@@ -129,7 +129,7 @@ function Hero() {
     if (subRef.current) tl.fromTo(subRef.current, { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.8 }, "-=0.4");
   }, []);
 
-  const lines = ["L'Art du", "Jardin Vivant"];
+  const lines = ["L'Enrobé qui", "Marque le Temps."];
   return (
     <section className="relative h-screen w-full overflow-hidden bg-background">
       <video

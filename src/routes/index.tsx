@@ -5,6 +5,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { motion, AnimatePresence } from "framer-motion";
 import { CustomCursor } from "@/components/CustomCursor";
 import { SmoothScroll } from "@/components/SmoothScroll";
+import { WhyUs, Zone, FAQ, QuoteForm } from "@/components/sections";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -49,9 +50,17 @@ function Index() {
         <SectionDivider />
         <Transformation />
         <SectionDivider />
+        <WhyUs />
+        <SectionDivider />
         <Process />
         <SectionDivider />
+        <Zone />
+        <SectionDivider />
         <Testimonials />
+        <SectionDivider />
+        <FAQ />
+        <SectionDivider />
+        <QuoteForm />
         <SectionDivider />
         <CTAFinal />
         <Footer />
@@ -625,7 +634,7 @@ function CTAFinal() {
         </h2>
         <div className="mt-12 flex flex-wrap gap-4 justify-center">
           <a
-            href="mailto:sarl.hce@laposte.net"
+            href="#devis"
             data-cursor-hover
             className="bg-gold text-background px-10 py-4 font-medium transition-all hover:bg-[#b3933e] active:scale-[0.98]"
             style={{ fontFamily: "Outfit", fontSize: 14, letterSpacing: "0.15em", textTransform: "uppercase" }}

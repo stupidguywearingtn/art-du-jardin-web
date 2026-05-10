@@ -55,7 +55,7 @@ function Index() {
         <Philosophy />
         <SectionDivider />
         <Services />
-        <SectionDivider />
+        <SectionDivider variant="marquee" />
         <Transformation />
         <SectionDivider />
         <WhyUs />
@@ -63,7 +63,7 @@ function Index() {
         <Process />
         <SectionDivider />
         <Zone />
-        <SectionDivider />
+        <SectionDivider variant="marquee" />
         <Testimonials />
         <SectionDivider />
         <FAQ />

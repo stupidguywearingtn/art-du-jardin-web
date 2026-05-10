@@ -484,29 +484,44 @@ function Process() {
   }, []);
 
   return (
-    <section className="relative bg-background py-32 px-6 md:px-12 overflow-hidden">
+    <section className="relative bg-background py-24 md:py-32 px-6 md:px-12 overflow-hidden">
       <CornerGlow corner="tr" tint="gold" />
       <CornerGlow corner="bl" tint="green" />
       <GiantNumber n="03" position="right" />
       <TechnicalMark className="hidden md:block" style={{ top: "20%", left: "2%", width: 140, height: 280, transform: "rotate(-4deg)" }} />
-      <div className="max-w-3xl mx-auto text-center mb-24">
+      <div className="max-w-3xl mx-auto text-center mb-16 md:mb-24">
         <div className="label text-gold">— Notre processus</div>
-        <h2 className="font-display mt-6 text-foreground" style={{ fontSize: "clamp(40px, 6vw, 80px)", fontWeight: 400, lineHeight: 0.95 }}>
+        <h2 className="font-display mt-6 text-foreground" style={{ fontSize: "clamp(36px, 6vw, 80px)", fontWeight: 400, lineHeight: 0.95 }}>
           Quatre étapes,<br/><span className="italic text-gold">un engagement.</span>
         </h2>
       </div>
 
       <div ref={ref} className="relative max-w-6xl mx-auto">
-        <div ref={lineRef} className="absolute left-1/2 top-0 bottom-0 w-px bg-gold/40 -translate-x-1/2" style={{ transformOrigin: "top center" }} />
+        {/* vertical gold line: left on mobile (24px), center on desktop */}
+        <div
+          ref={lineRef}
+          className="absolute top-0 bottom-0 w-px bg-gold/40"
+          style={{ left: "24px", transformOrigin: "top center" }}
+        />
+        <div className="absolute top-0 bottom-0 w-px bg-gold/40 hidden md:block left-1/2 -translate-x-1/2" />
+
         {PROCESS.map((s, i) => {
           const left = i % 2 === 0;
           return (
-            <div key={s.n} className="relative grid grid-cols-2 gap-8 md:gap-16 mb-24 last:mb-0 items-center">
-              <div data-dot className="absolute left-1/2 top-8 -translate-x-1/2 w-3 h-3 rounded-full bg-gold ring-4 ring-background" />
-              <ProcessStep
-                step={s}
-                left={left}
-              />
+            <div
+              key={s.n}
+              className="relative md:grid md:grid-cols-2 md:gap-16 mb-14 md:mb-24 last:mb-0 md:items-center pl-16 md:pl-0"
+            >
+              {/* number dot — sits ON the line (left mobile / center desktop) */}
+              <div
+                data-dot
+                className="absolute top-2 left-[18px] md:left-1/2 -translate-x-1/2 w-9 h-9 md:w-10 md:h-10 rounded-full bg-gold ring-4 ring-background flex items-center justify-center font-display text-background z-10"
+                style={{ fontSize: 14, fontWeight: 500 }}
+                aria-hidden
+              >
+                {s.n}
+              </div>
+              <ProcessStep step={s} left={left} />
             </div>
           );
         })}
@@ -523,7 +538,7 @@ function ProcessStep({ step, left }: { step: { n: string; t: string; d: string }
       data-step data-side={left ? "left" : "right"}
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
-      className={`relative ${left ? "col-start-1 text-right pr-8 md:pr-16" : "col-start-2 text-left pl-8 md:pl-16"}`}
+      className={`relative ${left ? "md:col-start-1 md:text-right md:pr-16" : "md:col-start-2 md:text-left md:pl-16"}`}
     >
       <div
         aria-hidden
@@ -536,9 +551,9 @@ function ProcessStep({ step, left }: { step: { n: string; t: string; d: string }
         }}
       />
       <div className="relative">
-        <div data-step-num={num} className="font-display text-gold" style={{ fontSize: "clamp(48px, 6vw, 80px)", fontWeight: 300, lineHeight: 1 }}>00</div>
-        <h3 className="font-display text-foreground mt-2" style={{ fontSize: "clamp(22px, 2.4vw, 32px)", fontWeight: 400 }}>{step.t}</h3>
-        <p className="mt-4 text-muted max-w-sm" style={{ marginLeft: left ? "auto" : 0 }}>{step.d}</p>
+        <div data-step-num={num} className="font-display text-gold" style={{ fontSize: "clamp(40px, 6vw, 80px)", fontWeight: 300, lineHeight: 1 }}>00</div>
+        <h3 className="font-display text-foreground mt-2" style={{ fontSize: "clamp(20px, 2.4vw, 32px)", fontWeight: 400 }}>{step.t}</h3>
+        <p className="mt-3 md:mt-4 text-muted max-w-sm" style={{ marginLeft: left ? "auto" : 0 }}>{step.d}</p>
       </div>
     </div>
   );

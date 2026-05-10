@@ -348,10 +348,10 @@ function Transformation() {
 
 /* ============ PROCESS ============ */
 const PROCESS = [
-  { n: "01", t: "Consultation & Vision", d: "Visite du site, écoute de vos usages et lecture sensible du lieu." },
-  { n: "02", t: "Conception & Plan", d: "Plans, ambiances, palette végétale et devis détaillé." },
-  { n: "03", t: "Création & Réalisation", d: "Du terrassement à la plantation, une exécution soignée." },
-  { n: "04", t: "Entretien & Suivi", d: "Accompagnement saisonnier pour faire vivre le jardin." },
+  { n: "01", t: "Visite & Devis", d: "Déplacement gratuit, lecture du terrain et devis détaillé sous 48h." },
+  { n: "02", t: "Préparation du sol", d: "Décaissement, nivellement laser, compactage et drainage maîtrisés." },
+  { n: "03", t: "Pose & Finitions", d: "Enrobé à chaud au finisseur, bordures et maçonnerie soignées." },
+  { n: "04", t: "Garantie & SAV", d: "Travaux garantis, intervention rapide en cas de besoin." },
 ];
 
 function Process() {

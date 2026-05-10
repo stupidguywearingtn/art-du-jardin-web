@@ -64,7 +64,7 @@ export function WhyUs() {
                 data-stroke
                 d="M 4 4 L 296 4 L 296 276 L 4 276 Z"
                 fill="none"
-                stroke="rgb(201 168 76 / 0.6)"
+                stroke="rgb(200 153 42 / 0.6)"
                 strokeWidth="1"
                 strokeDasharray="6 4"
                 vectorEffect="non-scaling-stroke"
@@ -143,18 +143,18 @@ export function Zone() {
             <path
               data-region
               d="M 20 20 Q 35 10, 55 15 Q 80 18, 82 35 Q 88 55, 78 75 Q 65 90, 40 88 Q 18 85, 12 65 Q 8 40, 20 20 Z"
-              fill="rgb(201 168 76 / 0.04)"
-              stroke="rgb(201 168 76 / 0.5)"
+              fill="rgb(200 153 42 / 0.04)"
+              stroke="rgb(200 153 42 / 0.5)"
               strokeWidth="0.4"
               vectorEffect="non-scaling-stroke"
             />
             {CITIES.map((c) => (
               <g key={c.name} data-city style={{ transformOrigin: `${c.x}px ${c.y}px` }}>
-                {c.hq && <circle cx={c.x} cy={c.y} r="4" fill="none" stroke="rgb(201 168 76 / 0.4)" strokeWidth="0.3" vectorEffect="non-scaling-stroke">
+                {c.hq && <circle cx={c.x} cy={c.y} r="4" fill="none" stroke="rgb(200 153 42 / 0.4)" strokeWidth="0.3" vectorEffect="non-scaling-stroke">
                   <animate attributeName="r" from="2" to="6" dur="2.5s" repeatCount="indefinite" />
                   <animate attributeName="opacity" from="0.8" to="0" dur="2.5s" repeatCount="indefinite" />
                 </circle>}
-                <circle cx={c.x} cy={c.y} r={c.hq ? 1.4 : 0.9} fill="rgb(201 168 76)" />
+                <circle cx={c.x} cy={c.y} r={c.hq ? 1.4 : 0.9} fill="rgb(200 153 42)" />
                 <text x={c.x + 2} y={c.y - 1.5} fill="rgb(237 232 220 / 0.85)" style={{ fontSize: 2.2, fontFamily: "Outfit" }}>
                   {c.name}{c.hq ? " (siège)" : ""}
                 </text>
@@ -353,9 +353,9 @@ export function QuoteForm() {
               <div
                 className="flex items-center justify-center w-8 h-8 border transition-all duration-500"
                 style={{
-                  borderColor: i <= step ? "#C9A84C" : "rgb(201 168 76 / 0.3)",
-                  background: i < step ? "#C9A84C" : "transparent",
-                  color: i < step ? "#070A08" : "#C9A84C",
+                  borderColor: i <= step ? "#C8992A" : "rgb(200 153 42 / 0.3)",
+                  background: i < step ? "#C8992A" : "transparent",
+                  color: i < step ? "#1E1E1E" : "#C8992A",
                   fontFamily: "Outfit", fontSize: 13,
                 }}
               >
@@ -397,8 +397,8 @@ export function QuoteForm() {
                             onClick={() => setData({ ...data, type: o.id })}
                             className="text-left p-6 border transition-all duration-300"
                             style={{
-                              borderColor: sel ? "#C9A84C" : "rgb(201 168 76 / 0.25)",
-                              background: sel ? "rgb(201 168 76 / 0.06)" : "transparent",
+                              borderColor: sel ? "#C8992A" : "rgb(200 153 42 / 0.25)",
+                              background: sel ? "rgb(200 153 42 / 0.06)" : "transparent",
                             }}
                           >
                             <div className="font-display text-foreground" style={{ fontSize: 20 }}>{o.label}</div>
@@ -423,7 +423,7 @@ export function QuoteForm() {
                       <input
                         type="range" min={20} max={1000} step={10} value={data.surface}
                         onChange={(e) => setData({ ...data, surface: Number(e.target.value) })}
-                        className="w-full accent-[#C9A84C] cursor-pointer"
+                        className="w-full accent-[#C8992A] cursor-pointer"
                       />
                       <div className="flex justify-between text-muted mt-2" style={{ fontSize: 11 }}>
                         <span>20 m²</span><span>1000 m²</span>
@@ -446,8 +446,8 @@ export function QuoteForm() {
                               onClick={() => setData({ ...data, delai: d.id })}
                               className="p-4 border transition-all duration-300 text-foreground"
                               style={{
-                                borderColor: sel ? "#C9A84C" : "rgb(201 168 76 / 0.25)",
-                                background: sel ? "rgb(201 168 76 / 0.06)" : "transparent",
+                                borderColor: sel ? "#C8992A" : "rgb(200 153 42 / 0.25)",
+                                background: sel ? "rgb(200 153 42 / 0.06)" : "transparent",
                                 fontSize: 14,
                               }}
                             >
@@ -501,7 +501,7 @@ export function QuoteForm() {
                   data-cursor-hover
                   onClick={() => setStep((s) => s + 1)}
                   disabled={!canNext}
-                  className="bg-gold text-background px-8 py-3 transition-all hover:bg-[#b3933e] disabled:opacity-40 disabled:cursor-not-allowed"
+                  className="bg-gold text-background px-8 py-3 transition-all hover:bg-[#A87E1F] disabled:opacity-40 disabled:cursor-not-allowed"
                   style={{ fontFamily: "Outfit", fontSize: 13, letterSpacing: "0.15em", textTransform: "uppercase" }}
                 >
                   Continuer →
@@ -511,7 +511,7 @@ export function QuoteForm() {
                   data-cursor-hover
                   onClick={submit}
                   disabled={!canNext}
-                  className="bg-gold text-background px-8 py-3 transition-all hover:bg-[#b3933e] disabled:opacity-40 disabled:cursor-not-allowed"
+                  className="bg-gold text-background px-8 py-3 transition-all hover:bg-[#A87E1F] disabled:opacity-40 disabled:cursor-not-allowed"
                   style={{ fontFamily: "Outfit", fontSize: 13, letterSpacing: "0.15em", textTransform: "uppercase" }}
                 >
                   Envoyer ma demande

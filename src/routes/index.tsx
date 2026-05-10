@@ -110,7 +110,7 @@ function CornerGlow({ corner = "tl", tint = "gold" }: { corner?: "tl" | "tr" | "
     bl: { bottom: "-10%", left: "-10%" },
     br: { bottom: "-10%", right: "-10%" },
   };
-  const color = tint === "gold" ? "rgba(201,168,76,0.05)" : "rgba(26,51,32,0.18)";
+  const color = tint === "gold" ? "rgba(200,153,42,0.05)" : "rgba(26,51,32,0.18)";
   return (
     <div
       aria-hidden
@@ -146,7 +146,7 @@ function Hero() {
         src="/videos/hero.mp4"
         autoPlay muted loop playsInline preload="auto"
       />
-      <div className="absolute inset-x-0 bottom-0 h-[60%]" style={{ background: "linear-gradient(to bottom, transparent, #070A08)" }} />
+      <div className="absolute inset-x-0 bottom-0 h-[60%]" style={{ background: "linear-gradient(to bottom, transparent, #1E1E1E)" }} />
       <div className="absolute inset-0 bg-background/20" />
 
       <div className="relative z-10 flex h-full flex-col items-center justify-center px-6">
@@ -245,7 +245,7 @@ function Services() {
   return (
     <section
       className="relative bg-background py-32 overflow-hidden"
-      style={{ background: "radial-gradient(ellipse at center, #0F1E12 0%, #070A08 70%)" }}
+      style={{ background: "radial-gradient(ellipse at center, #262626 0%, #1E1E1E 70%)" }}
     >
       <div className="grain-overlay" aria-hidden />
       <BotanicalLeaf className="hidden md:block" style={{ top: "8%", right: "-40px", width: 180, height: 360, transform: "rotate(15deg)" }} />
@@ -274,7 +274,7 @@ function ServiceStrip({ n, t, img }: { n: string; t: string; img: string }) {
       onMouseEnter={() => setH(true)}
       onMouseLeave={() => setH(false)}
       className="relative w-full overflow-hidden border-b cursor-none transition-[height] duration-700 ease-out"
-      style={{ height: h ? 400 : 200, borderColor: "#1A2B1C" }}
+      style={{ height: h ? 400 : 200, borderColor: "#2E2E2E" }}
     >
       <div
         className="absolute inset-0 bg-cover bg-center transition-opacity duration-700"
@@ -325,8 +325,8 @@ function Transformation() {
         src="/videos/transformation.mp4"
         autoPlay muted loop playsInline preload="auto"
       />
-      <div className="absolute inset-0" style={{ background: "rgba(7,10,8,0.55)" }} />
-      <div className="absolute inset-x-0 bottom-0 h-[30%]" style={{ background: "linear-gradient(to bottom, transparent, #070A08)" }} />
+      <div className="absolute inset-0" style={{ background: "rgba(30,30,30,0.55)" }} />
+      <div className="absolute inset-x-0 bottom-0 h-[30%]" style={{ background: "linear-gradient(to bottom, transparent, #1E1E1E)" }} />
 
       <div className="relative z-10 h-full w-full flex flex-col items-center justify-center text-center px-6">
         <div className="label text-gold">— Avant / Après</div>
@@ -524,14 +524,14 @@ function Testimonials() {
   const words = TESTIMONIALS[i].q.split(" ");
 
   return (
-    <section className="relative bg-background min-h-screen flex items-center justify-center px-6 py-32 overflow-hidden" style={{ backgroundColor: "#070A08" }}>
+    <section className="relative bg-background min-h-screen flex items-center justify-center px-6 py-32 overflow-hidden" style={{ backgroundColor: "#1E1E1E" }}>
       {/* background image with heavy dark overlay */}
       <div
         aria-hidden
         className="absolute inset-0 bg-cover bg-center"
         style={{ backgroundImage: "url(https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=1600)", opacity: 0.08 }}
       />
-      <div aria-hidden className="absolute inset-0" style={{ background: "linear-gradient(180deg, #070A08 0%, rgba(7,10,8,0.85) 50%, #070A08 100%)" }} />
+      <div aria-hidden className="absolute inset-0" style={{ background: "linear-gradient(180deg, #1E1E1E 0%, rgba(30,30,30,0.85) 50%, #1E1E1E 100%)" }} />
       <div className="grain-overlay animated" aria-hidden />
       <BotanicalLeaf className="hidden md:block" style={{ top: "10%", right: "3%", width: 160, height: 320, transform: "rotate(20deg)" }} />
 
@@ -584,7 +584,7 @@ function Testimonials() {
               onClick={() => setI(idx)}
               aria-label={`Témoignage ${idx + 1}`}
               className="w-2.5 h-2.5 rounded-full border border-gold transition-colors"
-              style={{ background: i === idx ? "#C9A84C" : "transparent" }}
+              style={{ background: i === idx ? "#C8992A" : "transparent" }}
             />
           ))}
         </div>
@@ -636,7 +636,7 @@ function CTAFinal() {
           <a
             href="#devis"
             data-cursor-hover
-            className="bg-gold text-background px-10 py-4 font-medium transition-all hover:bg-[#b3933e] active:scale-[0.98]"
+            className="bg-gold text-background px-10 py-4 font-medium transition-all hover:bg-[#A87E1F] active:scale-[0.98]"
             style={{ fontFamily: "Outfit", fontSize: 14, letterSpacing: "0.15em", textTransform: "uppercase" }}
           >
             Demander un Devis
@@ -658,10 +658,10 @@ function CTAFinal() {
 /* ============ FOOTER ============ */
 function Footer() {
   return (
-    <footer className="relative overflow-hidden pt-24 pb-10 px-6 md:px-12" style={{ background: "#040605" }}>
+    <footer className="relative overflow-hidden pt-24 pb-10 px-6 md:px-12" style={{ background: "#141414" }}>
       <div
         className="absolute inset-x-0 top-1/2 -translate-y-1/2 text-center font-display pointer-events-none select-none whitespace-nowrap"
-        style={{ opacity: 0.04, fontSize: "clamp(80px, 18vw, 280px)", color: "#EDE8DC", fontWeight: 300, lineHeight: 1 }}
+        style={{ opacity: 0.04, fontSize: "clamp(80px, 18vw, 280px)", color: "#FFFFFF", fontWeight: 300, lineHeight: 1 }}
         aria-hidden
       >
         HCE

@@ -1,0 +1,102 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Outfit:wght@300;400;500;600&display=swap');
+
+@theme inline {
+  --radius-sm: 0px;
+  --radius-md: 0px;
+  --radius-lg: 0px;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--foreground);
+  --color-popover: var(--card);
+  --color-popover-foreground: var(--foreground);
+  --color-primary: var(--gold);
+  --color-primary-foreground: var(--background);
+  --color-secondary: var(--surface);
+  --color-secondary-foreground: var(--foreground);
+  --color-muted: var(--surface);
+  --color-muted-foreground: var(--muted-text);
+  --color-accent: var(--gold);
+  --color-accent-foreground: var(--background);
+  --color-destructive: oklch(0.577 0.245 27.325);
+  --color-destructive-foreground: var(--foreground);
+  --color-border: var(--border);
+  --color-input: var(--border);
+  --color-ring: var(--gold);
+  --font-display: "Cormorant Garamond", serif;
+  --font-body: "Outfit", sans-serif;
+}
+
+:root {
+  --radius: 0rem;
+  --background: #070A08;
+  --surface: #0D1410;
+  --forest: #152A18;
+  --gold: #C9A84C;
+  --foreground: #EDE8DC;
+  --muted-text: #6B7A6D;
+  --card: #0D1410;
+  --border: #1A2B1C;
+}
+
+.dark { color-scheme: dark; }
+
+@layer base {
+  * { border-color: var(--border); }
+  html, body {
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-body);
+    font-weight: 300;
+  }
+  body { cursor: none; }
+  @media (pointer: coarse) { body { cursor: auto; } }
+  ::selection { background: var(--gold); color: var(--background); }
+}
+
+@layer utilities {
+  .font-display { font-family: var(--font-display); }
+  .font-body { font-family: var(--font-body); }
+  .text-gold { color: var(--gold); }
+  .bg-gold { background-color: var(--gold); }
+  .border-gold { border-color: var(--gold); }
+  .bg-surface { background-color: var(--surface); }
+  .bg-forest { background-color: var(--forest); }
+  .text-muted { color: var(--muted-text); }
+  .label {
+    font-family: var(--font-body);
+    text-transform: uppercase;
+    letter-spacing: 0.4em;
+    font-size: 11px;
+    font-weight: 300;
+  }
+  .grain-overlay {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.06;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.6 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  }
+  .grain-overlay.animated {
+    animation: grainShift 8s steps(6) infinite;
+  }
+  @keyframes grainShift {
+    0%   { transform: translate(0,0); }
+    20%  { transform: translate(-3%, 2%); }
+    40%  { transform: translate(2%, -3%); }
+    60%  { transform: translate(-2%, -2%); }
+    80%  { transform: translate(3%, 1%); }
+    100% { transform: translate(0,0); }
+  }
+  @keyframes progressFill {
+    from { transform: scaleX(0); }
+    to   { transform: scaleX(1); }
+  }
+}

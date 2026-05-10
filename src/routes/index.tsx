@@ -658,7 +658,7 @@ function CTAFinal() {
 /* ============ FOOTER ============ */
 function Footer() {
   return (
-    <footer className="relative overflow-hidden pt-24 pb-10 px-6 md:px-12" style={{ background: "#141414" }}>
+    <footer className="relative overflow-hidden pt-24 pb-10 px-6 md:px-12" style={{ background: "var(--footer)" }}>
       <div
         className="absolute inset-x-0 top-1/2 -translate-y-1/2 text-center font-display pointer-events-none select-none whitespace-nowrap"
         style={{ opacity: 0.04, fontSize: "clamp(80px, 18vw, 280px)", color: "#FFFFFF", fontWeight: 300, lineHeight: 1 }}

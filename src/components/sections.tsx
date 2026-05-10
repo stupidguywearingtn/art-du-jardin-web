@@ -480,7 +480,7 @@ export function QuoteForm() {
                   data-cursor-hover
                   onClick={() => setStep((s) => s + 1)}
                   disabled={!canNext}
-                  className="bg-gold text-background px-8 py-3 transition-all hover:bg-[#A87E1F] disabled:opacity-40 disabled:cursor-not-allowed"
+                  className="bg-gold text-background px-8 py-3 transition-all hover:bg-[#A87E1F] hover:-translate-y-0.5 focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:opacity-40 disabled:cursor-not-allowed"
                   style={{ fontFamily: "Outfit", fontSize: 13, letterSpacing: "0.15em", textTransform: "uppercase" }}
                 >
                   Continuer →
@@ -490,10 +490,10 @@ export function QuoteForm() {
                   data-cursor-hover
                   onClick={submit}
                   disabled={!canNext}
-                  className="bg-gold text-background px-8 py-3 transition-all hover:bg-[#A87E1F] disabled:opacity-40 disabled:cursor-not-allowed"
-                  style={{ fontFamily: "Outfit", fontSize: 13, letterSpacing: "0.15em", textTransform: "uppercase" }}
+                  className="bg-gold text-background px-10 transition-all hover:bg-[#A87E1F] hover:-translate-y-1 focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:opacity-40 disabled:cursor-not-allowed"
+                  style={{ fontFamily: "Outfit", fontSize: 14, letterSpacing: "0.15em", textTransform: "uppercase", height: 56, fontWeight: 500, boxShadow: "0 8px 24px rgba(200,153,42,0.35)" }}
                 >
-                  Envoyer ma demande
+                  Envoyer ma demande →
                 </button>
               )}
             </div>

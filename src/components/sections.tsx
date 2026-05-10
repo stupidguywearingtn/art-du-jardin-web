@@ -247,10 +247,10 @@ type Quote = {
 };
 
 const TYPE_OPTIONS = [
-  { id: "cour" as const, label: "Cour privée", price: 65, desc: "Enrobé à chaud, compactage" },
-  { id: "allee" as const, label: "Allée", price: 75, desc: "Bordures + finition soignée" },
-  { id: "parking" as const, label: "Parking pro", price: 55, desc: "Voirie poids lourds possible" },
-  { id: "preparation" as const, label: "Préparation seule", price: 30, desc: "Décaissement + nivellement" },
+  { id: "cour" as const, label: "Cour privée", price: 65, desc: "Enrobé à chaud, compactage", icon: "M3 12 12 4l9 8M5 10v10h14V10" },
+  { id: "allee" as const, label: "Allée", price: 75, desc: "Bordures + finition soignée", icon: "M4 20 14 4M10 20 20 4" },
+  { id: "parking" as const, label: "Parking pro", price: 55, desc: "Voirie poids lourds possible", icon: "M4 17V7a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v10M4 17h16M8 21v-4M16 21v-4" },
+  { id: "preparation" as const, label: "Préparation seule", price: 30, desc: "Décaissement + nivellement", icon: "M3 19h18M6 16l3-9 3 4 3-7 3 12" },
 ];
 
 const DELAI_COEF = { souple: 1, "1mois": 1.05, urgent: 1.15 } as const;

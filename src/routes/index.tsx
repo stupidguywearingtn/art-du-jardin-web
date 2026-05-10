@@ -110,7 +110,7 @@ function CornerGlow({ corner = "tl", tint = "gold" }: { corner?: "tl" | "tr" | "
     bl: { bottom: "-10%", left: "-10%" },
     br: { bottom: "-10%", right: "-10%" },
   };
-  const color = tint === "gold" ? "rgba(201,168,76,0.05)" : "rgba(26,51,32,0.18)";
+  const color = tint === "gold" ? "rgba(200,153,42,0.05)" : "rgba(26,51,32,0.18)";
   return (
     <div
       aria-hidden
@@ -146,7 +146,7 @@ function Hero() {
         src="/videos/hero.mp4"
         autoPlay muted loop playsInline preload="auto"
       />
-      <div className="absolute inset-x-0 bottom-0 h-[60%]" style={{ background: "linear-gradient(to bottom, transparent, #070A08)" }} />
+      <div className="absolute inset-x-0 bottom-0 h-[60%]" style={{ background: "linear-gradient(to bottom, transparent, #1E1E1E)" }} />
       <div className="absolute inset-0 bg-background/20" />
 
       <div className="relative z-10 flex h-full flex-col items-center justify-center px-6">
@@ -245,7 +245,7 @@ function Services() {
   return (
     <section
       className="relative bg-background py-32 overflow-hidden"
-      style={{ background: "radial-gradient(ellipse at center, #0F1E12 0%, #070A08 70%)" }}
+      style={{ background: "radial-gradient(ellipse at center, #262626 0%, #1E1E1E 70%)" }}
     >
       <div className="grain-overlay" aria-hidden />
       <BotanicalLeaf className="hidden md:block" style={{ top: "8%", right: "-40px", width: 180, height: 360, transform: "rotate(15deg)" }} />
@@ -274,7 +274,7 @@ function ServiceStrip({ n, t, img }: { n: string; t: string; img: string }) {
       onMouseEnter={() => setH(true)}
       onMouseLeave={() => setH(false)}
       className="relative w-full overflow-hidden border-b cursor-none transition-[height] duration-700 ease-out"
-      style={{ height: h ? 400 : 200, borderColor: "#1A2B1C" }}
+      style={{ height: h ? 400 : 200, borderColor: "#2E2E2E" }}
     >
       <div
         className="absolute inset-0 bg-cover bg-center transition-opacity duration-700"
@@ -325,8 +325,8 @@ function Transformation() {
         src="/videos/transformation.mp4"
         autoPlay muted loop playsInline preload="auto"
       />
-      <div className="absolute inset-0" style={{ background: "rgba(7,10,8,0.55)" }} />
-      <div className="absolute inset-x-0 bottom-0 h-[30%]" style={{ background: "linear-gradient(to bottom, transparent, #070A08)" }} />
+      <div className="absolute inset-0" style={{ background: "rgba(30,30,30,0.55)" }} />
+      <div className="absolute inset-x-0 bottom-0 h-[30%]" style={{ background: "linear-gradient(to bottom, transparent, #1E1E1E)" }} />
 
       <div className="relative z-10 h-full w-full flex flex-col items-center justify-center text-center px-6">
         <div className="label text-gold">— Avant / Après</div>
@@ -473,130 +473,123 @@ function ProcessStep({ step, left }: { step: { n: string; t: string; d: string }
   );
 }
 
-/* ============ TESTIMONIALS ============ */
+/* ============ TESTIMONIALS V2 — stacked cards + reveal stars + particles ============ */
 const TESTIMONIALS = [
-  { q: "Travail impeccable, équipe sérieuse et ponctuelle. Mon allée est parfaite, les finitions sont soignées. Je recommande HCE sans hésitation.", n: "Michel T., Bourg-en-Bresse" },
-  { q: "Devis rapide, prix honnête et résultat au-delà de mes attentes. La cour est magnifique et très bien drainée.", n: "Sandrine L., Lons-le-Saunier" },
-  { q: "HCE a refait le parking de notre entrepôt. Travail soigné, dans les délais et conforme au devis. Très satisfait.", n: "Pascal M., Oyonnax" },
+  { q: "Travail impeccable, équipe sérieuse et ponctuelle. Mon allée est parfaite, les finitions sont soignées. Je recommande HCE sans hésitation.", n: "Michel T.", c: "Bourg-en-Bresse" },
+  { q: "Devis rapide, prix honnête et résultat au-delà de mes attentes. La cour est magnifique et très bien drainée.", n: "Sandrine L.", c: "Lons-le-Saunier" },
+  { q: "HCE a refait le parking de notre entrepôt. Travail soigné, dans les délais et conforme au devis. Très satisfait.", n: "Pascal M.", c: "Oyonnax" },
 ];
 
 function Testimonials() {
-  const [i, setI] = useState(0);
-  const quoteRef = useRef<HTMLParagraphElement>(null);
-  const starsRef = useRef<HTMLDivElement>(null);
-  const bigQuoteRef = useRef<HTMLDivElement>(null);
+  const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const t = setInterval(() => setI((x) => (x + 1) % TESTIMONIALS.length), 6000);
-    return () => clearInterval(t);
-  }, []);
-
-  // Animate quote word-by-word + big quote scale on each change
-  useEffect(() => {
-    if (quoteRef.current) {
-      const words = quoteRef.current.querySelectorAll("[data-w]");
-      gsap.fromTo(words,
-        { opacity: 0, y: 12 },
-        { opacity: 1, y: 0, duration: 0.6, stagger: 0.05, ease: "power3.out" }
-      );
-    }
-    if (bigQuoteRef.current) {
-      gsap.fromTo(bigQuoteRef.current,
-        { scale: 0.8, opacity: 0 },
-        { scale: 1, opacity: 0.15, duration: 0.8, ease: "power3.out" }
-      );
-    }
-  }, [i]);
-
-  // Animate stars on first enter
-  useEffect(() => {
-    if (!starsRef.current) return;
-    const stars = starsRef.current.querySelectorAll("[data-star]");
-    gsap.fromTo(stars,
-      { opacity: 0, y: 10, scale: 0.6 },
-      {
-        opacity: 1, y: 0, scale: 1, duration: 0.5, stagger: 0.1, ease: "back.out(2)",
-        scrollTrigger: { trigger: starsRef.current, start: "top 85%" },
+    if (!ref.current) return;
+    const cards = ref.current.querySelectorAll<HTMLElement>("[data-tcard]");
+    cards.forEach((card, idx) => {
+      // parallax differential
+      const speed = idx === 0 ? 0 : idx === 1 ? -40 : 20;
+      gsap.fromTo(card,
+        { y: 60, opacity: 0 },
+        { y: 0, opacity: 1, duration: 1, ease: "power3.out", delay: idx * 0.15,
+          scrollTrigger: { trigger: card, start: "top 88%" } });
+      if (speed !== 0) {
+        gsap.to(card, {
+          y: speed, ease: "none",
+          scrollTrigger: { trigger: card, start: "top bottom", end: "bottom top", scrub: true },
+        });
       }
-    );
-  }, []);
 
-  const words = TESTIMONIALS[i].q.split(" ");
+      // stars sequential reveal
+      const stars = card.querySelectorAll<HTMLElement>("[data-tstar]");
+      gsap.fromTo(stars,
+        { opacity: 0, scale: 0.4 },
+        { opacity: 1, scale: 1, duration: 0.35, stagger: 0.08, ease: "back.out(2.4)",
+          scrollTrigger: { trigger: card, start: "top 80%" },
+          onComplete: () => {
+            // particle burst from last star
+            const last = stars[stars.length - 1];
+            if (!last) return;
+            const rect = last.getBoundingClientRect();
+            const cardRect = card.getBoundingClientRect();
+            const cx = rect.left - cardRect.left + rect.width / 2;
+            const cy = rect.top - cardRect.top + rect.height / 2;
+            for (let p = 0; p < 8; p++) {
+              const dot = document.createElement("span");
+              dot.style.cssText = `position:absolute;left:${cx}px;top:${cy}px;width:4px;height:4px;border-radius:9999px;background:#C8992A;pointer-events:none;will-change:transform,opacity;`;
+              card.appendChild(dot);
+              const angle = (p / 8) * Math.PI * 2;
+              gsap.to(dot, {
+                x: Math.cos(angle) * 40, y: Math.sin(angle) * 40 - 10,
+                opacity: 0, duration: 0.6, ease: "power2.out",
+                onComplete: () => dot.remove(),
+              });
+            }
+          },
+        });
+    });
+  }, []);
 
   return (
-    <section className="relative bg-background min-h-screen flex items-center justify-center px-6 py-32 overflow-hidden" style={{ backgroundColor: "#070A08" }}>
-      {/* background image with heavy dark overlay */}
-      <div
-        aria-hidden
-        className="absolute inset-0 bg-cover bg-center"
-        style={{ backgroundImage: "url(https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=1600)", opacity: 0.08 }}
-      />
-      <div aria-hidden className="absolute inset-0" style={{ background: "linear-gradient(180deg, #070A08 0%, rgba(7,10,8,0.85) 50%, #070A08 100%)" }} />
+    <section className="relative bg-background min-h-screen flex items-center justify-center px-6 py-32 overflow-hidden">
+      <div aria-hidden className="absolute inset-0" style={{ background: "linear-gradient(180deg, var(--background) 0%, var(--surface) 50%, var(--background) 100%)" }} />
       <div className="grain-overlay animated" aria-hidden />
       <BotanicalLeaf className="hidden md:block" style={{ top: "10%", right: "3%", width: 160, height: 320, transform: "rotate(20deg)" }} />
 
-      <div className="relative max-w-4xl w-full text-center">
-        <div
-          ref={bigQuoteRef}
-          className="absolute -top-16 left-0 md:-left-12 font-display text-gold pointer-events-none select-none"
-          style={{ fontSize: 200, lineHeight: 0.7, fontWeight: 400, opacity: 0.15 }}
-          aria-hidden
-        >
-          “
+      <div className="relative max-w-6xl w-full">
+        <div className="text-center mb-20">
+          <div className="label text-gold">— Ils nous font confiance</div>
+          <h2 className="font-display mt-6 text-foreground" style={{ fontSize: "clamp(40px, 6vw, 80px)", fontWeight: 400, lineHeight: 1 }}>
+            La Parole<br /><span className="italic text-gold">à nos clients.</span>
+          </h2>
         </div>
 
-        {/* Stars */}
-        <div ref={starsRef} className="flex justify-center gap-2 mb-10">
-          {[0,1,2,3,4].map((s) => (
-            <span key={s} data-star className="text-gold" style={{ fontSize: 16 }}>★</span>
-          ))}
-        </div>
-
-        <div className="relative min-h-[280px]">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={i}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.6, ease: "easeOut" }}
-              className="absolute inset-0 flex flex-col items-center justify-center"
-            >
-              <p
-                ref={quoteRef}
-                className="font-display italic text-foreground max-w-[760px] mx-auto"
-                style={{ fontSize: 28, fontWeight: 300, lineHeight: 1.6 }}
+        <div ref={ref} className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-6 items-start">
+          {TESTIMONIALS.map((t, idx) => {
+            const offsetClass = idx === 0 ? "md:translate-y-0" : idx === 1 ? "md:-translate-y-8" : "md:translate-y-4";
+            return (
+              <article
+                key={idx}
+                data-tcard
+                data-cursor-hover
+                className={`relative p-8 md:p-10 bg-surface border border-border transition-all duration-500 hover:border-gold hover:-translate-y-1.5 group overflow-hidden ${offsetClass}`}
+                style={{ minHeight: 360 }}
               >
-                {words.map((w, wi) => (
-                  <span key={wi} data-w className="inline-block mr-[0.25em]">{w}</span>
-                ))}
-              </p>
-              <p className="label text-gold mt-10">— {TESTIMONIALS[i].n}</p>
-            </motion.div>
-          </AnimatePresence>
-        </div>
+                {/* giant filigree quote */}
+                <span
+                  aria-hidden
+                  className="absolute -top-6 -left-2 font-display text-gold pointer-events-none select-none"
+                  style={{ fontSize: 180, lineHeight: 0.7, opacity: 0.08 }}
+                >
+                  “
+                </span>
 
-        <div className="mt-12 flex justify-center gap-3">
-          {TESTIMONIALS.map((_, idx) => (
-            <button
-              key={idx}
-              data-cursor-hover
-              onClick={() => setI(idx)}
-              aria-label={`Témoignage ${idx + 1}`}
-              className="w-2.5 h-2.5 rounded-full border border-gold transition-colors"
-              style={{ background: i === idx ? "#C9A84C" : "transparent" }}
-            />
-          ))}
-        </div>
-      </div>
+                {/* stars */}
+                <div className="relative flex gap-1.5 mb-6">
+                  {[0,1,2,3,4].map((s) => (
+                    <span key={s} data-tstar className="text-gold inline-block" style={{ fontSize: 16 }}>★</span>
+                  ))}
+                </div>
 
-      {/* progress bar */}
-      <div aria-hidden className="absolute left-0 right-0 bottom-0 h-px bg-gold/10">
-        <div
-          key={i}
-          className="h-full bg-gold origin-left"
-          style={{ animation: "progressFill 6s linear forwards" }}
-        />
+                <p className="relative font-display italic text-foreground" style={{ fontSize: 18, lineHeight: 1.6, fontWeight: 300 }}>
+                  {t.q}
+                </p>
+
+                <div className="relative mt-8 pt-6 border-t border-gold/20">
+                  <div className="font-display text-foreground" style={{ fontSize: 16, fontWeight: 400 }}>{t.n}</div>
+                  <div className="label text-gold mt-1.5" style={{ fontSize: 9 }}>{t.c}</div>
+                </div>
+
+                {/* hover gold corner accent */}
+                <span
+                  aria-hidden
+                  className="absolute top-0 right-0 w-12 h-12 transition-opacity duration-500 opacity-0 group-hover:opacity-100"
+                  style={{ background: "linear-gradient(225deg, rgba(200,153,42,0.25), transparent 60%)" }}
+                />
+              </article>
+            );
+          })}
+        </div>
       </div>
     </section>
   );
@@ -636,7 +629,7 @@ function CTAFinal() {
           <a
             href="#devis"
             data-cursor-hover
-            className="bg-gold text-background px-10 py-4 font-medium transition-all hover:bg-[#b3933e] active:scale-[0.98]"
+            className="bg-gold text-background px-10 py-4 font-medium transition-all hover:bg-[#A87E1F] active:scale-[0.98]"
             style={{ fontFamily: "Outfit", fontSize: 14, letterSpacing: "0.15em", textTransform: "uppercase" }}
           >
             Demander un Devis
@@ -658,10 +651,10 @@ function CTAFinal() {
 /* ============ FOOTER ============ */
 function Footer() {
   return (
-    <footer className="relative overflow-hidden pt-24 pb-10 px-6 md:px-12" style={{ background: "#040605" }}>
+    <footer className="relative overflow-hidden pt-24 pb-10 px-6 md:px-12" style={{ background: "var(--footer)" }}>
       <div
         className="absolute inset-x-0 top-1/2 -translate-y-1/2 text-center font-display pointer-events-none select-none whitespace-nowrap"
-        style={{ opacity: 0.04, fontSize: "clamp(80px, 18vw, 280px)", color: "#EDE8DC", fontWeight: 300, lineHeight: 1 }}
+        style={{ opacity: 0.04, fontSize: "clamp(80px, 18vw, 280px)", color: "#FFFFFF", fontWeight: 300, lineHeight: 1 }}
         aria-hidden
       >
         HCE

@@ -35,14 +35,18 @@
 
 :root {
   --radius: 0rem;
-  --background: #070A08;
-  --surface: #0D1410;
-  --forest: #152A18;
-  --gold: #C9A84C;
-  --foreground: #EDE8DC;
-  --muted-text: #6B7A6D;
-  --card: #0D1410;
-  --border: #1A2B1C;
+  --background: #1E1E1E;
+  --surface: #262626;
+  --forest: #262626;
+  --footer: #141414;
+  --cream: #F5F2ED;
+  --text-dark: #1E1E1E;
+  --gold: #C8992A;
+  --gold-hover: #A87E1F;
+  --foreground: #FFFFFF;
+  --muted-text: #A8A8A8;
+  --card: #262626;
+  --border: #2E2E2E;
 }
 
 .dark { color-scheme: dark; }

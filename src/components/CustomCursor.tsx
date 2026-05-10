@@ -47,7 +47,7 @@ export function CustomCursor() {
       style={{
         width: hover ? 40 : 14,
         height: hover ? 40 : 14,
-        background: "#C9A84C",
+        background: "#C8992A",
       }}
     />
   );

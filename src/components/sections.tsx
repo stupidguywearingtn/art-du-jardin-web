@@ -64,7 +64,7 @@ export function WhyUs() {
                 data-stroke
                 d="M 4 4 L 296 4 L 296 276 L 4 276 Z"
                 fill="none"
-                stroke="rgb(201 168 76 / 0.6)"
+                stroke="rgb(200 153 42 / 0.6)"
                 strokeWidth="1"
                 strokeDasharray="6 4"
                 vectorEffect="non-scaling-stroke"
@@ -85,37 +85,36 @@ export function WhyUs() {
   );
 }
 
-/* ============ ZONE D'INTERVENTION ============ */
-const CITIES = [
-  { name: "Cize", x: 50, y: 50, hq: true },
-  { name: "Bourg-en-Bresse", x: 30, y: 70 },
-  { name: "Lons-le-Saunier", x: 35, y: 25 },
-  { name: "Oyonnax", x: 65, y: 55 },
-  { name: "Saint-Claude", x: 70, y: 30 },
-  { name: "Champagnole", x: 55, y: 18 },
-  { name: "Nantua", x: 60, y: 65 },
-  { name: "Pont-d'Ain", x: 40, y: 80 },
+/* ============ ZONE D'INTERVENTION — Leaflet lazy ============ */
+const CITIES_FALLBACK = [
+  "Cize (siège)", "Lons-le-Saunier", "Saint-Claude", "Champagnole",
+  "Bourg-en-Bresse", "Oyonnax", "Nantua", "Pont-d'Ain",
 ];
 
 export function Zone() {
   const ref = useRef<HTMLDivElement>(null);
+  const [Map, setMap] = useState<React.ComponentType | null>(null);
+  const [shouldLoad, setShouldLoad] = useState(false);
+
   useEffect(() => {
     if (!ref.current) return;
-    const dots = ref.current.querySelectorAll("[data-city]");
-    dots.forEach((el, i) => {
-      gsap.fromTo(el,
-        { scale: 0, opacity: 0 },
-        { scale: 1, opacity: 1, duration: 0.5, delay: i * 0.08, ease: "back.out(2)",
-          scrollTrigger: { trigger: ref.current, start: "top 70%" } });
-    });
-    const path = ref.current.querySelector<SVGPathElement>("[data-region]");
-    if (path) {
-      const len = path.getTotalLength();
-      gsap.set(path, { strokeDasharray: len, strokeDashoffset: len });
-      gsap.to(path, { strokeDashoffset: 0, duration: 3, ease: "power2.inOut",
-        scrollTrigger: { trigger: ref.current, start: "top 70%" } });
-    }
+    const io = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          setShouldLoad(true);
+          io.disconnect();
+        }
+      },
+      { rootMargin: "200px" }
+    );
+    io.observe(ref.current);
+    return () => io.disconnect();
   }, []);
+
+  useEffect(() => {
+    if (!shouldLoad || Map) return;
+    import("./InteractiveMap").then((m) => setMap(() => m.default));
+  }, [shouldLoad, Map]);
 
   return (
     <section ref={ref} className="relative bg-background py-32 px-6 md:px-12 overflow-hidden">
@@ -129,38 +128,24 @@ export function Zone() {
             Basés à Cize, nous intervenons dans tout le Jura et le département de l'Ain. Visite et devis gratuits jusqu'à 60 km autour de notre siège.
           </p>
           <ul className="mt-8 grid grid-cols-2 gap-x-8 gap-y-3 text-foreground/80" style={{ fontSize: 14 }}>
-            {CITIES.map((c) => (
-              <li key={c.name} className="flex items-center gap-3">
+            {CITIES_FALLBACK.map((c) => (
+              <li key={c} className="flex items-center gap-3">
                 <span className="w-1 h-1 bg-gold rounded-full" />
-                {c.name}
+                {c}
               </li>
             ))}
           </ul>
+          <div className="label text-gold/70 mt-10" style={{ fontSize: 10 }}>
+            Marqueurs dorés · Survol pour le détail · Clic pour la fiche
+          </div>
         </div>
 
-        <div className="relative aspect-square max-w-lg mx-auto w-full">
-          <svg viewBox="0 0 100 100" className="w-full h-full">
-            <path
-              data-region
-              d="M 20 20 Q 35 10, 55 15 Q 80 18, 82 35 Q 88 55, 78 75 Q 65 90, 40 88 Q 18 85, 12 65 Q 8 40, 20 20 Z"
-              fill="rgb(201 168 76 / 0.04)"
-              stroke="rgb(201 168 76 / 0.5)"
-              strokeWidth="0.4"
-              vectorEffect="non-scaling-stroke"
-            />
-            {CITIES.map((c) => (
-              <g key={c.name} data-city style={{ transformOrigin: `${c.x}px ${c.y}px` }}>
-                {c.hq && <circle cx={c.x} cy={c.y} r="4" fill="none" stroke="rgb(201 168 76 / 0.4)" strokeWidth="0.3" vectorEffect="non-scaling-stroke">
-                  <animate attributeName="r" from="2" to="6" dur="2.5s" repeatCount="indefinite" />
-                  <animate attributeName="opacity" from="0.8" to="0" dur="2.5s" repeatCount="indefinite" />
-                </circle>}
-                <circle cx={c.x} cy={c.y} r={c.hq ? 1.4 : 0.9} fill="rgb(201 168 76)" />
-                <text x={c.x + 2} y={c.y - 1.5} fill="rgb(237 232 220 / 0.85)" style={{ fontSize: 2.2, fontFamily: "Outfit" }}>
-                  {c.name}{c.hq ? " (siège)" : ""}
-                </text>
-              </g>
-            ))}
-          </svg>
+        <div className="relative aspect-square max-w-lg mx-auto w-full bg-surface border border-border">
+          {Map ? <Map /> : (
+            <div className="absolute inset-0 flex items-center justify-center">
+              <span className="label text-gold/60">Carte Jura & Ain</span>
+            </div>
+          )}
         </div>
       </div>
     </section>
@@ -262,10 +247,10 @@ type Quote = {
 };
 
 const TYPE_OPTIONS = [
-  { id: "cour" as const, label: "Cour privée", price: 65, desc: "Enrobé à chaud, compactage" },
-  { id: "allee" as const, label: "Allée", price: 75, desc: "Bordures + finition soignée" },
-  { id: "parking" as const, label: "Parking pro", price: 55, desc: "Voirie poids lourds possible" },
-  { id: "preparation" as const, label: "Préparation seule", price: 30, desc: "Décaissement + nivellement" },
+  { id: "cour" as const, label: "Cour privée", price: 65, desc: "Enrobé à chaud, compactage", icon: "M3 12 12 4l9 8M5 10v10h14V10" },
+  { id: "allee" as const, label: "Allée", price: 75, desc: "Bordures + finition soignée", icon: "M4 20 14 4M10 20 20 4" },
+  { id: "parking" as const, label: "Parking pro", price: 55, desc: "Voirie poids lourds possible", icon: "M4 17V7a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v10M4 17h16M8 21v-4M16 21v-4" },
+  { id: "preparation" as const, label: "Préparation seule", price: 30, desc: "Décaissement + nivellement", icon: "M3 19h18M6 16l3-9 3 4 3-7 3 12" },
 ];
 
 const DELAI_COEF = { souple: 1, "1mois": 1.05, urgent: 1.15 } as const;
@@ -353,9 +338,9 @@ export function QuoteForm() {
               <div
                 className="flex items-center justify-center w-8 h-8 border transition-all duration-500"
                 style={{
-                  borderColor: i <= step ? "#C9A84C" : "rgb(201 168 76 / 0.3)",
-                  background: i < step ? "#C9A84C" : "transparent",
-                  color: i < step ? "#070A08" : "#C9A84C",
+                  borderColor: i <= step ? "#C8992A" : "rgb(200 153 42 / 0.3)",
+                  background: i < step ? "#C8992A" : "transparent",
+                  color: i < step ? "#1E1E1E" : "#C8992A",
                   fontFamily: "Outfit", fontSize: 13,
                 }}
               >
@@ -387,24 +372,22 @@ export function QuoteForm() {
                     <h3 className="font-display text-foreground mb-8" style={{ fontSize: 28, fontWeight: 400 }}>
                       Quel type de projet ?
                     </h3>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                       {TYPE_OPTIONS.map((o) => {
                         const sel = data.type === o.id;
                         return (
-                          <button
+                          <SelectCard
                             key={o.id}
-                            data-cursor-hover
+                            selected={sel}
                             onClick={() => setData({ ...data, type: o.id })}
-                            className="text-left p-6 border transition-all duration-300"
-                            style={{
-                              borderColor: sel ? "#C9A84C" : "rgb(201 168 76 / 0.25)",
-                              background: sel ? "rgb(201 168 76 / 0.06)" : "transparent",
-                            }}
                           >
-                            <div className="font-display text-foreground" style={{ fontSize: 20 }}>{o.label}</div>
-                            <div className="text-muted mt-2" style={{ fontSize: 13 }}>{o.desc}</div>
-                            <div className="label text-gold mt-4" style={{ fontSize: 10 }}>à partir de {o.price} €/m²</div>
-                          </button>
+                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" className="text-gold mb-5 transition-all duration-300 group-hover:text-[#E0AC30]">
+                              <path d={o.icon} strokeLinecap="round" strokeLinejoin="round" />
+                            </svg>
+                            <div className="font-display text-foreground" style={{ fontSize: 22, fontWeight: 400, letterSpacing: "-0.01em" }}>{o.label}</div>
+                            <div className="text-muted mt-2" style={{ fontSize: 13, lineHeight: 1.5 }}>{o.desc}</div>
+                            <div className="label text-gold mt-5" style={{ fontSize: 10 }}>à partir de {o.price} €/m²</div>
+                          </SelectCard>
                         );
                       })}
                     </div>
@@ -423,7 +406,7 @@ export function QuoteForm() {
                       <input
                         type="range" min={20} max={1000} step={10} value={data.surface}
                         onChange={(e) => setData({ ...data, surface: Number(e.target.value) })}
-                        className="w-full accent-[#C9A84C] cursor-pointer"
+                        className="w-full accent-[#C8992A] cursor-pointer"
                       />
                       <div className="flex justify-between text-muted mt-2" style={{ fontSize: 11 }}>
                         <span>20 m²</span><span>1000 m²</span>
@@ -432,27 +415,23 @@ export function QuoteForm() {
 
                     <div>
                       <h3 className="font-display text-foreground mb-6" style={{ fontSize: 24, fontWeight: 400 }}>Délai souhaité</h3>
-                      <div className="grid grid-cols-3 gap-3">
+                      <div className="grid grid-cols-3 gap-4">
                         {([
-                          { id: "souple", l: "Flexible" },
-                          { id: "1mois", l: "Sous 1 mois" },
-                          { id: "urgent", l: "Urgent" },
+                          { id: "souple", l: "Flexible", d: "Date libre" },
+                          { id: "1mois", l: "Sous 1 mois", d: "Planning serré" },
+                          { id: "urgent", l: "Urgent", d: "Sous 2 sem." },
                         ] as const).map((d) => {
                           const sel = data.delai === d.id;
                           return (
-                            <button
+                            <SelectCard
                               key={d.id}
-                              data-cursor-hover
+                              selected={sel}
                               onClick={() => setData({ ...data, delai: d.id })}
-                              className="p-4 border transition-all duration-300 text-foreground"
-                              style={{
-                                borderColor: sel ? "#C9A84C" : "rgb(201 168 76 / 0.25)",
-                                background: sel ? "rgb(201 168 76 / 0.06)" : "transparent",
-                                fontSize: 14,
-                              }}
+                              compact
                             >
-                              {d.l}
-                            </button>
+                              <div className="font-display text-foreground" style={{ fontSize: 18, fontWeight: 400 }}>{d.l}</div>
+                              <div className="text-muted mt-1.5" style={{ fontSize: 12 }}>{d.d}</div>
+                            </SelectCard>
                           );
                         })}
                       </div>
@@ -501,7 +480,7 @@ export function QuoteForm() {
                   data-cursor-hover
                   onClick={() => setStep((s) => s + 1)}
                   disabled={!canNext}
-                  className="bg-gold text-background px-8 py-3 transition-all hover:bg-[#b3933e] disabled:opacity-40 disabled:cursor-not-allowed"
+                  className="bg-gold text-background px-8 py-3 transition-all hover:bg-[#A87E1F] hover:-translate-y-0.5 focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:opacity-40 disabled:cursor-not-allowed"
                   style={{ fontFamily: "Outfit", fontSize: 13, letterSpacing: "0.15em", textTransform: "uppercase" }}
                 >
                   Continuer →
@@ -511,18 +490,19 @@ export function QuoteForm() {
                   data-cursor-hover
                   onClick={submit}
                   disabled={!canNext}
-                  className="bg-gold text-background px-8 py-3 transition-all hover:bg-[#b3933e] disabled:opacity-40 disabled:cursor-not-allowed"
-                  style={{ fontFamily: "Outfit", fontSize: 13, letterSpacing: "0.15em", textTransform: "uppercase" }}
+                  className="bg-gold text-background px-10 transition-all hover:bg-[#A87E1F] hover:-translate-y-1 focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:opacity-40 disabled:cursor-not-allowed"
+                  style={{ fontFamily: "Outfit", fontSize: 14, letterSpacing: "0.15em", textTransform: "uppercase", height: 56, fontWeight: 500, boxShadow: "0 8px 24px rgba(200,153,42,0.35)" }}
                 >
-                  Envoyer ma demande
+                  Envoyer ma demande →
                 </button>
               )}
             </div>
           </div>
 
-          {/* live estimate */}
+          {/* live estimate — sticky panel premium */}
           <aside className="relative">
-            <div className="sticky top-8 p-8 border border-gold/30 bg-surface/50">
+            <div className="sticky top-8 relative bg-surface border border-gold/40 p-8 overflow-hidden" style={{ boxShadow: "0 8px 32px rgba(0,0,0,0.4), 0 0 0 1px rgba(200,153,42,0.1)" }}>
+              <span aria-hidden className="absolute top-0 left-0 w-1 h-full bg-gold" />
               <div className="label text-gold mb-6" style={{ fontSize: 10 }}>— Estimation indicative</div>
 
               {data.type ? (
@@ -533,18 +513,18 @@ export function QuoteForm() {
                   <div className="text-muted mt-1" style={{ fontSize: 12 }}>{data.surface} m²{data.delai && ` · ${data.delai === "souple" ? "Flexible" : data.delai === "1mois" ? "Sous 1 mois" : "Urgent"}`}</div>
 
                   <div className="mt-8 mb-2">
-                    <div className="font-display text-gold flex items-baseline gap-2" style={{ fontSize: 36, lineHeight: 1, fontWeight: 400 }}>
+                    <div className="font-display text-gold flex items-baseline gap-2" style={{ fontSize: 64, lineHeight: 0.95, fontWeight: 400, letterSpacing: "-0.02em" }}>
                       <span ref={priceRef}>0</span>
-                      <span style={{ fontSize: 18 }}>€</span>
+                      <span style={{ fontSize: 24 }}>€</span>
                     </div>
-                    <div className="label text-muted mt-3" style={{ fontSize: 9 }}>
+                    <div className="label text-muted mt-4" style={{ fontSize: 10 }}>
                       Fourchette : {min.toLocaleString("fr-FR")} – {max.toLocaleString("fr-FR")} € HT
                     </div>
                   </div>
 
                   <div className="h-px bg-gold/20 my-6" />
                   <p className="text-muted italic font-display" style={{ fontSize: 12, lineHeight: 1.5 }}>
-                    Estimation à titre indicatif. Le devis officiel est établi après visite gratuite sur site.
+                    Estimation calculée selon vos critères. Le devis final pourra varier après visite gratuite du chantier.
                   </p>
                 </>
               ) : (
@@ -560,6 +540,55 @@ export function QuoteForm() {
   );
 }
 
+/* SelectCard — V_B "carte technique épurée" */
+function SelectCard({ children, selected, onClick, compact = false }: { children: React.ReactNode; selected: boolean; onClick: () => void; compact?: boolean }) {
+  const btnRef = useRef<HTMLButtonElement>(null);
+
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const btn = btnRef.current;
+    if (btn) {
+      // micro-bounce
+      gsap.fromTo(btn, { scale: 0.97 }, { scale: 1, duration: 0.35, ease: "back.out(3)" });
+      // ripple
+      const rect = btn.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const ripple = document.createElement("span");
+      ripple.style.cssText = `position:absolute;left:${x}px;top:${y}px;width:6px;height:6px;border-radius:9999px;background:rgba(200,153,42,0.45);pointer-events:none;transform:translate(-50%,-50%);`;
+      btn.appendChild(ripple);
+      gsap.to(ripple, {
+        width: 400, height: 400, opacity: 0, duration: 0.7, ease: "power2.out",
+        onComplete: () => ripple.remove(),
+      });
+    }
+    onClick();
+  };
+
+  return (
+    <button
+      ref={btnRef}
+      type="button"
+      data-cursor-hover
+      onClick={handleClick}
+      className={`group relative text-left bg-surface border transition-all duration-300 overflow-hidden focus:outline-none focus-visible:ring-2 focus-visible:ring-gold ${compact ? "p-5" : "p-8"} ${selected ? "border-gold border-2 -translate-y-0.5" : "border-border hover:border-gold hover:-translate-y-0.5"}`}
+      style={{
+        boxShadow: selected ? "0 12px 28px rgba(200,153,42,0.18), 0 0 0 1px rgba(200,153,42,0.4)" : "0 4px 12px rgba(0,0,0,0.4)",
+      }}
+    >
+      {/* gold left accent bar */}
+      <span aria-hidden className={`absolute top-0 left-0 w-[3px] h-full bg-gold transition-transform duration-500 origin-top ${selected ? "scale-y-100" : "scale-y-0 group-hover:scale-y-100"}`} />
+
+      {/* checkmark corner */}
+      {selected && (
+        <span aria-hidden className="absolute top-3 right-3 w-6 h-6 rounded-full border-2 border-gold flex items-center justify-center text-gold" style={{ fontSize: 11, animation: "fadeIn 0.3s ease-out" }}>
+          ✓
+        </span>
+      )}
+      <div className="relative">{children}</div>
+    </button>
+  );
+}
+
 function Input({ label, value, onChange, type = "text" }: { label: string; value: string; onChange: (v: string) => void; type?: string }) {
   return (
     <div>
@@ -568,7 +597,7 @@ function Input({ label, value, onChange, type = "text" }: { label: string; value
         type={type}
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className="w-full bg-transparent border border-gold/30 px-4 py-3 text-foreground focus:outline-none focus:border-gold transition-colors"
+        className="w-full bg-transparent border border-gold/30 px-4 py-3 text-foreground focus:outline-none focus:border-gold focus-visible:ring-1 focus-visible:ring-gold transition-colors"
         style={{ fontFamily: "Outfit", fontSize: 14 }}
       />
     </div>

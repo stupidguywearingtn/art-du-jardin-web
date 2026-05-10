@@ -245,10 +245,10 @@ function Services() {
         <div>
           <div className="label text-gold">— Nos services</div>
           <h2 className="font-display mt-6 text-foreground" style={{ fontSize: "clamp(40px, 7vw, 96px)", fontWeight: 400, lineHeight: 0.95 }}>
-            Six métiers,<br/>un seul jardin.
+            Trois métiers,<br/>une même exigence.
           </h2>
         </div>
-        <p className="max-w-md text-muted">De la première intuition à l'entretien quotidien, chaque geste participe à la vie de votre extérieur.</p>
+        <p className="max-w-md text-muted">De la préparation du sol à la pose finale, HCE intervient sur l'intégralité de votre chantier — sans intermédiaire.</p>
       </div>
       <div ref={ref} className="relative">
         {SERVICES.map((s) => <ServiceStrip key={s.n} {...s} />)}

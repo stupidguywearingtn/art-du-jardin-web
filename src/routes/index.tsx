@@ -78,7 +78,8 @@ function Index() {
 }
 
 /* ============ DECORATIONS ============ */
-function SectionDivider() {
+function SectionDivider({ variant = "minimal" }: { variant?: "minimal" | "marquee" }) {
+  if (variant === "marquee") return <MarqueeStats />;
   return (
     <div className="relative w-full flex items-center justify-center py-10 bg-background" aria-hidden>
       <div className="h-px flex-1 max-w-[28%] bg-gold/30" />
@@ -86,6 +87,46 @@ function SectionDivider() {
         <rect x="7" y="0" width="9.9" height="9.9" transform="rotate(45 7 7)" fill="currentColor" />
       </svg>
       <div className="h-px flex-1 max-w-[28%] bg-gold/30" />
+    </div>
+  );
+}
+
+/**
+ * MarqueeStats — bandeau de preuves sociales défilant lentement.
+ * CSS-only animation; pause si prefers-reduced-motion.
+ */
+function MarqueeStats() {
+  const items = [
+    "20 ans d'expérience",
+    "500+ chantiers livrés",
+    "Jura · Ain",
+    "Devis sous 48h",
+    "Garantie décennale",
+    "Enrobé à chaud",
+    "Visite gratuite",
+  ];
+  const row = [...items, ...items];
+  return (
+    <div
+      className="relative w-full overflow-hidden bg-background py-8 border-y border-gold/15"
+      aria-hidden
+      role="presentation"
+    >
+      <div
+        className="flex gap-12 whitespace-nowrap will-change-transform marquee-track"
+        style={{ animation: "marqueeSlide 38s linear infinite" }}
+      >
+        {row.map((it, i) => (
+          <span key={i} className="flex items-center gap-12 label text-gold/70" style={{ fontSize: 12 }}>
+            {it}
+            <span className="text-gold/40">◆</span>
+          </span>
+        ))}
+      </div>
+      <style>{`
+        @keyframes marqueeSlide { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+        @media (prefers-reduced-motion: reduce) { .marquee-track { animation: none !important; } }
+      `}</style>
     </div>
   );
 }

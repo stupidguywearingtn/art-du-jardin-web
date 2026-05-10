@@ -634,7 +634,7 @@ function CTAFinal() {
         </h2>
         <div className="mt-12 flex flex-wrap gap-4 justify-center">
           <a
-            href="mailto:sarl.hce@laposte.net"
+            href="#devis"
             data-cursor-hover
             className="bg-gold text-background px-10 py-4 font-medium transition-all hover:bg-[#b3933e] active:scale-[0.98]"
             style={{ fontFamily: "Outfit", fontSize: 14, letterSpacing: "0.15em", textTransform: "uppercase" }}

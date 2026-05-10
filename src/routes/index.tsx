@@ -159,13 +159,13 @@ function Hero() {
           ))}
         </h1>
         <div ref={lineRef} className="mt-10 h-px bg-gold" style={{ width: 0 }} />
-        <div ref={subRef} className="mt-8 label text-gold opacity-0">Leclerc Paysage — Genève</div>
+        <div ref={subRef} className="mt-8 label text-gold opacity-0">HCE — Cize, Jura</div>
       </div>
 
       <div className="absolute bottom-10 left-6 z-10 origin-bottom-left -rotate-90 label text-gold whitespace-nowrap" style={{ transformOrigin: "left bottom" }}>
         Scroll pour découvrir
       </div>
-      <div className="absolute bottom-10 right-6 z-10 label text-gold">Est. 2010</div>
+      <div className="absolute bottom-10 right-6 z-10 label text-gold">Depuis 2005</div>
     </section>
   );
 }

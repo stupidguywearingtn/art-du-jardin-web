@@ -14,8 +14,8 @@ export const Route = createFileRoute("/")({
   component: Index,
   head: () => ({
     meta: [
-      { title: "Leclerc Paysage — L'art du jardin vivant · Genève" },
-      { name: "description", content: "Architecte paysagiste à Genève. Création et entretien de jardins d'exception en Suisse romande." },
+      { title: "HCE — L'enrobé qui dure · Jura et Ain" },
+      { name: "description", content: "Spécialistes de l'aménagement de cours en enrobé à chaud, préparation de terrain et maçonnerie générale dans le Jura et l'Ain depuis 2005." },
     ],
   }),
 });
@@ -129,7 +129,7 @@ function Hero() {
     if (subRef.current) tl.fromTo(subRef.current, { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.8 }, "-=0.4");
   }, []);
 
-  const lines = ["L'Art du", "Jardin Vivant"];
+  const lines = ["L'Enrobé qui", "Marque le Temps."];
   return (
     <section className="relative h-screen w-full overflow-hidden bg-background">
       <video
@@ -159,13 +159,13 @@ function Hero() {
           ))}
         </h1>
         <div ref={lineRef} className="mt-10 h-px bg-gold" style={{ width: 0 }} />
-        <div ref={subRef} className="mt-8 label text-gold opacity-0">Leclerc Paysage — Genève</div>
+        <div ref={subRef} className="mt-8 label text-gold opacity-0">HCE — Cize, Jura</div>
       </div>
 
       <div className="absolute bottom-10 left-6 z-10 origin-bottom-left -rotate-90 label text-gold whitespace-nowrap" style={{ transformOrigin: "left bottom" }}>
         Scroll pour découvrir
       </div>
-      <div className="absolute bottom-10 right-6 z-10 label text-gold">Est. 2010</div>
+      <div className="absolute bottom-10 right-6 z-10 label text-gold">Depuis 2005</div>
     </section>
   );
 }
@@ -184,7 +184,7 @@ function Philosophy() {
       }
     );
   }, []);
-  const text = "Chaque jardin est une conversation\nentre l'homme et la nature.";
+  const text = "Un enrobé qui dure,\nune finition qui marque.";
   return (
     <section ref={ref} className="relative min-h-screen w-full bg-background flex items-center justify-center px-6 py-24">
       <div className="absolute left-6 md:left-12 top-0 bottom-0 w-px bg-gold/40" />
@@ -201,7 +201,7 @@ function Philosophy() {
             </span>
           ))}
         </p>
-        <div className="mt-12 label text-gold">— Leclerc Paysage</div>
+        <div className="mt-12 label text-gold">— HCE, Cize</div>
       </div>
     </section>
   );
@@ -209,12 +209,12 @@ function Philosophy() {
 
 /* ============ SERVICES ============ */
 const SERVICES = [
-  { n: "01", t: "Création de Jardin", img: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1600" },
-  { n: "02", t: "Entretien & Espaces Verts", img: "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=1600" },
-  { n: "03", t: "Optimisation Biodiversité", img: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=1600" },
-  { n: "04", t: "Jardins Comestibles", img: "https://images.unsplash.com/photo-1530836369250-ef72a3f5cda8?w=1600" },
-  { n: "05", t: "Gestion des Ressources", img: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=1600" },
-  { n: "06", t: "Ateliers Pratiques", img: "https://images.unsplash.com/photo-1592150621744-aca64f48394a?w=1600" },
+  { n: "01", t: "Préparation de terrain", img: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1600" },
+  { n: "02", t: "Enrobé à chaud", img: "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=1600" },
+  { n: "03", t: "Maçonnerie générale", img: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=1600" },
+  { n: "04", t: "Drainage & pentes", img: "https://images.unsplash.com/photo-1530836369250-ef72a3f5cda8?w=1600" },
+  { n: "05", t: "Bordures & murets", img: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=1600" },
+  { n: "06", t: "Garantie & SAV", img: "https://images.unsplash.com/photo-1592150621744-aca64f48394a?w=1600" },
 ];
 
 function Services() {
@@ -245,10 +245,10 @@ function Services() {
         <div>
           <div className="label text-gold">— Nos services</div>
           <h2 className="font-display mt-6 text-foreground" style={{ fontSize: "clamp(40px, 7vw, 96px)", fontWeight: 400, lineHeight: 0.95 }}>
-            Six métiers,<br/>un seul jardin.
+            Trois métiers,<br/>une même exigence.
           </h2>
         </div>
-        <p className="max-w-md text-muted">De la première intuition à l'entretien quotidien, chaque geste participe à la vie de votre extérieur.</p>
+        <p className="max-w-md text-muted">De la préparation du sol à la pose finale, HCE intervient sur l'intégralité de votre chantier — sans intermédiaire.</p>
       </div>
       <div ref={ref} className="relative">
         {SERVICES.map((s) => <ServiceStrip key={s.n} {...s} />)}
@@ -320,18 +320,18 @@ function Transformation() {
       <div className="absolute inset-x-0 bottom-0 h-[30%]" style={{ background: "linear-gradient(to bottom, transparent, #070A08)" }} />
 
       <div className="relative z-10 h-full w-full flex flex-col items-center justify-center text-center px-6">
-        <div className="label text-gold">— Métamorphose</div>
+        <div className="label text-gold">— Avant / Après</div>
         <h2 className="font-display mt-6 text-foreground" style={{ fontSize: "clamp(40px, 6vw, 88px)", fontWeight: 400, lineHeight: 1.05 }}>
-          De la Terre Brute<br/>au <span className="italic text-gold">Jardin d'Exception</span>
+          De la Cour Brute<br/>à <span className="italic text-gold">l'Enrobé d'Exception</span>
         </h2>
         <p className="mt-8 text-muted max-w-xl mx-auto">
-          Chaque projet débute par une lecture du lieu — sols, lumière, vents, vues — pour révéler l'identité unique de votre extérieur.
+          Chaque chantier débute par une lecture du terrain — sols, pentes, drainage, usages — pour garantir un enrobé qui dure dans le temps.
         </p>
         <div ref={statsRef} className="mt-14 grid grid-cols-3 gap-8 md:gap-16 max-w-3xl mx-auto">
           {[
-            { n: 12, suf: "+", l: "Années" },
-            { n: 200, suf: "+", l: "Jardins" },
-            { n: 100, suf: "%", l: "Sur-mesure" },
+            { n: 20, suf: "+", l: "Années" },
+            { n: 500, suf: "+", l: "Chantiers" },
+            { n: 100, suf: "%", l: "Satisfaits" },
           ].map((s, i) => (
             <div key={i} className="text-center">
               <div className="font-display text-gold flex items-baseline justify-center gap-1" style={{ fontSize: "clamp(36px, 5vw, 72px)", fontWeight: 400, lineHeight: 1 }}>
@@ -348,10 +348,10 @@ function Transformation() {
 
 /* ============ PROCESS ============ */
 const PROCESS = [
-  { n: "01", t: "Consultation & Vision", d: "Visite du site, écoute de vos usages et lecture sensible du lieu." },
-  { n: "02", t: "Conception & Plan", d: "Plans, ambiances, palette végétale et devis détaillé." },
-  { n: "03", t: "Création & Réalisation", d: "Du terrassement à la plantation, une exécution soignée." },
-  { n: "04", t: "Entretien & Suivi", d: "Accompagnement saisonnier pour faire vivre le jardin." },
+  { n: "01", t: "Visite & Devis", d: "Déplacement gratuit, lecture du terrain et devis détaillé sous 48h." },
+  { n: "02", t: "Préparation du sol", d: "Décaissement, nivellement laser, compactage et drainage maîtrisés." },
+  { n: "03", t: "Pose & Finitions", d: "Enrobé à chaud au finisseur, bordures et maçonnerie soignées." },
+  { n: "04", t: "Garantie & SAV", d: "Travaux garantis, intervention rapide en cas de besoin." },
 ];
 
 function Process() {
@@ -466,9 +466,9 @@ function ProcessStep({ step, left }: { step: { n: string; t: string; d: string }
 
 /* ============ TESTIMONIALS ============ */
 const TESTIMONIALS = [
-  { q: "Un travail d'orfèvre. Notre jardin est devenu le cœur de la maison, en toute saison.", n: "Marie-Claire D., Cologny" },
-  { q: "Vision, écoute, exécution irréprochable. Une vraie rencontre humaine et professionnelle.", n: "Étienne M., Vandœuvres" },
-  { q: "Leclerc Paysage a su révéler l'âme de notre propriété avec une délicatesse rare.", n: "Famille R., Genthod" },
+  { q: "Travail impeccable, équipe sérieuse et ponctuelle. Mon allée est parfaite, les finitions sont soignées. Je recommande HCE sans hésitation.", n: "Michel T., Bourg-en-Bresse" },
+  { q: "Devis rapide, prix honnête et résultat au-delà de mes attentes. La cour est magnifique et très bien drainée.", n: "Sandrine L., Lons-le-Saunier" },
+  { q: "HCE a refait le parking de notre entrepôt. Travail soigné, dans les délais et conforme au devis. Très satisfait.", n: "Pascal M., Oyonnax" },
 ];
 
 function Testimonials() {
@@ -612,33 +612,33 @@ function CTAFinal() {
       <div ref={imgRef} className="absolute inset-0 -top-[10%] -bottom-[10%]">
         <img
           src="https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=1600"
-          alt="Jardin éclairé"
+          alt="Cour en enrobé fraîchement posé"
           loading="lazy"
           className="h-full w-full object-cover"
         />
       </div>
       <div className="absolute inset-0" style={{ background: "rgba(7, 10, 8, 0.75)" }} />
       <div className="relative z-10 text-center px-6 max-w-4xl">
-        <div className="label text-gold">Genève & Suisse Romande</div>
+        <div className="label text-gold">Jura & Ain</div>
         <h2 className="font-display mt-8 text-foreground" style={{ fontSize: "clamp(48px, 9vw, 96px)", fontWeight: 400, lineHeight: 0.95 }}>
-          Transformons<br/>Votre Espace
+          Votre Projet,<br/>Notre Priorité
         </h2>
         <div className="mt-12 flex flex-wrap gap-4 justify-center">
           <a
-            href="mailto:contact@leclercpaysage.ch"
+            href="mailto:sarl.hce@laposte.net"
             data-cursor-hover
             className="bg-gold text-background px-10 py-4 font-medium transition-all hover:bg-[#b3933e] active:scale-[0.98]"
             style={{ fontFamily: "Outfit", fontSize: 14, letterSpacing: "0.15em", textTransform: "uppercase" }}
           >
-            Prendre Contact
+            Demander un Devis
           </a>
           <a
-            href="#services"
+            href="tel:0384526148"
             data-cursor-hover
             className="border border-gold text-gold px-10 py-4 font-medium transition-colors hover:bg-gold hover:text-background"
             style={{ fontFamily: "Outfit", fontSize: 14, letterSpacing: "0.15em", textTransform: "uppercase" }}
           >
-            Voir Nos Réalisations
+            03 84 52 61 48
           </a>
         </div>
       </div>
@@ -655,12 +655,12 @@ function Footer() {
         style={{ opacity: 0.04, fontSize: "clamp(80px, 18vw, 280px)", color: "#EDE8DC", fontWeight: 300, lineHeight: 1 }}
         aria-hidden
       >
-        LECLERC PAYSAGE
+        HCE
       </div>
       <div className="relative grid grid-cols-1 md:grid-cols-3 gap-12">
         <div>
-          <div className="font-display text-gold" style={{ fontSize: 56, fontWeight: 400, lineHeight: 1 }}>LP</div>
-          <p className="mt-4 text-muted italic font-display" style={{ fontSize: 18 }}>L'art du jardin vivant</p>
+          <div className="font-display text-gold" style={{ fontSize: 56, fontWeight: 400, lineHeight: 1 }}>HCE</div>
+          <p className="mt-4 text-muted italic font-display" style={{ fontSize: 18 }}>Aménagement de cours & enrobés</p>
         </div>
         <div>
           <div className="label text-gold mb-6">Services</div>
@@ -675,15 +675,16 @@ function Footer() {
         <div>
           <div className="label text-gold mb-6">Contact</div>
           <ul className="space-y-3 text-foreground/80" style={{ fontSize: 14 }}>
-            <li>Genève, Suisse</li>
-            <li><a href="mailto:contact@leclercpaysage.ch" className="transition-colors hover:text-gold">contact@leclercpaysage.ch</a></li>
-            <li><a href="#" className="transition-colors hover:text-gold">Instagram</a></li>
+            <li>40 avenue Etienne Lamy, 39300 Cize</li>
+            <li><a href="tel:0384526148" className="transition-colors hover:text-gold">03 84 52 61 48</a></li>
+            <li><a href="mailto:sarl.hce@laposte.net" className="transition-colors hover:text-gold">sarl.hce@laposte.net</a></li>
+            <li>Lun-Ven 8h-18h · Sam 8h-12h</li>
           </ul>
         </div>
       </div>
       <div className="relative mt-24 pt-8 border-t border-gold/30 flex flex-wrap items-center justify-between gap-4 text-muted" style={{ fontSize: 12 }}>
-        <span>© 2025 Leclerc Paysage</span>
-        <span>Fait à Genève, avec soin</span>
+        <span>© 2025 HCE SARL · Tous droits réservés</span>
+        <span>Cize, Jura — 03 84 52 61 48</span>
       </div>
     </footer>
   );

@@ -14,8 +14,8 @@ export const Route = createFileRoute("/")({
   component: Index,
   head: () => ({
     meta: [
-      { title: "Leclerc Paysage — L'art du jardin vivant · Genève" },
-      { name: "description", content: "Architecte paysagiste à Genève. Création et entretien de jardins d'exception en Suisse romande." },
+      { title: "HCE — L'enrobé qui dure · Jura et Ain" },
+      { name: "description", content: "Spécialistes de l'aménagement de cours en enrobé à chaud, préparation de terrain et maçonnerie générale dans le Jura et l'Ain depuis 2005." },
     ],
   }),
 });

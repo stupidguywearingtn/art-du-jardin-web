@@ -85,37 +85,36 @@ export function WhyUs() {
   );
 }
 
-/* ============ ZONE D'INTERVENTION ============ */
-const CITIES = [
-  { name: "Cize", x: 50, y: 50, hq: true },
-  { name: "Bourg-en-Bresse", x: 30, y: 70 },
-  { name: "Lons-le-Saunier", x: 35, y: 25 },
-  { name: "Oyonnax", x: 65, y: 55 },
-  { name: "Saint-Claude", x: 70, y: 30 },
-  { name: "Champagnole", x: 55, y: 18 },
-  { name: "Nantua", x: 60, y: 65 },
-  { name: "Pont-d'Ain", x: 40, y: 80 },
+/* ============ ZONE D'INTERVENTION — Leaflet lazy ============ */
+const CITIES_FALLBACK = [
+  "Cize (siège)", "Lons-le-Saunier", "Saint-Claude", "Champagnole",
+  "Bourg-en-Bresse", "Oyonnax", "Nantua", "Pont-d'Ain",
 ];
 
 export function Zone() {
   const ref = useRef<HTMLDivElement>(null);
+  const [Map, setMap] = useState<React.ComponentType | null>(null);
+  const [shouldLoad, setShouldLoad] = useState(false);
+
   useEffect(() => {
     if (!ref.current) return;
-    const dots = ref.current.querySelectorAll("[data-city]");
-    dots.forEach((el, i) => {
-      gsap.fromTo(el,
-        { scale: 0, opacity: 0 },
-        { scale: 1, opacity: 1, duration: 0.5, delay: i * 0.08, ease: "back.out(2)",
-          scrollTrigger: { trigger: ref.current, start: "top 70%" } });
-    });
-    const path = ref.current.querySelector<SVGPathElement>("[data-region]");
-    if (path) {
-      const len = path.getTotalLength();
-      gsap.set(path, { strokeDasharray: len, strokeDashoffset: len });
-      gsap.to(path, { strokeDashoffset: 0, duration: 3, ease: "power2.inOut",
-        scrollTrigger: { trigger: ref.current, start: "top 70%" } });
-    }
+    const io = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          setShouldLoad(true);
+          io.disconnect();
+        }
+      },
+      { rootMargin: "200px" }
+    );
+    io.observe(ref.current);
+    return () => io.disconnect();
   }, []);
+
+  useEffect(() => {
+    if (!shouldLoad || Map) return;
+    import("./InteractiveMap").then((m) => setMap(() => m.default));
+  }, [shouldLoad, Map]);
 
   return (
     <section ref={ref} className="relative bg-background py-32 px-6 md:px-12 overflow-hidden">
@@ -129,38 +128,24 @@ export function Zone() {
             Basés à Cize, nous intervenons dans tout le Jura et le département de l'Ain. Visite et devis gratuits jusqu'à 60 km autour de notre siège.
           </p>
           <ul className="mt-8 grid grid-cols-2 gap-x-8 gap-y-3 text-foreground/80" style={{ fontSize: 14 }}>
-            {CITIES.map((c) => (
-              <li key={c.name} className="flex items-center gap-3">
+            {CITIES_FALLBACK.map((c) => (
+              <li key={c} className="flex items-center gap-3">
                 <span className="w-1 h-1 bg-gold rounded-full" />
-                {c.name}
+                {c}
               </li>
             ))}
           </ul>
+          <div className="label text-gold/70 mt-10" style={{ fontSize: 10 }}>
+            Marqueurs dorés · Survol pour le détail · Clic pour la fiche
+          </div>
         </div>
 
-        <div className="relative aspect-square max-w-lg mx-auto w-full">
-          <svg viewBox="0 0 100 100" className="w-full h-full">
-            <path
-              data-region
-              d="M 20 20 Q 35 10, 55 15 Q 80 18, 82 35 Q 88 55, 78 75 Q 65 90, 40 88 Q 18 85, 12 65 Q 8 40, 20 20 Z"
-              fill="rgb(200 153 42 / 0.04)"
-              stroke="rgb(200 153 42 / 0.5)"
-              strokeWidth="0.4"
-              vectorEffect="non-scaling-stroke"
-            />
-            {CITIES.map((c) => (
-              <g key={c.name} data-city style={{ transformOrigin: `${c.x}px ${c.y}px` }}>
-                {c.hq && <circle cx={c.x} cy={c.y} r="4" fill="none" stroke="rgb(200 153 42 / 0.4)" strokeWidth="0.3" vectorEffect="non-scaling-stroke">
-                  <animate attributeName="r" from="2" to="6" dur="2.5s" repeatCount="indefinite" />
-                  <animate attributeName="opacity" from="0.8" to="0" dur="2.5s" repeatCount="indefinite" />
-                </circle>}
-                <circle cx={c.x} cy={c.y} r={c.hq ? 1.4 : 0.9} fill="rgb(200 153 42)" />
-                <text x={c.x + 2} y={c.y - 1.5} fill="rgb(237 232 220 / 0.85)" style={{ fontSize: 2.2, fontFamily: "Outfit" }}>
-                  {c.name}{c.hq ? " (siège)" : ""}
-                </text>
-              </g>
-            ))}
-          </svg>
+        <div className="relative aspect-square max-w-lg mx-auto w-full bg-surface border border-border">
+          {Map ? <Map /> : (
+            <div className="absolute inset-0 flex items-center justify-center">
+              <span className="label text-gold/60">Carte Jura & Ain</span>
+            </div>
+          )}
         </div>
       </div>
     </section>

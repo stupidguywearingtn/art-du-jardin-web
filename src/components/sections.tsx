@@ -499,9 +499,10 @@ export function QuoteForm() {
             </div>
           </div>
 
-          {/* live estimate */}
+          {/* live estimate — sticky panel premium */}
           <aside className="relative">
-            <div className="sticky top-8 p-8 border border-gold/30 bg-surface/50">
+            <div className="sticky top-8 relative bg-surface border border-gold/40 p-8 overflow-hidden" style={{ boxShadow: "0 8px 32px rgba(0,0,0,0.4), 0 0 0 1px rgba(200,153,42,0.1)" }}>
+              <span aria-hidden className="absolute top-0 left-0 w-1 h-full bg-gold" />
               <div className="label text-gold mb-6" style={{ fontSize: 10 }}>— Estimation indicative</div>
 
               {data.type ? (
@@ -512,18 +513,18 @@ export function QuoteForm() {
                   <div className="text-muted mt-1" style={{ fontSize: 12 }}>{data.surface} m²{data.delai && ` · ${data.delai === "souple" ? "Flexible" : data.delai === "1mois" ? "Sous 1 mois" : "Urgent"}`}</div>
 
                   <div className="mt-8 mb-2">
-                    <div className="font-display text-gold flex items-baseline gap-2" style={{ fontSize: 36, lineHeight: 1, fontWeight: 400 }}>
+                    <div className="font-display text-gold flex items-baseline gap-2" style={{ fontSize: 64, lineHeight: 0.95, fontWeight: 400, letterSpacing: "-0.02em" }}>
                       <span ref={priceRef}>0</span>
-                      <span style={{ fontSize: 18 }}>€</span>
+                      <span style={{ fontSize: 24 }}>€</span>
                     </div>
-                    <div className="label text-muted mt-3" style={{ fontSize: 9 }}>
+                    <div className="label text-muted mt-4" style={{ fontSize: 10 }}>
                       Fourchette : {min.toLocaleString("fr-FR")} – {max.toLocaleString("fr-FR")} € HT
                     </div>
                   </div>
 
                   <div className="h-px bg-gold/20 my-6" />
                   <p className="text-muted italic font-display" style={{ fontSize: 12, lineHeight: 1.5 }}>
-                    Estimation à titre indicatif. Le devis officiel est établi après visite gratuite sur site.
+                    Estimation calculée selon vos critères. Le devis final pourra varier après visite gratuite du chantier.
                   </p>
                 </>
               ) : (
@@ -539,6 +540,55 @@ export function QuoteForm() {
   );
 }
 
+/* SelectCard — V_B "carte technique épurée" */
+function SelectCard({ children, selected, onClick, compact = false }: { children: React.ReactNode; selected: boolean; onClick: () => void; compact?: boolean }) {
+  const btnRef = useRef<HTMLButtonElement>(null);
+
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const btn = btnRef.current;
+    if (btn) {
+      // micro-bounce
+      gsap.fromTo(btn, { scale: 0.97 }, { scale: 1, duration: 0.35, ease: "back.out(3)" });
+      // ripple
+      const rect = btn.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const ripple = document.createElement("span");
+      ripple.style.cssText = `position:absolute;left:${x}px;top:${y}px;width:6px;height:6px;border-radius:9999px;background:rgba(200,153,42,0.45);pointer-events:none;transform:translate(-50%,-50%);`;
+      btn.appendChild(ripple);
+      gsap.to(ripple, {
+        width: 400, height: 400, opacity: 0, duration: 0.7, ease: "power2.out",
+        onComplete: () => ripple.remove(),
+      });
+    }
+    onClick();
+  };
+
+  return (
+    <button
+      ref={btnRef}
+      type="button"
+      data-cursor-hover
+      onClick={handleClick}
+      className={`group relative text-left bg-surface border transition-all duration-300 overflow-hidden focus:outline-none focus-visible:ring-2 focus-visible:ring-gold ${compact ? "p-5" : "p-8"} ${selected ? "border-gold border-2 -translate-y-0.5" : "border-border hover:border-gold hover:-translate-y-0.5"}`}
+      style={{
+        boxShadow: selected ? "0 12px 28px rgba(200,153,42,0.18), 0 0 0 1px rgba(200,153,42,0.4)" : "0 4px 12px rgba(0,0,0,0.4)",
+      }}
+    >
+      {/* gold left accent bar */}
+      <span aria-hidden className={`absolute top-0 left-0 w-[3px] h-full bg-gold transition-transform duration-500 origin-top ${selected ? "scale-y-100" : "scale-y-0 group-hover:scale-y-100"}`} />
+
+      {/* checkmark corner */}
+      {selected && (
+        <span aria-hidden className="absolute top-3 right-3 w-6 h-6 rounded-full border-2 border-gold flex items-center justify-center text-gold" style={{ fontSize: 11, animation: "fadeIn 0.3s ease-out" }}>
+          ✓
+        </span>
+      )}
+      <div className="relative">{children}</div>
+    </button>
+  );
+}
+
 function Input({ label, value, onChange, type = "text" }: { label: string; value: string; onChange: (v: string) => void; type?: string }) {
   return (
     <div>
@@ -547,7 +597,7 @@ function Input({ label, value, onChange, type = "text" }: { label: string; value
         type={type}
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className="w-full bg-transparent border border-gold/30 px-4 py-3 text-foreground focus:outline-none focus:border-gold transition-colors"
+        className="w-full bg-transparent border border-gold/30 px-4 py-3 text-foreground focus:outline-none focus:border-gold focus-visible:ring-1 focus-visible:ring-gold transition-colors"
         style={{ fontFamily: "Outfit", fontSize: 14 }}
       />
     </div>

@@ -466,9 +466,9 @@ function ProcessStep({ step, left }: { step: { n: string; t: string; d: string }
 
 /* ============ TESTIMONIALS ============ */
 const TESTIMONIALS = [
-  { q: "Un travail d'orfèvre. Notre jardin est devenu le cœur de la maison, en toute saison.", n: "Marie-Claire D., Cologny" },
-  { q: "Vision, écoute, exécution irréprochable. Une vraie rencontre humaine et professionnelle.", n: "Étienne M., Vandœuvres" },
-  { q: "Leclerc Paysage a su révéler l'âme de notre propriété avec une délicatesse rare.", n: "Famille R., Genthod" },
+  { q: "Travail impeccable, équipe sérieuse et ponctuelle. Mon allée est parfaite, les finitions sont soignées. Je recommande HCE sans hésitation.", n: "Michel T., Bourg-en-Bresse" },
+  { q: "Devis rapide, prix honnête et résultat au-delà de mes attentes. La cour est magnifique et très bien drainée.", n: "Sandrine L., Lons-le-Saunier" },
+  { q: "HCE a refait le parking de notre entrepôt. Travail soigné, dans les délais et conforme au devis. Très satisfait.", n: "Pascal M., Oyonnax" },
 ];
 
 function Testimonials() {

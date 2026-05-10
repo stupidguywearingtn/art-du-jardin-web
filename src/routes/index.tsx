@@ -209,12 +209,12 @@ function Philosophy() {
 
 /* ============ SERVICES ============ */
 const SERVICES = [
-  { n: "01", t: "Création de Jardin", img: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1600" },
-  { n: "02", t: "Entretien & Espaces Verts", img: "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=1600" },
-  { n: "03", t: "Optimisation Biodiversité", img: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=1600" },
-  { n: "04", t: "Jardins Comestibles", img: "https://images.unsplash.com/photo-1530836369250-ef72a3f5cda8?w=1600" },
-  { n: "05", t: "Gestion des Ressources", img: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=1600" },
-  { n: "06", t: "Ateliers Pratiques", img: "https://images.unsplash.com/photo-1592150621744-aca64f48394a?w=1600" },
+  { n: "01", t: "Préparation de terrain", img: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1600" },
+  { n: "02", t: "Enrobé à chaud", img: "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=1600" },
+  { n: "03", t: "Maçonnerie générale", img: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=1600" },
+  { n: "04", t: "Drainage & pentes", img: "https://images.unsplash.com/photo-1530836369250-ef72a3f5cda8?w=1600" },
+  { n: "05", t: "Bordures & murets", img: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=1600" },
+  { n: "06", t: "Garantie & SAV", img: "https://images.unsplash.com/photo-1592150621744-aca64f48394a?w=1600" },
 ];
 
 function Services() {

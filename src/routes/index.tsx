@@ -497,13 +497,13 @@ function Process() {
       </div>
 
       <div ref={ref} className="relative max-w-6xl mx-auto">
-        {/* vertical gold line: left on mobile (24px), center on desktop */}
+        {/* vertical gold line: left-24 on mobile, centered on desktop */}
         <div
           ref={lineRef}
-          className="absolute top-0 bottom-0 w-px bg-gold/40"
-          style={{ left: "24px", transformOrigin: "top center" }}
+          className="absolute top-0 bottom-0 w-px bg-gold/40 left-6 md:left-1/2 md:-translate-x-1/2"
+          style={{ transformOrigin: "top center" }}
+          aria-hidden
         />
-        <div className="absolute top-0 bottom-0 w-px bg-gold/40 hidden md:block left-1/2 -translate-x-1/2" />
 
         {PROCESS.map((s, i) => {
           const left = i % 2 === 0;

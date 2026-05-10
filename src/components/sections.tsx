@@ -372,24 +372,22 @@ export function QuoteForm() {
                     <h3 className="font-display text-foreground mb-8" style={{ fontSize: 28, fontWeight: 400 }}>
                       Quel type de projet ?
                     </h3>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                       {TYPE_OPTIONS.map((o) => {
                         const sel = data.type === o.id;
                         return (
-                          <button
+                          <SelectCard
                             key={o.id}
-                            data-cursor-hover
+                            selected={sel}
                             onClick={() => setData({ ...data, type: o.id })}
-                            className="text-left p-6 border transition-all duration-300"
-                            style={{
-                              borderColor: sel ? "#C8992A" : "rgb(200 153 42 / 0.25)",
-                              background: sel ? "rgb(200 153 42 / 0.06)" : "transparent",
-                            }}
                           >
-                            <div className="font-display text-foreground" style={{ fontSize: 20 }}>{o.label}</div>
-                            <div className="text-muted mt-2" style={{ fontSize: 13 }}>{o.desc}</div>
-                            <div className="label text-gold mt-4" style={{ fontSize: 10 }}>à partir de {o.price} €/m²</div>
-                          </button>
+                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" className="text-gold mb-5 transition-all duration-300 group-hover:text-[#E0AC30]">
+                              <path d={o.icon} strokeLinecap="round" strokeLinejoin="round" />
+                            </svg>
+                            <div className="font-display text-foreground" style={{ fontSize: 22, fontWeight: 400, letterSpacing: "-0.01em" }}>{o.label}</div>
+                            <div className="text-muted mt-2" style={{ fontSize: 13, lineHeight: 1.5 }}>{o.desc}</div>
+                            <div className="label text-gold mt-5" style={{ fontSize: 10 }}>à partir de {o.price} €/m²</div>
+                          </SelectCard>
                         );
                       })}
                     </div>
@@ -417,27 +415,23 @@ export function QuoteForm() {
 
                     <div>
                       <h3 className="font-display text-foreground mb-6" style={{ fontSize: 24, fontWeight: 400 }}>Délai souhaité</h3>
-                      <div className="grid grid-cols-3 gap-3">
+                      <div className="grid grid-cols-3 gap-4">
                         {([
-                          { id: "souple", l: "Flexible" },
-                          { id: "1mois", l: "Sous 1 mois" },
-                          { id: "urgent", l: "Urgent" },
+                          { id: "souple", l: "Flexible", d: "Date libre" },
+                          { id: "1mois", l: "Sous 1 mois", d: "Planning serré" },
+                          { id: "urgent", l: "Urgent", d: "Sous 2 sem." },
                         ] as const).map((d) => {
                           const sel = data.delai === d.id;
                           return (
-                            <button
+                            <SelectCard
                               key={d.id}
-                              data-cursor-hover
+                              selected={sel}
                               onClick={() => setData({ ...data, delai: d.id })}
-                              className="p-4 border transition-all duration-300 text-foreground"
-                              style={{
-                                borderColor: sel ? "#C8992A" : "rgb(200 153 42 / 0.25)",
-                                background: sel ? "rgb(200 153 42 / 0.06)" : "transparent",
-                                fontSize: 14,
-                              }}
+                              compact
                             >
-                              {d.l}
-                            </button>
+                              <div className="font-display text-foreground" style={{ fontSize: 18, fontWeight: 400 }}>{d.l}</div>
+                              <div className="text-muted mt-1.5" style={{ fontSize: 12 }}>{d.d}</div>
+                            </SelectCard>
                           );
                         })}
                       </div>

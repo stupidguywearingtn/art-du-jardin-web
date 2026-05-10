@@ -6,6 +6,14 @@ import { motion, AnimatePresence } from "framer-motion";
 import { CustomCursor } from "@/components/CustomCursor";
 import { SmoothScroll } from "@/components/SmoothScroll";
 import { WhyUs, Zone, FAQ, QuoteForm } from "@/components/sections";
+import { useIsMobile } from "@/hooks/use-mobile";
+import service01 from "@/assets/service-01-preparation.jpg";
+import service02 from "@/assets/service-02-enrobe.jpg";
+import service03 from "@/assets/service-03-maconnerie.jpg";
+import service04 from "@/assets/service-04-drainage.jpg";
+import service05 from "@/assets/service-05-bordures.jpg";
+import service06 from "@/assets/service-06-garantie.jpg";
+import ctaCourtyard from "@/assets/cta-courtyard.jpg";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -47,7 +55,7 @@ function Index() {
         <Philosophy />
         <SectionDivider />
         <Services />
-        <SectionDivider />
+        <SectionDivider variant="marquee" />
         <Transformation />
         <SectionDivider />
         <WhyUs />
@@ -55,7 +63,7 @@ function Index() {
         <Process />
         <SectionDivider />
         <Zone />
-        <SectionDivider />
+        <SectionDivider variant="marquee" />
         <Testimonials />
         <SectionDivider />
         <FAQ />
@@ -70,7 +78,8 @@ function Index() {
 }
 
 /* ============ DECORATIONS ============ */
-function SectionDivider() {
+function SectionDivider({ variant = "minimal" }: { variant?: "minimal" | "marquee" }) {
+  if (variant === "marquee") return <MarqueeStats />;
   return (
     <div className="relative w-full flex items-center justify-center py-10 bg-background" aria-hidden>
       <div className="h-px flex-1 max-w-[28%] bg-gold/30" />
@@ -82,24 +91,125 @@ function SectionDivider() {
   );
 }
 
-function BotanicalLeaf({ className = "", style }: { className?: string; style?: React.CSSProperties }) {
+/**
+ * MarqueeStats — bandeau de preuves sociales défilant lentement.
+ * CSS-only animation; pause si prefers-reduced-motion.
+ */
+function MarqueeStats() {
+  const items = [
+    "20 ans d'expérience",
+    "500+ chantiers livrés",
+    "Jura · Ain",
+    "Devis sous 48h",
+    "Garantie décennale",
+    "Enrobé à chaud",
+    "Visite gratuite",
+  ];
+  const row = [...items, ...items];
+  return (
+    <div
+      className="relative w-full overflow-hidden bg-background py-8 border-y border-gold/15"
+      aria-hidden
+      role="presentation"
+    >
+      <div
+        className="flex gap-12 whitespace-nowrap will-change-transform marquee-track"
+        style={{ animation: "marqueeSlide 38s linear infinite" }}
+      >
+        {row.map((it, i) => (
+          <span key={i} className="flex items-center gap-12 label text-gold/70" style={{ fontSize: 12 }}>
+            {it}
+            <span className="text-gold/40">◆</span>
+          </span>
+        ))}
+      </div>
+      <style>{`
+        @keyframes marqueeSlide { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+        @media (prefers-reduced-motion: reduce) { .marquee-track { animation: none !important; } }
+      `}</style>
+    </div>
+  );
+}
+
+/**
+ * TechnicalMark — coupe d'enrobé annotée, SVG monochrome doré
+ * Remplace l'ancien BotanicalLeaf (héritage paysagiste).
+ * aria-hidden, opacité basse, prefers-reduced-motion safe (statique).
+ */
+function TechnicalMark({ className = "", style }: { className?: string; style?: React.CSSProperties }) {
   return (
     <svg
       viewBox="0 0 200 400"
       className={`pointer-events-none absolute text-gold ${className}`}
-      style={{ opacity: 0.04, ...style }}
+      style={{ opacity: 0.1, ...style }}
       aria-hidden
+      role="presentation"
       fill="none"
       stroke="currentColor"
       strokeWidth="1"
     >
-      <path d="M100 10 C 60 100, 40 220, 100 390" />
-      <path d="M100 60 C 130 80, 150 100, 160 130" />
-      <path d="M100 110 C 60 130, 45 150, 35 180" />
-      <path d="M100 160 C 135 180, 155 200, 165 230" />
-      <path d="M100 220 C 60 240, 45 260, 35 290" />
-      <path d="M100 280 C 130 300, 145 320, 155 345" />
+      {/* couche enrobé (haut) */}
+      <rect x="20" y="40" width="160" height="38" fill="currentColor" fillOpacity="0.25" />
+      <line x1="20" y1="40" x2="180" y2="40" />
+      <line x1="20" y1="78" x2="180" y2="78" />
+      {/* couche grave bitume */}
+      <rect x="20" y="78" width="160" height="50" fill="currentColor" fillOpacity="0.12" />
+      <line x1="20" y1="128" x2="180" y2="128" />
+      {/* couche fondation gravier (motif points) */}
+      {Array.from({ length: 6 }).map((_, i) =>
+        Array.from({ length: 16 }).map((__, j) => (
+          <circle key={`${i}-${j}`} cx={26 + j * 10} cy={138 + i * 12} r="1.4" fill="currentColor" />
+        ))
+      )}
+      <line x1="20" y1="216" x2="180" y2="216" />
+      {/* sol naturel hachuré */}
+      {Array.from({ length: 14 }).map((_, i) => (
+        <line key={i} x1={20 + i * 12} y1="216" x2={32 + i * 12} y2="240" strokeWidth="0.6" />
+      ))}
+      {/* lignes de cote droite */}
+      <line x1="186" y1="40" x2="186" y2="216" strokeDasharray="2 3" />
+      <line x1="183" y1="40" x2="189" y2="40" />
+      <line x1="183" y1="78" x2="189" y2="78" />
+      <line x1="183" y1="128" x2="189" y2="128" />
+      <line x1="183" y1="216" x2="189" y2="216" />
+      {/* étiquettes */}
+      <text x="14" y="62" fontSize="6" fill="currentColor" fontFamily="monospace" textAnchor="end">BBSG</text>
+      <text x="14" y="106" fontSize="6" fill="currentColor" fontFamily="monospace" textAnchor="end">GB</text>
+      <text x="14" y="178" fontSize="6" fill="currentColor" fontFamily="monospace" textAnchor="end">GNT</text>
+      <text x="14" y="232" fontSize="6" fill="currentColor" fontFamily="monospace" textAnchor="end">SOL</text>
+      {/* mire haut */}
+      <circle cx="100" cy="20" r="6" />
+      <line x1="94" y1="20" x2="106" y2="20" />
+      <line x1="100" y1="14" x2="100" y2="26" />
     </svg>
+  );
+}
+
+/**
+ * GiantNumber — repère éditorial type magazine, fond de section.
+ */
+function GiantNumber({ n, position = "right" }: { n: string; position?: "left" | "right" | "center" }) {
+  const pos: Record<string, React.CSSProperties> = {
+    left:   { left: "-2vw" },
+    right:  { right: "-2vw" },
+    center: { left: "50%", transform: "translateX(-50%)" },
+  };
+  return (
+    <span
+      aria-hidden
+      className="pointer-events-none absolute top-1/2 -translate-y-1/2 font-display text-foreground select-none whitespace-nowrap"
+      style={{
+        ...pos[position],
+        fontFamily: "Cormorant Garamond, serif",
+        fontSize: "clamp(180px, 28vw, 420px)",
+        fontWeight: 300,
+        lineHeight: 0.85,
+        opacity: 0.05,
+        letterSpacing: "-0.05em",
+      }}
+    >
+      {n}
+    </span>
   );
 }
 
@@ -218,12 +328,12 @@ function Philosophy() {
 
 /* ============ SERVICES ============ */
 const SERVICES = [
-  { n: "01", t: "Préparation de terrain", img: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1600" },
-  { n: "02", t: "Enrobé à chaud", img: "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=1600" },
-  { n: "03", t: "Maçonnerie générale", img: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=1600" },
-  { n: "04", t: "Drainage & pentes", img: "https://images.unsplash.com/photo-1530836369250-ef72a3f5cda8?w=1600" },
-  { n: "05", t: "Bordures & murets", img: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=1600" },
-  { n: "06", t: "Garantie & SAV", img: "https://images.unsplash.com/photo-1592150621744-aca64f48394a?w=1600" },
+  { n: "01", t: "Préparation de terrain", img: service01 },
+  { n: "02", t: "Enrobé à chaud", img: service02 },
+  { n: "03", t: "Maçonnerie générale", img: service03 },
+  { n: "04", t: "Drainage & pentes", img: service04 },
+  { n: "05", t: "Bordures & murets", img: service05 },
+  { n: "06", t: "Garantie & SAV", img: service06 },
 ];
 
 function Services() {
@@ -248,8 +358,9 @@ function Services() {
       style={{ background: "radial-gradient(ellipse at center, #262626 0%, #1E1E1E 70%)" }}
     >
       <div className="grain-overlay" aria-hidden />
-      <BotanicalLeaf className="hidden md:block" style={{ top: "8%", right: "-40px", width: 180, height: 360, transform: "rotate(15deg)" }} />
-      <BotanicalLeaf className="hidden md:block" style={{ bottom: "5%", left: "-30px", width: 160, height: 320, transform: "rotate(-200deg)" }} />
+      <GiantNumber n="01" position="left" />
+      <TechnicalMark className="hidden md:block" style={{ top: "8%", right: "-40px", width: 180, height: 360, transform: "rotate(8deg)" }} />
+      <TechnicalMark className="hidden md:block" style={{ bottom: "5%", left: "-30px", width: 160, height: 320, transform: "rotate(-6deg)" }} />
       <div className="px-6 md:px-12 mb-16 flex items-end justify-between flex-wrap gap-6">
         <div>
           <div className="label text-gold">— Nos services</div>
@@ -414,28 +525,44 @@ function Process() {
   }, []);
 
   return (
-    <section className="relative bg-background py-32 px-6 md:px-12 overflow-hidden">
+    <section className="relative bg-background py-24 md:py-32 px-6 md:px-12 overflow-hidden">
       <CornerGlow corner="tr" tint="gold" />
       <CornerGlow corner="bl" tint="green" />
-      <BotanicalLeaf className="hidden md:block" style={{ top: "20%", left: "2%", width: 140, height: 280, transform: "rotate(-25deg)" }} />
-      <div className="max-w-3xl mx-auto text-center mb-24">
+      <GiantNumber n="03" position="right" />
+      <TechnicalMark className="hidden md:block" style={{ top: "20%", left: "2%", width: 140, height: 280, transform: "rotate(-4deg)" }} />
+      <div className="max-w-3xl mx-auto text-center mb-16 md:mb-24">
         <div className="label text-gold">— Notre processus</div>
-        <h2 className="font-display mt-6 text-foreground" style={{ fontSize: "clamp(40px, 6vw, 80px)", fontWeight: 400, lineHeight: 0.95 }}>
+        <h2 className="font-display mt-6 text-foreground" style={{ fontSize: "clamp(36px, 6vw, 80px)", fontWeight: 400, lineHeight: 0.95 }}>
           Quatre étapes,<br/><span className="italic text-gold">un engagement.</span>
         </h2>
       </div>
 
       <div ref={ref} className="relative max-w-6xl mx-auto">
-        <div ref={lineRef} className="absolute left-1/2 top-0 bottom-0 w-px bg-gold/40 -translate-x-1/2" style={{ transformOrigin: "top center" }} />
+        {/* vertical gold line: left-24 on mobile, centered on desktop */}
+        <div
+          ref={lineRef}
+          className="absolute top-0 bottom-0 w-px bg-gold/40 left-6 md:left-1/2 md:-translate-x-1/2"
+          style={{ transformOrigin: "top center" }}
+          aria-hidden
+        />
+
         {PROCESS.map((s, i) => {
           const left = i % 2 === 0;
           return (
-            <div key={s.n} className="relative grid grid-cols-2 gap-8 md:gap-16 mb-24 last:mb-0 items-center">
-              <div data-dot className="absolute left-1/2 top-8 -translate-x-1/2 w-3 h-3 rounded-full bg-gold ring-4 ring-background" />
-              <ProcessStep
-                step={s}
-                left={left}
-              />
+            <div
+              key={s.n}
+              className="relative md:grid md:grid-cols-2 md:gap-16 mb-14 md:mb-24 last:mb-0 md:items-center pl-16 md:pl-0"
+            >
+              {/* number dot — sits ON the line (left mobile / center desktop) */}
+              <div
+                data-dot
+                className="absolute top-2 left-[18px] md:left-1/2 -translate-x-1/2 w-9 h-9 md:w-10 md:h-10 rounded-full bg-gold ring-4 ring-background flex items-center justify-center font-display text-background z-10"
+                style={{ fontSize: 14, fontWeight: 500 }}
+                aria-hidden
+              >
+                {s.n}
+              </div>
+              <ProcessStep step={s} left={left} />
             </div>
           );
         })}
@@ -452,22 +579,22 @@ function ProcessStep({ step, left }: { step: { n: string; t: string; d: string }
       data-step data-side={left ? "left" : "right"}
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
-      className={`relative ${left ? "col-start-1 text-right pr-8 md:pr-16" : "col-start-2 text-left pl-8 md:pl-16"}`}
+      className={`relative ${left ? "md:col-start-1 md:text-right md:pr-16" : "md:col-start-2 md:text-left md:pl-16"}`}
     >
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 bg-cover bg-center transition-all duration-700"
         style={{
-          backgroundImage: "url(https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=1200)",
+          backgroundImage: `url(${service02})`,
           opacity: hover ? 0.06 : 0,
           transform: hover ? "scale(1.05)" : "scale(1)",
           filter: "blur(2px)",
         }}
       />
       <div className="relative">
-        <div data-step-num={num} className="font-display text-gold" style={{ fontSize: "clamp(48px, 6vw, 80px)", fontWeight: 300, lineHeight: 1 }}>00</div>
-        <h3 className="font-display text-foreground mt-2" style={{ fontSize: "clamp(22px, 2.4vw, 32px)", fontWeight: 400 }}>{step.t}</h3>
-        <p className="mt-4 text-muted max-w-sm" style={{ marginLeft: left ? "auto" : 0 }}>{step.d}</p>
+        <div data-step-num={num} className="font-display text-gold" style={{ fontSize: "clamp(40px, 6vw, 80px)", fontWeight: 300, lineHeight: 1 }}>00</div>
+        <h3 className="font-display text-foreground mt-2" style={{ fontSize: "clamp(20px, 2.4vw, 32px)", fontWeight: 400 }}>{step.t}</h3>
+        <p className="mt-3 md:mt-4 text-muted max-w-sm" style={{ marginLeft: left ? "auto" : 0 }}>{step.d}</p>
       </div>
     </div>
   );
@@ -534,7 +661,8 @@ function Testimonials() {
     <section className="relative bg-background min-h-screen flex items-center justify-center px-6 py-32 overflow-hidden">
       <div aria-hidden className="absolute inset-0" style={{ background: "linear-gradient(180deg, var(--background) 0%, var(--surface) 50%, var(--background) 100%)" }} />
       <div className="grain-overlay animated" aria-hidden />
-      <BotanicalLeaf className="hidden md:block" style={{ top: "10%", right: "3%", width: 160, height: 320, transform: "rotate(20deg)" }} />
+      <GiantNumber n="04" position="left" />
+      <TechnicalMark className="hidden md:block" style={{ top: "10%", right: "3%", width: 160, height: 320, transform: "rotate(6deg)" }} />
 
       <div className="relative max-w-6xl w-full">
         <div className="text-center mb-20">
@@ -613,7 +741,7 @@ function CTAFinal() {
     <section ref={ref} className="relative h-screen w-full overflow-hidden flex items-center justify-center bg-background">
       <div ref={imgRef} className="absolute inset-0 -top-[10%] -bottom-[10%]">
         <img
-          src="https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=1600"
+          src={ctaCourtyard}
           alt="Cour en enrobé fraîchement posé"
           loading="lazy"
           className="h-full w-full object-cover"

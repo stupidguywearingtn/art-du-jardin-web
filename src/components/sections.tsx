@@ -2,6 +2,7 @@ import { useEffect, useRef, useState, useMemo } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { motion, AnimatePresence } from "framer-motion";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -256,6 +257,12 @@ const TYPE_OPTIONS = [
 const DELAI_COEF = { souple: 1, "1mois": 1.05, urgent: 1.15 } as const;
 
 export function QuoteForm() {
+  const isMobile = useIsMobile();
+  if (isMobile) return <QuoteFormMobile />;
+  return <QuoteFormDesktop />;
+}
+
+function QuoteFormDesktop() {
   const [step, setStep] = useState(0);
   const [data, setData] = useState<Quote>({
     type: "", surface: 100, delai: "", nom: "", email: "", tel: "", ville: "", message: "",
@@ -600,6 +607,294 @@ function Input({ label, value, onChange, type = "text" }: { label: string; value
         className="w-full bg-transparent border border-gold/30 px-4 py-3 text-foreground focus:outline-none focus:border-gold focus-visible:ring-1 focus-visible:ring-gold transition-colors"
         style={{ fontFamily: "Outfit", fontSize: 14 }}
       />
+    </div>
+  );
+}
+
+/* ============================================================
+   QUOTE FORM — MOBILE VARIANT
+   - one step per screen, full-width
+   - single-select étapes : carousel swipe horizontal + auto-advance 400ms
+   - multi-input : formulaire empilé + bouton Suivant
+   - sticky top : indicateur de progression (4 dots)
+   - sticky bottom : estimation indicative compacte
+   - retour ← top-left, slide horizontal entre étapes
+   ============================================================ */
+function QuoteFormMobile() {
+  const [step, setStep] = useState(0);
+  const [direction, setDirection] = useState<1 | -1>(1);
+  const [data, setData] = useState<Quote>({
+    type: "", surface: 100, delai: "", nom: "", email: "", tel: "", ville: "", message: "",
+  });
+
+  const { min, max } = useMemo(() => {
+    const opt = TYPE_OPTIONS.find((o) => o.id === data.type);
+    if (!opt || !data.surface) return { min: 0, max: 0 };
+    const coef = data.delai ? DELAI_COEF[data.delai] : 1;
+    const base = opt.price * data.surface * coef;
+    return { min: Math.round(base * 0.9 / 100) * 100, max: Math.round(base * 1.2 / 100) * 100 };
+  }, [data.type, data.surface, data.delai]);
+
+  const goNext = () => { setDirection(1); setStep((s) => Math.min(3, s + 1)); };
+  const goBack = () => { setDirection(-1); setStep((s) => Math.max(0, s - 1)); };
+
+  const submit = () => {
+    const opt = TYPE_OPTIONS.find((o) => o.id === data.type);
+    const body = encodeURIComponent(
+      `Demande de devis HCE\n\n` +
+      `Type : ${opt?.label}\nSurface : ${data.surface} m²\nDélai : ${data.delai}\n` +
+      `Estimation : ${min.toLocaleString("fr-FR")} – ${max.toLocaleString("fr-FR")} € HT\n\n` +
+      `Nom : ${data.nom}\nEmail : ${data.email}\nTél : ${data.tel}\nVille : ${data.ville}\n\nMessage :\n${data.message}`
+    );
+    window.location.href = `mailto:sarl.hce@laposte.net?subject=${encodeURIComponent("Demande de devis — " + (opt?.label ?? ""))}&body=${body}`;
+  };
+
+  // auto-advance helpers (400ms after a single-select tap)
+  const autoAdvance = (delay = 400) => {
+    setTimeout(() => goNext(), delay);
+  };
+
+  const TOTAL = 4;
+  const stepLabel = ["Projet", "Surface", "Délai", "Coordonnées"][step];
+  const canSubmit = !!(data.nom && data.email && data.tel);
+
+  const variants = {
+    enter: (dir: 1 | -1) => ({ x: dir * 60, opacity: 0 }),
+    center: { x: 0, opacity: 1 },
+    exit: (dir: 1 | -1) => ({ x: dir * -60, opacity: 0 }),
+  };
+
+  return (
+    <section id="devis" className="relative bg-background pt-10 pb-40 overflow-hidden">
+      {/* sticky top: progress + back */}
+      <div
+        className="sticky top-0 z-30 bg-background/95 backdrop-blur-sm border-b border-gold/20 px-5 py-4 flex items-center gap-4"
+      >
+        <button
+          onClick={goBack}
+          disabled={step === 0}
+          aria-label="Étape précédente"
+          className="w-11 h-11 -ml-2 flex items-center justify-center text-gold disabled:opacity-25 transition-opacity"
+          style={{ fontSize: 22 }}
+        >
+          ←
+        </button>
+        <div className="flex-1">
+          <div className="label text-gold/70" style={{ fontSize: 9 }}>Étape {step + 1} / {TOTAL}</div>
+          <div className="font-display text-foreground mt-0.5" style={{ fontSize: 16, fontWeight: 400 }}>{stepLabel}</div>
+        </div>
+        <div className="flex gap-1.5" aria-hidden>
+          {Array.from({ length: TOTAL }).map((_, i) => (
+            <span
+              key={i}
+              className="block rounded-full transition-all duration-500"
+              style={{
+                width: i === step ? 22 : 6, height: 6,
+                background: i <= step ? "#C8992A" : "rgba(200,153,42,0.25)",
+              }}
+            />
+          ))}
+        </div>
+      </div>
+
+      <div className="px-5 pt-10 pb-8 min-h-[60vh]">
+        <div className="text-center mb-8">
+          <div className="label text-gold">— Demande de devis</div>
+          <h2 className="font-display mt-4 text-foreground" style={{ fontSize: 36, fontWeight: 400, lineHeight: 1 }}>
+            Estimez votre projet<br/><span className="italic text-gold">en 90 sec.</span>
+          </h2>
+        </div>
+
+        <div className="relative overflow-hidden">
+          <AnimatePresence mode="wait" custom={direction}>
+            <motion.div
+              key={step}
+              custom={direction}
+              variants={variants}
+              initial="enter"
+              animate="center"
+              exit="exit"
+              transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
+            >
+              {step === 0 && (
+                <SwipeOptions
+                  ariaLabel="Type de projet"
+                  options={TYPE_OPTIONS.map((o) => ({
+                    id: o.id, title: o.label, sub: o.desc, foot: `à partir de ${o.price} €/m²`, icon: o.icon,
+                  }))}
+                  selected={data.type}
+                  onSelect={(id) => { setData({ ...data, type: id as Quote["type"] }); autoAdvance(); }}
+                />
+              )}
+
+              {step === 1 && (
+                <div className="px-2">
+                  <h3 className="font-display text-foreground mb-2" style={{ fontSize: 22, fontWeight: 400 }}>Surface estimée</h3>
+                  <p className="text-muted mb-8" style={{ fontSize: 13 }}>Approximative, nous affinerons sur place.</p>
+                  <div className="text-center mb-8">
+                    <div className="font-display text-gold inline-flex items-baseline gap-2" style={{ fontSize: 72, lineHeight: 1, fontWeight: 400 }}>
+                      {data.surface}<span className="label" style={{ fontSize: 14 }}>m²</span>
+                    </div>
+                  </div>
+                  <input
+                    type="range" min={20} max={1000} step={10} value={data.surface}
+                    onChange={(e) => setData({ ...data, surface: Number(e.target.value) })}
+                    className="w-full accent-[#C8992A]"
+                    style={{ minHeight: 44 }}
+                    aria-label="Surface en mètres carrés"
+                  />
+                  <div className="flex justify-between text-muted mt-2" style={{ fontSize: 11 }}>
+                    <span>20 m²</span><span>1000 m²</span>
+                  </div>
+                  <button
+                    onClick={goNext}
+                    className="w-full mt-12 bg-gold text-background py-4 font-medium"
+                    style={{ fontFamily: "Outfit", fontSize: 13, letterSpacing: "0.15em", textTransform: "uppercase", minHeight: 56 }}
+                  >
+                    Continuer →
+                  </button>
+                </div>
+              )}
+
+              {step === 2 && (
+                <SwipeOptions
+                  ariaLabel="Délai souhaité"
+                  options={[
+                    { id: "souple", title: "Flexible", sub: "Date libre" },
+                    { id: "1mois", title: "Sous 1 mois", sub: "Planning serré" },
+                    { id: "urgent", title: "Urgent", sub: "Sous 2 semaines" },
+                  ]}
+                  selected={data.delai}
+                  onSelect={(id) => { setData({ ...data, delai: id as Quote["delai"] }); autoAdvance(); }}
+                />
+              )}
+
+              {step === 3 && (
+                <div className="space-y-4 px-2">
+                  <h3 className="font-display text-foreground mb-2" style={{ fontSize: 22, fontWeight: 400 }}>Vos coordonnées</h3>
+                  <p className="text-muted mb-6" style={{ fontSize: 13 }}>On vous rappelle sous 48h.</p>
+                  <Input label="Nom complet *" value={data.nom} onChange={(v) => setData({ ...data, nom: v })} />
+                  <Input label="Téléphone *" value={data.tel} onChange={(v) => setData({ ...data, tel: v })} />
+                  <Input label="Email *" value={data.email} onChange={(v) => setData({ ...data, email: v })} type="email" />
+                  <Input label="Ville" value={data.ville} onChange={(v) => setData({ ...data, ville: v })} />
+                  <div>
+                    <label className="label text-gold/80 block mb-2" style={{ fontSize: 10 }}>Message (optionnel)</label>
+                    <textarea
+                      rows={3}
+                      value={data.message}
+                      onChange={(e) => setData({ ...data, message: e.target.value })}
+                      className="w-full bg-transparent border border-gold/30 px-4 py-3 text-foreground focus:outline-none focus:border-gold transition-colors"
+                      style={{ fontFamily: "Outfit", fontSize: 14 }}
+                    />
+                  </div>
+                  <button
+                    onClick={submit}
+                    disabled={!canSubmit}
+                    className="w-full mt-6 bg-gold text-background py-4 font-medium disabled:opacity-40"
+                    style={{ fontFamily: "Outfit", fontSize: 13, letterSpacing: "0.15em", textTransform: "uppercase", minHeight: 56, boxShadow: "0 8px 24px rgba(200,153,42,0.35)" }}
+                  >
+                    Envoyer ma demande →
+                  </button>
+                </div>
+              )}
+            </motion.div>
+          </AnimatePresence>
+        </div>
+      </div>
+
+      {/* sticky bottom estimate */}
+      {data.type && (
+        <div
+          className="fixed bottom-0 left-0 right-0 z-30 bg-surface border-t border-gold/40 px-5 py-3"
+          style={{ boxShadow: "0 -8px 24px rgba(0,0,0,0.5)" }}
+        >
+          <div className="flex items-baseline justify-between gap-3">
+            <div>
+              <div className="label text-gold/70" style={{ fontSize: 9 }}>Estimation indicative</div>
+              <div className="font-display text-gold mt-0.5" style={{ fontSize: 28, lineHeight: 1, fontWeight: 400 }}>
+                {min.toLocaleString("fr-FR")}–{max.toLocaleString("fr-FR")} <span style={{ fontSize: 14 }}>€ HT</span>
+              </div>
+            </div>
+            <div className="text-right text-muted" style={{ fontSize: 10, lineHeight: 1.3 }}>
+              {data.surface} m²<br/>{data.delai && (data.delai === "souple" ? "Flexible" : data.delai === "1mois" ? "Sous 1 mois" : "Urgent")}
+            </div>
+          </div>
+        </div>
+      )}
+    </section>
+  );
+}
+
+/**
+ * SwipeOptions — carousel horizontal scroll-snap façon iOS.
+ * Tap = sélection ; auto-advance déclenché par le parent.
+ */
+function SwipeOptions({
+  options, selected, onSelect, ariaLabel,
+}: {
+  options: { id: string; title: string; sub: string; foot?: string; icon?: string }[];
+  selected: string;
+  onSelect: (id: string) => void;
+  ariaLabel: string;
+}) {
+  const trackRef = useRef<HTMLDivElement>(null);
+  const [active, setActive] = useState(0);
+
+  useEffect(() => {
+    const el = trackRef.current;
+    if (!el) return;
+    const onScroll = () => {
+      const w = el.clientWidth;
+      const idx = Math.round(el.scrollLeft / w);
+      setActive(idx);
+    };
+    el.addEventListener("scroll", onScroll, { passive: true });
+    return () => el.removeEventListener("scroll", onScroll);
+  }, []);
+
+  return (
+    <div role="group" aria-label={ariaLabel}>
+      <div
+        ref={trackRef}
+        className="flex overflow-x-auto snap-x snap-mandatory -mx-5 px-5 gap-4 pb-2"
+        style={{ scrollbarWidth: "none" }}
+      >
+        {options.map((o) => {
+          const isSel = selected === o.id;
+          return (
+            <button
+              key={o.id}
+              type="button"
+              onClick={() => onSelect(o.id)}
+              className={`snap-center shrink-0 w-[80vw] max-w-[340px] text-left p-7 bg-surface border transition-all duration-300 ${isSel ? "border-gold border-2" : "border-border"}`}
+              style={{
+                minHeight: 220,
+                boxShadow: isSel ? "0 12px 28px rgba(200,153,42,0.18)" : "0 4px 12px rgba(0,0,0,0.4)",
+              }}
+            >
+              <span aria-hidden className={`absolute top-0 left-0 w-[3px] h-full bg-gold origin-top transition-transform duration-500 ${isSel ? "scale-y-100" : "scale-y-0"}`} />
+              {o.icon && (
+                <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" className="text-gold mb-5">
+                  <path d={o.icon} strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              )}
+              <div className="font-display text-foreground" style={{ fontSize: 22, fontWeight: 400 }}>{o.title}</div>
+              <div className="text-muted mt-2" style={{ fontSize: 13, lineHeight: 1.5 }}>{o.sub}</div>
+              {o.foot && <div className="label text-gold mt-5" style={{ fontSize: 10 }}>{o.foot}</div>}
+            </button>
+          );
+        })}
+      </div>
+      <div className="flex justify-center gap-2 mt-5" aria-hidden>
+        {options.map((_, i) => (
+          <span
+            key={i}
+            className="block w-1.5 h-1.5 rounded-full transition-all duration-300"
+            style={{ background: i === active ? "#C8992A" : "rgba(200,153,42,0.3)", transform: i === active ? "scale(1.4)" : "scale(1)" }}
+          />
+        ))}
+      </div>
+      <p className="text-center label text-gold/50 mt-4" style={{ fontSize: 9 }}>Tapez sur une carte pour valider</p>
     </div>
   );
 }

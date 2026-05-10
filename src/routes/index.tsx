@@ -487,7 +487,8 @@ function Process() {
     <section className="relative bg-background py-32 px-6 md:px-12 overflow-hidden">
       <CornerGlow corner="tr" tint="gold" />
       <CornerGlow corner="bl" tint="green" />
-      <BotanicalLeaf className="hidden md:block" style={{ top: "20%", left: "2%", width: 140, height: 280, transform: "rotate(-25deg)" }} />
+      <GiantNumber n="03" position="right" />
+      <TechnicalMark className="hidden md:block" style={{ top: "20%", left: "2%", width: 140, height: 280, transform: "rotate(-4deg)" }} />
       <div className="max-w-3xl mx-auto text-center mb-24">
         <div className="label text-gold">— Notre processus</div>
         <h2 className="font-display mt-6 text-foreground" style={{ fontSize: "clamp(40px, 6vw, 80px)", fontWeight: 400, lineHeight: 0.95 }}>
@@ -604,7 +605,8 @@ function Testimonials() {
     <section className="relative bg-background min-h-screen flex items-center justify-center px-6 py-32 overflow-hidden">
       <div aria-hidden className="absolute inset-0" style={{ background: "linear-gradient(180deg, var(--background) 0%, var(--surface) 50%, var(--background) 100%)" }} />
       <div className="grain-overlay animated" aria-hidden />
-      <BotanicalLeaf className="hidden md:block" style={{ top: "10%", right: "3%", width: 160, height: 320, transform: "rotate(20deg)" }} />
+      <GiantNumber n="04" position="left" />
+      <TechnicalMark className="hidden md:block" style={{ top: "10%", right: "3%", width: 160, height: 320, transform: "rotate(6deg)" }} />
 
       <div className="relative max-w-6xl w-full">
         <div className="text-center mb-20">

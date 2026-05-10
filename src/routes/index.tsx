@@ -529,7 +529,7 @@ function ProcessStep({ step, left }: { step: { n: string; t: string; d: string }
         aria-hidden
         className="pointer-events-none absolute inset-0 bg-cover bg-center transition-all duration-700"
         style={{
-          backgroundImage: "url(https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=1200)",
+          backgroundImage: `url(${service02})`,
           opacity: hover ? 0.06 : 0,
           transform: hover ? "scale(1.05)" : "scale(1)",
           filter: "blur(2px)",
@@ -685,7 +685,7 @@ function CTAFinal() {
     <section ref={ref} className="relative h-screen w-full overflow-hidden flex items-center justify-center bg-background">
       <div ref={imgRef} className="absolute inset-0 -top-[10%] -bottom-[10%]">
         <img
-          src="https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=1600"
+          src={ctaCourtyard}
           alt="Cour en enrobé fraîchement posé"
           loading="lazy"
           className="h-full w-full object-cover"

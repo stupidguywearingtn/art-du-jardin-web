@@ -612,33 +612,33 @@ function CTAFinal() {
       <div ref={imgRef} className="absolute inset-0 -top-[10%] -bottom-[10%]">
         <img
           src="https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=1600"
-          alt="Jardin éclairé"
+          alt="Cour en enrobé fraîchement posé"
           loading="lazy"
           className="h-full w-full object-cover"
         />
       </div>
       <div className="absolute inset-0" style={{ background: "rgba(7, 10, 8, 0.75)" }} />
       <div className="relative z-10 text-center px-6 max-w-4xl">
-        <div className="label text-gold">Genève & Suisse Romande</div>
+        <div className="label text-gold">Jura & Ain</div>
         <h2 className="font-display mt-8 text-foreground" style={{ fontSize: "clamp(48px, 9vw, 96px)", fontWeight: 400, lineHeight: 0.95 }}>
-          Transformons<br/>Votre Espace
+          Votre Projet,<br/>Notre Priorité
         </h2>
         <div className="mt-12 flex flex-wrap gap-4 justify-center">
           <a
-            href="mailto:contact@leclercpaysage.ch"
+            href="mailto:sarl.hce@laposte.net"
             data-cursor-hover
             className="bg-gold text-background px-10 py-4 font-medium transition-all hover:bg-[#b3933e] active:scale-[0.98]"
             style={{ fontFamily: "Outfit", fontSize: 14, letterSpacing: "0.15em", textTransform: "uppercase" }}
           >
-            Prendre Contact
+            Demander un Devis
           </a>
           <a
-            href="#services"
+            href="tel:0384526148"
             data-cursor-hover
             className="border border-gold text-gold px-10 py-4 font-medium transition-colors hover:bg-gold hover:text-background"
             style={{ fontFamily: "Outfit", fontSize: 14, letterSpacing: "0.15em", textTransform: "uppercase" }}
           >
-            Voir Nos Réalisations
+            03 84 52 61 48
           </a>
         </div>
       </div>

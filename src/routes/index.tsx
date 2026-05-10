@@ -6,6 +6,14 @@ import { motion, AnimatePresence } from "framer-motion";
 import { CustomCursor } from "@/components/CustomCursor";
 import { SmoothScroll } from "@/components/SmoothScroll";
 import { WhyUs, Zone, FAQ, QuoteForm } from "@/components/sections";
+import { useIsMobile } from "@/hooks/use-mobile";
+import service01 from "@/assets/service-01-preparation.jpg";
+import service02 from "@/assets/service-02-enrobe.jpg";
+import service03 from "@/assets/service-03-maconnerie.jpg";
+import service04 from "@/assets/service-04-drainage.jpg";
+import service05 from "@/assets/service-05-bordures.jpg";
+import service06 from "@/assets/service-06-garantie.jpg";
+import ctaCourtyard from "@/assets/cta-courtyard.jpg";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);

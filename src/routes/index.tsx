@@ -184,7 +184,7 @@ function Philosophy() {
       }
     );
   }, []);
-  const text = "Chaque jardin est une conversation\nentre l'homme et la nature.";
+  const text = "Un enrobé qui dure,\nune finition qui marque.";
   return (
     <section ref={ref} className="relative min-h-screen w-full bg-background flex items-center justify-center px-6 py-24">
       <div className="absolute left-6 md:left-12 top-0 bottom-0 w-px bg-gold/40" />
@@ -201,7 +201,7 @@ function Philosophy() {
             </span>
           ))}
         </p>
-        <div className="mt-12 label text-gold">— Leclerc Paysage</div>
+        <div className="mt-12 label text-gold">— HCE, Cize</div>
       </div>
     </section>
   );

@@ -320,18 +320,18 @@ function Transformation() {
       <div className="absolute inset-x-0 bottom-0 h-[30%]" style={{ background: "linear-gradient(to bottom, transparent, #070A08)" }} />
 
       <div className="relative z-10 h-full w-full flex flex-col items-center justify-center text-center px-6">
-        <div className="label text-gold">— Métamorphose</div>
+        <div className="label text-gold">— Avant / Après</div>
         <h2 className="font-display mt-6 text-foreground" style={{ fontSize: "clamp(40px, 6vw, 88px)", fontWeight: 400, lineHeight: 1.05 }}>
-          De la Terre Brute<br/>au <span className="italic text-gold">Jardin d'Exception</span>
+          De la Cour Brute<br/>à <span className="italic text-gold">l'Enrobé d'Exception</span>
         </h2>
         <p className="mt-8 text-muted max-w-xl mx-auto">
-          Chaque projet débute par une lecture du lieu — sols, lumière, vents, vues — pour révéler l'identité unique de votre extérieur.
+          Chaque chantier débute par une lecture du terrain — sols, pentes, drainage, usages — pour garantir un enrobé qui dure dans le temps.
         </p>
         <div ref={statsRef} className="mt-14 grid grid-cols-3 gap-8 md:gap-16 max-w-3xl mx-auto">
           {[
-            { n: 12, suf: "+", l: "Années" },
-            { n: 200, suf: "+", l: "Jardins" },
-            { n: 100, suf: "%", l: "Sur-mesure" },
+            { n: 20, suf: "+", l: "Années" },
+            { n: 500, suf: "+", l: "Chantiers" },
+            { n: 100, suf: "%", l: "Satisfaits" },
           ].map((s, i) => (
             <div key={i} className="text-center">
               <div className="font-display text-gold flex items-baseline justify-center gap-1" style={{ fontSize: "clamp(36px, 5vw, 72px)", fontWeight: 400, lineHeight: 1 }}>

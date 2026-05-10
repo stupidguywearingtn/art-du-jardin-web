@@ -5,6 +5,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { motion, AnimatePresence } from "framer-motion";
 import { CustomCursor } from "@/components/CustomCursor";
 import { SmoothScroll } from "@/components/SmoothScroll";
+import { WhyUs, Zone, FAQ, QuoteForm } from "@/components/sections";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -49,9 +50,17 @@ function Index() {
         <SectionDivider />
         <Transformation />
         <SectionDivider />
+        <WhyUs />
+        <SectionDivider />
         <Process />
         <SectionDivider />
+        <Zone />
+        <SectionDivider />
         <Testimonials />
+        <SectionDivider />
+        <FAQ />
+        <SectionDivider />
+        <QuoteForm />
         <SectionDivider />
         <CTAFinal />
         <Footer />

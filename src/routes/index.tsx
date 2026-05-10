@@ -90,24 +90,85 @@ function SectionDivider() {
   );
 }
 
-function BotanicalLeaf({ className = "", style }: { className?: string; style?: React.CSSProperties }) {
+/**
+ * TechnicalMark — coupe d'enrobé annotée, SVG monochrome doré
+ * Remplace l'ancien BotanicalLeaf (héritage paysagiste).
+ * aria-hidden, opacité basse, prefers-reduced-motion safe (statique).
+ */
+function TechnicalMark({ className = "", style }: { className?: string; style?: React.CSSProperties }) {
   return (
     <svg
       viewBox="0 0 200 400"
       className={`pointer-events-none absolute text-gold ${className}`}
-      style={{ opacity: 0.04, ...style }}
+      style={{ opacity: 0.1, ...style }}
       aria-hidden
+      role="presentation"
       fill="none"
       stroke="currentColor"
       strokeWidth="1"
     >
-      <path d="M100 10 C 60 100, 40 220, 100 390" />
-      <path d="M100 60 C 130 80, 150 100, 160 130" />
-      <path d="M100 110 C 60 130, 45 150, 35 180" />
-      <path d="M100 160 C 135 180, 155 200, 165 230" />
-      <path d="M100 220 C 60 240, 45 260, 35 290" />
-      <path d="M100 280 C 130 300, 145 320, 155 345" />
+      {/* couche enrobé (haut) */}
+      <rect x="20" y="40" width="160" height="38" fill="currentColor" fillOpacity="0.25" />
+      <line x1="20" y1="40" x2="180" y2="40" />
+      <line x1="20" y1="78" x2="180" y2="78" />
+      {/* couche grave bitume */}
+      <rect x="20" y="78" width="160" height="50" fill="currentColor" fillOpacity="0.12" />
+      <line x1="20" y1="128" x2="180" y2="128" />
+      {/* couche fondation gravier (motif points) */}
+      {Array.from({ length: 6 }).map((_, i) =>
+        Array.from({ length: 16 }).map((__, j) => (
+          <circle key={`${i}-${j}`} cx={26 + j * 10} cy={138 + i * 12} r="1.4" fill="currentColor" />
+        ))
+      )}
+      <line x1="20" y1="216" x2="180" y2="216" />
+      {/* sol naturel hachuré */}
+      {Array.from({ length: 14 }).map((_, i) => (
+        <line key={i} x1={20 + i * 12} y1="216" x2={32 + i * 12} y2="240" strokeWidth="0.6" />
+      ))}
+      {/* lignes de cote droite */}
+      <line x1="186" y1="40" x2="186" y2="216" strokeDasharray="2 3" />
+      <line x1="183" y1="40" x2="189" y2="40" />
+      <line x1="183" y1="78" x2="189" y2="78" />
+      <line x1="183" y1="128" x2="189" y2="128" />
+      <line x1="183" y1="216" x2="189" y2="216" />
+      {/* étiquettes */}
+      <text x="14" y="62" fontSize="6" fill="currentColor" fontFamily="monospace" textAnchor="end">BBSG</text>
+      <text x="14" y="106" fontSize="6" fill="currentColor" fontFamily="monospace" textAnchor="end">GB</text>
+      <text x="14" y="178" fontSize="6" fill="currentColor" fontFamily="monospace" textAnchor="end">GNT</text>
+      <text x="14" y="232" fontSize="6" fill="currentColor" fontFamily="monospace" textAnchor="end">SOL</text>
+      {/* mire haut */}
+      <circle cx="100" cy="20" r="6" />
+      <line x1="94" y1="20" x2="106" y2="20" />
+      <line x1="100" y1="14" x2="100" y2="26" />
     </svg>
+  );
+}
+
+/**
+ * GiantNumber — repère éditorial type magazine, fond de section.
+ */
+function GiantNumber({ n, position = "right" }: { n: string; position?: "left" | "right" | "center" }) {
+  const pos: Record<string, React.CSSProperties> = {
+    left:   { left: "-2vw" },
+    right:  { right: "-2vw" },
+    center: { left: "50%", transform: "translateX(-50%)" },
+  };
+  return (
+    <span
+      aria-hidden
+      className="pointer-events-none absolute top-1/2 -translate-y-1/2 font-display text-foreground select-none whitespace-nowrap"
+      style={{
+        ...pos[position],
+        fontFamily: "Cormorant Garamond, serif",
+        fontSize: "clamp(180px, 28vw, 420px)",
+        fontWeight: 300,
+        lineHeight: 0.85,
+        opacity: 0.05,
+        letterSpacing: "-0.05em",
+      }}
+    >
+      {n}
+    </span>
   );
 }
 

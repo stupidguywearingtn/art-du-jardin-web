@@ -655,12 +655,12 @@ function Footer() {
         style={{ opacity: 0.04, fontSize: "clamp(80px, 18vw, 280px)", color: "#EDE8DC", fontWeight: 300, lineHeight: 1 }}
         aria-hidden
       >
-        LECLERC PAYSAGE
+        HCE
       </div>
       <div className="relative grid grid-cols-1 md:grid-cols-3 gap-12">
         <div>
-          <div className="font-display text-gold" style={{ fontSize: 56, fontWeight: 400, lineHeight: 1 }}>LP</div>
-          <p className="mt-4 text-muted italic font-display" style={{ fontSize: 18 }}>L'art du jardin vivant</p>
+          <div className="font-display text-gold" style={{ fontSize: 56, fontWeight: 400, lineHeight: 1 }}>HCE</div>
+          <p className="mt-4 text-muted italic font-display" style={{ fontSize: 18 }}>Aménagement de cours & enrobés</p>
         </div>
         <div>
           <div className="label text-gold mb-6">Services</div>
@@ -675,15 +675,16 @@ function Footer() {
         <div>
           <div className="label text-gold mb-6">Contact</div>
           <ul className="space-y-3 text-foreground/80" style={{ fontSize: 14 }}>
-            <li>Genève, Suisse</li>
-            <li><a href="mailto:contact@leclercpaysage.ch" className="transition-colors hover:text-gold">contact@leclercpaysage.ch</a></li>
-            <li><a href="#" className="transition-colors hover:text-gold">Instagram</a></li>
+            <li>40 avenue Etienne Lamy, 39300 Cize</li>
+            <li><a href="tel:0384526148" className="transition-colors hover:text-gold">03 84 52 61 48</a></li>
+            <li><a href="mailto:sarl.hce@laposte.net" className="transition-colors hover:text-gold">sarl.hce@laposte.net</a></li>
+            <li>Lun-Ven 8h-18h · Sam 8h-12h</li>
           </ul>
         </div>
       </div>
       <div className="relative mt-24 pt-8 border-t border-gold/30 flex flex-wrap items-center justify-between gap-4 text-muted" style={{ fontSize: 12 }}>
-        <span>© 2025 Leclerc Paysage</span>
-        <span>Fait à Genève, avec soin</span>
+        <span>© 2025 HCE SARL · Tous droits réservés</span>
+        <span>Cize, Jura — 03 84 52 61 48</span>
       </div>
     </footer>
   );

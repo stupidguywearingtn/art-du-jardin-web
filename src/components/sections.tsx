@@ -257,6 +257,12 @@ const TYPE_OPTIONS = [
 const DELAI_COEF = { souple: 1, "1mois": 1.05, urgent: 1.15 } as const;
 
 export function QuoteForm() {
+  const isMobile = useIsMobile();
+  if (isMobile) return <QuoteFormMobile />;
+  return <QuoteFormDesktop />;
+}
+
+function QuoteFormDesktop() {
   const [step, setStep] = useState(0);
   const [data, setData] = useState<Quote>({
     type: "", surface: 100, delai: "", nom: "", email: "", tel: "", ville: "", message: "",

@@ -252,28 +252,27 @@ function ServicePage() {
         </section>
 
         {/* CTA */}
-        <section className="relative px-6 md:px-12 py-32 text-center bg-surface">
+        <section id="service-cta-bottom" className="relative px-6 md:px-12 py-32 text-center bg-surface">
           <div className="label text-gold">— Un projet ?</div>
           <h2 className="font-display mt-6 text-foreground max-w-3xl mx-auto" style={{ fontSize: "clamp(32px, 5vw, 64px)", fontWeight: 400, lineHeight: 1.05 }}>
             Demander un devis pour <span className="italic text-gold">{data.title.toLowerCase()}</span>
           </h2>
-          <div className="mt-12 flex flex-wrap gap-4 justify-center">
+          <div className="mt-12 flex flex-wrap gap-3 justify-center">
             <Link
-              to="/"
-              hash="devis"
+              to="/" hash="devis"
               data-cursor-hover
-              className="bg-gold text-background px-10 py-4"
-              style={{ fontFamily: "Outfit", fontSize: 14, letterSpacing: "0.15em", textTransform: "uppercase" }}
+              className="cta-primary"
+              style={{ fontFamily: "Outfit", fontSize: 15, fontWeight: 500, padding: "14px 28px", borderRadius: 4, background: "var(--brasier-500)", color: "#fff", textDecoration: "none", display: "inline-flex", alignItems: "center", gap: 8, transition: "all 0.2s ease" }}
             >
-              Demander un devis
+              Demander un devis →
             </Link>
             <a
               href="tel:0384526148"
               data-cursor-hover
-              className="border border-gold text-gold px-10 py-4 hover:bg-gold hover:text-background transition-colors"
-              style={{ fontFamily: "Outfit", fontSize: 14, letterSpacing: "0.15em", textTransform: "uppercase" }}
+              className="cta-secondary"
+              style={{ fontFamily: "Outfit", fontSize: 15, fontWeight: 500, padding: "14px 28px", borderRadius: 4, background: "transparent", color: "var(--creme-50)", border: "1px solid var(--creme-50)", textDecoration: "none", transition: "all 0.2s ease" }}
             >
-              03 84 52 61 48
+              📞 03 84 52 61 48
             </a>
           </div>
         </section>

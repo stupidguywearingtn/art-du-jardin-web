@@ -987,6 +987,8 @@ function CTAFinal() {
 
 /* ============ FOOTER ============ */
 function Footer() {
+  const { get } = useSiteContent();
+  const services = get("services", SERVICES) as typeof SERVICES;
   return (
     <footer className="relative overflow-hidden pt-24 pb-10 px-6 md:px-12" style={{ background: "var(--footer)" }}>
       <div
@@ -1004,7 +1006,7 @@ function Footer() {
         <div>
           <div className="label text-gold mb-6">Services</div>
           <ul className="space-y-3 text-foreground/80" style={{ fontSize: 14 }}>
-            {SERVICES.map((s) => (
+            {services.map((s) => (
               <li key={s.n}>
                 <Link to="/services/$slug" params={{ slug: s.slug }} className="transition-colors hover:text-gold">{s.t}</Link>
               </li>

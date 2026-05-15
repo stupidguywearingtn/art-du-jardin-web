@@ -1,6 +1,8 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
+import { useEffect, useState } from "react";
 import { CustomCursor } from "@/components/CustomCursor";
 import { SmoothScroll } from "@/components/SmoothScroll";
+import { MobileFloatingCTA } from "@/components/CTAButtons";
 
 type ServiceData = {
   n: string;
@@ -129,6 +131,13 @@ export const Route = createFileRoute("/services/$slug")({
 
 function ServicePage() {
   const data = Route.useLoaderData() as ServiceData;
+  const [scrolled, setScrolled] = useState(false);
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 200);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   return (
     <>
@@ -142,6 +151,27 @@ function ServicePage() {
             <Link to="/" className="label text-gold hover:text-foreground transition-colors">← Accueil</Link>
           </div>
         </header>
+
+        {/* Sticky CTA desktop */}
+        <div
+          className="hidden md:block fixed z-40"
+          style={{
+            top: 78, right: 24,
+            opacity: scrolled ? 1 : 0,
+            transform: scrolled ? "translateY(0)" : "translateY(-10px)",
+            pointerEvents: scrolled ? "auto" : "none",
+            transition: "opacity 0.3s ease, transform 0.3s ease",
+          }}
+        >
+          <Link
+            to="/" hash="devis"
+            data-cursor-hover
+            className="cta-primary"
+            style={{ fontFamily: "Outfit", fontSize: 13, fontWeight: 500, padding: "10px 20px", borderRadius: 4, background: "var(--brasier-500)", color: "#fff", textDecoration: "none", display: "inline-flex", alignItems: "center", gap: 6, transition: "all 0.2s ease" }}
+          >
+            Demander un devis →
+          </Link>
+        </div>
 
         {/* HERO */}
         <section className="relative w-full h-[80vh] overflow-hidden">
@@ -166,6 +196,33 @@ function ServicePage() {
               </li>
             ))}
           </ul>
+        </section>
+
+        {/* MID-PAGE CTA — bande sombre avec photo */}
+        <section className="relative w-full overflow-hidden" style={{ minHeight: 200 }}>
+          <div
+            className="absolute inset-0 bg-cover bg-center"
+            style={{ backgroundImage: `url(${data.hero})` }}
+          />
+          <div className="absolute inset-0" style={{ background: "rgba(14,14,15,0.78)" }} />
+          <div className="relative z-10 px-6 py-14 md:py-16 text-center max-w-3xl mx-auto">
+            <p className="font-display italic text-foreground" style={{ fontSize: "clamp(20px, 2.6vw, 28px)", lineHeight: 1.3 }}>
+              Vous avez un projet de <span className="text-gold">{data.title.toLowerCase()}</span> ?
+            </p>
+            <p className="mt-3 text-muted text-sm md:text-base">
+              Devis détaillé sous 48h · Visite gratuite · Garantie décennale
+            </p>
+            <div className="mt-7">
+              <Link
+                to="/" hash="devis"
+                data-cursor-hover
+                className="cta-primary"
+                style={{ fontFamily: "Outfit", fontSize: 15, fontWeight: 500, padding: "14px 28px", borderRadius: 4, background: "var(--brasier-500)", color: "#fff", textDecoration: "none", display: "inline-flex", alignItems: "center", gap: 8, transition: "all 0.2s ease" }}
+              >
+                Demander un devis pour ce projet →
+              </Link>
+            </div>
+          </div>
         </section>
 
         {/* GALERIE */}
@@ -195,28 +252,27 @@ function ServicePage() {
         </section>
 
         {/* CTA */}
-        <section className="relative px-6 md:px-12 py-32 text-center bg-surface">
+        <section id="service-cta-bottom" className="relative px-6 md:px-12 py-32 text-center bg-surface">
           <div className="label text-gold">— Un projet ?</div>
           <h2 className="font-display mt-6 text-foreground max-w-3xl mx-auto" style={{ fontSize: "clamp(32px, 5vw, 64px)", fontWeight: 400, lineHeight: 1.05 }}>
             Demander un devis pour <span className="italic text-gold">{data.title.toLowerCase()}</span>
           </h2>
-          <div className="mt-12 flex flex-wrap gap-4 justify-center">
+          <div className="mt-12 flex flex-wrap gap-3 justify-center">
             <Link
-              to="/"
-              hash="devis"
+              to="/" hash="devis"
               data-cursor-hover
-              className="bg-gold text-background px-10 py-4"
-              style={{ fontFamily: "Outfit", fontSize: 14, letterSpacing: "0.15em", textTransform: "uppercase" }}
+              className="cta-primary"
+              style={{ fontFamily: "Outfit", fontSize: 15, fontWeight: 500, padding: "14px 28px", borderRadius: 4, background: "var(--brasier-500)", color: "#fff", textDecoration: "none", display: "inline-flex", alignItems: "center", gap: 8, transition: "all 0.2s ease" }}
             >
-              Demander un devis
+              Demander un devis →
             </Link>
             <a
               href="tel:0384526148"
               data-cursor-hover
-              className="border border-gold text-gold px-10 py-4 hover:bg-gold hover:text-background transition-colors"
-              style={{ fontFamily: "Outfit", fontSize: 14, letterSpacing: "0.15em", textTransform: "uppercase" }}
+              className="cta-secondary"
+              style={{ fontFamily: "Outfit", fontSize: 15, fontWeight: 500, padding: "14px 28px", borderRadius: 4, background: "transparent", color: "var(--creme-50)", border: "1px solid var(--creme-50)", textDecoration: "none", transition: "all 0.2s ease" }}
             >
-              03 84 52 61 48
+              📞 03 84 52 61 48
             </a>
           </div>
         </section>
@@ -226,6 +282,7 @@ function ServicePage() {
           <Link to="/" className="font-display text-gold text-3xl">HCE</Link>
           <p className="mt-3 text-muted text-sm">Cize, Jura · 03 84 52 61 48</p>
         </footer>
+        <MobileFloatingCTA href="/#devis" />
       </main>
     </>
   );

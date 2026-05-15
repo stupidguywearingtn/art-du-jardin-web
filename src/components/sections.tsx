@@ -3,6 +3,7 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { motion, AnimatePresence } from "framer-motion";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { CTAInline } from "@/components/CTAButtons";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -82,6 +83,7 @@ export function WhyUs() {
           </div>
         ))}
       </div>
+      <CTAInline caption="Convaincu ? Recevez un devis personnalisé." />
     </section>
   );
 }
@@ -138,6 +140,19 @@ export function Zone() {
           </ul>
           <div className="label text-gold/70 mt-10" style={{ fontSize: 10 }}>
             Marqueurs dorés · Survol pour le détail · Clic pour la fiche
+          </div>
+          <div className="mt-10">
+            <p className="font-display italic text-foreground/80 mb-4" style={{ fontSize: 18 }}>
+              Votre commune n'est pas listée ? On se déplace jusqu'à 60 km.
+            </p>
+            <a
+              href="#devis"
+              data-cursor-hover
+              className="cta-primary inline-flex items-center gap-2"
+              style={{ fontFamily: "Outfit", fontSize: 15, letterSpacing: "0.02em", fontWeight: 500, borderRadius: 4, padding: "14px 28px", background: "var(--brasier-500)", color: "#fff", textDecoration: "none", transition: "all 0.2s ease" }}
+            >
+              Vérifier ma zone <span aria-hidden>→</span>
+            </a>
           </div>
         </div>
 
@@ -229,6 +244,29 @@ export function FAQ() {
               </div>
             );
           })}
+        </div>
+        <div className="mt-12 text-center">
+          <p className="text-muted mb-4" style={{ fontSize: 14 }}>
+            Une autre question ? Posez-la nous directement.
+          </p>
+          <div className="flex flex-wrap gap-3 justify-center">
+            <a
+              href="#devis"
+              data-cursor-hover
+              className="cta-primary"
+              style={{ fontFamily: "Outfit", fontSize: 13, fontWeight: 500, padding: "10px 20px", borderRadius: 4, background: "var(--brasier-500)", color: "#fff", textDecoration: "none", transition: "all 0.2s ease", display: "inline-flex", alignItems: "center", gap: 6 }}
+            >
+              Envoyer ma demande →
+            </a>
+            <a
+              href="tel:0384526148"
+              data-cursor-hover
+              className="cta-secondary"
+              style={{ fontFamily: "Outfit", fontSize: 13, fontWeight: 500, padding: "10px 20px", borderRadius: 4, background: "transparent", color: "var(--creme-50)", border: "1px solid var(--creme-50)", textDecoration: "none", transition: "all 0.2s ease" }}
+            >
+              📞 Appeler
+            </a>
+          </div>
         </div>
       </div>
     </section>

@@ -762,7 +762,7 @@ function Process() {
   );
 }
 
-function ProcessStep({ step, left }: { step: { n: string; t: string; d: string }; left: boolean }) {
+function ProcessStep({ step, left }: { step: { n: string; t: string; d: string; img: string | null }; left: boolean }) {
   const [hover, setHover] = useState(false);
   const num = parseInt(step.n, 10);
   return (
@@ -772,16 +772,17 @@ function ProcessStep({ step, left }: { step: { n: string; t: string; d: string }
       onMouseLeave={() => setHover(false)}
       className={`relative ${left ? "md:col-start-1 md:text-right md:pr-16" : "md:col-start-2 md:text-left md:pl-16"}`}
     >
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 bg-cover bg-center transition-all duration-700"
-        style={{
-          backgroundImage: `url(${service02})`,
-          opacity: hover ? 0.06 : 0,
-          transform: hover ? "scale(1.05)" : "scale(1)",
-          filter: "blur(2px)",
-        }}
-      />
+      {step.img && (
+        <div className={`mb-4 overflow-hidden aspect-[4/3] max-w-sm ${left ? "md:ml-auto" : ""}`}>
+          <img
+            src={step.img}
+            alt={step.t}
+            loading="lazy"
+            className="w-full h-full object-cover transition-transform duration-700"
+            style={{ transform: hover ? "scale(1.05)" : "scale(1)" }}
+          />
+        </div>
+      )}
       <div className="relative">
         <div data-step-num={num} className="font-display text-gold" style={{ fontSize: "clamp(40px, 6vw, 80px)", fontWeight: 300, lineHeight: 1 }}>00</div>
         <h3 className="font-display text-foreground mt-2" style={{ fontSize: "clamp(20px, 2.4vw, 32px)", fontWeight: 400 }}>{step.t}</h3>

@@ -104,7 +104,7 @@ export function CTAInline({ caption, label = "Demander un devis", href = "#devis
 }
 
 /* Floating mobile CTA — sticky bottom, hides over #devis */
-export function MobileFloatingCTA() {
+export function MobileFloatingCTA({ href = "#devis" }: { href?: string } = {}) {
   const [visible, setVisible] = useState(false);
   const [overDevis, setOverDevis] = useState(false);
 
@@ -130,7 +130,7 @@ export function MobileFloatingCTA() {
 
   return (
     <a
-      href="#devis"
+      href={href}
       aria-label="Demander un devis"
       className="md:hidden fixed left-4 right-4 z-[100] text-center"
       style={{

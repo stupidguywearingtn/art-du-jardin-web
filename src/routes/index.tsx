@@ -470,6 +470,13 @@ function Hero() {
         </h1>
         <div ref={lineRef} className="mt-10 h-px bg-gold" style={{ width: 0 }} />
         <div ref={subRef} className="mt-8 label text-gold opacity-0">HCE — Cize, Jura</div>
+        <div
+          className="mt-10 flex flex-col sm:flex-row items-center gap-3 px-4 sm:px-0 w-full sm:w-auto"
+          style={{ animation: "fadeUp 0.8s ease 1.6s both" }}
+        >
+          <CTAPrimary>Demander un devis gratuit</CTAPrimary>
+          <CTASecondary light />
+        </div>
       </div>
 
       <div className="absolute bottom-10 left-6 z-10 origin-bottom-left -rotate-90 label text-gold whitespace-nowrap" style={{ transformOrigin: "left bottom" }}>

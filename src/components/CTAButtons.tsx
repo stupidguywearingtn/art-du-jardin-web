@@ -136,8 +136,8 @@ export function MobileFloatingCTA({ href = "#devis" }: { href?: string } = {}) {
       className="md:hidden fixed left-4 right-4 z-[100] text-center"
       style={{
         bottom: 16,
-        background: "var(--brasier-500)",
-        color: "#fff",
+        background: "var(--cuivre-500)",
+        color: "var(--creme-50)",
         padding: "14px",
         borderRadius: 8,
         fontWeight: 500,

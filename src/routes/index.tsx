@@ -7,13 +7,14 @@ import { CustomCursor } from "@/components/CustomCursor";
 import { SmoothScroll } from "@/components/SmoothScroll";
 import { WhyUs, Zone, FAQ, QuoteForm } from "@/components/sections";
 import { useIsMobile } from "@/hooks/use-mobile";
-import service01 from "@/assets/service-01-preparation.jpg";
-import service02 from "@/assets/service-02-enrobe.jpg";
-import service03 from "@/assets/service-03-maconnerie.jpg";
-import service04 from "@/assets/service-04-drainage.jpg";
-import service05 from "@/assets/service-05-bordures.jpg";
-import service06 from "@/assets/service-06-garantie.jpg";
-import ctaCourtyard from "@/assets/cta-courtyard.jpg";
+import { Link } from "@tanstack/react-router";
+const service01 = "/photos/06-chantier-bobcat-preparation.jpg";
+const service02 = "/photos/01-hero-finisseur-vapeur-sunset.jpg";
+const service03 = "/photos/02-hero-medaillon-paves.jpg";
+const service04 = "/photos/09-detail-bordure-beton.jpg";
+const service05 = "/photos/13-cour-parking-muret.jpg";
+const service06 = "/photos/04-hero-golden-hour.jpg";
+const ctaCourtyard = "/photos/15-cour-golden-hour.jpg";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);

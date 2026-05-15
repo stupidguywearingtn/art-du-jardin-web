@@ -128,7 +128,7 @@ export const Route = createFileRoute("/services/$slug")({
 });
 
 function ServicePage() {
-  const data = Route.useLoaderData();
+  const data = Route.useLoaderData() as ServiceData;
 
   return (
     <>

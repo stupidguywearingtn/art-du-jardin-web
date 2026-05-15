@@ -82,6 +82,7 @@ export function WhyUs() {
           </div>
         ))}
       </div>
+      <CTAInline caption="Convaincu ? Recevez un devis personnalisé." />
     </section>
   );
 }

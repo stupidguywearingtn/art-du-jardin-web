@@ -282,6 +282,7 @@ function ServicePage() {
           <Link to="/" className="font-display text-gold text-3xl">HCE</Link>
           <p className="mt-3 text-muted text-sm">Cize, Jura · 03 84 52 61 48</p>
         </footer>
+        <MobileFloatingCTA href="/#devis" />
       </main>
     </>
   );

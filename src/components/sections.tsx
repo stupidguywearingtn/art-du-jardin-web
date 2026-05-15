@@ -141,6 +141,19 @@ export function Zone() {
           <div className="label text-gold/70 mt-10" style={{ fontSize: 10 }}>
             Marqueurs dorés · Survol pour le détail · Clic pour la fiche
           </div>
+          <div className="mt-10">
+            <p className="font-display italic text-foreground/80 mb-4" style={{ fontSize: 18 }}>
+              Votre commune n'est pas listée ? On se déplace jusqu'à 60 km.
+            </p>
+            <a
+              href="#devis"
+              data-cursor-hover
+              className="cta-primary inline-flex items-center gap-2"
+              style={{ fontFamily: "Outfit", fontSize: 15, letterSpacing: "0.02em", fontWeight: 500, borderRadius: 4, padding: "14px 28px", background: "var(--brasier-500)", color: "#fff", textDecoration: "none", transition: "all 0.2s ease" }}
+            >
+              Vérifier ma zone <span aria-hidden>→</span>
+            </a>
+          </div>
         </div>
 
         <div className="relative aspect-square max-w-lg mx-auto w-full bg-surface border border-border">

@@ -131,6 +131,13 @@ export const Route = createFileRoute("/services/$slug")({
 
 function ServicePage() {
   const data = Route.useLoaderData() as ServiceData;
+  const [scrolled, setScrolled] = useState(false);
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 200);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   return (
     <>
@@ -144,6 +151,27 @@ function ServicePage() {
             <Link to="/" className="label text-gold hover:text-foreground transition-colors">← Accueil</Link>
           </div>
         </header>
+
+        {/* Sticky CTA desktop */}
+        <div
+          className="hidden md:block fixed z-40"
+          style={{
+            top: 78, right: 24,
+            opacity: scrolled ? 1 : 0,
+            transform: scrolled ? "translateY(0)" : "translateY(-10px)",
+            pointerEvents: scrolled ? "auto" : "none",
+            transition: "opacity 0.3s ease, transform 0.3s ease",
+          }}
+        >
+          <Link
+            to="/" hash="devis"
+            data-cursor-hover
+            className="cta-primary"
+            style={{ fontFamily: "Outfit", fontSize: 13, fontWeight: 500, padding: "10px 20px", borderRadius: 4, background: "var(--brasier-500)", color: "#fff", textDecoration: "none", display: "inline-flex", alignItems: "center", gap: 6, transition: "all 0.2s ease" }}
+          >
+            Demander un devis →
+          </Link>
+        </div>
 
         {/* HERO */}
         <section className="relative w-full h-[80vh] overflow-hidden">

@@ -150,7 +150,7 @@ export function Zone() {
               href="#devis"
               data-cursor-hover
               className="cta-primary inline-flex items-center gap-2"
-              style={{ fontFamily: "Outfit", fontSize: 15, letterSpacing: "0.02em", fontWeight: 500, borderRadius: 4, padding: "14px 28px", background: "var(--brasier-500)", color: "#fff", textDecoration: "none", transition: "all 0.2s ease" }}
+              style={{ fontFamily: "Outfit", fontSize: 15, letterSpacing: "0.02em", fontWeight: 500, borderRadius: 4, padding: "14px 28px", background: "var(--cuivre-500)", color: "#fff", textDecoration: "none", transition: "all 0.2s ease" }}
             >
               Vérifier ma zone <span aria-hidden>→</span>
             </a>
@@ -257,7 +257,7 @@ export function FAQ() {
               href="#devis"
               data-cursor-hover
               className="cta-primary"
-              style={{ fontFamily: "Outfit", fontSize: 13, fontWeight: 500, padding: "10px 20px", borderRadius: 4, background: "var(--brasier-500)", color: "#fff", textDecoration: "none", transition: "all 0.2s ease", display: "inline-flex", alignItems: "center", gap: 6 }}
+              style={{ fontFamily: "Outfit", fontSize: 13, fontWeight: 500, padding: "10px 20px", borderRadius: 4, background: "var(--cuivre-500)", color: "#fff", textDecoration: "none", transition: "all 0.2s ease", display: "inline-flex", alignItems: "center", gap: 6 }}
             >
               Envoyer ma demande →
             </a>

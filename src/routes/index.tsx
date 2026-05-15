@@ -144,14 +144,14 @@ function MatiereFinitions() {
   return (
     <section className="relative w-full bg-cream py-24 md:py-32 px-6 md:px-12 overflow-hidden">
       <div className="max-w-3xl mx-auto text-center mb-16">
-        <div className="label" style={{ color: "var(--brasier-500)" }}>— Détails & finitions</div>
+        <div className="label" style={{ color: "var(--cuivre-500)" }}>— Détails & finitions</div>
         <h2 className="font-display mt-6" style={{ color: "var(--asphalte-900)", fontSize: "clamp(36px, 6vw, 72px)", fontWeight: 400, lineHeight: 1 }}>
-          La matière fait<br/><span className="italic" style={{ color: "var(--brasier-500)" }}>la différence.</span>
+          La matière fait<br/><span className="italic" style={{ color: "var(--cuivre-500)" }}>la différence.</span>
         </h2>
       </div>
       <div ref={ref} className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 max-w-6xl mx-auto">
         {items.map((it) => (
-          <article key={it.t} data-mf-card data-cursor-hover className="group bg-[var(--creme-100)] overflow-hidden border-l-4 transition-all duration-500 hover:-translate-y-1" style={{ borderColor: "var(--brasier-500)" }}>
+          <article key={it.t} data-mf-card data-cursor-hover className="group bg-[var(--creme-100)] overflow-hidden border-l-4 transition-all duration-500 hover:-translate-y-1" style={{ borderColor: "var(--cuivre-500)" }}>
             <div className="aspect-[4/3] overflow-hidden">
               <img src={it.img} alt={it.t} loading="lazy" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
             </div>

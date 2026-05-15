@@ -53,6 +53,7 @@ function Index() {
         )}
       </AnimatePresence>
       <main className="bg-background text-foreground overflow-x-hidden">
+        <SiteHeader />
         <Hero />
         <GesteMatiere />
         <SectionDivider />

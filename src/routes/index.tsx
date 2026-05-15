@@ -58,7 +58,7 @@ function Index() {
         <Philosophy />
         <SectionDivider />
         <Services />
-        <SectionDivider variant="marquee" />
+        <CTABanner />
         <Transformation />
         <SectionDivider />
         <WhyUs />
@@ -79,6 +79,7 @@ function Index() {
         <SectionDivider />
         <CTAFinal />
         <Footer />
+        <MobileFloatingCTA />
       </main>
     </>
   );

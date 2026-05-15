@@ -35,18 +35,32 @@
 
 :root {
   --radius: 0rem;
-  --background: #1E1E1E;
-  --surface: #262626;
-  --forest: #262626;
-  --footer: #141414;
-  --cream: #F5F2ED;
-  --text-dark: #1E1E1E;
-  --gold: #C8992A;
-  --gold-hover: #A87E1F;
-  --foreground: #FFFFFF;
-  --muted-text: #A8A8A8;
-  --card: #262626;
-  --border: #2E2E2E;
+  /* HCE — palette BTP : asphalte / crème / brasier / bronze */
+  --asphalte-900: #0E0E0F;
+  --asphalte-800: #1A1A1B;
+  --asphalte-700: #2A2A2D;
+  --creme-50: #F4EFE6;
+  --creme-100: #EAE3D6;
+  --brasier-500: #D7541C;
+  --brasier-600: #B8451A;
+  --brasier-300: #E89066;
+  --bronze-500: #8A6A3B;
+  --bronze-300: #C9A876;
+
+  --background: var(--asphalte-900);
+  --surface: var(--asphalte-800);
+  --forest: var(--asphalte-800);
+  --footer: #060607;
+  --cream: var(--creme-50);
+  --text-dark: var(--asphalte-900);
+  /* "gold" token kept for backward-compat — now points to brasier orange (couleur signature) */
+  --gold: var(--brasier-500);
+  --gold-hover: var(--brasier-600);
+  --bronze: var(--bronze-500);
+  --foreground: var(--creme-50);
+  --muted-text: #9A938A;
+  --card: var(--asphalte-800);
+  --border: var(--asphalte-700);
 }
 
 .dark { color-scheme: dark; }
@@ -73,6 +87,10 @@
   .bg-surface { background-color: var(--surface); }
   .bg-forest { background-color: var(--forest); }
   .text-muted { color: var(--muted-text); }
+  .text-bronze { color: var(--bronze); }
+  .bg-cream { background-color: var(--cream); }
+  .bg-asphalte { background-color: var(--asphalte-900); }
+  .text-asphalte { color: var(--asphalte-900); }
   .label {
     font-family: var(--font-body);
     text-transform: uppercase;

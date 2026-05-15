@@ -7,13 +7,14 @@ import { CustomCursor } from "@/components/CustomCursor";
 import { SmoothScroll } from "@/components/SmoothScroll";
 import { WhyUs, Zone, FAQ, QuoteForm } from "@/components/sections";
 import { useIsMobile } from "@/hooks/use-mobile";
-import service01 from "@/assets/service-01-preparation.jpg";
-import service02 from "@/assets/service-02-enrobe.jpg";
-import service03 from "@/assets/service-03-maconnerie.jpg";
-import service04 from "@/assets/service-04-drainage.jpg";
-import service05 from "@/assets/service-05-bordures.jpg";
-import service06 from "@/assets/service-06-garantie.jpg";
-import ctaCourtyard from "@/assets/cta-courtyard.jpg";
+import { Link } from "@tanstack/react-router";
+const service01 = "/photos/06-chantier-bobcat-preparation.jpg";
+const service02 = "/photos/01-hero-finisseur-vapeur-sunset.jpg";
+const service03 = "/photos/02-hero-medaillon-paves.jpg";
+const service04 = "/photos/09-detail-bordure-beton.jpg";
+const service05 = "/photos/13-cour-parking-muret.jpg";
+const service06 = "/photos/04-hero-golden-hour.jpg";
+const ctaCourtyard = "/photos/15-cour-golden-hour.jpg";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -51,6 +52,7 @@ function Index() {
       </AnimatePresence>
       <main className="bg-background text-foreground overflow-x-hidden">
         <Hero />
+        <GesteMatiere />
         <SectionDivider />
         <Philosophy />
         <SectionDivider />
@@ -62,7 +64,11 @@ function Index() {
         <SectionDivider />
         <Process />
         <SectionDivider />
+        <MatiereFinitions />
+        <SectionDivider />
         <Zone />
+        <SectionDivider />
+        <Galerie />
         <SectionDivider variant="marquee" />
         <Testimonials />
         <SectionDivider />
@@ -74,6 +80,189 @@ function Index() {
         <Footer />
       </main>
     </>
+  );
+}
+
+/* ============ GESTE & MATIÈRE ============ */
+function GesteMatiere() {
+  return (
+    <section className="relative w-full bg-asphalte overflow-hidden">
+      <div className="grid grid-cols-1 md:grid-cols-5 min-h-[80vh]">
+        <div className="md:col-span-3 relative">
+          <img
+            src="/photos/01-hero-finisseur-vapeur-sunset.jpg"
+            alt="Finisseur HCE posant l'enrobé à chaud à 160°C, vapeur visible au coucher de soleil"
+            loading="lazy"
+            className="absolute inset-0 w-full h-full object-cover"
+          />
+        </div>
+        <div className="md:col-span-2 flex items-center px-6 md:px-12 py-16 md:py-24">
+          <div>
+            <div className="label text-gold">— Le geste & la matière</div>
+            <h2 className="font-display mt-6 text-foreground" style={{ fontSize: "clamp(32px, 4vw, 56px)", fontWeight: 400, lineHeight: 1.05 }}>
+              L'enrobé à chaud,<br/>à <span className="italic text-gold">160°C</span>.<br/>Posé. Compacté. Garanti.
+            </h2>
+            <p className="mt-8 text-muted max-w-md" style={{ lineHeight: 1.7 }}>
+              Bitume noir, rouge, saumon ou bordeaux — posé au finisseur, compacté au rouleau, contrôlé à la tranche. Une matière vivante qui prend forme sous nos mains et tient dans le temps.
+            </p>
+            <Link
+              to="/services/enrobe-a-chaud"
+              data-cursor-hover
+              className="inline-flex items-center gap-3 mt-10 text-gold border-b border-gold/40 pb-1 hover:border-gold transition-colors"
+              style={{ fontFamily: "Outfit", fontSize: 13, letterSpacing: "0.15em", textTransform: "uppercase" }}
+            >
+              En savoir plus <span aria-hidden>→</span>
+            </Link>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ============ MATIÈRE & FINITIONS ============ */
+function MatiereFinitions() {
+  const ref = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (!ref.current) return;
+    const cards = ref.current.querySelectorAll("[data-mf-card]");
+    cards.forEach((c, i) => {
+      gsap.fromTo(c, { y: 40, opacity: 0 }, {
+        y: 0, opacity: 1, duration: 0.9, ease: "power3.out", delay: i * 0.1,
+        scrollTrigger: { trigger: c, start: "top 88%" },
+      });
+    });
+  }, []);
+  const items = [
+    { img: "/photos/02-hero-medaillon-paves.jpg", t: "Pavés sur mesure", d: "Médaillons et inserts pavés intégrés à l'enrobé pour personnaliser votre cour." },
+    { img: "/photos/09-detail-bordure-beton.jpg", t: "Bordures nettes", d: "Tranches précises et finitions au millimètre, pour un rendu durable et propre." },
+    { img: "/photos/10-detail-texture-enrobe-frais.jpg", t: "Grain & compactage", d: "Enrobé à chaud posé au finisseur à 160°C, compacté pour résister à la décennie." },
+  ];
+  return (
+    <section className="relative w-full bg-cream py-24 md:py-32 px-6 md:px-12 overflow-hidden">
+      <div className="max-w-3xl mx-auto text-center mb-16">
+        <div className="label" style={{ color: "var(--brasier-500)" }}>— Détails & finitions</div>
+        <h2 className="font-display mt-6" style={{ color: "var(--asphalte-900)", fontSize: "clamp(36px, 6vw, 72px)", fontWeight: 400, lineHeight: 1 }}>
+          La matière fait<br/><span className="italic" style={{ color: "var(--brasier-500)" }}>la différence.</span>
+        </h2>
+      </div>
+      <div ref={ref} className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 max-w-6xl mx-auto">
+        {items.map((it) => (
+          <article key={it.t} data-mf-card data-cursor-hover className="group bg-[var(--creme-100)] overflow-hidden border-l-4 transition-all duration-500 hover:-translate-y-1" style={{ borderColor: "var(--brasier-500)" }}>
+            <div className="aspect-[4/3] overflow-hidden">
+              <img src={it.img} alt={it.t} loading="lazy" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+            </div>
+            <div className="p-6">
+              <h3 className="font-display" style={{ color: "var(--asphalte-900)", fontSize: 24, fontWeight: 500 }}>{it.t}</h3>
+              <p className="mt-3" style={{ color: "var(--asphalte-700)", fontSize: 14, lineHeight: 1.6 }}>{it.d}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+/* ============ GALERIE FILTRABLE ============ */
+const GALLERY: { src: string; cat: string; alt: string }[] = [
+  ...["11-cour-courbe-ciel","12-cour-courbe-muret-pierre","13-cour-parking-muret","14-cour-maison-volets-rouges","15-cour-golden-hour","16-cour-maison-blanche-ciel-bleu","17-cour-arbres-automne","18-cour-allee-entre-maisons","19-cour-batiment-bois","20-cour-maison-beige-frontal","21-cour-maison-moderne-blanche","22-cour-maison-blanche-garage","23-cour-courbe-arbres","24-cour-maison-plain-pied","25-cour-allee-curve-garage"].map(s => ({ src: `/photos/${s}.jpg`, cat: "Cour & allée privée", alt: "Cour résidentielle en enrobé HCE" })),
+  { src: "/photos/08-chantier-plaque-vibrante.jpg", cat: "Parking & voirie pro", alt: "Compactage à la plaque vibrante sur parking" },
+  { src: "/photos/26-pro-batiment-commercial.jpg", cat: "Parking & voirie pro", alt: "Parking enrobé devant bâtiment commercial" },
+  { src: "/photos/06-chantier-bobcat-preparation.jpg", cat: "Préparation & terrassement", alt: "Mini-pelle Bobcat en préparation de terrain à Cize" },
+  { src: "/photos/07-chantier-terrain-brouette.jpg", cat: "Préparation & terrassement", alt: "Préparation manuelle du terrain avant pose" },
+  { src: "/photos/02-hero-medaillon-paves.jpg", cat: "Détails & finitions", alt: "Médaillon de pavés intégré dans l'enrobé" },
+  { src: "/photos/09-detail-bordure-beton.jpg", cat: "Détails & finitions", alt: "Bordure béton coulée HCE" },
+  { src: "/photos/10-detail-texture-enrobe-frais.jpg", cat: "Détails & finitions", alt: "Texture enrobé à chaud fraîchement posé" },
+  { src: "/photos/01-hero-finisseur-vapeur-sunset.jpg", cat: "Chantier en cours", alt: "Finisseur en cours de pose" },
+  { src: "/photos/03-hero-rouleau-compacteur.jpg", cat: "Chantier en cours", alt: "Rouleau compacteur sur chantier HCE" },
+];
+const CATS = ["Tous", "Cour & allée privée", "Parking & voirie pro", "Préparation & terrassement", "Détails & finitions", "Chantier en cours"];
+
+function Galerie() {
+  const [filter, setFilter] = useState("Tous");
+  const [lightbox, setLightbox] = useState<number | null>(null);
+  const visible = filter === "Tous" ? GALLERY : GALLERY.filter(g => g.cat === filter);
+
+  useEffect(() => {
+    if (lightbox === null) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setLightbox(null);
+      if (e.key === "ArrowRight") setLightbox(i => i === null ? null : (i + 1) % visible.length);
+      if (e.key === "ArrowLeft") setLightbox(i => i === null ? null : (i - 1 + visible.length) % visible.length);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [lightbox, visible.length]);
+
+  return (
+    <section className="relative w-full bg-background py-24 md:py-32 px-4 md:px-12 overflow-hidden">
+      <GiantNumber n="05" position="right" />
+      <div className="max-w-6xl mx-auto text-center mb-12">
+        <div className="label text-gold">— 500+ chantiers livrés depuis 2005</div>
+        <h2 className="font-display mt-6 text-foreground" style={{ fontSize: "clamp(36px, 6vw, 80px)", fontWeight: 400, lineHeight: 1 }}>
+          Nos <span className="italic text-gold">réalisations.</span>
+        </h2>
+      </div>
+
+      <div className="sticky top-0 z-20 bg-background/90 backdrop-blur-md py-4 mb-8 -mx-4 md:-mx-12 px-4 md:px-12 border-y border-gold/15">
+        <div className="flex gap-2 md:gap-3 overflow-x-auto no-scrollbar justify-start md:justify-center">
+          {CATS.map(c => (
+            <button
+              key={c}
+              onClick={() => setFilter(c)}
+              data-cursor-hover
+              className={`shrink-0 px-4 py-2 rounded-full text-xs md:text-sm whitespace-nowrap border transition-all ${filter === c ? "bg-gold text-background border-gold" : "bg-transparent text-foreground/80 border-asphalte-700 hover:border-gold/60"}`}
+              style={{ fontFamily: "Outfit", letterSpacing: "0.05em" }}
+            >
+              {c}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <motion.div layout className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-3">
+        <AnimatePresence mode="popLayout">
+          {visible.map((g, i) => (
+            <motion.button
+              key={g.src}
+              layout
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              transition={{ duration: 0.3 }}
+              onClick={() => setLightbox(i)}
+              data-cursor-hover
+              className="relative overflow-hidden bg-surface group aspect-[4/5] cursor-none"
+            >
+              <img src={g.src} alt={g.alt} loading="lazy" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+              <div className="absolute inset-0 bg-asphalte/0 group-hover:bg-asphalte/40 transition-colors duration-500" />
+              <div className="absolute bottom-0 left-0 right-0 p-3 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                <div className="label text-gold" style={{ fontSize: 9 }}>{g.cat}</div>
+              </div>
+            </motion.button>
+          ))}
+        </AnimatePresence>
+      </motion.div>
+
+      <AnimatePresence>
+        {lightbox !== null && visible[lightbox] && (
+          <motion.div
+            initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[9999] flex items-center justify-center"
+            style={{ background: "rgba(14,14,15,0.95)" }}
+            onClick={() => setLightbox(null)}
+          >
+            <button onClick={(e) => { e.stopPropagation(); setLightbox(null); }} className="absolute top-6 right-6 text-gold text-3xl" aria-label="Fermer">×</button>
+            <button onClick={(e) => { e.stopPropagation(); setLightbox(((lightbox - 1) + visible.length) % visible.length); }} className="absolute left-4 md:left-8 text-gold text-4xl p-4" aria-label="Précédent">‹</button>
+            <button onClick={(e) => { e.stopPropagation(); setLightbox((lightbox + 1) % visible.length); }} className="absolute right-4 md:right-8 text-gold text-4xl p-4" aria-label="Suivant">›</button>
+            <img src={visible[lightbox].src} alt={visible[lightbox].alt} className="max-h-[85vh] max-w-[90vw] object-contain" onClick={(e) => e.stopPropagation()} />
+            <div className="absolute bottom-6 left-0 right-0 text-center label text-gold">{visible[lightbox].cat}</div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      <style>{`.no-scrollbar::-webkit-scrollbar{display:none}.no-scrollbar{-ms-overflow-style:none;scrollbar-width:none}`}</style>
+    </section>
   );
 }
 
@@ -328,12 +517,12 @@ function Philosophy() {
 
 /* ============ SERVICES ============ */
 const SERVICES = [
-  { n: "01", t: "Préparation de terrain", img: service01 },
-  { n: "02", t: "Enrobé à chaud", img: service02 },
-  { n: "03", t: "Maçonnerie générale", img: service03 },
-  { n: "04", t: "Drainage & pentes", img: service04 },
-  { n: "05", t: "Bordures & murets", img: service05 },
-  { n: "06", t: "Garantie & SAV", img: service06 },
+  { n: "01", t: "Préparation de terrain", img: service01, slug: "preparation-terrain" },
+  { n: "02", t: "Enrobé à chaud", img: service02, slug: "enrobe-a-chaud" },
+  { n: "03", t: "Maçonnerie générale", img: service03, slug: "maconnerie-generale" },
+  { n: "04", t: "Drainage & pentes", img: service04, slug: "drainage-pentes" },
+  { n: "05", t: "Bordures & murets", img: service05, slug: "bordures-murets" },
+  { n: "06", t: "Garantie & SAV", img: service06, slug: "garantie-sav" },
 ];
 
 function Services() {
@@ -377,14 +566,16 @@ function Services() {
   );
 }
 
-function ServiceStrip({ n, t, img }: { n: string; t: string; img: string }) {
+function ServiceStrip({ n, t, img, slug }: { n: string; t: string; img: string; slug: string }) {
   const [h, setH] = useState(false);
   return (
-    <div
+    <Link
+      to="/services/$slug"
+      params={{ slug }}
       data-strip data-cursor-hover
       onMouseEnter={() => setH(true)}
       onMouseLeave={() => setH(false)}
-      className="relative w-full overflow-hidden border-b cursor-none transition-[height] duration-700 ease-out"
+      className="relative block w-full overflow-hidden border-b cursor-none transition-[height] duration-700 ease-out"
       style={{ height: h ? 400 : 200, borderColor: "#2E2E2E" }}
     >
       <div
@@ -407,7 +598,7 @@ function ServiceStrip({ n, t, img }: { n: string; t: string; img: string }) {
           <span className="text-gold text-3xl md:text-4xl inline-block transition-transform duration-500" style={{ transform: h ? "rotate(45deg)" : "rotate(0deg)" }}>→</span>
         </div>
       </div>
-    </div>
+    </Link>
   );
 }
 
@@ -468,10 +659,10 @@ function Transformation() {
 
 /* ============ PROCESS ============ */
 const PROCESS = [
-  { n: "01", t: "Visite & Devis", d: "Déplacement gratuit, lecture du terrain et devis détaillé sous 48h." },
-  { n: "02", t: "Préparation du sol", d: "Décaissement, nivellement laser, compactage et drainage maîtrisés." },
-  { n: "03", t: "Pose & Finitions", d: "Enrobé à chaud au finisseur, bordures et maçonnerie soignées." },
-  { n: "04", t: "Garantie & SAV", d: "Travaux garantis, intervention rapide en cas de besoin." },
+  { n: "01", t: "Visite & Devis", d: "Déplacement gratuit, lecture du terrain et devis détaillé sous 48h.", img: null as string | null },
+  { n: "02", t: "Préparation du sol", d: "Décaissement, nivellement laser, compactage et drainage maîtrisés.", img: "/photos/06-chantier-bobcat-preparation.jpg" },
+  { n: "03", t: "Pose & Finitions", d: "Enrobé à chaud au finisseur, bordures et maçonnerie soignées.", img: "/photos/01-hero-finisseur-vapeur-sunset.jpg" },
+  { n: "04", t: "Garantie & SAV", d: "Travaux garantis, intervention rapide en cas de besoin.", img: "/photos/03-hero-rouleau-compacteur.jpg" },
 ];
 
 function Process() {
@@ -571,7 +762,7 @@ function Process() {
   );
 }
 
-function ProcessStep({ step, left }: { step: { n: string; t: string; d: string }; left: boolean }) {
+function ProcessStep({ step, left }: { step: { n: string; t: string; d: string; img: string | null }; left: boolean }) {
   const [hover, setHover] = useState(false);
   const num = parseInt(step.n, 10);
   return (
@@ -581,16 +772,17 @@ function ProcessStep({ step, left }: { step: { n: string; t: string; d: string }
       onMouseLeave={() => setHover(false)}
       className={`relative ${left ? "md:col-start-1 md:text-right md:pr-16" : "md:col-start-2 md:text-left md:pl-16"}`}
     >
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 bg-cover bg-center transition-all duration-700"
-        style={{
-          backgroundImage: `url(${service02})`,
-          opacity: hover ? 0.06 : 0,
-          transform: hover ? "scale(1.05)" : "scale(1)",
-          filter: "blur(2px)",
-        }}
-      />
+      {step.img && (
+        <div className={`mb-4 overflow-hidden aspect-[4/3] max-w-sm ${left ? "md:ml-auto" : ""}`}>
+          <img
+            src={step.img}
+            alt={step.t}
+            loading="lazy"
+            className="w-full h-full object-cover transition-transform duration-700"
+            style={{ transform: hover ? "scale(1.05)" : "scale(1)" }}
+          />
+        </div>
+      )}
       <div className="relative">
         <div data-step-num={num} className="font-display text-gold" style={{ fontSize: "clamp(40px, 6vw, 80px)", fontWeight: 300, lineHeight: 1 }}>00</div>
         <h3 className="font-display text-foreground mt-2" style={{ fontSize: "clamp(20px, 2.4vw, 32px)", fontWeight: 400 }}>{step.t}</h3>
@@ -797,7 +989,7 @@ function Footer() {
           <ul className="space-y-3 text-foreground/80" style={{ fontSize: 14 }}>
             {SERVICES.map((s) => (
               <li key={s.n}>
-                <a href="#" className="transition-colors hover:text-gold">{s.t}</a>
+                <Link to="/services/$slug" params={{ slug: s.slug }} className="transition-colors hover:text-gold">{s.t}</Link>
               </li>
             ))}
           </ul>

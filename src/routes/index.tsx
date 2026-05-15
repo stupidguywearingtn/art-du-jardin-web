@@ -539,6 +539,8 @@ const SERVICES = [
 
 function Services() {
   const ref = useRef<HTMLDivElement>(null);
+  const { get } = useSiteContent();
+  const services = get("services", SERVICES) as typeof SERVICES;
   useEffect(() => {
     if (!ref.current) return;
     const strips = ref.current.querySelectorAll("[data-strip]");
@@ -551,7 +553,7 @@ function Services() {
         }
       );
     });
-  }, []);
+  }, [services]);
 
   return (
     <section
@@ -572,7 +574,7 @@ function Services() {
         <p className="max-w-md text-muted">De la préparation du sol à la pose finale, HCE intervient sur l'intégralité de votre chantier — sans intermédiaire.</p>
       </div>
       <div ref={ref} className="relative">
-        {SERVICES.map((s) => <ServiceStrip key={s.n} {...s} />)}
+        {services.map((s) => <ServiceStrip key={s.n} {...s} />)}
       </div>
     </section>
   );

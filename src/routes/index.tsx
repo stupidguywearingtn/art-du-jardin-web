@@ -52,6 +52,7 @@ function Index() {
       </AnimatePresence>
       <main className="bg-background text-foreground overflow-x-hidden">
         <Hero />
+        <GesteMatiere />
         <SectionDivider />
         <Philosophy />
         <SectionDivider />
@@ -63,7 +64,11 @@ function Index() {
         <SectionDivider />
         <Process />
         <SectionDivider />
+        <MatiereFinitions />
+        <SectionDivider />
         <Zone />
+        <SectionDivider />
+        <Galerie />
         <SectionDivider variant="marquee" />
         <Testimonials />
         <SectionDivider />
@@ -75,6 +80,189 @@ function Index() {
         <Footer />
       </main>
     </>
+  );
+}
+
+/* ============ GESTE & MATIÈRE ============ */
+function GesteMatiere() {
+  return (
+    <section className="relative w-full bg-asphalte overflow-hidden">
+      <div className="grid grid-cols-1 md:grid-cols-5 min-h-[80vh]">
+        <div className="md:col-span-3 relative">
+          <img
+            src="/photos/01-hero-finisseur-vapeur-sunset.jpg"
+            alt="Finisseur HCE posant l'enrobé à chaud à 160°C, vapeur visible au coucher de soleil"
+            loading="lazy"
+            className="absolute inset-0 w-full h-full object-cover"
+          />
+        </div>
+        <div className="md:col-span-2 flex items-center px-6 md:px-12 py-16 md:py-24">
+          <div>
+            <div className="label text-gold">— Le geste & la matière</div>
+            <h2 className="font-display mt-6 text-foreground" style={{ fontSize: "clamp(32px, 4vw, 56px)", fontWeight: 400, lineHeight: 1.05 }}>
+              L'enrobé à chaud,<br/>à <span className="italic text-gold">160°C</span>.<br/>Posé. Compacté. Garanti.
+            </h2>
+            <p className="mt-8 text-muted max-w-md" style={{ lineHeight: 1.7 }}>
+              Bitume noir, rouge, saumon ou bordeaux — posé au finisseur, compacté au rouleau, contrôlé à la tranche. Une matière vivante qui prend forme sous nos mains et tient dans le temps.
+            </p>
+            <Link
+              to="/services/enrobe-a-chaud"
+              data-cursor-hover
+              className="inline-flex items-center gap-3 mt-10 text-gold border-b border-gold/40 pb-1 hover:border-gold transition-colors"
+              style={{ fontFamily: "Outfit", fontSize: 13, letterSpacing: "0.15em", textTransform: "uppercase" }}
+            >
+              En savoir plus <span aria-hidden>→</span>
+            </Link>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ============ MATIÈRE & FINITIONS ============ */
+function MatiereFinitions() {
+  const ref = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (!ref.current) return;
+    const cards = ref.current.querySelectorAll("[data-mf-card]");
+    cards.forEach((c, i) => {
+      gsap.fromTo(c, { y: 40, opacity: 0 }, {
+        y: 0, opacity: 1, duration: 0.9, ease: "power3.out", delay: i * 0.1,
+        scrollTrigger: { trigger: c, start: "top 88%" },
+      });
+    });
+  }, []);
+  const items = [
+    { img: "/photos/02-hero-medaillon-paves.jpg", t: "Pavés sur mesure", d: "Médaillons et inserts pavés intégrés à l'enrobé pour personnaliser votre cour." },
+    { img: "/photos/09-detail-bordure-beton.jpg", t: "Bordures nettes", d: "Tranches précises et finitions au millimètre, pour un rendu durable et propre." },
+    { img: "/photos/10-detail-texture-enrobe-frais.jpg", t: "Grain & compactage", d: "Enrobé à chaud posé au finisseur à 160°C, compacté pour résister à la décennie." },
+  ];
+  return (
+    <section className="relative w-full bg-cream py-24 md:py-32 px-6 md:px-12 overflow-hidden">
+      <div className="max-w-3xl mx-auto text-center mb-16">
+        <div className="label" style={{ color: "var(--brasier-500)" }}>— Détails & finitions</div>
+        <h2 className="font-display mt-6" style={{ color: "var(--asphalte-900)", fontSize: "clamp(36px, 6vw, 72px)", fontWeight: 400, lineHeight: 1 }}>
+          La matière fait<br/><span className="italic" style={{ color: "var(--brasier-500)" }}>la différence.</span>
+        </h2>
+      </div>
+      <div ref={ref} className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 max-w-6xl mx-auto">
+        {items.map((it) => (
+          <article key={it.t} data-mf-card data-cursor-hover className="group bg-[var(--creme-100)] overflow-hidden border-l-4 transition-all duration-500 hover:-translate-y-1" style={{ borderColor: "var(--brasier-500)" }}>
+            <div className="aspect-[4/3] overflow-hidden">
+              <img src={it.img} alt={it.t} loading="lazy" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+            </div>
+            <div className="p-6">
+              <h3 className="font-display" style={{ color: "var(--asphalte-900)", fontSize: 24, fontWeight: 500 }}>{it.t}</h3>
+              <p className="mt-3" style={{ color: "var(--asphalte-700)", fontSize: 14, lineHeight: 1.6 }}>{it.d}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+/* ============ GALERIE FILTRABLE ============ */
+const GALLERY: { src: string; cat: string; alt: string }[] = [
+  ...["11-cour-courbe-ciel","12-cour-courbe-muret-pierre","13-cour-parking-muret","14-cour-maison-volets-rouges","15-cour-golden-hour","16-cour-maison-blanche-ciel-bleu","17-cour-arbres-automne","18-cour-allee-entre-maisons","19-cour-batiment-bois","20-cour-maison-beige-frontal","21-cour-maison-moderne-blanche","22-cour-maison-blanche-garage","23-cour-courbe-arbres","24-cour-maison-plain-pied","25-cour-allee-curve-garage"].map(s => ({ src: `/photos/${s}.jpg`, cat: "Cour & allée privée", alt: "Cour résidentielle en enrobé HCE" })),
+  { src: "/photos/08-chantier-plaque-vibrante.jpg", cat: "Parking & voirie pro", alt: "Compactage à la plaque vibrante sur parking" },
+  { src: "/photos/26-pro-batiment-commercial.jpg", cat: "Parking & voirie pro", alt: "Parking enrobé devant bâtiment commercial" },
+  { src: "/photos/06-chantier-bobcat-preparation.jpg", cat: "Préparation & terrassement", alt: "Mini-pelle Bobcat en préparation de terrain à Cize" },
+  { src: "/photos/07-chantier-terrain-brouette.jpg", cat: "Préparation & terrassement", alt: "Préparation manuelle du terrain avant pose" },
+  { src: "/photos/02-hero-medaillon-paves.jpg", cat: "Détails & finitions", alt: "Médaillon de pavés intégré dans l'enrobé" },
+  { src: "/photos/09-detail-bordure-beton.jpg", cat: "Détails & finitions", alt: "Bordure béton coulée HCE" },
+  { src: "/photos/10-detail-texture-enrobe-frais.jpg", cat: "Détails & finitions", alt: "Texture enrobé à chaud fraîchement posé" },
+  { src: "/photos/01-hero-finisseur-vapeur-sunset.jpg", cat: "Chantier en cours", alt: "Finisseur en cours de pose" },
+  { src: "/photos/03-hero-rouleau-compacteur.jpg", cat: "Chantier en cours", alt: "Rouleau compacteur sur chantier HCE" },
+];
+const CATS = ["Tous", "Cour & allée privée", "Parking & voirie pro", "Préparation & terrassement", "Détails & finitions", "Chantier en cours"];
+
+function Galerie() {
+  const [filter, setFilter] = useState("Tous");
+  const [lightbox, setLightbox] = useState<number | null>(null);
+  const visible = filter === "Tous" ? GALLERY : GALLERY.filter(g => g.cat === filter);
+
+  useEffect(() => {
+    if (lightbox === null) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setLightbox(null);
+      if (e.key === "ArrowRight") setLightbox(i => i === null ? null : (i + 1) % visible.length);
+      if (e.key === "ArrowLeft") setLightbox(i => i === null ? null : (i - 1 + visible.length) % visible.length);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [lightbox, visible.length]);
+
+  return (
+    <section className="relative w-full bg-background py-24 md:py-32 px-4 md:px-12 overflow-hidden">
+      <GiantNumber n="05" position="right" />
+      <div className="max-w-6xl mx-auto text-center mb-12">
+        <div className="label text-gold">— 500+ chantiers livrés depuis 2005</div>
+        <h2 className="font-display mt-6 text-foreground" style={{ fontSize: "clamp(36px, 6vw, 80px)", fontWeight: 400, lineHeight: 1 }}>
+          Nos <span className="italic text-gold">réalisations.</span>
+        </h2>
+      </div>
+
+      <div className="sticky top-0 z-20 bg-background/90 backdrop-blur-md py-4 mb-8 -mx-4 md:-mx-12 px-4 md:px-12 border-y border-gold/15">
+        <div className="flex gap-2 md:gap-3 overflow-x-auto no-scrollbar justify-start md:justify-center">
+          {CATS.map(c => (
+            <button
+              key={c}
+              onClick={() => setFilter(c)}
+              data-cursor-hover
+              className={`shrink-0 px-4 py-2 rounded-full text-xs md:text-sm whitespace-nowrap border transition-all ${filter === c ? "bg-gold text-background border-gold" : "bg-transparent text-foreground/80 border-asphalte-700 hover:border-gold/60"}`}
+              style={{ fontFamily: "Outfit", letterSpacing: "0.05em" }}
+            >
+              {c}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <motion.div layout className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-3">
+        <AnimatePresence mode="popLayout">
+          {visible.map((g, i) => (
+            <motion.button
+              key={g.src}
+              layout
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              transition={{ duration: 0.3 }}
+              onClick={() => setLightbox(i)}
+              data-cursor-hover
+              className="relative overflow-hidden bg-surface group aspect-[4/5] cursor-none"
+            >
+              <img src={g.src} alt={g.alt} loading="lazy" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+              <div className="absolute inset-0 bg-asphalte/0 group-hover:bg-asphalte/40 transition-colors duration-500" />
+              <div className="absolute bottom-0 left-0 right-0 p-3 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                <div className="label text-gold" style={{ fontSize: 9 }}>{g.cat}</div>
+              </div>
+            </motion.button>
+          ))}
+        </AnimatePresence>
+      </motion.div>
+
+      <AnimatePresence>
+        {lightbox !== null && visible[lightbox] && (
+          <motion.div
+            initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[9999] flex items-center justify-center"
+            style={{ background: "rgba(14,14,15,0.95)" }}
+            onClick={() => setLightbox(null)}
+          >
+            <button onClick={(e) => { e.stopPropagation(); setLightbox(null); }} className="absolute top-6 right-6 text-gold text-3xl" aria-label="Fermer">×</button>
+            <button onClick={(e) => { e.stopPropagation(); setLightbox(((lightbox - 1) + visible.length) % visible.length); }} className="absolute left-4 md:left-8 text-gold text-4xl p-4" aria-label="Précédent">‹</button>
+            <button onClick={(e) => { e.stopPropagation(); setLightbox((lightbox + 1) % visible.length); }} className="absolute right-4 md:right-8 text-gold text-4xl p-4" aria-label="Suivant">›</button>
+            <img src={visible[lightbox].src} alt={visible[lightbox].alt} className="max-h-[85vh] max-w-[90vw] object-contain" onClick={(e) => e.stopPropagation()} />
+            <div className="absolute bottom-6 left-0 right-0 text-center label text-gold">{visible[lightbox].cat}</div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      <style>{`.no-scrollbar::-webkit-scrollbar{display:none}.no-scrollbar{-ms-overflow-style:none;scrollbar-width:none}`}</style>
+    </section>
   );
 }
 

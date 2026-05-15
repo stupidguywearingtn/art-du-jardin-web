@@ -989,7 +989,7 @@ function Footer() {
           <ul className="space-y-3 text-foreground/80" style={{ fontSize: 14 }}>
             {SERVICES.map((s) => (
               <li key={s.n}>
-                <a href="#" className="transition-colors hover:text-gold">{s.t}</a>
+                <Link to="/services/$slug" params={{ slug: s.slug }} className="transition-colors hover:text-gold">{s.t}</Link>
               </li>
             ))}
           </ul>

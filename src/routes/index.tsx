@@ -659,10 +659,10 @@ function Transformation() {
 
 /* ============ PROCESS ============ */
 const PROCESS = [
-  { n: "01", t: "Visite & Devis", d: "Déplacement gratuit, lecture du terrain et devis détaillé sous 48h." },
-  { n: "02", t: "Préparation du sol", d: "Décaissement, nivellement laser, compactage et drainage maîtrisés." },
-  { n: "03", t: "Pose & Finitions", d: "Enrobé à chaud au finisseur, bordures et maçonnerie soignées." },
-  { n: "04", t: "Garantie & SAV", d: "Travaux garantis, intervention rapide en cas de besoin." },
+  { n: "01", t: "Visite & Devis", d: "Déplacement gratuit, lecture du terrain et devis détaillé sous 48h.", img: null as string | null },
+  { n: "02", t: "Préparation du sol", d: "Décaissement, nivellement laser, compactage et drainage maîtrisés.", img: "/photos/06-chantier-bobcat-preparation.jpg" },
+  { n: "03", t: "Pose & Finitions", d: "Enrobé à chaud au finisseur, bordures et maçonnerie soignées.", img: "/photos/01-hero-finisseur-vapeur-sunset.jpg" },
+  { n: "04", t: "Garantie & SAV", d: "Travaux garantis, intervention rapide en cas de besoin.", img: "/photos/03-hero-rouleau-compacteur.jpg" },
 ];
 
 function Process() {

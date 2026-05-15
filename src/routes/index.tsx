@@ -517,12 +517,12 @@ function Philosophy() {
 
 /* ============ SERVICES ============ */
 const SERVICES = [
-  { n: "01", t: "Préparation de terrain", img: service01 },
-  { n: "02", t: "Enrobé à chaud", img: service02 },
-  { n: "03", t: "Maçonnerie générale", img: service03 },
-  { n: "04", t: "Drainage & pentes", img: service04 },
-  { n: "05", t: "Bordures & murets", img: service05 },
-  { n: "06", t: "Garantie & SAV", img: service06 },
+  { n: "01", t: "Préparation de terrain", img: service01, slug: "preparation-terrain" },
+  { n: "02", t: "Enrobé à chaud", img: service02, slug: "enrobe-a-chaud" },
+  { n: "03", t: "Maçonnerie générale", img: service03, slug: "maconnerie-generale" },
+  { n: "04", t: "Drainage & pentes", img: service04, slug: "drainage-pentes" },
+  { n: "05", t: "Bordures & murets", img: service05, slug: "bordures-murets" },
+  { n: "06", t: "Garantie & SAV", img: service06, slug: "garantie-sav" },
 ];
 
 function Services() {

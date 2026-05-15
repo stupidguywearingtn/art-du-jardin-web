@@ -9,6 +9,7 @@ import { WhyUs, Zone, FAQ, QuoteForm } from "@/components/sections";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { Link } from "@tanstack/react-router";
 import { CTABanner, CTAPrimary, CTASecondary, CTAInline, MobileFloatingCTA } from "@/components/CTAButtons";
+import { useSiteContent } from "@/hooks/useSiteContent";
 const service01 = "/photos/06-chantier-bobcat-preparation.jpg";
 const service02 = "/photos/01-hero-finisseur-vapeur-sunset.jpg";
 const service03 = "/photos/02-hero-medaillon-paves.jpg";
@@ -426,6 +427,8 @@ function Hero() {
   const titleRef = useRef<HTMLHeadingElement>(null);
   const lineRef = useRef<HTMLDivElement>(null);
   const subRef = useRef<HTMLDivElement>(null);
+  const { get } = useSiteContent();
+  const hero = get("hero", { line1: "L'Enrobé qui", line2: "Marque le Temps.", badge: "HCE — Cize, Jura", tagline: "Depuis 2005" }) as { line1: string; line2: string; badge: string; tagline: string };
 
   useEffect(() => {
     if (!titleRef.current) return;
@@ -437,9 +440,9 @@ function Hero() {
     );
     if (lineRef.current) tl.fromTo(lineRef.current, { width: 0 }, { width: 120, duration: 0.8, ease: "power3.out" }, "-=0.3");
     if (subRef.current) tl.fromTo(subRef.current, { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.8 }, "-=0.4");
-  }, []);
+  }, [hero.line1, hero.line2]);
 
-  const lines = ["L'Enrobé qui", "Marque le Temps."];
+  const lines = [hero.line1, hero.line2];
   return (
     <section className="relative h-screen w-full overflow-hidden bg-background">
       <video
@@ -469,7 +472,7 @@ function Hero() {
           ))}
         </h1>
         <div ref={lineRef} className="mt-10 h-px bg-gold" style={{ width: 0 }} />
-        <div ref={subRef} className="mt-8 label text-gold opacity-0">HCE — Cize, Jura</div>
+        <div ref={subRef} className="mt-8 label text-gold opacity-0">{hero.badge}</div>
         <div
           className="mt-10 flex flex-col sm:flex-row items-center gap-3 px-4 sm:px-0 w-full sm:w-auto"
           style={{ animation: "fadeUp 0.8s ease 1.6s both" }}
@@ -482,7 +485,7 @@ function Hero() {
       <div className="absolute bottom-10 left-6 z-10 origin-bottom-left -rotate-90 label text-gold whitespace-nowrap" style={{ transformOrigin: "left bottom" }}>
         Scroll pour découvrir
       </div>
-      <div className="absolute bottom-10 right-6 z-10 label text-gold">Depuis 2005</div>
+      <div className="absolute bottom-10 right-6 z-10 label text-gold">{hero.tagline}</div>
     </section>
   );
 }

@@ -41,9 +41,17 @@
   --asphalte-700: #2A2A2D;
   --creme-50: #F4EFE6;
   --creme-100: #EAE3D6;
-  --brasier-500: #D7541C;
-  --brasier-600: #B8451A;
-  --brasier-300: #E89066;
+  /* Cuivre patiné — accent principal (remplace l'ancien orange brasier saturé) */
+  --cuivre-500: #8A5A3C;
+  --cuivre-600: #6E4730;
+  --cuivre-300: #A87A55;
+  /* Sable doré — accent secondaire chaud, pour micro-accents éditoriaux */
+  --sable-500: #C9A47E;
+  --sable-300: #E0C6A4;
+  /* Brasier — orange adouci, RÉSERVÉ aux micro-accents (scroll indicator, hover liens, bullets ◆) */
+  --brasier-500: #B85A2A;
+  --brasier-600: #9C4A22;
+  --brasier-300: #D78A66;
   --bronze-500: #8A6A3B;
   --bronze-300: #C9A876;
 
@@ -53,9 +61,9 @@
   --footer: #060607;
   --cream: var(--creme-50);
   --text-dark: var(--asphalte-900);
-  /* "gold" token kept for backward-compat — now points to brasier orange (couleur signature) */
-  --gold: var(--brasier-500);
-  --gold-hover: var(--brasier-600);
+  /* "gold" token kept for backward-compat — pointe sur le cuivre patiné (accent global) */
+  --gold: var(--cuivre-500);
+  --gold-hover: var(--cuivre-600);
   --bronze: var(--bronze-500);
   --foreground: var(--creme-50);
   --muted-text: #9A938A;
@@ -124,7 +132,7 @@
 }
 
 /* CTA hover states */
-.cta-primary:hover { background: var(--brasier-600) !important; transform: translateY(-1px); }
+.cta-primary:hover { background: var(--cuivre-600) !important; transform: translateY(-1px); }
 .cta-primary[style*="creme-50"]:hover { background: #fff !important; }
 .cta-secondary:hover { background: var(--creme-50) !important; color: var(--asphalte-900) !important; }
 @keyframes fadeUp { from { opacity: 0; transform: translateY(12px);} to { opacity: 1; transform: translateY(0);} }

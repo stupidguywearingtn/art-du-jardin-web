@@ -26,8 +26,8 @@ export function CTAPrimary({ children = "Demander un devis", href = "#devis", cl
     ...baseStyle,
     padding: compact ? "10px 20px" : baseStyle.padding,
     fontSize: compact ? 13 : 15,
-    background: invert ? "var(--creme-50)" : "var(--brasier-500)",
-    color: invert ? "var(--brasier-500)" : "#fff",
+    background: invert ? "var(--creme-50)" : "var(--cuivre-500)",
+    color: invert ? "var(--cuivre-600)" : "var(--creme-50)",
   };
   return (
     <a
@@ -57,29 +57,30 @@ export function CTASecondary({ children, href = `tel:${PHONE}`, light = false, c
   );
 }
 
-/* Bandeau orange pleine largeur */
+/* Bandeau sobre — respiration entre sections (fond asphalte, accent cuivre fin) */
 export function CTABanner() {
   return (
-    <section className="relative w-full px-6 py-12 md:py-16 text-center" style={{ background: "var(--brasier-500)" }}>
+    <section className="relative w-full px-6 py-10 md:py-14 text-center" style={{ background: "var(--asphalte-900)" }}>
       <p
-        className="font-display italic text-white max-w-3xl mx-auto"
-        style={{ fontSize: "clamp(18px, 2.4vw, 26px)", lineHeight: 1.4, fontWeight: 300 }}
+        className="font-display italic max-w-3xl mx-auto"
+        style={{ color: "var(--creme-50)", fontSize: "clamp(18px, 2.2vw, 26px)", lineHeight: 1.4, fontWeight: 300 }}
       >
         Un projet en tête ? Devis détaillé sous 48h, visite gratuite.
       </p>
-      <div className="mt-8 flex flex-wrap gap-3 justify-center">
-        <CTAPrimary invert>Demander mon devis</CTAPrimary>
+      <div aria-hidden className="mx-auto my-6" style={{ width: 28, height: 1, background: "var(--cuivre-500)" }} />
+      <div className="flex flex-wrap gap-3 justify-center">
+        <CTAPrimary>Demander mon devis</CTAPrimary>
         <a
           href={`tel:${PHONE}`}
           data-cursor-hover
           style={{
             ...baseStyle,
             background: "transparent",
-            color: "#fff",
-            border: "1px solid #fff",
+            color: "var(--creme-50)",
+            border: "1px solid rgba(244,239,230,0.4)",
           }}
         >
-          <span aria-hidden>📞</span> {PHONE_DISPLAY}
+          <span aria-hidden style={{ color: "var(--sable-500)" }}>📞</span> {PHONE_DISPLAY}
         </a>
       </div>
     </section>
@@ -135,8 +136,8 @@ export function MobileFloatingCTA({ href = "#devis" }: { href?: string } = {}) {
       className="md:hidden fixed left-4 right-4 z-[100] text-center"
       style={{
         bottom: 16,
-        background: "var(--brasier-500)",
-        color: "#fff",
+        background: "var(--cuivre-500)",
+        color: "var(--creme-50)",
         padding: "14px",
         borderRadius: 8,
         fontWeight: 500,

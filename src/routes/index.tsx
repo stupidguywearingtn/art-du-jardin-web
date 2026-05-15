@@ -53,6 +53,7 @@ function Index() {
         )}
       </AnimatePresence>
       <main className="bg-background text-foreground overflow-x-hidden">
+        <SiteHeader />
         <Hero />
         <GesteMatiere />
         <SectionDivider />
@@ -82,6 +83,77 @@ function Index() {
         <Footer />
         <MobileFloatingCTA />
       </main>
+    </>
+  );
+}
+
+/* ============ HEADER avec bouton ADMIN discret ============ */
+function SiteHeader() {
+  const [open, setOpen] = useState(false);
+  return (
+    <>
+      <header className="fixed top-0 left-0 right-0 z-[60] pointer-events-none">
+        <div className="flex items-center justify-end px-4 md:px-8 py-4">
+          <Link
+            to="/login"
+            data-cursor-hover
+            className="hidden md:inline-flex pointer-events-auto items-center gap-1.5 px-3.5 py-1.5 transition-colors"
+            style={{
+              color: "var(--sable-500)",
+              background: "rgba(14,14,15,0.35)",
+              backdropFilter: "blur(6px)",
+              border: "1px solid var(--cuivre-500)",
+              borderRadius: 3,
+              fontFamily: "Outfit, sans-serif",
+              fontSize: 11,
+              fontWeight: 500,
+              letterSpacing: "0.12em",
+              textTransform: "uppercase",
+              textDecoration: "none",
+            }}
+            onMouseEnter={(e) => { e.currentTarget.style.background = "var(--cuivre-500)"; e.currentTarget.style.color = "var(--creme-50)"; }}
+            onMouseLeave={(e) => { e.currentTarget.style.background = "rgba(14,14,15,0.35)"; e.currentTarget.style.color = "var(--sable-500)"; }}
+          >
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+              <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+              <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+            </svg>
+            Admin
+          </Link>
+          <button
+            type="button"
+            onClick={() => setOpen(true)}
+            aria-label="Ouvrir le menu"
+            className="md:hidden pointer-events-auto inline-flex items-center justify-center"
+            style={{
+              width: 40, height: 40, borderRadius: 3,
+              background: "rgba(14,14,15,0.5)", backdropFilter: "blur(6px)",
+              border: "1px solid var(--cuivre-500)", color: "var(--creme-50)",
+            }}
+          >
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden><path d="M3 6h18M3 12h18M3 18h18" /></svg>
+          </button>
+        </div>
+      </header>
+      {open && (
+        <div className="md:hidden fixed inset-0 z-[70] bg-asphalte/95 backdrop-blur-sm flex flex-col" onClick={() => setOpen(false)}>
+          <div className="flex justify-end p-4">
+            <button onClick={() => setOpen(false)} aria-label="Fermer" className="text-foreground text-3xl leading-none">×</button>
+          </div>
+          <nav className="flex-1 flex flex-col items-center justify-center gap-6 px-6">
+            <a href="#devis" className="font-display text-foreground" style={{ fontSize: 24 }} onClick={() => setOpen(false)}>Demander un devis</a>
+            <a href="tel:0384526148" className="font-display text-foreground" style={{ fontSize: 24 }}>03 84 52 61 48</a>
+            <div className="w-12 h-px my-4" style={{ background: "var(--cuivre-500)" }} />
+            <Link to="/login" onClick={() => setOpen(false)} className="inline-flex items-center gap-2" style={{ color: "var(--sable-500)", fontSize: 13, fontFamily: "Outfit", letterSpacing: "0.12em", textTransform: "uppercase" }}>
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+                <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+              </svg>
+              Espace admin
+            </Link>
+          </nav>
+        </div>
+      )}
     </>
   );
 }
@@ -144,14 +216,14 @@ function MatiereFinitions() {
   return (
     <section className="relative w-full bg-cream py-24 md:py-32 px-6 md:px-12 overflow-hidden">
       <div className="max-w-3xl mx-auto text-center mb-16">
-        <div className="label" style={{ color: "var(--brasier-500)" }}>— Détails & finitions</div>
+        <div className="label" style={{ color: "var(--cuivre-500)" }}>— Détails & finitions</div>
         <h2 className="font-display mt-6" style={{ color: "var(--asphalte-900)", fontSize: "clamp(36px, 6vw, 72px)", fontWeight: 400, lineHeight: 1 }}>
-          La matière fait<br/><span className="italic" style={{ color: "var(--brasier-500)" }}>la différence.</span>
+          La matière fait<br/><span className="italic" style={{ color: "var(--cuivre-500)" }}>la différence.</span>
         </h2>
       </div>
       <div ref={ref} className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 max-w-6xl mx-auto">
         {items.map((it) => (
-          <article key={it.t} data-mf-card data-cursor-hover className="group bg-[var(--creme-100)] overflow-hidden border-l-4 transition-all duration-500 hover:-translate-y-1" style={{ borderColor: "var(--brasier-500)" }}>
+          <article key={it.t} data-mf-card data-cursor-hover className="group bg-[var(--creme-100)] overflow-hidden border-l-4 transition-all duration-500 hover:-translate-y-1" style={{ borderColor: "var(--cuivre-500)" }}>
             <div className="aspect-[4/3] overflow-hidden">
               <img src={it.img} alt={it.t} loading="lazy" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
             </div>
@@ -647,7 +719,7 @@ function Transformation() {
       <div className="relative z-10 h-full w-full flex flex-col items-center justify-center text-center px-6">
         <div className="label text-gold">— Avant / Après</div>
         <h2 className="font-display mt-6 text-foreground" style={{ fontSize: "clamp(40px, 6vw, 88px)", fontWeight: 400, lineHeight: 1.05 }}>
-          De la Cour Brute<br/>à <span className="italic text-gold">l'Enrobé d'Exception</span>
+          De la Cour Brute<br/>à <span className="italic" style={{ color: "var(--sable-500)" }}>l'Enrobé d'Exception</span>
         </h2>
         <p className="mt-8 text-muted max-w-xl mx-auto">
           Chaque chantier débute par une lecture du terrain — sols, pentes, drainage, usages — pour garantir un enrobé qui dure dans le temps.
@@ -659,8 +731,8 @@ function Transformation() {
             { n: 100, suf: "%", l: "Satisfaits" },
           ].map((s, i) => (
             <div key={i} className="text-center">
-              <div className="font-display text-gold flex items-baseline justify-center gap-1" style={{ fontSize: "clamp(36px, 5vw, 72px)", fontWeight: 400, lineHeight: 1 }}>
-                <span data-num={s.n}>0</span><span>{s.suf}</span>
+              <div className="font-display flex items-baseline justify-center gap-1" style={{ color: "var(--creme-50)", fontSize: "clamp(36px, 5vw, 72px)", fontWeight: 400, lineHeight: 1 }}>
+                <span data-num={s.n}>0</span><span style={{ color: "var(--sable-500)" }}>{s.suf}</span>
               </div>
               <div className="label text-foreground/80 mt-3">{s.l}</div>
             </div>

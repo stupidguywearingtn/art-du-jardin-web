@@ -198,6 +198,33 @@ function ServicePage() {
           </ul>
         </section>
 
+        {/* MID-PAGE CTA — bande sombre avec photo */}
+        <section className="relative w-full overflow-hidden" style={{ minHeight: 200 }}>
+          <div
+            className="absolute inset-0 bg-cover bg-center"
+            style={{ backgroundImage: `url(${data.hero})` }}
+          />
+          <div className="absolute inset-0" style={{ background: "rgba(14,14,15,0.78)" }} />
+          <div className="relative z-10 px-6 py-14 md:py-16 text-center max-w-3xl mx-auto">
+            <p className="font-display italic text-foreground" style={{ fontSize: "clamp(20px, 2.6vw, 28px)", lineHeight: 1.3 }}>
+              Vous avez un projet de <span className="text-gold">{data.title.toLowerCase()}</span> ?
+            </p>
+            <p className="mt-3 text-muted text-sm md:text-base">
+              Devis détaillé sous 48h · Visite gratuite · Garantie décennale
+            </p>
+            <div className="mt-7">
+              <Link
+                to="/" hash="devis"
+                data-cursor-hover
+                className="cta-primary"
+                style={{ fontFamily: "Outfit", fontSize: 15, fontWeight: 500, padding: "14px 28px", borderRadius: 4, background: "var(--brasier-500)", color: "#fff", textDecoration: "none", display: "inline-flex", alignItems: "center", gap: 8, transition: "all 0.2s ease" }}
+              >
+                Demander un devis pour ce projet →
+              </Link>
+            </div>
+          </div>
+        </section>
+
         {/* GALERIE */}
         <section className="px-6 md:px-12 py-16 max-w-6xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-3">

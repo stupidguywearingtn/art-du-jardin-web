@@ -3,6 +3,7 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { motion, AnimatePresence } from "framer-motion";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { CTAInline } from "@/components/CTAButtons";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);

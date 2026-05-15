@@ -8,6 +8,7 @@ import { SmoothScroll } from "@/components/SmoothScroll";
 import { WhyUs, Zone, FAQ, QuoteForm } from "@/components/sections";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { Link } from "@tanstack/react-router";
+import { CTABanner, CTAPrimary, CTASecondary, CTAInline, MobileFloatingCTA } from "@/components/CTAButtons";
 const service01 = "/photos/06-chantier-bobcat-preparation.jpg";
 const service02 = "/photos/01-hero-finisseur-vapeur-sunset.jpg";
 const service03 = "/photos/02-hero-medaillon-paves.jpg";

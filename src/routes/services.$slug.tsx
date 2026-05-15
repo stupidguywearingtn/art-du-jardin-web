@@ -167,7 +167,7 @@ function ServicePage() {
             to="/" hash="devis"
             data-cursor-hover
             className="cta-primary"
-            style={{ fontFamily: "Outfit", fontSize: 13, fontWeight: 500, padding: "10px 20px", borderRadius: 4, background: "var(--brasier-500)", color: "#fff", textDecoration: "none", display: "inline-flex", alignItems: "center", gap: 6, transition: "all 0.2s ease" }}
+            style={{ fontFamily: "Outfit", fontSize: 13, fontWeight: 500, padding: "10px 20px", borderRadius: 4, background: "var(--cuivre-500)", color: "#fff", textDecoration: "none", display: "inline-flex", alignItems: "center", gap: 6, transition: "all 0.2s ease" }}
           >
             Demander un devis →
           </Link>
@@ -217,7 +217,7 @@ function ServicePage() {
                 to="/" hash="devis"
                 data-cursor-hover
                 className="cta-primary"
-                style={{ fontFamily: "Outfit", fontSize: 15, fontWeight: 500, padding: "14px 28px", borderRadius: 4, background: "var(--brasier-500)", color: "#fff", textDecoration: "none", display: "inline-flex", alignItems: "center", gap: 8, transition: "all 0.2s ease" }}
+                style={{ fontFamily: "Outfit", fontSize: 15, fontWeight: 500, padding: "14px 28px", borderRadius: 4, background: "var(--cuivre-500)", color: "#fff", textDecoration: "none", display: "inline-flex", alignItems: "center", gap: 8, transition: "all 0.2s ease" }}
               >
                 Demander un devis pour ce projet →
               </Link>
@@ -242,7 +242,7 @@ function ServicePage() {
           <h2 className="font-display mt-6 text-foreground" style={{ fontSize: "clamp(32px, 5vw, 56px)", fontWeight: 400 }}>Comment HCE travaille</h2>
           <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8">
             {data.methode.map((m, i) => (
-              <article key={m.t} className="border-l-2 pl-6" style={{ borderColor: "var(--brasier-500)" }}>
+              <article key={m.t} className="border-l-2 pl-6" style={{ borderColor: "var(--cuivre-500)" }}>
                 <div className="font-display text-gold" style={{ fontSize: 48, fontWeight: 300, lineHeight: 1 }}>{String(i + 1).padStart(2, "0")}</div>
                 <h3 className="font-display text-foreground mt-4" style={{ fontSize: 24, fontWeight: 400 }}>{m.t}</h3>
                 <p className="mt-3 text-muted" style={{ lineHeight: 1.6 }}>{m.d}</p>
@@ -262,7 +262,7 @@ function ServicePage() {
               to="/" hash="devis"
               data-cursor-hover
               className="cta-primary"
-              style={{ fontFamily: "Outfit", fontSize: 15, fontWeight: 500, padding: "14px 28px", borderRadius: 4, background: "var(--brasier-500)", color: "#fff", textDecoration: "none", display: "inline-flex", alignItems: "center", gap: 8, transition: "all 0.2s ease" }}
+              style={{ fontFamily: "Outfit", fontSize: 15, fontWeight: 500, padding: "14px 28px", borderRadius: 4, background: "var(--cuivre-500)", color: "#fff", textDecoration: "none", display: "inline-flex", alignItems: "center", gap: 8, transition: "all 0.2s ease" }}
             >
               Demander un devis →
             </Link>

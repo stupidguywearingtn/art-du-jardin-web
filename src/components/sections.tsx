@@ -4,6 +4,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { motion, AnimatePresence } from "framer-motion";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { CTAInline } from "@/components/CTAButtons";
+import { useSiteContent } from "@/hooks/useSiteContent";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -181,6 +182,8 @@ const FAQS = [
 export function FAQ() {
   const ref = useRef<HTMLDivElement>(null);
   const [open, setOpen] = useState<number | null>(0);
+  const { get } = useSiteContent();
+  const faqs = get("faqs", FAQS) as typeof FAQS;
 
   useEffect(() => {
     if (!ref.current) return;
@@ -191,7 +194,7 @@ export function FAQ() {
         { x: 0, opacity: 1, duration: 0.7, delay: i * 0.06, ease: "power3.out",
           scrollTrigger: { trigger: el, start: "top 90%" } });
     });
-  }, []);
+  }, [faqs]);
 
   return (
     <section ref={ref} className="relative bg-background py-32 px-6 md:px-12 overflow-hidden">
@@ -204,7 +207,7 @@ export function FAQ() {
         </div>
 
         <div className="space-y-px">
-          {FAQS.map((f, i) => {
+          {faqs.map((f, i) => {
             const isOpen = open === i;
             return (
               <div key={i} data-faq className="border-t border-gold/20 last:border-b">

@@ -566,14 +566,16 @@ function Services() {
   );
 }
 
-function ServiceStrip({ n, t, img }: { n: string; t: string; img: string }) {
+function ServiceStrip({ n, t, img, slug }: { n: string; t: string; img: string; slug: string }) {
   const [h, setH] = useState(false);
   return (
-    <div
+    <Link
+      to="/services/$slug"
+      params={{ slug }}
       data-strip data-cursor-hover
       onMouseEnter={() => setH(true)}
       onMouseLeave={() => setH(false)}
-      className="relative w-full overflow-hidden border-b cursor-none transition-[height] duration-700 ease-out"
+      className="relative block w-full overflow-hidden border-b cursor-none transition-[height] duration-700 ease-out"
       style={{ height: h ? 400 : 200, borderColor: "#2E2E2E" }}
     >
       <div
@@ -596,7 +598,7 @@ function ServiceStrip({ n, t, img }: { n: string; t: string; img: string }) {
           <span className="text-gold text-3xl md:text-4xl inline-block transition-transform duration-500" style={{ transform: h ? "rotate(45deg)" : "rotate(0deg)" }}>→</span>
         </div>
       </div>
-    </div>
+    </Link>
   );
 }
 

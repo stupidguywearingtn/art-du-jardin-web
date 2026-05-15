@@ -647,7 +647,7 @@ function Transformation() {
       <div className="relative z-10 h-full w-full flex flex-col items-center justify-center text-center px-6">
         <div className="label text-gold">— Avant / Après</div>
         <h2 className="font-display mt-6 text-foreground" style={{ fontSize: "clamp(40px, 6vw, 88px)", fontWeight: 400, lineHeight: 1.05 }}>
-          De la Cour Brute<br/>à <span className="italic text-gold">l'Enrobé d'Exception</span>
+          De la Cour Brute<br/>à <span className="italic" style={{ color: "var(--sable-500)" }}>l'Enrobé d'Exception</span>
         </h2>
         <p className="mt-8 text-muted max-w-xl mx-auto">
           Chaque chantier débute par une lecture du terrain — sols, pentes, drainage, usages — pour garantir un enrobé qui dure dans le temps.
@@ -659,8 +659,8 @@ function Transformation() {
             { n: 100, suf: "%", l: "Satisfaits" },
           ].map((s, i) => (
             <div key={i} className="text-center">
-              <div className="font-display text-gold flex items-baseline justify-center gap-1" style={{ fontSize: "clamp(36px, 5vw, 72px)", fontWeight: 400, lineHeight: 1 }}>
-                <span data-num={s.n}>0</span><span>{s.suf}</span>
+              <div className="font-display flex items-baseline justify-center gap-1" style={{ color: "var(--creme-50)", fontSize: "clamp(36px, 5vw, 72px)", fontWeight: 400, lineHeight: 1 }}>
+                <span data-num={s.n}>0</span><span style={{ color: "var(--sable-500)" }}>{s.suf}</span>
               </div>
               <div className="label text-foreground/80 mt-3">{s.l}</div>
             </div>

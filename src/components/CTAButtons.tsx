@@ -26,8 +26,8 @@ export function CTAPrimary({ children = "Demander un devis", href = "#devis", cl
     ...baseStyle,
     padding: compact ? "10px 20px" : baseStyle.padding,
     fontSize: compact ? 13 : 15,
-    background: invert ? "var(--creme-50)" : "var(--brasier-500)",
-    color: invert ? "var(--brasier-500)" : "#fff",
+    background: invert ? "var(--creme-50)" : "var(--cuivre-500)",
+    color: invert ? "var(--cuivre-600)" : "var(--creme-50)",
   };
   return (
     <a

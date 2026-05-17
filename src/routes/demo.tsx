@@ -37,27 +37,12 @@ function DemoPage() {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <EditModeToolbarWithReload reload={reload} />
+      <EditModeToolbar />
       <Hero v={v} />
       <Services v={v} />
       <Footer v={v} />
     </div>
   );
-}
-
-function EditModeToolbarWithReload({ reload }: { reload: () => void }) {
-  // re-render trigger: nothing fancy, just reload after publish via onPublished
-  // but the provider already handles publish; we hook reload via a tiny effect.
-  // Simpler: wrap toolbar; provider's publish clears drafts and we reload here.
-  const { hasDrafts, publishing } = useEditMode();
-  // when publishing ends and no drafts, reload published values
-  if (typeof window !== "undefined") {
-    // schedule reload after publish completes
-    (window as any).__demoReload = reload;
-  }
-  void hasDrafts;
-  void publishing;
-  return <EditModeToolbar />;
 }
 
 type V = (section: string, field: string, fallback: string) => string;

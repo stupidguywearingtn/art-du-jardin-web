@@ -32,6 +32,36 @@ export type Database = {
         }
         Relationships: []
       }
+      site_content_fields: {
+        Row: {
+          content_type: Database["public"]["Enums"]["content_type"]
+          content_value: string | null
+          field_key: string
+          id: string
+          section_key: string
+          site_id: string
+          updated_at: string
+        }
+        Insert: {
+          content_type?: Database["public"]["Enums"]["content_type"]
+          content_value?: string | null
+          field_key: string
+          id?: string
+          section_key: string
+          site_id: string
+          updated_at?: string
+        }
+        Update: {
+          content_type?: Database["public"]["Enums"]["content_type"]
+          content_value?: string | null
+          field_key?: string
+          id?: string
+          section_key?: string
+          site_id?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       user_roles: {
         Row: {
           created_at: string
@@ -68,6 +98,7 @@ export type Database = {
     }
     Enums: {
       app_role: "admin" | "user"
+      content_type: "text" | "image" | "richtext"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -196,6 +227,7 @@ export const Constants = {
   public: {
     Enums: {
       app_role: ["admin", "user"],
+      content_type: ["text", "image", "richtext"],
     },
   },
 } as const

@@ -19,15 +19,16 @@ export const Route = createFileRoute("/demo")({
 });
 
 function DemoRoute() {
+  const { reload } = useSiteContentFields(DEMO_SITE_ID);
   return (
-    <EditModeProvider siteId={DEMO_SITE_ID}>
+    <EditModeProvider siteId={DEMO_SITE_ID} onPublished={reload}>
       <DemoPage />
     </EditModeProvider>
   );
 }
 
 function DemoPage() {
-  const { get, reload } = useSiteContentFields(DEMO_SITE_ID);
+  const { get } = useSiteContentFields(DEMO_SITE_ID);
   const { getDraft } = useEditMode();
 
   // value resolves: draft > published > fallback

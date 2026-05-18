@@ -10,6 +10,14 @@ import { useIsMobile } from "@/hooks/use-mobile";
 import { Link } from "@tanstack/react-router";
 import { CTABanner, CTAPrimary, CTASecondary, CTAInline, MobileFloatingCTA } from "@/components/CTAButtons";
 import { useSiteContent } from "@/hooks/useSiteContent";
+import { useSiteContentFields } from "@/hooks/useSiteContentFields";
+import { EditModeProvider, useEditMode } from "@/hooks/useEditMode";
+import { EditModeToolbar } from "@/components/EditModeToolbar";
+import { EditableText } from "@/components/EditableText";
+import { EditableImage } from "@/components/EditableImage";
+
+const HOME_SITE_ID = "11111111-1111-1111-1111-111111111111";
+
 const service01 = "/photos/06-chantier-bobcat-preparation.jpg";
 const service02 = "/photos/01-hero-finisseur-vapeur-sunset.jpg";
 const service03 = "/photos/02-hero-medaillon-paves.jpg";
@@ -20,6 +28,14 @@ const ctaCourtyard = "/photos/15-cour-golden-hour.jpg";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
+}
+
+/** Resolves field value: draft (if edit on) > published > fallback */
+function useV() {
+  const { get } = useSiteContentFields(HOME_SITE_ID);
+  const { getDraft } = useEditMode();
+  return (section: string, field: string, fallback: string) =>
+    getDraft(section, field) ?? get(section, field, fallback);
 }
 
 export const Route = createFileRoute("/")({
@@ -33,6 +49,15 @@ export const Route = createFileRoute("/")({
 });
 
 function Index() {
+  const { reload } = useSiteContentFields(HOME_SITE_ID);
+  return (
+    <EditModeProvider siteId={HOME_SITE_ID} onPublished={reload}>
+      <IndexBody />
+    </EditModeProvider>
+  );
+}
+
+function IndexBody() {
   const [loaded, setLoaded] = useState(false);
   useEffect(() => {
     const t = setTimeout(() => setLoaded(true), 50);
@@ -40,6 +65,7 @@ function Index() {
   }, []);
   return (
     <>
+      <EditModeToolbar />
       <SmoothScroll />
       <CustomCursor />
       <AnimatePresence>
@@ -160,33 +186,51 @@ function SiteHeader() {
 
 /* ============ GESTE & MATIÈRE ============ */
 function GesteMatiere() {
+  const v = useV();
+  const img = v("geste", "image", "/photos/01-hero-finisseur-vapeur-sunset.jpg");
   return (
     <section className="relative w-full bg-asphalte overflow-hidden">
       <div className="grid grid-cols-1 md:grid-cols-5 min-h-[80vh]">
         <div className="md:col-span-3 relative">
-          <img
-            src="/photos/01-hero-finisseur-vapeur-sunset.jpg"
-            alt="Finisseur HCE posant l'enrobé à chaud à 160°C, vapeur visible au coucher de soleil"
-            loading="lazy"
-            className="absolute inset-0 w-full h-full object-cover"
-          />
+          <EditableImage section="geste" field="image" value={img}>
+            {(url) => (
+              <img
+                src={url}
+                alt={v("geste", "image_alt", "Finisseur HCE posant l'enrobé à chaud à 160°C, vapeur visible au coucher de soleil")}
+                loading="lazy"
+                className="absolute inset-0 w-full h-full object-cover"
+              />
+            )}
+          </EditableImage>
         </div>
         <div className="md:col-span-2 flex items-center px-6 md:px-12 py-16 md:py-24">
           <div>
-            <div className="label text-gold">— Le geste & la matière</div>
-            <h2 className="font-display mt-6 text-foreground" style={{ fontSize: "clamp(32px, 4vw, 56px)", fontWeight: 400, lineHeight: 1.05 }}>
-              L'enrobé à chaud,<br/>à <span className="italic text-gold">160°C</span>.<br/>Posé. Compacté. Garanti.
-            </h2>
-            <p className="mt-8 text-muted max-w-md" style={{ lineHeight: 1.7 }}>
-              Bitume noir, rouge, saumon ou bordeaux — posé au finisseur, compacté au rouleau, contrôlé à la tranche. Une matière vivante qui prend forme sous nos mains et tient dans le temps.
-            </p>
+            <EditableText section="geste" field="label" value={v("geste", "label", "— Le geste & la matière")} as="div" className="label text-gold" />
+            <EditableText
+              section="geste"
+              field="title"
+              value={v("geste", "title", "L'enrobé à chaud, à 160°C. Posé. Compacté. Garanti.")}
+              as="h2"
+              className="font-display mt-6 text-foreground"
+              style={{ fontSize: "clamp(32px, 4vw, 56px)", fontWeight: 400, lineHeight: 1.05 }}
+              multiline
+            />
+            <EditableText
+              section="geste"
+              field="paragraph"
+              value={v("geste", "paragraph", "Bitume noir, rouge, saumon ou bordeaux — posé au finisseur, compacté au rouleau, contrôlé à la tranche. Une matière vivante qui prend forme sous nos mains et tient dans le temps.")}
+              as="p"
+              className="mt-8 text-muted max-w-md"
+              style={{ lineHeight: 1.7 }}
+              multiline
+            />
             <Link
               to="/services/enrobe-a-chaud"
               data-cursor-hover
               className="inline-flex items-center gap-3 mt-10 text-gold border-b border-gold/40 pb-1 hover:border-gold transition-colors"
               style={{ fontFamily: "Outfit", fontSize: 13, letterSpacing: "0.15em", textTransform: "uppercase" }}
             >
-              En savoir plus <span aria-hidden>→</span>
+              <EditableText section="geste" field="cta" value={v("geste", "cta", "En savoir plus")} as="span" /> <span aria-hidden>→</span>
             </Link>
           </div>
         </div>
@@ -500,9 +544,16 @@ function Hero() {
   const lineRef = useRef<HTMLDivElement>(null);
   const subRef = useRef<HTMLDivElement>(null);
   const { get } = useSiteContent();
-  const hero = get("hero", { line1: "L'Enrobé qui", line2: "Marque le Temps.", badge: "HCE — Cize, Jura", tagline: "Depuis 2005" }) as { line1: string; line2: string; badge: string; tagline: string };
+  const { enabled: editEnabled } = useEditMode();
+  const v = useV();
+  const heroDefault = get("hero", { line1: "L'Enrobé qui", line2: "Marque le Temps.", badge: "HCE — Cize, Jura", tagline: "Depuis 2005" }) as { line1: string; line2: string; badge: string; tagline: string };
+  const line1 = v("hero", "line1", heroDefault.line1);
+  const line2 = v("hero", "line2", heroDefault.line2);
+  const badge = v("hero", "badge", heroDefault.badge);
+  const tagline = v("hero", "tagline", heroDefault.tagline);
 
   useEffect(() => {
+    if (editEnabled) return; // skip GSAP split animation in edit mode
     if (!titleRef.current) return;
     const chars = titleRef.current.querySelectorAll("[data-c]");
     const tl = gsap.timeline({ delay: 1.0 });
@@ -512,9 +563,9 @@ function Hero() {
     );
     if (lineRef.current) tl.fromTo(lineRef.current, { width: 0 }, { width: 120, duration: 0.8, ease: "power3.out" }, "-=0.3");
     if (subRef.current) tl.fromTo(subRef.current, { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.8 }, "-=0.4");
-  }, [hero.line1, hero.line2]);
+  }, [line1, line2, editEnabled]);
 
-  const lines = [hero.line1, hero.line2];
+  const lines = [line1, line2];
   return (
     <section className="relative h-screen w-full overflow-hidden bg-background">
       <video
@@ -526,25 +577,52 @@ function Hero() {
       <div className="absolute inset-0 bg-background/20" />
 
       <div className="relative z-10 flex h-full flex-col items-center justify-center px-6">
-        <h1
-          ref={titleRef}
-          className="font-display text-center text-foreground"
-          style={{ fontSize: "clamp(64px, 10vw, 140px)", fontWeight: 400, lineHeight: 0.95, letterSpacing: "-0.02em" }}
-        >
-          {lines.map((line, li) => (
-            <span key={li} className="block overflow-hidden">
-              <span className="inline-block">
-                {line.split("").map((c, ci) => (
-                  <span key={ci} data-c className="inline-block" style={{ whiteSpace: c === " " ? "pre" : "normal" }}>
-                    {c}
-                  </span>
-                ))}
+        {editEnabled ? (
+          <div className="text-center space-y-2">
+            <EditableText
+              section="hero"
+              field="line1"
+              value={line1}
+              as="h1"
+              className="font-display text-foreground block"
+              style={{ fontSize: "clamp(64px, 10vw, 140px)", fontWeight: 400, lineHeight: 0.95, letterSpacing: "-0.02em" }}
+            />
+            <EditableText
+              section="hero"
+              field="line2"
+              value={line2}
+              as="h1"
+              className="font-display text-foreground block"
+              style={{ fontSize: "clamp(64px, 10vw, 140px)", fontWeight: 400, lineHeight: 0.95, letterSpacing: "-0.02em" }}
+            />
+          </div>
+        ) : (
+          <h1
+            ref={titleRef}
+            className="font-display text-center text-foreground"
+            style={{ fontSize: "clamp(64px, 10vw, 140px)", fontWeight: 400, lineHeight: 0.95, letterSpacing: "-0.02em" }}
+          >
+            {lines.map((line, li) => (
+              <span key={li} className="block overflow-hidden">
+                <span className="inline-block">
+                  {line.split("").map((c, ci) => (
+                    <span key={ci} data-c className="inline-block" style={{ whiteSpace: c === " " ? "pre" : "normal" }}>
+                      {c}
+                    </span>
+                  ))}
+                </span>
               </span>
-            </span>
-          ))}
-        </h1>
-        <div ref={lineRef} className="mt-10 h-px bg-gold" style={{ width: 0 }} />
-        <div ref={subRef} className="mt-8 label text-gold opacity-0">{hero.badge}</div>
+            ))}
+          </h1>
+        )}
+        <div ref={lineRef} className="mt-10 h-px bg-gold" style={{ width: editEnabled ? 120 : 0 }} />
+        <EditableText
+          section="hero"
+          field="badge"
+          value={badge}
+          as="div"
+          className={`mt-8 label text-gold ${editEnabled ? "" : "opacity-0"}`}
+        />
         <div
           className="mt-10 flex flex-col sm:flex-row items-center gap-3 px-4 sm:px-0 w-full sm:w-auto"
           style={{ animation: "fadeUp 0.8s ease 1.6s both" }}
@@ -557,7 +635,13 @@ function Hero() {
       <div className="absolute bottom-10 left-6 z-10 origin-bottom-left -rotate-90 label text-gold whitespace-nowrap" style={{ transformOrigin: "left bottom" }}>
         Scroll pour découvrir
       </div>
-      <div className="absolute bottom-10 right-6 z-10 label text-gold">{hero.tagline}</div>
+      <EditableText
+        section="hero"
+        field="tagline"
+        value={tagline}
+        as="div"
+        className="absolute bottom-10 right-6 z-10 label text-gold"
+      />
     </section>
   );
 }
@@ -565,7 +649,13 @@ function Hero() {
 /* ============ PHILOSOPHY ============ */
 function Philosophy() {
   const ref = useRef<HTMLDivElement>(null);
+  const v = useV();
+  const { enabled: editEnabled } = useEditMode();
+  const text = v("philosophy", "text", "Un enrobé qui dure,\nune finition qui marque.");
+  const signature = v("philosophy", "signature", "— HCE, Cize");
+
   useEffect(() => {
+    if (editEnabled) return;
     if (!ref.current) return;
     const words = ref.current.querySelectorAll("[data-w]");
     gsap.fromTo(words,
@@ -575,25 +665,37 @@ function Philosophy() {
         scrollTrigger: { trigger: ref.current, start: "top 70%" },
       }
     );
-  }, []);
-  const text = "Un enrobé qui dure,\nune finition qui marque.";
+  }, [editEnabled, text]);
+
   return (
     <section ref={ref} className="relative min-h-screen w-full bg-background flex items-center justify-center px-6 py-24">
       <div className="absolute left-6 md:left-12 top-0 bottom-0 w-px bg-gold/40" />
       <div className="max-w-5xl text-center">
-        <p
-          className="font-display italic text-foreground"
-          style={{ fontSize: "clamp(32px, 5vw, 72px)", fontWeight: 300, lineHeight: 1.15 }}
-        >
-          {text.split("\n").map((line, li) => (
-            <span key={li} className="block">
-              {line.split(" ").map((w, wi) => (
-                <span key={wi} data-w className="inline-block mr-[0.25em]">{w}</span>
-              ))}
-            </span>
-          ))}
-        </p>
-        <div className="mt-12 label text-gold">— HCE, Cize</div>
+        {editEnabled ? (
+          <EditableText
+            section="philosophy"
+            field="text"
+            value={text}
+            as="p"
+            className="font-display italic text-foreground"
+            style={{ fontSize: "clamp(32px, 5vw, 72px)", fontWeight: 300, lineHeight: 1.15 }}
+            multiline
+          />
+        ) : (
+          <p
+            className="font-display italic text-foreground"
+            style={{ fontSize: "clamp(32px, 5vw, 72px)", fontWeight: 300, lineHeight: 1.15 }}
+          >
+            {text.split("\n").map((line, li) => (
+              <span key={li} className="block">
+                {line.split(" ").map((w, wi) => (
+                  <span key={wi} data-w className="inline-block mr-[0.25em]">{w}</span>
+                ))}
+              </span>
+            ))}
+          </p>
+        )}
+        <EditableText section="philosophy" field="signature" value={signature} as="div" className="mt-12 label text-gold" />
       </div>
     </section>
   );
@@ -608,6 +710,34 @@ const SERVICES = [
   { n: "05", t: "Bordures & murets", img: service05, slug: "bordures-murets" },
   { n: "06", t: "Garantie & SAV", img: service06, slug: "garantie-sav" },
 ];
+
+function ServicesHeader() {
+  const v = useV();
+  return (
+    <div className="px-6 md:px-12 mb-16 flex items-end justify-between flex-wrap gap-6">
+      <div>
+        <EditableText section="services" field="label" value={v("services", "label", "— Nos services")} as="div" className="label text-gold" />
+        <EditableText
+          section="services"
+          field="title"
+          value={v("services", "title", "Trois métiers, une même exigence.")}
+          as="h2"
+          className="font-display mt-6 text-foreground"
+          style={{ fontSize: "clamp(40px, 7vw, 96px)", fontWeight: 400, lineHeight: 0.95 }}
+          multiline
+        />
+      </div>
+      <EditableText
+        section="services"
+        field="intro"
+        value={v("services", "intro", "De la préparation du sol à la pose finale, HCE intervient sur l'intégralité de votre chantier — sans intermédiaire.")}
+        as="p"
+        className="max-w-md text-muted"
+        multiline
+      />
+    </div>
+  );
+}
 
 function Services() {
   const ref = useRef<HTMLDivElement>(null);
@@ -636,15 +766,8 @@ function Services() {
       <GiantNumber n="01" position="left" />
       <TechnicalMark className="hidden md:block" style={{ top: "8%", right: "-40px", width: 180, height: 360, transform: "rotate(8deg)" }} />
       <TechnicalMark className="hidden md:block" style={{ bottom: "5%", left: "-30px", width: 160, height: 320, transform: "rotate(-6deg)" }} />
-      <div className="px-6 md:px-12 mb-16 flex items-end justify-between flex-wrap gap-6">
-        <div>
-          <div className="label text-gold">— Nos services</div>
-          <h2 className="font-display mt-6 text-foreground" style={{ fontSize: "clamp(40px, 7vw, 96px)", fontWeight: 400, lineHeight: 0.95 }}>
-            Trois métiers,<br/>une même exigence.
-          </h2>
-        </div>
-        <p className="max-w-md text-muted">De la préparation du sol à la pose finale, HCE intervient sur l'intégralité de votre chantier — sans intermédiaire.</p>
-      </div>
+      <ServicesHeader />
+
       <div ref={ref} className="relative">
         {services.map((s) => <ServiceStrip key={s.n} {...s} />)}
       </div>

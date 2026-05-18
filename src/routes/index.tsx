@@ -795,6 +795,8 @@ function Services() {
 
 function ServiceStrip({ n, t, img, slug }: { n: string; t: string; img: string; slug: string }) {
   const [h, setH] = useState(false);
+  const isMobile = useIsMobile();
+  const expanded = h || isMobile; // toujours étendu sur mobile pour lisibilité
   return (
     <Link
       to="/services/$slug"
@@ -803,16 +805,20 @@ function ServiceStrip({ n, t, img, slug }: { n: string; t: string; img: string; 
       onMouseEnter={() => setH(true)}
       onMouseLeave={() => setH(false)}
       className="relative block w-full overflow-hidden border-b cursor-none transition-[height] duration-700 ease-out"
-      style={{ height: h ? 400 : 200, borderColor: "#2E2E2E" }}
+      style={{ height: expanded ? (isMobile ? 220 : 400) : 200, borderColor: "#2E2E2E" }}
     >
       <div
         className="absolute inset-0 bg-cover bg-center transition-opacity duration-700"
-        style={{ backgroundImage: `url(${img})`, opacity: h ? 1 : 0 }}
+        style={{ backgroundImage: `url(${img})`, opacity: expanded ? 1 : 0 }}
       />
-      <div className="absolute inset-0 bg-background/65 transition-opacity duration-700" style={{ opacity: h ? 1 : 0 }} />
-      <div className="relative z-10 h-full grid grid-cols-12 items-center px-6 md:px-12 gap-6">
-        <div className="col-span-2 md:col-span-2 font-display text-gold" style={{ fontSize: "clamp(40px, 6vw, 80px)", fontWeight: 300, lineHeight: 1 }}>{n}</div>
-        <div className="col-span-8 md:col-span-8 font-display text-foreground relative inline-block" style={{ fontSize: "clamp(22px, 3vw, 36px)", fontWeight: 400 }}>
+      {/* overlay sombre OBLIGATOIRE pour garantir la lisibilité du texte blanc */}
+      <div
+        className="absolute inset-0 transition-opacity duration-700"
+        style={{ background: "linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6))", opacity: expanded ? 1 : 0 }}
+      />
+      <div className="relative z-10 h-full grid grid-cols-12 items-center px-6 md:px-12 gap-4 md:gap-6">
+        <div className="col-span-2 font-display text-gold" style={{ fontSize: "clamp(32px, 6vw, 80px)", fontWeight: 300, lineHeight: 1 }}>{n}</div>
+        <div className="col-span-8 font-display relative inline-block" style={{ fontSize: "clamp(18px, 3vw, 36px)", fontWeight: 400, color: expanded ? "#FFFFFF" : "var(--foreground)" }}>
           <span className="relative inline-block">
             {t}
             <span
@@ -821,8 +827,8 @@ function ServiceStrip({ n, t, img, slug }: { n: string; t: string; img: string; 
             />
           </span>
         </div>
-        <div className="col-span-2 md:col-span-2 flex justify-end">
-          <span className="text-gold text-3xl md:text-4xl inline-block transition-transform duration-500" style={{ transform: h ? "rotate(45deg)" : "rotate(0deg)" }}>→</span>
+        <div className="col-span-2 flex justify-end">
+          <span className="text-gold text-2xl md:text-4xl inline-block transition-transform duration-500" style={{ transform: h ? "rotate(45deg)" : "rotate(0deg)" }}>→</span>
         </div>
       </div>
     </Link>

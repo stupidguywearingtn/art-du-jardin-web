@@ -5,7 +5,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { motion, AnimatePresence } from "framer-motion";
 import { CustomCursor } from "@/components/CustomCursor";
 import { SmoothScroll } from "@/components/SmoothScroll";
-import { WhyUs, Zone, FAQ, QuoteForm } from "@/components/sections";
+import { WhyUs, Zone, FAQ, FAQS, QuoteForm } from "@/components/sections";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { Link } from "@tanstack/react-router";
 import { CTABanner, CTAPrimary, CTASecondary, CTAInline, MobileFloatingCTA } from "@/components/CTAButtons";
@@ -46,6 +46,44 @@ export const Route = createFileRoute("/")({
       { name: "description", content: "HCE — Enrobé à chaud, cours, parkings, terrassement dans le Jura et l'Ain depuis 2005. Pose à la main, devis gratuit sous 48h, garantie décennale." },
       { property: "og:title", content: "Enrobé · Cours · Parkings · Terrassement — HCE Jura & Ain" },
       { property: "og:description", content: "HCE — Enrobé à chaud, cours, parkings, terrassement dans le Jura et l'Ain depuis 2005. Pose à la main, devis gratuit sous 48h." },
+      { property: "og:url", content: "https://hcebtp.com/" },
+    ],
+    links: [
+      { rel: "canonical", href: "https://hcebtp.com/" },
+    ],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "LocalBusiness",
+          name: "HCE",
+          url: "https://hcebtp.com",
+          telephone: "+33 3 84 52 61 48",
+          address: {
+            "@type": "PostalAddress",
+            addressLocality: "Cize",
+            addressRegion: "Jura",
+            addressCountry: "FR",
+          },
+          areaServed: [
+            { "@type": "AdministrativeArea", name: "Jura" },
+            { "@type": "AdministrativeArea", name: "Ain" },
+          ],
+        }),
+      },
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: FAQS.map((f) => ({
+            "@type": "Question",
+            name: f.q,
+            acceptedAnswer: { "@type": "Answer", text: f.a },
+          })),
+        }),
+      },
     ],
   }),
 });

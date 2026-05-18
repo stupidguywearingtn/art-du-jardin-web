@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, useMemo } from "react";
+import { useEffect, useRef, useState, useMemo, useId } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { motion, AnimatePresence } from "framer-motion";
@@ -162,7 +162,7 @@ export function Zone() {
 }
 
 /* ============ FAQ ============ */
-const FAQS = [
+export const FAQS = [
   { q: "Sous combien de temps recevrai-je mon devis ?", a: "Après visite sur site, nous vous transmettons un devis détaillé sous 48 heures ouvrées, sans engagement." },
   { q: "L'enrobé peut-il être posé toute l'année ?", a: "L'enrobé à chaud requiert des températures supérieures à 5°C et un sol sec. Nous intervenons généralement de mars à novembre." },
   { q: "Quelle est la durée de vie d'un enrobé HCE ?", a: "Un enrobé bien préparé et compacté tient 20 à 30 ans selon l'usage, sans entretien lourd." },
@@ -447,6 +447,7 @@ function QuoteFormDesktop() {
                         type="range" min={20} max={1000} step={10} value={data.surface}
                         onChange={(e) => setData({ ...data, surface: Number(e.target.value) })}
                         className="w-full accent-[#C8992A] cursor-pointer"
+                        aria-label="Surface estimée en mètres carrés"
                       />
                       <div className="flex justify-between text-muted mt-2" style={{ fontSize: 11 }}>
                         <span>20 m²</span><span>1000 m²</span>
@@ -490,8 +491,9 @@ function QuoteFormDesktop() {
                       <Input label="Ville" value={data.ville} onChange={(v) => setData({ ...data, ville: v })} />
                     </div>
                     <div>
-                      <label className="label text-gold/80 block mb-2" style={{ fontSize: 10 }}>Message (optionnel)</label>
+                      <label htmlFor="quote-message-desktop" className="label text-gold/80 block mb-2" style={{ fontSize: 10 }}>Message (optionnel)</label>
                       <textarea
+                        id="quote-message-desktop"
                         rows={4}
                         value={data.message}
                         onChange={(e) => setData({ ...data, message: e.target.value })}
@@ -630,10 +632,12 @@ function SelectCard({ children, selected, onClick, compact = false }: { children
 }
 
 function Input({ label, value, onChange, type = "text" }: { label: string; value: string; onChange: (v: string) => void; type?: string }) {
+  const id = useId();
   return (
     <div>
-      <label className="label text-gold/80 block mb-2" style={{ fontSize: 10 }}>{label}</label>
+      <label htmlFor={id} className="label text-gold/80 block mb-2" style={{ fontSize: 10 }}>{label}</label>
       <input
+        id={id}
         type={type}
         value={value}
         onChange={(e) => onChange(e.target.value)}
@@ -811,8 +815,9 @@ function QuoteFormMobile() {
                   <Input label="Email *" value={data.email} onChange={(v) => setData({ ...data, email: v })} type="email" />
                   <Input label="Ville" value={data.ville} onChange={(v) => setData({ ...data, ville: v })} />
                   <div>
-                    <label className="label text-gold/80 block mb-2" style={{ fontSize: 10 }}>Message (optionnel)</label>
+                    <label htmlFor="quote-message-mobile" className="label text-gold/80 block mb-2" style={{ fontSize: 10 }}>Message (optionnel)</label>
                     <textarea
+                      id="quote-message-mobile"
                       rows={3}
                       value={data.message}
                       onChange={(e) => setData({ ...data, message: e.target.value })}

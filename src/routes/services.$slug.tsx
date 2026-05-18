@@ -101,16 +101,39 @@ export const Route = createFileRoute("/services/$slug")({
     if (!data) throw notFound();
     return data;
   },
-  head: ({ loaderData }) => ({
+  head: ({ params, loaderData }) => ({
     meta: loaderData
       ? [
           { title: `${loaderData.title} — HCE · Jura & Ain` },
           { name: "description", content: loaderData.intro },
           { property: "og:title", content: `${loaderData.title} — HCE` },
           { property: "og:description", content: loaderData.intro },
-          { property: "og:image", content: `https://hcebtp.lovable.app${loaderData.hero}` },
+          { property: "og:image", content: `https://hcebtp.com${loaderData.hero}` },
+          { property: "og:url", content: `https://hcebtp.com/services/${params.slug}` },
         ]
       : [{ title: "Service — HCE" }],
+    links: loaderData
+      ? [{ rel: "canonical", href: `https://hcebtp.com/services/${params.slug}` }]
+      : [],
+    scripts: loaderData
+      ? [
+          {
+            type: "application/ld+json",
+            children: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Service",
+              name: loaderData.title,
+              description: loaderData.intro,
+              provider: { "@type": "LocalBusiness", name: "HCE", url: "https://hcebtp.com" },
+              areaServed: [
+                { "@type": "AdministrativeArea", name: "Jura" },
+                { "@type": "AdministrativeArea", name: "Ain" },
+              ],
+              url: `https://hcebtp.com/services/${params.slug}`,
+            }),
+          },
+        ]
+      : [],
   }),
   notFoundComponent: () => (
     <div className="min-h-screen flex items-center justify-center bg-background text-foreground">

@@ -544,9 +544,16 @@ function Hero() {
   const lineRef = useRef<HTMLDivElement>(null);
   const subRef = useRef<HTMLDivElement>(null);
   const { get } = useSiteContent();
-  const hero = get("hero", { line1: "L'Enrobé qui", line2: "Marque le Temps.", badge: "HCE — Cize, Jura", tagline: "Depuis 2005" }) as { line1: string; line2: string; badge: string; tagline: string };
+  const { enabled: editEnabled } = useEditMode();
+  const v = useV();
+  const heroDefault = get("hero", { line1: "L'Enrobé qui", line2: "Marque le Temps.", badge: "HCE — Cize, Jura", tagline: "Depuis 2005" }) as { line1: string; line2: string; badge: string; tagline: string };
+  const line1 = v("hero", "line1", heroDefault.line1);
+  const line2 = v("hero", "line2", heroDefault.line2);
+  const badge = v("hero", "badge", heroDefault.badge);
+  const tagline = v("hero", "tagline", heroDefault.tagline);
 
   useEffect(() => {
+    if (editEnabled) return; // skip GSAP split animation in edit mode
     if (!titleRef.current) return;
     const chars = titleRef.current.querySelectorAll("[data-c]");
     const tl = gsap.timeline({ delay: 1.0 });
@@ -556,9 +563,9 @@ function Hero() {
     );
     if (lineRef.current) tl.fromTo(lineRef.current, { width: 0 }, { width: 120, duration: 0.8, ease: "power3.out" }, "-=0.3");
     if (subRef.current) tl.fromTo(subRef.current, { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.8 }, "-=0.4");
-  }, [hero.line1, hero.line2]);
+  }, [line1, line2, editEnabled]);
 
-  const lines = [hero.line1, hero.line2];
+  const lines = [line1, line2];
   return (
     <section className="relative h-screen w-full overflow-hidden bg-background">
       <video
@@ -570,25 +577,52 @@ function Hero() {
       <div className="absolute inset-0 bg-background/20" />
 
       <div className="relative z-10 flex h-full flex-col items-center justify-center px-6">
-        <h1
-          ref={titleRef}
-          className="font-display text-center text-foreground"
-          style={{ fontSize: "clamp(64px, 10vw, 140px)", fontWeight: 400, lineHeight: 0.95, letterSpacing: "-0.02em" }}
-        >
-          {lines.map((line, li) => (
-            <span key={li} className="block overflow-hidden">
-              <span className="inline-block">
-                {line.split("").map((c, ci) => (
-                  <span key={ci} data-c className="inline-block" style={{ whiteSpace: c === " " ? "pre" : "normal" }}>
-                    {c}
-                  </span>
-                ))}
+        {editEnabled ? (
+          <div className="text-center space-y-2">
+            <EditableText
+              section="hero"
+              field="line1"
+              value={line1}
+              as="h1"
+              className="font-display text-foreground block"
+              style={{ fontSize: "clamp(64px, 10vw, 140px)", fontWeight: 400, lineHeight: 0.95, letterSpacing: "-0.02em" }}
+            />
+            <EditableText
+              section="hero"
+              field="line2"
+              value={line2}
+              as="h1"
+              className="font-display text-foreground block"
+              style={{ fontSize: "clamp(64px, 10vw, 140px)", fontWeight: 400, lineHeight: 0.95, letterSpacing: "-0.02em" }}
+            />
+          </div>
+        ) : (
+          <h1
+            ref={titleRef}
+            className="font-display text-center text-foreground"
+            style={{ fontSize: "clamp(64px, 10vw, 140px)", fontWeight: 400, lineHeight: 0.95, letterSpacing: "-0.02em" }}
+          >
+            {lines.map((line, li) => (
+              <span key={li} className="block overflow-hidden">
+                <span className="inline-block">
+                  {line.split("").map((c, ci) => (
+                    <span key={ci} data-c className="inline-block" style={{ whiteSpace: c === " " ? "pre" : "normal" }}>
+                      {c}
+                    </span>
+                  ))}
+                </span>
               </span>
-            </span>
-          ))}
-        </h1>
-        <div ref={lineRef} className="mt-10 h-px bg-gold" style={{ width: 0 }} />
-        <div ref={subRef} className="mt-8 label text-gold opacity-0">{hero.badge}</div>
+            ))}
+          </h1>
+        )}
+        <div ref={lineRef} className="mt-10 h-px bg-gold" style={{ width: editEnabled ? 120 : 0 }} />
+        <EditableText
+          section="hero"
+          field="badge"
+          value={badge}
+          as="div"
+          className={`mt-8 label text-gold ${editEnabled ? "" : "opacity-0"}`}
+        />
         <div
           className="mt-10 flex flex-col sm:flex-row items-center gap-3 px-4 sm:px-0 w-full sm:w-auto"
           style={{ animation: "fadeUp 0.8s ease 1.6s both" }}
@@ -601,7 +635,13 @@ function Hero() {
       <div className="absolute bottom-10 left-6 z-10 origin-bottom-left -rotate-90 label text-gold whitespace-nowrap" style={{ transformOrigin: "left bottom" }}>
         Scroll pour découvrir
       </div>
-      <div className="absolute bottom-10 right-6 z-10 label text-gold">{hero.tagline}</div>
+      <EditableText
+        section="hero"
+        field="tagline"
+        value={tagline}
+        as="div"
+        className="absolute bottom-10 right-6 z-10 label text-gold"
+      />
     </section>
   );
 }

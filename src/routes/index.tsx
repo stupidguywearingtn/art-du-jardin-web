@@ -276,11 +276,21 @@ function MatiereFinitions() {
           multiline
         />
       </div>
-      <div ref={ref} className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 max-w-6xl mx-auto">
+      <div
+        ref={ref}
+        className="details-carousel flex gap-4 overflow-x-auto snap-x snap-mandatory px-6 md:px-0 -mx-6 md:mx-auto md:max-w-6xl pb-2"
+        style={{ scrollPaddingLeft: "1.5rem", WebkitOverflowScrolling: "touch" }}
+      >
         {defaults.map((it, i) => {
           const img = v("matiere", `item_${i}_img`, it.img);
           return (
-            <article key={i} data-mf-card data-cursor-hover className="group bg-[var(--creme-100)] overflow-hidden border-l-4 transition-all duration-500 hover:-translate-y-1" style={{ borderColor: "var(--cuivre-500)" }}>
+            <article
+              key={i}
+              data-mf-card
+              data-cursor-hover
+              className="details-card group bg-[var(--creme-100)] overflow-hidden border-l-4 transition-all duration-500 hover:-translate-y-1 snap-start"
+              style={{ borderColor: "var(--cuivre-500)", flex: "0 0 80%", maxWidth: 360 }}
+            >
               <div className="aspect-[4/3] overflow-hidden">
                 <EditableImage section="matiere" field={`item_${i}_img`} value={img}>
                   {(url) => <img src={url} alt={it.t} loading="lazy" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />}

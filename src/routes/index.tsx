@@ -586,7 +586,7 @@ function Hero() {
   const { get } = useSiteContent();
   const { enabled: editEnabled } = useEditMode();
   const v = useV();
-  const heroDefault = get("hero", { line1: "L'Enrobé qui", line2: "Marque le Temps.", badge: "HCE — Cize, Jura", tagline: "Depuis 2005" }) as { line1: string; line2: string; badge: string; tagline: string };
+  const heroDefault = get("hero", { line1: "Enrobé · Cours ·", line2: "Parkings · Terrassement", badge: "Jura & Ain — depuis 2005", tagline: "Depuis 2005" }) as { line1: string; line2: string; badge: string; tagline: string };
   const line1 = v("hero", "line1", heroDefault.line1);
   const line2 = v("hero", "line2", heroDefault.line2);
   const badge = v("hero", "badge", heroDefault.badge);

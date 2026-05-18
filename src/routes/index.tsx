@@ -301,7 +301,7 @@ function MatiereFinitions() {
     { img: "/photos/10-detail-texture-enrobe-frais.jpg", t: "Grain & compactage", d: "Enrobé à chaud posé à la main à 160°C, compacté pour résister à la décennie." },
   ];
   return (
-    <section className="relative w-full bg-cream py-16 md:py-24 px-6 md:px-12 overflow-hidden">
+    <section className="relative w-full bg-cream py-10 md:py-20 px-6 md:px-12 overflow-hidden">
       <div className="max-w-3xl mx-auto text-center mb-16">
         <EditableText section="matiere" field="label" value={v("matiere", "label", "— Détails & finitions")} as="div" className="label" style={{ color: "var(--cuivre-500)" }} />
         <EditableText
@@ -393,7 +393,7 @@ function Galerie() {
   const closeAll = () => { setLightbox(null); setOpenCat(null); };
 
   return (
-    <section className="relative w-full bg-depth-a py-16 md:py-24 px-4 md:px-12 overflow-hidden">
+    <section className="relative w-full bg-depth-a py-10 md:py-20 px-4 md:px-12 overflow-hidden">
       <GiantNumber n="05" position="right" />
       <div className="max-w-6xl mx-auto text-center mb-10 md:mb-14">
         <div className="label text-gold">— 500+ chantiers livrés depuis 2005</div>
@@ -476,15 +476,7 @@ function Galerie() {
 /* ============ DECORATIONS ============ */
 function SectionDivider({ variant = "minimal" }: { variant?: "minimal" | "marquee" }) {
   if (variant === "marquee") return <MarqueeStats />;
-  return (
-    <div className="relative w-full flex items-center justify-center py-4 md:py-8 bg-background" aria-hidden>
-      <div className="h-px flex-1 max-w-[28%] bg-gold/30" />
-      <svg width="10" height="10" viewBox="0 0 14 14" className="mx-3 text-gold" style={{ opacity: 0.45 }}>
-        <rect x="7" y="0" width="9.9" height="9.9" transform="rotate(45 7 7)" fill="currentColor" />
-      </svg>
-      <div className="h-px flex-1 max-w-[28%] bg-gold/30" />
-    </div>
-  );
+  return null;
 }
 
 /**
@@ -761,7 +753,7 @@ function Philosophy() {
   }, [editEnabled, text]);
 
   return (
-    <section ref={ref} className="relative w-full bg-depth-c flex items-center justify-center px-6 py-16 md:py-24 overflow-hidden">
+    <section ref={ref} className="relative w-full bg-depth-c flex items-center justify-center px-6 py-10 md:py-20 overflow-hidden">
       <div className="max-w-5xl text-center">
         {editEnabled ? (
           <EditableText
@@ -851,7 +843,7 @@ function Services() {
 
   return (
     <section
-      className="relative bg-background py-16 md:py-24 overflow-hidden"
+      className="relative bg-background py-10 md:py-20 overflow-hidden"
       style={{ background: "radial-gradient(ellipse at center, #262626 0%, #1E1E1E 70%)" }}
     >
       <div className="grain-overlay" aria-hidden />
@@ -1049,7 +1041,7 @@ function Process() {
   }, []);
 
   return (
-    <section className="relative bg-depth-b py-16 md:py-24 px-6 md:px-12 overflow-hidden">
+    <section className="relative bg-depth-b py-10 md:py-20 px-6 md:px-12 overflow-hidden">
       <CornerGlow corner="tr" tint="gold" />
       <CornerGlow corner="bl" tint="green" />
       <GiantNumber n="03" position="right" />

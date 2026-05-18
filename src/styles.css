@@ -181,3 +181,8 @@
     opacity: 1 !important; animation: none !important; transform: none !important; filter: none !important;
   }
 }
+
+[data-card]:hover {
+  border-color: rgba(180,130,90,0.4) !important;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+}

@@ -176,11 +176,14 @@ function ServicePage() {
         {/* HERO */}
         <section className="relative w-full h-[80vh] overflow-hidden">
           <img src={data.hero} alt={data.title} className="absolute inset-0 w-full h-full object-cover" />
-          <div className="absolute inset-0 bg-asphalte/60" />
+          <div
+            className="absolute inset-0"
+            style={{ background: "linear-gradient(180deg, rgba(14,14,15,0.35) 0%, rgba(14,14,15,0.55) 45%, rgba(14,14,15,0.92) 100%)" }}
+          />
           <div className="relative z-10 h-full flex flex-col justify-end px-6 md:px-12 pb-16">
-            <div className="font-display text-gold" style={{ fontSize: "clamp(80px, 14vw, 220px)", fontWeight: 300, lineHeight: 1 }}>{data.n}</div>
-            <h1 className="font-display text-foreground mt-2" style={{ fontSize: "clamp(40px, 7vw, 96px)", fontWeight: 400, lineHeight: 1 }}>{data.title}</h1>
-            <p className="mt-6 text-muted max-w-2xl" style={{ fontSize: 18, lineHeight: 1.6 }}>{data.intro}</p>
+            <div className="font-display text-gold" style={{ fontSize: "clamp(80px, 14vw, 220px)", fontWeight: 300, lineHeight: 1, textShadow: "0 2px 12px rgba(0,0,0,0.6)" }}>{data.n}</div>
+            <h1 className="font-display text-foreground mt-2" style={{ fontSize: "clamp(40px, 7vw, 96px)", fontWeight: 400, lineHeight: 1, textShadow: "0 2px 12px rgba(0,0,0,0.75), 0 0 2px rgba(0,0,0,0.5)" }}>{data.title}</h1>
+            <p className="mt-6 max-w-2xl" style={{ fontSize: 18, lineHeight: 1.6, color: "#F4EFE6", textShadow: "0 1px 6px rgba(0,0,0,0.7)" }}>{data.intro}</p>
           </div>
         </section>
 

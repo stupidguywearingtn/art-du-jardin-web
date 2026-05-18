@@ -997,6 +997,24 @@ function Process() {
   );
 }
 
+function ProcessHeader() {
+  const v = useV();
+  return (
+    <>
+      <EditableText section="process" field="label" value={v("process", "label", "— Notre processus")} as="div" className="label text-gold" />
+      <EditableText
+        section="process"
+        field="title"
+        value={v("process", "title", "Quatre étapes,\nun engagement.")}
+        as="h2"
+        className="font-display mt-6 text-foreground"
+        style={{ fontSize: "clamp(36px, 6vw, 80px)", fontWeight: 400, lineHeight: 0.95 }}
+        multiline
+      />
+    </>
+  );
+}
+
 function ProcessStep({ step, left }: { step: { n: string; t: string; d: string; img: string | null }; left: boolean }) {
   const [hover, setHover] = useState(false);
   const num = parseInt(step.n, 10);

@@ -711,7 +711,7 @@ function Philosophy() {
   }, [editEnabled, text]);
 
   return (
-    <section ref={ref} className="relative w-full bg-background flex items-center justify-center px-6 py-16 md:py-24">
+    <section ref={ref} className="relative w-full bg-depth-c flex items-center justify-center px-6 py-16 md:py-24 overflow-hidden">
       <div className="max-w-5xl text-center">
         {editEnabled ? (
           <EditableText

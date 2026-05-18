@@ -1159,13 +1159,11 @@ function Testimonials() {
                   ))}
                 </div>
 
-                <p className="relative font-display italic text-foreground" style={{ fontSize: 18, lineHeight: 1.6, fontWeight: 300 }}>
-                  {t.q}
-                </p>
+                <EditableText section="testimonials" field={`item_${idx}_q`} value={v("testimonials", `item_${idx}_q`, t.q)} as="p" className="relative font-display italic text-foreground" style={{ fontSize: 18, lineHeight: 1.6, fontWeight: 300 }} multiline />
 
                 <div className="relative mt-8 pt-6 border-t border-gold/20">
-                  <div className="font-display text-foreground" style={{ fontSize: 16, fontWeight: 400 }}>{t.n}</div>
-                  <div className="label text-gold mt-1.5" style={{ fontSize: 9 }}>{t.c}</div>
+                  <EditableText section="testimonials" field={`item_${idx}_n`} value={v("testimonials", `item_${idx}_n`, t.n)} as="div" className="font-display text-foreground" style={{ fontSize: 16, fontWeight: 400 }} />
+                  <EditableText section="testimonials" field={`item_${idx}_c`} value={v("testimonials", `item_${idx}_c`, t.c)} as="div" className="label text-gold mt-1.5" style={{ fontSize: 9 }} />
                 </div>
 
                 {/* hover gold corner accent */}

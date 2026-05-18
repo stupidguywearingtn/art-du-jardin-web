@@ -41,7 +41,7 @@ export function WhyUs() {
   }, []);
 
   return (
-    <section ref={ref} className="relative bg-background py-16 md:py-24 px-6 md:px-12 overflow-hidden">
+    <section ref={ref} className="relative bg-depth-a py-16 md:py-24 px-6 md:px-12 overflow-hidden">
       <div className="grain-overlay" aria-hidden />
       <div className="max-w-3xl mx-auto text-center mb-12 md:mb-16">
         <div className="label text-gold">— Pourquoi HCE</div>
@@ -121,7 +121,7 @@ export function Zone() {
   }, [shouldLoad, Map]);
 
   return (
-    <section ref={ref} className="relative bg-background py-16 md:py-24 px-6 md:px-12 overflow-hidden">
+    <section ref={ref} className="relative bg-depth-b py-16 md:py-24 px-6 md:px-12 overflow-hidden">
       <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
         <div>
           <div className="label text-gold">— Zone d'intervention</div>
@@ -197,7 +197,7 @@ export function FAQ() {
   }, [faqs]);
 
   return (
-    <section ref={ref} className="relative bg-background py-16 md:py-24 px-6 md:px-12 overflow-hidden">
+    <section ref={ref} className="relative bg-depth-a py-16 md:py-24 px-6 md:px-12 overflow-hidden">
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-20">
           <div className="label text-gold">— Questions fréquentes</div>
@@ -369,7 +369,7 @@ function QuoteFormDesktop() {
   const STEPS = ["Projet", "Surface & délai", "Coordonnées"];
 
   return (
-    <section ref={sectionRef} id="devis" className="relative bg-background py-16 md:py-24 px-6 md:px-12 overflow-hidden">
+    <section ref={sectionRef} id="devis" className="relative bg-depth-b py-16 md:py-24 px-6 md:px-12 overflow-hidden">
       <div className="grain-overlay" aria-hidden />
       <div className="max-w-5xl mx-auto">
         <div className="text-center mb-16" data-reveal>

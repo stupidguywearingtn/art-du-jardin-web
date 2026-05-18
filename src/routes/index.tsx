@@ -343,7 +343,7 @@ function Galerie() {
   const closeAll = () => { setLightbox(null); setOpenCat(null); };
 
   return (
-    <section className="relative w-full bg-background py-16 md:py-24 px-4 md:px-12 overflow-hidden">
+    <section className="relative w-full bg-depth-a py-16 md:py-24 px-4 md:px-12 overflow-hidden">
       <GiantNumber n="05" position="right" />
       <div className="max-w-6xl mx-auto text-center mb-10 md:mb-14">
         <div className="label text-gold">— 500+ chantiers livrés depuis 2005</div>
@@ -999,7 +999,7 @@ function Process() {
   }, []);
 
   return (
-    <section className="relative bg-background py-16 md:py-24 px-6 md:px-12 overflow-hidden">
+    <section className="relative bg-depth-b py-16 md:py-24 px-6 md:px-12 overflow-hidden">
       <CornerGlow corner="tr" tint="gold" />
       <CornerGlow corner="bl" tint="green" />
       <GiantNumber n="03" position="right" />

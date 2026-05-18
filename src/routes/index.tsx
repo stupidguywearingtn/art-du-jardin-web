@@ -393,7 +393,25 @@ function Galerie() {
             style={{ background: "rgba(14,14,15,0.95)" }}
             onClick={closeAll}
           >
-            <button onClick={(e) => { e.stopPropagation(); closeAll(); }} className="absolute top-4 right-4 text-gold text-4xl leading-none p-2" aria-label="Fermer">×</button>
+            <button
+              onClick={(e) => { e.stopPropagation(); closeAll(); }}
+              className="absolute z-[9999] flex items-center justify-center transition-all duration-200"
+              style={{
+                top: "1rem", right: "1rem",
+                width: 48, height: 48,
+                background: "rgba(0,0,0,0.5)",
+                backdropFilter: "blur(8px)",
+                WebkitBackdropFilter: "blur(8px)",
+                borderRadius: "50%",
+                border: "1px solid rgba(255,255,255,0.2)",
+                color: "#FFFFFF",
+              }}
+              onMouseEnter={(e) => { e.currentTarget.style.background = "rgba(0,0,0,0.8)"; e.currentTarget.style.transform = "scale(1.05)"; }}
+              onMouseLeave={(e) => { e.currentTarget.style.background = "rgba(0,0,0,0.5)"; e.currentTarget.style.transform = "scale(1)"; }}
+              aria-label="Fermer"
+            >
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><path d="M18 6 6 18M6 6l12 12" /></svg>
+            </button>
             <div className="absolute top-4 left-4 label text-gold/80" style={{ fontSize: 11 }}>{openCat} · {lightbox + 1}/{photos.length}</div>
             <button onClick={(e) => { e.stopPropagation(); setLightbox(((lightbox - 1) + photos.length) % photos.length); }} className="absolute left-2 md:left-8 text-gold text-4xl p-4" aria-label="Précédent">‹</button>
             <button onClick={(e) => { e.stopPropagation(); setLightbox((lightbox + 1) % photos.length); }} className="absolute right-2 md:right-8 text-gold text-4xl p-4" aria-label="Suivant">›</button>

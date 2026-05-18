@@ -491,8 +491,9 @@ function QuoteFormDesktop() {
                       <Input label="Ville" value={data.ville} onChange={(v) => setData({ ...data, ville: v })} />
                     </div>
                     <div>
-                      <label className="label text-gold/80 block mb-2" style={{ fontSize: 10 }}>Message (optionnel)</label>
+                      <label htmlFor="quote-message-desktop" className="label text-gold/80 block mb-2" style={{ fontSize: 10 }}>Message (optionnel)</label>
                       <textarea
+                        id="quote-message-desktop"
                         rows={4}
                         value={data.message}
                         onChange={(e) => setData({ ...data, message: e.target.value })}

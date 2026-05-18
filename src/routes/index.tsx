@@ -49,6 +49,15 @@ export const Route = createFileRoute("/")({
 });
 
 function Index() {
+  const { reload } = useSiteContentFields(HOME_SITE_ID);
+  return (
+    <EditModeProvider siteId={HOME_SITE_ID} onPublished={reload}>
+      <IndexBody />
+    </EditModeProvider>
+  );
+}
+
+function IndexBody() {
   const [loaded, setLoaded] = useState(false);
   useEffect(() => {
     const t = setTimeout(() => setLoaded(true), 50);
@@ -56,6 +65,7 @@ function Index() {
   }, []);
   return (
     <>
+      <EditModeToolbar />
       <SmoothScroll />
       <CustomCursor />
       <AnimatePresence>

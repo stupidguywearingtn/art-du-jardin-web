@@ -189,21 +189,21 @@ function GesteMatiere() {
   const v = useV();
   const img = v("geste", "image", "/photos/01-hero-finisseur-vapeur-sunset.jpg");
   return (
-    <section className="relative w-full bg-asphalte overflow-hidden">
-      <div className="grid grid-cols-1 md:grid-cols-5 min-h-[80vh]">
+    <section className="relative w-full bg-depth-d overflow-hidden">
+      <div className="grid grid-cols-1 md:grid-cols-5 md:min-h-[80vh]">
         <div className="md:col-span-3 relative">
           <EditableImage section="geste" field="image" value={img}>
             {(url) => (
               <img
                 src={url}
-                alt={v("geste", "image_alt", "Finisseur HCE posant l'enrobé à chaud à 160°C, vapeur visible au coucher de soleil")}
+                alt={v("geste", "image_alt", "HCE posant l'enrobé à chaud à la main à 160°C, vapeur visible au coucher de soleil")}
                 loading="lazy"
                 className="absolute inset-0 w-full h-full object-cover"
               />
             )}
           </EditableImage>
         </div>
-        <div className="md:col-span-2 flex items-center px-6 md:px-12 py-16 md:py-24">
+        <div className="md:col-span-2 flex items-center px-6 md:px-12 py-12 md:py-24">
           <div>
             <EditableText section="geste" field="label" value={v("geste", "label", "— Le geste & la matière")} as="div" className="label text-gold" />
             <EditableText
@@ -218,7 +218,7 @@ function GesteMatiere() {
             <EditableText
               section="geste"
               field="paragraph"
-              value={v("geste", "paragraph", "Bitume noir, rouge, saumon ou bordeaux — posé au finisseur, compacté au rouleau, contrôlé à la tranche. Une matière vivante qui prend forme sous nos mains et tient dans le temps.")}
+              value={v("geste", "paragraph", "Bitume noir, rouge, saumon ou bordeaux — posé à la main, compacté au rouleau, contrôlé à la tranche. Une matière vivante qui prend forme sous nos mains et tient dans le temps.")}
               as="p"
               className="mt-8 text-muted max-w-md"
               style={{ lineHeight: 1.7 }}
@@ -258,7 +258,7 @@ function MatiereFinitions() {
   const defaults = [
     { img: "/photos/02-hero-medaillon-paves.jpg", t: "Pavés sur mesure", d: "Médaillons et inserts pavés intégrés à l'enrobé pour personnaliser votre cour." },
     { img: "/photos/09-detail-bordure-beton.jpg", t: "Bordures nettes", d: "Tranches précises et finitions au millimètre, pour un rendu durable et propre." },
-    { img: "/photos/10-detail-texture-enrobe-frais.jpg", t: "Grain & compactage", d: "Enrobé à chaud posé au finisseur à 160°C, compacté pour résister à la décennie." },
+    { img: "/photos/10-detail-texture-enrobe-frais.jpg", t: "Grain & compactage", d: "Enrobé à chaud posé à la main à 160°C, compacté pour résister à la décennie." },
   ];
   return (
     <section className="relative w-full bg-cream py-16 md:py-24 px-6 md:px-12 overflow-hidden">
@@ -306,7 +306,7 @@ const GALLERY: { src: string; cat: string; alt: string }[] = [
   { src: "/photos/02-hero-medaillon-paves.jpg", cat: "Détails & finitions", alt: "Médaillon de pavés intégré dans l'enrobé" },
   { src: "/photos/09-detail-bordure-beton.jpg", cat: "Détails & finitions", alt: "Bordure béton coulée HCE" },
   { src: "/photos/10-detail-texture-enrobe-frais.jpg", cat: "Détails & finitions", alt: "Texture enrobé à chaud fraîchement posé" },
-  { src: "/photos/01-hero-finisseur-vapeur-sunset.jpg", cat: "Chantier en cours", alt: "Finisseur en cours de pose" },
+  { src: "/photos/01-hero-finisseur-vapeur-sunset.jpg", cat: "Chantier en cours", alt: "HCE en cours de pose à la main" },
   { src: "/photos/03-hero-rouleau-compacteur.jpg", cat: "Chantier en cours", alt: "Rouleau compacteur sur chantier HCE" },
 ];
 const CATS = ["Cour & allée privée", "Parking & voirie pro", "Préparation & terrassement", "Détails & finitions", "Chantier en cours"];
@@ -711,7 +711,7 @@ function Philosophy() {
   }, [editEnabled, text]);
 
   return (
-    <section ref={ref} className="relative w-full bg-background flex items-center justify-center px-6 py-16 md:py-24">
+    <section ref={ref} className="relative w-full bg-depth-c flex items-center justify-center px-6 py-16 md:py-24 overflow-hidden">
       <div className="max-w-5xl text-center">
         {editEnabled ? (
           <EditableText
@@ -944,7 +944,7 @@ function Transformation() {
 const PROCESS = [
   { n: "01", t: "Visite & Devis", d: "Déplacement gratuit, lecture du terrain et devis détaillé sous 48h.", img: null as string | null },
   { n: "02", t: "Préparation du sol", d: "Décaissement, nivellement laser, compactage et drainage maîtrisés.", img: "/photos/07-chantier-terrain-brouette.jpg" },
-  { n: "03", t: "Pose & Finitions", d: "Enrobé à chaud au finisseur, bordures et maçonnerie soignées.", img: "/photos/10-detail-texture-enrobe-frais.jpg" },
+  { n: "03", t: "Pose & Finitions", d: "Enrobé à chaud posé à la main, bordures et maçonnerie soignées.", img: "/photos/10-detail-texture-enrobe-frais.jpg" },
   { n: "04", t: "Garantie & SAV", d: "Travaux garantis, intervention rapide en cas de besoin.", img: "/photos/03-hero-rouleau-compacteur.jpg" },
 ];
 
@@ -1141,8 +1141,8 @@ function Testimonials() {
   }, [isMobile]);
 
   return (
-    <section className="relative bg-background flex items-center justify-center px-6 py-12 md:py-28 overflow-hidden">
-      <div aria-hidden className="absolute inset-0" style={{ background: "linear-gradient(180deg, var(--background) 0%, var(--surface) 50%, var(--background) 100%)" }} />
+    <section className="relative bg-depth-d flex items-center justify-center px-6 py-12 md:py-28 overflow-hidden">
+      <div aria-hidden className="absolute inset-0 pointer-events-none" style={{ background: "linear-gradient(180deg, transparent 0%, rgba(255,255,255,0.02) 50%, transparent 100%)" }} />
       <div className="grain-overlay animated" aria-hidden />
       <GiantNumber n="04" position="left" />
       <TechnicalMark className="hidden md:block" style={{ top: "10%", right: "3%", width: 160, height: 320, transform: "rotate(6deg)" }} />
@@ -1278,7 +1278,7 @@ function Footer() {
   const services = get("services", SERVICES) as typeof SERVICES;
   const v = useV();
   return (
-    <footer className="relative overflow-hidden pt-24 pb-10 px-6 md:px-12" style={{ background: "var(--footer)" }}>
+    <footer className="relative overflow-hidden pt-24 pb-10 px-6 md:px-12" style={{ background: "radial-gradient(circle at 20% 0%, rgba(180,130,90,0.18) 0%, transparent 45%), radial-gradient(circle at 80% 100%, rgba(255,255,255,0.08) 0%, transparent 40%), var(--footer)" }}>
       <div
         className="absolute inset-x-0 top-1/2 -translate-y-1/2 text-center font-display pointer-events-none select-none whitespace-nowrap"
         style={{ opacity: 0.04, fontSize: "clamp(80px, 18vw, 280px)", color: "#FFFFFF", fontWeight: 300, lineHeight: 1 }}

@@ -12,10 +12,10 @@ if (typeof window !== "undefined") {
 
 /* ============ POURQUOI NOUS CHOISIR ============ */
 const REASONS = [
-  { n: "01", t: "Enrobé à chaud", d: "Pose au finisseur à 160°C, compactage maîtrisé pour une durabilité maximale.", icon: "M3 17h18M5 17V9l7-4 7 4v8" },
-  { n: "02", t: "20 ans d'expérience", d: "Plus de 500 chantiers réalisés dans le Jura et l'Ain depuis 2005.", icon: "M12 6v6l4 2M12 22a10 10 0 1 1 0-20 10 10 0 0 1 0 20Z" },
-  { n: "03", t: "Devis détaillé", d: "Visite gratuite, devis sous 48h, prix tenus, aucune mauvaise surprise.", icon: "M9 12h6M9 16h6M9 8h6M5 21V5a2 2 0 0 1 2-2h7l5 5v13a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2Z" },
-  { n: "04", t: "Garantie & SAV", d: "Travaux garantis. Intervention rapide à la moindre anomalie.", icon: "M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z" },
+  { n: "01", t: "Enrobé à chaud", d: "Pose à la main à 160°C, compactage maîtrisé pour une durabilité maximale.", icon: "M8 20s-3-3-3-7a7 7 0 0 1 7-7c0 3-2 4-2 7a3 3 0 0 0 6 0c0 4-3 7-8 7Z" },
+  { n: "02", t: "20 ans d'expérience", d: "Plus de 500 chantiers réalisés dans le Jura et l'Ain depuis 2005.", icon: "M12 2l2.4 5 5.6.8-4 3.9 1 5.5L12 14.8 6.9 17.2l1-5.5-4-3.9L9.6 7Z" },
+  { n: "03", t: "Devis détaillé", d: "Visite gratuite, devis sous 48h, prix tenus, aucune mauvaise surprise.", icon: "M9 12h6M9 16h4M14 3v4a1 1 0 0 0 1 1h4M5 21V5a2 2 0 0 1 2-2h8l5 5v13a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2Z" },
+  { n: "04", t: "Garantie & SAV", d: "Travaux garantis. Intervention rapide à la moindre anomalie.", icon: "M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10ZM9 12l2 2 4-4" },
 ];
 
 export function WhyUs() {
@@ -50,37 +50,29 @@ export function WhyUs() {
         </h2>
       </div>
 
-      <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="max-w-6xl mx-auto grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-6">
         {REASONS.map((r) => (
           <div
             key={r.n}
             data-card
             data-cursor-hover
-            className="relative p-8 group"
-            style={{ minHeight: 280 }}
+            className="relative group transition-all duration-300 hover:-translate-y-1"
+            style={{
+              background: "rgba(255,255,255,0.03)",
+              border: "1px solid rgba(255,255,255,0.08)",
+              borderRadius: 12,
+              padding: "1.25rem",
+              backdropFilter: "blur(10px)",
+            }}
           >
-            <svg
-              className="absolute inset-0 w-full h-full pointer-events-none"
-              viewBox="0 0 300 280" preserveAspectRatio="none" aria-hidden
-            >
-              <path
-                data-stroke
-                d="M 4 4 L 296 4 L 296 276 L 4 276 Z"
-                fill="none"
-                stroke="rgb(200 153 42 / 0.6)"
-                strokeWidth="1"
-                strokeDasharray="6 4"
-                vectorEffect="non-scaling-stroke"
-              />
-            </svg>
-            <div className="relative">
-              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" className="text-gold mb-6" strokeWidth="1.2">
+            <div className="flex items-start justify-between mb-3">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" className="text-gold" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round">
                 <path d={r.icon} />
               </svg>
-              <div className="font-display text-gold/60 mb-2" style={{ fontSize: 14, letterSpacing: "0.2em" }}>{r.n}</div>
-              <h3 className="font-display text-foreground" style={{ fontSize: 24, fontWeight: 400 }}>{r.t}</h3>
-              <p className="mt-4 text-muted" style={{ fontSize: 14, lineHeight: 1.6 }}>{r.d}</p>
+              <div className="font-display text-gold/70" style={{ fontSize: 11, letterSpacing: "0.2em" }}>{r.n}</div>
             </div>
+            <h3 className="font-display text-foreground" style={{ fontSize: "clamp(16px, 2.2vw, 20px)", fontWeight: 500, lineHeight: 1.2 }}>{r.t}</h3>
+            <p className="mt-2 text-muted" style={{ fontSize: 13, lineHeight: 1.55 }}>{r.d}</p>
           </div>
         ))}
       </div>

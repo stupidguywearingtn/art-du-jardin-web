@@ -630,10 +630,12 @@ function SelectCard({ children, selected, onClick, compact = false }: { children
 }
 
 function Input({ label, value, onChange, type = "text" }: { label: string; value: string; onChange: (v: string) => void; type?: string }) {
+  const id = useId();
   return (
     <div>
-      <label className="label text-gold/80 block mb-2" style={{ fontSize: 10 }}>{label}</label>
+      <label htmlFor={id} className="label text-gold/80 block mb-2" style={{ fontSize: 10 }}>{label}</label>
       <input
+        id={id}
         type={type}
         value={value}
         onChange={(e) => onChange(e.target.value)}

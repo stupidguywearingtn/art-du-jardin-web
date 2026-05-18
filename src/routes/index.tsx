@@ -309,92 +309,98 @@ const GALLERY: { src: string; cat: string; alt: string }[] = [
   { src: "/photos/01-hero-finisseur-vapeur-sunset.jpg", cat: "Chantier en cours", alt: "Finisseur en cours de pose" },
   { src: "/photos/03-hero-rouleau-compacteur.jpg", cat: "Chantier en cours", alt: "Rouleau compacteur sur chantier HCE" },
 ];
-const CATS = ["Tous", "Cour & allée privée", "Parking & voirie pro", "Préparation & terrassement", "Détails & finitions", "Chantier en cours"];
+const CATS = ["Cour & allée privée", "Parking & voirie pro", "Préparation & terrassement", "Détails & finitions", "Chantier en cours"];
+
+// Photo représentative pour chaque catégorie
+const CAT_COVERS: Record<string, string> = {
+  "Cour & allée privée": "/photos/15-cour-golden-hour.jpg",
+  "Parking & voirie pro": "/photos/26-pro-batiment-commercial.jpg",
+  "Préparation & terrassement": "/photos/06-chantier-bobcat-preparation.jpg",
+  "Détails & finitions": "/photos/02-hero-medaillon-paves.jpg",
+  "Chantier en cours": "/photos/01-hero-finisseur-vapeur-sunset.jpg",
+};
 
 function Galerie() {
-  const [filter, setFilter] = useState("Tous");
+  const [openCat, setOpenCat] = useState<string | null>(null);
   const [lightbox, setLightbox] = useState<number | null>(null);
-  const visible = filter === "Tous" ? GALLERY : GALLERY.filter(g => g.cat === filter);
+  const photos = openCat ? GALLERY.filter(g => g.cat === openCat) : [];
 
   useEffect(() => {
     if (lightbox === null) return;
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") setLightbox(null);
-      if (e.key === "ArrowRight") setLightbox(i => i === null ? null : (i + 1) % visible.length);
-      if (e.key === "ArrowLeft") setLightbox(i => i === null ? null : (i - 1 + visible.length) % visible.length);
+      if (e.key === "ArrowRight") setLightbox(i => i === null ? null : (i + 1) % photos.length);
+      if (e.key === "ArrowLeft") setLightbox(i => i === null ? null : (i - 1 + photos.length) % photos.length);
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [lightbox, visible.length]);
+  }, [lightbox, photos.length]);
+
+  const openCategory = (cat: string) => {
+    setOpenCat(cat);
+    setLightbox(0);
+  };
+  const closeAll = () => { setLightbox(null); setOpenCat(null); };
 
   return (
     <section className="relative w-full bg-background py-16 md:py-24 px-4 md:px-12 overflow-hidden">
       <GiantNumber n="05" position="right" />
-      <div className="max-w-6xl mx-auto text-center mb-12">
+      <div className="max-w-6xl mx-auto text-center mb-10 md:mb-14">
         <div className="label text-gold">— 500+ chantiers livrés depuis 2005</div>
-        <h2 className="font-display mt-6 text-foreground" style={{ fontSize: "clamp(36px, 6vw, 80px)", fontWeight: 400, lineHeight: 1 }}>
+        <h2 className="font-display mt-4 md:mt-6 text-foreground" style={{ fontSize: "clamp(32px, 6vw, 80px)", fontWeight: 400, lineHeight: 1, wordBreak: "keep-all", overflowWrap: "normal", hyphens: "none" }}>
           Nos <span className="italic text-gold">réalisations.</span>
         </h2>
+        <p className="mt-4 max-w-xl mx-auto text-muted" style={{ fontSize: 14 }}>
+          Choisissez une catégorie pour voir nos chantiers en grand.
+        </p>
       </div>
 
-      <div className="sticky top-0 z-20 bg-background/90 backdrop-blur-md py-4 mb-8 -mx-4 md:-mx-12 px-4 md:px-12 border-y border-gold/15">
-        <div className="flex gap-2 md:gap-3 overflow-x-auto no-scrollbar justify-start md:justify-center">
-          {CATS.map(c => (
+      <div className="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-5">
+        {CATS.map((cat, idx) => {
+          const cover = CAT_COVERS[cat];
+          const count = GALLERY.filter(g => g.cat === cat).length;
+          // 5e carte (Chantier en cours) prend toute la largeur sur mobile
+          const fullWidth = idx === 4 ? "col-span-2 md:col-span-1" : "";
+          return (
             <button
-              key={c}
-              onClick={() => setFilter(c)}
+              key={cat}
+              onClick={() => openCategory(cat)}
               data-cursor-hover
-              className={`shrink-0 px-4 py-2 rounded-full text-xs md:text-sm whitespace-nowrap border transition-all ${filter === c ? "bg-gold text-background border-gold" : "bg-transparent text-foreground/80 border-asphalte-700 hover:border-gold/60"}`}
-              style={{ fontFamily: "Outfit", letterSpacing: "0.05em" }}
+              className={`relative group overflow-hidden aspect-[4/5] md:aspect-[4/5] cursor-none ${fullWidth}`}
+              style={{ background: "var(--surface)" }}
             >
-              {c}
-            </button>
-          ))}
-        </div>
-      </div>
-
-      <motion.div layout className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-3">
-        <AnimatePresence mode="popLayout">
-          {visible.map((g, i) => (
-            <motion.button
-              key={g.src}
-              layout
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.95 }}
-              transition={{ duration: 0.3 }}
-              onClick={() => setLightbox(i)}
-              data-cursor-hover
-              className="relative overflow-hidden bg-surface group aspect-[4/5] cursor-none"
-            >
-              <img src={g.src} alt={g.alt} loading="lazy" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
-              <div className="absolute inset-0 bg-asphalte/0 group-hover:bg-asphalte/40 transition-colors duration-500" />
-              <div className="absolute bottom-0 left-0 right-0 p-3 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                <div className="label text-gold" style={{ fontSize: 9 }}>{g.cat}</div>
+              <img src={cover} alt={cat} loading="lazy" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+              <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0.1) 100%)" }} />
+              <div className="absolute bottom-0 left-0 right-0 p-4 md:p-5 text-left">
+                <div className="label" style={{ color: "var(--gold)", fontSize: 9, marginBottom: 6 }}>{count} photos</div>
+                <div className="font-display" style={{ color: "#FFFFFF", fontSize: "clamp(16px, 2vw, 22px)", fontWeight: 400, lineHeight: 1.15 }}>
+                  {cat}
+                </div>
+                <div className="mt-2 flex items-center gap-2" style={{ color: "var(--gold)", fontSize: 11, fontFamily: "Outfit", letterSpacing: "0.1em", textTransform: "uppercase" }}>
+                  Voir <span aria-hidden>→</span>
+                </div>
               </div>
-            </motion.button>
-          ))}
-        </AnimatePresence>
-      </motion.div>
+            </button>
+          );
+        })}
+      </div>
 
       <AnimatePresence>
-        {lightbox !== null && visible[lightbox] && (
+        {lightbox !== null && photos[lightbox] && (
           <motion.div
             initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
             className="fixed inset-0 z-[9999] flex items-center justify-center"
             style={{ background: "rgba(14,14,15,0.95)" }}
-            onClick={() => setLightbox(null)}
+            onClick={closeAll}
           >
-            <button onClick={(e) => { e.stopPropagation(); setLightbox(null); }} className="absolute top-6 right-6 text-gold text-3xl" aria-label="Fermer">×</button>
-            <button onClick={(e) => { e.stopPropagation(); setLightbox(((lightbox - 1) + visible.length) % visible.length); }} className="absolute left-4 md:left-8 text-gold text-4xl p-4" aria-label="Précédent">‹</button>
-            <button onClick={(e) => { e.stopPropagation(); setLightbox((lightbox + 1) % visible.length); }} className="absolute right-4 md:right-8 text-gold text-4xl p-4" aria-label="Suivant">›</button>
-            <img src={visible[lightbox].src} alt={visible[lightbox].alt} className="max-h-[85vh] max-w-[90vw] object-contain" onClick={(e) => e.stopPropagation()} />
-            <div className="absolute bottom-6 left-0 right-0 text-center label text-gold">{visible[lightbox].cat}</div>
+            <button onClick={(e) => { e.stopPropagation(); closeAll(); }} className="absolute top-4 right-4 text-gold text-4xl leading-none p-2" aria-label="Fermer">×</button>
+            <div className="absolute top-4 left-4 label text-gold/80" style={{ fontSize: 11 }}>{openCat} · {lightbox + 1}/{photos.length}</div>
+            <button onClick={(e) => { e.stopPropagation(); setLightbox(((lightbox - 1) + photos.length) % photos.length); }} className="absolute left-2 md:left-8 text-gold text-4xl p-4" aria-label="Précédent">‹</button>
+            <button onClick={(e) => { e.stopPropagation(); setLightbox((lightbox + 1) % photos.length); }} className="absolute right-2 md:right-8 text-gold text-4xl p-4" aria-label="Suivant">›</button>
+            <img src={photos[lightbox].src} alt={photos[lightbox].alt} className="max-h-[80vh] max-w-[90vw] object-contain" onClick={(e) => e.stopPropagation()} />
           </motion.div>
         )}
       </AnimatePresence>
-
-      <style>{`.no-scrollbar::-webkit-scrollbar{display:none}.no-scrollbar{-ms-overflow-style:none;scrollbar-width:none}`}</style>
     </section>
   );
 }

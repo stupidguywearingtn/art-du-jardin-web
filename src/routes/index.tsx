@@ -855,11 +855,11 @@ function Transformation() {
       <div className="absolute inset-x-0 bottom-0 h-[30%]" style={{ background: "linear-gradient(to bottom, transparent, #1E1E1E)" }} />
 
       <div className="relative z-10 h-full w-full flex flex-col items-center justify-center text-center px-6">
-        <EditableText section="transformation" field="label" value={useV()("transformation", "label", "— Avant / Après")} as="div" className="label text-gold" />
+        <EditableText section="transformation" field="label" value={v("transformation", "label", "— Avant / Après")} as="div" className="label text-gold" />
         <EditableText
           section="transformation"
           field="title"
-          value={useV()("transformation", "title", "De la Cour Brute\nà l'Enrobé d'Exception")}
+          value={v("transformation", "title", "De la Cour Brute\nà l'Enrobé d'Exception")}
           as="h2"
           className="font-display mt-6 text-foreground"
           style={{ fontSize: "clamp(40px, 6vw, 88px)", fontWeight: 400, lineHeight: 1.05 }}
@@ -868,7 +868,7 @@ function Transformation() {
         <EditableText
           section="transformation"
           field="text"
-          value={useV()("transformation", "text", "Chaque chantier débute par une lecture du terrain — sols, pentes, drainage, usages — pour garantir un enrobé qui dure dans le temps.")}
+          value={v("transformation", "text", "Chaque chantier débute par une lecture du terrain — sols, pentes, drainage, usages — pour garantir un enrobé qui dure dans le temps.")}
           as="p"
           className="mt-8 text-muted max-w-xl mx-auto"
           multiline
@@ -883,7 +883,7 @@ function Transformation() {
               <div className="font-display flex items-baseline justify-center gap-1" style={{ color: "var(--creme-50)", fontSize: "clamp(36px, 5vw, 72px)", fontWeight: 400, lineHeight: 1 }}>
                 <span data-num={s.n}>0</span><span style={{ color: "var(--sable-500)" }}>{s.suf}</span>
               </div>
-              <EditableText section="transformation" field={`stat_${i}_l`} value={useV()("transformation", `stat_${i}_l`, s.l)} as="div" className="label text-foreground/80 mt-3" />
+              <EditableText section="transformation" field={`stat_${i}_l`} value={v("transformation", `stat_${i}_l`, s.l)} as="div" className="label text-foreground/80 mt-3" />
             </div>
           ))}
         </div>

@@ -1185,6 +1185,8 @@ function Testimonials() {
 function CTAFinal() {
   const ref = useRef<HTMLDivElement>(null);
   const imgRef = useRef<HTMLDivElement>(null);
+  const v = useV();
+  const img = v("ctafinal", "image", ctaCourtyard);
 
   useEffect(() => {
     if (!ref.current || !imgRef.current) return;
@@ -1198,19 +1200,29 @@ function CTAFinal() {
   return (
     <section ref={ref} className="relative h-screen w-full overflow-hidden flex items-center justify-center bg-background">
       <div ref={imgRef} className="absolute inset-0 -top-[10%] -bottom-[10%]">
-        <img
-          src={ctaCourtyard}
-          alt="Cour en enrobé fraîchement posé"
-          loading="lazy"
-          className="h-full w-full object-cover"
-        />
+        <EditableImage section="ctafinal" field="image" value={img}>
+          {(url) => (
+            <img
+              src={url}
+              alt="Cour en enrobé fraîchement posé"
+              loading="lazy"
+              className="h-full w-full object-cover"
+            />
+          )}
+        </EditableImage>
       </div>
       <div className="absolute inset-0" style={{ background: "rgba(7, 10, 8, 0.75)" }} />
       <div className="relative z-10 text-center px-6 max-w-4xl">
-        <div className="label text-gold">Jura & Ain</div>
-        <h2 className="font-display mt-8 text-foreground" style={{ fontSize: "clamp(48px, 9vw, 96px)", fontWeight: 400, lineHeight: 0.95 }}>
-          Votre Projet,<br/>Notre Priorité
-        </h2>
+        <EditableText section="ctafinal" field="label" value={v("ctafinal", "label", "Jura & Ain")} as="div" className="label text-gold" />
+        <EditableText
+          section="ctafinal"
+          field="title"
+          value={v("ctafinal", "title", "Votre Projet,\nNotre Priorité")}
+          as="h2"
+          className="font-display mt-8 text-foreground"
+          style={{ fontSize: "clamp(48px, 9vw, 96px)", fontWeight: 400, lineHeight: 0.95 }}
+          multiline
+        />
         <div className="mt-12 flex flex-wrap gap-4 justify-center">
           <a
             href="#devis"
@@ -1218,7 +1230,7 @@ function CTAFinal() {
             className="bg-gold text-background px-10 py-4 font-medium transition-all hover:bg-[#A87E1F] active:scale-[0.98]"
             style={{ fontFamily: "Outfit", fontSize: 14, letterSpacing: "0.15em", textTransform: "uppercase" }}
           >
-            Demander un Devis
+            <EditableText section="ctafinal" field="cta1" value={v("ctafinal", "cta1", "Demander un Devis")} as="span" />
           </a>
           <a
             href="tel:0384526148"
@@ -1226,7 +1238,7 @@ function CTAFinal() {
             className="border border-gold text-gold px-10 py-4 font-medium transition-colors hover:bg-gold hover:text-background"
             style={{ fontFamily: "Outfit", fontSize: 14, letterSpacing: "0.15em", textTransform: "uppercase" }}
           >
-            03 84 52 61 48
+            <EditableText section="ctafinal" field="phone" value={v("ctafinal", "phone", "03 84 52 61 48")} as="span" />
           </a>
         </div>
       </div>

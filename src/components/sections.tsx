@@ -447,6 +447,7 @@ function QuoteFormDesktop() {
                         type="range" min={20} max={1000} step={10} value={data.surface}
                         onChange={(e) => setData({ ...data, surface: Number(e.target.value) })}
                         className="w-full accent-[#C8992A] cursor-pointer"
+                        aria-label="Surface estimée en mètres carrés"
                       />
                       <div className="flex justify-between text-muted mt-2" style={{ fontSize: 11 }}>
                         <span>20 m²</span><span>1000 m²</span>

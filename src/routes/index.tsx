@@ -1074,22 +1074,27 @@ const TESTIMONIALS = [
 function Testimonials() {
   const v = useV();
   const ref = useRef<HTMLDivElement>(null);
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     if (!ref.current) return;
     const cards = ref.current.querySelectorAll<HTMLElement>("[data-tcard]");
     cards.forEach((card, idx) => {
-      // parallax differential
-      const speed = idx === 0 ? 0 : idx === 1 ? -40 : 20;
+      // reveal doux SANS opacité 0 initiale (évite cartes invisibles si ScrollTrigger ne se déclenche pas sur mobile)
       gsap.fromTo(card,
-        { y: 60, opacity: 0 },
-        { y: 0, opacity: 1, duration: 1, ease: "power3.out", delay: idx * 0.15,
-          scrollTrigger: { trigger: card, start: "top 88%" } });
-      if (speed !== 0) {
-        gsap.to(card, {
-          y: speed, ease: "none",
-          scrollTrigger: { trigger: card, start: "top bottom", end: "bottom top", scrub: true },
-        });
+        { y: 30 },
+        { y: 0, duration: 0.9, ease: "power3.out", delay: idx * 0.1,
+          scrollTrigger: { trigger: card, start: "top 92%" } });
+
+      // parallax desktop uniquement
+      if (!isMobile) {
+        const speed = idx === 0 ? 0 : idx === 1 ? -40 : 20;
+        if (speed !== 0) {
+          gsap.to(card, {
+            y: speed, ease: "none",
+            scrollTrigger: { trigger: card, start: "top bottom", end: "bottom top", scrub: true },
+          });
+        }
       }
 
       // stars sequential reveal
@@ -1097,53 +1102,32 @@ function Testimonials() {
       gsap.fromTo(stars,
         { opacity: 0, scale: 0.4 },
         { opacity: 1, scale: 1, duration: 0.35, stagger: 0.08, ease: "back.out(2.4)",
-          scrollTrigger: { trigger: card, start: "top 80%" },
-          onComplete: () => {
-            // particle burst from last star
-            const last = stars[stars.length - 1];
-            if (!last) return;
-            const rect = last.getBoundingClientRect();
-            const cardRect = card.getBoundingClientRect();
-            const cx = rect.left - cardRect.left + rect.width / 2;
-            const cy = rect.top - cardRect.top + rect.height / 2;
-            for (let p = 0; p < 8; p++) {
-              const dot = document.createElement("span");
-              dot.style.cssText = `position:absolute;left:${cx}px;top:${cy}px;width:4px;height:4px;border-radius:9999px;background:#C8992A;pointer-events:none;will-change:transform,opacity;`;
-              card.appendChild(dot);
-              const angle = (p / 8) * Math.PI * 2;
-              gsap.to(dot, {
-                x: Math.cos(angle) * 40, y: Math.sin(angle) * 40 - 10,
-                opacity: 0, duration: 0.6, ease: "power2.out",
-                onComplete: () => dot.remove(),
-              });
-            }
-          },
-        });
+          scrollTrigger: { trigger: card, start: "top 85%" } });
     });
-  }, []);
+  }, [isMobile]);
 
   return (
-    <section className="relative bg-background min-h-screen flex items-center justify-center px-6 py-32 overflow-hidden">
+    <section className="relative bg-background flex items-center justify-center px-6 py-20 md:py-28 overflow-hidden">
       <div aria-hidden className="absolute inset-0" style={{ background: "linear-gradient(180deg, var(--background) 0%, var(--surface) 50%, var(--background) 100%)" }} />
       <div className="grain-overlay animated" aria-hidden />
       <GiantNumber n="04" position="left" />
       <TechnicalMark className="hidden md:block" style={{ top: "10%", right: "3%", width: 160, height: 320, transform: "rotate(6deg)" }} />
 
       <div className="relative max-w-6xl w-full">
-        <div className="text-center mb-20">
+        <div className="text-center mb-12 md:mb-16">
           <EditableText section="testimonials" field="label" value={v("testimonials", "label", "— Ils nous font confiance")} as="div" className="label text-gold" />
           <EditableText
             section="testimonials"
             field="title"
             value={v("testimonials", "title", "La Parole\nà nos clients.")}
             as="h2"
-            className="font-display mt-6 text-foreground"
-            style={{ fontSize: "clamp(40px, 6vw, 80px)", fontWeight: 400, lineHeight: 1 }}
+            className="font-display mt-4 md:mt-6 text-foreground"
+            style={{ fontSize: "clamp(32px, 6vw, 80px)", fontWeight: 400, lineHeight: 1, wordBreak: "keep-all", overflowWrap: "normal", hyphens: "none" }}
             multiline
           />
         </div>
 
-        <div ref={ref} className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-6 items-start">
+        <div ref={ref} className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-6 items-start">
           {TESTIMONIALS.map((t, idx) => {
             const offsetClass = idx === 0 ? "md:translate-y-0" : idx === 1 ? "md:-translate-y-8" : "md:translate-y-4";
             return (
@@ -1151,10 +1135,9 @@ function Testimonials() {
                 key={idx}
                 data-tcard
                 data-cursor-hover
-                className={`relative p-8 md:p-10 bg-surface border border-border transition-all duration-500 hover:border-gold hover:-translate-y-1.5 group overflow-hidden ${offsetClass}`}
-                style={{ minHeight: 360 }}
+                className={`relative p-6 md:p-10 bg-surface border border-border transition-all duration-500 hover:border-gold hover:-translate-y-1.5 group overflow-hidden ${offsetClass}`}
+                style={{ minHeight: 280 }}
               >
-                {/* giant filigree quote */}
                 <span
                   aria-hidden
                   className="absolute -top-6 -left-2 font-display text-gold pointer-events-none select-none"
@@ -1163,21 +1146,19 @@ function Testimonials() {
                   “
                 </span>
 
-                {/* stars */}
-                <div className="relative flex gap-1.5 mb-6">
+                <div className="relative flex gap-1.5 mb-5">
                   {[0,1,2,3,4].map((s) => (
                     <span key={s} data-tstar className="text-gold inline-block" style={{ fontSize: 16 }}>★</span>
                   ))}
                 </div>
 
-                <EditableText section="testimonials" field={`item_${idx}_q`} value={v("testimonials", `item_${idx}_q`, t.q)} as="p" className="relative font-display italic text-foreground" style={{ fontSize: 18, lineHeight: 1.6, fontWeight: 300 }} multiline />
+                <EditableText section="testimonials" field={`item_${idx}_q`} value={v("testimonials", `item_${idx}_q`, t.q)} as="p" className="relative font-display italic text-foreground" style={{ fontSize: 17, lineHeight: 1.55, fontWeight: 300 }} multiline />
 
-                <div className="relative mt-8 pt-6 border-t border-gold/20">
+                <div className="relative mt-6 pt-5 border-t border-gold/20">
                   <EditableText section="testimonials" field={`item_${idx}_n`} value={v("testimonials", `item_${idx}_n`, t.n)} as="div" className="font-display text-foreground" style={{ fontSize: 16, fontWeight: 400 }} />
                   <EditableText section="testimonials" field={`item_${idx}_c`} value={v("testimonials", `item_${idx}_c`, t.c)} as="div" className="label text-gold mt-1.5" style={{ fontSize: 9 }} />
                 </div>
 
-                {/* hover gold corner accent */}
                 <span
                   aria-hidden
                   className="absolute top-0 right-0 w-12 h-12 transition-opacity duration-500 opacity-0 group-hover:opacity-100"

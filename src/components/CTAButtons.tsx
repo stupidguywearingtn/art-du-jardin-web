@@ -90,7 +90,7 @@ export function CTABanner() {
 /* CTA inline centré sur fond sombre */
 export function CTAInline({ caption, label = "Demander un devis", href = "#devis", withPhone = false }: { caption?: string; label?: string; href?: string; withPhone?: boolean }) {
   return (
-    <div className="mt-14 text-center">
+    <div className="mt-10 md:mt-12 text-center">
       {caption && (
         <p className="font-display italic text-foreground/80 mb-5" style={{ fontSize: "clamp(16px, 2vw, 20px)" }}>
           {caption}

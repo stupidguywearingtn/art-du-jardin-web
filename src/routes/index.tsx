@@ -261,7 +261,7 @@ function MatiereFinitions() {
     { img: "/photos/10-detail-texture-enrobe-frais.jpg", t: "Grain & compactage", d: "Enrobé à chaud posé au finisseur à 160°C, compacté pour résister à la décennie." },
   ];
   return (
-    <section className="relative w-full bg-cream py-24 md:py-32 px-6 md:px-12 overflow-hidden">
+    <section className="relative w-full bg-cream py-16 md:py-24 px-6 md:px-12 overflow-hidden">
       <div className="max-w-3xl mx-auto text-center mb-16">
         <EditableText section="matiere" field="label" value={v("matiere", "label", "— Détails & finitions")} as="div" className="label" style={{ color: "var(--cuivre-500)" }} />
         <EditableText
@@ -309,92 +309,98 @@ const GALLERY: { src: string; cat: string; alt: string }[] = [
   { src: "/photos/01-hero-finisseur-vapeur-sunset.jpg", cat: "Chantier en cours", alt: "Finisseur en cours de pose" },
   { src: "/photos/03-hero-rouleau-compacteur.jpg", cat: "Chantier en cours", alt: "Rouleau compacteur sur chantier HCE" },
 ];
-const CATS = ["Tous", "Cour & allée privée", "Parking & voirie pro", "Préparation & terrassement", "Détails & finitions", "Chantier en cours"];
+const CATS = ["Cour & allée privée", "Parking & voirie pro", "Préparation & terrassement", "Détails & finitions", "Chantier en cours"];
+
+// Photo représentative pour chaque catégorie
+const CAT_COVERS: Record<string, string> = {
+  "Cour & allée privée": "/photos/15-cour-golden-hour.jpg",
+  "Parking & voirie pro": "/photos/26-pro-batiment-commercial.jpg",
+  "Préparation & terrassement": "/photos/06-chantier-bobcat-preparation.jpg",
+  "Détails & finitions": "/photos/02-hero-medaillon-paves.jpg",
+  "Chantier en cours": "/photos/01-hero-finisseur-vapeur-sunset.jpg",
+};
 
 function Galerie() {
-  const [filter, setFilter] = useState("Tous");
+  const [openCat, setOpenCat] = useState<string | null>(null);
   const [lightbox, setLightbox] = useState<number | null>(null);
-  const visible = filter === "Tous" ? GALLERY : GALLERY.filter(g => g.cat === filter);
+  const photos = openCat ? GALLERY.filter(g => g.cat === openCat) : [];
 
   useEffect(() => {
     if (lightbox === null) return;
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") setLightbox(null);
-      if (e.key === "ArrowRight") setLightbox(i => i === null ? null : (i + 1) % visible.length);
-      if (e.key === "ArrowLeft") setLightbox(i => i === null ? null : (i - 1 + visible.length) % visible.length);
+      if (e.key === "ArrowRight") setLightbox(i => i === null ? null : (i + 1) % photos.length);
+      if (e.key === "ArrowLeft") setLightbox(i => i === null ? null : (i - 1 + photos.length) % photos.length);
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [lightbox, visible.length]);
+  }, [lightbox, photos.length]);
+
+  const openCategory = (cat: string) => {
+    setOpenCat(cat);
+    setLightbox(0);
+  };
+  const closeAll = () => { setLightbox(null); setOpenCat(null); };
 
   return (
-    <section className="relative w-full bg-background py-24 md:py-32 px-4 md:px-12 overflow-hidden">
+    <section className="relative w-full bg-background py-16 md:py-24 px-4 md:px-12 overflow-hidden">
       <GiantNumber n="05" position="right" />
-      <div className="max-w-6xl mx-auto text-center mb-12">
+      <div className="max-w-6xl mx-auto text-center mb-10 md:mb-14">
         <div className="label text-gold">— 500+ chantiers livrés depuis 2005</div>
-        <h2 className="font-display mt-6 text-foreground" style={{ fontSize: "clamp(36px, 6vw, 80px)", fontWeight: 400, lineHeight: 1 }}>
+        <h2 className="font-display mt-4 md:mt-6 text-foreground" style={{ fontSize: "clamp(32px, 6vw, 80px)", fontWeight: 400, lineHeight: 1, wordBreak: "keep-all", overflowWrap: "normal", hyphens: "none" }}>
           Nos <span className="italic text-gold">réalisations.</span>
         </h2>
+        <p className="mt-4 max-w-xl mx-auto text-muted" style={{ fontSize: 14 }}>
+          Choisissez une catégorie pour voir nos chantiers en grand.
+        </p>
       </div>
 
-      <div className="sticky top-0 z-20 bg-background/90 backdrop-blur-md py-4 mb-8 -mx-4 md:-mx-12 px-4 md:px-12 border-y border-gold/15">
-        <div className="flex gap-2 md:gap-3 overflow-x-auto no-scrollbar justify-start md:justify-center">
-          {CATS.map(c => (
+      <div className="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-5">
+        {CATS.map((cat, idx) => {
+          const cover = CAT_COVERS[cat];
+          const count = GALLERY.filter(g => g.cat === cat).length;
+          // 5e carte (Chantier en cours) prend toute la largeur sur mobile
+          const fullWidth = idx === 4 ? "col-span-2 md:col-span-1" : "";
+          return (
             <button
-              key={c}
-              onClick={() => setFilter(c)}
+              key={cat}
+              onClick={() => openCategory(cat)}
               data-cursor-hover
-              className={`shrink-0 px-4 py-2 rounded-full text-xs md:text-sm whitespace-nowrap border transition-all ${filter === c ? "bg-gold text-background border-gold" : "bg-transparent text-foreground/80 border-asphalte-700 hover:border-gold/60"}`}
-              style={{ fontFamily: "Outfit", letterSpacing: "0.05em" }}
+              className={`relative group overflow-hidden aspect-[4/5] md:aspect-[4/5] cursor-none ${fullWidth}`}
+              style={{ background: "var(--surface)" }}
             >
-              {c}
-            </button>
-          ))}
-        </div>
-      </div>
-
-      <motion.div layout className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-3">
-        <AnimatePresence mode="popLayout">
-          {visible.map((g, i) => (
-            <motion.button
-              key={g.src}
-              layout
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.95 }}
-              transition={{ duration: 0.3 }}
-              onClick={() => setLightbox(i)}
-              data-cursor-hover
-              className="relative overflow-hidden bg-surface group aspect-[4/5] cursor-none"
-            >
-              <img src={g.src} alt={g.alt} loading="lazy" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
-              <div className="absolute inset-0 bg-asphalte/0 group-hover:bg-asphalte/40 transition-colors duration-500" />
-              <div className="absolute bottom-0 left-0 right-0 p-3 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                <div className="label text-gold" style={{ fontSize: 9 }}>{g.cat}</div>
+              <img src={cover} alt={cat} loading="lazy" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+              <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0.1) 100%)" }} />
+              <div className="absolute bottom-0 left-0 right-0 p-4 md:p-5 text-left">
+                <div className="label" style={{ color: "var(--gold)", fontSize: 9, marginBottom: 6 }}>{count} photos</div>
+                <div className="font-display" style={{ color: "#FFFFFF", fontSize: "clamp(16px, 2vw, 22px)", fontWeight: 400, lineHeight: 1.15 }}>
+                  {cat}
+                </div>
+                <div className="mt-2 flex items-center gap-2" style={{ color: "var(--gold)", fontSize: 11, fontFamily: "Outfit", letterSpacing: "0.1em", textTransform: "uppercase" }}>
+                  Voir <span aria-hidden>→</span>
+                </div>
               </div>
-            </motion.button>
-          ))}
-        </AnimatePresence>
-      </motion.div>
+            </button>
+          );
+        })}
+      </div>
 
       <AnimatePresence>
-        {lightbox !== null && visible[lightbox] && (
+        {lightbox !== null && photos[lightbox] && (
           <motion.div
             initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
             className="fixed inset-0 z-[9999] flex items-center justify-center"
             style={{ background: "rgba(14,14,15,0.95)" }}
-            onClick={() => setLightbox(null)}
+            onClick={closeAll}
           >
-            <button onClick={(e) => { e.stopPropagation(); setLightbox(null); }} className="absolute top-6 right-6 text-gold text-3xl" aria-label="Fermer">×</button>
-            <button onClick={(e) => { e.stopPropagation(); setLightbox(((lightbox - 1) + visible.length) % visible.length); }} className="absolute left-4 md:left-8 text-gold text-4xl p-4" aria-label="Précédent">‹</button>
-            <button onClick={(e) => { e.stopPropagation(); setLightbox((lightbox + 1) % visible.length); }} className="absolute right-4 md:right-8 text-gold text-4xl p-4" aria-label="Suivant">›</button>
-            <img src={visible[lightbox].src} alt={visible[lightbox].alt} className="max-h-[85vh] max-w-[90vw] object-contain" onClick={(e) => e.stopPropagation()} />
-            <div className="absolute bottom-6 left-0 right-0 text-center label text-gold">{visible[lightbox].cat}</div>
+            <button onClick={(e) => { e.stopPropagation(); closeAll(); }} className="absolute top-4 right-4 text-gold text-4xl leading-none p-2" aria-label="Fermer">×</button>
+            <div className="absolute top-4 left-4 label text-gold/80" style={{ fontSize: 11 }}>{openCat} · {lightbox + 1}/{photos.length}</div>
+            <button onClick={(e) => { e.stopPropagation(); setLightbox(((lightbox - 1) + photos.length) % photos.length); }} className="absolute left-2 md:left-8 text-gold text-4xl p-4" aria-label="Précédent">‹</button>
+            <button onClick={(e) => { e.stopPropagation(); setLightbox((lightbox + 1) % photos.length); }} className="absolute right-2 md:right-8 text-gold text-4xl p-4" aria-label="Suivant">›</button>
+            <img src={photos[lightbox].src} alt={photos[lightbox].alt} className="max-h-[80vh] max-w-[90vw] object-contain" onClick={(e) => e.stopPropagation()} />
           </motion.div>
         )}
       </AnimatePresence>
-
-      <style>{`.no-scrollbar::-webkit-scrollbar{display:none}.no-scrollbar{-ms-overflow-style:none;scrollbar-width:none}`}</style>
     </section>
   );
 }
@@ -403,9 +409,9 @@ function Galerie() {
 function SectionDivider({ variant = "minimal" }: { variant?: "minimal" | "marquee" }) {
   if (variant === "marquee") return <MarqueeStats />;
   return (
-    <div className="relative w-full flex items-center justify-center py-10 bg-background" aria-hidden>
+    <div className="relative w-full flex items-center justify-center py-4 md:py-8 bg-background" aria-hidden>
       <div className="h-px flex-1 max-w-[28%] bg-gold/30" />
-      <svg width="14" height="14" viewBox="0 0 14 14" className="mx-4 text-gold" style={{ opacity: 0.6 }}>
+      <svg width="10" height="10" viewBox="0 0 14 14" className="mx-3 text-gold" style={{ opacity: 0.45 }}>
         <rect x="7" y="0" width="9.9" height="9.9" transform="rotate(45 7 7)" fill="currentColor" />
       </svg>
       <div className="h-px flex-1 max-w-[28%] bg-gold/30" />
@@ -599,7 +605,7 @@ function Hero() {
               value={line1}
               as="h1"
               className="font-display text-foreground block"
-              style={{ fontSize: "clamp(64px, 10vw, 140px)", fontWeight: 400, lineHeight: 0.95, letterSpacing: "-0.02em" }}
+              style={{ fontSize: "clamp(40px, 9vw, 140px)", fontWeight: 400, lineHeight: 1, letterSpacing: "-0.02em", wordBreak: "keep-all", overflowWrap: "normal", hyphens: "none" }}
             />
             <EditableText
               section="hero"
@@ -607,38 +613,42 @@ function Hero() {
               value={line2}
               as="h1"
               className="font-display text-foreground block"
-              style={{ fontSize: "clamp(64px, 10vw, 140px)", fontWeight: 400, lineHeight: 0.95, letterSpacing: "-0.02em" }}
+              style={{ fontSize: "clamp(40px, 9vw, 140px)", fontWeight: 400, lineHeight: 1, letterSpacing: "-0.02em", wordBreak: "keep-all", overflowWrap: "normal", hyphens: "none" }}
             />
           </div>
         ) : (
           <h1
             ref={titleRef}
-            className="font-display text-center text-foreground"
-            style={{ fontSize: "clamp(64px, 10vw, 140px)", fontWeight: 400, lineHeight: 0.95, letterSpacing: "-0.02em" }}
+            className="font-display text-center text-foreground px-2"
+            style={{ fontSize: "clamp(40px, 9vw, 140px)", fontWeight: 400, lineHeight: 1, letterSpacing: "-0.02em", wordBreak: "keep-all", overflowWrap: "normal", hyphens: "none" }}
           >
-            {lines.map((line, li) => (
-              <span key={li} className="block overflow-hidden">
-                <span className="inline-block">
-                  {line.split("").map((c, ci) => (
-                    <span key={ci} data-c className="inline-block" style={{ whiteSpace: c === " " ? "pre" : "normal" }}>
-                      {c}
+            {lines.map((line, li) => {
+              const words = line.split(" ");
+              return (
+                <span key={li} className="block overflow-hidden" style={{ wordBreak: "keep-all", overflowWrap: "normal" }}>
+                  {words.map((word, wi) => (
+                    <span key={wi} className="inline-block" style={{ whiteSpace: "nowrap", marginRight: wi < words.length - 1 ? "0.28em" : 0 }}>
+                      {word.split("").map((c, ci) => (
+                        <span key={ci} data-c className="inline-block">{c}</span>
+                      ))}
                     </span>
                   ))}
                 </span>
-              </span>
-            ))}
+              );
+            })}
           </h1>
         )}
-        <div ref={lineRef} className="mt-10 h-px bg-gold" style={{ width: editEnabled ? 120 : 0 }} />
+        <div ref={lineRef} className="mt-8 md:mt-10 h-px bg-gold" style={{ width: editEnabled ? 120 : 0 }} />
         <EditableText
           section="hero"
           field="badge"
           value={badge}
           as="div"
-          className={`mt-8 label text-gold ${editEnabled ? "" : "opacity-0"}`}
+          className="mt-6 md:mt-8 label"
+          style={{ color: "#FFFFFF", opacity: 0.9 }}
         />
         <div
-          className="mt-10 flex flex-col sm:flex-row items-center gap-3 px-4 sm:px-0 w-full sm:w-auto"
+          className="mt-8 md:mt-10 flex flex-col sm:flex-row items-center gap-3 px-4 sm:px-0 w-full sm:w-auto"
           style={{ animation: "fadeUp 0.8s ease 1.6s both" }}
         >
           <CTAPrimary>Demander un devis gratuit</CTAPrimary>
@@ -646,7 +656,7 @@ function Hero() {
         </div>
       </div>
 
-      <div className="absolute bottom-10 left-6 z-10 origin-bottom-left -rotate-90 label text-gold whitespace-nowrap" style={{ transformOrigin: "left bottom" }}>
+      <div className="hidden md:block absolute bottom-10 left-6 z-10 origin-bottom-left -rotate-90 label whitespace-nowrap" style={{ transformOrigin: "left bottom", color: "#FFFFFF", opacity: 0.7 }}>
         Scroll pour découvrir
       </div>
       <EditableText
@@ -654,7 +664,8 @@ function Hero() {
         field="tagline"
         value={tagline}
         as="div"
-        className="absolute bottom-10 right-6 z-10 label text-gold"
+        className="absolute bottom-6 md:bottom-10 right-6 z-10 label"
+        style={{ color: "#FFFFFF", opacity: 0.75 }}
       />
     </section>
   );
@@ -682,8 +693,7 @@ function Philosophy() {
   }, [editEnabled, text]);
 
   return (
-    <section ref={ref} className="relative min-h-screen w-full bg-background flex items-center justify-center px-6 py-24">
-      <div className="absolute left-6 md:left-12 top-0 bottom-0 w-px bg-gold/40" />
+    <section ref={ref} className="relative w-full bg-background flex items-center justify-center px-6 py-16 md:py-24">
       <div className="max-w-5xl text-center">
         {editEnabled ? (
           <EditableText
@@ -692,24 +702,24 @@ function Philosophy() {
             value={text}
             as="p"
             className="font-display italic text-foreground"
-            style={{ fontSize: "clamp(32px, 5vw, 72px)", fontWeight: 300, lineHeight: 1.15 }}
+            style={{ fontSize: "clamp(26px, 5vw, 72px)", fontWeight: 300, lineHeight: 1.2, wordBreak: "keep-all", overflowWrap: "normal", hyphens: "none" }}
             multiline
           />
         ) : (
           <p
             className="font-display italic text-foreground"
-            style={{ fontSize: "clamp(32px, 5vw, 72px)", fontWeight: 300, lineHeight: 1.15 }}
+            style={{ fontSize: "clamp(26px, 5vw, 72px)", fontWeight: 300, lineHeight: 1.2, wordBreak: "keep-all", overflowWrap: "normal", hyphens: "none" }}
           >
             {text.split("\n").map((line, li) => (
               <span key={li} className="block">
                 {line.split(" ").map((w, wi) => (
-                  <span key={wi} data-w className="inline-block mr-[0.25em]">{w}</span>
+                  <span key={wi} data-w className="inline-block mr-[0.25em]" style={{ whiteSpace: "nowrap" }}>{w}</span>
                 ))}
               </span>
             ))}
           </p>
         )}
-        <EditableText section="philosophy" field="signature" value={signature} as="div" className="mt-12 label text-gold" />
+        <EditableText section="philosophy" field="signature" value={signature} as="div" className="mt-8 md:mt-12 label text-gold" />
       </div>
     </section>
   );
@@ -773,7 +783,7 @@ function Services() {
 
   return (
     <section
-      className="relative bg-background py-32 overflow-hidden"
+      className="relative bg-background py-16 md:py-24 overflow-hidden"
       style={{ background: "radial-gradient(ellipse at center, #262626 0%, #1E1E1E 70%)" }}
     >
       <div className="grain-overlay" aria-hidden />
@@ -791,6 +801,8 @@ function Services() {
 
 function ServiceStrip({ n, t, img, slug }: { n: string; t: string; img: string; slug: string }) {
   const [h, setH] = useState(false);
+  const isMobile = useIsMobile();
+  const expanded = h || isMobile; // toujours étendu sur mobile pour lisibilité
   return (
     <Link
       to="/services/$slug"
@@ -799,16 +811,20 @@ function ServiceStrip({ n, t, img, slug }: { n: string; t: string; img: string; 
       onMouseEnter={() => setH(true)}
       onMouseLeave={() => setH(false)}
       className="relative block w-full overflow-hidden border-b cursor-none transition-[height] duration-700 ease-out"
-      style={{ height: h ? 400 : 200, borderColor: "#2E2E2E" }}
+      style={{ height: expanded ? (isMobile ? 220 : 400) : 200, borderColor: "#2E2E2E" }}
     >
       <div
         className="absolute inset-0 bg-cover bg-center transition-opacity duration-700"
-        style={{ backgroundImage: `url(${img})`, opacity: h ? 1 : 0 }}
+        style={{ backgroundImage: `url(${img})`, opacity: expanded ? 1 : 0 }}
       />
-      <div className="absolute inset-0 bg-background/65 transition-opacity duration-700" style={{ opacity: h ? 1 : 0 }} />
-      <div className="relative z-10 h-full grid grid-cols-12 items-center px-6 md:px-12 gap-6">
-        <div className="col-span-2 md:col-span-2 font-display text-gold" style={{ fontSize: "clamp(40px, 6vw, 80px)", fontWeight: 300, lineHeight: 1 }}>{n}</div>
-        <div className="col-span-8 md:col-span-8 font-display text-foreground relative inline-block" style={{ fontSize: "clamp(22px, 3vw, 36px)", fontWeight: 400 }}>
+      {/* overlay sombre OBLIGATOIRE pour garantir la lisibilité du texte blanc */}
+      <div
+        className="absolute inset-0 transition-opacity duration-700"
+        style={{ background: "linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6))", opacity: expanded ? 1 : 0 }}
+      />
+      <div className="relative z-10 h-full grid grid-cols-12 items-center px-6 md:px-12 gap-4 md:gap-6">
+        <div className="col-span-2 font-display text-gold" style={{ fontSize: "clamp(32px, 6vw, 80px)", fontWeight: 300, lineHeight: 1 }}>{n}</div>
+        <div className="col-span-8 font-display relative inline-block" style={{ fontSize: "clamp(18px, 3vw, 36px)", fontWeight: 400, color: expanded ? "#FFFFFF" : "var(--foreground)" }}>
           <span className="relative inline-block">
             {t}
             <span
@@ -817,8 +833,8 @@ function ServiceStrip({ n, t, img, slug }: { n: string; t: string; img: string; 
             />
           </span>
         </div>
-        <div className="col-span-2 md:col-span-2 flex justify-end">
-          <span className="text-gold text-3xl md:text-4xl inline-block transition-transform duration-500" style={{ transform: h ? "rotate(45deg)" : "rotate(0deg)" }}>→</span>
+        <div className="col-span-2 flex justify-end">
+          <span className="text-gold text-2xl md:text-4xl inline-block transition-transform duration-500" style={{ transform: h ? "rotate(45deg)" : "rotate(0deg)" }}>→</span>
         </div>
       </div>
     </Link>
@@ -870,7 +886,8 @@ function Transformation() {
           field="text"
           value={v("transformation", "text", "Chaque chantier débute par une lecture du terrain — sols, pentes, drainage, usages — pour garantir un enrobé qui dure dans le temps.")}
           as="p"
-          className="mt-8 text-muted max-w-xl mx-auto"
+          className="mt-6 md:mt-8 max-w-xl mx-auto"
+          style={{ color: "#FFFFFF", opacity: 0.92, lineHeight: 1.6 }}
           multiline
         />
         <div ref={statsRef} className="mt-14 grid grid-cols-3 gap-8 md:gap-16 max-w-3xl mx-auto">
@@ -954,7 +971,7 @@ function Process() {
   }, []);
 
   return (
-    <section className="relative bg-background py-24 md:py-32 px-6 md:px-12 overflow-hidden">
+    <section className="relative bg-background py-16 md:py-24 px-6 md:px-12 overflow-hidden">
       <CornerGlow corner="tr" tint="gold" />
       <CornerGlow corner="bl" tint="green" />
       <GiantNumber n="03" position="right" />
@@ -1063,22 +1080,27 @@ const TESTIMONIALS = [
 function Testimonials() {
   const v = useV();
   const ref = useRef<HTMLDivElement>(null);
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     if (!ref.current) return;
     const cards = ref.current.querySelectorAll<HTMLElement>("[data-tcard]");
     cards.forEach((card, idx) => {
-      // parallax differential
-      const speed = idx === 0 ? 0 : idx === 1 ? -40 : 20;
+      // reveal doux SANS opacité 0 initiale (évite cartes invisibles si ScrollTrigger ne se déclenche pas sur mobile)
       gsap.fromTo(card,
-        { y: 60, opacity: 0 },
-        { y: 0, opacity: 1, duration: 1, ease: "power3.out", delay: idx * 0.15,
-          scrollTrigger: { trigger: card, start: "top 88%" } });
-      if (speed !== 0) {
-        gsap.to(card, {
-          y: speed, ease: "none",
-          scrollTrigger: { trigger: card, start: "top bottom", end: "bottom top", scrub: true },
-        });
+        { y: 30 },
+        { y: 0, duration: 0.9, ease: "power3.out", delay: idx * 0.1,
+          scrollTrigger: { trigger: card, start: "top 92%" } });
+
+      // parallax desktop uniquement
+      if (!isMobile) {
+        const speed = idx === 0 ? 0 : idx === 1 ? -40 : 20;
+        if (speed !== 0) {
+          gsap.to(card, {
+            y: speed, ease: "none",
+            scrollTrigger: { trigger: card, start: "top bottom", end: "bottom top", scrub: true },
+          });
+        }
       }
 
       // stars sequential reveal
@@ -1086,53 +1108,32 @@ function Testimonials() {
       gsap.fromTo(stars,
         { opacity: 0, scale: 0.4 },
         { opacity: 1, scale: 1, duration: 0.35, stagger: 0.08, ease: "back.out(2.4)",
-          scrollTrigger: { trigger: card, start: "top 80%" },
-          onComplete: () => {
-            // particle burst from last star
-            const last = stars[stars.length - 1];
-            if (!last) return;
-            const rect = last.getBoundingClientRect();
-            const cardRect = card.getBoundingClientRect();
-            const cx = rect.left - cardRect.left + rect.width / 2;
-            const cy = rect.top - cardRect.top + rect.height / 2;
-            for (let p = 0; p < 8; p++) {
-              const dot = document.createElement("span");
-              dot.style.cssText = `position:absolute;left:${cx}px;top:${cy}px;width:4px;height:4px;border-radius:9999px;background:#C8992A;pointer-events:none;will-change:transform,opacity;`;
-              card.appendChild(dot);
-              const angle = (p / 8) * Math.PI * 2;
-              gsap.to(dot, {
-                x: Math.cos(angle) * 40, y: Math.sin(angle) * 40 - 10,
-                opacity: 0, duration: 0.6, ease: "power2.out",
-                onComplete: () => dot.remove(),
-              });
-            }
-          },
-        });
+          scrollTrigger: { trigger: card, start: "top 85%" } });
     });
-  }, []);
+  }, [isMobile]);
 
   return (
-    <section className="relative bg-background min-h-screen flex items-center justify-center px-6 py-32 overflow-hidden">
+    <section className="relative bg-background flex items-center justify-center px-6 py-20 md:py-28 overflow-hidden">
       <div aria-hidden className="absolute inset-0" style={{ background: "linear-gradient(180deg, var(--background) 0%, var(--surface) 50%, var(--background) 100%)" }} />
       <div className="grain-overlay animated" aria-hidden />
       <GiantNumber n="04" position="left" />
       <TechnicalMark className="hidden md:block" style={{ top: "10%", right: "3%", width: 160, height: 320, transform: "rotate(6deg)" }} />
 
       <div className="relative max-w-6xl w-full">
-        <div className="text-center mb-20">
+        <div className="text-center mb-12 md:mb-16">
           <EditableText section="testimonials" field="label" value={v("testimonials", "label", "— Ils nous font confiance")} as="div" className="label text-gold" />
           <EditableText
             section="testimonials"
             field="title"
             value={v("testimonials", "title", "La Parole\nà nos clients.")}
             as="h2"
-            className="font-display mt-6 text-foreground"
-            style={{ fontSize: "clamp(40px, 6vw, 80px)", fontWeight: 400, lineHeight: 1 }}
+            className="font-display mt-4 md:mt-6 text-foreground"
+            style={{ fontSize: "clamp(32px, 6vw, 80px)", fontWeight: 400, lineHeight: 1, wordBreak: "keep-all", overflowWrap: "normal", hyphens: "none" }}
             multiline
           />
         </div>
 
-        <div ref={ref} className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-6 items-start">
+        <div ref={ref} className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-6 items-start">
           {TESTIMONIALS.map((t, idx) => {
             const offsetClass = idx === 0 ? "md:translate-y-0" : idx === 1 ? "md:-translate-y-8" : "md:translate-y-4";
             return (
@@ -1140,10 +1141,9 @@ function Testimonials() {
                 key={idx}
                 data-tcard
                 data-cursor-hover
-                className={`relative p-8 md:p-10 bg-surface border border-border transition-all duration-500 hover:border-gold hover:-translate-y-1.5 group overflow-hidden ${offsetClass}`}
-                style={{ minHeight: 360 }}
+                className={`relative p-6 md:p-10 bg-surface border border-border transition-all duration-500 hover:border-gold hover:-translate-y-1.5 group overflow-hidden ${offsetClass}`}
+                style={{ minHeight: 280 }}
               >
-                {/* giant filigree quote */}
                 <span
                   aria-hidden
                   className="absolute -top-6 -left-2 font-display text-gold pointer-events-none select-none"
@@ -1152,21 +1152,19 @@ function Testimonials() {
                   “
                 </span>
 
-                {/* stars */}
-                <div className="relative flex gap-1.5 mb-6">
+                <div className="relative flex gap-1.5 mb-5">
                   {[0,1,2,3,4].map((s) => (
                     <span key={s} data-tstar className="text-gold inline-block" style={{ fontSize: 16 }}>★</span>
                   ))}
                 </div>
 
-                <EditableText section="testimonials" field={`item_${idx}_q`} value={v("testimonials", `item_${idx}_q`, t.q)} as="p" className="relative font-display italic text-foreground" style={{ fontSize: 18, lineHeight: 1.6, fontWeight: 300 }} multiline />
+                <EditableText section="testimonials" field={`item_${idx}_q`} value={v("testimonials", `item_${idx}_q`, t.q)} as="p" className="relative font-display italic text-foreground" style={{ fontSize: 17, lineHeight: 1.55, fontWeight: 300 }} multiline />
 
-                <div className="relative mt-8 pt-6 border-t border-gold/20">
+                <div className="relative mt-6 pt-5 border-t border-gold/20">
                   <EditableText section="testimonials" field={`item_${idx}_n`} value={v("testimonials", `item_${idx}_n`, t.n)} as="div" className="font-display text-foreground" style={{ fontSize: 16, fontWeight: 400 }} />
                   <EditableText section="testimonials" field={`item_${idx}_c`} value={v("testimonials", `item_${idx}_c`, t.c)} as="div" className="label text-gold mt-1.5" style={{ fontSize: 9 }} />
                 </div>
 
-                {/* hover gold corner accent */}
                 <span
                   aria-hidden
                   className="absolute top-0 right-0 w-12 h-12 transition-opacity duration-500 opacity-0 group-hover:opacity-100"
@@ -1198,7 +1196,7 @@ function CTAFinal() {
   }, []);
 
   return (
-    <section ref={ref} className="relative h-screen w-full overflow-hidden flex items-center justify-center bg-background">
+    <section ref={ref} className="relative min-h-[80vh] md:h-screen w-full overflow-hidden flex items-center justify-center bg-background py-20 md:py-0">
       <div ref={imgRef} className="absolute inset-0 -top-[10%] -bottom-[10%]">
         <EditableImage section="ctafinal" field="image" value={img}>
           {(url) => (

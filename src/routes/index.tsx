@@ -1120,10 +1120,16 @@ function Testimonials() {
 
       <div className="relative max-w-6xl w-full">
         <div className="text-center mb-20">
-          <div className="label text-gold">— Ils nous font confiance</div>
-          <h2 className="font-display mt-6 text-foreground" style={{ fontSize: "clamp(40px, 6vw, 80px)", fontWeight: 400, lineHeight: 1 }}>
-            La Parole<br /><span className="italic text-gold">à nos clients.</span>
-          </h2>
+          <EditableText section="testimonials" field="label" value={v("testimonials", "label", "— Ils nous font confiance")} as="div" className="label text-gold" />
+          <EditableText
+            section="testimonials"
+            field="title"
+            value={v("testimonials", "title", "La Parole\nà nos clients.")}
+            as="h2"
+            className="font-display mt-6 text-foreground"
+            style={{ fontSize: "clamp(40px, 6vw, 80px)", fontWeight: 400, lineHeight: 1 }}
+            multiline
+          />
         </div>
 
         <div ref={ref} className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-6 items-start">

@@ -10,6 +10,14 @@ import { useIsMobile } from "@/hooks/use-mobile";
 import { Link } from "@tanstack/react-router";
 import { CTABanner, CTAPrimary, CTASecondary, CTAInline, MobileFloatingCTA } from "@/components/CTAButtons";
 import { useSiteContent } from "@/hooks/useSiteContent";
+import { useSiteContentFields } from "@/hooks/useSiteContentFields";
+import { EditModeProvider, useEditMode } from "@/hooks/useEditMode";
+import { EditModeToolbar } from "@/components/EditModeToolbar";
+import { EditableText } from "@/components/EditableText";
+import { EditableImage } from "@/components/EditableImage";
+
+const HOME_SITE_ID = "11111111-1111-1111-1111-111111111111";
+
 const service01 = "/photos/06-chantier-bobcat-preparation.jpg";
 const service02 = "/photos/01-hero-finisseur-vapeur-sunset.jpg";
 const service03 = "/photos/02-hero-medaillon-paves.jpg";
@@ -20,6 +28,14 @@ const ctaCourtyard = "/photos/15-cour-golden-hour.jpg";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
+}
+
+/** Resolves field value: draft (if edit on) > published > fallback */
+function useV() {
+  const { get } = useSiteContentFields(HOME_SITE_ID);
+  const { getDraft } = useEditMode();
+  return (section: string, field: string, fallback: string) =>
+    getDraft(section, field) ?? get(section, field, fallback);
 }
 
 export const Route = createFileRoute("/")({

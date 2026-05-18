@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, type ElementType } from "react";
+import { useEffect, useRef, useState, type CSSProperties, type ElementType } from "react";
 import { Pencil } from "lucide-react";
 import { useEditMode } from "@/hooks/useEditMode";
 
@@ -8,6 +8,7 @@ type Props = {
   value: string;
   as?: ElementType;
   className?: string;
+  style?: CSSProperties;
   multiline?: boolean;
 };
 
@@ -17,6 +18,7 @@ export function EditableText({
   value,
   as: Tag = "div",
   className,
+  style,
   multiline = false,
 }: Props) {
   const { enabled, setDraft } = useEditMode();
@@ -26,7 +28,6 @@ export function EditableText({
   useEffect(() => {
     if (editing && ref.current) {
       ref.current.focus();
-      // place caret at end
       const range = document.createRange();
       range.selectNodeContents(ref.current);
       range.collapse(false);
@@ -43,7 +44,11 @@ export function EditableText({
   };
 
   if (!enabled) {
-    return <Tag className={className}>{value}</Tag>;
+    return (
+      <Tag className={className} style={style}>
+        {value}
+      </Tag>
+    );
   }
 
   return (
@@ -55,6 +60,7 @@ export function EditableText({
             ? "ring-2 ring-blue-500 ring-offset-2 ring-offset-background cursor-text"
             : "group-hover/editable:ring-2 group-hover/editable:ring-blue-500/70 cursor-pointer"
         }`}
+        style={style}
         contentEditable={editing}
         suppressContentEditableWarning
         onBlur={editing ? commit : undefined}

@@ -212,6 +212,7 @@ function GesteMatiere() {
               value={v("geste", "title", "L'enrobé à chaud, à 160°C. Posé. Compacté. Garanti.")}
               as="h2"
               className="font-display mt-6 text-foreground"
+              style={{ fontSize: "clamp(32px, 4vw, 56px)", fontWeight: 400, lineHeight: 1.05 }}
               multiline
             />
             <EditableText
@@ -220,6 +221,7 @@ function GesteMatiere() {
               value={v("geste", "paragraph", "Bitume noir, rouge, saumon ou bordeaux — posé au finisseur, compacté au rouleau, contrôlé à la tranche. Une matière vivante qui prend forme sous nos mains et tient dans le temps.")}
               as="p"
               className="mt-8 text-muted max-w-md"
+              style={{ lineHeight: 1.7 }}
               multiline
             />
             <Link

@@ -12,7 +12,7 @@ if (typeof window !== "undefined") {
 
 /* ============ POURQUOI NOUS CHOISIR ============ */
 const REASONS = [
-  { n: "01", t: "Enrobé à chaud", d: "Pose au finisseur à 160°C, compactage maîtrisé pour une durabilité maximale.", icon: "M3 17h18M5 17V9l7-4 7 4v8" },
+  { n: "01", t: "Enrobé à chaud", d: "Pose à la main à 160°C, compactage maîtrisé pour une durabilité maximale.", icon: "M3 17h18M5 17V9l7-4 7 4v8" },
   { n: "02", t: "20 ans d'expérience", d: "Plus de 500 chantiers réalisés dans le Jura et l'Ain depuis 2005.", icon: "M12 6v6l4 2M12 22a10 10 0 1 1 0-20 10 10 0 0 1 0 20Z" },
   { n: "03", t: "Devis détaillé", d: "Visite gratuite, devis sous 48h, prix tenus, aucune mauvaise surprise.", icon: "M9 12h6M9 16h6M9 8h6M5 21V5a2 2 0 0 1 2-2h7l5 5v13a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2Z" },
   { n: "04", t: "Garantie & SAV", d: "Travaux garantis. Intervention rapide à la moindre anomalie.", icon: "M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z" },

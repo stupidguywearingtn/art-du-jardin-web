@@ -880,7 +880,8 @@ function Transformation() {
           field="text"
           value={v("transformation", "text", "Chaque chantier débute par une lecture du terrain — sols, pentes, drainage, usages — pour garantir un enrobé qui dure dans le temps.")}
           as="p"
-          className="mt-8 text-muted max-w-xl mx-auto"
+          className="mt-6 md:mt-8 max-w-xl mx-auto"
+          style={{ color: "#FFFFFF", opacity: 0.92, lineHeight: 1.6 }}
           multiline
         />
         <div ref={statsRef} className="mt-14 grid grid-cols-3 gap-8 md:gap-16 max-w-3xl mx-auto">

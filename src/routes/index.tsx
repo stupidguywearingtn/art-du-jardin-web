@@ -42,8 +42,10 @@ export const Route = createFileRoute("/")({
   component: Index,
   head: () => ({
     meta: [
-      { title: "HCE — L'enrobé qui dure · Jura et Ain" },
-      { name: "description", content: "Spécialistes de l'aménagement de cours en enrobé à chaud, préparation de terrain et maçonnerie générale dans le Jura et l'Ain depuis 2005." },
+      { title: "Enrobé · Cours · Parkings · Terrassement — HCE Jura & Ain" },
+      { name: "description", content: "HCE — Enrobé à chaud, cours, parkings, terrassement dans le Jura et l'Ain depuis 2005. Pose à la main, devis gratuit sous 48h, garantie décennale." },
+      { property: "og:title", content: "Enrobé · Cours · Parkings · Terrassement — HCE Jura & Ain" },
+      { property: "og:description", content: "HCE — Enrobé à chaud, cours, parkings, terrassement dans le Jura et l'Ain depuis 2005. Pose à la main, devis gratuit sous 48h." },
     ],
   }),
 });

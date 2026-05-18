@@ -599,7 +599,7 @@ function Hero() {
               value={line1}
               as="h1"
               className="font-display text-foreground block"
-              style={{ fontSize: "clamp(64px, 10vw, 140px)", fontWeight: 400, lineHeight: 0.95, letterSpacing: "-0.02em" }}
+              style={{ fontSize: "clamp(40px, 9vw, 140px)", fontWeight: 400, lineHeight: 1, letterSpacing: "-0.02em", wordBreak: "keep-all", overflowWrap: "normal", hyphens: "none" }}
             />
             <EditableText
               section="hero"
@@ -607,38 +607,42 @@ function Hero() {
               value={line2}
               as="h1"
               className="font-display text-foreground block"
-              style={{ fontSize: "clamp(64px, 10vw, 140px)", fontWeight: 400, lineHeight: 0.95, letterSpacing: "-0.02em" }}
+              style={{ fontSize: "clamp(40px, 9vw, 140px)", fontWeight: 400, lineHeight: 1, letterSpacing: "-0.02em", wordBreak: "keep-all", overflowWrap: "normal", hyphens: "none" }}
             />
           </div>
         ) : (
           <h1
             ref={titleRef}
-            className="font-display text-center text-foreground"
-            style={{ fontSize: "clamp(64px, 10vw, 140px)", fontWeight: 400, lineHeight: 0.95, letterSpacing: "-0.02em" }}
+            className="font-display text-center text-foreground px-2"
+            style={{ fontSize: "clamp(40px, 9vw, 140px)", fontWeight: 400, lineHeight: 1, letterSpacing: "-0.02em", wordBreak: "keep-all", overflowWrap: "normal", hyphens: "none" }}
           >
-            {lines.map((line, li) => (
-              <span key={li} className="block overflow-hidden">
-                <span className="inline-block">
-                  {line.split("").map((c, ci) => (
-                    <span key={ci} data-c className="inline-block" style={{ whiteSpace: c === " " ? "pre" : "normal" }}>
-                      {c}
+            {lines.map((line, li) => {
+              const words = line.split(" ");
+              return (
+                <span key={li} className="block overflow-hidden" style={{ wordBreak: "keep-all", overflowWrap: "normal" }}>
+                  {words.map((word, wi) => (
+                    <span key={wi} className="inline-block" style={{ whiteSpace: "nowrap", marginRight: wi < words.length - 1 ? "0.28em" : 0 }}>
+                      {word.split("").map((c, ci) => (
+                        <span key={ci} data-c className="inline-block">{c}</span>
+                      ))}
                     </span>
                   ))}
                 </span>
-              </span>
-            ))}
+              );
+            })}
           </h1>
         )}
-        <div ref={lineRef} className="mt-10 h-px bg-gold" style={{ width: editEnabled ? 120 : 0 }} />
+        <div ref={lineRef} className="mt-8 md:mt-10 h-px bg-gold" style={{ width: editEnabled ? 120 : 0 }} />
         <EditableText
           section="hero"
           field="badge"
           value={badge}
           as="div"
-          className={`mt-8 label text-gold ${editEnabled ? "" : "opacity-0"}`}
+          className="mt-6 md:mt-8 label"
+          style={{ color: "#FFFFFF", opacity: 0.9 }}
         />
         <div
-          className="mt-10 flex flex-col sm:flex-row items-center gap-3 px-4 sm:px-0 w-full sm:w-auto"
+          className="mt-8 md:mt-10 flex flex-col sm:flex-row items-center gap-3 px-4 sm:px-0 w-full sm:w-auto"
           style={{ animation: "fadeUp 0.8s ease 1.6s both" }}
         >
           <CTAPrimary>Demander un devis gratuit</CTAPrimary>
@@ -646,7 +650,7 @@ function Hero() {
         </div>
       </div>
 
-      <div className="absolute bottom-10 left-6 z-10 origin-bottom-left -rotate-90 label text-gold whitespace-nowrap" style={{ transformOrigin: "left bottom" }}>
+      <div className="hidden md:block absolute bottom-10 left-6 z-10 origin-bottom-left -rotate-90 label whitespace-nowrap" style={{ transformOrigin: "left bottom", color: "#FFFFFF", opacity: 0.7 }}>
         Scroll pour découvrir
       </div>
       <EditableText
@@ -654,7 +658,8 @@ function Hero() {
         field="tagline"
         value={tagline}
         as="div"
-        className="absolute bottom-10 right-6 z-10 label text-gold"
+        className="absolute bottom-6 md:bottom-10 right-6 z-10 label"
+        style={{ color: "#FFFFFF", opacity: 0.75 }}
       />
     </section>
   );

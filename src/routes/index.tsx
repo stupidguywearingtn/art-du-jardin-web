@@ -1018,6 +1018,10 @@ function ProcessHeader() {
 function ProcessStep({ step, left }: { step: { n: string; t: string; d: string; img: string | null }; left: boolean }) {
   const [hover, setHover] = useState(false);
   const num = parseInt(step.n, 10);
+  const v = useV();
+  const t = v("process", `step_${step.n}_t`, step.t);
+  const d = v("process", `step_${step.n}_d`, step.d);
+  const img = step.img ? v("process", `step_${step.n}_img`, step.img) : null;
   return (
     <div
       data-step data-side={left ? "left" : "right"}
@@ -1025,21 +1029,25 @@ function ProcessStep({ step, left }: { step: { n: string; t: string; d: string; 
       onMouseLeave={() => setHover(false)}
       className={`relative ${left ? "md:col-start-1 md:text-right md:pr-16" : "md:col-start-2 md:text-left md:pl-16"}`}
     >
-      {step.img && (
+      {img && (
         <div className={`mb-4 overflow-hidden aspect-[4/3] max-w-sm ${left ? "md:ml-auto" : ""}`}>
-          <img
-            src={step.img}
-            alt={step.t}
-            loading="lazy"
-            className="w-full h-full object-cover transition-transform duration-700"
-            style={{ transform: hover ? "scale(1.05)" : "scale(1)" }}
-          />
+          <EditableImage section="process" field={`step_${step.n}_img`} value={img}>
+            {(url) => (
+              <img
+                src={url}
+                alt={t}
+                loading="lazy"
+                className="w-full h-full object-cover transition-transform duration-700"
+                style={{ transform: hover ? "scale(1.05)" : "scale(1)" }}
+              />
+            )}
+          </EditableImage>
         </div>
       )}
       <div className="relative">
         <div data-step-num={num} className="font-display text-gold" style={{ fontSize: "clamp(40px, 6vw, 80px)", fontWeight: 300, lineHeight: 1 }}>00</div>
-        <h3 className="font-display text-foreground mt-2" style={{ fontSize: "clamp(20px, 2.4vw, 32px)", fontWeight: 400 }}>{step.t}</h3>
-        <p className="mt-3 md:mt-4 text-muted max-w-sm" style={{ marginLeft: left ? "auto" : 0 }}>{step.d}</p>
+        <EditableText section="process" field={`step_${step.n}_t`} value={t} as="h3" className="font-display text-foreground mt-2" style={{ fontSize: "clamp(20px, 2.4vw, 32px)", fontWeight: 400 }} />
+        <EditableText section="process" field={`step_${step.n}_d`} value={d} as="p" className="mt-3 md:mt-4 text-muted max-w-sm" style={{ marginLeft: left ? "auto" : 0 }} multiline />
       </div>
     </div>
   );

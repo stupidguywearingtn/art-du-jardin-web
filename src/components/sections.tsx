@@ -50,37 +50,29 @@ export function WhyUs() {
         </h2>
       </div>
 
-      <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="max-w-6xl mx-auto grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-6">
         {REASONS.map((r) => (
           <div
             key={r.n}
             data-card
             data-cursor-hover
-            className="relative p-8 group"
-            style={{ minHeight: 280 }}
+            className="relative group transition-all duration-300 hover:-translate-y-1"
+            style={{
+              background: "rgba(255,255,255,0.03)",
+              border: "1px solid rgba(255,255,255,0.08)",
+              borderRadius: 12,
+              padding: "1.25rem",
+              backdropFilter: "blur(10px)",
+            }}
           >
-            <svg
-              className="absolute inset-0 w-full h-full pointer-events-none"
-              viewBox="0 0 300 280" preserveAspectRatio="none" aria-hidden
-            >
-              <path
-                data-stroke
-                d="M 4 4 L 296 4 L 296 276 L 4 276 Z"
-                fill="none"
-                stroke="rgb(200 153 42 / 0.6)"
-                strokeWidth="1"
-                strokeDasharray="6 4"
-                vectorEffect="non-scaling-stroke"
-              />
-            </svg>
-            <div className="relative">
-              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" className="text-gold mb-6" strokeWidth="1.2">
+            <div className="flex items-start justify-between mb-3">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" className="text-gold" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round">
                 <path d={r.icon} />
               </svg>
-              <div className="font-display text-gold/60 mb-2" style={{ fontSize: 14, letterSpacing: "0.2em" }}>{r.n}</div>
-              <h3 className="font-display text-foreground" style={{ fontSize: 24, fontWeight: 400 }}>{r.t}</h3>
-              <p className="mt-4 text-muted" style={{ fontSize: 14, lineHeight: 1.6 }}>{r.d}</p>
+              <div className="font-display text-gold/70" style={{ fontSize: 11, letterSpacing: "0.2em" }}>{r.n}</div>
             </div>
+            <h3 className="font-display text-foreground" style={{ fontSize: "clamp(16px, 2.2vw, 20px)", fontWeight: 500, lineHeight: 1.2 }}>{r.t}</h3>
+            <p className="mt-2 text-muted" style={{ fontSize: 13, lineHeight: 1.55 }}>{r.d}</p>
           </div>
         ))}
       </div>

@@ -1250,6 +1250,7 @@ function CTAFinal() {
 function Footer() {
   const { get } = useSiteContent();
   const services = get("services", SERVICES) as typeof SERVICES;
+  const v = useV();
   return (
     <footer className="relative overflow-hidden pt-24 pb-10 px-6 md:px-12" style={{ background: "var(--footer)" }}>
       <div
@@ -1261,11 +1262,11 @@ function Footer() {
       </div>
       <div className="relative grid grid-cols-1 md:grid-cols-3 gap-12">
         <div>
-          <div className="font-display text-gold" style={{ fontSize: 56, fontWeight: 400, lineHeight: 1 }}>HCE</div>
-          <p className="mt-4 text-muted italic font-display" style={{ fontSize: 18 }}>Aménagement de cours & enrobés</p>
+          <EditableText section="footer" field="brand" value={v("footer", "brand", "HCE")} as="div" className="font-display text-gold" style={{ fontSize: 56, fontWeight: 400, lineHeight: 1 }} />
+          <EditableText section="footer" field="tagline" value={v("footer", "tagline", "Aménagement de cours & enrobés")} as="p" className="mt-4 text-muted italic font-display" style={{ fontSize: 18 }} />
         </div>
         <div>
-          <div className="label text-gold mb-6">Services</div>
+          <EditableText section="footer" field="services_title" value={v("footer", "services_title", "Services")} as="div" className="label text-gold mb-6" />
           <ul className="space-y-3 text-foreground/80" style={{ fontSize: 14 }}>
             {services.map((s) => (
               <li key={s.n}>
@@ -1275,18 +1276,18 @@ function Footer() {
           </ul>
         </div>
         <div>
-          <div className="label text-gold mb-6">Contact</div>
+          <EditableText section="footer" field="contact_title" value={v("footer", "contact_title", "Contact")} as="div" className="label text-gold mb-6" />
           <ul className="space-y-3 text-foreground/80" style={{ fontSize: 14 }}>
-            <li>40 avenue Etienne Lamy, 39300 Cize</li>
-            <li><a href="tel:0384526148" className="transition-colors hover:text-gold">03 84 52 61 48</a></li>
-            <li><a href="mailto:sarl.hce@laposte.net" className="transition-colors hover:text-gold">sarl.hce@laposte.net</a></li>
-            <li>Lun-Ven 8h-18h · Sam 8h-12h</li>
+            <li><EditableText section="footer" field="address" value={v("footer", "address", "40 avenue Etienne Lamy, 39300 Cize")} as="span" /></li>
+            <li><a href="tel:0384526148" className="transition-colors hover:text-gold"><EditableText section="footer" field="phone" value={v("footer", "phone", "03 84 52 61 48")} as="span" /></a></li>
+            <li><a href="mailto:sarl.hce@laposte.net" className="transition-colors hover:text-gold"><EditableText section="footer" field="email" value={v("footer", "email", "sarl.hce@laposte.net")} as="span" /></a></li>
+            <li><EditableText section="footer" field="hours" value={v("footer", "hours", "Lun-Ven 8h-18h · Sam 8h-12h")} as="span" /></li>
           </ul>
         </div>
       </div>
       <div className="relative mt-24 pt-8 border-t border-gold/30 flex flex-wrap items-center justify-between gap-4 text-muted" style={{ fontSize: 12 }}>
-        <span>© 2025 HCE SARL · Tous droits réservés</span>
-        <span>Cize, Jura — 03 84 52 61 48</span>
+        <EditableText section="footer" field="copyright" value={v("footer", "copyright", "© 2025 HCE SARL · Tous droits réservés")} as="span" />
+        <EditableText section="footer" field="meta" value={v("footer", "meta", "Cize, Jura — 03 84 52 61 48")} as="span" />
       </div>
     </footer>
   );

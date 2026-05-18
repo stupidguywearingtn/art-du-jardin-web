@@ -343,7 +343,7 @@ function Galerie() {
   const closeAll = () => { setLightbox(null); setOpenCat(null); };
 
   return (
-    <section className="relative w-full bg-background py-16 md:py-24 px-4 md:px-12 overflow-hidden">
+    <section className="relative w-full bg-depth-a py-16 md:py-24 px-4 md:px-12 overflow-hidden">
       <GiantNumber n="05" position="right" />
       <div className="max-w-6xl mx-auto text-center mb-10 md:mb-14">
         <div className="label text-gold">— 500+ chantiers livrés depuis 2005</div>
@@ -393,7 +393,25 @@ function Galerie() {
             style={{ background: "rgba(14,14,15,0.95)" }}
             onClick={closeAll}
           >
-            <button onClick={(e) => { e.stopPropagation(); closeAll(); }} className="absolute top-4 right-4 text-gold text-4xl leading-none p-2" aria-label="Fermer">×</button>
+            <button
+              onClick={(e) => { e.stopPropagation(); closeAll(); }}
+              className="absolute z-[9999] flex items-center justify-center transition-all duration-200"
+              style={{
+                top: "1rem", right: "1rem",
+                width: 48, height: 48,
+                background: "rgba(0,0,0,0.5)",
+                backdropFilter: "blur(8px)",
+                WebkitBackdropFilter: "blur(8px)",
+                borderRadius: "50%",
+                border: "1px solid rgba(255,255,255,0.2)",
+                color: "#FFFFFF",
+              }}
+              onMouseEnter={(e) => { e.currentTarget.style.background = "rgba(0,0,0,0.8)"; e.currentTarget.style.transform = "scale(1.05)"; }}
+              onMouseLeave={(e) => { e.currentTarget.style.background = "rgba(0,0,0,0.5)"; e.currentTarget.style.transform = "scale(1)"; }}
+              aria-label="Fermer"
+            >
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><path d="M18 6 6 18M6 6l12 12" /></svg>
+            </button>
             <div className="absolute top-4 left-4 label text-gold/80" style={{ fontSize: 11 }}>{openCat} · {lightbox + 1}/{photos.length}</div>
             <button onClick={(e) => { e.stopPropagation(); setLightbox(((lightbox - 1) + photos.length) % photos.length); }} className="absolute left-2 md:left-8 text-gold text-4xl p-4" aria-label="Précédent">‹</button>
             <button onClick={(e) => { e.stopPropagation(); setLightbox((lightbox + 1) % photos.length); }} className="absolute right-2 md:right-8 text-gold text-4xl p-4" aria-label="Suivant">›</button>
@@ -817,14 +835,24 @@ function ServiceStrip({ n, t, img, slug }: { n: string; t: string; img: string; 
         className="absolute inset-0 bg-cover bg-center transition-opacity duration-700"
         style={{ backgroundImage: `url(${img})`, opacity: expanded ? 1 : 0 }}
       />
-      {/* overlay sombre OBLIGATOIRE pour garantir la lisibilité du texte blanc */}
+      {/* dégradé directionnel fort pour garantir lisibilité du texte blanc */}
       <div
         className="absolute inset-0 transition-opacity duration-700"
-        style={{ background: "linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6))", opacity: expanded ? 1 : 0 }}
+        style={{
+          background:
+            "linear-gradient(90deg, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.78) 45%, rgba(0,0,0,0.55) 75%, rgba(0,0,0,0.35) 100%)",
+          opacity: expanded ? 1 : 0,
+        }}
       />
       <div className="relative z-10 h-full grid grid-cols-12 items-center px-6 md:px-12 gap-4 md:gap-6">
-        <div className="col-span-2 font-display text-gold" style={{ fontSize: "clamp(32px, 6vw, 80px)", fontWeight: 300, lineHeight: 1 }}>{n}</div>
-        <div className="col-span-8 font-display relative inline-block" style={{ fontSize: "clamp(18px, 3vw, 36px)", fontWeight: 400, color: expanded ? "#FFFFFF" : "var(--foreground)" }}>
+        <div
+          className="col-span-2 font-display text-gold"
+          style={{ fontSize: "clamp(32px, 6vw, 80px)", fontWeight: 300, lineHeight: 1, textShadow: expanded ? "0 2px 8px rgba(0,0,0,0.8), 0 0 2px rgba(0,0,0,0.6)" : "none" }}
+        >{n}</div>
+        <div
+          className="col-span-8 font-display relative inline-block"
+          style={{ fontSize: "clamp(18px, 3vw, 36px)", fontWeight: 400, color: expanded ? "#FFFFFF" : "var(--foreground)", textShadow: expanded ? "0 2px 8px rgba(0,0,0,0.8), 0 0 2px rgba(0,0,0,0.6)" : "none" }}
+        >
           <span className="relative inline-block">
             {t}
             <span
@@ -834,7 +862,7 @@ function ServiceStrip({ n, t, img, slug }: { n: string; t: string; img: string; 
           </span>
         </div>
         <div className="col-span-2 flex justify-end">
-          <span className="text-gold text-2xl md:text-4xl inline-block transition-transform duration-500" style={{ transform: h ? "rotate(45deg)" : "rotate(0deg)" }}>→</span>
+          <span className="text-gold text-2xl md:text-4xl inline-block transition-transform duration-500" style={{ transform: h ? "rotate(45deg)" : "rotate(0deg)", textShadow: expanded ? "0 2px 6px rgba(0,0,0,0.7)" : "none" }}>→</span>
         </div>
       </div>
     </Link>
@@ -915,8 +943,8 @@ function Transformation() {
 /* ============ PROCESS ============ */
 const PROCESS = [
   { n: "01", t: "Visite & Devis", d: "Déplacement gratuit, lecture du terrain et devis détaillé sous 48h.", img: null as string | null },
-  { n: "02", t: "Préparation du sol", d: "Décaissement, nivellement laser, compactage et drainage maîtrisés.", img: "/photos/06-chantier-bobcat-preparation.jpg" },
-  { n: "03", t: "Pose & Finitions", d: "Enrobé à chaud au finisseur, bordures et maçonnerie soignées.", img: "/photos/01-hero-finisseur-vapeur-sunset.jpg" },
+  { n: "02", t: "Préparation du sol", d: "Décaissement, nivellement laser, compactage et drainage maîtrisés.", img: "/photos/07-chantier-terrain-brouette.jpg" },
+  { n: "03", t: "Pose & Finitions", d: "Enrobé à chaud au finisseur, bordures et maçonnerie soignées.", img: "/photos/10-detail-texture-enrobe-frais.jpg" },
   { n: "04", t: "Garantie & SAV", d: "Travaux garantis, intervention rapide en cas de besoin.", img: "/photos/03-hero-rouleau-compacteur.jpg" },
 ];
 
@@ -971,7 +999,7 @@ function Process() {
   }, []);
 
   return (
-    <section className="relative bg-background py-16 md:py-24 px-6 md:px-12 overflow-hidden">
+    <section className="relative bg-depth-b py-16 md:py-24 px-6 md:px-12 overflow-hidden">
       <CornerGlow corner="tr" tint="gold" />
       <CornerGlow corner="bl" tint="green" />
       <GiantNumber n="03" position="right" />
@@ -1113,7 +1141,7 @@ function Testimonials() {
   }, [isMobile]);
 
   return (
-    <section className="relative bg-background flex items-center justify-center px-6 py-20 md:py-28 overflow-hidden">
+    <section className="relative bg-background flex items-center justify-center px-6 py-12 md:py-28 overflow-hidden">
       <div aria-hidden className="absolute inset-0" style={{ background: "linear-gradient(180deg, var(--background) 0%, var(--surface) 50%, var(--background) 100%)" }} />
       <div className="grain-overlay animated" aria-hidden />
       <GiantNumber n="04" position="left" />

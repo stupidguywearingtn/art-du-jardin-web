@@ -8,13 +8,13 @@ const baseStyle: React.CSSProperties = {
   fontSize: 15,
   letterSpacing: "0.02em",
   fontWeight: 500,
-  borderRadius: 4,
-  padding: "14px 28px",
+  borderRadius: 6,
+  padding: "0.85rem 1.75rem",
   display: "inline-flex",
   alignItems: "center",
   justifyContent: "center",
   gap: 8,
-  transition: "all 0.2s ease",
+  transition: "all 200ms ease",
   textDecoration: "none",
   whiteSpace: "nowrap",
 };
@@ -24,10 +24,16 @@ type CTAProps = { children?: React.ReactNode; href?: string; className?: string;
 export function CTAPrimary({ children = "Demander un devis", href = "#devis", className = "", compact = false, invert = false }: CTAProps) {
   const style: React.CSSProperties = {
     ...baseStyle,
-    padding: compact ? "10px 20px" : baseStyle.padding,
-    fontSize: compact ? 13 : 15,
-    background: invert ? "var(--creme-50)" : "var(--cuivre-500)",
-    color: invert ? "var(--cuivre-600)" : "var(--creme-50)",
+    padding: compact ? "0.6rem 1.25rem" : baseStyle.padding,
+    fontSize: compact ? 13 : "0.95rem",
+    background: invert
+      ? "linear-gradient(135deg, #f4efe6 0%, #eae3d6 100%)"
+      : "linear-gradient(135deg, #a06b48 0%, #8a5a3a 100%)",
+    color: invert ? "var(--cuivre-600)" : "#FFFFFF",
+    border: invert ? "1px solid rgba(0,0,0,0.06)" : "1px solid rgba(255,255,255,0.1)",
+    boxShadow: invert
+      ? "0 1px 2px rgba(0,0,0,0.08), 0 4px 12px rgba(0,0,0,0.06)"
+      : "0 1px 2px rgba(0,0,0,0.3), 0 4px 12px rgba(0,0,0,0.15), inset 0 1px 0 rgba(255,255,255,0.12)",
   };
   return (
     <a

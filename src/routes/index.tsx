@@ -5,7 +5,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { motion, AnimatePresence } from "framer-motion";
 import { CustomCursor } from "@/components/CustomCursor";
 import { SmoothScroll } from "@/components/SmoothScroll";
-import { WhyUs, Zone, FAQ, QuoteForm } from "@/components/sections";
+import { WhyUs, Zone, FAQ, FAQS, QuoteForm } from "@/components/sections";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { Link } from "@tanstack/react-router";
 import { CTABanner, CTAPrimary, CTASecondary, CTAInline, MobileFloatingCTA } from "@/components/CTAButtons";

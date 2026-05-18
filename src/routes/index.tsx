@@ -817,14 +817,24 @@ function ServiceStrip({ n, t, img, slug }: { n: string; t: string; img: string; 
         className="absolute inset-0 bg-cover bg-center transition-opacity duration-700"
         style={{ backgroundImage: `url(${img})`, opacity: expanded ? 1 : 0 }}
       />
-      {/* overlay sombre OBLIGATOIRE pour garantir la lisibilité du texte blanc */}
+      {/* dégradé directionnel fort pour garantir lisibilité du texte blanc */}
       <div
         className="absolute inset-0 transition-opacity duration-700"
-        style={{ background: "linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6))", opacity: expanded ? 1 : 0 }}
+        style={{
+          background:
+            "linear-gradient(90deg, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.78) 45%, rgba(0,0,0,0.55) 75%, rgba(0,0,0,0.35) 100%)",
+          opacity: expanded ? 1 : 0,
+        }}
       />
       <div className="relative z-10 h-full grid grid-cols-12 items-center px-6 md:px-12 gap-4 md:gap-6">
-        <div className="col-span-2 font-display text-gold" style={{ fontSize: "clamp(32px, 6vw, 80px)", fontWeight: 300, lineHeight: 1 }}>{n}</div>
-        <div className="col-span-8 font-display relative inline-block" style={{ fontSize: "clamp(18px, 3vw, 36px)", fontWeight: 400, color: expanded ? "#FFFFFF" : "var(--foreground)" }}>
+        <div
+          className="col-span-2 font-display text-gold"
+          style={{ fontSize: "clamp(32px, 6vw, 80px)", fontWeight: 300, lineHeight: 1, textShadow: expanded ? "0 2px 8px rgba(0,0,0,0.8), 0 0 2px rgba(0,0,0,0.6)" : "none" }}
+        >{n}</div>
+        <div
+          className="col-span-8 font-display relative inline-block"
+          style={{ fontSize: "clamp(18px, 3vw, 36px)", fontWeight: 400, color: expanded ? "#FFFFFF" : "var(--foreground)", textShadow: expanded ? "0 2px 8px rgba(0,0,0,0.8), 0 0 2px rgba(0,0,0,0.6)" : "none" }}
+        >
           <span className="relative inline-block">
             {t}
             <span
@@ -834,7 +844,7 @@ function ServiceStrip({ n, t, img, slug }: { n: string; t: string; img: string; 
           </span>
         </div>
         <div className="col-span-2 flex justify-end">
-          <span className="text-gold text-2xl md:text-4xl inline-block transition-transform duration-500" style={{ transform: h ? "rotate(45deg)" : "rotate(0deg)" }}>→</span>
+          <span className="text-gold text-2xl md:text-4xl inline-block transition-transform duration-500" style={{ transform: h ? "rotate(45deg)" : "rotate(0deg)", textShadow: expanded ? "0 2px 6px rgba(0,0,0,0.7)" : "none" }}>→</span>
         </div>
       </div>
     </Link>

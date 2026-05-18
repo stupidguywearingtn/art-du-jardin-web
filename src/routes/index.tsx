@@ -196,14 +196,14 @@ function GesteMatiere() {
             {(url) => (
               <img
                 src={url}
-                alt={v("geste", "image_alt", "Finisseur HCE posant l'enrobé à chaud à 160°C, vapeur visible au coucher de soleil")}
+                alt={v("geste", "image_alt", "HCE posant l'enrobé à chaud à la main à 160°C, vapeur visible au coucher de soleil")}
                 loading="lazy"
                 className="absolute inset-0 w-full h-full object-cover"
               />
             )}
           </EditableImage>
         </div>
-        <div className="md:col-span-2 flex items-center px-6 md:px-12 py-16 md:py-24">
+        <div className="md:col-span-2 flex items-center px-6 md:px-12 py-12 md:py-24">
           <div>
             <EditableText section="geste" field="label" value={v("geste", "label", "— Le geste & la matière")} as="div" className="label text-gold" />
             <EditableText
@@ -218,7 +218,7 @@ function GesteMatiere() {
             <EditableText
               section="geste"
               field="paragraph"
-              value={v("geste", "paragraph", "Bitume noir, rouge, saumon ou bordeaux — posé au finisseur, compacté au rouleau, contrôlé à la tranche. Une matière vivante qui prend forme sous nos mains et tient dans le temps.")}
+              value={v("geste", "paragraph", "Bitume noir, rouge, saumon ou bordeaux — posé à la main, compacté au rouleau, contrôlé à la tranche. Une matière vivante qui prend forme sous nos mains et tient dans le temps.")}
               as="p"
               className="mt-8 text-muted max-w-md"
               style={{ lineHeight: 1.7 }}

@@ -186,33 +186,49 @@ function SiteHeader() {
 
 /* ============ GESTE & MATIÈRE ============ */
 function GesteMatiere() {
+  const v = useV();
+  const img = v("geste", "image", "/photos/01-hero-finisseur-vapeur-sunset.jpg");
   return (
     <section className="relative w-full bg-asphalte overflow-hidden">
       <div className="grid grid-cols-1 md:grid-cols-5 min-h-[80vh]">
         <div className="md:col-span-3 relative">
-          <img
-            src="/photos/01-hero-finisseur-vapeur-sunset.jpg"
-            alt="Finisseur HCE posant l'enrobé à chaud à 160°C, vapeur visible au coucher de soleil"
-            loading="lazy"
-            className="absolute inset-0 w-full h-full object-cover"
-          />
+          <EditableImage section="geste" field="image" value={img}>
+            {(url) => (
+              <img
+                src={url}
+                alt={v("geste", "image_alt", "Finisseur HCE posant l'enrobé à chaud à 160°C, vapeur visible au coucher de soleil")}
+                loading="lazy"
+                className="absolute inset-0 w-full h-full object-cover"
+              />
+            )}
+          </EditableImage>
         </div>
         <div className="md:col-span-2 flex items-center px-6 md:px-12 py-16 md:py-24">
           <div>
-            <div className="label text-gold">— Le geste & la matière</div>
-            <h2 className="font-display mt-6 text-foreground" style={{ fontSize: "clamp(32px, 4vw, 56px)", fontWeight: 400, lineHeight: 1.05 }}>
-              L'enrobé à chaud,<br/>à <span className="italic text-gold">160°C</span>.<br/>Posé. Compacté. Garanti.
-            </h2>
-            <p className="mt-8 text-muted max-w-md" style={{ lineHeight: 1.7 }}>
-              Bitume noir, rouge, saumon ou bordeaux — posé au finisseur, compacté au rouleau, contrôlé à la tranche. Une matière vivante qui prend forme sous nos mains et tient dans le temps.
-            </p>
+            <EditableText section="geste" field="label" value={v("geste", "label", "— Le geste & la matière")} as="div" className="label text-gold" />
+            <EditableText
+              section="geste"
+              field="title"
+              value={v("geste", "title", "L'enrobé à chaud, à 160°C. Posé. Compacté. Garanti.")}
+              as="h2"
+              className="font-display mt-6 text-foreground"
+              multiline
+            />
+            <EditableText
+              section="geste"
+              field="paragraph"
+              value={v("geste", "paragraph", "Bitume noir, rouge, saumon ou bordeaux — posé au finisseur, compacté au rouleau, contrôlé à la tranche. Une matière vivante qui prend forme sous nos mains et tient dans le temps.")}
+              as="p"
+              className="mt-8 text-muted max-w-md"
+              multiline
+            />
             <Link
               to="/services/enrobe-a-chaud"
               data-cursor-hover
               className="inline-flex items-center gap-3 mt-10 text-gold border-b border-gold/40 pb-1 hover:border-gold transition-colors"
               style={{ fontFamily: "Outfit", fontSize: 13, letterSpacing: "0.15em", textTransform: "uppercase" }}
             >
-              En savoir plus <span aria-hidden>→</span>
+              <EditableText section="geste" field="cta" value={v("geste", "cta", "En savoir plus")} as="span" /> <span aria-hidden>→</span>
             </Link>
           </div>
         </div>

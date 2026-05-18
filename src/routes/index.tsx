@@ -828,6 +828,7 @@ function ServiceStrip({ n, t, img, slug }: { n: string; t: string; img: string; 
 /* ============ TRANSFORMATION ============ */
 function Transformation() {
   const statsRef = useRef<HTMLDivElement>(null);
+  const v = useV();
 
   useEffect(() => {
     if (!statsRef.current) return;

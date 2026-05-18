@@ -960,10 +960,7 @@ function Process() {
       <GiantNumber n="03" position="right" />
       <TechnicalMark className="hidden md:block" style={{ top: "20%", left: "2%", width: 140, height: 280, transform: "rotate(-4deg)" }} />
       <div className="max-w-3xl mx-auto text-center mb-16 md:mb-24">
-        <div className="label text-gold">— Notre processus</div>
-        <h2 className="font-display mt-6 text-foreground" style={{ fontSize: "clamp(36px, 6vw, 80px)", fontWeight: 400, lineHeight: 0.95 }}>
-          Quatre étapes,<br/><span className="italic text-gold">un engagement.</span>
-        </h2>
+        <ProcessHeader />
       </div>
 
       <div ref={ref} className="relative max-w-6xl mx-auto">

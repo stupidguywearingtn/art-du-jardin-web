@@ -1141,8 +1141,8 @@ function Testimonials() {
   }, [isMobile]);
 
   return (
-    <section className="relative bg-background flex items-center justify-center px-6 py-12 md:py-28 overflow-hidden">
-      <div aria-hidden className="absolute inset-0" style={{ background: "linear-gradient(180deg, var(--background) 0%, var(--surface) 50%, var(--background) 100%)" }} />
+    <section className="relative bg-depth-d flex items-center justify-center px-6 py-12 md:py-28 overflow-hidden">
+      <div aria-hidden className="absolute inset-0 pointer-events-none" style={{ background: "linear-gradient(180deg, transparent 0%, rgba(255,255,255,0.02) 50%, transparent 100%)" }} />
       <div className="grain-overlay animated" aria-hidden />
       <GiantNumber n="04" position="left" />
       <TechnicalMark className="hidden md:block" style={{ top: "10%", right: "3%", width: 160, height: 320, transform: "rotate(6deg)" }} />

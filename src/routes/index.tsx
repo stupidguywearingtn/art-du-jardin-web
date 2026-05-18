@@ -830,8 +830,8 @@ function ServiceStrip({ n, t, img, slug }: { n: string; t: string; img: string; 
       data-strip data-cursor-hover
       onMouseEnter={() => setH(true)}
       onMouseLeave={() => setH(false)}
-      className="relative block w-full overflow-hidden border-b cursor-none transition-[height] duration-700 ease-out"
-      style={{ height: expanded ? (isMobile ? 220 : 400) : 200, borderColor: "#2E2E2E" }}
+      className="relative block w-full overflow-hidden cursor-none transition-[height] duration-700 ease-out"
+      style={{ height: expanded ? (isMobile ? 220 : 400) : 200 }}
     >
       <div
         className="absolute inset-0 bg-cover bg-center transition-opacity duration-700"

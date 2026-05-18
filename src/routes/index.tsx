@@ -242,7 +242,10 @@ function GesteMatiere() {
 /* ============ MATIÈRE & FINITIONS ============ */
 function MatiereFinitions() {
   const ref = useRef<HTMLDivElement>(null);
+  const v = useV();
+  const { enabled: editEnabled } = useEditMode();
   useEffect(() => {
+    if (editEnabled) return;
     if (!ref.current) return;
     const cards = ref.current.querySelectorAll("[data-mf-card]");
     cards.forEach((c, i) => {
@@ -251,8 +254,8 @@ function MatiereFinitions() {
         scrollTrigger: { trigger: c, start: "top 88%" },
       });
     });
-  }, []);
-  const items = [
+  }, [editEnabled]);
+  const defaults = [
     { img: "/photos/02-hero-medaillon-paves.jpg", t: "Pavés sur mesure", d: "Médaillons et inserts pavés intégrés à l'enrobé pour personnaliser votre cour." },
     { img: "/photos/09-detail-bordure-beton.jpg", t: "Bordures nettes", d: "Tranches précises et finitions au millimètre, pour un rendu durable et propre." },
     { img: "/photos/10-detail-texture-enrobe-frais.jpg", t: "Grain & compactage", d: "Enrobé à chaud posé au finisseur à 160°C, compacté pour résister à la décennie." },
@@ -260,23 +263,34 @@ function MatiereFinitions() {
   return (
     <section className="relative w-full bg-cream py-24 md:py-32 px-6 md:px-12 overflow-hidden">
       <div className="max-w-3xl mx-auto text-center mb-16">
-        <div className="label" style={{ color: "var(--cuivre-500)" }}>— Détails & finitions</div>
-        <h2 className="font-display mt-6" style={{ color: "var(--asphalte-900)", fontSize: "clamp(36px, 6vw, 72px)", fontWeight: 400, lineHeight: 1 }}>
-          La matière fait<br/><span className="italic" style={{ color: "var(--cuivre-500)" }}>la différence.</span>
-        </h2>
+        <EditableText section="matiere" field="label" value={v("matiere", "label", "— Détails & finitions")} as="div" className="label" style={{ color: "var(--cuivre-500)" }} />
+        <EditableText
+          section="matiere"
+          field="title"
+          value={v("matiere", "title", "La matière fait\nla différence.")}
+          as="h2"
+          className="font-display mt-6"
+          style={{ color: "var(--asphalte-900)", fontSize: "clamp(36px, 6vw, 72px)", fontWeight: 400, lineHeight: 1 }}
+          multiline
+        />
       </div>
       <div ref={ref} className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 max-w-6xl mx-auto">
-        {items.map((it) => (
-          <article key={it.t} data-mf-card data-cursor-hover className="group bg-[var(--creme-100)] overflow-hidden border-l-4 transition-all duration-500 hover:-translate-y-1" style={{ borderColor: "var(--cuivre-500)" }}>
-            <div className="aspect-[4/3] overflow-hidden">
-              <img src={it.img} alt={it.t} loading="lazy" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
-            </div>
-            <div className="p-6">
-              <h3 className="font-display" style={{ color: "var(--asphalte-900)", fontSize: 24, fontWeight: 500 }}>{it.t}</h3>
-              <p className="mt-3" style={{ color: "var(--asphalte-700)", fontSize: 14, lineHeight: 1.6 }}>{it.d}</p>
-            </div>
-          </article>
-        ))}
+        {defaults.map((it, i) => {
+          const img = v("matiere", `item_${i}_img`, it.img);
+          return (
+            <article key={i} data-mf-card data-cursor-hover className="group bg-[var(--creme-100)] overflow-hidden border-l-4 transition-all duration-500 hover:-translate-y-1" style={{ borderColor: "var(--cuivre-500)" }}>
+              <div className="aspect-[4/3] overflow-hidden">
+                <EditableImage section="matiere" field={`item_${i}_img`} value={img}>
+                  {(url) => <img src={url} alt={it.t} loading="lazy" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />}
+                </EditableImage>
+              </div>
+              <div className="p-6">
+                <EditableText section="matiere" field={`item_${i}_t`} value={v("matiere", `item_${i}_t`, it.t)} as="h3" className="font-display" style={{ color: "var(--asphalte-900)", fontSize: 24, fontWeight: 500 }} />
+                <EditableText section="matiere" field={`item_${i}_d`} value={v("matiere", `item_${i}_d`, it.d)} as="p" className="mt-3" style={{ color: "var(--asphalte-700)", fontSize: 14, lineHeight: 1.6 }} multiline />
+              </div>
+            </article>
+          );
+        })}
       </div>
     </section>
   );
@@ -814,6 +828,7 @@ function ServiceStrip({ n, t, img, slug }: { n: string; t: string; img: string; 
 /* ============ TRANSFORMATION ============ */
 function Transformation() {
   const statsRef = useRef<HTMLDivElement>(null);
+  const v = useV();
 
   useEffect(() => {
     if (!statsRef.current) return;
@@ -840,13 +855,24 @@ function Transformation() {
       <div className="absolute inset-x-0 bottom-0 h-[30%]" style={{ background: "linear-gradient(to bottom, transparent, #1E1E1E)" }} />
 
       <div className="relative z-10 h-full w-full flex flex-col items-center justify-center text-center px-6">
-        <div className="label text-gold">— Avant / Après</div>
-        <h2 className="font-display mt-6 text-foreground" style={{ fontSize: "clamp(40px, 6vw, 88px)", fontWeight: 400, lineHeight: 1.05 }}>
-          De la Cour Brute<br/>à <span className="italic" style={{ color: "var(--sable-500)" }}>l'Enrobé d'Exception</span>
-        </h2>
-        <p className="mt-8 text-muted max-w-xl mx-auto">
-          Chaque chantier débute par une lecture du terrain — sols, pentes, drainage, usages — pour garantir un enrobé qui dure dans le temps.
-        </p>
+        <EditableText section="transformation" field="label" value={v("transformation", "label", "— Avant / Après")} as="div" className="label text-gold" />
+        <EditableText
+          section="transformation"
+          field="title"
+          value={v("transformation", "title", "De la Cour Brute\nà l'Enrobé d'Exception")}
+          as="h2"
+          className="font-display mt-6 text-foreground"
+          style={{ fontSize: "clamp(40px, 6vw, 88px)", fontWeight: 400, lineHeight: 1.05 }}
+          multiline
+        />
+        <EditableText
+          section="transformation"
+          field="text"
+          value={v("transformation", "text", "Chaque chantier débute par une lecture du terrain — sols, pentes, drainage, usages — pour garantir un enrobé qui dure dans le temps.")}
+          as="p"
+          className="mt-8 text-muted max-w-xl mx-auto"
+          multiline
+        />
         <div ref={statsRef} className="mt-14 grid grid-cols-3 gap-8 md:gap-16 max-w-3xl mx-auto">
           {[
             { n: 20, suf: "+", l: "Années" },
@@ -857,7 +883,7 @@ function Transformation() {
               <div className="font-display flex items-baseline justify-center gap-1" style={{ color: "var(--creme-50)", fontSize: "clamp(36px, 5vw, 72px)", fontWeight: 400, lineHeight: 1 }}>
                 <span data-num={s.n}>0</span><span style={{ color: "var(--sable-500)" }}>{s.suf}</span>
               </div>
-              <div className="label text-foreground/80 mt-3">{s.l}</div>
+              <EditableText section="transformation" field={`stat_${i}_l`} value={v("transformation", `stat_${i}_l`, s.l)} as="div" className="label text-foreground/80 mt-3" />
             </div>
           ))}
         </div>
@@ -934,10 +960,7 @@ function Process() {
       <GiantNumber n="03" position="right" />
       <TechnicalMark className="hidden md:block" style={{ top: "20%", left: "2%", width: 140, height: 280, transform: "rotate(-4deg)" }} />
       <div className="max-w-3xl mx-auto text-center mb-16 md:mb-24">
-        <div className="label text-gold">— Notre processus</div>
-        <h2 className="font-display mt-6 text-foreground" style={{ fontSize: "clamp(36px, 6vw, 80px)", fontWeight: 400, lineHeight: 0.95 }}>
-          Quatre étapes,<br/><span className="italic text-gold">un engagement.</span>
-        </h2>
+        <ProcessHeader />
       </div>
 
       <div ref={ref} className="relative max-w-6xl mx-auto">
@@ -974,9 +997,31 @@ function Process() {
   );
 }
 
+function ProcessHeader() {
+  const v = useV();
+  return (
+    <>
+      <EditableText section="process" field="label" value={v("process", "label", "— Notre processus")} as="div" className="label text-gold" />
+      <EditableText
+        section="process"
+        field="title"
+        value={v("process", "title", "Quatre étapes,\nun engagement.")}
+        as="h2"
+        className="font-display mt-6 text-foreground"
+        style={{ fontSize: "clamp(36px, 6vw, 80px)", fontWeight: 400, lineHeight: 0.95 }}
+        multiline
+      />
+    </>
+  );
+}
+
 function ProcessStep({ step, left }: { step: { n: string; t: string; d: string; img: string | null }; left: boolean }) {
   const [hover, setHover] = useState(false);
   const num = parseInt(step.n, 10);
+  const v = useV();
+  const t = v("process", `step_${step.n}_t`, step.t);
+  const d = v("process", `step_${step.n}_d`, step.d);
+  const img = step.img ? v("process", `step_${step.n}_img`, step.img) : null;
   return (
     <div
       data-step data-side={left ? "left" : "right"}
@@ -984,21 +1029,25 @@ function ProcessStep({ step, left }: { step: { n: string; t: string; d: string; 
       onMouseLeave={() => setHover(false)}
       className={`relative ${left ? "md:col-start-1 md:text-right md:pr-16" : "md:col-start-2 md:text-left md:pl-16"}`}
     >
-      {step.img && (
+      {img && (
         <div className={`mb-4 overflow-hidden aspect-[4/3] max-w-sm ${left ? "md:ml-auto" : ""}`}>
-          <img
-            src={step.img}
-            alt={step.t}
-            loading="lazy"
-            className="w-full h-full object-cover transition-transform duration-700"
-            style={{ transform: hover ? "scale(1.05)" : "scale(1)" }}
-          />
+          <EditableImage section="process" field={`step_${step.n}_img`} value={img}>
+            {(url) => (
+              <img
+                src={url}
+                alt={t}
+                loading="lazy"
+                className="w-full h-full object-cover transition-transform duration-700"
+                style={{ transform: hover ? "scale(1.05)" : "scale(1)" }}
+              />
+            )}
+          </EditableImage>
         </div>
       )}
       <div className="relative">
         <div data-step-num={num} className="font-display text-gold" style={{ fontSize: "clamp(40px, 6vw, 80px)", fontWeight: 300, lineHeight: 1 }}>00</div>
-        <h3 className="font-display text-foreground mt-2" style={{ fontSize: "clamp(20px, 2.4vw, 32px)", fontWeight: 400 }}>{step.t}</h3>
-        <p className="mt-3 md:mt-4 text-muted max-w-sm" style={{ marginLeft: left ? "auto" : 0 }}>{step.d}</p>
+        <EditableText section="process" field={`step_${step.n}_t`} value={t} as="h3" className="font-display text-foreground mt-2" style={{ fontSize: "clamp(20px, 2.4vw, 32px)", fontWeight: 400 }} />
+        <EditableText section="process" field={`step_${step.n}_d`} value={d} as="p" className="mt-3 md:mt-4 text-muted max-w-sm" style={{ marginLeft: left ? "auto" : 0 }} multiline />
       </div>
     </div>
   );
@@ -1012,6 +1061,7 @@ const TESTIMONIALS = [
 ];
 
 function Testimonials() {
+  const v = useV();
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -1070,10 +1120,16 @@ function Testimonials() {
 
       <div className="relative max-w-6xl w-full">
         <div className="text-center mb-20">
-          <div className="label text-gold">— Ils nous font confiance</div>
-          <h2 className="font-display mt-6 text-foreground" style={{ fontSize: "clamp(40px, 6vw, 80px)", fontWeight: 400, lineHeight: 1 }}>
-            La Parole<br /><span className="italic text-gold">à nos clients.</span>
-          </h2>
+          <EditableText section="testimonials" field="label" value={v("testimonials", "label", "— Ils nous font confiance")} as="div" className="label text-gold" />
+          <EditableText
+            section="testimonials"
+            field="title"
+            value={v("testimonials", "title", "La Parole\nà nos clients.")}
+            as="h2"
+            className="font-display mt-6 text-foreground"
+            style={{ fontSize: "clamp(40px, 6vw, 80px)", fontWeight: 400, lineHeight: 1 }}
+            multiline
+          />
         </div>
 
         <div ref={ref} className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-6 items-start">
@@ -1103,13 +1159,11 @@ function Testimonials() {
                   ))}
                 </div>
 
-                <p className="relative font-display italic text-foreground" style={{ fontSize: 18, lineHeight: 1.6, fontWeight: 300 }}>
-                  {t.q}
-                </p>
+                <EditableText section="testimonials" field={`item_${idx}_q`} value={v("testimonials", `item_${idx}_q`, t.q)} as="p" className="relative font-display italic text-foreground" style={{ fontSize: 18, lineHeight: 1.6, fontWeight: 300 }} multiline />
 
                 <div className="relative mt-8 pt-6 border-t border-gold/20">
-                  <div className="font-display text-foreground" style={{ fontSize: 16, fontWeight: 400 }}>{t.n}</div>
-                  <div className="label text-gold mt-1.5" style={{ fontSize: 9 }}>{t.c}</div>
+                  <EditableText section="testimonials" field={`item_${idx}_n`} value={v("testimonials", `item_${idx}_n`, t.n)} as="div" className="font-display text-foreground" style={{ fontSize: 16, fontWeight: 400 }} />
+                  <EditableText section="testimonials" field={`item_${idx}_c`} value={v("testimonials", `item_${idx}_c`, t.c)} as="div" className="label text-gold mt-1.5" style={{ fontSize: 9 }} />
                 </div>
 
                 {/* hover gold corner accent */}
@@ -1131,6 +1185,8 @@ function Testimonials() {
 function CTAFinal() {
   const ref = useRef<HTMLDivElement>(null);
   const imgRef = useRef<HTMLDivElement>(null);
+  const v = useV();
+  const img = v("ctafinal", "image", ctaCourtyard);
 
   useEffect(() => {
     if (!ref.current || !imgRef.current) return;
@@ -1144,19 +1200,29 @@ function CTAFinal() {
   return (
     <section ref={ref} className="relative h-screen w-full overflow-hidden flex items-center justify-center bg-background">
       <div ref={imgRef} className="absolute inset-0 -top-[10%] -bottom-[10%]">
-        <img
-          src={ctaCourtyard}
-          alt="Cour en enrobé fraîchement posé"
-          loading="lazy"
-          className="h-full w-full object-cover"
-        />
+        <EditableImage section="ctafinal" field="image" value={img}>
+          {(url) => (
+            <img
+              src={url}
+              alt="Cour en enrobé fraîchement posé"
+              loading="lazy"
+              className="h-full w-full object-cover"
+            />
+          )}
+        </EditableImage>
       </div>
       <div className="absolute inset-0" style={{ background: "rgba(7, 10, 8, 0.75)" }} />
       <div className="relative z-10 text-center px-6 max-w-4xl">
-        <div className="label text-gold">Jura & Ain</div>
-        <h2 className="font-display mt-8 text-foreground" style={{ fontSize: "clamp(48px, 9vw, 96px)", fontWeight: 400, lineHeight: 0.95 }}>
-          Votre Projet,<br/>Notre Priorité
-        </h2>
+        <EditableText section="ctafinal" field="label" value={v("ctafinal", "label", "Jura & Ain")} as="div" className="label text-gold" />
+        <EditableText
+          section="ctafinal"
+          field="title"
+          value={v("ctafinal", "title", "Votre Projet,\nNotre Priorité")}
+          as="h2"
+          className="font-display mt-8 text-foreground"
+          style={{ fontSize: "clamp(48px, 9vw, 96px)", fontWeight: 400, lineHeight: 0.95 }}
+          multiline
+        />
         <div className="mt-12 flex flex-wrap gap-4 justify-center">
           <a
             href="#devis"
@@ -1164,7 +1230,7 @@ function CTAFinal() {
             className="bg-gold text-background px-10 py-4 font-medium transition-all hover:bg-[#A87E1F] active:scale-[0.98]"
             style={{ fontFamily: "Outfit", fontSize: 14, letterSpacing: "0.15em", textTransform: "uppercase" }}
           >
-            Demander un Devis
+            <EditableText section="ctafinal" field="cta1" value={v("ctafinal", "cta1", "Demander un Devis")} as="span" />
           </a>
           <a
             href="tel:0384526148"
@@ -1172,7 +1238,7 @@ function CTAFinal() {
             className="border border-gold text-gold px-10 py-4 font-medium transition-colors hover:bg-gold hover:text-background"
             style={{ fontFamily: "Outfit", fontSize: 14, letterSpacing: "0.15em", textTransform: "uppercase" }}
           >
-            03 84 52 61 48
+            <EditableText section="ctafinal" field="phone" value={v("ctafinal", "phone", "03 84 52 61 48")} as="span" />
           </a>
         </div>
       </div>
@@ -1184,6 +1250,7 @@ function CTAFinal() {
 function Footer() {
   const { get } = useSiteContent();
   const services = get("services", SERVICES) as typeof SERVICES;
+  const v = useV();
   return (
     <footer className="relative overflow-hidden pt-24 pb-10 px-6 md:px-12" style={{ background: "var(--footer)" }}>
       <div
@@ -1195,11 +1262,11 @@ function Footer() {
       </div>
       <div className="relative grid grid-cols-1 md:grid-cols-3 gap-12">
         <div>
-          <div className="font-display text-gold" style={{ fontSize: 56, fontWeight: 400, lineHeight: 1 }}>HCE</div>
-          <p className="mt-4 text-muted italic font-display" style={{ fontSize: 18 }}>Aménagement de cours & enrobés</p>
+          <EditableText section="footer" field="brand" value={v("footer", "brand", "HCE")} as="div" className="font-display text-gold" style={{ fontSize: 56, fontWeight: 400, lineHeight: 1 }} />
+          <EditableText section="footer" field="tagline" value={v("footer", "tagline", "Aménagement de cours & enrobés")} as="p" className="mt-4 text-muted italic font-display" style={{ fontSize: 18 }} />
         </div>
         <div>
-          <div className="label text-gold mb-6">Services</div>
+          <EditableText section="footer" field="services_title" value={v("footer", "services_title", "Services")} as="div" className="label text-gold mb-6" />
           <ul className="space-y-3 text-foreground/80" style={{ fontSize: 14 }}>
             {services.map((s) => (
               <li key={s.n}>
@@ -1209,18 +1276,18 @@ function Footer() {
           </ul>
         </div>
         <div>
-          <div className="label text-gold mb-6">Contact</div>
+          <EditableText section="footer" field="contact_title" value={v("footer", "contact_title", "Contact")} as="div" className="label text-gold mb-6" />
           <ul className="space-y-3 text-foreground/80" style={{ fontSize: 14 }}>
-            <li>40 avenue Etienne Lamy, 39300 Cize</li>
-            <li><a href="tel:0384526148" className="transition-colors hover:text-gold">03 84 52 61 48</a></li>
-            <li><a href="mailto:sarl.hce@laposte.net" className="transition-colors hover:text-gold">sarl.hce@laposte.net</a></li>
-            <li>Lun-Ven 8h-18h · Sam 8h-12h</li>
+            <li><EditableText section="footer" field="address" value={v("footer", "address", "40 avenue Etienne Lamy, 39300 Cize")} as="span" /></li>
+            <li><a href="tel:0384526148" className="transition-colors hover:text-gold"><EditableText section="footer" field="phone" value={v("footer", "phone", "03 84 52 61 48")} as="span" /></a></li>
+            <li><a href="mailto:sarl.hce@laposte.net" className="transition-colors hover:text-gold"><EditableText section="footer" field="email" value={v("footer", "email", "sarl.hce@laposte.net")} as="span" /></a></li>
+            <li><EditableText section="footer" field="hours" value={v("footer", "hours", "Lun-Ven 8h-18h · Sam 8h-12h")} as="span" /></li>
           </ul>
         </div>
       </div>
       <div className="relative mt-24 pt-8 border-t border-gold/30 flex flex-wrap items-center justify-between gap-4 text-muted" style={{ fontSize: 12 }}>
-        <span>© 2025 HCE SARL · Tous droits réservés</span>
-        <span>Cize, Jura — 03 84 52 61 48</span>
+        <EditableText section="footer" field="copyright" value={v("footer", "copyright", "© 2025 HCE SARL · Tous droits réservés")} as="span" />
+        <EditableText section="footer" field="meta" value={v("footer", "meta", "Cize, Jura — 03 84 52 61 48")} as="span" />
       </div>
     </footer>
   );

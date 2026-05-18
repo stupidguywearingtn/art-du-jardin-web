@@ -189,7 +189,7 @@ function GesteMatiere() {
   const v = useV();
   const img = v("geste", "image", "/photos/01-hero-finisseur-vapeur-sunset.jpg");
   return (
-    <section className="relative w-full bg-asphalte overflow-hidden">
+    <section className="relative w-full bg-depth-d overflow-hidden">
       <div className="grid grid-cols-1 md:grid-cols-5 md:min-h-[80vh]">
         <div className="md:col-span-3 relative">
           <EditableImage section="geste" field="image" value={img}>

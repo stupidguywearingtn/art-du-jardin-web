@@ -687,8 +687,7 @@ function Philosophy() {
   }, [editEnabled, text]);
 
   return (
-    <section ref={ref} className="relative min-h-screen w-full bg-background flex items-center justify-center px-6 py-24">
-      <div className="absolute left-6 md:left-12 top-0 bottom-0 w-px bg-gold/40" />
+    <section ref={ref} className="relative w-full bg-background flex items-center justify-center px-6 py-16 md:py-24">
       <div className="max-w-5xl text-center">
         {editEnabled ? (
           <EditableText
@@ -697,24 +696,24 @@ function Philosophy() {
             value={text}
             as="p"
             className="font-display italic text-foreground"
-            style={{ fontSize: "clamp(32px, 5vw, 72px)", fontWeight: 300, lineHeight: 1.15 }}
+            style={{ fontSize: "clamp(26px, 5vw, 72px)", fontWeight: 300, lineHeight: 1.2, wordBreak: "keep-all", overflowWrap: "normal", hyphens: "none" }}
             multiline
           />
         ) : (
           <p
             className="font-display italic text-foreground"
-            style={{ fontSize: "clamp(32px, 5vw, 72px)", fontWeight: 300, lineHeight: 1.15 }}
+            style={{ fontSize: "clamp(26px, 5vw, 72px)", fontWeight: 300, lineHeight: 1.2, wordBreak: "keep-all", overflowWrap: "normal", hyphens: "none" }}
           >
             {text.split("\n").map((line, li) => (
               <span key={li} className="block">
                 {line.split(" ").map((w, wi) => (
-                  <span key={wi} data-w className="inline-block mr-[0.25em]">{w}</span>
+                  <span key={wi} data-w className="inline-block mr-[0.25em]" style={{ whiteSpace: "nowrap" }}>{w}</span>
                 ))}
               </span>
             ))}
           </p>
         )}
-        <EditableText section="philosophy" field="signature" value={signature} as="div" className="mt-12 label text-gold" />
+        <EditableText section="philosophy" field="signature" value={signature} as="div" className="mt-8 md:mt-12 label text-gold" />
       </div>
     </section>
   );

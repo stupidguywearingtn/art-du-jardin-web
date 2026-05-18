@@ -1190,7 +1190,7 @@ function CTAFinal() {
   }, []);
 
   return (
-    <section ref={ref} className="relative h-screen w-full overflow-hidden flex items-center justify-center bg-background">
+    <section ref={ref} className="relative min-h-[80vh] md:h-screen w-full overflow-hidden flex items-center justify-center bg-background py-20 md:py-0">
       <div ref={imgRef} className="absolute inset-0 -top-[10%] -bottom-[10%]">
         <EditableImage section="ctafinal" field="image" value={img}>
           {(url) => (

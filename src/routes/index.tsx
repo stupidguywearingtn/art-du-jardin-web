@@ -1141,7 +1141,7 @@ function Testimonials() {
   }, [isMobile]);
 
   return (
-    <section className="relative bg-background flex items-center justify-center px-6 py-20 md:py-28 overflow-hidden">
+    <section className="relative bg-background flex items-center justify-center px-6 py-12 md:py-28 overflow-hidden">
       <div aria-hidden className="absolute inset-0" style={{ background: "linear-gradient(180deg, var(--background) 0%, var(--surface) 50%, var(--background) 100%)" }} />
       <div className="grain-overlay animated" aria-hidden />
       <GiantNumber n="04" position="left" />

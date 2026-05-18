@@ -306,7 +306,7 @@ const GALLERY: { src: string; cat: string; alt: string }[] = [
   { src: "/photos/02-hero-medaillon-paves.jpg", cat: "Détails & finitions", alt: "Médaillon de pavés intégré dans l'enrobé" },
   { src: "/photos/09-detail-bordure-beton.jpg", cat: "Détails & finitions", alt: "Bordure béton coulée HCE" },
   { src: "/photos/10-detail-texture-enrobe-frais.jpg", cat: "Détails & finitions", alt: "Texture enrobé à chaud fraîchement posé" },
-  { src: "/photos/01-hero-finisseur-vapeur-sunset.jpg", cat: "Chantier en cours", alt: "Finisseur en cours de pose" },
+  { src: "/photos/01-hero-finisseur-vapeur-sunset.jpg", cat: "Chantier en cours", alt: "HCE en cours de pose à la main" },
   { src: "/photos/03-hero-rouleau-compacteur.jpg", cat: "Chantier en cours", alt: "Rouleau compacteur sur chantier HCE" },
 ];
 const CATS = ["Cour & allée privée", "Parking & voirie pro", "Préparation & terrassement", "Détails & finitions", "Chantier en cours"];

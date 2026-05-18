@@ -1278,7 +1278,7 @@ function Footer() {
   const services = get("services", SERVICES) as typeof SERVICES;
   const v = useV();
   return (
-    <footer className="relative overflow-hidden pt-24 pb-10 px-6 md:px-12" style={{ background: "var(--footer)" }}>
+    <footer className="relative overflow-hidden pt-24 pb-10 px-6 md:px-12" style={{ background: "radial-gradient(circle at 20% 0%, rgba(180,130,90,0.18) 0%, transparent 45%), radial-gradient(circle at 80% 100%, rgba(255,255,255,0.08) 0%, transparent 40%), var(--footer)" }}>
       <div
         className="absolute inset-x-0 top-1/2 -translate-y-1/2 text-center font-display pointer-events-none select-none whitespace-nowrap"
         style={{ opacity: 0.04, fontSize: "clamp(80px, 18vw, 280px)", color: "#FFFFFF", fontWeight: 300, lineHeight: 1 }}

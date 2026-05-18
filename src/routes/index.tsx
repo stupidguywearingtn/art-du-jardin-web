@@ -403,9 +403,9 @@ function Galerie() {
 function SectionDivider({ variant = "minimal" }: { variant?: "minimal" | "marquee" }) {
   if (variant === "marquee") return <MarqueeStats />;
   return (
-    <div className="relative w-full flex items-center justify-center py-10 bg-background" aria-hidden>
+    <div className="relative w-full flex items-center justify-center py-4 md:py-8 bg-background" aria-hidden>
       <div className="h-px flex-1 max-w-[28%] bg-gold/30" />
-      <svg width="14" height="14" viewBox="0 0 14 14" className="mx-4 text-gold" style={{ opacity: 0.6 }}>
+      <svg width="10" height="10" viewBox="0 0 14 14" className="mx-3 text-gold" style={{ opacity: 0.45 }}>
         <rect x="7" y="0" width="9.9" height="9.9" transform="rotate(45 7 7)" fill="currentColor" />
       </svg>
       <div className="h-px flex-1 max-w-[28%] bg-gold/30" />

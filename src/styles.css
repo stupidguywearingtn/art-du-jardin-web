@@ -186,3 +186,20 @@
   border-color: rgba(180,130,90,0.4) !important;
   box-shadow: 0 8px 24px rgba(0,0,0,0.3);
 }
+
+/* Détails & finitions — carrousel horizontal mobile / grille 3 colonnes desktop */
+.details-carousel { scrollbar-width: none; }
+.details-carousel::-webkit-scrollbar { display: none; }
+@media (min-width: 768px) {
+  .details-carousel {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    overflow: visible;
+    gap: 2rem;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .details-card { flex: none !important; max-width: none !important; }
+}

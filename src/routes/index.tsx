@@ -738,15 +738,8 @@ function Services() {
       <GiantNumber n="01" position="left" />
       <TechnicalMark className="hidden md:block" style={{ top: "8%", right: "-40px", width: 180, height: 360, transform: "rotate(8deg)" }} />
       <TechnicalMark className="hidden md:block" style={{ bottom: "5%", left: "-30px", width: 160, height: 320, transform: "rotate(-6deg)" }} />
-      <div className="px-6 md:px-12 mb-16 flex items-end justify-between flex-wrap gap-6">
-        <div>
-          <div className="label text-gold">— Nos services</div>
-          <h2 className="font-display mt-6 text-foreground" style={{ fontSize: "clamp(40px, 7vw, 96px)", fontWeight: 400, lineHeight: 0.95 }}>
-            Trois métiers,<br/>une même exigence.
-          </h2>
-        </div>
-        <p className="max-w-md text-muted">De la préparation du sol à la pose finale, HCE intervient sur l'intégralité de votre chantier — sans intermédiaire.</p>
-      </div>
+      <ServicesHeader />
+
       <div ref={ref} className="relative">
         {services.map((s) => <ServiceStrip key={s.n} {...s} />)}
       </div>

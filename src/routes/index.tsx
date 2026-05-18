@@ -1061,6 +1061,7 @@ const TESTIMONIALS = [
 ];
 
 function Testimonials() {
+  const v = useV();
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {

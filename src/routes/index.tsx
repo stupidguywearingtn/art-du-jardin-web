@@ -711,6 +711,34 @@ const SERVICES = [
   { n: "06", t: "Garantie & SAV", img: service06, slug: "garantie-sav" },
 ];
 
+function ServicesHeader() {
+  const v = useV();
+  return (
+    <div className="px-6 md:px-12 mb-16 flex items-end justify-between flex-wrap gap-6">
+      <div>
+        <EditableText section="services" field="label" value={v("services", "label", "— Nos services")} as="div" className="label text-gold" />
+        <EditableText
+          section="services"
+          field="title"
+          value={v("services", "title", "Trois métiers, une même exigence.")}
+          as="h2"
+          className="font-display mt-6 text-foreground"
+          style={{ fontSize: "clamp(40px, 7vw, 96px)", fontWeight: 400, lineHeight: 0.95 }}
+          multiline
+        />
+      </div>
+      <EditableText
+        section="services"
+        field="intro"
+        value={v("services", "intro", "De la préparation du sol à la pose finale, HCE intervient sur l'intégralité de votre chantier — sans intermédiaire.")}
+        as="p"
+        className="max-w-md text-muted"
+        multiline
+      />
+    </div>
+  );
+}
+
 function Services() {
   const ref = useRef<HTMLDivElement>(null);
   const { get } = useSiteContent();

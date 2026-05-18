@@ -625,7 +625,7 @@ function Hero() {
               value={line1}
               as="h1"
               className="font-display text-foreground block"
-              style={{ fontSize: "clamp(40px, 9vw, 140px)", fontWeight: 400, lineHeight: 1, letterSpacing: "-0.02em", wordBreak: "keep-all", overflowWrap: "normal", hyphens: "none" }}
+              style={{ fontSize: "clamp(2rem, 7.5vw, 6.5rem)", fontWeight: 400, lineHeight: 1, letterSpacing: "-0.02em", wordBreak: "keep-all", overflowWrap: "normal", hyphens: "none" }}
             />
             <EditableText
               section="hero"
@@ -633,14 +633,14 @@ function Hero() {
               value={line2}
               as="h1"
               className="font-display text-foreground block"
-              style={{ fontSize: "clamp(40px, 9vw, 140px)", fontWeight: 400, lineHeight: 1, letterSpacing: "-0.02em", wordBreak: "keep-all", overflowWrap: "normal", hyphens: "none" }}
+              style={{ fontSize: "clamp(2rem, 7.5vw, 6.5rem)", fontWeight: 400, lineHeight: 1, letterSpacing: "-0.02em", wordBreak: "keep-all", overflowWrap: "normal", hyphens: "none" }}
             />
           </div>
         ) : (
           <h1
             ref={titleRef}
             className="font-display text-center text-foreground px-2"
-            style={{ fontSize: "clamp(40px, 9vw, 140px)", fontWeight: 400, lineHeight: 1, letterSpacing: "-0.02em", wordBreak: "keep-all", overflowWrap: "normal", hyphens: "none" }}
+            style={{ fontSize: "clamp(2rem, 7.5vw, 6.5rem)", fontWeight: 400, lineHeight: 1, letterSpacing: "-0.02em", wordBreak: "keep-all", overflowWrap: "normal", hyphens: "none" }}
           >
             {lines.map((line, li) => {
               const words = line.split(" ");

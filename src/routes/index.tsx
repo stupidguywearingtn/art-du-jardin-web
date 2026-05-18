@@ -649,7 +649,13 @@ function Hero() {
 /* ============ PHILOSOPHY ============ */
 function Philosophy() {
   const ref = useRef<HTMLDivElement>(null);
+  const v = useV();
+  const { enabled: editEnabled } = useEditMode();
+  const text = v("philosophy", "text", "Un enrobé qui dure,\nune finition qui marque.");
+  const signature = v("philosophy", "signature", "— HCE, Cize");
+
   useEffect(() => {
+    if (editEnabled) return;
     if (!ref.current) return;
     const words = ref.current.querySelectorAll("[data-w]");
     gsap.fromTo(words,
@@ -659,25 +665,37 @@ function Philosophy() {
         scrollTrigger: { trigger: ref.current, start: "top 70%" },
       }
     );
-  }, []);
-  const text = "Un enrobé qui dure,\nune finition qui marque.";
+  }, [editEnabled, text]);
+
   return (
     <section ref={ref} className="relative min-h-screen w-full bg-background flex items-center justify-center px-6 py-24">
       <div className="absolute left-6 md:left-12 top-0 bottom-0 w-px bg-gold/40" />
       <div className="max-w-5xl text-center">
-        <p
-          className="font-display italic text-foreground"
-          style={{ fontSize: "clamp(32px, 5vw, 72px)", fontWeight: 300, lineHeight: 1.15 }}
-        >
-          {text.split("\n").map((line, li) => (
-            <span key={li} className="block">
-              {line.split(" ").map((w, wi) => (
-                <span key={wi} data-w className="inline-block mr-[0.25em]">{w}</span>
-              ))}
-            </span>
-          ))}
-        </p>
-        <div className="mt-12 label text-gold">— HCE, Cize</div>
+        {editEnabled ? (
+          <EditableText
+            section="philosophy"
+            field="text"
+            value={text}
+            as="p"
+            className="font-display italic text-foreground"
+            style={{ fontSize: "clamp(32px, 5vw, 72px)", fontWeight: 300, lineHeight: 1.15 }}
+            multiline
+          />
+        ) : (
+          <p
+            className="font-display italic text-foreground"
+            style={{ fontSize: "clamp(32px, 5vw, 72px)", fontWeight: 300, lineHeight: 1.15 }}
+          >
+            {text.split("\n").map((line, li) => (
+              <span key={li} className="block">
+                {line.split(" ").map((w, wi) => (
+                  <span key={wi} data-w className="inline-block mr-[0.25em]">{w}</span>
+                ))}
+              </span>
+            ))}
+          </p>
+        )}
+        <EditableText section="philosophy" field="signature" value={signature} as="div" className="mt-12 label text-gold" />
       </div>
     </section>
   );

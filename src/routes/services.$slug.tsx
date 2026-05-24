@@ -204,7 +204,7 @@ function ServicePage() {
 
         {/* HERO */}
         <section className="relative w-full h-[80vh] overflow-hidden">
-          <img src={data.hero} alt={data.title} className="absolute inset-0 w-full h-full object-cover" />
+          <img src={heroImg} alt={data.title} className="absolute inset-0 w-full h-full object-cover" />
           <div
             className="absolute inset-0"
             style={{ background: "linear-gradient(180deg, rgba(14,14,15,0.35) 0%, rgba(14,14,15,0.55) 45%, rgba(14,14,15,0.92) 100%)" }}

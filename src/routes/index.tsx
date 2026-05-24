@@ -249,7 +249,7 @@ function GesteMatiere() {
             <EditableText
               section="geste"
               field="title"
-              value={v("geste", "title", "L'enrobé à chaud, à 160°C. Posé. Compacté. Garanti.")}
+              value={v("geste", "title", "L'enrobé à chaud, à 180°C. Posé. Compacté. Garanti.")}
               as="h2"
               className="font-display mt-6 text-foreground"
               style={{ fontSize: "clamp(32px, 4vw, 56px)", fontWeight: 400, lineHeight: 1.05 }}

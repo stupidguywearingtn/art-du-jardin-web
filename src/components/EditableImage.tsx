@@ -53,14 +53,14 @@ export function EditableImage({ section, field, value, children }: Props) {
 
   return (
     <>
-      <div className="relative group/editable">
-        <div className="ring-0 group-hover/editable:ring-2 group-hover/editable:ring-blue-500/70 rounded-md transition-shadow cursor-pointer">
+      <div className="relative group/editable w-full h-full">
+        <div className="w-full h-full ring-0 group-hover/editable:ring-2 group-hover/editable:ring-primary/70 rounded-md transition-shadow cursor-pointer">
           {children(value)}
         </div>
         <button
           type="button"
           onClick={() => setOpen(true)}
-          className="absolute top-2 right-2 z-10 hidden group-hover/editable:flex items-center justify-center w-9 h-9 rounded-full bg-blue-600 text-white shadow-lg hover:bg-blue-700"
+          className="absolute top-2 right-2 z-[80] flex items-center justify-center w-10 h-10 rounded-full bg-primary text-primary-foreground shadow-lg hover:bg-primary/90"
           aria-label="Changer l'image"
         >
           <Pencil className="w-4 h-4" />

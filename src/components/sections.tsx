@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { CTAInline } from "@/components/CTAButtons";
 import { useSiteContent } from "@/hooks/useSiteContent";
+import InteractiveMap from "@/components/InteractiveMap";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -81,27 +82,29 @@ export function WhyUs() {
   );
 }
 
-/* ============ ZONE D'INTERVENTION — Google Maps simple ============ */
+/* ============ ZONE D'INTERVENTION ============ */
 export function Zone() {
   return (
     <section className="relative bg-depth-b py-10 md:py-20 px-6 md:px-12 overflow-hidden">
-      <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-10">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-stretch">
+        <div className="lg:col-span-4 flex flex-col justify-center">
           <div className="label text-gold">— Zone d'intervention</div>
-          <h2 className="font-display mt-6 text-foreground" style={{ fontSize: "clamp(36px, 5vw, 64px)", fontWeight: 400, lineHeight: 1 }}>
-            Basés à <span className="italic text-gold">Cize.</span>
+          <h2 className="font-display mt-6 text-foreground" style={{ fontSize: "clamp(36px, 5vw, 72px)", fontWeight: 400, lineHeight: 1 }}>
+            Jura & Ain,<br /><span className="italic text-gold">depuis Cize.</span>
           </h2>
+          <p className="mt-8 text-muted" style={{ fontSize: 16, lineHeight: 1.75 }}>
+            HCE intervient autour de Cize pour les cours, allées, parkings, travaux de terrassement et finitions extérieures.
+          </p>
+          <div className="mt-8 grid grid-cols-2 gap-3">
+            {["Cize", "Lons-le-Saunier", "Champagnole", "Oyonnax", "Bourg-en-Bresse", "Saint-Claude"].map((city) => (
+              <div key={city} className="border-l border-gold/40 pl-3 text-sm text-foreground/85">
+                {city}
+              </div>
+            ))}
+          </div>
         </div>
-        <div className="relative w-full aspect-[16/9] md:aspect-[21/9] border border-border overflow-hidden">
-          <iframe
-            title="Localisation HCE — Cize, Jura"
-            src="https://www.google.com/maps?q=Cize,+Jura,+France&z=12&output=embed"
-            className="absolute inset-0 w-full h-full"
-            style={{ border: 0 }}
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-            allowFullScreen
-          />
+        <div className="lg:col-span-8 relative min-h-[420px] md:min-h-[560px] border border-border overflow-hidden bg-surface">
+          <InteractiveMap />
         </div>
       </div>
     </section>

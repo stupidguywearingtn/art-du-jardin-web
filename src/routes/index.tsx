@@ -236,7 +236,7 @@ function GesteMatiere() {
             {(url) => (
               <img
                 src={url}
-                alt={v("geste", "image_alt", "HCE posant l'enrobé à chaud à la main à 160°C, vapeur visible au coucher de soleil")}
+                alt={v("geste", "image_alt", "HCE posant l'enrobé à chaud à la main à 180°C, vapeur visible au coucher de soleil")}
                 loading="lazy"
                 className="absolute inset-0 w-full h-full object-cover"
               />

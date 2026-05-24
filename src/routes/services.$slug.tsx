@@ -155,6 +155,11 @@ export const Route = createFileRoute("/services/$slug")({
 
 function ServicePage() {
   const data = Route.useLoaderData() as ServiceData;
+  const { slug } = Route.useParams();
+  const { get } = useSiteContent();
+  const adminServices = get<Array<{ slug: string; img: string }>>("services", []);
+  const override = adminServices.find((s) => s?.slug === slug)?.img;
+  const heroImg = override && override.length > 0 ? override : data.hero;
   const [scrolled, setScrolled] = useState(false);
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 200);

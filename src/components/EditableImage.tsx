@@ -42,8 +42,8 @@ export function EditableImage({ section, field, value, children }: Props) {
       setDraft(section, field, "image", data.publicUrl);
       toast.success("Image mise à jour (brouillon)");
       setOpen(false);
-    } catch (e: any) {
-      toast.error(e.message ?? "Erreur d'upload");
+    } catch (e: unknown) {
+      toast.error(e instanceof Error ? e.message : "Erreur d'upload");
     } finally {
       setUploading(false);
     }

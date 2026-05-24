@@ -879,14 +879,16 @@ function ServiceStrip({ n, t, img, slug }: { n: string; t: string; img: string; 
       className="relative block w-full overflow-hidden cursor-none transition-[height] duration-700 ease-out"
       style={{ height: expanded ? (isMobile ? 220 : 400) : 200 }}
     >
-      <EditableImage section="service_images" field={slug} value={img}>
-        {(url) => (
-          <div
-            className="absolute inset-0 bg-cover bg-center transition-opacity duration-700"
-            style={{ backgroundImage: `url(${url})`, opacity: expanded ? 1 : 0 }}
-          />
-        )}
-      </EditableImage>
+      <div className="absolute inset-0">
+        <EditableImage section="service_images" field={slug} value={img}>
+          {(url) => (
+            <div
+              className="absolute inset-0 bg-cover bg-center transition-opacity duration-700"
+              style={{ backgroundImage: `url(${url})`, opacity: expanded ? 1 : 0 }}
+            />
+          )}
+        </EditableImage>
+      </div>
       {/* dégradé directionnel fort pour garantir lisibilité du texte blanc */}
       <div
         className="absolute inset-0 transition-opacity duration-700"

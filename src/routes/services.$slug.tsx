@@ -234,7 +234,7 @@ function ServicePage() {
         <section className="relative w-full overflow-hidden" style={{ minHeight: 200 }}>
           <div
             className="absolute inset-0 bg-cover bg-center"
-            style={{ backgroundImage: `url(${data.hero})` }}
+            style={{ backgroundImage: `url(${heroImg})` }}
           />
           <div className="absolute inset-0" style={{ background: "rgba(14,14,15,0.78)" }} />
           <div className="relative z-10 px-6 py-14 md:py-16 text-center max-w-3xl mx-auto">

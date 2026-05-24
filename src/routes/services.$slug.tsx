@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { CustomCursor } from "@/components/CustomCursor";
 import { SmoothScroll } from "@/components/SmoothScroll";
 import { MobileFloatingCTA } from "@/components/CTAButtons";
+import { useSiteContent } from "@/hooks/useSiteContent";
 
 type ServiceData = {
   n: string;

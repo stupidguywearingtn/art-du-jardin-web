@@ -4,6 +4,12 @@ import { CustomCursor } from "@/components/CustomCursor";
 import { SmoothScroll } from "@/components/SmoothScroll";
 import { MobileFloatingCTA } from "@/components/CTAButtons";
 import { useSiteContent } from "@/hooks/useSiteContent";
+import { useSiteContentFields } from "@/hooks/useSiteContentFields";
+import { EditModeProvider } from "@/hooks/useEditMode";
+import { EditModeToolbar } from "@/components/EditModeToolbar";
+import { EditableImage } from "@/components/EditableImage";
+
+const HOME_SITE_ID = "11111111-1111-1111-1111-111111111111";
 
 type ServiceData = {
   n: string;
@@ -154,12 +160,22 @@ export const Route = createFileRoute("/services/$slug")({
 });
 
 function ServicePage() {
+  const { reload } = useSiteContentFields(HOME_SITE_ID);
+  return (
+    <EditModeProvider siteId={HOME_SITE_ID} onPublished={reload}>
+      <ServicePageBody />
+    </EditModeProvider>
+  );
+}
+
+function ServicePageBody() {
   const data = Route.useLoaderData() as ServiceData;
   const { slug } = Route.useParams();
   const { get } = useSiteContent();
+  const { get: getField } = useSiteContentFields(HOME_SITE_ID);
   const adminServices = get<Array<{ slug: string; img: string }>>("services", []);
   const override = adminServices.find((s) => s?.slug === slug)?.img;
-  const heroImg = override && override.length > 0 ? override : data.hero;
+  const heroImg = getField("service_images", slug, override && override.length > 0 ? override : data.hero);
   const [scrolled, setScrolled] = useState(false);
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 200);
@@ -170,6 +186,7 @@ function ServicePage() {
 
   return (
     <>
+      <EditModeToolbar />
       <SmoothScroll />
       <CustomCursor />
       <main className="bg-background text-foreground overflow-x-hidden">
@@ -204,7 +221,9 @@ function ServicePage() {
 
         {/* HERO */}
         <section className="relative w-full h-[80vh] overflow-hidden">
-          <img src={heroImg} alt={data.title} className="absolute inset-0 w-full h-full object-cover" />
+          <EditableImage section="service_images" field={slug} value={heroImg}>
+            {(url) => <img src={url} alt={data.title} className="absolute inset-0 w-full h-full object-cover" />}
+          </EditableImage>
           <div
             className="absolute inset-0"
             style={{ background: "linear-gradient(180deg, rgba(14,14,15,0.35) 0%, rgba(14,14,15,0.55) 45%, rgba(14,14,15,0.92) 100%)" }}

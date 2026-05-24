@@ -826,6 +826,7 @@ function ServicesHeader() {
 function Services() {
   const ref = useRef<HTMLDivElement>(null);
   const { get } = useSiteContent();
+  const v = useV();
   const services = get("services", SERVICES) as typeof SERVICES;
   useEffect(() => {
     if (!ref.current) return;
@@ -853,7 +854,13 @@ function Services() {
       <ServicesHeader />
 
       <div ref={ref} className="relative">
-        {services.map((s) => <ServiceStrip key={s.n} {...s} />)}
+        {services.map((s) => (
+          <ServiceStrip
+            key={s.n}
+            {...s}
+            img={v("service_images", s.slug, s.img)}
+          />
+        ))}
       </div>
     </section>
   );
@@ -862,21 +869,26 @@ function Services() {
 function ServiceStrip({ n, t, img, slug }: { n: string; t: string; img: string; slug: string }) {
   const [h, setH] = useState(false);
   const isMobile = useIsMobile();
+  const { enabled: editEnabled } = useEditMode();
   const expanded = h || isMobile; // toujours étendu sur mobile pour lisibilité
   return (
-    <Link
-      to="/services/$slug"
-      params={{ slug }}
+    <div
       data-strip data-cursor-hover
       onMouseEnter={() => setH(true)}
       onMouseLeave={() => setH(false)}
       className="relative block w-full overflow-hidden cursor-none transition-[height] duration-700 ease-out"
       style={{ height: expanded ? (isMobile ? 220 : 400) : 200 }}
     >
-      <div
-        className="absolute inset-0 bg-cover bg-center transition-opacity duration-700"
-        style={{ backgroundImage: `url(${img})`, opacity: expanded ? 1 : 0 }}
-      />
+      <div className="absolute inset-0">
+        <EditableImage section="service_images" field={slug} value={img}>
+          {(url) => (
+            <div
+              className="absolute inset-0 bg-cover bg-center transition-opacity duration-700"
+              style={{ backgroundImage: `url(${url})`, opacity: expanded ? 1 : 0 }}
+            />
+          )}
+        </EditableImage>
+      </div>
       {/* dégradé directionnel fort pour garantir lisibilité du texte blanc */}
       <div
         className="absolute inset-0 transition-opacity duration-700"
@@ -886,7 +898,14 @@ function ServiceStrip({ n, t, img, slug }: { n: string; t: string; img: string; 
           opacity: expanded ? 1 : 0,
         }}
       />
-      <div className="relative z-10 h-full grid grid-cols-12 items-center px-6 md:px-12 gap-4 md:gap-6">
+      <Link
+        to="/services/$slug"
+        params={{ slug }}
+        className="absolute inset-0 z-10"
+        aria-label={`Voir le service ${t}`}
+        style={{ pointerEvents: editEnabled ? "none" : "auto" }}
+      />
+      <div className="relative z-20 h-full grid grid-cols-12 items-center px-6 md:px-12 gap-4 md:gap-6 pointer-events-none">
         <div
           className="col-span-2 font-display text-gold"
           style={{ fontSize: "clamp(32px, 6vw, 80px)", fontWeight: 300, lineHeight: 1, textShadow: expanded ? "0 2px 8px rgba(0,0,0,0.8), 0 0 2px rgba(0,0,0,0.6)" : "none" }}
@@ -907,7 +926,7 @@ function ServiceStrip({ n, t, img, slug }: { n: string; t: string; img: string; 
           <span className="text-gold text-2xl md:text-4xl inline-block transition-transform duration-500" style={{ transform: h ? "rotate(45deg)" : "rotate(0deg)", textShadow: expanded ? "0 2px 6px rgba(0,0,0,0.7)" : "none" }}>→</span>
         </div>
       </div>
-    </Link>
+    </div>
   );
 }
 

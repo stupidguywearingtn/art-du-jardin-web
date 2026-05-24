@@ -298,7 +298,7 @@ function MatiereFinitions() {
   const defaults = [
     { img: "/photos/02-hero-medaillon-paves.jpg", t: "Pavés sur mesure", d: "Médaillons et inserts pavés intégrés à l'enrobé pour personnaliser votre cour." },
     { img: "/photos/09-detail-bordure-beton.jpg", t: "Bordures nettes", d: "Tranches précises et finitions au millimètre, pour un rendu durable et propre." },
-    { img: "/photos/10-detail-texture-enrobe-frais.jpg", t: "Grain & compactage", d: "Enrobé à chaud posé à la main à 160°C, compacté pour résister à la décennie." },
+    { img: "/photos/10-detail-texture-enrobe-frais.jpg", t: "Grain & compactage", d: "Enrobé à chaud posé à la main à 180°C, compacté pour résister à la décennie." },
   ];
   return (
     <section className="relative w-full bg-cream py-10 md:py-20 px-6 md:px-12 overflow-hidden">

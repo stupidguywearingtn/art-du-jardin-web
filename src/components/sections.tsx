@@ -81,85 +81,33 @@ export function WhyUs() {
   );
 }
 
-/* ============ ZONE D'INTERVENTION — Leaflet lazy ============ */
-const CITIES_FALLBACK = [
-  "Cize (siège)", "Lons-le-Saunier", "Saint-Claude", "Champagnole",
-  "Bourg-en-Bresse", "Oyonnax", "Nantua", "Pont-d'Ain",
-];
-
+/* ============ ZONE D'INTERVENTION — Google Maps simple ============ */
 export function Zone() {
-  const ref = useRef<HTMLDivElement>(null);
-  const [Map, setMap] = useState<React.ComponentType | null>(null);
-  const [shouldLoad, setShouldLoad] = useState(false);
-
-  useEffect(() => {
-    if (!ref.current) return;
-    const io = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting) {
-          setShouldLoad(true);
-          io.disconnect();
-        }
-      },
-      { rootMargin: "200px" }
-    );
-    io.observe(ref.current);
-    return () => io.disconnect();
-  }, []);
-
-  useEffect(() => {
-    if (!shouldLoad || Map) return;
-    import("./InteractiveMap").then((m) => setMap(() => m.default));
-  }, [shouldLoad, Map]);
-
   return (
-    <section ref={ref} className="relative bg-depth-b py-10 md:py-20 px-6 md:px-12 overflow-hidden">
-      <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-        <div>
+    <section className="relative bg-depth-b py-10 md:py-20 px-6 md:px-12 overflow-hidden">
+      <div className="max-w-6xl mx-auto">
+        <div className="text-center mb-10">
           <div className="label text-gold">— Zone d'intervention</div>
           <h2 className="font-display mt-6 text-foreground" style={{ fontSize: "clamp(36px, 5vw, 64px)", fontWeight: 400, lineHeight: 1 }}>
-            Jura & Ain,<br /><span className="italic text-gold">notre territoire.</span>
+            Basés à <span className="italic text-gold">Cize.</span>
           </h2>
-          <p className="mt-8 text-muted max-w-md" style={{ lineHeight: 1.7 }}>
-            Basés à Cize, nous intervenons dans tout le Jura et le département de l'Ain. Visite et devis gratuits jusqu'à 60 km autour de notre siège.
-          </p>
-          <ul className="mt-8 grid grid-cols-2 gap-x-8 gap-y-3 text-foreground/80" style={{ fontSize: 14 }}>
-            {CITIES_FALLBACK.map((c) => (
-              <li key={c} className="flex items-center gap-3">
-                <span className="w-1 h-1 bg-gold rounded-full" />
-                {c}
-              </li>
-            ))}
-          </ul>
-          <div className="label text-gold/70 mt-10" style={{ fontSize: 10 }}>
-            Marqueurs dorés · Survol pour le détail · Clic pour la fiche
-          </div>
-          <div className="mt-10">
-            <p className="font-display italic text-foreground/80 mb-4" style={{ fontSize: 18 }}>
-              Votre commune n'est pas listée ? On se déplace jusqu'à 60 km.
-            </p>
-            <a
-              href="#devis"
-              data-cursor-hover
-              className="cta-primary inline-flex items-center gap-2"
-              style={{ fontFamily: "Outfit", fontSize: 15, letterSpacing: "0.02em", fontWeight: 500, borderRadius: 4, padding: "14px 28px", background: "var(--cuivre-500)", color: "#fff", textDecoration: "none", transition: "all 0.2s ease" }}
-            >
-              Vérifier ma zone <span aria-hidden>→</span>
-            </a>
-          </div>
         </div>
-
-        <div className="relative aspect-square max-w-lg mx-auto w-full bg-surface border border-border">
-          {Map ? <Map /> : (
-            <div className="absolute inset-0 flex items-center justify-center">
-              <span className="label text-gold/60">Carte Jura & Ain</span>
-            </div>
-          )}
+        <div className="relative w-full aspect-[16/9] md:aspect-[21/9] border border-border overflow-hidden">
+          <iframe
+            title="Localisation HCE — Cize, Jura"
+            src="https://www.google.com/maps?q=Cize,+Jura,+France&z=12&output=embed"
+            className="absolute inset-0 w-full h-full"
+            style={{ border: 0 }}
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+            allowFullScreen
+          />
         </div>
       </div>
     </section>
   );
 }
+
 
 /* ============ FAQ ============ */
 export const FAQS = [

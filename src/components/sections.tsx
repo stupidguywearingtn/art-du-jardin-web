@@ -5,7 +5,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { CTAInline } from "@/components/CTAButtons";
 import { useSiteContent } from "@/hooks/useSiteContent";
-import InteractiveMap from "@/components/InteractiveMap";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -104,7 +103,14 @@ export function Zone() {
           </div>
         </div>
         <div className="lg:col-span-8 relative min-h-[420px] md:min-h-[560px] border border-border overflow-hidden bg-surface">
-          <InteractiveMap />
+          <iframe
+            src="https://www.google.com/maps?q=Cize,Jura,France&z=12&output=embed"
+            className="absolute inset-0 w-full h-full"
+            style={{ border: 0 }}
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+            title="Carte de Cize, Jura"
+          />
         </div>
       </div>
     </section>

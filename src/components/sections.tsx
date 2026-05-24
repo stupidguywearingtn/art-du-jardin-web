@@ -12,7 +12,7 @@ if (typeof window !== "undefined") {
 
 /* ============ POURQUOI NOUS CHOISIR ============ */
 const REASONS = [
-  { n: "01", t: "Enrobé à chaud", d: "Pose à la main à 160°C, compactage maîtrisé pour une durabilité maximale.", icon: "M8 20s-3-3-3-7a7 7 0 0 1 7-7c0 3-2 4-2 7a3 3 0 0 0 6 0c0 4-3 7-8 7Z" },
+  { n: "01", t: "Enrobé à chaud", d: "Pose à la main à 180°C, compactage maîtrisé pour une durabilité maximale.", icon: "M8 20s-3-3-3-7a7 7 0 0 1 7-7c0 3-2 4-2 7a3 3 0 0 0 6 0c0 4-3 7-8 7Z" },
   { n: "02", t: "20 ans d'expérience", d: "Plus de 500 chantiers réalisés dans le Jura et l'Ain depuis 2005.", icon: "M12 2l2.4 5 5.6.8-4 3.9 1 5.5L12 14.8 6.9 17.2l1-5.5-4-3.9L9.6 7Z" },
   { n: "03", t: "Devis détaillé", d: "Visite gratuite, devis sous 48h, prix tenus, aucune mauvaise surprise.", icon: "M9 12h6M9 16h4M14 3v4a1 1 0 0 0 1 1h4M5 21V5a2 2 0 0 1 2-2h8l5 5v13a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2Z" },
   { n: "04", t: "Garantie & SAV", d: "Travaux garantis. Intervention rapide à la moindre anomalie.", icon: "M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10ZM9 12l2 2 4-4" },

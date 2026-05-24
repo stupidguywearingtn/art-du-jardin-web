@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { CustomCursor } from "@/components/CustomCursor";
 import { SmoothScroll } from "@/components/SmoothScroll";
 import { MobileFloatingCTA } from "@/components/CTAButtons";
+import { useSiteContent } from "@/hooks/useSiteContent";
 
 type ServiceData = {
   n: string;
@@ -32,8 +33,8 @@ const SERVICES: Record<string, ServiceData> = {
     n: "02",
     title: "Enrobé à chaud",
     hero: "/photos/01-hero-finisseur-vapeur-sunset.jpg",
-    intro: "Pose à la main à 160°C, compactage maîtrisé, garantie décennale. La spécialité historique d'HCE depuis 2005.",
-    prestations: ["Enrobé noir, rouge, saumon, bordeaux", "Goudronnage fins ou épais", "Pose à la main à 160°C", "Compactage maîtrisé", "Garantie décennale"],
+    intro: "Pose à la main à 180°C, compactage maîtrisé, garantie décennale. La spécialité historique d'HCE depuis 2005.",
+    prestations: ["Enrobé noir, rouge, saumon, bordeaux", "Goudronnage fins ou épais", "Pose à la main à 180°C", "Compactage maîtrisé", "Garantie décennale"],
     methode: [
       { t: "Préparation thermique", d: "Enrobé livré à température, application sans interruption." },
       { t: "Pose à la main", d: "Épaisseur régulière, pentes maîtrisées, joints soignés." },
@@ -154,6 +155,11 @@ export const Route = createFileRoute("/services/$slug")({
 
 function ServicePage() {
   const data = Route.useLoaderData() as ServiceData;
+  const { slug } = Route.useParams();
+  const { get } = useSiteContent();
+  const adminServices = get<Array<{ slug: string; img: string }>>("services", []);
+  const override = adminServices.find((s) => s?.slug === slug)?.img;
+  const heroImg = override && override.length > 0 ? override : data.hero;
   const [scrolled, setScrolled] = useState(false);
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 200);
@@ -198,7 +204,7 @@ function ServicePage() {
 
         {/* HERO */}
         <section className="relative w-full h-[80vh] overflow-hidden">
-          <img src={data.hero} alt={data.title} className="absolute inset-0 w-full h-full object-cover" />
+          <img src={heroImg} alt={data.title} className="absolute inset-0 w-full h-full object-cover" />
           <div
             className="absolute inset-0"
             style={{ background: "linear-gradient(180deg, rgba(14,14,15,0.35) 0%, rgba(14,14,15,0.55) 45%, rgba(14,14,15,0.92) 100%)" }}
@@ -228,7 +234,7 @@ function ServicePage() {
         <section className="relative w-full overflow-hidden" style={{ minHeight: 200 }}>
           <div
             className="absolute inset-0 bg-cover bg-center"
-            style={{ backgroundImage: `url(${data.hero})` }}
+            style={{ backgroundImage: `url(${heroImg})` }}
           />
           <div className="absolute inset-0" style={{ background: "rgba(14,14,15,0.78)" }} />
           <div className="relative z-10 px-6 py-14 md:py-16 text-center max-w-3xl mx-auto">

@@ -12,7 +12,7 @@ if (typeof window !== "undefined") {
 
 /* ============ POURQUOI NOUS CHOISIR ============ */
 const REASONS = [
-  { n: "01", t: "Enrobé à chaud", d: "Pose à la main à 160°C, compactage maîtrisé pour une durabilité maximale.", icon: "M8 20s-3-3-3-7a7 7 0 0 1 7-7c0 3-2 4-2 7a3 3 0 0 0 6 0c0 4-3 7-8 7Z" },
+  { n: "01", t: "Enrobé à chaud", d: "Pose à la main à 180°C, compactage maîtrisé pour une durabilité maximale.", icon: "M8 20s-3-3-3-7a7 7 0 0 1 7-7c0 3-2 4-2 7a3 3 0 0 0 6 0c0 4-3 7-8 7Z" },
   { n: "02", t: "20 ans d'expérience", d: "Plus de 500 chantiers réalisés dans le Jura et l'Ain depuis 2005.", icon: "M12 2l2.4 5 5.6.8-4 3.9 1 5.5L12 14.8 6.9 17.2l1-5.5-4-3.9L9.6 7Z" },
   { n: "03", t: "Devis détaillé", d: "Visite gratuite, devis sous 48h, prix tenus, aucune mauvaise surprise.", icon: "M9 12h6M9 16h4M14 3v4a1 1 0 0 0 1 1h4M5 21V5a2 2 0 0 1 2-2h8l5 5v13a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2Z" },
   { n: "04", t: "Garantie & SAV", d: "Travaux garantis. Intervention rapide à la moindre anomalie.", icon: "M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10ZM9 12l2 2 4-4" },
@@ -81,85 +81,33 @@ export function WhyUs() {
   );
 }
 
-/* ============ ZONE D'INTERVENTION — Leaflet lazy ============ */
-const CITIES_FALLBACK = [
-  "Cize (siège)", "Lons-le-Saunier", "Saint-Claude", "Champagnole",
-  "Bourg-en-Bresse", "Oyonnax", "Nantua", "Pont-d'Ain",
-];
-
+/* ============ ZONE D'INTERVENTION — Google Maps simple ============ */
 export function Zone() {
-  const ref = useRef<HTMLDivElement>(null);
-  const [Map, setMap] = useState<React.ComponentType | null>(null);
-  const [shouldLoad, setShouldLoad] = useState(false);
-
-  useEffect(() => {
-    if (!ref.current) return;
-    const io = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting) {
-          setShouldLoad(true);
-          io.disconnect();
-        }
-      },
-      { rootMargin: "200px" }
-    );
-    io.observe(ref.current);
-    return () => io.disconnect();
-  }, []);
-
-  useEffect(() => {
-    if (!shouldLoad || Map) return;
-    import("./InteractiveMap").then((m) => setMap(() => m.default));
-  }, [shouldLoad, Map]);
-
   return (
-    <section ref={ref} className="relative bg-depth-b py-10 md:py-20 px-6 md:px-12 overflow-hidden">
-      <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-        <div>
+    <section className="relative bg-depth-b py-10 md:py-20 px-6 md:px-12 overflow-hidden">
+      <div className="max-w-6xl mx-auto">
+        <div className="text-center mb-10">
           <div className="label text-gold">— Zone d'intervention</div>
           <h2 className="font-display mt-6 text-foreground" style={{ fontSize: "clamp(36px, 5vw, 64px)", fontWeight: 400, lineHeight: 1 }}>
-            Jura & Ain,<br /><span className="italic text-gold">notre territoire.</span>
+            Basés à <span className="italic text-gold">Cize.</span>
           </h2>
-          <p className="mt-8 text-muted max-w-md" style={{ lineHeight: 1.7 }}>
-            Basés à Cize, nous intervenons dans tout le Jura et le département de l'Ain. Visite et devis gratuits jusqu'à 60 km autour de notre siège.
-          </p>
-          <ul className="mt-8 grid grid-cols-2 gap-x-8 gap-y-3 text-foreground/80" style={{ fontSize: 14 }}>
-            {CITIES_FALLBACK.map((c) => (
-              <li key={c} className="flex items-center gap-3">
-                <span className="w-1 h-1 bg-gold rounded-full" />
-                {c}
-              </li>
-            ))}
-          </ul>
-          <div className="label text-gold/70 mt-10" style={{ fontSize: 10 }}>
-            Marqueurs dorés · Survol pour le détail · Clic pour la fiche
-          </div>
-          <div className="mt-10">
-            <p className="font-display italic text-foreground/80 mb-4" style={{ fontSize: 18 }}>
-              Votre commune n'est pas listée ? On se déplace jusqu'à 60 km.
-            </p>
-            <a
-              href="#devis"
-              data-cursor-hover
-              className="cta-primary inline-flex items-center gap-2"
-              style={{ fontFamily: "Outfit", fontSize: 15, letterSpacing: "0.02em", fontWeight: 500, borderRadius: 4, padding: "14px 28px", background: "var(--cuivre-500)", color: "#fff", textDecoration: "none", transition: "all 0.2s ease" }}
-            >
-              Vérifier ma zone <span aria-hidden>→</span>
-            </a>
-          </div>
         </div>
-
-        <div className="relative aspect-square max-w-lg mx-auto w-full bg-surface border border-border">
-          {Map ? <Map /> : (
-            <div className="absolute inset-0 flex items-center justify-center">
-              <span className="label text-gold/60">Carte Jura & Ain</span>
-            </div>
-          )}
+        <div className="relative w-full aspect-[16/9] md:aspect-[21/9] border border-border overflow-hidden">
+          <iframe
+            title="Localisation HCE — Cize, Jura"
+            src="https://www.google.com/maps?q=Cize,+Jura,+France&z=12&output=embed"
+            className="absolute inset-0 w-full h-full"
+            style={{ border: 0 }}
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+            allowFullScreen
+          />
         </div>
       </div>
     </section>
   );
 }
+
 
 /* ============ FAQ ============ */
 export const FAQS = [

@@ -91,6 +91,7 @@ function RootComponent() {
   return (
     <AuthProvider>
       <Outlet />
+      <WhatsAppFAB />
       <Toaster position="top-right" richColors />
     </AuthProvider>
   );

@@ -396,7 +396,7 @@ function Galerie() {
     <section className="relative w-full bg-depth-a py-10 md:py-20 px-4 md:px-12 overflow-hidden">
       <GiantNumber n="05" position="right" />
       <div className="max-w-6xl mx-auto text-center mb-10 md:mb-14">
-        <div className="label text-gold">— 500+ chantiers livrés depuis 2005</div>
+        <div className="label text-gold">— 1000+ chantiers livrés depuis 2005</div>
         <h2 className="font-display mt-4 md:mt-6 text-foreground" style={{ fontSize: "clamp(32px, 6vw, 80px)", fontWeight: 400, lineHeight: 1, wordBreak: "keep-all", overflowWrap: "normal", hyphens: "none" }}>
           Nos <span className="italic text-gold">réalisations.</span>
         </h2>
@@ -485,8 +485,8 @@ function SectionDivider({ variant = "minimal" }: { variant?: "minimal" | "marque
  */
 function MarqueeStats() {
   const items = [
+    "1000+ chantiers livrés",
     "20 ans d'expérience",
-    "500+ chantiers livrés",
     "Jura · Ain",
     "Devis sous 48h",
     "Garantie décennale",
@@ -981,8 +981,8 @@ function Transformation() {
         />
         <div ref={statsRef} className="mt-14 grid grid-cols-3 gap-8 md:gap-16 max-w-3xl mx-auto">
           {[
+            { n: 1000, suf: "+", l: "Chantiers" },
             { n: 20, suf: "+", l: "Années" },
-            { n: 500, suf: "+", l: "Chantiers" },
             { n: 100, suf: "%", l: "Satisfaits" },
           ].map((s, i) => (
             <div key={i} className="text-center">

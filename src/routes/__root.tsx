@@ -1,6 +1,7 @@
 import { Outlet, Link, createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
 import { Toaster } from "sonner";
 import { AuthProvider } from "@/hooks/useAuth";
+import { WhatsAppFAB } from "@/components/WhatsAppFAB";
 
 import appCss from "../styles.css?url";
 
@@ -90,6 +91,7 @@ function RootComponent() {
   return (
     <AuthProvider>
       <Outlet />
+      <WhatsAppFAB />
       <Toaster position="top-right" richColors />
     </AuthProvider>
   );

@@ -87,16 +87,21 @@ const SERVICES: Record<string, ServiceData> = {
     ],
     gallery: ["/photos/13-cour-parking-muret.jpg", "/photos/12-cour-courbe-muret-pierre.jpg", "/photos/09-detail-bordure-beton.jpg"],
   },
-  "garantie-sav": {
+  "finitions-soignees": {
     n: "06",
-    title: "Garantie & SAV",
+    title: "Finitions soignées",
     hero: "/photos/04-hero-golden-hour.jpg",
-    intro: "Travaux garantis, intervention rapide en cas d'anomalie, suivi long terme : HCE reste à vos côtés bien après la pose.",
-    prestations: ["Travaux garantis", "Intervention rapide en cas d'anomalie", "Suivi long terme", "Conseil entretien"],
+    intro: "Bords nets, raccords maîtrisés, surface plane et homogène. Le souci du détail jusqu'à la dernière passe.",
+    prestations: [
+      "Bords et angles nets, sans bavure",
+      "Raccords et jonctions parfaitement intégrés",
+      "Surface plane, homogène, sans flaque",
+      "Nettoyage complet du chantier en fin de travaux",
+    ],
     methode: [
-      { t: "Réception de chantier", d: "Visite contradictoire à la livraison, photos d'archivage." },
-      { t: "Suivi annuel", d: "Un appel d'évaluation pour détecter les besoins." },
-      { t: "Intervention rapide", d: "Sur tout désordre, retour sur site sous 5 jours ouvrés." },
+      { t: "Contrôle visuel et de planéité", d: "Vérification complète avant de quitter le chantier." },
+      { t: "Reprise immédiate", d: "Tout défaut de finition repris sur le champ." },
+      { t: "Livraison propre", d: "Chantier rendu propre, prêt à l'usage." },
     ],
     gallery: ["/photos/04-hero-golden-hour.jpg", "/photos/05-hero-chalet-bois-finition.jpg", "/photos/15-cour-golden-hour.jpg"],
   },

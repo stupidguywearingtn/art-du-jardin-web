@@ -2,9 +2,12 @@ import { useEffect, useRef, useState, useMemo, useId } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { motion, AnimatePresence } from "framer-motion";
+import { toast } from "sonner";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { CTAInline } from "@/components/CTAButtons";
 import { useSiteContent } from "@/hooks/useSiteContent";
+import { useProjectTypes, type ProjectType } from "@/hooks/useProjectTypes";
+import { supabase } from "@/integrations/supabase/client";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -225,26 +228,97 @@ export function FAQ() {
   );
 }
 
-/* ============ DEVIS MULTI-STEP + CALCULATEUR ============ */
-type Quote = {
-  type: "cour" | "allee" | "parking" | "preparation" | "";
-  surface: number;
-  delai: "souple" | "1mois" | "urgent" | "";
+/* ============ DEVIS MULTI-STEP (sans total calculé) ============
+   Brief 8 :
+   - GARDER « à partir de X €/m² » sur chaque carte (éditable côté admin).
+   - SUPPRIMER tout total / fourchette : pas de surface × prix.
+   - Étape 1 : choix carte. Étape 2 : longueur×largeur → surface estimée
+     (ou case "Je ne connais pas les dimensions" + texte libre).
+   - Étape 3 : coordonnées. Écran final : confirmation, aucun montant.
+   - Submit : insertion dans devis_requests.
+============================================================ */
+
+type QuoteData = {
+  typeSlug: string;
+  typeLabel: string;
+  length: string;
+  width: string;
+  freeDimensions: string;
+  knowsDimensions: boolean;
   nom: string;
   email: string;
   tel: string;
   ville: string;
+  postalCode: string;
   message: string;
 };
 
-const TYPE_OPTIONS = [
-  { id: "cour" as const, label: "Cour privée", price: 65, desc: "Enrobé à chaud, compactage", icon: "M3 12 12 4l9 8M5 10v10h14V10" },
-  { id: "allee" as const, label: "Allée", price: 75, desc: "Bordures + finition soignée", icon: "M4 20 14 4M10 20 20 4" },
-  { id: "parking" as const, label: "Parking pro", price: 55, desc: "Voirie poids lourds possible", icon: "M4 17V7a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v10M4 17h16M8 21v-4M16 21v-4" },
-  { id: "preparation" as const, label: "Préparation seule", price: 30, desc: "Décaissement + nivellement", icon: "M3 19h18M6 16l3-9 3 4 3-7 3 12" },
-];
+const EMPTY_QUOTE: QuoteData = {
+  typeSlug: "",
+  typeLabel: "",
+  length: "",
+  width: "",
+  freeDimensions: "",
+  knowsDimensions: true,
+  nom: "",
+  email: "",
+  tel: "",
+  ville: "",
+  postalCode: "",
+  message: "",
+};
 
-const DELAI_COEF = { souple: 1, "1mois": 1.05, urgent: 1.15 } as const;
+const TYPE_ICONS: Record<string, string> = {
+  cour: "M3 12 12 4l9 8M5 10v10h14V10",
+  allee: "M4 20 14 4M10 20 20 4",
+  parking: "M4 17V7a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v10M4 17h16M8 21v-4M16 21v-4",
+  preparation: "M3 19h18M6 16l3-9 3 4 3-7 3 12",
+};
+
+function computeSurface(q: QuoteData): number | null {
+  if (!q.knowsDimensions) return null;
+  const l = parseFloat(q.length.replace(",", "."));
+  const w = parseFloat(q.width.replace(",", "."));
+  if (!isFinite(l) || !isFinite(w) || l <= 0 || w <= 0) return null;
+  return Math.round(l * w * 10) / 10;
+}
+
+async function submitDevis(q: QuoteData): Promise<boolean> {
+  const surface = computeSurface(q);
+  const { error } = await supabase.from("devis_requests").insert({
+    project_type_slug: q.typeSlug || null,
+    project_type_label: q.typeLabel || null,
+    length_m: q.knowsDimensions && q.length ? parseFloat(q.length.replace(",", ".")) : null,
+    width_m: q.knowsDimensions && q.width ? parseFloat(q.width.replace(",", ".")) : null,
+    estimated_surface_m2: surface,
+    free_dimensions: q.knowsDimensions ? null : (q.freeDimensions || null),
+    description: q.message || null,
+    name: q.nom,
+    phone: q.tel,
+    email: q.email,
+    postal_code: q.postalCode || null,
+    city: q.ville || null,
+  });
+  if (error) {
+    toast.error(`Erreur : ${error.message}`);
+    return false;
+  }
+  // Notification email (fire-and-forget — un edge function Supabase peut être branché plus tard)
+  try {
+    const surfaceStr = surface !== null ? `${surface} m²` : (q.freeDimensions || "non précisée");
+    const body = encodeURIComponent(
+      `Demande de devis HCE\n\nType : ${q.typeLabel}\nSurface estimée : ${surfaceStr}\n\n` +
+      `Nom : ${q.nom}\nEmail : ${q.email}\nTél : ${q.tel}\nVille : ${q.ville}\nCP : ${q.postalCode}\n\n` +
+      `Message :\n${q.message}`
+    );
+    // Mailto fallback ouvert dans un nouvel onglet pour notifier sarl.hce@laposte.net
+    const subject = encodeURIComponent(`Nouvelle demande de devis — ${q.typeLabel || "HCE"}`);
+    window.open(`mailto:sarl.hce@laposte.net?subject=${subject}&body=${body}`, "_blank");
+  } catch {
+    // ignore
+  }
+  return true;
+}
 
 export function QuoteForm() {
   const isMobile = useIsMobile();
@@ -254,33 +328,11 @@ export function QuoteForm() {
 
 function QuoteFormDesktop() {
   const [step, setStep] = useState(0);
-  const [data, setData] = useState<Quote>({
-    type: "", surface: 100, delai: "", nom: "", email: "", tel: "", ville: "", message: "",
-  });
-  const priceRef = useRef<HTMLSpanElement>(null);
+  const [data, setData] = useState<QuoteData>(EMPTY_QUOTE);
+  const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
-
-  const { min, max } = useMemo(() => {
-    const opt = TYPE_OPTIONS.find((o) => o.id === data.type);
-    if (!opt || !data.surface) return { min: 0, max: 0 };
-    const coef = data.delai ? DELAI_COEF[data.delai] : 1;
-    const base = opt.price * data.surface * coef;
-    return { min: Math.round(base * 0.9 / 100) * 100, max: Math.round(base * 1.2 / 100) * 100 };
-  }, [data.type, data.surface, data.delai]);
-
-  // animate price counter
-  const prevMaxRef = useRef(0);
-  useEffect(() => {
-    if (!priceRef.current) return;
-    const obj = { v: prevMaxRef.current };
-    gsap.to(obj, {
-      v: max, duration: 0.8, ease: "power2.out",
-      onUpdate: () => {
-        if (priceRef.current) priceRef.current.textContent = Math.round(obj.v).toLocaleString("fr-FR");
-      },
-      onComplete: () => { prevMaxRef.current = max; },
-    });
-  }, [max]);
+  const { items: types } = useProjectTypes();
 
   // section reveal
   useEffect(() => {
@@ -294,28 +346,31 @@ function QuoteFormDesktop() {
     });
   }, []);
 
-  const canNext = useMemo(() => {
-    if (step === 0) return data.type !== "";
-    if (step === 1) return data.surface > 0 && data.delai !== "";
-    if (step === 2) return data.nom && data.email && data.tel;
-    return false;
-  }, [step, data]);
+  const surface = useMemo(() => computeSurface(data), [data]);
 
-  const submit = () => {
-    const opt = TYPE_OPTIONS.find((o) => o.id === data.type);
-    const body = encodeURIComponent(
-      `Demande de devis HCE\n\n` +
-      `Type : ${opt?.label}\n` +
-      `Surface : ${data.surface} m²\n` +
-      `Délai : ${data.delai}\n` +
-      `Estimation indicative : ${min.toLocaleString("fr-FR")} € — ${max.toLocaleString("fr-FR")} € HT\n\n` +
-      `Nom : ${data.nom}\nEmail : ${data.email}\nTél : ${data.tel}\nVille : ${data.ville}\n\n` +
-      `Message :\n${data.message}`
-    );
-    window.location.href = `mailto:sarl.hce@laposte.net?subject=${encodeURIComponent("Demande de devis — " + (opt?.label ?? ""))}&body=${body}`;
+  const canNext = useMemo(() => {
+    if (step === 0) return data.typeSlug !== "";
+    if (step === 1) {
+      if (!data.knowsDimensions) return data.freeDimensions.trim().length > 0;
+      return surface !== null;
+    }
+    if (step === 2) return !!(data.nom && data.email && data.tel);
+    return false;
+  }, [step, data, surface]);
+
+  const handleSubmit = async () => {
+    if (submitting) return;
+    setSubmitting(true);
+    const ok = await submitDevis(data);
+    setSubmitting(false);
+    if (ok) {
+      setSubmitted(true);
+      toast.success("Demande envoyée");
+    }
   };
 
-  const STEPS = ["Projet", "Surface & délai", "Coordonnées"];
+  const STEPS = ["Projet", "Dimensions", "Coordonnées"];
+  const selectedType = types.find((t) => t.slug === data.typeSlug);
 
   return (
     <section ref={sectionRef} id="devis" className="relative bg-depth-b py-10 md:py-20 px-6 md:px-12 overflow-hidden">
@@ -328,214 +383,273 @@ function QuoteFormDesktop() {
           </h2>
         </div>
 
-        {/* progress */}
-        <div className="flex items-center gap-3 mb-12 max-w-2xl mx-auto" data-reveal>
-          {STEPS.map((s, i) => (
-            <div key={s} className="flex-1 flex items-center gap-3">
-              <div
-                className="flex items-center justify-center w-8 h-8 border transition-all duration-500"
-                style={{
-                  borderColor: i <= step ? "var(--cuivre-500)" : "rgb(200 153 42 / 0.3)",
-                  background: i < step ? "var(--cuivre-500)" : "transparent",
-                  color: i < step ? "var(--asphalte-900)" : "var(--cuivre-500)",
-                  fontFamily: "var(--font-body)", fontSize: 13,
-                }}
-              >
-                {i < step ? "✓" : i + 1}
+        {submitted ? (
+          <SubmittedScreen onReset={() => { setData(EMPTY_QUOTE); setStep(0); setSubmitted(false); }} />
+        ) : (
+          <>
+            {/* progress */}
+            <div className="flex items-center gap-3 mb-12 max-w-2xl mx-auto" data-reveal>
+              {STEPS.map((s, i) => (
+                <div key={s} className="flex-1 flex items-center gap-3">
+                  <div
+                    className="flex items-center justify-center w-8 h-8 border transition-all duration-500"
+                    style={{
+                      borderColor: i <= step ? "var(--cuivre-500)" : "rgb(200 153 42 / 0.3)",
+                      background: i < step ? "var(--cuivre-500)" : "transparent",
+                      color: i < step ? "var(--asphalte-900)" : "var(--cuivre-500)",
+                      fontFamily: "var(--font-body)", fontSize: 13,
+                    }}
+                  >
+                    {i < step ? "✓" : i + 1}
+                  </div>
+                  <span className="hidden md:inline label text-gold/80" style={{ fontSize: 10 }}>{s}</span>
+                  {i < STEPS.length - 1 && (
+                    <div className="flex-1 h-px relative bg-gold/20">
+                      <div className="absolute inset-y-0 left-0 bg-gold transition-all duration-700" style={{ width: i < step ? "100%" : "0%" }} />
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-12" data-reveal>
+              {/* form area */}
+              <div className="lg:col-span-2 relative min-h-[420px]">
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={step}
+                    initial={{ opacity: 0, x: 30 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: -30 }}
+                    transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
+                  >
+                    {step === 0 && (
+                      <div>
+                        <h3 className="font-display text-foreground mb-8" style={{ fontSize: 28, fontWeight: 400 }}>
+                          Quel type de projet ?
+                        </h3>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                          {types.map((o) => {
+                            const sel = data.typeSlug === o.slug;
+                            const icon = TYPE_ICONS[o.slug] ?? TYPE_ICONS.cour;
+                            return (
+                              <SelectCard
+                                key={o.id}
+                                selected={sel}
+                                onClick={() => setData({ ...data, typeSlug: o.slug, typeLabel: o.label })}
+                              >
+                                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" className="text-gold mb-5 transition-all duration-300 group-hover:text-[var(--sable-500)]">
+                                  <path d={icon} strokeLinecap="round" strokeLinejoin="round" />
+                                </svg>
+                                <div className="font-display text-foreground" style={{ fontSize: 22, fontWeight: 400, letterSpacing: "-0.01em" }}>{o.label}</div>
+                                {o.description && <div className="text-muted mt-2" style={{ fontSize: 13, lineHeight: 1.5 }}>{o.description}</div>}
+                                {o.show_price && o.price_from !== null && (
+                                  <div className="label text-gold mt-5" style={{ fontSize: 10 }}>
+                                    à partir de {o.price_from} {o.price_unit}
+                                  </div>
+                                )}
+                              </SelectCard>
+                            );
+                          })}
+                        </div>
+                      </div>
+                    )}
+
+                    {step === 1 && (
+                      <div className="space-y-8">
+                        <div>
+                          <h3 className="font-display text-foreground mb-2" style={{ fontSize: 28, fontWeight: 400 }}>Dimensions de la surface</h3>
+                          <p className="text-muted mb-6" style={{ fontSize: 14 }}>Approximatives, nous affinerons sur place.</p>
+                          {data.knowsDimensions ? (
+                            <>
+                              <div className="grid grid-cols-2 gap-5">
+                                <DimInput label="Longueur (m)" value={data.length} onChange={(v) => setData({ ...data, length: v })} />
+                                <DimInput label="Largeur (m)" value={data.width} onChange={(v) => setData({ ...data, width: v })} />
+                              </div>
+                              {surface !== null && (
+                                <div className="mt-8 p-5 border border-gold/30 bg-surface">
+                                  <div className="label text-gold/80" style={{ fontSize: 10 }}>— Surface estimée</div>
+                                  <div className="font-display text-gold mt-2 flex items-baseline gap-2" style={{ fontSize: 44, lineHeight: 1 }}>
+                                    ~{surface}<span style={{ fontSize: 18 }}>m²</span>
+                                  </div>
+                                </div>
+                              )}
+                            </>
+                          ) : (
+                            <div>
+                              <label htmlFor="free-dim-desktop" className="label text-gold/80 block mb-2" style={{ fontSize: 10 }}>Décrivez le projet (libre)</label>
+                              <textarea
+                                id="free-dim-desktop"
+                                rows={4}
+                                placeholder="Ex : grande cour devant la maison + petite allée latérale, environ 200 m² au total mais à confirmer."
+                                value={data.freeDimensions}
+                                onChange={(e) => setData({ ...data, freeDimensions: e.target.value })}
+                                className="w-full bg-transparent border border-gold/30 px-4 py-3 text-foreground placeholder:text-muted focus:outline-none focus:border-gold transition-colors"
+                                style={{ fontFamily: "var(--font-body)", fontSize: 14 }}
+                              />
+                            </div>
+                          )}
+                          <label className="mt-6 inline-flex items-center gap-2 cursor-pointer text-foreground/80" style={{ fontSize: 13 }}>
+                            <input
+                              type="checkbox"
+                              checked={!data.knowsDimensions}
+                              onChange={(e) => setData({ ...data, knowsDimensions: !e.target.checked })}
+                              className="accent-[var(--cuivre-500)] w-4 h-4"
+                            />
+                            Je ne connais pas les dimensions
+                          </label>
+                        </div>
+                      </div>
+                    )}
+
+                    {step === 2 && (
+                      <div className="space-y-5">
+                        <h3 className="font-display text-foreground mb-2" style={{ fontSize: 28, fontWeight: 400 }}>Vos coordonnées</h3>
+                        <p className="text-muted mb-6" style={{ fontSize: 14 }}>On vous rappelle sous 48h pour planifier la visite.</p>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                          <Input label="Nom complet *" value={data.nom} onChange={(v) => setData({ ...data, nom: v })} />
+                          <Input label="Téléphone *" value={data.tel} onChange={(v) => setData({ ...data, tel: v })} />
+                          <Input label="Email *" value={data.email} onChange={(v) => setData({ ...data, email: v })} type="email" />
+                          <Input label="Ville" value={data.ville} onChange={(v) => setData({ ...data, ville: v })} />
+                          <Input label="Code postal" value={data.postalCode} onChange={(v) => setData({ ...data, postalCode: v })} />
+                        </div>
+                        <div>
+                          <label htmlFor="quote-message-desktop" className="label text-gold/80 block mb-2" style={{ fontSize: 10 }}>Message (optionnel)</label>
+                          <textarea
+                            id="quote-message-desktop"
+                            rows={4}
+                            value={data.message}
+                            onChange={(e) => setData({ ...data, message: e.target.value })}
+                            className="w-full bg-transparent border border-gold/30 px-4 py-3 text-foreground focus:outline-none focus:border-gold transition-colors"
+                            style={{ fontFamily: "var(--font-body)", fontSize: 14 }}
+                          />
+                        </div>
+                      </div>
+                    )}
+                  </motion.div>
+                </AnimatePresence>
+
+                {/* nav */}
+                <div className="mt-10 flex items-center justify-between gap-4">
+                  <button
+                    data-cursor-hover
+                    onClick={() => setStep((s) => Math.max(0, s - 1))}
+                    disabled={step === 0}
+                    className="label text-gold disabled:opacity-30 disabled:cursor-not-allowed transition-opacity"
+                    style={{ fontSize: 11 }}
+                  >
+                    ← Précédent
+                  </button>
+                  {step < 2 ? (
+                    <button
+                      data-cursor-hover
+                      onClick={() => setStep((s) => s + 1)}
+                      disabled={!canNext}
+                      className="bg-gold text-background px-8 py-3 transition-all hover:bg-[var(--cuivre-600)] hover:-translate-y-0.5 focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:opacity-40 disabled:cursor-not-allowed"
+                      style={{ fontFamily: "var(--font-body)", fontSize: 13, letterSpacing: "0.15em", textTransform: "uppercase" }}
+                    >
+                      Continuer →
+                    </button>
+                  ) : (
+                    <button
+                      data-cursor-hover
+                      onClick={handleSubmit}
+                      disabled={!canNext || submitting}
+                      className="bg-gold text-background px-10 transition-all hover:bg-[var(--cuivre-600)] hover:-translate-y-1 focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:opacity-40 disabled:cursor-not-allowed"
+                      style={{ fontFamily: "var(--font-body)", fontSize: 14, letterSpacing: "0.15em", textTransform: "uppercase", height: 56, fontWeight: 500, boxShadow: "0 8px 24px rgba(200,153,42,0.35)" }}
+                    >
+                      {submitting ? "Envoi…" : "Envoyer ma demande →"}
+                    </button>
+                  )}
+                </div>
               </div>
-              <span className="hidden md:inline label text-gold/80" style={{ fontSize: 10 }}>{s}</span>
-              {i < STEPS.length - 1 && (
-                <div className="flex-1 h-px relative bg-gold/20">
-                  <div className="absolute inset-y-0 left-0 bg-gold transition-all duration-700" style={{ width: i < step ? "100%" : "0%" }} />
+
+              {/* récap — pas de prix calculé */}
+              <aside className="relative">
+                <div className="sticky top-8 relative bg-surface border border-gold/40 p-8 overflow-hidden" style={{ boxShadow: "0 8px 32px rgba(0,0,0,0.4), 0 0 0 1px rgba(200,153,42,0.1)" }}>
+                  <span aria-hidden className="absolute top-0 left-0 w-1 h-full bg-gold" />
+                  <div className="label text-gold mb-6" style={{ fontSize: 10 }}>— Récapitulatif</div>
+
+                  {selectedType ? (
+                    <>
+                      <div className="font-display text-foreground" style={{ fontSize: 16 }}>
+                        {selectedType.label}
+                      </div>
+                      {selectedType.show_price && selectedType.price_from !== null && (
+                        <div className="label text-gold mt-2" style={{ fontSize: 10 }}>
+                          à partir de {selectedType.price_from} {selectedType.price_unit}
+                        </div>
+                      )}
+                      {(surface !== null || (!data.knowsDimensions && data.freeDimensions)) && (
+                        <div className="mt-6">
+                          <div className="label text-gold/70" style={{ fontSize: 9 }}>Surface</div>
+                          <div className="text-foreground mt-1" style={{ fontSize: 14 }}>
+                            {surface !== null ? `~${surface} m²` : "À évaluer sur place"}
+                          </div>
+                        </div>
+                      )}
+
+                      <div className="h-px bg-gold/20 my-6" />
+                      <p className="text-muted italic font-display" style={{ fontSize: 12, lineHeight: 1.5 }}>
+                        Devis détaillé établi après visite gratuite. Aucun montant n'est calculé automatiquement.
+                      </p>
+                    </>
+                  ) : (
+                    <div className="text-muted italic font-display" style={{ fontSize: 14, lineHeight: 1.6 }}>
+                      Sélectionnez un type de projet pour commencer.
+                    </div>
+                  )}
                 </div>
-              )}
+              </aside>
             </div>
-          ))}
-        </div>
-
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12" data-reveal>
-          {/* form area */}
-          <div className="lg:col-span-2 relative min-h-[420px]">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={step}
-                initial={{ opacity: 0, x: 30 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -30 }}
-                transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
-              >
-                {step === 0 && (
-                  <div>
-                    <h3 className="font-display text-foreground mb-8" style={{ fontSize: 28, fontWeight: 400 }}>
-                      Quel type de projet ?
-                    </h3>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                      {TYPE_OPTIONS.map((o) => {
-                        const sel = data.type === o.id;
-                        return (
-                          <SelectCard
-                            key={o.id}
-                            selected={sel}
-                            onClick={() => setData({ ...data, type: o.id })}
-                          >
-                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" className="text-gold mb-5 transition-all duration-300 group-hover:text-[var(--sable-500)]">
-                              <path d={o.icon} strokeLinecap="round" strokeLinejoin="round" />
-                            </svg>
-                            <div className="font-display text-foreground" style={{ fontSize: 22, fontWeight: 400, letterSpacing: "-0.01em" }}>{o.label}</div>
-                            <div className="text-muted mt-2" style={{ fontSize: 13, lineHeight: 1.5 }}>{o.desc}</div>
-                            <div className="label text-gold mt-5" style={{ fontSize: 10 }}>à partir de {o.price} €/m²</div>
-                          </SelectCard>
-                        );
-                      })}
-                    </div>
-                  </div>
-                )}
-
-                {step === 1 && (
-                  <div className="space-y-10">
-                    <div>
-                      <h3 className="font-display text-foreground mb-2" style={{ fontSize: 28, fontWeight: 400 }}>Surface estimée</h3>
-                      <p className="text-muted mb-6" style={{ fontSize: 14 }}>Approximative, nous affinerons sur place.</p>
-                      <div className="flex items-baseline gap-3 mb-4">
-                        <span className="font-display text-gold" style={{ fontSize: 48, lineHeight: 1 }}>{data.surface}</span>
-                        <span className="label text-foreground/70">m²</span>
-                      </div>
-                      <input
-                        type="range" min={20} max={1000} step={10} value={data.surface}
-                        onChange={(e) => setData({ ...data, surface: Number(e.target.value) })}
-                        className="w-full accent-[var(--cuivre-500)] cursor-pointer"
-                        aria-label="Surface estimée en mètres carrés"
-                      />
-                      <div className="flex justify-between text-muted mt-2" style={{ fontSize: 11 }}>
-                        <span>20 m²</span><span>1000 m²</span>
-                      </div>
-                    </div>
-
-                    <div>
-                      <h3 className="font-display text-foreground mb-6" style={{ fontSize: 24, fontWeight: 400 }}>Délai souhaité</h3>
-                      <div className="grid grid-cols-3 gap-4">
-                        {([
-                          { id: "souple", l: "Flexible", d: "Date libre" },
-                          { id: "1mois", l: "Sous 1 mois", d: "Planning serré" },
-                          { id: "urgent", l: "Urgent", d: "Sous 2 sem." },
-                        ] as const).map((d) => {
-                          const sel = data.delai === d.id;
-                          return (
-                            <SelectCard
-                              key={d.id}
-                              selected={sel}
-                              onClick={() => setData({ ...data, delai: d.id })}
-                              compact
-                            >
-                              <div className="font-display text-foreground" style={{ fontSize: 18, fontWeight: 400 }}>{d.l}</div>
-                              <div className="text-muted mt-1.5" style={{ fontSize: 12 }}>{d.d}</div>
-                            </SelectCard>
-                          );
-                        })}
-                      </div>
-                    </div>
-                  </div>
-                )}
-
-                {step === 2 && (
-                  <div className="space-y-5">
-                    <h3 className="font-display text-foreground mb-2" style={{ fontSize: 28, fontWeight: 400 }}>Vos coordonnées</h3>
-                    <p className="text-muted mb-6" style={{ fontSize: 14 }}>On vous rappelle sous 48h pour planifier la visite.</p>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                      <Input label="Nom complet *" value={data.nom} onChange={(v) => setData({ ...data, nom: v })} />
-                      <Input label="Téléphone *" value={data.tel} onChange={(v) => setData({ ...data, tel: v })} />
-                      <Input label="Email *" value={data.email} onChange={(v) => setData({ ...data, email: v })} type="email" />
-                      <Input label="Ville" value={data.ville} onChange={(v) => setData({ ...data, ville: v })} />
-                    </div>
-                    <div>
-                      <label htmlFor="quote-message-desktop" className="label text-gold/80 block mb-2" style={{ fontSize: 10 }}>Message (optionnel)</label>
-                      <textarea
-                        id="quote-message-desktop"
-                        rows={4}
-                        value={data.message}
-                        onChange={(e) => setData({ ...data, message: e.target.value })}
-                        className="w-full bg-transparent border border-gold/30 px-4 py-3 text-foreground focus:outline-none focus:border-gold transition-colors"
-                        style={{ fontFamily: "var(--font-body)", fontSize: 14 }}
-                      />
-                    </div>
-                  </div>
-                )}
-              </motion.div>
-            </AnimatePresence>
-
-            {/* nav */}
-            <div className="mt-10 flex items-center justify-between gap-4">
-              <button
-                data-cursor-hover
-                onClick={() => setStep((s) => Math.max(0, s - 1))}
-                disabled={step === 0}
-                className="label text-gold disabled:opacity-30 disabled:cursor-not-allowed transition-opacity"
-                style={{ fontSize: 11 }}
-              >
-                ← Précédent
-              </button>
-              {step < 2 ? (
-                <button
-                  data-cursor-hover
-                  onClick={() => setStep((s) => s + 1)}
-                  disabled={!canNext}
-                  className="bg-gold text-background px-8 py-3 transition-all hover:bg-[var(--cuivre-600)] hover:-translate-y-0.5 focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:opacity-40 disabled:cursor-not-allowed"
-                  style={{ fontFamily: "var(--font-body)", fontSize: 13, letterSpacing: "0.15em", textTransform: "uppercase" }}
-                >
-                  Continuer →
-                </button>
-              ) : (
-                <button
-                  data-cursor-hover
-                  onClick={submit}
-                  disabled={!canNext}
-                  className="bg-gold text-background px-10 transition-all hover:bg-[var(--cuivre-600)] hover:-translate-y-1 focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:opacity-40 disabled:cursor-not-allowed"
-                  style={{ fontFamily: "var(--font-body)", fontSize: 14, letterSpacing: "0.15em", textTransform: "uppercase", height: 56, fontWeight: 500, boxShadow: "0 8px 24px rgba(200,153,42,0.35)" }}
-                >
-                  Envoyer ma demande →
-                </button>
-              )}
-            </div>
-          </div>
-
-          {/* live estimate — sticky panel premium */}
-          <aside className="relative">
-            <div className="sticky top-8 relative bg-surface border border-gold/40 p-8 overflow-hidden" style={{ boxShadow: "0 8px 32px rgba(0,0,0,0.4), 0 0 0 1px rgba(200,153,42,0.1)" }}>
-              <span aria-hidden className="absolute top-0 left-0 w-1 h-full bg-gold" />
-              <div className="label text-gold mb-6" style={{ fontSize: 10 }}>— Estimation indicative</div>
-
-              {data.type ? (
-                <>
-                  <div className="font-display text-foreground" style={{ fontSize: 14 }}>
-                    {TYPE_OPTIONS.find((o) => o.id === data.type)?.label}
-                  </div>
-                  <div className="text-muted mt-1" style={{ fontSize: 12 }}>{data.surface} m²{data.delai && ` · ${data.delai === "souple" ? "Flexible" : data.delai === "1mois" ? "Sous 1 mois" : "Urgent"}`}</div>
-
-                  <div className="mt-8 mb-2">
-                    <div className="font-display text-gold flex items-baseline gap-2" style={{ fontSize: 64, lineHeight: 0.95, fontWeight: 400, letterSpacing: "-0.02em" }}>
-                      <span ref={priceRef}>0</span>
-                      <span style={{ fontSize: 24 }}>€</span>
-                    </div>
-                    <div className="label text-muted mt-4" style={{ fontSize: 10 }}>
-                      Fourchette : {min.toLocaleString("fr-FR")} – {max.toLocaleString("fr-FR")} € HT
-                    </div>
-                  </div>
-
-                  <div className="h-px bg-gold/20 my-6" />
-                  <p className="text-muted italic font-display" style={{ fontSize: 12, lineHeight: 1.5 }}>
-                    Estimation calculée selon vos critères. Le devis final pourra varier après visite gratuite du chantier.
-                  </p>
-                </>
-              ) : (
-                <div className="text-muted italic font-display" style={{ fontSize: 14, lineHeight: 1.6 }}>
-                  Sélectionnez un type de projet pour voir l'estimation s'afficher en direct.
-                </div>
-              )}
-            </div>
-          </aside>
-        </div>
+          </>
+        )}
       </div>
     </section>
+  );
+}
+
+function SubmittedScreen({ onReset }: { onReset: () => void }) {
+  return (
+    <div className="max-w-2xl mx-auto text-center py-10">
+      <div className="inline-flex items-center justify-center w-16 h-16 rounded-full mb-6" style={{ background: "var(--cuivre-500)" }}>
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M5 12l5 5L20 7" />
+        </svg>
+      </div>
+      <h3 className="font-display text-foreground" style={{ fontSize: "clamp(28px, 4vw, 44px)", fontWeight: 400, lineHeight: 1.1 }}>
+        Votre demande a bien été envoyée.
+      </h3>
+      <p className="mt-6 text-muted max-w-md mx-auto" style={{ fontSize: 16, lineHeight: 1.6 }}>
+        Nous revenons vers vous sous 48h pour planifier la visite gratuite et établir un devis détaillé.
+      </p>
+      <button
+        onClick={onReset}
+        className="mt-10 label text-gold border-b border-gold/40 pb-1 hover:border-gold transition-colors"
+        style={{ fontSize: 11 }}
+      >
+        Faire une nouvelle demande →
+      </button>
+    </div>
+  );
+}
+
+function DimInput({ label, value, onChange }: { label: string; value: string; onChange: (v: string) => void }) {
+  const id = useId();
+  return (
+    <div>
+      <label htmlFor={id} className="label text-gold/80 block mb-2" style={{ fontSize: 10 }}>{label}</label>
+      <input
+        id={id}
+        type="text"
+        inputMode="decimal"
+        value={value}
+        placeholder="0"
+        onChange={(e) => onChange(e.target.value)}
+        className="w-full bg-transparent border border-gold/30 px-4 py-3 text-foreground focus:outline-none focus:border-gold transition-colors"
+        style={{ fontFamily: "var(--font-body)", fontSize: 16 }}
+      />
+    </div>
   );
 }
 
@@ -617,40 +731,32 @@ function Input({ label, value, onChange, type = "text" }: { label: string; value
 function QuoteFormMobile() {
   const [step, setStep] = useState(0);
   const [direction, setDirection] = useState<1 | -1>(1);
-  const [data, setData] = useState<Quote>({
-    type: "", surface: 100, delai: "", nom: "", email: "", tel: "", ville: "", message: "",
-  });
+  const [data, setData] = useState<QuoteData>(EMPTY_QUOTE);
+  const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const { items: types } = useProjectTypes();
 
-  const { min, max } = useMemo(() => {
-    const opt = TYPE_OPTIONS.find((o) => o.id === data.type);
-    if (!opt || !data.surface) return { min: 0, max: 0 };
-    const coef = data.delai ? DELAI_COEF[data.delai] : 1;
-    const base = opt.price * data.surface * coef;
-    return { min: Math.round(base * 0.9 / 100) * 100, max: Math.round(base * 1.2 / 100) * 100 };
-  }, [data.type, data.surface, data.delai]);
+  const surface = useMemo(() => computeSurface(data), [data]);
 
-  const goNext = () => { setDirection(1); setStep((s) => Math.min(3, s + 1)); };
+  const goNext = () => { setDirection(1); setStep((s) => Math.min(2, s + 1)); };
   const goBack = () => { setDirection(-1); setStep((s) => Math.max(0, s - 1)); };
 
-  const submit = () => {
-    const opt = TYPE_OPTIONS.find((o) => o.id === data.type);
-    const body = encodeURIComponent(
-      `Demande de devis HCE\n\n` +
-      `Type : ${opt?.label}\nSurface : ${data.surface} m²\nDélai : ${data.delai}\n` +
-      `Estimation : ${min.toLocaleString("fr-FR")} – ${max.toLocaleString("fr-FR")} € HT\n\n` +
-      `Nom : ${data.nom}\nEmail : ${data.email}\nTél : ${data.tel}\nVille : ${data.ville}\n\nMessage :\n${data.message}`
-    );
-    window.location.href = `mailto:sarl.hce@laposte.net?subject=${encodeURIComponent("Demande de devis — " + (opt?.label ?? ""))}&body=${body}`;
+  const autoAdvance = (delay = 400) => setTimeout(() => goNext(), delay);
+
+  const handleSubmit = async () => {
+    if (submitting) return;
+    setSubmitting(true);
+    const ok = await submitDevis(data);
+    setSubmitting(false);
+    if (ok) {
+      setSubmitted(true);
+      toast.success("Demande envoyée");
+    }
   };
 
-  // auto-advance helpers (400ms after a single-select tap)
-  const autoAdvance = (delay = 400) => {
-    setTimeout(() => goNext(), delay);
-  };
-
-  const TOTAL = 4;
-  const stepLabel = ["Projet", "Surface", "Délai", "Coordonnées"][step];
-  const canSubmit = !!(data.nom && data.email && data.tel);
+  const TOTAL = 3;
+  const stepLabel = ["Projet", "Dimensions", "Coordonnées"][step];
+  const canSubmitFinal = !!(data.nom && data.email && data.tel);
 
   const variants = {
     enter: (dir: 1 | -1) => ({ x: dir * 60, opacity: 0 }),
@@ -658,12 +764,18 @@ function QuoteFormMobile() {
     exit: (dir: 1 | -1) => ({ x: dir * -60, opacity: 0 }),
   };
 
+  if (submitted) {
+    return (
+      <section id="devis" className="relative bg-background pt-16 pb-24 px-5">
+        <SubmittedScreen onReset={() => { setData(EMPTY_QUOTE); setStep(0); setSubmitted(false); }} />
+      </section>
+    );
+  }
+
   return (
-    <section id="devis" className="relative bg-background pt-10 pb-40 overflow-hidden">
+    <section id="devis" className="relative bg-background pt-10 pb-24 overflow-hidden">
       {/* sticky top: progress + back */}
-      <div
-        className="sticky top-0 z-30 bg-background/95 backdrop-blur-sm border-b border-gold/20 px-5 py-4 flex items-center gap-4"
-      >
+      <div className="sticky top-0 z-30 bg-background/95 backdrop-blur-sm border-b border-gold/20 px-5 py-4 flex items-center gap-4">
         <button
           onClick={goBack}
           disabled={step === 0}
@@ -695,7 +807,7 @@ function QuoteFormMobile() {
         <div className="text-center mb-8">
           <div className="label text-gold">— Demande de devis</div>
           <h2 className="font-display mt-4 text-foreground" style={{ fontSize: 36, fontWeight: 400, lineHeight: 1 }}>
-            Estimez votre projet<br/><span className="italic text-gold">en 90 sec.</span>
+            Estimez votre projet<br /><span className="italic text-gold">en 90 sec.</span>
           </h2>
         </div>
 
@@ -713,36 +825,68 @@ function QuoteFormMobile() {
               {step === 0 && (
                 <SwipeOptions
                   ariaLabel="Type de projet"
-                  options={TYPE_OPTIONS.map((o) => ({
-                    id: o.id, title: o.label, sub: o.desc, foot: `à partir de ${o.price} €/m²`, icon: o.icon,
+                  options={types.map((o) => ({
+                    id: o.slug,
+                    title: o.label,
+                    sub: o.description ?? "",
+                    foot: o.show_price && o.price_from !== null ? `à partir de ${o.price_from} ${o.price_unit}` : undefined,
+                    icon: TYPE_ICONS[o.slug] ?? TYPE_ICONS.cour,
                   }))}
-                  selected={data.type}
-                  onSelect={(id) => { setData({ ...data, type: id as Quote["type"] }); autoAdvance(); }}
+                  selected={data.typeSlug}
+                  onSelect={(id) => {
+                    const t = types.find((x) => x.slug === id);
+                    setData({ ...data, typeSlug: id, typeLabel: t?.label ?? "" });
+                    autoAdvance();
+                  }}
                 />
               )}
 
               {step === 1 && (
                 <div className="px-2">
-                  <h3 className="font-display text-foreground mb-2" style={{ fontSize: 22, fontWeight: 400 }}>Surface estimée</h3>
-                  <p className="text-muted mb-8" style={{ fontSize: 13 }}>Approximative, nous affinerons sur place.</p>
-                  <div className="text-center mb-8">
-                    <div className="font-display text-gold inline-flex items-baseline gap-2" style={{ fontSize: 72, lineHeight: 1, fontWeight: 400 }}>
-                      {data.surface}<span className="label" style={{ fontSize: 14 }}>m²</span>
+                  <h3 className="font-display text-foreground mb-2" style={{ fontSize: 22, fontWeight: 400 }}>Dimensions</h3>
+                  <p className="text-muted mb-6" style={{ fontSize: 13 }}>Approximatives, nous affinerons sur place.</p>
+                  {data.knowsDimensions ? (
+                    <>
+                      <div className="grid grid-cols-2 gap-4">
+                        <DimInput label="Longueur (m)" value={data.length} onChange={(v) => setData({ ...data, length: v })} />
+                        <DimInput label="Largeur (m)" value={data.width} onChange={(v) => setData({ ...data, width: v })} />
+                      </div>
+                      {surface !== null && (
+                        <div className="mt-6 p-4 border border-gold/30 bg-surface text-center">
+                          <div className="label text-gold/80" style={{ fontSize: 9 }}>— Surface estimée</div>
+                          <div className="font-display text-gold mt-1 inline-flex items-baseline gap-1" style={{ fontSize: 40, lineHeight: 1 }}>
+                            ~{surface}<span style={{ fontSize: 16 }}>m²</span>
+                          </div>
+                        </div>
+                      )}
+                    </>
+                  ) : (
+                    <div>
+                      <label htmlFor="free-dim-mobile" className="label text-gold/80 block mb-2" style={{ fontSize: 10 }}>Décrivez le projet</label>
+                      <textarea
+                        id="free-dim-mobile"
+                        rows={4}
+                        placeholder="Ex : grande cour devant la maison + petite allée latérale."
+                        value={data.freeDimensions}
+                        onChange={(e) => setData({ ...data, freeDimensions: e.target.value })}
+                        className="w-full bg-transparent border border-gold/30 px-4 py-3 text-foreground placeholder:text-muted focus:outline-none focus:border-gold transition-colors"
+                        style={{ fontFamily: "var(--font-body)", fontSize: 14 }}
+                      />
                     </div>
-                  </div>
-                  <input
-                    type="range" min={20} max={1000} step={10} value={data.surface}
-                    onChange={(e) => setData({ ...data, surface: Number(e.target.value) })}
-                    className="w-full accent-[var(--cuivre-500)]"
-                    style={{ minHeight: 44 }}
-                    aria-label="Surface en mètres carrés"
-                  />
-                  <div className="flex justify-between text-muted mt-2" style={{ fontSize: 11 }}>
-                    <span>20 m²</span><span>1000 m²</span>
-                  </div>
+                  )}
+                  <label className="mt-4 inline-flex items-center gap-2 cursor-pointer text-foreground/80" style={{ fontSize: 13 }}>
+                    <input
+                      type="checkbox"
+                      checked={!data.knowsDimensions}
+                      onChange={(e) => setData({ ...data, knowsDimensions: !e.target.checked })}
+                      className="accent-[var(--cuivre-500)] w-4 h-4"
+                    />
+                    Je ne connais pas les dimensions
+                  </label>
                   <button
                     onClick={goNext}
-                    className="w-full mt-12 bg-gold text-background py-4 font-medium"
+                    disabled={data.knowsDimensions ? surface === null : !data.freeDimensions.trim()}
+                    className="w-full mt-8 bg-gold text-background py-4 font-medium disabled:opacity-40"
                     style={{ fontFamily: "var(--font-body)", fontSize: 13, letterSpacing: "0.15em", textTransform: "uppercase", minHeight: 56 }}
                   >
                     Continuer →
@@ -751,19 +895,6 @@ function QuoteFormMobile() {
               )}
 
               {step === 2 && (
-                <SwipeOptions
-                  ariaLabel="Délai souhaité"
-                  options={[
-                    { id: "souple", title: "Flexible", sub: "Date libre" },
-                    { id: "1mois", title: "Sous 1 mois", sub: "Planning serré" },
-                    { id: "urgent", title: "Urgent", sub: "Sous 2 semaines" },
-                  ]}
-                  selected={data.delai}
-                  onSelect={(id) => { setData({ ...data, delai: id as Quote["delai"] }); autoAdvance(); }}
-                />
-              )}
-
-              {step === 3 && (
                 <div className="space-y-4 px-2">
                   <h3 className="font-display text-foreground mb-2" style={{ fontSize: 22, fontWeight: 400 }}>Vos coordonnées</h3>
                   <p className="text-muted mb-6" style={{ fontSize: 13 }}>On vous rappelle sous 48h.</p>
@@ -771,6 +902,7 @@ function QuoteFormMobile() {
                   <Input label="Téléphone *" value={data.tel} onChange={(v) => setData({ ...data, tel: v })} />
                   <Input label="Email *" value={data.email} onChange={(v) => setData({ ...data, email: v })} type="email" />
                   <Input label="Ville" value={data.ville} onChange={(v) => setData({ ...data, ville: v })} />
+                  <Input label="Code postal" value={data.postalCode} onChange={(v) => setData({ ...data, postalCode: v })} />
                   <div>
                     <label htmlFor="quote-message-mobile" className="label text-gold/80 block mb-2" style={{ fontSize: 10 }}>Message (optionnel)</label>
                     <textarea
@@ -783,12 +915,12 @@ function QuoteFormMobile() {
                     />
                   </div>
                   <button
-                    onClick={submit}
-                    disabled={!canSubmit}
+                    onClick={handleSubmit}
+                    disabled={!canSubmitFinal || submitting}
                     className="w-full mt-6 bg-gold text-background py-4 font-medium disabled:opacity-40"
                     style={{ fontFamily: "var(--font-body)", fontSize: 13, letterSpacing: "0.15em", textTransform: "uppercase", minHeight: 56, boxShadow: "0 8px 24px rgba(200,153,42,0.35)" }}
                   >
-                    Envoyer ma demande →
+                    {submitting ? "Envoi…" : "Envoyer ma demande →"}
                   </button>
                 </div>
               )}
@@ -796,26 +928,6 @@ function QuoteFormMobile() {
           </AnimatePresence>
         </div>
       </div>
-
-      {/* sticky bottom estimate */}
-      {data.type && (
-        <div
-          className="fixed bottom-0 left-0 right-0 z-30 bg-surface border-t border-gold/40 px-5 py-3"
-          style={{ boxShadow: "0 -8px 24px rgba(0,0,0,0.5)" }}
-        >
-          <div className="flex items-baseline justify-between gap-3">
-            <div>
-              <div className="label text-gold/70" style={{ fontSize: 9 }}>Estimation indicative</div>
-              <div className="font-display text-gold mt-0.5" style={{ fontSize: 28, lineHeight: 1, fontWeight: 400 }}>
-                {min.toLocaleString("fr-FR")}–{max.toLocaleString("fr-FR")} <span style={{ fontSize: 14 }}>€ HT</span>
-              </div>
-            </div>
-            <div className="text-right text-muted" style={{ fontSize: 10, lineHeight: 1.3 }}>
-              {data.surface} m²<br/>{data.delai && (data.delai === "souple" ? "Flexible" : data.delai === "1mois" ? "Sous 1 mois" : "Urgent")}
-            </div>
-          </div>
-        </div>
-      )}
     </section>
   );
 }

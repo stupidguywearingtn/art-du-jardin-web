@@ -1,6 +1,5 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { CustomCursor } from "@/components/CustomCursor";
 import { SmoothScroll } from "@/components/SmoothScroll";
 import { MobileFloatingCTA } from "@/components/CTAButtons";
 import { useSiteContent } from "@/hooks/useSiteContent";
@@ -193,7 +192,7 @@ function ServicePageBody() {
     <>
       <EditModeToolbar />
       <SmoothScroll />
-      <CustomCursor />
+
       <main className="bg-background text-foreground overflow-x-hidden">
         {/* HEADER nav */}
         <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-background/70 border-b border-gold/15">
@@ -216,7 +215,7 @@ function ServicePageBody() {
         >
           <Link
             to="/" hash="devis"
-            data-cursor-hover
+
             className="cta-primary"
             style={{ fontFamily: "var(--font-body)", fontSize: 13, fontWeight: 500, padding: "10px 20px", borderRadius: 4, background: "var(--cuivre-500)", color: "#fff", textDecoration: "none", display: "inline-flex", alignItems: "center", gap: 6, transition: "all 0.2s ease" }}
           >
@@ -271,7 +270,7 @@ function ServicePageBody() {
             <div className="mt-7">
               <Link
                 to="/" hash="devis"
-                data-cursor-hover
+
                 className="cta-primary"
                 style={{ fontFamily: "var(--font-body)", fontSize: 15, fontWeight: 500, padding: "14px 28px", borderRadius: 4, background: "var(--cuivre-500)", color: "#fff", textDecoration: "none", display: "inline-flex", alignItems: "center", gap: 8, transition: "all 0.2s ease" }}
               >
@@ -316,7 +315,7 @@ function ServicePageBody() {
           <div className="mt-12 flex flex-wrap gap-3 justify-center">
             <Link
               to="/" hash="devis"
-              data-cursor-hover
+
               className="cta-primary"
               style={{ fontFamily: "var(--font-body)", fontSize: 15, fontWeight: 500, padding: "14px 28px", borderRadius: 4, background: "var(--cuivre-500)", color: "#fff", textDecoration: "none", display: "inline-flex", alignItems: "center", gap: 8, transition: "all 0.2s ease" }}
             >
@@ -324,7 +323,7 @@ function ServicePageBody() {
             </Link>
             <a
               href="tel:0384526148"
-              data-cursor-hover
+
               className="cta-secondary"
               style={{ fontFamily: "var(--font-body)", fontSize: 15, fontWeight: 500, padding: "14px 28px", borderRadius: 4, background: "transparent", color: "var(--creme-50)", border: "1px solid var(--creme-50)", textDecoration: "none", transition: "all 0.2s ease" }}
             >

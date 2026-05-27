@@ -58,7 +58,7 @@ export function WhyUs() {
           <div
             key={r.n}
             data-card
-            data-cursor-hover
+
             className="relative group transition-all duration-300 hover:-translate-y-1"
             style={{
               background: "rgba(255,255,255,0.03)",
@@ -164,7 +164,7 @@ export function FAQ() {
             return (
               <div key={i} data-faq className="border-t border-gold/20 last:border-b">
                 <button
-                  data-cursor-hover
+
                   onClick={() => setOpen(isOpen ? null : i)}
                   className="w-full flex items-center justify-between gap-6 py-7 text-left group"
                 >
@@ -207,7 +207,7 @@ export function FAQ() {
           <div className="flex flex-wrap gap-3 justify-center">
             <a
               href="#devis"
-              data-cursor-hover
+
               className="cta-primary"
               style={{ fontFamily: "var(--font-body)", fontSize: 13, fontWeight: 500, padding: "10px 20px", borderRadius: 4, background: "var(--cuivre-500)", color: "#fff", textDecoration: "none", transition: "all 0.2s ease", display: "inline-flex", alignItems: "center", gap: 6 }}
             >
@@ -215,7 +215,7 @@ export function FAQ() {
             </a>
             <a
               href="tel:0384526148"
-              data-cursor-hover
+
               className="cta-secondary"
               style={{ fontFamily: "var(--font-body)", fontSize: 13, fontWeight: 500, padding: "10px 20px", borderRadius: 4, background: "transparent", color: "var(--creme-50)", border: "1px solid var(--creme-50)", textDecoration: "none", transition: "all 0.2s ease" }}
             >
@@ -532,7 +532,7 @@ function QuoteFormDesktop() {
                 {/* nav */}
                 <div className="mt-10 flex items-center justify-between gap-4">
                   <button
-                    data-cursor-hover
+
                     onClick={() => setStep((s) => Math.max(0, s - 1))}
                     disabled={step === 0}
                     className="label text-gold disabled:opacity-30 disabled:cursor-not-allowed transition-opacity"
@@ -542,7 +542,7 @@ function QuoteFormDesktop() {
                   </button>
                   {step < 2 ? (
                     <button
-                      data-cursor-hover
+
                       onClick={() => setStep((s) => s + 1)}
                       disabled={!canNext}
                       className="bg-gold text-background px-8 py-3 transition-all hover:bg-[var(--cuivre-600)] hover:-translate-y-0.5 focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:opacity-40 disabled:cursor-not-allowed"
@@ -552,7 +552,7 @@ function QuoteFormDesktop() {
                     </button>
                   ) : (
                     <button
-                      data-cursor-hover
+
                       onClick={handleSubmit}
                       disabled={!canNext || submitting}
                       className="bg-gold text-background px-10 transition-all hover:bg-[var(--cuivre-600)] hover:-translate-y-1 focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:opacity-40 disabled:cursor-not-allowed"
@@ -681,7 +681,7 @@ function SelectCard({ children, selected, onClick, compact = false }: { children
     <button
       ref={btnRef}
       type="button"
-      data-cursor-hover
+
       onClick={handleClick}
       className={`group relative text-left bg-surface border transition-all duration-300 overflow-hidden focus:outline-none focus-visible:ring-2 focus-visible:ring-gold ${compact ? "p-5" : "p-8"} ${selected ? "border-gold border-2 -translate-y-0.5" : "border-border hover:border-gold hover:-translate-y-0.5"}`}
       style={{

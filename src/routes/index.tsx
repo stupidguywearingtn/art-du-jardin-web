@@ -3,7 +3,6 @@ import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { motion, AnimatePresence } from "framer-motion";
-import { CustomCursor } from "@/components/CustomCursor";
 import { SmoothScroll } from "@/components/SmoothScroll";
 import { WhyUs, Zone, FAQ, FAQS, QuoteForm } from "@/components/sections";
 import { useIsMobile } from "@/hooks/use-mobile";
@@ -108,7 +107,7 @@ function IndexBody() {
     <>
       <EditModeToolbar />
       <SmoothScroll />
-      <CustomCursor />
+
       <AnimatePresence>
         {!loaded && (
           <motion.div
@@ -161,7 +160,7 @@ function SiteHeader() {
         <div className="flex items-center justify-end px-4 md:px-8 py-4">
           <Link
             to="/login"
-            data-cursor-hover
+
             className="hidden md:inline-flex pointer-events-auto items-center gap-1.5 px-3.5 py-1.5 transition-colors"
             style={{
               color: "var(--sable-500)",
@@ -265,7 +264,7 @@ function GesteMatiere() {
             />
             <Link
               to="/services/enrobe-a-chaud"
-              data-cursor-hover
+
               className="inline-flex items-center gap-3 mt-10 text-gold border-b border-gold/40 pb-1 hover:border-gold transition-colors"
               style={{ fontFamily: "var(--font-body)", fontSize: 13, letterSpacing: "0.15em", textTransform: "uppercase" }}
             >
@@ -324,7 +323,7 @@ function MatiereFinitions() {
             <article
               key={i}
               data-mf-card
-              data-cursor-hover
+
               className="details-card group bg-[var(--creme-100)] overflow-hidden border-l-4 transition-all duration-500 hover:-translate-y-1 snap-start"
               style={{ borderColor: "var(--cuivre-500)", flex: "0 0 80%", maxWidth: 360 }}
             >
@@ -389,7 +388,7 @@ function Galerie() {
               key={cat.slug}
               to="/realisations/$slug"
               params={{ slug: cat.slug }}
-              data-cursor-hover
+
               className={`relative group overflow-hidden aspect-[4/5] md:aspect-[4/5] block ${fullWidth}`}
               style={{ background: "var(--surface)" }}
             >
@@ -812,10 +811,10 @@ function ServiceStrip({ n, t, img, slug }: { n: string; t: string; img: string; 
   const expanded = h || isMobile; // toujours étendu sur mobile pour lisibilité
   return (
     <div
-      data-strip data-cursor-hover
+      data-strip
       onMouseEnter={() => setH(true)}
       onMouseLeave={() => setH(false)}
-      className="relative block w-full overflow-hidden cursor-none transition-[height] duration-700 ease-out"
+      className="relative block w-full overflow-hidden transition-[height] duration-700 ease-out"
       style={{ height: expanded ? (isMobile ? 220 : 400) : 200 }}
     >
       <div className="absolute inset-0">
@@ -1143,7 +1142,7 @@ function CTAFinal() {
         <div className="mt-12 flex flex-wrap gap-4 justify-center">
           <a
             href="#devis"
-            data-cursor-hover
+
             className="bg-gold text-background px-10 py-4 font-medium transition-all hover:bg-[var(--cuivre-600)] active:scale-[0.98]"
             style={{ fontFamily: "var(--font-body)", fontSize: 14, letterSpacing: "0.15em", textTransform: "uppercase" }}
           >
@@ -1151,7 +1150,7 @@ function CTAFinal() {
           </a>
           <a
             href="tel:0384526148"
-            data-cursor-hover
+
             className="border border-gold text-gold px-10 py-4 font-medium transition-colors hover:bg-gold hover:text-background"
             style={{ fontFamily: "var(--font-body)", fontSize: 14, letterSpacing: "0.15em", textTransform: "uppercase" }}
           >

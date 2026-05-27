@@ -1,7 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { CustomCursor } from "@/components/CustomCursor";
 import { SmoothScroll } from "@/components/SmoothScroll";
 import { MobileFloatingCTA } from "@/components/CTAButtons";
 import { WhatsAppFAB } from "@/components/WhatsAppFAB";
@@ -72,7 +71,7 @@ function RealisationsPage() {
   return (
     <>
       <SmoothScroll />
-      <CustomCursor />
+
       <WhatsAppFAB />
       <main className="bg-background text-foreground overflow-x-hidden">
         {/* HEADER */}
@@ -127,7 +126,7 @@ function RealisationsPage() {
                   <button
                     key={p.id}
                     onClick={() => setLightbox(idx)}
-                    data-cursor-hover
+
                     className="block w-full mb-4 group overflow-hidden break-inside-avoid"
                     style={{ background: "var(--surface)" }}
                     aria-label={`Ouvrir la photo ${idx + 1}`}

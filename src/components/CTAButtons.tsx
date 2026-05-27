@@ -38,7 +38,7 @@ export function CTAPrimary({ children = "Demander un devis", href = "#devis", cl
   return (
     <a
       href={href}
-      data-cursor-hover
+
       className={`cta-primary ${className}`}
       style={style}
     >
@@ -56,7 +56,7 @@ export function CTASecondary({ children, href = `tel:${PHONE}`, light = false, c
     border: `1px solid ${light ? "var(--creme-50)" : "var(--asphalte-700)"}`,
   };
   return (
-    <a href={href} data-cursor-hover className={`cta-secondary ${className}`} style={style}>
+    <a href={href} className={`cta-secondary ${className}`} style={style}>
       <span aria-hidden>📞</span>
       {children ?? PHONE_DISPLAY}
     </a>
@@ -78,7 +78,7 @@ export function CTABanner() {
         <CTAPrimary>Demander mon devis</CTAPrimary>
         <a
           href={`tel:${PHONE}`}
-          data-cursor-hover
+
           style={{
             ...baseStyle,
             background: "transparent",

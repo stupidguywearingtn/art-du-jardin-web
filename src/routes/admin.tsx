@@ -20,7 +20,7 @@ type Hero = { line1: string; line2: string; badge: string; tagline: string };
 type Service = { n: string; t: string; img: string; slug: string };
 type Faq = { q: string; a: string };
 
-const DEFAULT_HERO: Hero = { line1: "L'Enrobé qui", line2: "Marque le Temps.", badge: "HCE — Cize, Jura", tagline: "Depuis 2005" };
+const DEFAULT_HERO: Hero = { line1: "L'Enrobé qui", line2: "Marque le Temps.", badge: "HCE — Cize, Jura", tagline: "Depuis 2012" };
 
 function AdminPage() {
   const { user, isAdmin, loading, signOut } = useAuth();

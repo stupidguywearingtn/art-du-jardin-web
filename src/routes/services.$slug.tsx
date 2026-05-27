@@ -39,7 +39,7 @@ const SERVICES: Record<string, ServiceData> = {
     n: "02",
     title: "Enrobé à chaud",
     hero: "/photos/01-hero-finisseur-vapeur-sunset.jpg",
-    intro: "Pose à la main à 180°C, compactage maîtrisé, garantie décennale. La spécialité historique d'HCE depuis 2005.",
+    intro: "Pose à la main à 180°C, compactage maîtrisé, garantie décennale. La spécialité historique d'HCE depuis 2012.",
     prestations: ["Enrobé noir, rouge, saumon, bordeaux", "Goudronnage fins ou épais", "Pose à la main à 180°C", "Compactage maîtrisé", "Garantie décennale"],
     methode: [
       { t: "Préparation thermique", d: "Enrobé livré à température, application sans interruption." },

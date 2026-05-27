@@ -18,41 +18,62 @@ export type Database = {
         Row: {
           city: string | null
           created_at: string
+          description: string | null
           email: string | null
+          estimated_surface_m2: number | null
           free_dimensions: string | null
           full_name: string | null
           id: string
+          length_m: number | null
           message: string | null
+          name: string | null
           phone: string | null
           postal_code: string | null
           project_type: string | null
+          project_type_label: string | null
+          project_type_slug: string | null
           surface_estimate: string | null
+          width_m: number | null
         }
         Insert: {
           city?: string | null
           created_at?: string
+          description?: string | null
           email?: string | null
+          estimated_surface_m2?: number | null
           free_dimensions?: string | null
           full_name?: string | null
           id?: string
+          length_m?: number | null
           message?: string | null
+          name?: string | null
           phone?: string | null
           postal_code?: string | null
           project_type?: string | null
+          project_type_label?: string | null
+          project_type_slug?: string | null
           surface_estimate?: string | null
+          width_m?: number | null
         }
         Update: {
           city?: string | null
           created_at?: string
+          description?: string | null
           email?: string | null
+          estimated_surface_m2?: number | null
           free_dimensions?: string | null
           full_name?: string | null
           id?: string
+          length_m?: number | null
           message?: string | null
+          name?: string | null
           phone?: string | null
           postal_code?: string | null
           project_type?: string | null
+          project_type_label?: string | null
+          project_type_slug?: string | null
           surface_estimate?: string | null
+          width_m?: number | null
         }
         Relationships: []
       }

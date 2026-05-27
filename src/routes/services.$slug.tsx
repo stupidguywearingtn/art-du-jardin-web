@@ -218,7 +218,7 @@ function ServicePageBody() {
             to="/" hash="devis"
             data-cursor-hover
             className="cta-primary"
-            style={{ fontFamily: "Outfit", fontSize: 13, fontWeight: 500, padding: "10px 20px", borderRadius: 4, background: "var(--cuivre-500)", color: "#fff", textDecoration: "none", display: "inline-flex", alignItems: "center", gap: 6, transition: "all 0.2s ease" }}
+            style={{ fontFamily: "var(--font-body)", fontSize: 13, fontWeight: 500, padding: "10px 20px", borderRadius: 4, background: "var(--cuivre-500)", color: "#fff", textDecoration: "none", display: "inline-flex", alignItems: "center", gap: 6, transition: "all 0.2s ease" }}
           >
             Demander un devis →
           </Link>
@@ -273,7 +273,7 @@ function ServicePageBody() {
                 to="/" hash="devis"
                 data-cursor-hover
                 className="cta-primary"
-                style={{ fontFamily: "Outfit", fontSize: 15, fontWeight: 500, padding: "14px 28px", borderRadius: 4, background: "var(--cuivre-500)", color: "#fff", textDecoration: "none", display: "inline-flex", alignItems: "center", gap: 8, transition: "all 0.2s ease" }}
+                style={{ fontFamily: "var(--font-body)", fontSize: 15, fontWeight: 500, padding: "14px 28px", borderRadius: 4, background: "var(--cuivre-500)", color: "#fff", textDecoration: "none", display: "inline-flex", alignItems: "center", gap: 8, transition: "all 0.2s ease" }}
               >
                 Demander un devis pour ce projet →
               </Link>
@@ -318,7 +318,7 @@ function ServicePageBody() {
               to="/" hash="devis"
               data-cursor-hover
               className="cta-primary"
-              style={{ fontFamily: "Outfit", fontSize: 15, fontWeight: 500, padding: "14px 28px", borderRadius: 4, background: "var(--cuivre-500)", color: "#fff", textDecoration: "none", display: "inline-flex", alignItems: "center", gap: 8, transition: "all 0.2s ease" }}
+              style={{ fontFamily: "var(--font-body)", fontSize: 15, fontWeight: 500, padding: "14px 28px", borderRadius: 4, background: "var(--cuivre-500)", color: "#fff", textDecoration: "none", display: "inline-flex", alignItems: "center", gap: 8, transition: "all 0.2s ease" }}
             >
               Demander un devis →
             </Link>
@@ -326,7 +326,7 @@ function ServicePageBody() {
               href="tel:0384526148"
               data-cursor-hover
               className="cta-secondary"
-              style={{ fontFamily: "Outfit", fontSize: 15, fontWeight: 500, padding: "14px 28px", borderRadius: 4, background: "transparent", color: "var(--creme-50)", border: "1px solid var(--creme-50)", textDecoration: "none", transition: "all 0.2s ease" }}
+              style={{ fontFamily: "var(--font-body)", fontSize: 15, fontWeight: 500, padding: "14px 28px", borderRadius: 4, background: "transparent", color: "var(--creme-50)", border: "1px solid var(--creme-50)", textDecoration: "none", transition: "all 0.2s ease" }}
             >
               📞 03 84 52 61 48
             </a>

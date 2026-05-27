@@ -170,7 +170,7 @@ function SiteHeader() {
               backdropFilter: "blur(6px)",
               border: "1px solid var(--cuivre-500)",
               borderRadius: 3,
-              fontFamily: "Outfit, sans-serif",
+              fontFamily: "var(--font-body)",
               fontSize: 11,
               fontWeight: 500,
               letterSpacing: "0.12em",
@@ -210,7 +210,7 @@ function SiteHeader() {
             <a href="#devis" className="font-display text-foreground" style={{ fontSize: 24 }} onClick={() => setOpen(false)}>Demander un devis</a>
             <a href="tel:0384526148" className="font-display text-foreground" style={{ fontSize: 24 }}>03 84 52 61 48</a>
             <div className="w-12 h-px my-4" style={{ background: "var(--cuivre-500)" }} />
-            <Link to="/login" onClick={() => setOpen(false)} className="inline-flex items-center gap-2" style={{ color: "var(--sable-500)", fontSize: 13, fontFamily: "Outfit", letterSpacing: "0.12em", textTransform: "uppercase" }}>
+            <Link to="/login" onClick={() => setOpen(false)} className="inline-flex items-center gap-2" style={{ color: "var(--sable-500)", fontSize: 13, fontFamily: "var(--font-body)", letterSpacing: "0.12em", textTransform: "uppercase" }}>
               <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
                 <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
                 <path d="M7 11V7a5 5 0 0 1 10 0v4" />
@@ -268,7 +268,7 @@ function GesteMatiere() {
               to="/services/enrobe-a-chaud"
               data-cursor-hover
               className="inline-flex items-center gap-3 mt-10 text-gold border-b border-gold/40 pb-1 hover:border-gold transition-colors"
-              style={{ fontFamily: "Outfit", fontSize: 13, letterSpacing: "0.15em", textTransform: "uppercase" }}
+              style={{ fontFamily: "var(--font-body)", fontSize: 13, letterSpacing: "0.15em", textTransform: "uppercase" }}
             >
               <EditableText section="geste" field="cta" value={v("geste", "cta", "En savoir plus")} as="span" /> <span aria-hidden>→</span>
             </Link>
@@ -426,7 +426,7 @@ function Galerie() {
                 <div className="font-display" style={{ color: "#FFFFFF", fontSize: "clamp(16px, 2vw, 22px)", fontWeight: 400, lineHeight: 1.15 }}>
                   {cat}
                 </div>
-                <div className="mt-2 flex items-center gap-2" style={{ color: "var(--gold)", fontSize: 11, fontFamily: "Outfit", letterSpacing: "0.1em", textTransform: "uppercase" }}>
+                <div className="mt-2 flex items-center gap-2" style={{ color: "var(--gold)", fontSize: 11, fontFamily: "var(--font-body)", letterSpacing: "0.1em", textTransform: "uppercase" }}>
                   Voir <span aria-hidden>→</span>
                 </div>
               </div>
@@ -653,7 +653,7 @@ function Hero() {
         src="/videos/hero.mp4"
         autoPlay muted loop playsInline preload="auto"
       />
-      <div className="absolute inset-x-0 bottom-0 h-[60%]" style={{ background: "linear-gradient(to bottom, transparent, #1E1E1E)" }} />
+      <div className="absolute inset-x-0 bottom-0 h-[60%]" style={{ background: "linear-gradient(to bottom, transparent, var(--asphalte-900))" }} />
       <div className="absolute inset-0 bg-background/20" />
 
       <div className="relative z-10 flex h-full flex-col items-center justify-center px-6">
@@ -845,7 +845,7 @@ function Services() {
   return (
     <section
       className="relative bg-background py-10 md:py-20 overflow-hidden"
-      style={{ background: "radial-gradient(ellipse at center, #262626 0%, #1E1E1E 70%)" }}
+      style={{ background: "radial-gradient(ellipse at center, var(--asphalte-700) 0%, var(--asphalte-900) 70%)" }}
     >
       <div className="grain-overlay" aria-hidden />
       <GiantNumber n="01" position="left" />
@@ -957,7 +957,7 @@ function Transformation() {
         autoPlay muted loop playsInline preload="auto"
       />
       <div className="absolute inset-0" style={{ background: "rgba(30,30,30,0.55)" }} />
-      <div className="absolute inset-x-0 bottom-0 h-[30%]" style={{ background: "linear-gradient(to bottom, transparent, #1E1E1E)" }} />
+      <div className="absolute inset-x-0 bottom-0 h-[30%]" style={{ background: "linear-gradient(to bottom, transparent, var(--asphalte-900))" }} />
 
       <div className="relative z-10 h-full w-full flex flex-col items-center justify-center text-center px-6">
         <EditableText section="transformation" field="label" value={v("transformation", "label", "— Avant / Après")} as="div" className="label text-gold" />
@@ -1314,8 +1314,8 @@ function CTAFinal() {
           <a
             href="#devis"
             data-cursor-hover
-            className="bg-gold text-background px-10 py-4 font-medium transition-all hover:bg-[#A87E1F] active:scale-[0.98]"
-            style={{ fontFamily: "Outfit", fontSize: 14, letterSpacing: "0.15em", textTransform: "uppercase" }}
+            className="bg-gold text-background px-10 py-4 font-medium transition-all hover:bg-[var(--cuivre-600)] active:scale-[0.98]"
+            style={{ fontFamily: "var(--font-body)", fontSize: 14, letterSpacing: "0.15em", textTransform: "uppercase" }}
           >
             <EditableText section="ctafinal" field="cta1" value={v("ctafinal", "cta1", "Demander un Devis")} as="span" />
           </a>
@@ -1323,7 +1323,7 @@ function CTAFinal() {
             href="tel:0384526148"
             data-cursor-hover
             className="border border-gold text-gold px-10 py-4 font-medium transition-colors hover:bg-gold hover:text-background"
-            style={{ fontFamily: "Outfit", fontSize: 14, letterSpacing: "0.15em", textTransform: "uppercase" }}
+            style={{ fontFamily: "var(--font-body)", fontSize: 14, letterSpacing: "0.15em", textTransform: "uppercase" }}
           >
             <EditableText section="ctafinal" field="phone" value={v("ctafinal", "phone", "03 84 52 61 48")} as="span" />
           </a>

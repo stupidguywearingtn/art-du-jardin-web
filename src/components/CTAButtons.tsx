@@ -4,7 +4,7 @@ const PHONE = "0384526148";
 const PHONE_DISPLAY = "03 84 52 61 48";
 
 const baseStyle: React.CSSProperties = {
-  fontFamily: "Outfit, sans-serif",
+  fontFamily: "var(--font-body)",
   fontSize: 15,
   letterSpacing: "0.02em",
   fontWeight: 500,
@@ -147,7 +147,7 @@ export function MobileFloatingCTA({ href = "#devis" }: { href?: string } = {}) {
         padding: "14px",
         borderRadius: 8,
         fontWeight: 500,
-        fontFamily: "Outfit, sans-serif",
+        fontFamily: "var(--font-body)",
         fontSize: 15,
         boxShadow: "0 4px 12px rgba(14,14,15,0.35)",
         opacity: show ? 1 : 0,

@@ -43,10 +43,10 @@ export default function InteractiveMap() {
 
       // coverage polygon
       L.polygon(COVERAGE, {
-        color: "#C8992A",
+        color: "var(--cuivre-500)",
         weight: 1,
         opacity: 0.5,
-        fillColor: "#C8992A",
+        fillColor: "var(--cuivre-500)",
         fillOpacity: 0.08,
       }).addTo(map);
 
@@ -55,18 +55,18 @@ export default function InteractiveMap() {
         const size = c.hq ? 22 : 14;
         const icon = L.divIcon({
           className: "hce-pin",
-          html: `<span style="display:block;width:${size}px;height:${size}px;border-radius:9999px;background:#C8992A;box-shadow:0 0 0 4px rgba(200,153,42,0.18),0 0 16px rgba(200,153,42,0.5);${c.hq ? "border:2px solid #fff;" : ""}"></span>`,
+          html: `<span style="display:block;width:${size}px;height:${size}px;border-radius:9999px;background:var(--cuivre-500);box-shadow:0 0 0 4px rgba(200,153,42,0.18),0 0 16px rgba(200,153,42,0.5);${c.hq ? "border:2px solid #fff;" : ""}"></span>`,
           iconSize: [size, size],
           iconAnchor: [size / 2, size / 2],
         });
         const marker = L.marker([c.lat, c.lng], { icon }).addTo(map);
         marker.bindTooltip(
-          `<div style="font-family:Outfit,sans-serif;font-size:12px;padding:2px 4px;"><strong style="color:#C8992A;letter-spacing:0.1em;text-transform:uppercase;font-size:10px;">${c.name}${c.hq ? " · Siège" : ""}</strong><br/><span style="color:#fff;">${c.chantiers} chantiers réalisés</span></div>`,
+          `<div style="font-family:var(--font-body);font-size:12px;padding:2px 4px;"><strong style="color:var(--cuivre-500);letter-spacing:0.1em;text-transform:uppercase;font-size:10px;">${c.name}${c.hq ? " · Siège" : ""}</strong><br/><span style="color:#fff;">${c.chantiers} chantiers réalisés</span></div>`,
           { direction: "top", offset: [0, -size / 2], className: "hce-tooltip" }
         );
         marker.bindPopup(
-          `<div style="font-family:Outfit,sans-serif;color:#fff;min-width:200px;">
-            <div style="font-family:'Cormorant Garamond',serif;font-size:22px;color:#C8992A;line-height:1;">${c.name}</div>
+          `<div style="font-family:var(--font-body);color:#fff;min-width:200px;">
+            <div style="font-family:'Cormorant Garamond',serif;font-size:22px;color:var(--cuivre-500);line-height:1;">${c.name}</div>
             <div style="font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:#A8A8A8;margin-top:4px;">${c.chantiers} chantiers</div>
             <p style="font-size:13px;line-height:1.5;margin-top:10px;color:#fff;">${c.desc}</p>
           </div>`,
@@ -92,12 +92,12 @@ export default function InteractiveMap() {
         </div>
       )}
       <style>{`
-        .hce-tooltip{background:#1E1E1E !important;border:1px solid #C8992A !important;color:#fff !important;border-radius:0 !important;box-shadow:0 4px 12px rgba(0,0,0,0.5) !important;}
+        .hce-tooltip{background:var(--asphalte-900) !important;border:1px solid var(--cuivre-500) !important;color:#fff !important;border-radius:0 !important;box-shadow:0 4px 12px rgba(0,0,0,0.5) !important;}
         .hce-tooltip:before{display:none !important;}
-        .hce-popup .leaflet-popup-content-wrapper{background:#1E1E1E;border:1px solid #C8992A;border-radius:0;color:#fff;}
-        .hce-popup .leaflet-popup-tip{background:#C8992A;}
-        .hce-popup .leaflet-popup-close-button{color:#C8992A !important;font-size:18px !important;padding:6px 8px !important;}
-        .leaflet-control-zoom a{background:#1E1E1E !important;color:#C8992A !important;border:1px solid #2E2E2E !important;}
+        .hce-popup .leaflet-popup-content-wrapper{background:var(--asphalte-900);border:1px solid var(--cuivre-500);border-radius:0;color:#fff;}
+        .hce-popup .leaflet-popup-tip{background:var(--cuivre-500);}
+        .hce-popup .leaflet-popup-close-button{color:var(--cuivre-500) !important;font-size:18px !important;padding:6px 8px !important;}
+        .leaflet-control-zoom a{background:var(--asphalte-900) !important;color:var(--cuivre-500) !important;border:1px solid #2E2E2E !important;}
         .leaflet-control-zoom a:hover{background:#262626 !important;}
       `}</style>
     </div>

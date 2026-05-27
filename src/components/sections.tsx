@@ -206,7 +206,7 @@ export function FAQ() {
               href="#devis"
               data-cursor-hover
               className="cta-primary"
-              style={{ fontFamily: "Outfit", fontSize: 13, fontWeight: 500, padding: "10px 20px", borderRadius: 4, background: "var(--cuivre-500)", color: "#fff", textDecoration: "none", transition: "all 0.2s ease", display: "inline-flex", alignItems: "center", gap: 6 }}
+              style={{ fontFamily: "var(--font-body)", fontSize: 13, fontWeight: 500, padding: "10px 20px", borderRadius: 4, background: "var(--cuivre-500)", color: "#fff", textDecoration: "none", transition: "all 0.2s ease", display: "inline-flex", alignItems: "center", gap: 6 }}
             >
               Envoyer ma demande →
             </a>
@@ -214,7 +214,7 @@ export function FAQ() {
               href="tel:0384526148"
               data-cursor-hover
               className="cta-secondary"
-              style={{ fontFamily: "Outfit", fontSize: 13, fontWeight: 500, padding: "10px 20px", borderRadius: 4, background: "transparent", color: "var(--creme-50)", border: "1px solid var(--creme-50)", textDecoration: "none", transition: "all 0.2s ease" }}
+              style={{ fontFamily: "var(--font-body)", fontSize: 13, fontWeight: 500, padding: "10px 20px", borderRadius: 4, background: "transparent", color: "var(--creme-50)", border: "1px solid var(--creme-50)", textDecoration: "none", transition: "all 0.2s ease" }}
             >
               📞 Appeler
             </a>
@@ -335,10 +335,10 @@ function QuoteFormDesktop() {
               <div
                 className="flex items-center justify-center w-8 h-8 border transition-all duration-500"
                 style={{
-                  borderColor: i <= step ? "#C8992A" : "rgb(200 153 42 / 0.3)",
-                  background: i < step ? "#C8992A" : "transparent",
-                  color: i < step ? "#1E1E1E" : "#C8992A",
-                  fontFamily: "Outfit", fontSize: 13,
+                  borderColor: i <= step ? "var(--cuivre-500)" : "rgb(200 153 42 / 0.3)",
+                  background: i < step ? "var(--cuivre-500)" : "transparent",
+                  color: i < step ? "var(--asphalte-900)" : "var(--cuivre-500)",
+                  fontFamily: "var(--font-body)", fontSize: 13,
                 }}
               >
                 {i < step ? "✓" : i + 1}
@@ -378,7 +378,7 @@ function QuoteFormDesktop() {
                             selected={sel}
                             onClick={() => setData({ ...data, type: o.id })}
                           >
-                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" className="text-gold mb-5 transition-all duration-300 group-hover:text-[#E0AC30]">
+                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" className="text-gold mb-5 transition-all duration-300 group-hover:text-[var(--sable-500)]">
                               <path d={o.icon} strokeLinecap="round" strokeLinejoin="round" />
                             </svg>
                             <div className="font-display text-foreground" style={{ fontSize: 22, fontWeight: 400, letterSpacing: "-0.01em" }}>{o.label}</div>
@@ -403,7 +403,7 @@ function QuoteFormDesktop() {
                       <input
                         type="range" min={20} max={1000} step={10} value={data.surface}
                         onChange={(e) => setData({ ...data, surface: Number(e.target.value) })}
-                        className="w-full accent-[#C8992A] cursor-pointer"
+                        className="w-full accent-[var(--cuivre-500)] cursor-pointer"
                         aria-label="Surface estimée en mètres carrés"
                       />
                       <div className="flex justify-between text-muted mt-2" style={{ fontSize: 11 }}>
@@ -455,7 +455,7 @@ function QuoteFormDesktop() {
                         value={data.message}
                         onChange={(e) => setData({ ...data, message: e.target.value })}
                         className="w-full bg-transparent border border-gold/30 px-4 py-3 text-foreground focus:outline-none focus:border-gold transition-colors"
-                        style={{ fontFamily: "Outfit", fontSize: 14 }}
+                        style={{ fontFamily: "var(--font-body)", fontSize: 14 }}
                       />
                     </div>
                   </div>
@@ -479,8 +479,8 @@ function QuoteFormDesktop() {
                   data-cursor-hover
                   onClick={() => setStep((s) => s + 1)}
                   disabled={!canNext}
-                  className="bg-gold text-background px-8 py-3 transition-all hover:bg-[#A87E1F] hover:-translate-y-0.5 focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:opacity-40 disabled:cursor-not-allowed"
-                  style={{ fontFamily: "Outfit", fontSize: 13, letterSpacing: "0.15em", textTransform: "uppercase" }}
+                  className="bg-gold text-background px-8 py-3 transition-all hover:bg-[var(--cuivre-600)] hover:-translate-y-0.5 focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:opacity-40 disabled:cursor-not-allowed"
+                  style={{ fontFamily: "var(--font-body)", fontSize: 13, letterSpacing: "0.15em", textTransform: "uppercase" }}
                 >
                   Continuer →
                 </button>
@@ -489,8 +489,8 @@ function QuoteFormDesktop() {
                   data-cursor-hover
                   onClick={submit}
                   disabled={!canNext}
-                  className="bg-gold text-background px-10 transition-all hover:bg-[#A87E1F] hover:-translate-y-1 focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:opacity-40 disabled:cursor-not-allowed"
-                  style={{ fontFamily: "Outfit", fontSize: 14, letterSpacing: "0.15em", textTransform: "uppercase", height: 56, fontWeight: 500, boxShadow: "0 8px 24px rgba(200,153,42,0.35)" }}
+                  className="bg-gold text-background px-10 transition-all hover:bg-[var(--cuivre-600)] hover:-translate-y-1 focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:opacity-40 disabled:cursor-not-allowed"
+                  style={{ fontFamily: "var(--font-body)", fontSize: 14, letterSpacing: "0.15em", textTransform: "uppercase", height: 56, fontWeight: 500, boxShadow: "0 8px 24px rgba(200,153,42,0.35)" }}
                 >
                   Envoyer ma demande →
                 </button>
@@ -599,7 +599,7 @@ function Input({ label, value, onChange, type = "text" }: { label: string; value
         value={value}
         onChange={(e) => onChange(e.target.value)}
         className="w-full bg-transparent border border-gold/30 px-4 py-3 text-foreground focus:outline-none focus:border-gold focus-visible:ring-1 focus-visible:ring-gold transition-colors"
-        style={{ fontFamily: "Outfit", fontSize: 14 }}
+        style={{ fontFamily: "var(--font-body)", fontSize: 14 }}
       />
     </div>
   );
@@ -684,7 +684,7 @@ function QuoteFormMobile() {
               className="block rounded-full transition-all duration-500"
               style={{
                 width: i === step ? 22 : 6, height: 6,
-                background: i <= step ? "#C8992A" : "rgba(200,153,42,0.25)",
+                background: i <= step ? "var(--cuivre-500)" : "rgba(200,153,42,0.25)",
               }}
             />
           ))}
@@ -733,7 +733,7 @@ function QuoteFormMobile() {
                   <input
                     type="range" min={20} max={1000} step={10} value={data.surface}
                     onChange={(e) => setData({ ...data, surface: Number(e.target.value) })}
-                    className="w-full accent-[#C8992A]"
+                    className="w-full accent-[var(--cuivre-500)]"
                     style={{ minHeight: 44 }}
                     aria-label="Surface en mètres carrés"
                   />
@@ -743,7 +743,7 @@ function QuoteFormMobile() {
                   <button
                     onClick={goNext}
                     className="w-full mt-12 bg-gold text-background py-4 font-medium"
-                    style={{ fontFamily: "Outfit", fontSize: 13, letterSpacing: "0.15em", textTransform: "uppercase", minHeight: 56 }}
+                    style={{ fontFamily: "var(--font-body)", fontSize: 13, letterSpacing: "0.15em", textTransform: "uppercase", minHeight: 56 }}
                   >
                     Continuer →
                   </button>
@@ -779,14 +779,14 @@ function QuoteFormMobile() {
                       value={data.message}
                       onChange={(e) => setData({ ...data, message: e.target.value })}
                       className="w-full bg-transparent border border-gold/30 px-4 py-3 text-foreground focus:outline-none focus:border-gold transition-colors"
-                      style={{ fontFamily: "Outfit", fontSize: 14 }}
+                      style={{ fontFamily: "var(--font-body)", fontSize: 14 }}
                     />
                   </div>
                   <button
                     onClick={submit}
                     disabled={!canSubmit}
                     className="w-full mt-6 bg-gold text-background py-4 font-medium disabled:opacity-40"
-                    style={{ fontFamily: "Outfit", fontSize: 13, letterSpacing: "0.15em", textTransform: "uppercase", minHeight: 56, boxShadow: "0 8px 24px rgba(200,153,42,0.35)" }}
+                    style={{ fontFamily: "var(--font-body)", fontSize: 13, letterSpacing: "0.15em", textTransform: "uppercase", minHeight: 56, boxShadow: "0 8px 24px rgba(200,153,42,0.35)" }}
                   >
                     Envoyer ma demande →
                   </button>
@@ -885,7 +885,7 @@ function SwipeOptions({
           <span
             key={i}
             className="block w-1.5 h-1.5 rounded-full transition-all duration-300"
-            style={{ background: i === active ? "#C8992A" : "rgba(200,153,42,0.3)", transform: i === active ? "scale(1.4)" : "scale(1)" }}
+            style={{ background: i === active ? "var(--cuivre-500)" : "rgba(200,153,42,0.3)", transform: i === active ? "scale(1.4)" : "scale(1)" }}
           />
         ))}
       </div>

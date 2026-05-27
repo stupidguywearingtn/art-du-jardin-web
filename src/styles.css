@@ -1,10 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Inter:wght@300;400;500;600;700&display=swap');
 @import "tailwindcss" source(none);
 @source "../src";
 @import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
-
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Outfit:wght@300;400;500;600&display=swap');
 
 @theme inline {
   --radius-sm: 0px;
@@ -30,7 +29,7 @@
   --color-input: var(--border);
   --color-ring: var(--gold);
   --font-display: "Cormorant Garamond", serif;
-  --font-body: "Outfit", sans-serif;
+  --font-body: "Inter", system-ui, -apple-system, sans-serif;
 }
 
 :root {

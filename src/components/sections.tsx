@@ -9,7 +9,10 @@ import { useSiteContent } from "@/hooks/useSiteContent";
 import { useProjectTypes, type ProjectType } from "@/hooks/useProjectTypes";
 import { useWhyUs, useServiceArea, useQuoteSection } from "@/hooks/useEditableSections";
 import { supabase } from "@/integrations/supabase/client";
-import { Flame, Star, FileText, ShieldCheck, Award } from "lucide-react";
+import { Flame, Star, FileText, ShieldCheck, Award, Plus, Trash2 } from "lucide-react";
+import { useEditMode } from "@/hooks/useEditMode";
+import { useAuth } from "@/hooks/useAuth";
+import { EditableField } from "@/components/EditableField";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -26,8 +29,13 @@ const ICONS_MAP: Record<string, React.ComponentType<{ size?: number; className?:
 
 export function WhyUs() {
   const ref = useRef<HTMLDivElement>(null);
-  const { section, cards } = useWhyUs();
+  const { section, cards, reload } = useWhyUs();
+  const { enabled } = useEditMode();
+  const { isAdmin } = useAuth();
+  const canEdit = enabled && isAdmin;
+
   useEffect(() => {
+    if (canEdit) return; // skip GSAP en mode édition
     if (!ref.current) return;
     const items = ref.current.querySelectorAll("[data-card]");
     items.forEach((el, i) => {
@@ -36,7 +44,20 @@ export function WhyUs() {
         { y: 0, opacity: 1, duration: 0.9, ease: "power3.out", delay: i * 0.08,
           scrollTrigger: { trigger: el, start: "top 88%" } });
     });
-  }, [cards.length]);
+  }, [cards.length, canEdit]);
+
+  const addCard = async () => {
+    const { error } = await supabase.from("why_us_cards").insert({
+      title: "Nouvelle raison", description: "Description courte.",
+      icon_name: "star", display_order: cards.length + 1, active: true,
+    });
+    if (error) toast.error(error.message); else { toast.success("Carte ajoutée"); reload(); }
+  };
+  const removeCard = async (id: string) => {
+    if (!confirm("Supprimer cette carte ?")) return;
+    const { error } = await supabase.from("why_us_cards").delete().eq("id", id);
+    if (error) toast.error(error.message); else { toast.success("Supprimée"); reload(); }
+  };
 
   return (
     <section ref={ref} className="relative bg-depth-a py-10 md:py-20 px-6 md:px-12 overflow-hidden">
@@ -69,11 +90,52 @@ export function WhyUs() {
                 <Icon size={28} className="text-gold" strokeWidth={1.3} />
                 <div className="font-display text-gold/70" style={{ fontSize: 11, letterSpacing: "0.2em" }}>{n}</div>
               </div>
-              <h3 className="font-display text-foreground" style={{ fontSize: "clamp(16px, 2.2vw, 20px)", fontWeight: 500, lineHeight: 1.2 }}>{c.title}</h3>
-              {c.description && <p className="mt-2 text-muted" style={{ fontSize: 13, lineHeight: 1.55 }}>{c.description}</p>}
+              {canEdit && !c.id.startsWith("fb-") ? (
+                <>
+                  <EditableField
+                    table="why_us_cards" rowId={c.id} field="title" value={c.title}
+                    as="h3"
+                    className="font-display text-foreground block"
+                    style={{ fontSize: "clamp(16px, 2.2vw, 20px)", fontWeight: 500, lineHeight: 1.2 }}
+                    onSaved={reload}
+                  />
+                  <EditableField
+                    table="why_us_cards" rowId={c.id} field="description" value={c.description ?? ""}
+                    as="p" multiline placeholder="Cliquez pour ajouter une description"
+                    className="mt-2 text-muted block"
+                    style={{ fontSize: 13, lineHeight: 1.55 }}
+                    onSaved={reload}
+                  />
+                  <button
+                    type="button"
+                    onClick={() => removeCard(c.id)}
+                    className="absolute -top-2 -left-2 z-[80] flex items-center justify-center w-6 h-6 rounded-full shadow-lg opacity-0 group-hover:opacity-100 transition-opacity"
+                    style={{ background: "var(--asphalte-900)", color: "#f87171", border: "1px solid #f87171" }}
+                    aria-label="Supprimer la carte"
+                    title="Supprimer la carte"
+                  >
+                    <Trash2 className="w-3 h-3" />
+                  </button>
+                </>
+              ) : (
+                <>
+                  <h3 className="font-display text-foreground" style={{ fontSize: "clamp(16px, 2.2vw, 20px)", fontWeight: 500, lineHeight: 1.2 }}>{c.title}</h3>
+                  {c.description && <p className="mt-2 text-muted" style={{ fontSize: 13, lineHeight: 1.55 }}>{c.description}</p>}
+                </>
+              )}
             </div>
           );
         })}
+        {canEdit && (
+          <button
+            type="button"
+            onClick={addCard}
+            className="rounded-xl border-2 border-dashed text-creme-50 flex flex-col items-center justify-center gap-2 transition-colors hover:bg-cuivre-500/10 min-h-[180px]"
+            style={{ borderColor: "var(--cuivre-500)", color: "var(--cuivre-300)" }}
+          >
+            <Plus className="w-6 h-6" /> Ajouter une carte
+          </button>
+        )}
       </div>
       <CTAInline caption={section.cta_text} />
     </section>
@@ -82,7 +144,27 @@ export function WhyUs() {
 
 /* ============ ZONE D'INTERVENTION ============ */
 export function Zone() {
-  const { section, cities } = useServiceArea();
+  const { section, cities, reload } = useServiceArea();
+  const { enabled } = useEditMode();
+  const { isAdmin } = useAuth();
+  const canEdit = enabled && isAdmin;
+
+  const addCity = async () => {
+    const { error } = await supabase.from("service_area_cities").insert({
+      name: "Nouvelle ville", display_order: cities.length + 1, is_headquarters: false,
+    });
+    if (error) toast.error(error.message); else { toast.success("Ville ajoutée"); reload(); }
+  };
+  const removeCity = async (id: string) => {
+    if (!confirm("Supprimer cette ville ?")) return;
+    const { error } = await supabase.from("service_area_cities").delete().eq("id", id);
+    if (error) toast.error(error.message); else { toast.success("Supprimée"); reload(); }
+  };
+  const toggleHQ = async (id: string, val: boolean) => {
+    const { error } = await supabase.from("service_area_cities").update({ is_headquarters: val }).eq("id", id);
+    if (error) toast.error(error.message); else reload();
+  };
+
   return (
     <section className="relative bg-depth-b py-10 md:py-20 px-6 md:px-12 overflow-hidden">
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-stretch">
@@ -96,11 +178,56 @@ export function Zone() {
           </p>
           <div className="mt-8 grid grid-cols-2 gap-3">
             {cities.map((c) => (
-              <div key={c.id} className="border-l border-gold/40 pl-3 text-sm text-foreground/85">
-                {c.name}
-                {c.is_headquarters && <span className="ml-1.5 text-gold/80 text-xs">· siège</span>}
+              <div key={c.id} className="border-l border-gold/40 pl-3 text-sm text-foreground/85 relative group/city">
+                {canEdit && !c.id.startsWith("fb-") ? (
+                  <>
+                    <EditableField
+                      table="service_area_cities" rowId={c.id} field="name" value={c.name}
+                      as="span" className="inline-block" onSaved={reload}
+                    />
+                    {c.is_headquarters && <span className="ml-1.5 text-gold/80 text-xs">· siège</span>}
+                    <div className="opacity-0 group-hover/city:opacity-100 transition-opacity inline-flex gap-1 ml-2">
+                      <button
+                        type="button"
+                        onClick={() => toggleHQ(c.id, !c.is_headquarters)}
+                        className="text-[10px] px-1.5 py-0.5 rounded"
+                        style={{
+                          background: c.is_headquarters ? "var(--cuivre-500)" : "transparent",
+                          color: c.is_headquarters ? "var(--creme-50)" : "var(--cuivre-300)",
+                          border: "1px solid var(--cuivre-500)",
+                        }}
+                        title={c.is_headquarters ? "Retirer flag siège" : "Marquer comme siège"}
+                      >
+                        siège
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => removeCity(c.id)}
+                        className="text-red-400 text-xs"
+                        title="Supprimer"
+                      >
+                        <Trash2 className="w-3 h-3 inline" />
+                      </button>
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    {c.name}
+                    {c.is_headquarters && <span className="ml-1.5 text-gold/80 text-xs">· siège</span>}
+                  </>
+                )}
               </div>
             ))}
+            {canEdit && (
+              <button
+                type="button"
+                onClick={addCity}
+                className="border-l border-dashed pl-3 text-sm transition-colors flex items-center gap-1"
+                style={{ borderColor: "var(--cuivre-500)", color: "var(--cuivre-300)" }}
+              >
+                <Plus className="w-3 h-3" /> Ajouter
+              </button>
+            )}
           </div>
           {section.cta_text && (
             <p className="mt-6 text-muted italic font-display" style={{ fontSize: 14, lineHeight: 1.5 }}>
@@ -288,7 +415,7 @@ function computeSurface(q: QuoteData): number | null {
 
 async function submitDevis(q: QuoteData): Promise<boolean> {
   const surface = computeSurface(q);
-  const { error } = await supabase.from("devis_requests").insert({
+  const payload = {
     project_type_slug: q.typeSlug || null,
     project_type_label: q.typeLabel || null,
     length_m: q.knowsDimensions && q.length ? parseFloat(q.length.replace(",", ".")) : null,
@@ -301,26 +428,33 @@ async function submitDevis(q: QuoteData): Promise<boolean> {
     email: q.email,
     postal_code: q.postalCode || null,
     city: q.ville || null,
+  };
+
+  // 1) archive en base (best effort, ne bloque pas)
+  supabase.from("devis_requests").insert(payload).then(({ error }) => {
+    if (error) console.warn("devis_requests insert failed:", error.message);
   });
-  if (error) {
-    toast.error(`Erreur : ${error.message}`);
-    return false;
-  }
-  // Notification email (fire-and-forget — un edge function Supabase peut être branché plus tard)
+
+  // 2) envoi email via edge function send-devis (chemin principal)
   try {
+    const { data, error } = await supabase.functions.invoke("send-devis", { body: payload });
+    if (error || !data?.ok) {
+      throw new Error(error?.message || data?.error || "Edge function error");
+    }
+    return true;
+  } catch (e: unknown) {
+    // 3) fallback mailto si l'edge function n'est pas déployée
     const surfaceStr = surface !== null ? `${surface} m²` : (q.freeDimensions || "non précisée");
     const body = encodeURIComponent(
       `Demande de devis HCE\n\nType : ${q.typeLabel}\nSurface estimée : ${surfaceStr}\n\n` +
       `Nom : ${q.nom}\nEmail : ${q.email}\nTél : ${q.tel}\nVille : ${q.ville}\nCP : ${q.postalCode}\n\n` +
       `Message :\n${q.message}`
     );
-    // Mailto fallback ouvert dans un nouvel onglet pour notifier sarl.hce@laposte.net
     const subject = encodeURIComponent(`Nouvelle demande de devis — ${q.typeLabel || "HCE"}`);
-    window.open(`mailto:sarl.hce@laposte.net?subject=${subject}&body=${body}`, "_blank");
-  } catch {
-    // ignore
+    window.open(`mailto:yanisouammou063@gmail.com?subject=${subject}&body=${body}`, "_blank");
+    toast.message(`Email non envoyé automatiquement (${(e as Error).message}). Ton client mail s'ouvre en secours.`);
+    return true;
   }
-  return true;
 }
 
 export function QuoteForm() {
@@ -335,8 +469,11 @@ function QuoteFormDesktop() {
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
-  const { items: types } = useProjectTypes();
+  const { items: types, reload: reloadTypes } = useProjectTypes();
   const { tag, title, subtitle } = useQuoteSection();
+  const { enabled: editEnabled } = useEditMode();
+  const { isAdmin } = useAuth();
+  const canEdit = editEnabled && isAdmin;
 
   // section reveal
   useEffect(() => {
@@ -437,22 +574,15 @@ function QuoteFormDesktop() {
                             const sel = data.typeSlug === o.slug;
                             const icon = TYPE_ICONS[o.slug] ?? TYPE_ICONS.cour;
                             return (
-                              <SelectCard
+                              <ProjectTypeCard
                                 key={o.id}
+                                option={o}
+                                icon={icon}
                                 selected={sel}
-                                onClick={() => setData({ ...data, typeSlug: o.slug, typeLabel: o.label })}
-                              >
-                                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" className="text-gold mb-5 transition-all duration-300 group-hover:text-[var(--sable-500)]">
-                                  <path d={icon} strokeLinecap="round" strokeLinejoin="round" />
-                                </svg>
-                                <div className="font-display text-foreground" style={{ fontSize: 22, fontWeight: 400, letterSpacing: "-0.01em" }}>{o.label}</div>
-                                {o.description && <div className="text-muted mt-2" style={{ fontSize: 13, lineHeight: 1.5 }}>{o.description}</div>}
-                                {o.show_price && o.price_from !== null && (
-                                  <div className="label text-gold mt-5" style={{ fontSize: 10 }}>
-                                    à partir de {o.price_from} {o.price_unit}
-                                  </div>
-                                )}
-                              </SelectCard>
+                                canEdit={canEdit && !o.id.startsWith("f-")}
+                                onClick={canEdit ? undefined : () => setData({ ...data, typeSlug: o.slug, typeLabel: o.label })}
+                                onSaved={reloadTypes}
+                              />
                             );
                           })}
                         </div>
@@ -658,6 +788,108 @@ function DimInput({ label, value, onChange }: { label: string; value: string; on
 }
 
 /* SelectCard — V_B "carte technique épurée" */
+/* ProjectTypeCard — carte du simulateur, soit cliquable (visiteur) soit éditable (admin) */
+function ProjectTypeCard({
+  option, icon, selected, canEdit, onClick, onSaved,
+}: {
+  option: ProjectType;
+  icon: string;
+  selected: boolean;
+  canEdit: boolean;
+  onClick?: () => void;
+  onSaved: () => void;
+}) {
+  const toggleShowPrice = async () => {
+    const { error } = await supabase.from("project_types").update({ show_price: !option.show_price }).eq("id", option.id);
+    if (error) toast.error(error.message); else { toast.success("Mis à jour"); onSaved(); }
+  };
+  const removeType = async () => {
+    if (!confirm(`Supprimer le type « ${option.label} » ?`)) return;
+    const { error } = await supabase.from("project_types").delete().eq("id", option.id);
+    if (error) toast.error(error.message); else { toast.success("Supprimé"); onSaved(); }
+  };
+
+  const cardStyle: React.CSSProperties = {
+    boxShadow: selected
+      ? "0 12px 28px rgba(200,153,42,0.18), 0 0 0 1px rgba(200,153,42,0.4)"
+      : "0 4px 12px rgba(0,0,0,0.4)",
+  };
+
+  if (canEdit) {
+    return (
+      <div
+        className="group relative text-left bg-surface border border-border p-8 rounded-sm"
+        style={cardStyle}
+      >
+        <span aria-hidden className="absolute top-0 left-0 w-[3px] h-full bg-gold" />
+        <button
+          type="button"
+          onClick={removeType}
+          className="absolute -top-2 -left-2 z-[80] flex items-center justify-center w-6 h-6 rounded-full shadow-lg opacity-0 group-hover:opacity-100 transition-opacity"
+          style={{ background: "var(--asphalte-900)", color: "#f87171", border: "1px solid #f87171" }}
+          title="Supprimer ce type"
+        >
+          <Trash2 className="w-3 h-3" />
+        </button>
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" className="text-gold mb-5">
+          <path d={icon} strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+        <EditableField
+          table="project_types" rowId={option.id} field="label" value={option.label}
+          as="div" className="font-display text-foreground block"
+          style={{ fontSize: 22, fontWeight: 400, letterSpacing: "-0.01em" }}
+          onSaved={onSaved}
+        />
+        <EditableField
+          table="project_types" rowId={option.id} field="description" value={option.description ?? ""}
+          as="div" multiline placeholder="Cliquez pour ajouter une description"
+          className="text-muted mt-2 block"
+          style={{ fontSize: 13, lineHeight: 1.5 }}
+          onSaved={onSaved}
+        />
+        <div className="mt-5 flex items-center gap-3 flex-wrap">
+          <span className="label text-gold" style={{ fontSize: 10 }}>à partir de</span>
+          <EditableField
+            table="project_types" rowId={option.id} field="price_from" value={String(option.price_from ?? "")}
+            as="span" className="font-display text-gold inline-block"
+            style={{ fontSize: 18, minWidth: 30 }}
+            onSaved={onSaved}
+          />
+          <span className="label text-gold" style={{ fontSize: 10 }}>{option.price_unit}</span>
+          <button
+            type="button"
+            onClick={toggleShowPrice}
+            className="text-[10px] px-2 py-1 rounded ml-auto"
+            style={{
+              background: option.show_price ? "var(--cuivre-500)" : "transparent",
+              color: option.show_price ? "var(--creme-50)" : "var(--cuivre-300)",
+              border: "1px solid var(--cuivre-500)",
+              fontFamily: "var(--font-body)",
+            }}
+          >
+            {option.show_price ? "Prix affiché" : "Prix masqué"}
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <SelectCard selected={selected} onClick={onClick ?? (() => {})}>
+      <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" className="text-gold mb-5 transition-all duration-300 group-hover:text-[var(--sable-500)]">
+        <path d={icon} strokeLinecap="round" strokeLinejoin="round" />
+      </svg>
+      <div className="font-display text-foreground" style={{ fontSize: 22, fontWeight: 400, letterSpacing: "-0.01em" }}>{option.label}</div>
+      {option.description && <div className="text-muted mt-2" style={{ fontSize: 13, lineHeight: 1.5 }}>{option.description}</div>}
+      {option.show_price && option.price_from !== null && (
+        <div className="label text-gold mt-5" style={{ fontSize: 10 }}>
+          à partir de {option.price_from} {option.price_unit}
+        </div>
+      )}
+    </SelectCard>
+  );
+}
+
 function SelectCard({ children, selected, onClick, compact = false }: { children: React.ReactNode; selected: boolean; onClick: () => void; compact?: boolean }) {
   const btnRef = useRef<HTMLButtonElement>(null);
 

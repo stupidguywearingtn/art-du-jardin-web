@@ -7,8 +7,11 @@ import { WhatsAppFAB } from "@/components/WhatsAppFAB";
 import { EditModeProvider, useEditMode } from "@/hooks/useEditMode";
 import { EditModeToolbar } from "@/components/EditModeToolbar";
 import { useAuth } from "@/hooks/useAuth";
-import { useGalleryByCategorySlug, useGalleryCategories } from "@/hooks/useGallery";
+import { useGalleryByCategorySlug } from "@/hooks/useGallery";
 import { useSiteContentFields } from "@/hooks/useSiteContentFields";
+import { supabase } from "@/integrations/supabase/client";
+import { toast } from "sonner";
+import { Pencil, Trash2, Plus, Loader2 } from "lucide-react";
 
 const HOME_SITE_ID = "11111111-1111-1111-1111-111111111111";
 
@@ -37,10 +40,88 @@ function RealisationsRoute() {
 
 function RealisationsPage() {
   const { slug } = Route.useParams();
-  const { category, photos, loading } = useGalleryByCategorySlug(slug);
+  const { category, photos, loading, reload } = useGalleryByCategorySlug(slug);
   const { isAdmin } = useAuth();
   const [lightbox, setLightbox] = useState<number | null>(null);
   const [touchStart, setTouchStart] = useState<number | null>(null);
+  const [busyId, setBusyId] = useState<string | null>(null);
+  const [adding, setAdding] = useState(false);
+
+  const isFallback = (category?.id ?? "").startsWith("fb-");
+
+  const compressImage = (file: File, maxSize = 1920, quality = 0.82): Promise<File> =>
+    new Promise((resolve, reject) => {
+      if (!file.type.startsWith("image/")) return reject(new Error("Not an image"));
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const img = new Image();
+        img.onload = () => {
+          const ratio = Math.min(1, maxSize / Math.max(img.width, img.height));
+          const w = img.width * ratio, h = img.height * ratio;
+          const c = document.createElement("canvas");
+          c.width = w; c.height = h;
+          const ctx = c.getContext("2d");
+          if (!ctx) return reject(new Error("no ctx"));
+          ctx.drawImage(img, 0, 0, w, h);
+          c.toBlob((b) => b ? resolve(new File([b], file.name, { type: "image/jpeg" })) : reject(new Error("compress fail")), "image/jpeg", quality);
+        };
+        img.onerror = reject;
+        img.src = e.target?.result as string;
+      };
+      reader.onerror = reject;
+      reader.readAsDataURL(file);
+    });
+
+  const uploadFile = async (file: File): Promise<string | null> => {
+    try {
+      const compressed = await compressImage(file).catch(() => file);
+      const ext = compressed.name.split(".").pop() || "jpg";
+      const path = `gallery/${Date.now()}-${Math.random().toString(36).slice(2, 8)}.${ext}`;
+      const { error } = await supabase.storage.from("site-images").upload(path, compressed, { upsert: false });
+      if (error) { toast.error(error.message); return null; }
+      return supabase.storage.from("site-images").getPublicUrl(path).data.publicUrl;
+    } catch (e) {
+      toast.error((e as Error).message);
+      return null;
+    }
+  };
+
+  const replacePhoto = async (id: string, file: File) => {
+    setBusyId(id);
+    const url = await uploadFile(file);
+    if (url) {
+      const { error } = await supabase.from("gallery_photos").update({ url }).eq("id", id);
+      if (error) toast.error(error.message);
+      else { toast.success("Photo remplacée"); reload(); }
+    }
+    setBusyId(null);
+  };
+
+  const deletePhoto = async (id: string) => {
+    if (!confirm("Supprimer cette photo ?")) return;
+    setBusyId(id);
+    const { error } = await supabase.from("gallery_photos").delete().eq("id", id);
+    setBusyId(null);
+    if (error) toast.error(error.message);
+    else { toast.success("Photo supprimée"); reload(); }
+  };
+
+  const addPhotos = async (files: FileList) => {
+    if (!category) return;
+    setAdding(true);
+    let order = photos.length > 0 ? Math.max(...photos.map((p) => p.display_order)) + 1 : 0;
+    for (const f of Array.from(files)) {
+      const url = await uploadFile(f);
+      if (!url) continue;
+      const { error } = await supabase.from("gallery_photos").insert({
+        url, category_id: category.id, display_order: order++,
+      });
+      if (error) toast.error(error.message);
+    }
+    setAdding(false);
+    toast.success(`${files.length} photo(s) ajoutée(s)`);
+    reload();
+  };
 
   useEffect(() => {
     if (lightbox === null) return;
@@ -112,26 +193,8 @@ function RealisationsPage() {
           </div>
         </header>
 
-        {/* Bandeau admin contextuel : raccourci vers l'onglet Galerie filtré sur cette catégorie */}
-        {isAdmin && (
-          <div className="fixed top-[60px] left-0 right-0 z-40 bg-cuivre-500" style={{ background: "var(--cuivre-500)" }}>
-            <div className="px-6 md:px-12 py-2 flex items-center justify-between gap-3 text-creme-50" style={{ color: "var(--creme-50)" }}>
-              <span className="text-sm" style={{ fontFamily: "var(--font-body)" }}>
-                <strong>Mode admin</strong> · pour ajouter, remplacer ou supprimer des photos de cette catégorie :
-              </span>
-              <Link
-                to="/admin"
-                className="inline-flex items-center gap-2 bg-creme-50 px-3 py-1.5 rounded text-xs font-medium hover:opacity-90 transition-opacity"
-                style={{ background: "var(--creme-50)", color: "var(--asphalte-900)", fontFamily: "var(--font-body)" }}
-              >
-                Gérer la galerie →
-              </Link>
-            </div>
-          </div>
-        )}
-
         {/* HERO catégorie */}
-        <section className={`relative w-full ${isAdmin ? "pt-44" : "pt-32"} md:pt-40 pb-12 md:pb-16 px-6 md:px-12 bg-depth-a overflow-hidden`}>
+        <section className="relative w-full pt-32 md:pt-40 pb-12 md:pb-16 px-6 md:px-12 bg-depth-a overflow-hidden">
           <div className="max-w-5xl mx-auto">
             <div className="label text-gold">— Réalisations</div>
             <h1
@@ -153,33 +216,94 @@ function RealisationsPage() {
 
         {/* GRILLE photos */}
         <section className="relative w-full px-4 md:px-12 py-12 md:py-20 bg-background">
+          <style>{`
+            @media (min-width: 640px) { .gallery-masonry { column-count: 2 !important; } }
+            @media (min-width: 1024px) { .gallery-masonry { column-count: 3 !important; } }
+          `}</style>
+
+          {/* Barre admin pour cette catégorie */}
+          {isAdmin && (
+            <div className="max-w-7xl mx-auto mb-6 p-4 rounded border flex items-center justify-between gap-4 flex-wrap"
+                 style={{ borderColor: "var(--cuivre-500)", background: "rgba(138,90,60,0.08)" }}>
+              <div className="text-sm" style={{ fontFamily: "var(--font-body)", color: "var(--creme-50)" }}>
+                <strong>Mode admin</strong> — survol une photo pour Remplacer ou Supprimer.
+                {isFallback && (
+                  <span className="ml-2" style={{ color: "var(--sable-500)" }}>
+                    ⚠ La catégorie « {category.title} » n'est pas encore en base — applique SETUP-PROD.sql pour activer les modifications.
+                  </span>
+                )}
+              </div>
+              {!isFallback && (
+                <label
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded font-semibold text-sm cursor-pointer transition-opacity hover:opacity-90"
+                  style={{ background: "var(--cuivre-500)", color: "var(--creme-50)", fontFamily: "var(--font-body)" }}
+                >
+                  {adding ? <><Loader2 className="w-4 h-4 animate-spin" /> Upload…</> : <><Plus className="w-4 h-4" /> Ajouter des photos</>}
+                  <input type="file" accept="image/*" multiple className="hidden"
+                         disabled={adding}
+                         onChange={(e) => e.target.files && addPhotos(e.target.files)} />
+                </label>
+              )}
+            </div>
+          )}
+
           {photos.length === 0 ? (
             <p className="text-center text-muted max-w-md mx-auto py-20">
               Aucune photo dans cette catégorie pour le moment.
             </p>
           ) : (
             <div className="max-w-7xl mx-auto" style={{ columnGap: "1rem", columnCount: 1 }}>
-              <style>{`
-                @media (min-width: 640px) { .gallery-masonry { column-count: 2 !important; } }
-                @media (min-width: 1024px) { .gallery-masonry { column-count: 3 !important; } }
-              `}</style>
               <div className="gallery-masonry">
-                {photos.map((p, idx) => (
-                  <button
-                    key={p.id}
-                    onClick={() => setLightbox(idx)}
-                    className="block w-full mb-4 group overflow-hidden break-inside-avoid"
-                    style={{ background: "var(--surface)" }}
-                    aria-label={`Ouvrir la photo ${idx + 1}`}
-                  >
-                    <img
-                      src={p.url}
-                      alt={p.alt_text ?? category.title}
-                      loading="lazy"
-                      className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-105"
-                    />
-                  </button>
-                ))}
+                {photos.map((p, idx) => {
+                  const editable = isAdmin && !p.id.startsWith("fb-");
+                  return (
+                    <div
+                      key={p.id}
+                      className="relative w-full mb-4 group/photo overflow-hidden break-inside-avoid"
+                      style={{ background: "var(--surface)" }}
+                    >
+                      <button
+                        type="button"
+                        onClick={() => setLightbox(idx)}
+                        className="block w-full"
+                        aria-label={`Ouvrir la photo ${idx + 1}`}
+                      >
+                        <img
+                          src={p.url}
+                          alt={p.alt_text ?? category.title}
+                          loading="lazy"
+                          className="w-full h-auto object-cover transition-transform duration-700 group-hover/photo:scale-105"
+                        />
+                      </button>
+                      {editable && (
+                        <div
+                          className="absolute inset-0 flex items-end justify-center pb-4 gap-2 opacity-0 group-hover/photo:opacity-100 transition-opacity pointer-events-none"
+                          style={{ background: "linear-gradient(to top, rgba(14,14,15,0.75), transparent 50%)" }}
+                        >
+                          <label
+                            className="inline-flex items-center gap-1 px-3 py-1.5 rounded text-xs font-semibold cursor-pointer pointer-events-auto"
+                            style={{ background: "var(--cuivre-500)", color: "var(--creme-50)", fontFamily: "var(--font-body)" }}
+                          >
+                            {busyId === p.id ? <Loader2 className="w-3 h-3 animate-spin" /> : <Pencil className="w-3 h-3" />}
+                            Remplacer
+                            <input type="file" accept="image/*" className="hidden"
+                                   disabled={busyId === p.id}
+                                   onChange={(e) => e.target.files?.[0] && replacePhoto(p.id, e.target.files[0])} />
+                          </label>
+                          <button
+                            type="button"
+                            onClick={() => deletePhoto(p.id)}
+                            disabled={busyId === p.id}
+                            className="inline-flex items-center gap-1 px-3 py-1.5 rounded text-xs font-semibold pointer-events-auto"
+                            style={{ background: "rgba(14,14,15,0.8)", color: "#f87171", border: "1px solid #f87171", fontFamily: "var(--font-body)" }}
+                          >
+                            <Trash2 className="w-3 h-3" /> Supprimer
+                          </button>
+                        </div>
+                      )}
+                    </div>
+                  );
+                })}
               </div>
             </div>
           )}

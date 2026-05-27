@@ -16,6 +16,7 @@ import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ServicesGarantieSavRouteImport } from './routes/services.garantie-sav'
 import { Route as ServicesSlugRouteImport } from './routes/services.$slug'
+import { Route as RealisationsSlugRouteImport } from './routes/realisations.$slug'
 
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
@@ -52,6 +53,11 @@ const ServicesSlugRoute = ServicesSlugRouteImport.update({
   path: '/services/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const RealisationsSlugRoute = RealisationsSlugRouteImport.update({
+  id: '/realisations/$slug',
+  path: '/realisations/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -59,6 +65,7 @@ export interface FileRoutesByFullPath {
   '/demo': typeof DemoRoute
   '/login': typeof LoginRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/realisations/$slug': typeof RealisationsSlugRoute
   '/services/$slug': typeof ServicesSlugRoute
   '/services/garantie-sav': typeof ServicesGarantieSavRoute
 }
@@ -68,6 +75,7 @@ export interface FileRoutesByTo {
   '/demo': typeof DemoRoute
   '/login': typeof LoginRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/realisations/$slug': typeof RealisationsSlugRoute
   '/services/$slug': typeof ServicesSlugRoute
   '/services/garantie-sav': typeof ServicesGarantieSavRoute
 }
@@ -78,6 +86,7 @@ export interface FileRoutesById {
   '/demo': typeof DemoRoute
   '/login': typeof LoginRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/realisations/$slug': typeof RealisationsSlugRoute
   '/services/$slug': typeof ServicesSlugRoute
   '/services/garantie-sav': typeof ServicesGarantieSavRoute
 }
@@ -89,6 +98,7 @@ export interface FileRouteTypes {
     | '/demo'
     | '/login'
     | '/sitemap.xml'
+    | '/realisations/$slug'
     | '/services/$slug'
     | '/services/garantie-sav'
   fileRoutesByTo: FileRoutesByTo
@@ -98,6 +108,7 @@ export interface FileRouteTypes {
     | '/demo'
     | '/login'
     | '/sitemap.xml'
+    | '/realisations/$slug'
     | '/services/$slug'
     | '/services/garantie-sav'
   id:
@@ -107,6 +118,7 @@ export interface FileRouteTypes {
     | '/demo'
     | '/login'
     | '/sitemap.xml'
+    | '/realisations/$slug'
     | '/services/$slug'
     | '/services/garantie-sav'
   fileRoutesById: FileRoutesById
@@ -117,6 +129,7 @@ export interface RootRouteChildren {
   DemoRoute: typeof DemoRoute
   LoginRoute: typeof LoginRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  RealisationsSlugRoute: typeof RealisationsSlugRoute
   ServicesSlugRoute: typeof ServicesSlugRoute
   ServicesGarantieSavRoute: typeof ServicesGarantieSavRoute
 }
@@ -172,6 +185,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ServicesSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/realisations/$slug': {
+      id: '/realisations/$slug'
+      path: '/realisations/$slug'
+      fullPath: '/realisations/$slug'
+      preLoaderRoute: typeof RealisationsSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -181,6 +201,7 @@ const rootRouteChildren: RootRouteChildren = {
   DemoRoute: DemoRoute,
   LoginRoute: LoginRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
+  RealisationsSlugRoute: RealisationsSlugRoute,
   ServicesSlugRoute: ServicesSlugRoute,
   ServicesGarantieSavRoute: ServicesGarantieSavRoute,
 }

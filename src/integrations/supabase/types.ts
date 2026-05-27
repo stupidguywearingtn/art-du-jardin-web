@@ -83,6 +83,173 @@ export type Database = {
         }
         Relationships: []
       }
+      gallery_categories: {
+        Row: {
+          id: string
+          slug: string
+          title: string
+          description: string | null
+          cover_url: string | null
+          display_order: number
+          active: boolean
+          updated_at: string
+        }
+        Insert: {
+          id?: string
+          slug: string
+          title: string
+          description?: string | null
+          cover_url?: string | null
+          display_order?: number
+          active?: boolean
+          updated_at?: string
+        }
+        Update: {
+          id?: string
+          slug?: string
+          title?: string
+          description?: string | null
+          cover_url?: string | null
+          display_order?: number
+          active?: boolean
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      gallery_photos: {
+        Row: {
+          id: string
+          url: string
+          caption: string | null
+          alt_text: string | null
+          category_id: string | null
+          display_order: number
+          created_at: string
+          updated_at: string
+        }
+        Insert: {
+          id?: string
+          url: string
+          caption?: string | null
+          alt_text?: string | null
+          category_id?: string | null
+          display_order?: number
+          created_at?: string
+          updated_at?: string
+        }
+        Update: {
+          id?: string
+          url?: string
+          caption?: string | null
+          alt_text?: string | null
+          category_id?: string | null
+          display_order?: number
+          created_at?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "gallery_photos_category_id_fkey"
+            columns: ["category_id"]
+            isOneToOne: false
+            referencedRelation: "gallery_categories"
+            referencedColumns: ["id"]
+          }
+        ]
+      }
+      project_types: {
+        Row: {
+          id: string
+          slug: string
+          label: string
+          description: string | null
+          price_from: number | null
+          price_unit: string
+          show_price: boolean
+          display_order: number
+          active: boolean
+          updated_at: string
+        }
+        Insert: {
+          id?: string
+          slug: string
+          label: string
+          description?: string | null
+          price_from?: number | null
+          price_unit?: string
+          show_price?: boolean
+          display_order?: number
+          active?: boolean
+          updated_at?: string
+        }
+        Update: {
+          id?: string
+          slug?: string
+          label?: string
+          description?: string | null
+          price_from?: number | null
+          price_unit?: string
+          show_price?: boolean
+          display_order?: number
+          active?: boolean
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      devis_requests: {
+        Row: {
+          id: string
+          project_type_slug: string | null
+          project_type_label: string | null
+          length_m: number | null
+          width_m: number | null
+          estimated_surface_m2: number | null
+          free_dimensions: string | null
+          description: string | null
+          name: string
+          phone: string
+          email: string
+          postal_code: string | null
+          city: string | null
+          status: string
+          created_at: string
+        }
+        Insert: {
+          id?: string
+          project_type_slug?: string | null
+          project_type_label?: string | null
+          length_m?: number | null
+          width_m?: number | null
+          estimated_surface_m2?: number | null
+          free_dimensions?: string | null
+          description?: string | null
+          name: string
+          phone: string
+          email: string
+          postal_code?: string | null
+          city?: string | null
+          status?: string
+          created_at?: string
+        }
+        Update: {
+          id?: string
+          project_type_slug?: string | null
+          project_type_label?: string | null
+          length_m?: number | null
+          width_m?: number | null
+          estimated_surface_m2?: number | null
+          free_dimensions?: string | null
+          description?: string | null
+          name?: string
+          phone?: string
+          email?: string
+          postal_code?: string | null
+          city?: string | null
+          status?: string
+          created_at?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never

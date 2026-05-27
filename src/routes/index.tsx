@@ -11,6 +11,7 @@ import { Link } from "@tanstack/react-router";
 import { CTABanner, CTAPrimary, CTASecondary, CTAInline, MobileFloatingCTA } from "@/components/CTAButtons";
 import { useSiteContent } from "@/hooks/useSiteContent";
 import { useSiteContentFields } from "@/hooks/useSiteContentFields";
+import { useGalleryCategories } from "@/hooks/useGallery";
 import { EditModeProvider, useEditMode } from "@/hooks/useEditMode";
 import { EditModeToolbar } from "@/components/EditModeToolbar";
 import { EditableText } from "@/components/EditableText";
@@ -344,129 +345,69 @@ function MatiereFinitions() {
   );
 }
 
-/* ============ GALERIE FILTRABLE ============ */
-const GALLERY: { src: string; cat: string; alt: string }[] = [
-  ...["11-cour-courbe-ciel","12-cour-courbe-muret-pierre","13-cour-parking-muret","14-cour-maison-volets-rouges","15-cour-golden-hour","16-cour-maison-blanche-ciel-bleu","17-cour-arbres-automne","18-cour-allee-entre-maisons","19-cour-batiment-bois","20-cour-maison-beige-frontal","21-cour-maison-moderne-blanche","22-cour-maison-blanche-garage","23-cour-courbe-arbres","24-cour-maison-plain-pied","25-cour-allee-curve-garage"].map(s => ({ src: `/photos/${s}.jpg`, cat: "Cour & allée privée", alt: "Cour résidentielle en enrobé HCE" })),
-  { src: "/photos/08-chantier-plaque-vibrante.jpg", cat: "Parking & voirie pro", alt: "Compactage à la plaque vibrante sur parking" },
-  { src: "/photos/26-pro-batiment-commercial.jpg", cat: "Parking & voirie pro", alt: "Parking enrobé devant bâtiment commercial" },
-  { src: "/photos/06-chantier-bobcat-preparation.jpg", cat: "Préparation & terrassement", alt: "Mini-pelle Bobcat en préparation de terrain à Cize" },
-  { src: "/photos/07-chantier-terrain-brouette.jpg", cat: "Préparation & terrassement", alt: "Préparation manuelle du terrain avant pose" },
-  { src: "/photos/02-hero-medaillon-paves.jpg", cat: "Détails & finitions", alt: "Médaillon de pavés intégré dans l'enrobé" },
-  { src: "/photos/09-detail-bordure-beton.jpg", cat: "Détails & finitions", alt: "Bordure béton coulée HCE" },
-  { src: "/photos/10-detail-texture-enrobe-frais.jpg", cat: "Détails & finitions", alt: "Texture enrobé à chaud fraîchement posé" },
-  { src: "/photos/01-hero-finisseur-vapeur-sunset.jpg", cat: "Chantier en cours", alt: "HCE en cours de pose à la main" },
-  { src: "/photos/03-hero-rouleau-compacteur.jpg", cat: "Chantier en cours", alt: "Rouleau compacteur sur chantier HCE" },
-];
-const CATS = ["Cour & allée privée", "Parking & voirie pro", "Préparation & terrassement", "Détails & finitions", "Chantier en cours"];
-
-// Photo représentative pour chaque catégorie
-const CAT_COVERS: Record<string, string> = {
-  "Cour & allée privée": "/photos/15-cour-golden-hour.jpg",
-  "Parking & voirie pro": "/photos/26-pro-batiment-commercial.jpg",
-  "Préparation & terrassement": "/photos/06-chantier-bobcat-preparation.jpg",
-  "Détails & finitions": "/photos/02-hero-medaillon-paves.jpg",
-  "Chantier en cours": "/photos/01-hero-finisseur-vapeur-sunset.jpg",
-};
-
+/* ============ GALERIE — cartes catégories (vers /realisations/{slug}) ============ */
 function Galerie() {
-  const [openCat, setOpenCat] = useState<string | null>(null);
-  const [lightbox, setLightbox] = useState<number | null>(null);
-  const photos = openCat ? GALLERY.filter(g => g.cat === openCat) : [];
-
-  useEffect(() => {
-    if (lightbox === null) return;
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setLightbox(null);
-      if (e.key === "ArrowRight") setLightbox(i => i === null ? null : (i + 1) % photos.length);
-      if (e.key === "ArrowLeft") setLightbox(i => i === null ? null : (i - 1 + photos.length) % photos.length);
-    };
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, [lightbox, photos.length]);
-
-  const openCategory = (cat: string) => {
-    setOpenCat(cat);
-    setLightbox(0);
-  };
-  const closeAll = () => { setLightbox(null); setOpenCat(null); };
+  const v = useV();
+  const { categories } = useGalleryCategories();
+  // Fallback statique si la base n'est pas encore peuplée (SSR/preview)
+  const FALLBACK: { slug: string; title: string; cover_url: string; photo_count: number }[] = [
+    { slug: "cour-allee-privee", title: "Cour & allée privée", cover_url: "/photos/15-cour-golden-hour.jpg", photo_count: 15 },
+    { slug: "parking-voirie-pro", title: "Parking & voirie pro", cover_url: "/photos/26-pro-batiment-commercial.jpg", photo_count: 2 },
+    { slug: "preparation-terrassement", title: "Préparation & terrassement", cover_url: "/photos/06-chantier-bobcat-preparation.jpg", photo_count: 2 },
+    { slug: "details-finitions", title: "Détails & finitions", cover_url: "/photos/02-hero-medaillon-paves.jpg", photo_count: 3 },
+    { slug: "chantier-en-cours", title: "Chantier en cours", cover_url: "/photos/01-hero-finisseur-vapeur-sunset.jpg", photo_count: 3 },
+  ];
+  const items = categories.length > 0 ? categories : FALLBACK;
 
   return (
     <section className="relative w-full bg-depth-a py-10 md:py-20 px-4 md:px-12 overflow-hidden">
       <GiantNumber n="05" position="right" />
       <div className="max-w-6xl mx-auto text-center mb-10 md:mb-14">
-        <div className="label text-gold">— 1000+ chantiers livrés depuis 2012</div>
+        <EditableText section="galerie" field="label" value={v("galerie", "label", "— 1000+ chantiers livrés depuis 2012")} as="div" className="label text-gold" />
         <h2 className="font-display mt-4 md:mt-6 text-foreground" style={{ fontSize: "clamp(32px, 6vw, 80px)", fontWeight: 400, lineHeight: 1, wordBreak: "keep-all", overflowWrap: "normal", hyphens: "none" }}>
           Nos <span className="italic text-gold">réalisations.</span>
         </h2>
-        <p className="mt-4 max-w-xl mx-auto text-muted" style={{ fontSize: 14 }}>
-          Choisissez une catégorie pour voir nos chantiers en grand.
-        </p>
+        <EditableText
+          section="galerie"
+          field="intro"
+          value={v("galerie", "intro", "Choisissez une catégorie pour découvrir nos chantiers en détail.")}
+          as="p"
+          className="mt-4 max-w-xl mx-auto text-muted"
+          style={{ fontSize: 14 }}
+          multiline
+        />
       </div>
 
       <div className="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-5">
-        {CATS.map((cat, idx) => {
-          const cover = CAT_COVERS[cat];
-          const count = GALLERY.filter(g => g.cat === cat).length;
-          // 5e carte (Chantier en cours) prend toute la largeur sur mobile
+        {items.map((cat, idx) => {
+          const cover = cat.cover_url || "/photos/15-cour-golden-hour.jpg";
+          const count = cat.photo_count;
+          // 5e carte prend toute la largeur sur mobile pour ne pas rester seule
           const fullWidth = idx === 4 ? "col-span-2 md:col-span-1" : "";
           return (
-            <button
-              key={cat}
-              onClick={() => openCategory(cat)}
+            <Link
+              key={cat.slug}
+              to="/realisations/$slug"
+              params={{ slug: cat.slug }}
               data-cursor-hover
-              className={`relative group overflow-hidden aspect-[4/5] md:aspect-[4/5] cursor-none ${fullWidth}`}
+              className={`relative group overflow-hidden aspect-[4/5] md:aspect-[4/5] block ${fullWidth}`}
               style={{ background: "var(--surface)" }}
             >
-              <img src={cover} alt={cat} loading="lazy" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+              <img src={cover} alt={cat.title} loading="lazy" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
               <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0.1) 100%)" }} />
               <div className="absolute bottom-0 left-0 right-0 p-4 md:p-5 text-left">
                 <div className="label" style={{ color: "var(--gold)", fontSize: 9, marginBottom: 6 }}>{count} photos</div>
                 <div className="font-display" style={{ color: "#FFFFFF", fontSize: "clamp(16px, 2vw, 22px)", fontWeight: 400, lineHeight: 1.15 }}>
-                  {cat}
+                  {cat.title}
                 </div>
                 <div className="mt-2 flex items-center gap-2" style={{ color: "var(--gold)", fontSize: 11, fontFamily: "var(--font-body)", letterSpacing: "0.1em", textTransform: "uppercase" }}>
-                  Voir <span aria-hidden>→</span>
+                  Voir la galerie <span aria-hidden>→</span>
                 </div>
               </div>
-            </button>
+            </Link>
           );
         })}
       </div>
-
-      <AnimatePresence>
-        {lightbox !== null && photos[lightbox] && (
-          <motion.div
-            initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[9999] flex items-center justify-center"
-            style={{ background: "rgba(14,14,15,0.95)" }}
-            onClick={closeAll}
-          >
-            <button
-              onClick={(e) => { e.stopPropagation(); closeAll(); }}
-              className="absolute z-[9999] flex items-center justify-center transition-all duration-200"
-              style={{
-                top: "1rem", right: "1rem",
-                width: 48, height: 48,
-                background: "rgba(0,0,0,0.5)",
-                backdropFilter: "blur(8px)",
-                WebkitBackdropFilter: "blur(8px)",
-                borderRadius: "50%",
-                border: "1px solid rgba(255,255,255,0.2)",
-                color: "#FFFFFF",
-              }}
-              onMouseEnter={(e) => { e.currentTarget.style.background = "rgba(0,0,0,0.8)"; e.currentTarget.style.transform = "scale(1.05)"; }}
-              onMouseLeave={(e) => { e.currentTarget.style.background = "rgba(0,0,0,0.5)"; e.currentTarget.style.transform = "scale(1)"; }}
-              aria-label="Fermer"
-            >
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><path d="M18 6 6 18M6 6l12 12" /></svg>
-            </button>
-            <div className="absolute top-4 left-4 label text-gold/80" style={{ fontSize: 11 }}>{openCat} · {lightbox + 1}/{photos.length}</div>
-            <button onClick={(e) => { e.stopPropagation(); setLightbox(((lightbox - 1) + photos.length) % photos.length); }} className="absolute left-2 md:left-8 text-gold text-4xl p-4" aria-label="Précédent">‹</button>
-            <button onClick={(e) => { e.stopPropagation(); setLightbox((lightbox + 1) % photos.length); }} className="absolute right-2 md:right-8 text-gold text-4xl p-4" aria-label="Suivant">›</button>
-            <img src={photos[lightbox].src} alt={photos[lightbox].alt} className="max-h-[80vh] max-w-[90vw] object-contain" onClick={(e) => e.stopPropagation()} />
-          </motion.div>
-        )}
-      </AnimatePresence>
     </section>
   );
 }

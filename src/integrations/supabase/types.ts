@@ -14,6 +14,140 @@ export type Database = {
   }
   public: {
     Tables: {
+      devis_requests: {
+        Row: {
+          city: string | null
+          created_at: string
+          email: string | null
+          free_dimensions: string | null
+          full_name: string | null
+          id: string
+          message: string | null
+          phone: string | null
+          postal_code: string | null
+          project_type: string | null
+          surface_estimate: string | null
+        }
+        Insert: {
+          city?: string | null
+          created_at?: string
+          email?: string | null
+          free_dimensions?: string | null
+          full_name?: string | null
+          id?: string
+          message?: string | null
+          phone?: string | null
+          postal_code?: string | null
+          project_type?: string | null
+          surface_estimate?: string | null
+        }
+        Update: {
+          city?: string | null
+          created_at?: string
+          email?: string | null
+          free_dimensions?: string | null
+          full_name?: string | null
+          id?: string
+          message?: string | null
+          phone?: string | null
+          postal_code?: string | null
+          project_type?: string | null
+          surface_estimate?: string | null
+        }
+        Relationships: []
+      }
+      gallery_categories: {
+        Row: {
+          active: boolean
+          cover_url: string | null
+          created_at: string
+          description: string | null
+          display_order: number
+          id: string
+          slug: string
+          title: string
+        }
+        Insert: {
+          active?: boolean
+          cover_url?: string | null
+          created_at?: string
+          description?: string | null
+          display_order?: number
+          id?: string
+          slug: string
+          title: string
+        }
+        Update: {
+          active?: boolean
+          cover_url?: string | null
+          created_at?: string
+          description?: string | null
+          display_order?: number
+          id?: string
+          slug?: string
+          title?: string
+        }
+        Relationships: []
+      }
+      gallery_photos: {
+        Row: {
+          alt_text: string | null
+          caption: string | null
+          category_id: string | null
+          created_at: string
+          display_order: number
+          id: string
+          url: string
+        }
+        Insert: {
+          alt_text?: string | null
+          caption?: string | null
+          category_id?: string | null
+          created_at?: string
+          display_order?: number
+          id?: string
+          url: string
+        }
+        Update: {
+          alt_text?: string | null
+          caption?: string | null
+          category_id?: string | null
+          created_at?: string
+          display_order?: number
+          id?: string
+          url?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "gallery_photos_category_id_fkey"
+            columns: ["category_id"]
+            isOneToOne: false
+            referencedRelation: "gallery_categories"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      gallery_section: {
+        Row: {
+          id: number
+          subtitle: string | null
+          title: string | null
+          updated_at: string
+        }
+        Insert: {
+          id?: number
+          subtitle?: string | null
+          title?: string | null
+          updated_at?: string
+        }
+        Update: {
+          id?: number
+          subtitle?: string | null
+          title?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
       project_types: {
         Row: {
           active: boolean
@@ -77,6 +211,57 @@ export type Database = {
           tag?: string | null
           title?: string | null
           updated_at?: string
+        }
+        Relationships: []
+      }
+      service_area: {
+        Row: {
+          cta_text: string | null
+          description: string | null
+          id: number
+          tag: string | null
+          title: string | null
+          updated_at: string
+        }
+        Insert: {
+          cta_text?: string | null
+          description?: string | null
+          id?: number
+          tag?: string | null
+          title?: string | null
+          updated_at?: string
+        }
+        Update: {
+          cta_text?: string | null
+          description?: string | null
+          id?: number
+          tag?: string | null
+          title?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      service_area_cities: {
+        Row: {
+          created_at: string
+          display_order: number
+          id: string
+          is_headquarters: boolean
+          name: string
+        }
+        Insert: {
+          created_at?: string
+          display_order?: number
+          id?: string
+          is_headquarters?: boolean
+          name: string
+        }
+        Update: {
+          created_at?: string
+          display_order?: number
+          id?: string
+          is_headquarters?: boolean
+          name?: string
         }
         Relationships: []
       }

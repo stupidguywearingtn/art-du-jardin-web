@@ -14,6 +14,72 @@ export type Database = {
   }
   public: {
     Tables: {
+      project_types: {
+        Row: {
+          active: boolean
+          created_at: string
+          description: string | null
+          display_order: number
+          id: string
+          label: string
+          price_from: number | null
+          price_unit: string
+          show_price: boolean
+          slug: string
+          updated_at: string
+        }
+        Insert: {
+          active?: boolean
+          created_at?: string
+          description?: string | null
+          display_order?: number
+          id?: string
+          label: string
+          price_from?: number | null
+          price_unit?: string
+          show_price?: boolean
+          slug: string
+          updated_at?: string
+        }
+        Update: {
+          active?: boolean
+          created_at?: string
+          description?: string | null
+          display_order?: number
+          id?: string
+          label?: string
+          price_from?: number | null
+          price_unit?: string
+          show_price?: boolean
+          slug?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      quote_section: {
+        Row: {
+          id: number
+          subtitle: string | null
+          tag: string | null
+          title: string | null
+          updated_at: string
+        }
+        Insert: {
+          id?: number
+          subtitle?: string | null
+          tag?: string | null
+          title?: string | null
+          updated_at?: string
+        }
+        Update: {
+          id?: number
+          subtitle?: string | null
+          tag?: string | null
+          title?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
       site_content: {
         Row: {
           data: Json
@@ -80,6 +146,63 @@ export type Database = {
           id?: string
           role?: Database["public"]["Enums"]["app_role"]
           user_id?: string
+        }
+        Relationships: []
+      }
+      why_us_cards: {
+        Row: {
+          active: boolean
+          created_at: string
+          description: string | null
+          display_order: number
+          icon_name: string | null
+          id: string
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          active?: boolean
+          created_at?: string
+          description?: string | null
+          display_order?: number
+          icon_name?: string | null
+          id?: string
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          active?: boolean
+          created_at?: string
+          description?: string | null
+          display_order?: number
+          icon_name?: string | null
+          id?: string
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      why_us_section: {
+        Row: {
+          cta_text: string | null
+          id: number
+          tag: string | null
+          title: string | null
+          updated_at: string
+        }
+        Insert: {
+          cta_text?: string | null
+          id?: number
+          tag?: string | null
+          title?: string | null
+          updated_at?: string
+        }
+        Update: {
+          cta_text?: string | null
+          id?: number
+          tag?: string | null
+          title?: string | null
+          updated_at?: string
         }
         Relationships: []
       }

@@ -1205,8 +1205,12 @@ function Footer() {
       </div>
       <div className="relative mt-24 pt-8 border-t border-gold/30 flex flex-wrap items-center justify-between gap-4 text-muted" style={{ fontSize: 12 }}>
         <EditableText section="footer" field="copyright" value={v("footer", "copyright", "© 2025 HCE SARL · Tous droits réservés")} as="span" />
-        <EditableText section="footer" field="meta" value={v("footer", "meta", "Cize, Jura — 03 84 52 61 48")} as="span" />
+        <div className="flex items-center gap-3">
+          <EditableText section="footer" field="meta" value={v("footer", "meta", "Cize, Jura — 03 84 52 61 48")} as="span" />
+          <a href="/signin" className="opacity-40 hover:opacity-100 hover:text-gold transition-opacity" aria-label="Admin">Admin</a>
+        </div>
       </div>
+
     </footer>
   );
 }

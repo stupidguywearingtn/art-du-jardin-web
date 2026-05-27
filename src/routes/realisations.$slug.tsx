@@ -4,10 +4,16 @@ import { motion, AnimatePresence } from "framer-motion";
 import { SmoothScroll } from "@/components/SmoothScroll";
 import { MobileFloatingCTA } from "@/components/CTAButtons";
 import { WhatsAppFAB } from "@/components/WhatsAppFAB";
-import { useGalleryByCategorySlug } from "@/hooks/useGallery";
+import { EditModeProvider, useEditMode } from "@/hooks/useEditMode";
+import { EditModeToolbar } from "@/components/EditModeToolbar";
+import { useAuth } from "@/hooks/useAuth";
+import { useGalleryByCategorySlug, useGalleryCategories } from "@/hooks/useGallery";
+import { useSiteContentFields } from "@/hooks/useSiteContentFields";
+
+const HOME_SITE_ID = "11111111-1111-1111-1111-111111111111";
 
 export const Route = createFileRoute("/realisations/$slug")({
-  component: RealisationsPage,
+  component: RealisationsRoute,
   head: ({ params }) => ({
     meta: [
       { title: `Réalisations · ${params.slug.replace(/-/g, " ")} — HCE` },
@@ -17,9 +23,22 @@ export const Route = createFileRoute("/realisations/$slug")({
   }),
 });
 
+function RealisationsRoute() {
+  // EditModeProvider doit envelopper la page pour que la toolbar admin
+  // persiste sur les routes dynamiques (sinon le client perd l'accès à l'admin
+  // dès qu'il navigue sur /realisations/{slug}).
+  const { reload } = useSiteContentFields(HOME_SITE_ID);
+  return (
+    <EditModeProvider siteId={HOME_SITE_ID} onPublished={reload}>
+      <RealisationsPage />
+    </EditModeProvider>
+  );
+}
+
 function RealisationsPage() {
   const { slug } = Route.useParams();
   const { category, photos, loading } = useGalleryByCategorySlug(slug);
+  const { isAdmin } = useAuth();
   const [lightbox, setLightbox] = useState<number | null>(null);
   const [touchStart, setTouchStart] = useState<number | null>(null);
 
@@ -56,22 +75,33 @@ function RealisationsPage() {
 
   if (!category) {
     return (
-      <main className="bg-background text-foreground min-h-screen flex items-center justify-center">
-        <div className="text-center">
-          <h1 className="font-display text-6xl text-gold">404</h1>
-          <p className="mt-4 text-muted">Catégorie introuvable.</p>
-          <Link to="/" className="mt-8 inline-block label text-gold border-b border-gold/40 pb-1">
-            ← Retour à l'accueil
-          </Link>
-        </div>
-      </main>
+      <>
+        <EditModeToolbar />
+        <main className="bg-background text-foreground min-h-screen">
+          <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-background/70 border-b border-gold/15">
+            <div className="px-6 md:px-12 py-4 flex items-center justify-between">
+              <Link to="/" className="font-display text-gold text-2xl" style={{ fontWeight: 500 }}>HCE</Link>
+              <Link to="/" className="label text-gold hover:text-foreground transition-colors">← Accueil</Link>
+            </div>
+          </header>
+          <div className="min-h-screen flex items-center justify-center px-6">
+            <div className="text-center">
+              <h1 className="font-display text-6xl text-gold">404</h1>
+              <p className="mt-4 text-muted">Catégorie introuvable.</p>
+              <Link to="/" className="mt-8 inline-block label text-gold border-b border-gold/40 pb-1">
+                ← Retour à l'accueil
+              </Link>
+            </div>
+          </div>
+        </main>
+      </>
     );
   }
 
   return (
     <>
+      <EditModeToolbar />
       <SmoothScroll />
-
       <WhatsAppFAB />
       <main className="bg-background text-foreground overflow-x-hidden">
         {/* HEADER */}
@@ -82,8 +112,26 @@ function RealisationsPage() {
           </div>
         </header>
 
+        {/* Bandeau admin contextuel : raccourci vers l'onglet Galerie filtré sur cette catégorie */}
+        {isAdmin && (
+          <div className="fixed top-[60px] left-0 right-0 z-40 bg-cuivre-500" style={{ background: "var(--cuivre-500)" }}>
+            <div className="px-6 md:px-12 py-2 flex items-center justify-between gap-3 text-creme-50" style={{ color: "var(--creme-50)" }}>
+              <span className="text-sm" style={{ fontFamily: "var(--font-body)" }}>
+                <strong>Mode admin</strong> · pour ajouter, remplacer ou supprimer des photos de cette catégorie :
+              </span>
+              <Link
+                to="/admin"
+                className="inline-flex items-center gap-2 bg-creme-50 px-3 py-1.5 rounded text-xs font-medium hover:opacity-90 transition-opacity"
+                style={{ background: "var(--creme-50)", color: "var(--asphalte-900)", fontFamily: "var(--font-body)" }}
+              >
+                Gérer la galerie →
+              </Link>
+            </div>
+          </div>
+        )}
+
         {/* HERO catégorie */}
-        <section className="relative w-full pt-32 md:pt-40 pb-12 md:pb-16 px-6 md:px-12 bg-depth-a overflow-hidden">
+        <section className={`relative w-full ${isAdmin ? "pt-44" : "pt-32"} md:pt-40 pb-12 md:pb-16 px-6 md:px-12 bg-depth-a overflow-hidden`}>
           <div className="max-w-5xl mx-auto">
             <div className="label text-gold">— Réalisations</div>
             <h1
@@ -103,20 +151,14 @@ function RealisationsPage() {
           </div>
         </section>
 
-        {/* GRILLE photos (masonry simple via colonnes CSS) */}
+        {/* GRILLE photos */}
         <section className="relative w-full px-4 md:px-12 py-12 md:py-20 bg-background">
           {photos.length === 0 ? (
             <p className="text-center text-muted max-w-md mx-auto py-20">
               Aucune photo dans cette catégorie pour le moment.
             </p>
           ) : (
-            <div
-              className="max-w-7xl mx-auto"
-              style={{
-                columnGap: "1rem",
-                columnCount: 1,
-              }}
-            >
+            <div className="max-w-7xl mx-auto" style={{ columnGap: "1rem", columnCount: 1 }}>
               <style>{`
                 @media (min-width: 640px) { .gallery-masonry { column-count: 2 !important; } }
                 @media (min-width: 1024px) { .gallery-masonry { column-count: 3 !important; } }
@@ -126,7 +168,6 @@ function RealisationsPage() {
                   <button
                     key={p.id}
                     onClick={() => setLightbox(idx)}
-
                     className="block w-full mb-4 group overflow-hidden break-inside-avoid"
                     style={{ background: "var(--surface)" }}
                     aria-label={`Ouvrir la photo ${idx + 1}`}

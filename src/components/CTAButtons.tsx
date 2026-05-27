@@ -1,4 +1,7 @@
 import { useEffect, useState, useRef } from "react";
+import { useSiteContentFields } from "@/hooks/useSiteContentFields";
+
+const HOME_SITE_ID = "11111111-1111-1111-1111-111111111111";
 
 const PHONE = "0384526148";
 const PHONE_DISPLAY = "03 84 52 61 48";
@@ -65,17 +68,21 @@ export function CTASecondary({ children, href = `tel:${PHONE}`, light = false, c
 
 /* Bandeau sobre — respiration entre sections (fond asphalte, accent cuivre fin) */
 export function CTABanner() {
+  const { get } = useSiteContentFields(HOME_SITE_ID);
+  const text = get("cta_banner", "text", "Un projet en tête ? Devis détaillé sous 48h, visite gratuite.");
+  const primaryLabel = get("cta_banner", "primary_label", "Demander mon devis");
+
   return (
     <section className="relative w-full px-6 py-10 md:py-14 text-center" style={{ background: "var(--asphalte-900)" }}>
       <p
         className="font-display italic max-w-3xl mx-auto"
         style={{ color: "var(--creme-50)", fontSize: "clamp(18px, 2.2vw, 26px)", lineHeight: 1.4, fontWeight: 300 }}
       >
-        Un projet en tête ? Devis détaillé sous 48h, visite gratuite.
+        {text}
       </p>
       <div aria-hidden className="mx-auto my-6" style={{ width: 28, height: 1, background: "var(--cuivre-500)" }} />
       <div className="flex flex-wrap gap-3 justify-center">
-        <CTAPrimary>Demander mon devis</CTAPrimary>
+        <CTAPrimary>{primaryLabel}</CTAPrimary>
         <a
           href={`tel:${PHONE}`}
 

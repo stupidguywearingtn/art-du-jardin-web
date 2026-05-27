@@ -4,13 +4,17 @@ import { useAuth } from "@/hooks/useAuth";
 import { reloadSiteContent } from "@/hooks/useSiteContent";
 import { useSiteContentFields } from "@/hooks/useSiteContentFields";
 import { supabase } from "@/integrations/supabase/client";
+import {
+  ensureWhyUsSeeded, ensureServiceAreaSeeded, ensureGallerySectionSeeded,
+  ensureQuoteSectionSeeded, ensureProjectTypesSeeded, ensureGallerySeeded,
+} from "@/integrations/supabase/seed";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { toast } from "sonner";
-import { Trash2, Plus, Upload, LogOut, RefreshCw, GripVertical, ArrowUp, ArrowDown } from "lucide-react";
+import { Trash2, Plus, Upload, LogOut, RefreshCw, ArrowUp, ArrowDown, Sparkles } from "lucide-react";
 
 export const Route = createFileRoute("/admin")({
   component: AdminPage,
@@ -28,6 +32,34 @@ const HOME_SITE_ID = "11111111-1111-1111-1111-111111111111";
      2. si erreur → toast.error et on n'avance pas
      3. si succès → toast.success + on rafraîchit le cache lecture
    ============================================================ */
+
+function SeedAllButton() {
+  const [seeding, setSeeding] = useState(false);
+  const run = async () => {
+    if (seeding) return;
+    setSeeding(true);
+    try {
+      await Promise.all([
+        ensureWhyUsSeeded(),
+        ensureServiceAreaSeeded(),
+        ensureGallerySectionSeeded(),
+        ensureQuoteSectionSeeded(),
+        ensureProjectTypesSeeded(),
+        ensureGallerySeeded(),
+      ]);
+      toast.success("Toutes les sections ont été initialisées avec les valeurs par défaut.");
+    } catch (e) {
+      toast.error(`Erreur d'initialisation : ${(e as Error).message}`);
+    }
+    setSeeding(false);
+  };
+  return (
+    <Button variant="outline" size="sm" onClick={run} disabled={seeding} title="Pré-remplit toutes les tables vides avec les valeurs par défaut">
+      <Sparkles className="w-4 h-4 mr-2" />
+      {seeding ? "Init…" : "Initialiser"}
+    </Button>
+  );
+}
 
 async function saveField(section: string, field: string, value: string): Promise<boolean> {
   const { error } = await supabase
@@ -105,7 +137,8 @@ function AdminUI({ onSignOut, email }: { onSignOut: () => void; email: string })
             <h1 className="font-display text-xl">Admin HCE</h1>
             <p className="text-xs text-muted-foreground">{email}</p>
           </div>
-          <div className="flex gap-2">
+          <div className="flex gap-2 items-center">
+            <SeedAllButton />
             <Link to="/" className="text-sm underline self-center">Voir le site</Link>
             <Button variant="outline" size="sm" onClick={onSignOut}><LogOut className="w-4 h-4 mr-2" />Déconnexion</Button>
           </div>
@@ -121,6 +154,8 @@ function AdminUI({ onSignOut, email }: { onSignOut: () => void; email: string })
             <TabsTrigger value="gallery">Galerie</TabsTrigger>
             <TabsTrigger value="quote">Simulateur devis</TabsTrigger>
             <TabsTrigger value="types">Types de projet</TabsTrigger>
+            <TabsTrigger value="faq">FAQ</TabsTrigger>
+            <TabsTrigger value="marquee">Bandeau défilant</TabsTrigger>
             <TabsTrigger value="requests">Demandes</TabsTrigger>
             <TabsTrigger value="contact">Coordonnées</TabsTrigger>
             <TabsTrigger value="figures">Chiffres-clés</TabsTrigger>
@@ -132,6 +167,8 @@ function AdminUI({ onSignOut, email }: { onSignOut: () => void; email: string })
           <TabsContent value="gallery" className="mt-6"><GalleryEditor /></TabsContent>
           <TabsContent value="quote" className="mt-6"><QuoteSectionEditor /></TabsContent>
           <TabsContent value="types" className="mt-6"><ProjectTypesEditor /></TabsContent>
+          <TabsContent value="faq" className="mt-6"><FaqEditor /></TabsContent>
+          <TabsContent value="marquee" className="mt-6"><MarqueeEditor /></TabsContent>
           <TabsContent value="requests" className="mt-6"><DevisRequestsList /></TabsContent>
           <TabsContent value="contact" className="mt-6"><ContactEditor /></TabsContent>
           <TabsContent value="figures" className="mt-6"><FiguresEditor /></TabsContent>
@@ -152,7 +189,12 @@ function HeroEditor() {
     badge: get("hero", "badge", "Jura & Ain — depuis 2012"),
     tagline: get("hero", "tagline", "Depuis 2012"),
   });
+  const [banner, setBanner] = useState({
+    text: get("cta_banner", "text", "Un projet en tête ? Devis détaillé sous 48h, visite gratuite."),
+    primary_label: get("cta_banner", "primary_label", "Demander mon devis"),
+  });
   const [saving, setSaving] = useState(false);
+  const [savingBanner, setSavingBanner] = useState(false);
 
   useEffect(() => {
     setHero({
@@ -160,6 +202,10 @@ function HeroEditor() {
       line2: get("hero", "line2", "Parkings · Terrassement"),
       badge: get("hero", "badge", "Jura & Ain — depuis 2012"),
       tagline: get("hero", "tagline", "Depuis 2012"),
+    });
+    setBanner({
+      text: get("cta_banner", "text", "Un projet en tête ? Devis détaillé sous 48h, visite gratuite."),
+      primary_label: get("cta_banner", "primary_label", "Demander mon devis"),
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -180,16 +226,43 @@ function HeroEditor() {
     setSaving(false);
   };
 
+  const saveBanner = async () => {
+    setSavingBanner(true);
+    const ok = await saveMany([
+      { section: "cta_banner", field: "text", value: banner.text },
+      { section: "cta_banner", field: "primary_label", value: banner.primary_label },
+    ]);
+    if (ok) {
+      toast.success("Bande CTA enregistrée");
+      await reload();
+    }
+    setSavingBanner(false);
+  };
+
   return (
-    <div className="space-y-4 bg-card p-6 rounded-xl border border-border">
-      <div className="text-xs text-muted-foreground -mt-2 mb-2">
-        ✅ Ces champs sont lus en direct par la page d'accueil (table <code>site_content_fields</code>).
+    <div className="space-y-6">
+      <div className="space-y-4 bg-card p-6 rounded-xl border border-border">
+        <h3 className="font-display text-lg">Hero (vidéo + titre principal)</h3>
+        <div className="text-xs text-muted-foreground">
+          ✅ Ces champs sont lus en direct par la home (table <code>site_content_fields</code>).
+        </div>
+        <div><Label>Titre — ligne 1</Label><Input value={hero.line1} onChange={(e) => setHero({ ...hero, line1: e.target.value })} /></div>
+        <div><Label>Titre — ligne 2</Label><Input value={hero.line2} onChange={(e) => setHero({ ...hero, line2: e.target.value })} /></div>
+        <div><Label>Badge (sous le titre)</Label><Input value={hero.badge} onChange={(e) => setHero({ ...hero, badge: e.target.value })} /></div>
+        <div><Label>Tagline (coin droit)</Label><Input value={hero.tagline} onChange={(e) => setHero({ ...hero, tagline: e.target.value })} /></div>
+        <Button onClick={save} disabled={saving}>{saving ? "Enregistrement…" : "Enregistrer le hero"}</Button>
       </div>
-      <div><Label>Titre — ligne 1</Label><Input value={hero.line1} onChange={(e) => setHero({ ...hero, line1: e.target.value })} /></div>
-      <div><Label>Titre — ligne 2</Label><Input value={hero.line2} onChange={(e) => setHero({ ...hero, line2: e.target.value })} /></div>
-      <div><Label>Badge (sous le titre)</Label><Input value={hero.badge} onChange={(e) => setHero({ ...hero, badge: e.target.value })} /></div>
-      <div><Label>Tagline (coin droit)</Label><Input value={hero.tagline} onChange={(e) => setHero({ ...hero, tagline: e.target.value })} /></div>
-      <Button onClick={save} disabled={saving}>{saving ? "Enregistrement…" : "Enregistrer"}</Button>
+
+      <div className="space-y-4 bg-card p-6 rounded-xl border border-border">
+        <h3 className="font-display text-lg">Bande CTA (sous les services)</h3>
+        <p className="text-xs text-muted-foreground">
+          Bande sombre entre Services et Avant/Après, avec un texte d'accroche
+          et un bouton vers le simulateur.
+        </p>
+        <div><Label>Texte (italique crème)</Label><Textarea rows={2} value={banner.text} onChange={(e) => setBanner({ ...banner, text: e.target.value })} /></div>
+        <div><Label>Libellé du bouton primaire</Label><Input value={banner.primary_label} onChange={(e) => setBanner({ ...banner, primary_label: e.target.value })} /></div>
+        <Button onClick={saveBanner} disabled={savingBanner}>{savingBanner ? "Enregistrement…" : "Enregistrer la bande CTA"}</Button>
+      </div>
     </div>
   );
 }
@@ -273,6 +346,7 @@ function GalleryEditor() {
 
   const load = useCallback(async () => {
     setLoading(true);
+    await ensureGallerySeeded();
     const [c, p] = await Promise.all([
       supabase.from("gallery_categories").select("*").order("display_order"),
       supabase.from("gallery_photos").select("*").order("display_order"),
@@ -312,11 +386,11 @@ function GalleryEditor() {
         <GallerySectionHeaderEditor />
         <div className="bg-card p-6 rounded-xl border border-border">
           <p className="text-muted-foreground">
-            Aucune catégorie en base. Applique les migrations Supabase
-            (<code>gallery_categories</code> + <code>gallery_photos</code>) pour activer l'édition complète.
-            En attendant, le site affiche un dataset de fallback statique côté code.
+            Le seed automatique a échoué — vérifie tes droits admin sur Supabase
+            (RLS doit autoriser un compte <code>admin</code> à insérer dans
+            <code className="mx-1">gallery_categories</code>).
           </p>
-          <Button className="mt-4" variant="outline" onClick={load}><RefreshCw className="w-4 h-4 mr-2" />Recharger</Button>
+          <Button className="mt-4" variant="outline" onClick={load}><RefreshCw className="w-4 h-4 mr-2" />Réessayer</Button>
         </div>
       </div>
     );
@@ -526,6 +600,7 @@ function ProjectTypesEditor() {
 
   const load = useCallback(async () => {
     setLoading(true);
+    await ensureProjectTypesSeeded();
     const { data, error } = await supabase.from("project_types").select("*").order("display_order");
     if (error) toast.error(error.message);
     setItems((data ?? []) as PType[]);
@@ -800,6 +875,7 @@ function WhyUsEditor() {
 
   const load = useCallback(async () => {
     setLoading(true);
+    await ensureWhyUsSeeded(); // auto-seed si les tables sont vides
     const [s, c] = await Promise.all([
       supabase.from("why_us_section").select("*").eq("id", 1).maybeSingle(),
       supabase.from("why_us_cards").select("*").order("display_order"),
@@ -840,15 +916,6 @@ function WhyUsEditor() {
   };
 
   if (loading) return <div className="text-muted-foreground">Chargement…</div>;
-  if (cards.length === 0 && !section.tag) {
-    return (
-      <div className="bg-card p-6 rounded-xl border border-border text-muted-foreground">
-        Table <code>why_us_*</code> non initialisée. Applique la migration
-        <code className="mx-1">20260527160000_editable_sections.sql</code> via Supabase.
-        En attendant, le site public utilise un fallback statique.
-      </div>
-    );
-  }
 
   return (
     <div className="space-y-6">
@@ -916,6 +983,7 @@ function ServiceAreaEditor() {
 
   const load = useCallback(async () => {
     setLoading(true);
+    await ensureServiceAreaSeeded();
     const [s, c] = await Promise.all([
       supabase.from("service_area").select("*").eq("id", 1).maybeSingle(),
       supabase.from("service_area_cities").select("*").order("display_order"),
@@ -955,13 +1023,6 @@ function ServiceAreaEditor() {
   };
 
   if (loading) return <div className="text-muted-foreground">Chargement…</div>;
-  if (cities.length === 0 && !section.tag) {
-    return (
-      <div className="bg-card p-6 rounded-xl border border-border text-muted-foreground">
-        Tables <code>service_area*</code> non initialisées. Le site utilise un fallback statique en attendant.
-      </div>
-    );
-  }
 
   return (
     <div className="space-y-6">
@@ -1009,9 +1070,11 @@ function GallerySectionHeaderEditor() {
   const [saving, setSaving] = useState(false);
 
   useEffect(() => {
-    supabase.from("gallery_section").select("*").eq("id", 1).maybeSingle().then(({ data: row }) => {
+    (async () => {
+      await ensureGallerySectionSeeded();
+      const { data: row } = await supabase.from("gallery_section").select("*").eq("id", 1).maybeSingle();
       if (row) setData({ subtitle: row.subtitle ?? "", title: row.title ?? "" });
-    });
+    })();
   }, []);
 
   const save = async () => {
@@ -1043,9 +1106,11 @@ function QuoteSectionEditor() {
   const [saving, setSaving] = useState(false);
 
   useEffect(() => {
-    supabase.from("quote_section").select("*").eq("id", 1).maybeSingle().then(({ data: row }) => {
+    (async () => {
+      await ensureQuoteSectionSeeded();
+      const { data: row } = await supabase.from("quote_section").select("*").eq("id", 1).maybeSingle();
       if (row) setData({ tag: row.tag ?? "", title: row.title ?? "", subtitle: row.subtitle ?? "" });
-    });
+    })();
   }, []);
 
   const save = async () => {
@@ -1066,6 +1131,158 @@ function QuoteSectionEditor() {
       <div><Label>Titre</Label><Input value={data.title} onChange={(e) => setData({ ...data, title: e.target.value })} /></div>
       <div><Label>Sous-titre (italique)</Label><Input value={data.subtitle} onChange={(e) => setData({ ...data, subtitle: e.target.value })} /></div>
       <Button onClick={save} disabled={saving}>{saving ? "…" : "Enregistrer l'en-tête"}</Button>
+    </div>
+  );
+}
+
+/* ============================================================
+   FAQ EDITOR — relié à site_content (clé "faqs", liste JSON)
+   ============================================================ */
+type FaqItem = { q: string; a: string };
+
+const DEFAULT_FAQS: FaqItem[] = [
+  { q: "Sous combien de temps recevrai-je mon devis ?", a: "Après visite sur site, nous vous transmettons un devis détaillé sous 48 heures ouvrées, sans engagement." },
+  { q: "L'enrobé peut-il être posé toute l'année ?", a: "L'enrobé à chaud requiert des températures supérieures à 5°C et un sol sec. Nous intervenons généralement de mars à novembre." },
+  { q: "Quelle est la durée de vie d'un enrobé HCE ?", a: "Un enrobé bien préparé et compacté tient 20 à 30 ans selon l'usage, sans entretien lourd." },
+  { q: "Faut-il un permis pour refaire ma cour ?", a: "Pour un simple revêtement à l'identique, aucune autorisation n'est nécessaire. Nous vous conseillons en cas de doute." },
+  { q: "Travaillez-vous pour les particuliers et les professionnels ?", a: "Oui : cours privées, allées, parkings d'entreprise, voiries de copropriété, plateformes industrielles." },
+  { q: "Combien de temps dure un chantier type ?", a: "Une cour standard de 100 à 200 m² se réalise en 2 à 4 jours, préparation comprise." },
+];
+
+function FaqEditor() {
+  const [items, setItems] = useState<FaqItem[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  const load = useCallback(async () => {
+    setLoading(true);
+    const { data } = await supabase.from("site_content").select("data").eq("key", "faqs").maybeSingle();
+    const list = Array.isArray(data?.data) ? (data!.data as FaqItem[]) : DEFAULT_FAQS;
+    setItems(list);
+    setLoading(false);
+  }, []);
+  useEffect(() => { load(); }, [load]);
+
+  const save = async (next: FaqItem[]) => {
+    const { error } = await supabase.from("site_content").upsert({ key: "faqs", data: next }, { onConflict: "key" });
+    if (error) { toast.error(error.message); return; }
+    await reloadSiteContent();
+    toast.success("FAQ enregistrée");
+    setItems(next);
+  };
+
+  const update = (i: number, patch: Partial<FaqItem>) => {
+    const next = items.map((it, idx) => idx === i ? { ...it, ...patch } : it);
+    setItems(next);
+  };
+  const move = (i: number, dir: -1 | 1) => {
+    const j = i + dir;
+    if (j < 0 || j >= items.length) return;
+    const next = [...items];
+    [next[i], next[j]] = [next[j], next[i]];
+    save(next);
+  };
+  const remove = (i: number) => {
+    if (!confirm("Supprimer cette question ?")) return;
+    save(items.filter((_, idx) => idx !== i));
+  };
+  const add = () => {
+    save([...items, { q: "Nouvelle question", a: "Réponse à compléter." }]);
+  };
+
+  if (loading) return <div className="text-muted-foreground">Chargement…</div>;
+
+  return (
+    <div className="space-y-3">
+      <div className="text-xs text-muted-foreground">
+        Les FAQ sont stockées en JSON dans <code>site_content</code> sous la clé <code>faqs</code>.
+        Toute modif est immédiatement publiée.
+      </div>
+      {items.map((f, i) => (
+        <div key={i} className="bg-card p-5 rounded-xl border border-border space-y-3">
+          <div className="flex items-center justify-between">
+            <span className="text-xs text-muted-foreground">Question #{i + 1}</span>
+            <div className="flex gap-1">
+              <button onClick={() => move(i, -1)} disabled={i === 0} className="p-1.5 rounded border border-border hover:bg-muted disabled:opacity-30"><ArrowUp className="w-3 h-3" /></button>
+              <button onClick={() => move(i, 1)} disabled={i === items.length - 1} className="p-1.5 rounded border border-border hover:bg-muted disabled:opacity-30"><ArrowDown className="w-3 h-3" /></button>
+              <Button variant="ghost" size="sm" onClick={() => remove(i)}><Trash2 className="w-4 h-4" /></Button>
+            </div>
+          </div>
+          <div><Label>Question</Label><Input value={f.q} onChange={(e) => update(i, { q: e.target.value })} onBlur={() => save(items)} /></div>
+          <div><Label>Réponse</Label><Textarea rows={3} value={f.a} onChange={(e) => update(i, { a: e.target.value })} onBlur={() => save(items)} /></div>
+        </div>
+      ))}
+      <div className="flex gap-2">
+        <Button variant="outline" onClick={add}><Plus className="w-4 h-4 mr-1" />Ajouter une FAQ</Button>
+        <Button onClick={() => save(items)}>Forcer l'enregistrement</Button>
+      </div>
+    </div>
+  );
+}
+
+/* ============================================================
+   MARQUEE EDITOR — bandeau défilant (items dans site_content)
+   ============================================================ */
+const DEFAULT_MARQUEE = [
+  "1000+ chantiers livrés",
+  "14 années d'expérience",
+  "Jura · Ain",
+  "Devis sous 48h",
+  "Garantie décennale",
+  "Enrobé à chaud",
+  "Visite gratuite",
+];
+
+function MarqueeEditor() {
+  const [items, setItems] = useState<string[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  const load = useCallback(async () => {
+    setLoading(true);
+    const { data } = await supabase.from("site_content").select("data").eq("key", "marquee_items").maybeSingle();
+    const list = Array.isArray(data?.data) ? (data!.data as string[]) : DEFAULT_MARQUEE;
+    setItems(list);
+    setLoading(false);
+  }, []);
+  useEffect(() => { load(); }, [load]);
+
+  const save = async (next: string[]) => {
+    const { error } = await supabase.from("site_content").upsert({ key: "marquee_items", data: next }, { onConflict: "key" });
+    if (error) { toast.error(error.message); return; }
+    await reloadSiteContent();
+    toast.success("Bandeau enregistré");
+    setItems(next);
+  };
+
+  const updateItem = (i: number, value: string) => {
+    setItems(items.map((it, idx) => idx === i ? value : it));
+  };
+  const remove = (i: number) => save(items.filter((_, idx) => idx !== i));
+  const add = () => save([...items, "Nouvelle accroche"]);
+  const move = (i: number, dir: -1 | 1) => {
+    const j = i + dir;
+    if (j < 0 || j >= items.length) return;
+    const next = [...items];
+    [next[i], next[j]] = [next[j], next[i]];
+    save(next);
+  };
+
+  if (loading) return <div className="text-muted-foreground">Chargement…</div>;
+
+  return (
+    <div className="space-y-3">
+      <div className="bg-card p-4 rounded-xl border border-border text-sm text-muted-foreground">
+        Items affichés en boucle dans le bandeau défilant entre Galerie et FAQ.
+        Garde des phrases courtes (4–6 mots), elles défilent automatiquement.
+      </div>
+      {items.map((it, i) => (
+        <div key={i} className="bg-card p-3 rounded-xl border border-border flex gap-2 items-center">
+          <Input value={it} onChange={(e) => updateItem(i, e.target.value)} onBlur={() => save(items)} />
+          <button onClick={() => move(i, -1)} disabled={i === 0} className="p-1.5 rounded border border-border hover:bg-muted disabled:opacity-30"><ArrowUp className="w-3 h-3" /></button>
+          <button onClick={() => move(i, 1)} disabled={i === items.length - 1} className="p-1.5 rounded border border-border hover:bg-muted disabled:opacity-30"><ArrowDown className="w-3 h-3" /></button>
+          <Button variant="ghost" size="sm" onClick={() => remove(i)}><Trash2 className="w-4 h-4" /></Button>
+        </div>
+      ))}
+      <Button variant="outline" onClick={add}><Plus className="w-4 h-4 mr-1" />Ajouter un item</Button>
     </div>
   );
 }

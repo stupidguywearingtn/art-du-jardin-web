@@ -418,7 +418,8 @@ function SectionDivider({ variant = "minimal" }: { variant?: "minimal" | "marque
  * CSS-only animation; pause si prefers-reduced-motion.
  */
 function MarqueeStats() {
-  const items = [
+  const { get } = useSiteContent();
+  const DEFAULT_ITEMS = [
     "1000+ chantiers livrés",
     "14 années d'expérience",
     "Jura · Ain",
@@ -427,6 +428,7 @@ function MarqueeStats() {
     "Enrobé à chaud",
     "Visite gratuite",
   ];
+  const items = get("marquee_items", DEFAULT_ITEMS) as string[];
   const row = [...items, ...items];
   return (
     <div

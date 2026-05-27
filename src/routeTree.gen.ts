@@ -18,6 +18,7 @@ import { Route as ServicesSlugRouteImport } from './routes/services.$slug'
 import { Route as RealisationsSlugRouteImport } from './routes/realisations.$slug'
 import { Route as EmailUnsubscribeRouteImport } from './routes/email/unsubscribe'
 import { Route as LovableEmailSuppressionRouteImport } from './routes/lovable/email/suppression'
+import { Route as ApiPublicDevisRouteImport } from './routes/api/public/devis'
 import { Route as LovableEmailTransactionalSendRouteImport } from './routes/lovable/email/transactional/send'
 import { Route as LovableEmailTransactionalPreviewRouteImport } from './routes/lovable/email/transactional/preview'
 import { Route as LovableEmailQueueProcessRouteImport } from './routes/lovable/email/queue/process'
@@ -67,6 +68,11 @@ const LovableEmailSuppressionRoute = LovableEmailSuppressionRouteImport.update({
   path: '/lovable/email/suppression',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPublicDevisRoute = ApiPublicDevisRouteImport.update({
+  id: '/api/public/devis',
+  path: '/api/public/devis',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const LovableEmailTransactionalSendRoute =
   LovableEmailTransactionalSendRouteImport.update({
     id: '/lovable/email/transactional/send',
@@ -95,6 +101,7 @@ export interface FileRoutesByFullPath {
   '/realisations/$slug': typeof RealisationsSlugRoute
   '/services/$slug': typeof ServicesSlugRoute
   '/services/garantie-sav': typeof ServicesGarantieSavRoute
+  '/api/public/devis': typeof ApiPublicDevisRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
   '/lovable/email/queue/process': typeof LovableEmailQueueProcessRoute
   '/lovable/email/transactional/preview': typeof LovableEmailTransactionalPreviewRoute
@@ -109,6 +116,7 @@ export interface FileRoutesByTo {
   '/realisations/$slug': typeof RealisationsSlugRoute
   '/services/$slug': typeof ServicesSlugRoute
   '/services/garantie-sav': typeof ServicesGarantieSavRoute
+  '/api/public/devis': typeof ApiPublicDevisRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
   '/lovable/email/queue/process': typeof LovableEmailQueueProcessRoute
   '/lovable/email/transactional/preview': typeof LovableEmailTransactionalPreviewRoute
@@ -124,6 +132,7 @@ export interface FileRoutesById {
   '/realisations/$slug': typeof RealisationsSlugRoute
   '/services/$slug': typeof ServicesSlugRoute
   '/services/garantie-sav': typeof ServicesGarantieSavRoute
+  '/api/public/devis': typeof ApiPublicDevisRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
   '/lovable/email/queue/process': typeof LovableEmailQueueProcessRoute
   '/lovable/email/transactional/preview': typeof LovableEmailTransactionalPreviewRoute
@@ -140,6 +149,7 @@ export interface FileRouteTypes {
     | '/realisations/$slug'
     | '/services/$slug'
     | '/services/garantie-sav'
+    | '/api/public/devis'
     | '/lovable/email/suppression'
     | '/lovable/email/queue/process'
     | '/lovable/email/transactional/preview'
@@ -154,6 +164,7 @@ export interface FileRouteTypes {
     | '/realisations/$slug'
     | '/services/$slug'
     | '/services/garantie-sav'
+    | '/api/public/devis'
     | '/lovable/email/suppression'
     | '/lovable/email/queue/process'
     | '/lovable/email/transactional/preview'
@@ -168,6 +179,7 @@ export interface FileRouteTypes {
     | '/realisations/$slug'
     | '/services/$slug'
     | '/services/garantie-sav'
+    | '/api/public/devis'
     | '/lovable/email/suppression'
     | '/lovable/email/queue/process'
     | '/lovable/email/transactional/preview'
@@ -183,6 +195,7 @@ export interface RootRouteChildren {
   RealisationsSlugRoute: typeof RealisationsSlugRoute
   ServicesSlugRoute: typeof ServicesSlugRoute
   ServicesGarantieSavRoute: typeof ServicesGarantieSavRoute
+  ApiPublicDevisRoute: typeof ApiPublicDevisRoute
   LovableEmailSuppressionRoute: typeof LovableEmailSuppressionRoute
   LovableEmailQueueProcessRoute: typeof LovableEmailQueueProcessRoute
   LovableEmailTransactionalPreviewRoute: typeof LovableEmailTransactionalPreviewRoute
@@ -254,6 +267,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LovableEmailSuppressionRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/devis': {
+      id: '/api/public/devis'
+      path: '/api/public/devis'
+      fullPath: '/api/public/devis'
+      preLoaderRoute: typeof ApiPublicDevisRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/lovable/email/transactional/send': {
       id: '/lovable/email/transactional/send'
       path: '/lovable/email/transactional/send'
@@ -287,6 +307,7 @@ const rootRouteChildren: RootRouteChildren = {
   RealisationsSlugRoute: RealisationsSlugRoute,
   ServicesSlugRoute: ServicesSlugRoute,
   ServicesGarantieSavRoute: ServicesGarantieSavRoute,
+  ApiPublicDevisRoute: ApiPublicDevisRoute,
   LovableEmailSuppressionRoute: LovableEmailSuppressionRoute,
   LovableEmailQueueProcessRoute: LovableEmailQueueProcessRoute,
   LovableEmailTransactionalPreviewRoute: LovableEmailTransactionalPreviewRoute,

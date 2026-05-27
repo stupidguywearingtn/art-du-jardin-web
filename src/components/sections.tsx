@@ -413,20 +413,19 @@ async function submitDevis(q: QuoteData): Promise<boolean> {
     city: q.ville || null,
   };
 
-  // 1) archive en base (best effort, ne bloque pas)
-  supabase.from("devis_requests").insert(payload).then(({ error }) => {
-    if (error) console.warn("devis_requests insert failed:", error.message);
-  });
-
-  // 2) envoi email via edge function send-devis (chemin principal)
   try {
-    const { data, error } = await supabase.functions.invoke("send-devis", { body: payload });
-    if (error || !data?.ok) {
-      throw new Error(error?.message || data?.error || "Edge function error");
+    const res = await fetch("/api/public/devis", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    });
+    if (!res.ok) {
+      const j = await res.json().catch(() => ({}));
+      throw new Error(j?.error || `HTTP ${res.status}`);
     }
     return true;
   } catch (e: unknown) {
-    // 3) fallback mailto si l'edge function n'est pas déployée
+    // Fallback mailto si la route serveur échoue
     const surfaceStr = surface !== null ? `${surface} m²` : (q.freeDimensions || "non précisée");
     const body = encodeURIComponent(
       `Demande de devis HCE\n\nType : ${q.typeLabel}\nSurface estimée : ${surfaceStr}\n\n` +
@@ -434,11 +433,12 @@ async function submitDevis(q: QuoteData): Promise<boolean> {
       `Message :\n${q.message}`
     );
     const subject = encodeURIComponent(`Nouvelle demande de devis — ${q.typeLabel || "HCE"}`);
-    window.open(`mailto:yanisouammou063@gmail.com?subject=${subject}&body=${body}`, "_blank");
+    window.open(`mailto:Nawfal.hini@gmail.com?subject=${subject}&body=${body}`, "_blank");
     toast.message(`Email non envoyé automatiquement (${(e as Error).message}). Ton client mail s'ouvre en secours.`);
     return true;
   }
 }
+
 
 export function QuoteForm() {
   const isMobile = useIsMobile();

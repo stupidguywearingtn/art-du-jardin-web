@@ -14,6 +14,278 @@ export type Database = {
   }
   public: {
     Tables: {
+      devis_requests: {
+        Row: {
+          city: string | null
+          created_at: string
+          description: string | null
+          email: string | null
+          estimated_surface_m2: number | null
+          free_dimensions: string | null
+          full_name: string | null
+          id: string
+          length_m: number | null
+          message: string | null
+          name: string | null
+          phone: string | null
+          postal_code: string | null
+          project_type: string | null
+          project_type_label: string | null
+          project_type_slug: string | null
+          surface_estimate: string | null
+          width_m: number | null
+        }
+        Insert: {
+          city?: string | null
+          created_at?: string
+          description?: string | null
+          email?: string | null
+          estimated_surface_m2?: number | null
+          free_dimensions?: string | null
+          full_name?: string | null
+          id?: string
+          length_m?: number | null
+          message?: string | null
+          name?: string | null
+          phone?: string | null
+          postal_code?: string | null
+          project_type?: string | null
+          project_type_label?: string | null
+          project_type_slug?: string | null
+          surface_estimate?: string | null
+          width_m?: number | null
+        }
+        Update: {
+          city?: string | null
+          created_at?: string
+          description?: string | null
+          email?: string | null
+          estimated_surface_m2?: number | null
+          free_dimensions?: string | null
+          full_name?: string | null
+          id?: string
+          length_m?: number | null
+          message?: string | null
+          name?: string | null
+          phone?: string | null
+          postal_code?: string | null
+          project_type?: string | null
+          project_type_label?: string | null
+          project_type_slug?: string | null
+          surface_estimate?: string | null
+          width_m?: number | null
+        }
+        Relationships: []
+      }
+      gallery_categories: {
+        Row: {
+          active: boolean
+          cover_url: string | null
+          created_at: string
+          description: string | null
+          display_order: number
+          id: string
+          slug: string
+          title: string
+        }
+        Insert: {
+          active?: boolean
+          cover_url?: string | null
+          created_at?: string
+          description?: string | null
+          display_order?: number
+          id?: string
+          slug: string
+          title: string
+        }
+        Update: {
+          active?: boolean
+          cover_url?: string | null
+          created_at?: string
+          description?: string | null
+          display_order?: number
+          id?: string
+          slug?: string
+          title?: string
+        }
+        Relationships: []
+      }
+      gallery_photos: {
+        Row: {
+          alt_text: string | null
+          caption: string | null
+          category_id: string | null
+          created_at: string
+          display_order: number
+          id: string
+          url: string
+        }
+        Insert: {
+          alt_text?: string | null
+          caption?: string | null
+          category_id?: string | null
+          created_at?: string
+          display_order?: number
+          id?: string
+          url: string
+        }
+        Update: {
+          alt_text?: string | null
+          caption?: string | null
+          category_id?: string | null
+          created_at?: string
+          display_order?: number
+          id?: string
+          url?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "gallery_photos_category_id_fkey"
+            columns: ["category_id"]
+            isOneToOne: false
+            referencedRelation: "gallery_categories"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      gallery_section: {
+        Row: {
+          id: number
+          subtitle: string | null
+          title: string | null
+          updated_at: string
+        }
+        Insert: {
+          id?: number
+          subtitle?: string | null
+          title?: string | null
+          updated_at?: string
+        }
+        Update: {
+          id?: number
+          subtitle?: string | null
+          title?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      project_types: {
+        Row: {
+          active: boolean
+          created_at: string
+          description: string | null
+          display_order: number
+          id: string
+          label: string
+          price_from: number | null
+          price_unit: string
+          show_price: boolean
+          slug: string
+          updated_at: string
+        }
+        Insert: {
+          active?: boolean
+          created_at?: string
+          description?: string | null
+          display_order?: number
+          id?: string
+          label: string
+          price_from?: number | null
+          price_unit?: string
+          show_price?: boolean
+          slug: string
+          updated_at?: string
+        }
+        Update: {
+          active?: boolean
+          created_at?: string
+          description?: string | null
+          display_order?: number
+          id?: string
+          label?: string
+          price_from?: number | null
+          price_unit?: string
+          show_price?: boolean
+          slug?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      quote_section: {
+        Row: {
+          id: number
+          subtitle: string | null
+          tag: string | null
+          title: string | null
+          updated_at: string
+        }
+        Insert: {
+          id?: number
+          subtitle?: string | null
+          tag?: string | null
+          title?: string | null
+          updated_at?: string
+        }
+        Update: {
+          id?: number
+          subtitle?: string | null
+          tag?: string | null
+          title?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      service_area: {
+        Row: {
+          cta_text: string | null
+          description: string | null
+          id: number
+          tag: string | null
+          title: string | null
+          updated_at: string
+        }
+        Insert: {
+          cta_text?: string | null
+          description?: string | null
+          id?: number
+          tag?: string | null
+          title?: string | null
+          updated_at?: string
+        }
+        Update: {
+          cta_text?: string | null
+          description?: string | null
+          id?: number
+          tag?: string | null
+          title?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      service_area_cities: {
+        Row: {
+          created_at: string
+          display_order: number
+          id: string
+          is_headquarters: boolean
+          name: string
+        }
+        Insert: {
+          created_at?: string
+          display_order?: number
+          id?: string
+          is_headquarters?: boolean
+          name: string
+        }
+        Update: {
+          created_at?: string
+          display_order?: number
+          id?: string
+          is_headquarters?: boolean
+          name?: string
+        }
+        Relationships: []
+      }
       site_content: {
         Row: {
           data: Json
@@ -83,206 +355,60 @@ export type Database = {
         }
         Relationships: []
       }
-      gallery_categories: {
+      why_us_cards: {
         Row: {
-          id: string
-          slug: string
-          title: string
-          description: string | null
-          cover_url: string | null
-          display_order: number
           active: boolean
-          updated_at: string
-        }
-        Insert: {
-          id?: string
-          slug: string
-          title: string
-          description?: string | null
-          cover_url?: string | null
-          display_order?: number
-          active?: boolean
-          updated_at?: string
-        }
-        Update: {
-          id?: string
-          slug?: string
-          title?: string
-          description?: string | null
-          cover_url?: string | null
-          display_order?: number
-          active?: boolean
-          updated_at?: string
-        }
-        Relationships: []
-      }
-      gallery_photos: {
-        Row: {
-          id: string
-          url: string
-          caption: string | null
-          alt_text: string | null
-          category_id: string | null
-          display_order: number
           created_at: string
-          updated_at: string
-        }
-        Insert: {
-          id?: string
-          url: string
-          caption?: string | null
-          alt_text?: string | null
-          category_id?: string | null
-          display_order?: number
-          created_at?: string
-          updated_at?: string
-        }
-        Update: {
-          id?: string
-          url?: string
-          caption?: string | null
-          alt_text?: string | null
-          category_id?: string | null
-          display_order?: number
-          created_at?: string
-          updated_at?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "gallery_photos_category_id_fkey"
-            columns: ["category_id"]
-            isOneToOne: false
-            referencedRelation: "gallery_categories"
-            referencedColumns: ["id"]
-          }
-        ]
-      }
-      project_types: {
-        Row: {
-          id: string
-          slug: string
-          label: string
           description: string | null
-          price_from: number | null
-          price_unit: string
-          show_price: boolean
           display_order: number
-          active: boolean
+          icon_name: string | null
+          id: string
+          title: string
           updated_at: string
         }
         Insert: {
-          id?: string
-          slug: string
-          label: string
-          description?: string | null
-          price_from?: number | null
-          price_unit?: string
-          show_price?: boolean
-          display_order?: number
           active?: boolean
+          created_at?: string
+          description?: string | null
+          display_order?: number
+          icon_name?: string | null
+          id?: string
+          title: string
           updated_at?: string
         }
         Update: {
-          id?: string
-          slug?: string
-          label?: string
-          description?: string | null
-          price_from?: number | null
-          price_unit?: string
-          show_price?: boolean
-          display_order?: number
           active?: boolean
+          created_at?: string
+          description?: string | null
+          display_order?: number
+          icon_name?: string | null
+          id?: string
+          title?: string
           updated_at?: string
         }
         Relationships: []
       }
       why_us_section: {
-        Row: { id: number; tag: string | null; title: string | null; cta_text: string | null; updated_at: string }
-        Insert: { id?: number; tag?: string | null; title?: string | null; cta_text?: string | null; updated_at?: string }
-        Update: { id?: number; tag?: string | null; title?: string | null; cta_text?: string | null; updated_at?: string }
-        Relationships: []
-      }
-      why_us_cards: {
-        Row: { id: string; title: string; description: string | null; icon_name: string | null; display_order: number; active: boolean; updated_at: string }
-        Insert: { id?: string; title: string; description?: string | null; icon_name?: string | null; display_order?: number; active?: boolean; updated_at?: string }
-        Update: { id?: string; title?: string; description?: string | null; icon_name?: string | null; display_order?: number; active?: boolean; updated_at?: string }
-        Relationships: []
-      }
-      service_area: {
-        Row: { id: number; tag: string | null; title: string | null; description: string | null; cta_text: string | null; updated_at: string }
-        Insert: { id?: number; tag?: string | null; title?: string | null; description?: string | null; cta_text?: string | null; updated_at?: string }
-        Update: { id?: number; tag?: string | null; title?: string | null; description?: string | null; cta_text?: string | null; updated_at?: string }
-        Relationships: []
-      }
-      service_area_cities: {
-        Row: { id: string; name: string; is_headquarters: boolean; display_order: number; updated_at: string }
-        Insert: { id?: string; name: string; is_headquarters?: boolean; display_order?: number; updated_at?: string }
-        Update: { id?: string; name?: string; is_headquarters?: boolean; display_order?: number; updated_at?: string }
-        Relationships: []
-      }
-      gallery_section: {
-        Row: { id: number; subtitle: string | null; title: string | null; updated_at: string }
-        Insert: { id?: number; subtitle?: string | null; title?: string | null; updated_at?: string }
-        Update: { id?: number; subtitle?: string | null; title?: string | null; updated_at?: string }
-        Relationships: []
-      }
-      quote_section: {
-        Row: { id: number; tag: string | null; title: string | null; subtitle: string | null; updated_at: string }
-        Insert: { id?: number; tag?: string | null; title?: string | null; subtitle?: string | null; updated_at?: string }
-        Update: { id?: number; tag?: string | null; title?: string | null; subtitle?: string | null; updated_at?: string }
-        Relationships: []
-      }
-      devis_requests: {
         Row: {
-          id: string
-          project_type_slug: string | null
-          project_type_label: string | null
-          length_m: number | null
-          width_m: number | null
-          estimated_surface_m2: number | null
-          free_dimensions: string | null
-          description: string | null
-          name: string
-          phone: string
-          email: string
-          postal_code: string | null
-          city: string | null
-          status: string
-          created_at: string
+          cta_text: string | null
+          id: number
+          tag: string | null
+          title: string | null
+          updated_at: string
         }
         Insert: {
-          id?: string
-          project_type_slug?: string | null
-          project_type_label?: string | null
-          length_m?: number | null
-          width_m?: number | null
-          estimated_surface_m2?: number | null
-          free_dimensions?: string | null
-          description?: string | null
-          name: string
-          phone: string
-          email: string
-          postal_code?: string | null
-          city?: string | null
-          status?: string
-          created_at?: string
+          cta_text?: string | null
+          id?: number
+          tag?: string | null
+          title?: string | null
+          updated_at?: string
         }
         Update: {
-          id?: string
-          project_type_slug?: string | null
-          project_type_label?: string | null
-          length_m?: number | null
-          width_m?: number | null
-          estimated_surface_m2?: number | null
-          free_dimensions?: string | null
-          description?: string | null
-          name?: string
-          phone?: string
-          email?: string
-          postal_code?: string | null
-          city?: string | null
-          status?: string
-          created_at?: string
+          cta_text?: string | null
+          id?: number
+          tag?: string | null
+          title?: string | null
+          updated_at?: string
         }
         Relationships: []
       }

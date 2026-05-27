@@ -1,0 +1,9 @@
+
+ALTER TABLE public.devis_requests
+  ADD COLUMN IF NOT EXISTS project_type_slug TEXT,
+  ADD COLUMN IF NOT EXISTS project_type_label TEXT,
+  ADD COLUMN IF NOT EXISTS length_m NUMERIC,
+  ADD COLUMN IF NOT EXISTS width_m NUMERIC,
+  ADD COLUMN IF NOT EXISTS estimated_surface_m2 NUMERIC,
+  ADD COLUMN IF NOT EXISTS description TEXT,
+  ADD COLUMN IF NOT EXISTS name TEXT;

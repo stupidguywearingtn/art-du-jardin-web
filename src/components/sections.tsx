@@ -511,10 +511,25 @@ function QuoteFormDesktop() {
       <div className="grain-overlay" aria-hidden />
       <div className="max-w-5xl mx-auto">
         <div className="text-center mb-16" data-reveal>
-          <div className="label text-gold">{tag}</div>
-          <h2 className="font-display mt-6 text-foreground" style={{ fontSize: "clamp(40px, 6vw, 80px)", fontWeight: 400, lineHeight: 1 }}>
-            {title}<br /><span className="italic text-gold">{subtitle}</span>
-          </h2>
+          {canEdit ? (
+            <>
+              <EditableField table="quote_section" rowId="1" field="tag" value={tag}
+                as="div" className="label text-gold" onSaved={() => { /* header is in hook cache; visual update via local edit */ }} />
+              <h2 className="font-display mt-6 text-foreground" style={{ fontSize: "clamp(40px, 6vw, 80px)", fontWeight: 400, lineHeight: 1 }}>
+                <EditableField table="quote_section" rowId="1" field="title" value={title} as="span" />
+                <br />
+                <EditableField table="quote_section" rowId="1" field="subtitle" value={subtitle}
+                  as="span" className="italic text-gold" />
+              </h2>
+            </>
+          ) : (
+            <>
+              <div className="label text-gold">{tag}</div>
+              <h2 className="font-display mt-6 text-foreground" style={{ fontSize: "clamp(40px, 6vw, 80px)", fontWeight: 400, lineHeight: 1 }}>
+                {title}<br /><span className="italic text-gold">{subtitle}</span>
+              </h2>
+            </>
+          )}
         </div>
 
         {submitted ? (

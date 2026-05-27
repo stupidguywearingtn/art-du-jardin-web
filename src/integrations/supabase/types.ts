@@ -196,6 +196,42 @@ export type Database = {
         }
         Relationships: []
       }
+      why_us_section: {
+        Row: { id: number; tag: string | null; title: string | null; cta_text: string | null; updated_at: string }
+        Insert: { id?: number; tag?: string | null; title?: string | null; cta_text?: string | null; updated_at?: string }
+        Update: { id?: number; tag?: string | null; title?: string | null; cta_text?: string | null; updated_at?: string }
+        Relationships: []
+      }
+      why_us_cards: {
+        Row: { id: string; title: string; description: string | null; icon_name: string | null; display_order: number; active: boolean; updated_at: string }
+        Insert: { id?: string; title: string; description?: string | null; icon_name?: string | null; display_order?: number; active?: boolean; updated_at?: string }
+        Update: { id?: string; title?: string; description?: string | null; icon_name?: string | null; display_order?: number; active?: boolean; updated_at?: string }
+        Relationships: []
+      }
+      service_area: {
+        Row: { id: number; tag: string | null; title: string | null; description: string | null; cta_text: string | null; updated_at: string }
+        Insert: { id?: number; tag?: string | null; title?: string | null; description?: string | null; cta_text?: string | null; updated_at?: string }
+        Update: { id?: number; tag?: string | null; title?: string | null; description?: string | null; cta_text?: string | null; updated_at?: string }
+        Relationships: []
+      }
+      service_area_cities: {
+        Row: { id: string; name: string; is_headquarters: boolean; display_order: number; updated_at: string }
+        Insert: { id?: string; name: string; is_headquarters?: boolean; display_order?: number; updated_at?: string }
+        Update: { id?: string; name?: string; is_headquarters?: boolean; display_order?: number; updated_at?: string }
+        Relationships: []
+      }
+      gallery_section: {
+        Row: { id: number; subtitle: string | null; title: string | null; updated_at: string }
+        Insert: { id?: number; subtitle?: string | null; title?: string | null; updated_at?: string }
+        Update: { id?: number; subtitle?: string | null; title?: string | null; updated_at?: string }
+        Relationships: []
+      }
+      quote_section: {
+        Row: { id: number; tag: string | null; title: string | null; subtitle: string | null; updated_at: string }
+        Insert: { id?: number; tag?: string | null; title?: string | null; subtitle?: string | null; updated_at?: string }
+        Update: { id?: number; tag?: string | null; title?: string | null; subtitle?: string | null; updated_at?: string }
+        Relationships: []
+      }
       devis_requests: {
         Row: {
           id: string

@@ -11,6 +11,7 @@ import { CTABanner, CTAPrimary, CTASecondary, CTAInline, MobileFloatingCTA } fro
 import { useSiteContent } from "@/hooks/useSiteContent";
 import { useSiteContentFields } from "@/hooks/useSiteContentFields";
 import { useGalleryCategories } from "@/hooks/useGallery";
+import { useGallerySection } from "@/hooks/useEditableSections";
 import { EditModeProvider, useEditMode } from "@/hooks/useEditMode";
 import { EditModeToolbar } from "@/components/EditModeToolbar";
 import { EditableText } from "@/components/EditableText";
@@ -346,35 +347,30 @@ function MatiereFinitions() {
 
 /* ============ GALERIE — cartes catégories (vers /realisations/{slug}) ============ */
 function Galerie() {
-  const v = useV();
   const { categories } = useGalleryCategories();
-  // Fallback statique si la base n'est pas encore peuplée (SSR/preview)
-  const FALLBACK: { slug: string; title: string; cover_url: string; photo_count: number }[] = [
-    { slug: "cour-allee-privee", title: "Cour & allée privée", cover_url: "/photos/15-cour-golden-hour.jpg", photo_count: 15 },
-    { slug: "parking-voirie-pro", title: "Parking & voirie pro", cover_url: "/photos/26-pro-batiment-commercial.jpg", photo_count: 2 },
-    { slug: "preparation-terrassement", title: "Préparation & terrassement", cover_url: "/photos/06-chantier-bobcat-preparation.jpg", photo_count: 2 },
-    { slug: "details-finitions", title: "Détails & finitions", cover_url: "/photos/02-hero-medaillon-paves.jpg", photo_count: 3 },
-    { slug: "chantier-en-cours", title: "Chantier en cours", cover_url: "/photos/01-hero-finisseur-vapeur-sunset.jpg", photo_count: 3 },
-  ];
-  const items = categories.length > 0 ? categories : FALLBACK;
+  const { subtitle, title } = useGallerySection();
+
+  // Le hook retourne toujours un fallback si la DB est vide — pas besoin de doublon ici.
+  const items = categories;
+
+  // Render display title — supports a single italic-gold word at the end ("réalisations.")
+  // by splitting on last space. If title has no space, render plain.
+  const lastSpace = title.lastIndexOf(" ");
+  const titleHead = lastSpace > 0 ? title.slice(0, lastSpace) : "";
+  const titleTail = lastSpace > 0 ? title.slice(lastSpace + 1) : title;
 
   return (
-    <section className="relative w-full bg-depth-a py-10 md:py-20 px-4 md:px-12 overflow-hidden">
+    <section id="galerie" className="relative w-full bg-depth-a py-10 md:py-20 px-4 md:px-12 overflow-hidden">
       <GiantNumber n="05" position="right" />
       <div className="max-w-6xl mx-auto text-center mb-10 md:mb-14">
-        <EditableText section="galerie" field="label" value={v("galerie", "label", "— 1000+ chantiers livrés depuis 2012")} as="div" className="label text-gold" />
+        <div className="label text-gold">{subtitle}</div>
         <h2 className="font-display mt-4 md:mt-6 text-foreground" style={{ fontSize: "clamp(32px, 6vw, 80px)", fontWeight: 400, lineHeight: 1, wordBreak: "keep-all", overflowWrap: "normal", hyphens: "none" }}>
-          Nos <span className="italic text-gold">réalisations.</span>
+          {titleHead && <>{titleHead} </>}
+          <span className="italic text-gold">{titleTail}</span>
         </h2>
-        <EditableText
-          section="galerie"
-          field="intro"
-          value={v("galerie", "intro", "Choisissez une catégorie pour découvrir nos chantiers en détail.")}
-          as="p"
-          className="mt-4 max-w-xl mx-auto text-muted"
-          style={{ fontSize: 14 }}
-          multiline
-        />
+        <p className="mt-4 max-w-xl mx-auto text-muted" style={{ fontSize: 14 }}>
+          Choisissez une catégorie pour voir tous les chantiers en grand.
+        </p>
       </div>
 
       <div className="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-5">

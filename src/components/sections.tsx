@@ -7,33 +7,28 @@ import { useIsMobile } from "@/hooks/use-mobile";
 import { CTAInline } from "@/components/CTAButtons";
 import { useSiteContent } from "@/hooks/useSiteContent";
 import { useProjectTypes, type ProjectType } from "@/hooks/useProjectTypes";
+import { useWhyUs, useServiceArea, useQuoteSection } from "@/hooks/useEditableSections";
 import { supabase } from "@/integrations/supabase/client";
+import { Flame, Star, FileText, ShieldCheck, Award } from "lucide-react";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
 }
 
 /* ============ POURQUOI NOUS CHOISIR ============ */
-const REASONS = [
-  { n: "01", t: "Enrobé à chaud", d: "Pose à la main à 180°C, compactage maîtrisé pour une durabilité maximale.", icon: "M8 20s-3-3-3-7a7 7 0 0 1 7-7c0 3-2 4-2 7a3 3 0 0 0 6 0c0 4-3 7-8 7Z" },
-  { n: "02", t: "1000+ chantiers", d: "Plus de 1000 chantiers réalisés dans le Jura et l'Ain depuis 2012, 14 années d'expérience.", icon: "M12 2l2.4 5 5.6.8-4 3.9 1 5.5L12 14.8 6.9 17.2l1-5.5-4-3.9L9.6 7Z" },
-  { n: "03", t: "Devis détaillé", d: "Visite gratuite, devis sous 48h, prix tenus, aucune mauvaise surprise.", icon: "M9 12h6M9 16h4M14 3v4a1 1 0 0 0 1 1h4M5 21V5a2 2 0 0 1 2-2h8l5 5v13a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2Z" },
-  { n: "04", t: "Finitions soignées", d: "Bords nets, raccords maîtrisés, surface plane et homogène jusqu'à la dernière passe.", icon: "M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10ZM9 12l2 2 4-4" },
-];
+const ICONS_MAP: Record<string, React.ComponentType<{ size?: number; className?: string; strokeWidth?: number }>> = {
+  flame: Flame,
+  star: Star,
+  "file-text": FileText,
+  "shield-check": ShieldCheck,
+  award: Award,
+};
 
 export function WhyUs() {
   const ref = useRef<HTMLDivElement>(null);
+  const { section, cards } = useWhyUs();
   useEffect(() => {
     if (!ref.current) return;
-    const cards = ref.current.querySelectorAll<SVGPathElement>("[data-stroke]");
-    cards.forEach((p) => {
-      const len = p.getTotalLength();
-      gsap.set(p, { strokeDasharray: len, strokeDashoffset: len });
-      gsap.to(p, {
-        strokeDashoffset: 0, duration: 2.4, ease: "power2.inOut",
-        scrollTrigger: { trigger: p, start: "top 85%" },
-      });
-    });
     const items = ref.current.querySelectorAll("[data-card]");
     items.forEach((el, i) => {
       gsap.fromTo(el,
@@ -41,69 +36,77 @@ export function WhyUs() {
         { y: 0, opacity: 1, duration: 0.9, ease: "power3.out", delay: i * 0.08,
           scrollTrigger: { trigger: el, start: "top 88%" } });
     });
-  }, []);
+  }, [cards.length]);
 
   return (
     <section ref={ref} className="relative bg-depth-a py-10 md:py-20 px-6 md:px-12 overflow-hidden">
       <div className="grain-overlay" aria-hidden />
       <div className="max-w-3xl mx-auto text-center mb-12 md:mb-16">
-        <div className="label text-gold">— Pourquoi HCE</div>
+        <div className="label text-gold">{section.tag}</div>
         <h2 className="font-display mt-6 text-foreground" style={{ fontSize: "clamp(32px, 6vw, 80px)", fontWeight: 400, lineHeight: 1, wordBreak: "keep-all", overflowWrap: "normal", hyphens: "none" }}>
-          Quatre raisons,<br /><span className="italic text-gold">une certitude.</span>
+          {section.title}
         </h2>
       </div>
 
       <div className="max-w-6xl mx-auto grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-6">
-        {REASONS.map((r) => (
-          <div
-            key={r.n}
-            data-card
-
-            className="relative group transition-all duration-300 hover:-translate-y-1"
-            style={{
-              background: "rgba(255,255,255,0.03)",
-              border: "1px solid rgba(255,255,255,0.08)",
-              borderRadius: 12,
-              padding: "1.25rem",
-              backdropFilter: "blur(10px)",
-            }}
-          >
-            <div className="flex items-start justify-between mb-3">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" className="text-gold" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round">
-                <path d={r.icon} />
-              </svg>
-              <div className="font-display text-gold/70" style={{ fontSize: 11, letterSpacing: "0.2em" }}>{r.n}</div>
+        {cards.map((c, i) => {
+          const Icon = ICONS_MAP[c.icon_name ?? ""] ?? Star;
+          const n = String(i + 1).padStart(2, "0");
+          return (
+            <div
+              key={c.id}
+              data-card
+              className="relative group transition-all duration-300 hover:-translate-y-1"
+              style={{
+                background: "rgba(255,255,255,0.03)",
+                border: "1px solid rgba(255,255,255,0.08)",
+                borderRadius: 12,
+                padding: "1.25rem",
+                backdropFilter: "blur(10px)",
+              }}
+            >
+              <div className="flex items-start justify-between mb-3">
+                <Icon size={28} className="text-gold" strokeWidth={1.3} />
+                <div className="font-display text-gold/70" style={{ fontSize: 11, letterSpacing: "0.2em" }}>{n}</div>
+              </div>
+              <h3 className="font-display text-foreground" style={{ fontSize: "clamp(16px, 2.2vw, 20px)", fontWeight: 500, lineHeight: 1.2 }}>{c.title}</h3>
+              {c.description && <p className="mt-2 text-muted" style={{ fontSize: 13, lineHeight: 1.55 }}>{c.description}</p>}
             </div>
-            <h3 className="font-display text-foreground" style={{ fontSize: "clamp(16px, 2.2vw, 20px)", fontWeight: 500, lineHeight: 1.2 }}>{r.t}</h3>
-            <p className="mt-2 text-muted" style={{ fontSize: 13, lineHeight: 1.55 }}>{r.d}</p>
-          </div>
-        ))}
+          );
+        })}
       </div>
-      <CTAInline caption="Convaincu ? Recevez un devis personnalisé." />
+      <CTAInline caption={section.cta_text} />
     </section>
   );
 }
 
 /* ============ ZONE D'INTERVENTION ============ */
 export function Zone() {
+  const { section, cities } = useServiceArea();
   return (
     <section className="relative bg-depth-b py-10 md:py-20 px-6 md:px-12 overflow-hidden">
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-stretch">
         <div className="lg:col-span-4 flex flex-col justify-center">
-          <div className="label text-gold">— Zone d'intervention</div>
+          <div className="label text-gold">{section.tag}</div>
           <h2 className="font-display mt-6 text-foreground" style={{ fontSize: "clamp(36px, 5vw, 72px)", fontWeight: 400, lineHeight: 1 }}>
-            Jura & Ain,<br /><span className="italic text-gold">depuis Cize.</span>
+            {section.title}
           </h2>
           <p className="mt-8 text-muted" style={{ fontSize: 16, lineHeight: 1.75 }}>
-            HCE intervient autour de Cize pour les cours, allées, parkings, travaux de terrassement et finitions extérieures.
+            {section.description}
           </p>
           <div className="mt-8 grid grid-cols-2 gap-3">
-            {["Cize", "Lons-le-Saunier", "Champagnole", "Oyonnax", "Bourg-en-Bresse", "Saint-Claude"].map((city) => (
-              <div key={city} className="border-l border-gold/40 pl-3 text-sm text-foreground/85">
-                {city}
+            {cities.map((c) => (
+              <div key={c.id} className="border-l border-gold/40 pl-3 text-sm text-foreground/85">
+                {c.name}
+                {c.is_headquarters && <span className="ml-1.5 text-gold/80 text-xs">· siège</span>}
               </div>
             ))}
           </div>
+          {section.cta_text && (
+            <p className="mt-6 text-muted italic font-display" style={{ fontSize: 14, lineHeight: 1.5 }}>
+              {section.cta_text}
+            </p>
+          )}
         </div>
         <div className="lg:col-span-8 relative min-h-[420px] md:min-h-[560px] border border-border overflow-hidden bg-surface">
           <iframe
@@ -333,6 +336,7 @@ function QuoteFormDesktop() {
   const [submitting, setSubmitting] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
   const { items: types } = useProjectTypes();
+  const { tag, title, subtitle } = useQuoteSection();
 
   // section reveal
   useEffect(() => {
@@ -377,9 +381,9 @@ function QuoteFormDesktop() {
       <div className="grain-overlay" aria-hidden />
       <div className="max-w-5xl mx-auto">
         <div className="text-center mb-16" data-reveal>
-          <div className="label text-gold">— Demande de devis</div>
+          <div className="label text-gold">{tag}</div>
           <h2 className="font-display mt-6 text-foreground" style={{ fontSize: "clamp(40px, 6vw, 80px)", fontWeight: 400, lineHeight: 1 }}>
-            Estimez votre projet<br /><span className="italic text-gold">en 90 secondes.</span>
+            {title}<br /><span className="italic text-gold">{subtitle}</span>
           </h2>
         </div>
 
@@ -735,6 +739,7 @@ function QuoteFormMobile() {
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const { items: types } = useProjectTypes();
+  const { tag, title, subtitle } = useQuoteSection();
 
   const surface = useMemo(() => computeSurface(data), [data]);
 
@@ -805,9 +810,9 @@ function QuoteFormMobile() {
 
       <div className="px-5 pt-10 pb-8 min-h-[60vh]">
         <div className="text-center mb-8">
-          <div className="label text-gold">— Demande de devis</div>
+          <div className="label text-gold">{tag}</div>
           <h2 className="font-display mt-4 text-foreground" style={{ fontSize: 36, fontWeight: 400, lineHeight: 1 }}>
-            Estimez votre projet<br /><span className="italic text-gold">en 90 sec.</span>
+            {title}<br /><span className="italic text-gold">{subtitle}</span>
           </h2>
         </div>
 

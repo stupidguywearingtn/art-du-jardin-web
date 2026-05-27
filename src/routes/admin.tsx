@@ -116,15 +116,21 @@ function AdminUI({ onSignOut, email }: { onSignOut: () => void; email: string })
         <Tabs defaultValue="hero">
           <TabsList className="flex-wrap h-auto">
             <TabsTrigger value="hero">Page d'accueil</TabsTrigger>
+            <TabsTrigger value="why">Pourquoi HCE</TabsTrigger>
+            <TabsTrigger value="zone">Zone d'intervention</TabsTrigger>
             <TabsTrigger value="gallery">Galerie</TabsTrigger>
+            <TabsTrigger value="quote">Simulateur devis</TabsTrigger>
             <TabsTrigger value="types">Types de projet</TabsTrigger>
-            <TabsTrigger value="requests">Demandes de devis</TabsTrigger>
+            <TabsTrigger value="requests">Demandes</TabsTrigger>
             <TabsTrigger value="contact">Coordonnées</TabsTrigger>
             <TabsTrigger value="figures">Chiffres-clés</TabsTrigger>
           </TabsList>
 
           <TabsContent value="hero" className="mt-6"><HeroEditor /></TabsContent>
+          <TabsContent value="why" className="mt-6"><WhyUsEditor /></TabsContent>
+          <TabsContent value="zone" className="mt-6"><ServiceAreaEditor /></TabsContent>
           <TabsContent value="gallery" className="mt-6"><GalleryEditor /></TabsContent>
+          <TabsContent value="quote" className="mt-6"><QuoteSectionEditor /></TabsContent>
           <TabsContent value="types" className="mt-6"><ProjectTypesEditor /></TabsContent>
           <TabsContent value="requests" className="mt-6"><DevisRequestsList /></TabsContent>
           <TabsContent value="contact" className="mt-6"><ContactEditor /></TabsContent>
@@ -302,12 +308,16 @@ function GalleryEditor() {
 
   if (cats.length === 0) {
     return (
-      <div className="bg-card p-6 rounded-xl border border-border">
-        <p className="text-muted-foreground">
-          Aucune catégorie en base. Applique la migration <code>20260527120000_gallery_and_quote_tables.sql</code>
-          via Supabase pour initialiser les catégories et les photos.
-        </p>
-        <Button className="mt-4" variant="outline" onClick={load}><RefreshCw className="w-4 h-4 mr-2" />Recharger</Button>
+      <div className="space-y-6">
+        <GallerySectionHeaderEditor />
+        <div className="bg-card p-6 rounded-xl border border-border">
+          <p className="text-muted-foreground">
+            Aucune catégorie en base. Applique les migrations Supabase
+            (<code>gallery_categories</code> + <code>gallery_photos</code>) pour activer l'édition complète.
+            En attendant, le site affiche un dataset de fallback statique côté code.
+          </p>
+          <Button className="mt-4" variant="outline" onClick={load}><RefreshCw className="w-4 h-4 mr-2" />Recharger</Button>
+        </div>
       </div>
     );
   }
@@ -317,6 +327,8 @@ function GalleryEditor() {
 
   return (
     <div className="space-y-6">
+      <GallerySectionHeaderEditor />
+
       <div className="bg-card p-4 rounded-xl border border-border flex gap-2 flex-wrap">
         {cats.map((c) => (
           <button
@@ -771,6 +783,289 @@ function FiguresEditor() {
       <div><Label>Libellé pour 14</Label><Input value={f.years_label} onChange={(e) => setF({ ...f, years_label: e.target.value })} /></div>
       <div><Label>Libellé pour 100%</Label><Input value={f.satisfied_label} onChange={(e) => setF({ ...f, satisfied_label: e.target.value })} /></div>
       <Button onClick={save} disabled={saving}>{saving ? "Enregistrement…" : "Enregistrer"}</Button>
+    </div>
+  );
+}
+
+/* ============================================================
+   WHY US EDITOR (Pourquoi HCE)
+   ============================================================ */
+type WhyCard = { id: string; title: string; description: string | null; icon_name: string | null; display_order: number; active: boolean };
+
+function WhyUsEditor() {
+  const [section, setSection] = useState({ tag: "", title: "", cta_text: "" });
+  const [cards, setCards] = useState<WhyCard[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [savingSection, setSavingSection] = useState(false);
+
+  const load = useCallback(async () => {
+    setLoading(true);
+    const [s, c] = await Promise.all([
+      supabase.from("why_us_section").select("*").eq("id", 1).maybeSingle(),
+      supabase.from("why_us_cards").select("*").order("display_order"),
+    ]);
+    if (s.data) setSection({ tag: s.data.tag ?? "", title: s.data.title ?? "", cta_text: s.data.cta_text ?? "" });
+    setCards((c.data ?? []) as WhyCard[]);
+    setLoading(false);
+  }, []);
+  useEffect(() => { load(); }, [load]);
+
+  const saveSection = async () => {
+    setSavingSection(true);
+    const { error } = await supabase.from("why_us_section").upsert({ id: 1, ...section });
+    setSavingSection(false);
+    if (error) { toast.error(error.message); return; }
+    toast.success("Section enregistrée");
+    load();
+  };
+
+  const updateCard = async (id: string, patch: Partial<WhyCard>) => {
+    const { error } = await supabase.from("why_us_cards").update(patch).eq("id", id);
+    if (error) { toast.error(error.message); return; }
+    load();
+  };
+  const removeCard = async (id: string) => {
+    if (!confirm("Supprimer cette carte ?")) return;
+    const { error } = await supabase.from("why_us_cards").delete().eq("id", id);
+    if (error) { toast.error(error.message); return; }
+    load();
+  };
+  const addCard = async () => {
+    const { error } = await supabase.from("why_us_cards").insert({
+      title: "Nouvelle raison", description: "", icon_name: "star",
+      display_order: cards.length + 1, active: true,
+    });
+    if (error) { toast.error(error.message); return; }
+    load();
+  };
+
+  if (loading) return <div className="text-muted-foreground">Chargement…</div>;
+  if (cards.length === 0 && !section.tag) {
+    return (
+      <div className="bg-card p-6 rounded-xl border border-border text-muted-foreground">
+        Table <code>why_us_*</code> non initialisée. Applique la migration
+        <code className="mx-1">20260527160000_editable_sections.sql</code> via Supabase.
+        En attendant, le site public utilise un fallback statique.
+      </div>
+    );
+  }
+
+  return (
+    <div className="space-y-6">
+      <div className="bg-card p-6 rounded-xl border border-border space-y-3">
+        <h3 className="font-display text-lg">En-tête de section</h3>
+        <div><Label>Tag (petite étiquette)</Label><Input value={section.tag} onChange={(e) => setSection({ ...section, tag: e.target.value })} /></div>
+        <div><Label>Titre</Label><Input value={section.title} onChange={(e) => setSection({ ...section, title: e.target.value })} /></div>
+        <div><Label>Texte du CTA (sous les cartes)</Label><Input value={section.cta_text} onChange={(e) => setSection({ ...section, cta_text: e.target.value })} /></div>
+        <Button onClick={saveSection} disabled={savingSection}>{savingSection ? "…" : "Enregistrer l'en-tête"}</Button>
+      </div>
+
+      <div className="space-y-3">
+        <div className="flex items-center justify-between">
+          <h3 className="font-display text-lg">Cartes ({cards.length})</h3>
+          <Button variant="outline" size="sm" onClick={addCard}><Plus className="w-4 h-4 mr-1" />Ajouter</Button>
+        </div>
+        {cards.map((c) => (
+          <div key={c.id} className="bg-card p-5 rounded-xl border border-border space-y-3">
+            <div className="flex items-center justify-between text-xs text-muted-foreground">
+              <span>Ordre {c.display_order}</span>
+              <Button variant="ghost" size="sm" onClick={() => removeCard(c.id)}><Trash2 className="w-4 h-4" /></Button>
+            </div>
+            <div className="grid md:grid-cols-2 gap-3">
+              <div><Label>Titre</Label><Input value={c.title} onChange={(e) => updateCard(c.id, { title: e.target.value })} /></div>
+              <div>
+                <Label>Icône</Label>
+                <select
+                  value={c.icon_name ?? "star"}
+                  onChange={(e) => updateCard(c.id, { icon_name: e.target.value })}
+                  className="w-full bg-background border border-border rounded px-3 py-2 text-sm"
+                >
+                  <option value="flame">flame (flamme)</option>
+                  <option value="star">star (étoile)</option>
+                  <option value="file-text">file-text (devis)</option>
+                  <option value="shield-check">shield-check (qualité)</option>
+                  <option value="award">award (distinction)</option>
+                </select>
+              </div>
+            </div>
+            <div><Label>Description</Label><Textarea rows={2} value={c.description ?? ""} onChange={(e) => updateCard(c.id, { description: e.target.value })} /></div>
+            <div className="flex gap-4 items-end">
+              <div className="flex-1"><Label>Ordre d'affichage</Label><Input type="number" value={c.display_order} onChange={(e) => updateCard(c.id, { display_order: Number(e.target.value) })} /></div>
+              <label className="inline-flex items-center gap-2 text-sm pb-2 cursor-pointer">
+                <input type="checkbox" checked={c.active} onChange={(e) => updateCard(c.id, { active: e.target.checked })} />
+                Affichée
+              </label>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+/* ============================================================
+   SERVICE AREA EDITOR (Zone d'intervention)
+   ============================================================ */
+type SACity = { id: string; name: string; is_headquarters: boolean; display_order: number };
+
+function ServiceAreaEditor() {
+  const [section, setSection] = useState({ tag: "", title: "", description: "", cta_text: "" });
+  const [cities, setCities] = useState<SACity[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [savingSection, setSavingSection] = useState(false);
+
+  const load = useCallback(async () => {
+    setLoading(true);
+    const [s, c] = await Promise.all([
+      supabase.from("service_area").select("*").eq("id", 1).maybeSingle(),
+      supabase.from("service_area_cities").select("*").order("display_order"),
+    ]);
+    if (s.data) setSection({ tag: s.data.tag ?? "", title: s.data.title ?? "", description: s.data.description ?? "", cta_text: s.data.cta_text ?? "" });
+    setCities((c.data ?? []) as SACity[]);
+    setLoading(false);
+  }, []);
+  useEffect(() => { load(); }, [load]);
+
+  const saveSection = async () => {
+    setSavingSection(true);
+    const { error } = await supabase.from("service_area").upsert({ id: 1, ...section });
+    setSavingSection(false);
+    if (error) { toast.error(error.message); return; }
+    toast.success("Section enregistrée");
+    load();
+  };
+
+  const updateCity = async (id: string, patch: Partial<SACity>) => {
+    const { error } = await supabase.from("service_area_cities").update(patch).eq("id", id);
+    if (error) { toast.error(error.message); return; }
+    load();
+  };
+  const removeCity = async (id: string) => {
+    if (!confirm("Supprimer cette ville ?")) return;
+    const { error } = await supabase.from("service_area_cities").delete().eq("id", id);
+    if (error) { toast.error(error.message); return; }
+    load();
+  };
+  const addCity = async () => {
+    const { error } = await supabase.from("service_area_cities").insert({
+      name: "Nouvelle ville", display_order: cities.length + 1, is_headquarters: false,
+    });
+    if (error) { toast.error(error.message); return; }
+    load();
+  };
+
+  if (loading) return <div className="text-muted-foreground">Chargement…</div>;
+  if (cities.length === 0 && !section.tag) {
+    return (
+      <div className="bg-card p-6 rounded-xl border border-border text-muted-foreground">
+        Tables <code>service_area*</code> non initialisées. Le site utilise un fallback statique en attendant.
+      </div>
+    );
+  }
+
+  return (
+    <div className="space-y-6">
+      <div className="bg-card p-6 rounded-xl border border-border space-y-3">
+        <h3 className="font-display text-lg">En-tête de section</h3>
+        <div><Label>Tag</Label><Input value={section.tag} onChange={(e) => setSection({ ...section, tag: e.target.value })} /></div>
+        <div><Label>Titre</Label><Input value={section.title} onChange={(e) => setSection({ ...section, title: e.target.value })} /></div>
+        <div><Label>Description</Label><Textarea rows={3} value={section.description} onChange={(e) => setSection({ ...section, description: e.target.value })} /></div>
+        <div><Label>Texte sous les villes</Label><Input value={section.cta_text} onChange={(e) => setSection({ ...section, cta_text: e.target.value })} /></div>
+        <Button onClick={saveSection} disabled={savingSection}>{savingSection ? "…" : "Enregistrer l'en-tête"}</Button>
+      </div>
+
+      <div className="space-y-3">
+        <div className="flex items-center justify-between">
+          <h3 className="font-display text-lg">Villes ({cities.length})</h3>
+          <Button variant="outline" size="sm" onClick={addCity}><Plus className="w-4 h-4 mr-1" />Ajouter</Button>
+        </div>
+        {cities.map((c) => (
+          <div key={c.id} className="bg-card p-4 rounded-xl border border-border flex gap-3 items-end">
+            <div className="flex-1">
+              <Label>Nom</Label>
+              <Input value={c.name} onChange={(e) => updateCity(c.id, { name: e.target.value })} />
+            </div>
+            <div className="w-24">
+              <Label>Ordre</Label>
+              <Input type="number" value={c.display_order} onChange={(e) => updateCity(c.id, { display_order: Number(e.target.value) })} />
+            </div>
+            <label className="inline-flex items-center gap-2 text-xs cursor-pointer pb-2.5 whitespace-nowrap">
+              <input type="checkbox" checked={c.is_headquarters} onChange={(e) => updateCity(c.id, { is_headquarters: e.target.checked })} />
+              Siège
+            </label>
+            <Button variant="ghost" size="sm" onClick={() => removeCity(c.id)}><Trash2 className="w-4 h-4" /></Button>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+/* ============================================================
+   GALLERY SECTION HEADER EDITOR (titre + sous-titre)
+   ============================================================ */
+function GallerySectionHeaderEditor() {
+  const [data, setData] = useState({ subtitle: "", title: "" });
+  const [saving, setSaving] = useState(false);
+
+  useEffect(() => {
+    supabase.from("gallery_section").select("*").eq("id", 1).maybeSingle().then(({ data: row }) => {
+      if (row) setData({ subtitle: row.subtitle ?? "", title: row.title ?? "" });
+    });
+  }, []);
+
+  const save = async () => {
+    setSaving(true);
+    const { error } = await supabase.from("gallery_section").upsert({ id: 1, ...data });
+    setSaving(false);
+    if (error) { toast.error(error.message); return; }
+    toast.success("En-tête galerie enregistré");
+  };
+
+  return (
+    <div className="bg-card p-6 rounded-xl border border-border space-y-3">
+      <h3 className="font-display text-lg">En-tête « Nos réalisations »</h3>
+      <p className="text-xs text-muted-foreground">
+        Le dernier mot du titre est rendu en italique doré (« réalisations. » par défaut).
+      </p>
+      <div><Label>Sous-titre (au-dessus)</Label><Input value={data.subtitle} onChange={(e) => setData({ ...data, subtitle: e.target.value })} /></div>
+      <div><Label>Titre</Label><Input value={data.title} onChange={(e) => setData({ ...data, title: e.target.value })} /></div>
+      <Button onClick={save} disabled={saving}>{saving ? "…" : "Enregistrer l'en-tête"}</Button>
+    </div>
+  );
+}
+
+/* ============================================================
+   QUOTE SECTION EDITOR (header simulateur)
+   ============================================================ */
+function QuoteSectionEditor() {
+  const [data, setData] = useState({ tag: "", title: "", subtitle: "" });
+  const [saving, setSaving] = useState(false);
+
+  useEffect(() => {
+    supabase.from("quote_section").select("*").eq("id", 1).maybeSingle().then(({ data: row }) => {
+      if (row) setData({ tag: row.tag ?? "", title: row.title ?? "", subtitle: row.subtitle ?? "" });
+    });
+  }, []);
+
+  const save = async () => {
+    setSaving(true);
+    const { error } = await supabase.from("quote_section").upsert({ id: 1, ...data });
+    setSaving(false);
+    if (error) { toast.error(error.message); return; }
+    toast.success("En-tête simulateur enregistré");
+  };
+
+  return (
+    <div className="bg-card p-6 rounded-xl border border-border space-y-3">
+      <h3 className="font-display text-lg">En-tête « Simulateur de devis »</h3>
+      <p className="text-xs text-muted-foreground">
+        Le sous-titre est rendu en italique doré (« en 90 secondes. » par défaut).
+      </p>
+      <div><Label>Tag</Label><Input value={data.tag} onChange={(e) => setData({ ...data, tag: e.target.value })} /></div>
+      <div><Label>Titre</Label><Input value={data.title} onChange={(e) => setData({ ...data, title: e.target.value })} /></div>
+      <div><Label>Sous-titre (italique)</Label><Input value={data.subtitle} onChange={(e) => setData({ ...data, subtitle: e.target.value })} /></div>
+      <Button onClick={save} disabled={saving}>{saving ? "…" : "Enregistrer l'en-tête"}</Button>
     </div>
   );
 }

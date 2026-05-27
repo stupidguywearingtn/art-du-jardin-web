@@ -16,6 +16,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as ServicesGarantieSavRouteImport } from './routes/services.garantie-sav'
 import { Route as ServicesSlugRouteImport } from './routes/services.$slug'
 import { Route as RealisationsSlugRouteImport } from './routes/realisations.$slug'
+import { Route as LovableEmailQueueProcessRouteImport } from './routes/lovable/email/queue/process'
 
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
@@ -52,6 +53,12 @@ const RealisationsSlugRoute = RealisationsSlugRouteImport.update({
   path: '/realisations/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LovableEmailQueueProcessRoute =
+  LovableEmailQueueProcessRouteImport.update({
+    id: '/lovable/email/queue/process',
+    path: '/lovable/email/queue/process',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -61,6 +68,7 @@ export interface FileRoutesByFullPath {
   '/realisations/$slug': typeof RealisationsSlugRoute
   '/services/$slug': typeof ServicesSlugRoute
   '/services/garantie-sav': typeof ServicesGarantieSavRoute
+  '/lovable/email/queue/process': typeof LovableEmailQueueProcessRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -70,6 +78,7 @@ export interface FileRoutesByTo {
   '/realisations/$slug': typeof RealisationsSlugRoute
   '/services/$slug': typeof ServicesSlugRoute
   '/services/garantie-sav': typeof ServicesGarantieSavRoute
+  '/lovable/email/queue/process': typeof LovableEmailQueueProcessRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -80,6 +89,7 @@ export interface FileRoutesById {
   '/realisations/$slug': typeof RealisationsSlugRoute
   '/services/$slug': typeof ServicesSlugRoute
   '/services/garantie-sav': typeof ServicesGarantieSavRoute
+  '/lovable/email/queue/process': typeof LovableEmailQueueProcessRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -91,6 +101,7 @@ export interface FileRouteTypes {
     | '/realisations/$slug'
     | '/services/$slug'
     | '/services/garantie-sav'
+    | '/lovable/email/queue/process'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -100,6 +111,7 @@ export interface FileRouteTypes {
     | '/realisations/$slug'
     | '/services/$slug'
     | '/services/garantie-sav'
+    | '/lovable/email/queue/process'
   id:
     | '__root__'
     | '/'
@@ -109,6 +121,7 @@ export interface FileRouteTypes {
     | '/realisations/$slug'
     | '/services/$slug'
     | '/services/garantie-sav'
+    | '/lovable/email/queue/process'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -119,6 +132,7 @@ export interface RootRouteChildren {
   RealisationsSlugRoute: typeof RealisationsSlugRoute
   ServicesSlugRoute: typeof ServicesSlugRoute
   ServicesGarantieSavRoute: typeof ServicesGarantieSavRoute
+  LovableEmailQueueProcessRoute: typeof LovableEmailQueueProcessRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -172,6 +186,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RealisationsSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/lovable/email/queue/process': {
+      id: '/lovable/email/queue/process'
+      path: '/lovable/email/queue/process'
+      fullPath: '/lovable/email/queue/process'
+      preLoaderRoute: typeof LovableEmailQueueProcessRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -183,6 +204,7 @@ const rootRouteChildren: RootRouteChildren = {
   RealisationsSlugRoute: RealisationsSlugRoute,
   ServicesSlugRoute: ServicesSlugRoute,
   ServicesGarantieSavRoute: ServicesGarantieSavRoute,
+  LovableEmailQueueProcessRoute: LovableEmailQueueProcessRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

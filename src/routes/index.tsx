@@ -11,7 +11,14 @@ import { CTABanner, CTAPrimary, CTASecondary, CTAInline, MobileFloatingCTA } fro
 import { useSiteContent } from "@/hooks/useSiteContent";
 import { useSiteContentFields } from "@/hooks/useSiteContentFields";
 import { useGalleryCategories } from "@/hooks/useGallery";
-import { useGallerySection } from "@/hooks/useEditableSections";
+import { useGallerySection, useWhyUs } from "@/hooks/useEditableSections";
+import { useAuth } from "@/hooks/useAuth";
+import {
+  ensureWhyUsSeeded, ensureServiceAreaSeeded, ensureGallerySectionSeeded,
+  ensureQuoteSectionSeeded, ensureProjectTypesSeeded, ensureGallerySeeded,
+} from "@/integrations/supabase/seed";
+import { useProjectTypes } from "@/hooks/useProjectTypes";
+import { useServiceArea } from "@/hooks/useEditableSections";
 import { EditModeProvider, useEditMode } from "@/hooks/useEditMode";
 import { EditModeToolbar } from "@/components/EditModeToolbar";
 import { EditableText } from "@/components/EditableText";
@@ -100,10 +107,41 @@ function Index() {
 
 function IndexBody() {
   const [loaded, setLoaded] = useState(false);
+  const { isAdmin } = useAuth();
+  const { reload: reloadWhy } = useWhyUs();
+  const { reload: reloadTypes } = useProjectTypes();
+  const { reload: reloadArea } = useServiceArea();
+
   useEffect(() => {
     const t = setTimeout(() => setLoaded(true), 50);
     return () => clearTimeout(t);
   }, []);
+
+  /* AUTO-SEED quand un admin arrive sur la home : si les tables sont vides,
+     elles se peuplent avec les valeurs par défaut, et l'édition inline
+     devient immédiatement fonctionnelle (les IDs ne sont plus "fb-...") */
+  useEffect(() => {
+    if (!isAdmin) return;
+    (async () => {
+      try {
+        await Promise.all([
+          ensureWhyUsSeeded(),
+          ensureServiceAreaSeeded(),
+          ensureGallerySectionSeeded(),
+          ensureQuoteSectionSeeded(),
+          ensureProjectTypesSeeded(),
+          ensureGallerySeeded(),
+        ]);
+        // Recharger les hooks pour récupérer les vrais IDs
+        await Promise.all([reloadWhy(), reloadTypes(), reloadArea()]);
+      } catch (e) {
+        // Pas de toast bruyant : si le seed échoue (RLS, etc.), le user
+        // verra simplement les fallbacks. Erreur dispo dans la console.
+        console.warn("auto-seed failed:", e);
+      }
+    })();
+  }, [isAdmin, reloadWhy, reloadTypes, reloadArea]);
+
   return (
     <>
       <EditModeToolbar />

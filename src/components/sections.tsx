@@ -34,6 +34,16 @@ export function WhyUs() {
   const { isAdmin } = useAuth();
   const canEdit = enabled && isAdmin;
 
+  // Si on est en fallback (cards id "fb-*"), l'auto-seed dans IndexBody
+  // a peut-être déjà tourné — on tente un reload pour récupérer les vrais IDs.
+  const allFallback = cards.length > 0 && cards.every((c) => c.id.startsWith("fb-"));
+  useEffect(() => {
+    if (canEdit && allFallback) {
+      const t = setTimeout(() => reload(), 800);
+      return () => clearTimeout(t);
+    }
+  }, [canEdit, allFallback, reload]);
+
   useEffect(() => {
     if (canEdit) return; // skip GSAP en mode édition
     if (!ref.current) return;
@@ -46,19 +56,6 @@ export function WhyUs() {
     });
   }, [cards.length, canEdit]);
 
-  const addCard = async () => {
-    const { error } = await supabase.from("why_us_cards").insert({
-      title: "Nouvelle raison", description: "Description courte.",
-      icon_name: "star", display_order: cards.length + 1, active: true,
-    });
-    if (error) toast.error(error.message); else { toast.success("Carte ajoutée"); reload(); }
-  };
-  const removeCard = async (id: string) => {
-    if (!confirm("Supprimer cette carte ?")) return;
-    const { error } = await supabase.from("why_us_cards").delete().eq("id", id);
-    if (error) toast.error(error.message); else { toast.success("Supprimée"); reload(); }
-  };
-
   return (
     <section ref={ref} className="relative bg-depth-a py-10 md:py-20 px-6 md:px-12 overflow-hidden">
       <div className="grain-overlay" aria-hidden />
@@ -67,12 +64,18 @@ export function WhyUs() {
         <h2 className="font-display mt-6 text-foreground" style={{ fontSize: "clamp(32px, 6vw, 80px)", fontWeight: 400, lineHeight: 1, wordBreak: "keep-all", overflowWrap: "normal", hyphens: "none" }}>
           {section.title}
         </h2>
+        {canEdit && allFallback && (
+          <p className="mt-4 text-xs text-sable-500" style={{ color: "var(--sable-500)" }}>
+            Initialisation des données en cours… les cartes deviendront éditables d'un instant à l'autre.
+          </p>
+        )}
       </div>
 
       <div className="max-w-6xl mx-auto grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-6">
         {cards.map((c, i) => {
           const Icon = ICONS_MAP[c.icon_name ?? ""] ?? Star;
           const n = String(i + 1).padStart(2, "0");
+          const editable = canEdit && !c.id.startsWith("fb-");
           return (
             <div
               key={c.id}
@@ -90,7 +93,7 @@ export function WhyUs() {
                 <Icon size={28} className="text-gold" strokeWidth={1.3} />
                 <div className="font-display text-gold/70" style={{ fontSize: 11, letterSpacing: "0.2em" }}>{n}</div>
               </div>
-              {canEdit && !c.id.startsWith("fb-") ? (
+              {editable ? (
                 <>
                   <EditableField
                     table="why_us_cards" rowId={c.id} field="title" value={c.title}
@@ -106,16 +109,6 @@ export function WhyUs() {
                     style={{ fontSize: 13, lineHeight: 1.55 }}
                     onSaved={reload}
                   />
-                  <button
-                    type="button"
-                    onClick={() => removeCard(c.id)}
-                    className="absolute -top-2 -left-2 z-[80] flex items-center justify-center w-6 h-6 rounded-full shadow-lg opacity-0 group-hover:opacity-100 transition-opacity"
-                    style={{ background: "var(--asphalte-900)", color: "#f87171", border: "1px solid #f87171" }}
-                    aria-label="Supprimer la carte"
-                    title="Supprimer la carte"
-                  >
-                    <Trash2 className="w-3 h-3" />
-                  </button>
                 </>
               ) : (
                 <>
@@ -126,16 +119,6 @@ export function WhyUs() {
             </div>
           );
         })}
-        {canEdit && (
-          <button
-            type="button"
-            onClick={addCard}
-            className="rounded-xl border-2 border-dashed text-creme-50 flex flex-col items-center justify-center gap-2 transition-colors hover:bg-cuivre-500/10 min-h-[180px]"
-            style={{ borderColor: "var(--cuivre-500)", color: "var(--cuivre-300)" }}
-          >
-            <Plus className="w-6 h-6" /> Ajouter une carte
-          </button>
-        )}
       </div>
       <CTAInline caption={section.cta_text} />
     </section>
@@ -474,6 +457,16 @@ function QuoteFormDesktop() {
   const { enabled: editEnabled } = useEditMode();
   const { isAdmin } = useAuth();
   const canEdit = editEnabled && isAdmin;
+
+  // Si on est sur les fallback statiques (ids "f-…"), tente un reload
+  // pour récupérer les vrais IDs après l'auto-seed côté home.
+  const allFallback = types.length > 0 && types.every((t) => t.id.startsWith("f-"));
+  useEffect(() => {
+    if (canEdit && allFallback) {
+      const t = setTimeout(() => reloadTypes(), 800);
+      return () => clearTimeout(t);
+    }
+  }, [canEdit, allFallback, reloadTypes]);
 
   // section reveal
   useEffect(() => {

@@ -152,39 +152,13 @@ function IndexBody() {
   );
 }
 
-/* ============ HEADER avec bouton ADMIN discret ============ */
+/* ============ HEADER — burger mobile, plus de bouton ADMIN (URL /signin secrète) ============ */
 function SiteHeader() {
   const [open, setOpen] = useState(false);
   return (
     <>
       <header className="fixed top-0 left-0 right-0 z-[60] pointer-events-none">
         <div className="flex items-center justify-end px-4 md:px-8 py-4">
-          <Link
-            to="/login"
-
-            className="hidden md:inline-flex pointer-events-auto items-center gap-1.5 px-3.5 py-1.5 transition-colors"
-            style={{
-              color: "var(--sable-500)",
-              background: "rgba(14,14,15,0.35)",
-              backdropFilter: "blur(6px)",
-              border: "1px solid var(--cuivre-500)",
-              borderRadius: 3,
-              fontFamily: "var(--font-body)",
-              fontSize: 11,
-              fontWeight: 500,
-              letterSpacing: "0.12em",
-              textTransform: "uppercase",
-              textDecoration: "none",
-            }}
-            onMouseEnter={(e) => { e.currentTarget.style.background = "var(--cuivre-500)"; e.currentTarget.style.color = "var(--creme-50)"; }}
-            onMouseLeave={(e) => { e.currentTarget.style.background = "rgba(14,14,15,0.35)"; e.currentTarget.style.color = "var(--sable-500)"; }}
-          >
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-              <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
-              <path d="M7 11V7a5 5 0 0 1 10 0v4" />
-            </svg>
-            Admin
-          </Link>
           <button
             type="button"
             onClick={() => setOpen(true)}
@@ -208,14 +182,6 @@ function SiteHeader() {
           <nav className="flex-1 flex flex-col items-center justify-center gap-6 px-6">
             <a href="#devis" className="font-display text-foreground" style={{ fontSize: 24 }} onClick={() => setOpen(false)}>Demander un devis</a>
             <a href="tel:0384526148" className="font-display text-foreground" style={{ fontSize: 24 }}>03 84 52 61 48</a>
-            <div className="w-12 h-px my-4" style={{ background: "var(--cuivre-500)" }} />
-            <Link to="/login" onClick={() => setOpen(false)} className="inline-flex items-center gap-2" style={{ color: "var(--sable-500)", fontSize: 13, fontFamily: "var(--font-body)", letterSpacing: "0.12em", textTransform: "uppercase" }}>
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-                <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
-                <path d="M7 11V7a5 5 0 0 1 10 0v4" />
-              </svg>
-              Espace admin
-            </Link>
           </nav>
         </div>
       )}

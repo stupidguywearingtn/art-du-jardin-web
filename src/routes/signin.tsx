@@ -8,7 +8,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
 
-export const Route = createFileRoute("/login")({
+export const Route = createFileRoute("/signin")({
   component: LoginPage,
   head: () => ({ meta: [{ title: "Connexion — HCE Admin" }, { name: "robots", content: "noindex" }] }),
 });
@@ -22,7 +22,7 @@ function LoginPage() {
   const [mode, setMode] = useState<"signin" | "signup">("signin");
 
   useEffect(() => {
-    if (!loading && user) nav({ to: "/admin" });
+    if (!loading && user) nav({ to: "/" });
   }, [loading, user, nav]);
 
   async function submit(e: React.FormEvent) {
@@ -32,11 +32,12 @@ function LoginPage() {
       if (mode === "signin") {
         const { error } = await supabase.auth.signInWithPassword({ email, password });
         if (error) throw error;
+        toast.success("Connexion réussie. Mode édition activé.");
       } else {
         const { error } = await supabase.auth.signUp({
           email,
           password,
-          options: { emailRedirectTo: `${window.location.origin}/admin` },
+          options: { emailRedirectTo: `${window.location.origin}/` },
         });
         if (error) throw error;
         toast.success("Compte créé. Vérifie ton email pour confirmer.");
@@ -49,7 +50,7 @@ function LoginPage() {
   }
 
   async function google() {
-    const r = await lovable.auth.signInWithOAuth("google", { redirect_uri: window.location.origin + "/admin" });
+    const r = await lovable.auth.signInWithOAuth("google", { redirect_uri: window.location.origin + "/" });
     if (r.error) toast.error("Connexion Google impossible");
   }
 

@@ -54,17 +54,27 @@ export function EditableImage({ section, field, value, children }: Props) {
   return (
     <>
       <div className="relative group/editable w-full h-full">
-        <div className="w-full h-full ring-0 group-hover/editable:ring-2 group-hover/editable:ring-primary/70 rounded-md transition-shadow cursor-pointer">
+        <div
+          className="w-full h-full rounded-sm transition-all cursor-pointer"
+          style={{ outline: "0 solid transparent", transition: "outline 200ms ease" }}
+          onMouseEnter={(e) => { e.currentTarget.style.outline = "2px solid var(--cuivre-500)"; e.currentTarget.style.outlineOffset = "-2px"; }}
+          onMouseLeave={(e) => { e.currentTarget.style.outline = "0 solid transparent"; }}
+        >
           {children(value)}
         </div>
-        <button
-          type="button"
-          onClick={() => setOpen(true)}
-          className="absolute top-2 right-2 z-[80] flex items-center justify-center w-10 h-10 rounded-full bg-primary text-primary-foreground shadow-lg hover:bg-primary/90"
-          aria-label="Changer l'image"
+        <div
+          className="absolute inset-0 flex items-center justify-center opacity-0 group-hover/editable:opacity-100 transition-opacity pointer-events-none"
+          style={{ background: "rgba(14,14,15,0.4)" }}
         >
-          <Pencil className="w-4 h-4" />
-        </button>
+          <button
+            type="button"
+            onClick={() => setOpen(true)}
+            className="inline-flex items-center gap-2 px-4 py-2 rounded font-semibold text-sm shadow-lg pointer-events-auto"
+            style={{ background: "var(--cuivre-500)", color: "var(--creme-50)", fontFamily: "var(--font-body)" }}
+          >
+            <Pencil className="w-4 h-4" /> Remplacer
+          </button>
+        </div>
       </div>
 
       <Dialog open={open} onOpenChange={setOpen}>

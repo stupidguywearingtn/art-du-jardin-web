@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState, type CSSProperties, type ElementType } from "react";
-import { Pencil } from "lucide-react";
+import { Pencil, Check, X } from "lucide-react";
 import { useEditMode } from "@/hooks/useEditMode";
 
 type Props = {
@@ -12,6 +12,13 @@ type Props = {
   multiline?: boolean;
 };
 
+/**
+ * Texte éditable inline. Quand enabled (admin) :
+ * - hover : fin contour cuivre + icône stylo à droite
+ * - clic : devient contentEditable, ring cuivre épais
+ * - Enter (mono) ou blur → commit en draft
+ * - Esc → annule
+ */
 export function EditableText({
   section,
   field,
@@ -21,9 +28,13 @@ export function EditableText({
   style,
   multiline = false,
 }: Props) {
-  const { enabled, setDraft } = useEditMode();
+  const { enabled, setDraft, getDraft } = useEditMode();
   const [editing, setEditing] = useState(false);
   const ref = useRef<HTMLElement>(null);
+
+  const draftVal = getDraft(section, field);
+  const displayValue = draftVal ?? value;
+  const isDirty = draftVal !== undefined && draftVal !== value;
 
   useEffect(() => {
     if (editing && ref.current) {
@@ -46,23 +57,44 @@ export function EditableText({
   if (!enabled) {
     return (
       <Tag className={className} style={style}>
-        {value}
+        {displayValue}
       </Tag>
     );
   }
 
   return (
-    <span className="relative inline-block group/editable align-baseline w-full">
+    <span className="relative inline-block group/editable align-baseline" style={{ width: "fit-content", maxWidth: "100%" }}>
       <Tag
         ref={ref as any}
-        className={`${className ?? ""} outline-none transition-[box-shadow] rounded-sm ${
-          editing
-            ? "ring-2 ring-blue-500 ring-offset-2 ring-offset-background cursor-text"
-            : "group-hover/editable:ring-2 group-hover/editable:ring-blue-500/70 cursor-pointer"
-        }`}
-        style={style}
+        className={`${className ?? ""} outline-none transition-[box-shadow] rounded-sm cursor-pointer`}
+        style={{
+          ...style,
+          boxShadow: editing
+            ? "0 0 0 2px var(--cuivre-500), 0 0 0 4px rgba(138,90,60,0.2)"
+            : isDirty
+              ? "0 0 0 1px var(--sable-500), inset 0 0 0 9999px rgba(200,164,126,0.06)"
+              : undefined,
+          background: undefined,
+        }}
         contentEditable={editing}
         suppressContentEditableWarning
+        onClick={(e: React.MouseEvent) => {
+          if (!editing) {
+            e.preventDefault();
+            e.stopPropagation();
+            setEditing(true);
+          }
+        }}
+        onMouseEnter={(e: React.MouseEvent<HTMLElement>) => {
+          if (!editing) e.currentTarget.style.boxShadow = isDirty
+            ? "0 0 0 2px var(--sable-500), inset 0 0 0 9999px rgba(200,164,126,0.08)"
+            : "0 0 0 1px var(--cuivre-500), inset 0 0 0 9999px rgba(138,90,60,0.05)";
+        }}
+        onMouseLeave={(e: React.MouseEvent<HTMLElement>) => {
+          if (!editing) e.currentTarget.style.boxShadow = isDirty
+            ? "0 0 0 1px var(--sable-500), inset 0 0 0 9999px rgba(200,164,126,0.06)"
+            : "";
+        }}
         onBlur={editing ? commit : undefined}
         onKeyDown={(e: React.KeyboardEvent) => {
           if (!multiline && e.key === "Enter") {
@@ -72,24 +104,48 @@ export function EditableText({
           if (e.key === "Escape") {
             e.preventDefault();
             setEditing(false);
-            if (ref.current) ref.current.innerText = value;
+            if (ref.current) ref.current.innerText = displayValue;
           }
         }}
       >
-        {value}
+        {displayValue}
       </Tag>
+
+      {/* Pastille stylo au hover quand pas en édition */}
       {!editing && (
         <button
           type="button"
           onClick={(e) => {
+            e.preventDefault();
             e.stopPropagation();
             setEditing(true);
           }}
-          className="absolute -top-3 -right-3 z-10 hidden group-hover/editable:flex items-center justify-center w-7 h-7 rounded-full bg-blue-600 text-white shadow-lg hover:bg-blue-700"
+          className="absolute -top-2 -right-2 z-[150] hidden group-hover/editable:flex items-center justify-center w-6 h-6 rounded-full shadow-lg pointer-events-auto"
+          style={{ background: "var(--cuivre-500)", color: "var(--creme-50)" }}
           aria-label="Éditer"
+          title="Cliquer pour modifier"
         >
-          <Pencil className="w-3.5 h-3.5" />
+          <Pencil className="w-3 h-3" />
         </button>
+      )}
+
+      {editing && (
+        <span
+          aria-hidden
+          className="absolute -top-7 left-0 z-[150] inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-semibold pointer-events-none"
+          style={{ background: "var(--cuivre-500)", color: "var(--creme-50)" }}
+        >
+          <Check className="w-3 h-3" /> Entrée pour valider · Échap pour annuler
+        </span>
+      )}
+
+      {isDirty && !editing && (
+        <span
+          aria-hidden
+          className="absolute -top-2.5 left-0 z-[150] inline-block w-2.5 h-2.5 rounded-full pointer-events-none"
+          style={{ background: "var(--sable-500)", boxShadow: "0 0 6px rgba(200,164,126,0.8)" }}
+          title="Modification non sauvegardée"
+        />
       )}
     </span>
   );

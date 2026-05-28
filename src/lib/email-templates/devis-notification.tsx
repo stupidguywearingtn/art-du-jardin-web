@@ -77,7 +77,7 @@ export const template = {
   subject: (data: Record<string, any>) =>
     `Nouvelle demande de devis — ${data.projectType || 'HCE'}`,
   displayName: 'Notification demande de devis',
-  to: 'yanisouammou063@gmail.com',
+  to: 'Nawfal.hini@gmail.com',
   previewData: {
     projectType: 'Cour',
     surface: '120 m²',

@@ -1,0 +1,1 @@
+UPDATE public.service_area SET cta_text = 'Votre commune n''est pas listée ? On se déplace jusqu''à 120 km.' WHERE id = 1;

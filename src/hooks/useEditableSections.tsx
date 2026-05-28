@@ -72,7 +72,7 @@ const SA_SECTION_FALLBACK: ServiceAreaSection = {
   tag: "— Zone d'intervention",
   title: "Jura & Ain, depuis Cize.",
   description: "HCE intervient autour de Cize pour les cours, allées, parkings, travaux de terrassement et finitions extérieures.",
-  cta_text: "Votre commune n'est pas listée ? On se déplace jusqu'à 60 km.",
+  cta_text: "Votre commune n'est pas listée ? On se déplace jusqu'à 120 km.",
 };
 
 const SA_CITIES_FALLBACK: ServiceAreaCity[] = [

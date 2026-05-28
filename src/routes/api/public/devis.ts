@@ -10,6 +10,14 @@ const SENDER_DOMAIN = 'notify.hcebtp.com'
 const FROM_DOMAIN = 'hcebtp.com'
 const TEMPLATE_NAME = 'devis-notification'
 
+function generateToken(): string {
+  const bytes = new Uint8Array(32)
+  crypto.getRandomValues(bytes)
+  return Array.from(bytes)
+    .map((b) => b.toString(16).padStart(2, '0'))
+    .join('')
+}
+
 const PayloadSchema = z.object({
   project_type_slug: z.string().max(64).nullable().optional(),
   project_type_label: z.string().max(120).nullable().optional(),
@@ -105,6 +113,47 @@ export const Route = createFileRoute('/api/public/devis')({
 
         const messageId = crypto.randomUUID()
 
+        const normalizedEmail = to.toLowerCase()
+        const { data: existingToken, error: tokenLookupError } = await supabase
+          .from('email_unsubscribe_tokens')
+          .select('token, used_at')
+          .eq('email', normalizedEmail)
+          .maybeSingle()
+
+        if (tokenLookupError) {
+          await supabase.from('email_send_log').insert({
+            message_id: messageId,
+            template_name: TEMPLATE_NAME,
+            recipient_email: to,
+            status: 'failed',
+            error_message: 'Failed to look up unsubscribe token',
+          })
+          return new Response(JSON.stringify({ error: 'Email prepare failed' }), { status: 500, headers: cors })
+        }
+
+        let unsubscribeToken = existingToken?.used_at ? generateToken() : existingToken?.token
+
+        if (!unsubscribeToken || existingToken?.used_at) {
+          unsubscribeToken = generateToken()
+          const { error: tokenError } = await supabase
+            .from('email_unsubscribe_tokens')
+            .upsert(
+              { token: unsubscribeToken, email: normalizedEmail, used_at: null },
+              { onConflict: 'email' }
+            )
+
+          if (tokenError) {
+            await supabase.from('email_send_log').insert({
+              message_id: messageId,
+              template_name: TEMPLATE_NAME,
+              recipient_email: to,
+              status: 'failed',
+              error_message: 'Failed to create unsubscribe token',
+            })
+            return new Response(JSON.stringify({ error: 'Email prepare failed' }), { status: 500, headers: cors })
+          }
+        }
+
         await supabase.from('email_send_log').insert({
           message_id: messageId,
           template_name: TEMPLATE_NAME,
@@ -125,6 +174,7 @@ export const Route = createFileRoute('/api/public/devis')({
             purpose: 'transactional',
             label: TEMPLATE_NAME,
             idempotency_key: messageId,
+            unsubscribe_token: unsubscribeToken,
             reply_to: p.email,
             queued_at: new Date().toISOString(),
           },

@@ -905,7 +905,7 @@ function Transformation() {
         src="/videos/transformation.mp4"
         autoPlay
         muted
-        defaultMuted
+        muted
         loop
         playsInline
         // @ts-ignore - iOS Safari attribute

@@ -892,9 +892,26 @@ function Transformation() {
   return (
     <section className="relative h-screen w-full overflow-hidden bg-background">
       <video
+        ref={(el) => {
+          if (!el) return;
+          el.muted = true;
+          const tryPlay = () => el.play().catch(() => {});
+          tryPlay();
+          const onVisible = () => { if (el.paused) tryPlay(); };
+          document.addEventListener("visibilitychange", onVisible);
+          window.addEventListener("touchstart", tryPlay, { once: true, passive: true });
+        }}
         className="absolute inset-0 h-full w-full object-cover"
         src="/videos/transformation.mp4"
-        autoPlay muted loop playsInline preload="auto"
+        autoPlay
+        muted
+        loop
+        playsInline
+        // @ts-ignore - iOS Safari attribute
+        webkit-playsinline="true"
+        preload="auto"
+        controls={false}
+        disablePictureInPicture
       />
       <div className="absolute inset-0" style={{ background: "rgba(30,30,30,0.55)" }} />
       <div className="absolute inset-x-0 bottom-0 h-[30%]" style={{ background: "linear-gradient(to bottom, transparent, var(--asphalte-900))" }} />

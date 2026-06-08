@@ -28,7 +28,7 @@ const HOME_SITE_ID = "11111111-1111-1111-1111-111111111111";
 
 const service01 = "/photos/06-chantier-bobcat-preparation.jpg";
 const service02 = "/photos/01-hero-finisseur-vapeur-sunset.jpg";
-const service03 = "/photos/02-hero-medaillon-paves.jpg";
+const service03 = "/__l5e/assets-v1/affc3bb4-5d7e-4326-8eae-ad72469a1178/maconnerie-generale-hero.png";
 const service04 = "/photos/09-detail-bordure-beton.jpg";
 const service05 = "/photos/13-cour-parking-muret.jpg";
 const service06 = "/photos/04-hero-golden-hour.jpg";

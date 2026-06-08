@@ -27,7 +27,7 @@ import { EditableImage } from "@/components/EditableImage";
 const HOME_SITE_ID = "11111111-1111-1111-1111-111111111111";
 
 const service01 = "/photos/06-chantier-bobcat-preparation.jpg";
-const service02 = "/photos/01-hero-finisseur-vapeur-sunset.jpg";
+const service02 = "/__l5e/assets-v1/900635d3-6e67-4d85-a6f3-3ef39a652596/enrobe-a-chaud-hero.png";
 const service03 = "/__l5e/assets-v1/affc3bb4-5d7e-4326-8eae-ad72469a1178/maconnerie-generale-hero.png";
 const service04 = "/photos/09-detail-bordure-beton.jpg";
 const service05 = "/photos/13-cour-parking-muret.jpg";

@@ -31,7 +31,7 @@ const service02 = "/photos/01-hero-finisseur-vapeur-sunset.jpg";
 const service03 = "/__l5e/assets-v1/affc3bb4-5d7e-4326-8eae-ad72469a1178/maconnerie-generale-hero.png";
 const service04 = "/photos/09-detail-bordure-beton.jpg";
 const service05 = "/photos/13-cour-parking-muret.jpg";
-const service06 = "/photos/04-hero-golden-hour.jpg";
+const service06 = "/__l5e/assets-v1/971fdf42-4607-43f7-9ca0-eee19d68bceb/finitions-soignees-hero.png";
 const ctaCourtyard = "/photos/15-cour-golden-hour.jpg";
 
 if (typeof window !== "undefined") {

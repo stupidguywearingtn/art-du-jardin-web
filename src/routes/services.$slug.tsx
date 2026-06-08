@@ -50,7 +50,7 @@ const SERVICES: Record<string, ServiceData> = {
   "maconnerie-generale": {
     n: "03",
     title: "Maçonnerie générale",
-    hero: "/photos/02-hero-medaillon-paves.jpg",
+    hero: "/__l5e/assets-v1/affc3bb4-5d7e-4326-8eae-ad72469a1178/maconnerie-generale-hero.png",
     intro: "Pavage, dallage, médaillons sur mesure : une maçonnerie qui s'intègre à votre enrobé pour personnaliser votre extérieur.",
     prestations: ["Pavage", "Pose de bordures", "Dallage", "Médaillons et inserts décoratifs sur mesure"],
     methode: [

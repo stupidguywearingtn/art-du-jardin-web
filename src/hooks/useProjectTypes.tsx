@@ -16,7 +16,7 @@ export type ProjectType = {
 const FALLBACK: ProjectType[] = [
   { id: "f-cour", slug: "cour", label: "Cour privée", description: "Enrobé à chaud, compactage", price_from: 65, price_unit: "€/m²", show_price: false, display_order: 1, active: true },
   { id: "f-allee", slug: "allee", label: "Chemin", description: "Bordures + finition soignée", price_from: 75, price_unit: "€/m²", show_price: false, display_order: 2, active: true },
-  { id: "f-parking", slug: "parking", label: "Parking pro", description: "Voirie poids lourds et grand espace", price_from: 55, price_unit: "€/m²", show_price: false, display_order: 3, active: true },
+  { id: "f-parking", slug: "parking", label: "Parking pro", description: "et grand espace", price_from: 55, price_unit: "€/m²", show_price: false, display_order: 3, active: true },
   { id: "f-prep", slug: "preparation", label: "Préparation seule", description: "Décaissement + nivellement", price_from: 30, price_unit: "€/m²", show_price: false, display_order: 4, active: true },
 ];
 

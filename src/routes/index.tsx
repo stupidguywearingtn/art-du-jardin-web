@@ -671,59 +671,67 @@ function Hero() {
   );
 }
 
-/* ============ PHILOSOPHY ============ */
+/* ============ PHILOSOPHY (carousel auto avec logo) ============ */
+const HCE_LOGO = "/__l5e/assets-v1/05ea9086-5751-411a-be99-0e1c678681b3/hce-logo.png";
+
 function Philosophy() {
-  const ref = useRef<HTMLDivElement>(null);
-  const v = useV();
-  const { enabled: editEnabled } = useEditMode();
-  const text = v("philosophy", "text", "Un enrobé qui dure,\nune finition qui marque.");
-  const signature = v("philosophy", "signature", "— HCE, Cize");
+  const slides = [
+    "/photos/06-chantier-bobcat-preparation.jpg",
+    "/__l5e/assets-v1/6be5916b-4243-4feb-8f29-69f57d0e2181/enrobe-a-chaud-allee.jpg",
+    "/__l5e/assets-v1/affc3bb4-5d7e-4326-8eae-ad72469a1178/maconnerie-generale-hero.png",
+  ];
+  const [idx, setIdx] = useState(0);
+  const [paused, setPaused] = useState(false);
 
   useEffect(() => {
-    if (editEnabled) return;
-    if (!ref.current) return;
-    const words = ref.current.querySelectorAll("[data-w]");
-    gsap.fromTo(words,
-      { opacity: 0, y: 30 },
-      {
-        opacity: 1, y: 0, duration: 1, ease: "power3.out", stagger: 0.08,
-        scrollTrigger: { trigger: ref.current, start: "top 70%" },
-      }
-    );
-  }, [editEnabled, text]);
+    if (paused) return;
+    const id = setInterval(() => setIdx((i) => (i + 1) % slides.length), 4000);
+    return () => clearInterval(id);
+  }, [paused, slides.length]);
 
   return (
-    <section ref={ref} className="relative w-full bg-depth-c flex items-center justify-center px-6 py-10 md:py-20 overflow-hidden">
-      <div className="max-w-5xl text-center">
-        {editEnabled ? (
-          <EditableText
-            section="philosophy"
-            field="text"
-            value={text}
-            as="p"
-            className="font-display italic text-foreground"
-            style={{ fontSize: "clamp(26px, 5vw, 72px)", fontWeight: 300, lineHeight: 1.2, wordBreak: "keep-all", overflowWrap: "normal", hyphens: "none" }}
-            multiline
+    <section
+      className="relative w-full bg-depth-c flex items-center justify-center px-6 py-10 md:py-20 overflow-hidden"
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
+    >
+      <div className="relative w-full max-w-5xl aspect-[16/9] overflow-hidden rounded-lg">
+        {slides.map((src, i) => (
+          <img
+            key={src}
+            src={src}
+            alt=""
+            aria-hidden="true"
+            className="absolute inset-0 w-full h-full object-cover transition-opacity duration-[800ms] ease-in-out"
+            style={{ opacity: i === idx ? 1 : 0 }}
           />
-        ) : (
-          <p
-            className="font-display italic text-foreground"
-            style={{ fontSize: "clamp(26px, 5vw, 72px)", fontWeight: 300, lineHeight: 1.2, wordBreak: "keep-all", overflowWrap: "normal", hyphens: "none" }}
-          >
-            {text.split("\n").map((line, li) => (
-              <span key={li} className="block">
-                {line.split(" ").map((w, wi) => (
-                  <span key={wi} data-w className="inline-block mr-[0.25em]" style={{ whiteSpace: "nowrap" }}>{w}</span>
-                ))}
-              </span>
-            ))}
-          </p>
-        )}
-        <EditableText section="philosophy" field="signature" value={signature} as="div" className="mt-8 md:mt-12 label text-gold" />
+        ))}
+        <div className="absolute inset-0" style={{ background: "rgba(14,14,15,0.4)" }} />
+        <div className="absolute inset-0 flex items-center justify-center">
+          <img
+            src={HCE_LOGO}
+            alt="HCE — Aménagement de cours en enrobé"
+            className="w-[140px] md:w-[220px] h-auto select-none pointer-events-none"
+            draggable={false}
+          />
+        </div>
+        <div className="absolute bottom-3 left-0 right-0 flex justify-center gap-2">
+          {slides.map((_, i) => (
+            <span
+              key={i}
+              className="h-1.5 rounded-full transition-all duration-300"
+              style={{
+                width: i === idx ? 18 : 6,
+                background: i === idx ? "rgba(255,255,255,0.9)" : "rgba(255,255,255,0.4)",
+              }}
+            />
+          ))}
+        </div>
       </div>
     </section>
   );
 }
+
 
 /* ============ SERVICES ============ */
 const SERVICES = [

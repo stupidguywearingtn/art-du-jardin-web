@@ -672,7 +672,7 @@ function Hero() {
 }
 
 /* ============ PHILOSOPHY (carousel auto avec logo) ============ */
-const HCE_LOGO = "/__l5e/assets-v1/05ea9086-5751-411a-be99-0e1c678681b3/hce-logo.png";
+const HCE_LOGO = "/__l5e/assets-v1/001bae5e-8e13-4133-ad95-1746668e03ed/hce-logo-full.png";
 
 function Philosophy() {
   const slides = [

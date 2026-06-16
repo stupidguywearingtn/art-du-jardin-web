@@ -691,11 +691,11 @@ function Philosophy() {
 
   return (
     <section
-      className="relative w-full bg-depth-c flex items-center justify-center px-6 py-10 md:py-20 overflow-hidden"
+      className="relative w-full overflow-hidden"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
     >
-      <div className="relative w-full max-w-5xl aspect-[16/9] overflow-hidden rounded-lg">
+      <div className="relative w-full h-[190px] md:h-[320px] overflow-hidden">
         {slides.map((src, i) => (
           <img
             key={src}

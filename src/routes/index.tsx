@@ -381,8 +381,33 @@ function Galerie() {
         {items.map((cat, idx) => {
           const cover = cat.cover_url || "/photos/15-cour-golden-hour.jpg";
           const count = cat.photo_count;
-          // 5e carte prend toute la largeur sur mobile pour ne pas rester seule
           const fullWidth = idx === 4 ? "col-span-2 md:col-span-1" : "";
+          const isChantier = cat.slug === "chantier-en-cours";
+
+          if (isChantier) {
+            // Remplacé par le bloc "Avant / Après" — même gabarit
+            return (
+              <Link
+                key="avant-apres"
+                to="/realisations/avant-apres"
+                className={`relative group overflow-hidden aspect-[4/5] md:aspect-[4/5] block ${fullWidth}`}
+                style={{ background: "var(--surface)" }}
+              >
+                <img src={cover} alt="Avant / Après" loading="lazy" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.35) 55%, rgba(0,0,0,0.1) 100%)" }} />
+                <div className="absolute bottom-0 left-0 right-0 p-4 md:p-5 text-left">
+                  <div className="label" style={{ color: "var(--gold)", fontSize: 9, marginBottom: 6 }}>Comparaisons</div>
+                  <div className="font-display" style={{ color: "#FFFFFF", fontSize: "clamp(16px, 2vw, 22px)", fontWeight: 400, lineHeight: 1.15 }}>
+                    Avant / Après
+                  </div>
+                  <div className="mt-2 flex items-center gap-2" style={{ color: "var(--gold)", fontSize: 11, fontFamily: "var(--font-body)", letterSpacing: "0.1em", textTransform: "uppercase" }}>
+                    Voir les comparaisons <span aria-hidden>→</span>
+                  </div>
+                </div>
+              </Link>
+            );
+          }
+
           return (
             <Link
               key={cat.slug}

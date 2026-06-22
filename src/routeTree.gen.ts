@@ -15,6 +15,7 @@ import { Route as DemoRouteImport } from './routes/demo'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ServicesGarantieSavRouteImport } from './routes/services.garantie-sav'
 import { Route as ServicesSlugRouteImport } from './routes/services.$slug'
+import { Route as RealisationsAvantApresRouteImport } from './routes/realisations.avant-apres'
 import { Route as RealisationsSlugRouteImport } from './routes/realisations.$slug'
 import { Route as EmailUnsubscribeRouteImport } from './routes/email/unsubscribe'
 import { Route as LovableEmailSuppressionRouteImport } from './routes/lovable/email/suppression'
@@ -51,6 +52,11 @@ const ServicesGarantieSavRoute = ServicesGarantieSavRouteImport.update({
 const ServicesSlugRoute = ServicesSlugRouteImport.update({
   id: '/services/$slug',
   path: '/services/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RealisationsAvantApresRoute = RealisationsAvantApresRouteImport.update({
+  id: '/realisations/avant-apres',
+  path: '/realisations/avant-apres',
   getParentRoute: () => rootRouteImport,
 } as any)
 const RealisationsSlugRoute = RealisationsSlugRouteImport.update({
@@ -99,6 +105,7 @@ export interface FileRoutesByFullPath {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
   '/realisations/$slug': typeof RealisationsSlugRoute
+  '/realisations/avant-apres': typeof RealisationsAvantApresRoute
   '/services/$slug': typeof ServicesSlugRoute
   '/services/garantie-sav': typeof ServicesGarantieSavRoute
   '/api/public/devis': typeof ApiPublicDevisRoute
@@ -114,6 +121,7 @@ export interface FileRoutesByTo {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
   '/realisations/$slug': typeof RealisationsSlugRoute
+  '/realisations/avant-apres': typeof RealisationsAvantApresRoute
   '/services/$slug': typeof ServicesSlugRoute
   '/services/garantie-sav': typeof ServicesGarantieSavRoute
   '/api/public/devis': typeof ApiPublicDevisRoute
@@ -130,6 +138,7 @@ export interface FileRoutesById {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
   '/realisations/$slug': typeof RealisationsSlugRoute
+  '/realisations/avant-apres': typeof RealisationsAvantApresRoute
   '/services/$slug': typeof ServicesSlugRoute
   '/services/garantie-sav': typeof ServicesGarantieSavRoute
   '/api/public/devis': typeof ApiPublicDevisRoute
@@ -147,6 +156,7 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/email/unsubscribe'
     | '/realisations/$slug'
+    | '/realisations/avant-apres'
     | '/services/$slug'
     | '/services/garantie-sav'
     | '/api/public/devis'
@@ -162,6 +172,7 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/email/unsubscribe'
     | '/realisations/$slug'
+    | '/realisations/avant-apres'
     | '/services/$slug'
     | '/services/garantie-sav'
     | '/api/public/devis'
@@ -177,6 +188,7 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/email/unsubscribe'
     | '/realisations/$slug'
+    | '/realisations/avant-apres'
     | '/services/$slug'
     | '/services/garantie-sav'
     | '/api/public/devis'
@@ -193,6 +205,7 @@ export interface RootRouteChildren {
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   EmailUnsubscribeRoute: typeof EmailUnsubscribeRoute
   RealisationsSlugRoute: typeof RealisationsSlugRoute
+  RealisationsAvantApresRoute: typeof RealisationsAvantApresRoute
   ServicesSlugRoute: typeof ServicesSlugRoute
   ServicesGarantieSavRoute: typeof ServicesGarantieSavRoute
   ApiPublicDevisRoute: typeof ApiPublicDevisRoute
@@ -244,6 +257,13 @@ declare module '@tanstack/react-router' {
       path: '/services/$slug'
       fullPath: '/services/$slug'
       preLoaderRoute: typeof ServicesSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/realisations/avant-apres': {
+      id: '/realisations/avant-apres'
+      path: '/realisations/avant-apres'
+      fullPath: '/realisations/avant-apres'
+      preLoaderRoute: typeof RealisationsAvantApresRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/realisations/$slug': {
@@ -305,6 +325,7 @@ const rootRouteChildren: RootRouteChildren = {
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   EmailUnsubscribeRoute: EmailUnsubscribeRoute,
   RealisationsSlugRoute: RealisationsSlugRoute,
+  RealisationsAvantApresRoute: RealisationsAvantApresRoute,
   ServicesSlugRoute: ServicesSlugRoute,
   ServicesGarantieSavRoute: ServicesGarantieSavRoute,
   ApiPublicDevisRoute: ApiPublicDevisRoute,

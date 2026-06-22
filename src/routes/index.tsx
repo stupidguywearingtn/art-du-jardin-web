@@ -736,7 +736,7 @@ function Philosophy() {
           <img
             src={HCE_LOGO}
             alt="HCE — Aménagement de cours en enrobé"
-            className="w-[140px] md:w-[220px] h-auto select-none pointer-events-none"
+            className="w-[80%] md:w-[70%] max-w-[900px] h-auto select-none pointer-events-none object-contain"
             draggable={false}
           />
         </div>

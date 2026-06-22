@@ -89,7 +89,8 @@ function MiniCarousel({ images, label }: { images: string[]; label: "Avant" | "A
 
 function AvantApresPage() {
   return (
-    <SmoothScroll>
+    <>
+      <SmoothScroll />
       <main className="bg-depth-a min-h-screen">
         {/* Header */}
         <section className="relative w-full px-4 md:px-12 pt-24 md:pt-32 pb-10 md:pb-16">

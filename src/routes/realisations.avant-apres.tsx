@@ -148,6 +148,6 @@ function AvantApresPage() {
         <MobileFloatingCTA />
         <WhatsAppFAB />
       </main>
-    </SmoothScroll>
+    </>
   );
 }

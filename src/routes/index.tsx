@@ -697,7 +697,7 @@ function Hero() {
 }
 
 /* ============ PHILOSOPHY (carousel auto avec logo) ============ */
-const HCE_LOGO = "/__l5e/assets-v1/94c0687a-9621-4880-bc4f-636d31526c53/hce-logo-engins.png";
+const HCE_LOGO = "/__l5e/assets-v1/19433b55-cf3a-478a-8001-5be3b44ae0b5/hce-logo-engins-v2.png";
 
 function Philosophy() {
   const slides = [
@@ -736,7 +736,7 @@ function Philosophy() {
           <img
             src={HCE_LOGO}
             alt="HCE — Aménagement de cours en enrobé"
-            className="w-[140px] md:w-[220px] h-auto select-none pointer-events-none"
+            className="w-[80%] md:w-[70%] max-w-[900px] h-auto select-none pointer-events-none object-contain"
             draggable={false}
           />
         </div>

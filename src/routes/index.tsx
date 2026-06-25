@@ -700,58 +700,15 @@ function Hero() {
 const HCE_LOGO = "/__l5e/assets-v1/19433b55-cf3a-478a-8001-5be3b44ae0b5/hce-logo-engins-v2.png";
 
 function Philosophy() {
-  const slides = [
-    "/photos/06-chantier-bobcat-preparation.jpg",
-    "/__l5e/assets-v1/6be5916b-4243-4feb-8f29-69f57d0e2181/enrobe-a-chaud-allee.jpg",
-    "/__l5e/assets-v1/affc3bb4-5d7e-4326-8eae-ad72469a1178/maconnerie-generale-hero.png",
-  ];
-  const [idx, setIdx] = useState(0);
-  const [paused, setPaused] = useState(false);
-
-  useEffect(() => {
-    if (paused) return;
-    const id = setInterval(() => setIdx((i) => (i + 1) % slides.length), 4000);
-    return () => clearInterval(id);
-  }, [paused, slides.length]);
-
   return (
-    <section
-      className="relative w-full overflow-hidden"
-      onMouseEnter={() => setPaused(true)}
-      onMouseLeave={() => setPaused(false)}
-    >
-      <div className="relative w-full h-[190px] md:h-[320px] overflow-hidden">
-        {slides.map((src, i) => (
-          <img
-            key={src}
-            src={src}
-            alt=""
-            aria-hidden="true"
-            className="absolute inset-0 w-full h-full object-cover transition-opacity duration-[800ms] ease-in-out"
-            style={{ opacity: i === idx ? 1 : 0 }}
-          />
-        ))}
-        <div className="absolute inset-0" style={{ background: "rgba(14,14,15,0.4)" }} />
-        <div className="absolute inset-0 flex items-center justify-center">
-          <img
-            src={HCE_LOGO}
-            alt="HCE — Aménagement de cours en enrobé"
-            className="w-[55%] md:w-[40%] max-w-[480px] h-auto select-none pointer-events-none object-contain"
-            draggable={false}
-          />
-        </div>
-        <div className="absolute bottom-3 left-0 right-0 flex justify-center gap-2">
-          {slides.map((_, i) => (
-            <span
-              key={i}
-              className="h-1.5 rounded-full transition-all duration-300"
-              style={{
-                width: i === idx ? 18 : 6,
-                background: i === idx ? "rgba(255,255,255,0.9)" : "rgba(255,255,255,0.4)",
-              }}
-            />
-          ))}
-        </div>
+    <section className="relative w-full overflow-hidden bg-[#0e0e0f]">
+      <div className="relative w-full flex items-center justify-center">
+        <img
+          src={HCE_LOGO}
+          alt="HCE — Aménagement de cours en enrobé"
+          className="w-full h-auto select-none pointer-events-none object-contain block"
+          draggable={false}
+        />
       </div>
     </section>
   );

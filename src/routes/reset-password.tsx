@@ -8,7 +8,6 @@ import { toast } from "sonner";
 
 export const Route = createFileRoute("/reset-password")({
   component: ResetPasswordPage,
-  ssr: false,
   head: () => ({ meta: [{ title: "Nouveau mot de passe — HCE" }, { name: "robots", content: "noindex" }] }),
 });
 

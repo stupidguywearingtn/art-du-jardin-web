@@ -79,7 +79,11 @@ const SERVICES: Record<string, ServiceData> = {
       { t: "Drains périphériques", d: "Pose de drains et de regards aux endroits stratégiques." },
       { t: "Pentes calculées", d: "Pente minimum 1.5 % vers les exutoires, vérifiée au laser." },
     ],
-    gallery: ["/photos/09-detail-bordure-beton.jpg", "/photos/06-chantier-bobcat-preparation.jpg", "/photos/11-cour-courbe-ciel.jpg"],
+    gallery: [
+      "/__l5e/assets-v1/0ed1f7f2-328d-443e-87f3-5fa2803157a4/drainage-1.jpeg",
+      "/__l5e/assets-v1/d2e48fb9-8087-4957-b1af-aae69e595969/drainage-2.jpeg",
+      "/__l5e/assets-v1/51939538-bcea-4748-9bcc-b5d0c8221bfd/drainage-3.jpeg",
+    ],
   },
   "bordures-murets": {
     n: "05",

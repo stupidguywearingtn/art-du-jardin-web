@@ -92,7 +92,7 @@ const SERVICES: Record<string, ServiceData> = {
   "bordures-murets": {
     n: "05",
     title: "Bordures & murets",
-    hero: "/photos/13-cour-parking-muret.jpg",
+    hero: "/__l5e/assets-v1/4e61c550-2477-4cd0-a800-323188366b6e/bordures-1.png",
     intro: "Bordures béton coulées sur place, pavées, ou petits murets de soutènement : la finition qui fait toute la différence.",
     prestations: ["Bordures béton coulées", "Bordures pavées", "Petits murets de soutènement", "Finitions périphériques"],
     methode: [
@@ -100,7 +100,7 @@ const SERVICES: Record<string, ServiceData> = {
       { t: "Coulage sur place", d: "Béton dosé pour résister au gel et à la décennie." },
       { t: "Décoffrage propre", d: "Finition lisse, arêtes nettes, prêt à recevoir l'enrobé." },
     ],
-    gallery: ["/photos/13-cour-parking-muret.jpg", "/photos/12-cour-courbe-muret-pierre.jpg", "/photos/09-detail-bordure-beton.jpg"],
+    gallery: ["/__l5e/assets-v1/4e61c550-2477-4cd0-a800-323188366b6e/bordures-1.png", "/__l5e/assets-v1/3e3159a6-a482-4c58-b790-fbac0bd3a7fd/bordures-2.png", "/__l5e/assets-v1/ad358cad-0e34-425f-9f7b-14e476954b11/bordures-3.png"],
   },
   "finitions-soignees": {
     n: "06",

@@ -33,7 +33,7 @@ export const Route = createRootRoute({
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "HCE — Enrobé, cours & terrassement · Jura & Ain" },
-      { name: "description", content: "HCE — Enrobé à chaud posé à la main, cours, parkings et terrassement dans le Jura et l'Ain depuis 2012. Devis gratuit sous 48h, garantie décennale." },
+      { name: "description", content: "HCE — Enrobé à chaud posé à la main, cours, parkings et terrassement dans le Jura et l'Ain depuis 2012. Devis détaillé, garantie décennale." },
       { name: "author", content: "HCE" },
       { property: "og:site_name", content: "HCE" },
       { property: "og:type", content: "website" },

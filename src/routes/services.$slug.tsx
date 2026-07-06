@@ -45,7 +45,11 @@ const SERVICES: Record<string, ServiceData> = {
       { t: "Pose à la main", d: "Épaisseur régulière, pentes maîtrisées, joints soignés." },
       { t: "Compactage en plusieurs passes", d: "Rouleau tandem pour une densité optimale." },
     ],
-    gallery: ["/photos/01-hero-finisseur-vapeur-sunset.jpg", "/photos/03-hero-rouleau-compacteur.jpg", "/photos/10-detail-texture-enrobe-frais.jpg", "/photos/15-cour-golden-hour.jpg"],
+    gallery: [
+      "/__l5e/assets-v1/2bde9de8-2a5c-41cf-89c8-66e170f365cd/enrobe-1.png",
+      "/__l5e/assets-v1/3202c8fb-9eee-4884-9a36-914bde9f7c58/enrobe-2.png",
+      "/__l5e/assets-v1/0526a979-30b1-41f7-b575-64df03447d28/enrobe-3.png",
+    ],
   },
   "maconnerie-generale": {
     n: "03",

@@ -1,0 +1,2 @@
+UPDATE public.gallery_categories SET title = 'Parking, grand espace et voirie pro' WHERE slug = 'parking-voirie-pro';
+UPDATE public.gallery_categories SET active = false WHERE slug = 'details-finitions';

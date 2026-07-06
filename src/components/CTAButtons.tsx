@@ -211,7 +211,7 @@ export function ServiceMidCTA({ serviceName, bgImage }: { serviceName: string; b
           Vous avez un projet de <span className="text-gold">{serviceName.toLowerCase()}</span> ?
         </p>
         <p className="mt-3 text-muted text-sm md:text-base">
-          Devis détaillé sous 48h · Visite gratuite · Garantie décennale
+          Devis détaillé · Visite gratuite · Garantie décennale
         </p>
         <div className="mt-7 flex flex-wrap gap-3 justify-center">
           <CTAPrimary>Demander un devis pour ce projet</CTAPrimary>

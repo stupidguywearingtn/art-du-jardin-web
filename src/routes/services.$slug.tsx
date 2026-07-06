@@ -93,7 +93,7 @@ const SERVICES: Record<string, ServiceData> = {
   "finitions-soignees": {
     n: "06",
     title: "Vous avez un projet d'aménagement de cour en enrobé",
-    hero: "/__l5e/assets-v1/971fdf42-4607-43f7-9ca0-eee19d68bceb/finitions-soignees-hero.png",
+    hero: "/__l5e/assets-v1/d6604f6b-5402-4325-8f17-abcc914ef8e0/finitions-1.jpeg",
     intro: "Bords nets, raccords maîtrisés, surface plane et homogène. Le souci du détail jusqu'à la dernière passe.",
     prestations: [
       "Bords et angles nets, sans bavure",

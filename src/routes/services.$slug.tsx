@@ -71,7 +71,7 @@ const SERVICES: Record<string, ServiceData> = {
   "drainage-pentes": {
     n: "04",
     title: "Drainage & pentes",
-    hero: "/photos/09-detail-bordure-beton.jpg",
+    hero: "/__l5e/assets-v1/0ed1f7f2-328d-443e-87f3-5fa2803157a4/drainage-1.jpeg",
     intro: "Une cour qui dure, c'est d'abord une cour qui évacue l'eau. HCE étudie les pentes avant chaque pose.",
     prestations: ["Études de pente", "Drainage périphérique", "Évacuation des eaux pluviales", "Lecture du terrain avant pose"],
     methode: [

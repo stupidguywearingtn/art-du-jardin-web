@@ -69,7 +69,7 @@ export function CTASecondary({ children, href = `tel:${PHONE}`, light = false, c
 /* Bandeau sobre — respiration entre sections (fond asphalte, accent cuivre fin) */
 export function CTABanner() {
   const { get } = useSiteContentFields(HOME_SITE_ID);
-  const text = get("cta_banner", "text", "Un projet en tête ? Devis détaillé sous 48h, visite gratuite.");
+  const text = get("cta_banner", "text", "Un projet en tête ? Devis détaillé, visite gratuite.");
   const primaryLabel = get("cta_banner", "primary_label", "Demander mon devis");
 
   return (

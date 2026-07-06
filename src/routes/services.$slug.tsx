@@ -50,7 +50,7 @@ const SERVICES: Record<string, ServiceData> = {
   "maconnerie-generale": {
     n: "03",
     title: "Maçonnerie générale",
-    hero: "/__l5e/assets-v1/affc3bb4-5d7e-4326-8eae-ad72469a1178/maconnerie-generale-hero.png",
+    hero: "/__l5e/assets-v1/1c935b79-d832-4151-adea-da3380cec475/maconnerie-1.png",
     intro: "Pavage, dallage, médaillons sur mesure : une maçonnerie qui s'intègre à votre enrobé pour personnaliser votre extérieur.",
     prestations: ["Pavage", "Pose de bordures", "Dallage", "Médaillons et inserts décoratifs sur mesure"],
     methode: [
@@ -58,7 +58,11 @@ const SERVICES: Record<string, ServiceData> = {
       { t: "Pose au cordeau", d: "Niveau laser et précision millimétrique sur les jonctions." },
       { t: "Finition jointoyée", d: "Joints sablés ou cimentés selon l'usage prévu." },
     ],
-    gallery: ["/photos/02-hero-medaillon-paves.jpg", "/photos/12-cour-courbe-muret-pierre.jpg", "/photos/13-cour-parking-muret.jpg"],
+    gallery: [
+      "/__l5e/assets-v1/1c935b79-d832-4151-adea-da3380cec475/maconnerie-1.png",
+      "/__l5e/assets-v1/de15cd90-fcb8-4eeb-b8ca-64161a967e5c/maconnerie-2.png",
+      "/__l5e/assets-v1/ab5e67fa-0f52-439d-a295-dc9f241b56f8/maconnerie-3.png",
+    ],
   },
   "drainage-pentes": {
     n: "04",

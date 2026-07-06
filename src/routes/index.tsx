@@ -950,7 +950,7 @@ function Transformation() {
 
 /* ============ PROCESS ============ */
 const PROCESS = [
-  { n: "01", t: "Visite & Devis", d: "Déplacement gratuit, lecture du terrain et devis détaillé sous 48h.", img: null as string | null },
+  { n: "01", t: "Visite & Devis", d: "Déplacement gratuit, lecture du terrain et devis détaillé.", img: null as string | null },
   { n: "02", t: "Préparation du sol", d: "Décaissement, nivellement laser, compactage et drainage maîtrisés.", img: "/photos/06-chantier-bobcat-preparation.jpg" },
   { n: "03", t: "Pose & Finitions", d: "Enrobé à chaud posé à la main, bordures et maçonnerie soignées.", img: "/photos/01-hero-finisseur-vapeur-sunset.jpg" },
   { n: "04", t: "Contrôle & Finitions", d: "Vérification de la planéité, des pentes d'évacuation et des finitions de bordure. On ne quitte le chantier qu'une fois le rendu impeccable.", img: "/photos/03-hero-rouleau-compacteur.jpg" },

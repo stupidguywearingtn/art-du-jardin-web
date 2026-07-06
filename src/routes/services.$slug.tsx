@@ -24,7 +24,7 @@ const SERVICES: Record<string, ServiceData> = {
   "preparation-terrain": {
     n: "01",
     title: "Préparation de terrain",
-    hero: "/photos/06-chantier-bobcat-preparation.jpg",
+    hero: "/__l5e/assets-v1/03fdbc07-bacb-4d20-9969-38b9031a8e33/preparation-terrain-1.png",
     intro: "De la lecture du sol à la viabilisation complète : HCE prépare votre terrain pour une pose d'enrobé qui dure dans le temps.",
     prestations: ["Aménagements extérieurs", "Terrassement VRD (Voirie et Réseaux Divers)", "Viabilisation de terrains", "Génie civil", "Puits perdus", "Drainage des sols", "Enrochement", "Aménagement de terrasses"],
     methode: [
@@ -32,7 +32,11 @@ const SERVICES: Record<string, ServiceData> = {
       { t: "Décaissement contrôlé", d: "Mini-pelle et chargeur pour respecter les volumes prévus au devis." },
       { t: "Compactage par couches", d: "Plaque vibrante et rouleau, contrôle de portance." },
     ],
-    gallery: ["/photos/06-chantier-bobcat-preparation.jpg", "/photos/07-chantier-terrain-brouette.jpg", "/photos/08-chantier-plaque-vibrante.jpg"],
+    gallery: [
+      "/__l5e/assets-v1/03fdbc07-bacb-4d20-9969-38b9031a8e33/preparation-terrain-1.png",
+      "/__l5e/assets-v1/2f9d82e3-e59e-4a65-b7c9-af967a37c003/preparation-terrain-2.png",
+      "/__l5e/assets-v1/e3cfae3a-0cee-4eb1-89a9-d0fa559e6c4d/preparation-terrain-3.png",
+    ],
   },
   "enrobe-a-chaud": {
     n: "02",

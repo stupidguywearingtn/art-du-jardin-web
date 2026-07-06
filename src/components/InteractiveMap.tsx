@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 
 const CITIES = [
   { name: "Cize", lat: 46.244, lng: 5.464, hq: true, chantiers: 120, desc: "Notre siège social. Atelier, dépôt machines et planning des équipes." },
-  { name: "Lons-le-Saunier", lat: 46.674, lng: 5.554, chantiers: 85, desc: "Chantiers résidentiels et copropriétés. Devis sous 48h." },
+  { name: "Lons-le-Saunier", lat: 46.674, lng: 5.554, chantiers: 85, desc: "Chantiers résidentiels et copropriétés. Devis détaillé." },
   { name: "Saint-Claude", lat: 46.387, lng: 5.864, chantiers: 42, desc: "Préparation de terrain et enrobé en zone montagne." },
   { name: "Champagnole", lat: 46.747, lng: 5.911, chantiers: 38, desc: "Cours, allées et parkings d'entreprise." },
   { name: "Bourg-en-Bresse", lat: 46.205, lng: 5.226, chantiers: 95, desc: "Voiries, parkings et zones commerciales." },

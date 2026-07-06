@@ -99,7 +99,7 @@ const SERVICES: Record<string, ServiceData> = {
     ],
     methode: [
       { t: "Contrôle visuel et de planéité", d: "Vérification complète avant de quitter le chantier." },
-      { t: "Reprise immédiate", d: "Tout défaut de finition repris sur le champ." },
+      { t: "Demande de validation", d: "Chaque étape est validée avec vous avant de poursuivre." },
       { t: "Livraison propre", d: "Chantier rendu propre, prêt à l'usage." },
     ],
     gallery: ["/photos/04-hero-golden-hour.jpg", "/photos/05-hero-chalet-bois-finition.jpg", "/photos/15-cour-golden-hour.jpg"],

@@ -106,7 +106,11 @@ const SERVICES: Record<string, ServiceData> = {
       { t: "Demande de validation", d: "Chaque étape est validée avec vous avant de poursuivre." },
       { t: "Livraison propre", d: "Chantier rendu propre, prêt à l'usage." },
     ],
-    gallery: ["/photos/04-hero-golden-hour.jpg", "/photos/05-hero-chalet-bois-finition.jpg", "/photos/15-cour-golden-hour.jpg"],
+    gallery: [
+      "/__l5e/assets-v1/d6604f6b-5402-4325-8f17-abcc914ef8e0/finitions-1.jpeg",
+      "/__l5e/assets-v1/d4aa6231-de96-4829-b629-85d725db7335/finitions-2.jpeg",
+      "/__l5e/assets-v1/433fa3c0-e168-44ee-9dca-d0052b9ce2e7/finitions-3.jpeg",
+    ],
   },
 };
 

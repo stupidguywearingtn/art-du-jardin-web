@@ -1142,7 +1142,7 @@ function QuoteFormMobile() {
               {step === 2 && (
                 <div className="space-y-4 px-2">
                   <h3 className="font-display text-foreground mb-2" style={{ fontSize: 22, fontWeight: 400 }}>Vos coordonnées</h3>
-                  <p className="text-muted mb-6" style={{ fontSize: 13 }}>On vous rappelle sous 48h.</p>
+                  <p className="text-muted mb-6" style={{ fontSize: 13 }}>On vous rappelle rapidement.</p>
                   <Input label="Nom complet *" value={data.nom} onChange={(v) => setData({ ...data, nom: v })} />
                   <Input label="Téléphone *" value={data.tel} onChange={(v) => setData({ ...data, tel: v })} />
                   <Input label="Email *" value={data.email} onChange={(v) => setData({ ...data, email: v })} type="email" />

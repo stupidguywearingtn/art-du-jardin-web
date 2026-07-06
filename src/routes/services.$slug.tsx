@@ -37,7 +37,7 @@ const SERVICES: Record<string, ServiceData> = {
   "enrobe-a-chaud": {
     n: "02",
     title: "Enrobé à chaud",
-    hero: "/__l5e/assets-v1/900635d3-6e67-4d85-a6f3-3ef39a652596/enrobe-a-chaud-hero.png",
+    hero: "/__l5e/assets-v1/2bde9de8-2a5c-41cf-89c8-66e170f365cd/enrobe-1.png",
     intro: "Pose à la main à 150°C, compactage maîtrisé, garantie décennale. La spécialité historique d'HCE depuis 2012.",
     prestations: ["Enrobé noir, rouge, saumon, bordeaux", "Enrobé sous différentes granulations", "Pose à la main à 150°C", "Compactage maîtrisé", "Garantie décennale"],
     methode: [
@@ -45,7 +45,11 @@ const SERVICES: Record<string, ServiceData> = {
       { t: "Pose à la main", d: "Épaisseur régulière, pentes maîtrisées, joints soignés." },
       { t: "Compactage en plusieurs passes", d: "Rouleau tandem pour une densité optimale." },
     ],
-    gallery: ["/photos/01-hero-finisseur-vapeur-sunset.jpg", "/photos/03-hero-rouleau-compacteur.jpg", "/photos/10-detail-texture-enrobe-frais.jpg", "/photos/15-cour-golden-hour.jpg"],
+    gallery: [
+      "/__l5e/assets-v1/2bde9de8-2a5c-41cf-89c8-66e170f365cd/enrobe-1.png",
+      "/__l5e/assets-v1/3202c8fb-9eee-4884-9a36-914bde9f7c58/enrobe-2.png",
+      "/__l5e/assets-v1/0526a979-30b1-41f7-b575-64df03447d28/enrobe-3.png",
+    ],
   },
   "maconnerie-generale": {
     n: "03",
@@ -67,7 +71,7 @@ const SERVICES: Record<string, ServiceData> = {
   "drainage-pentes": {
     n: "04",
     title: "Drainage & pentes",
-    hero: "/photos/09-detail-bordure-beton.jpg",
+    hero: "/__l5e/assets-v1/0ed1f7f2-328d-443e-87f3-5fa2803157a4/drainage-1.jpeg",
     intro: "Une cour qui dure, c'est d'abord une cour qui évacue l'eau. HCE étudie les pentes avant chaque pose.",
     prestations: ["Études de pente", "Drainage périphérique", "Évacuation des eaux pluviales", "Lecture du terrain avant pose"],
     methode: [
@@ -75,7 +79,11 @@ const SERVICES: Record<string, ServiceData> = {
       { t: "Drains périphériques", d: "Pose de drains et de regards aux endroits stratégiques." },
       { t: "Pentes calculées", d: "Pente minimum 1.5 % vers les exutoires, vérifiée au laser." },
     ],
-    gallery: ["/photos/09-detail-bordure-beton.jpg", "/photos/06-chantier-bobcat-preparation.jpg", "/photos/11-cour-courbe-ciel.jpg"],
+    gallery: [
+      "/__l5e/assets-v1/0ed1f7f2-328d-443e-87f3-5fa2803157a4/drainage-1.jpeg",
+      "/__l5e/assets-v1/d2e48fb9-8087-4957-b1af-aae69e595969/drainage-2.jpeg",
+      "/__l5e/assets-v1/51939538-bcea-4748-9bcc-b5d0c8221bfd/drainage-3.jpeg",
+    ],
   },
   "bordures-murets": {
     n: "05",

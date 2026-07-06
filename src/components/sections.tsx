@@ -647,7 +647,7 @@ function QuoteFormDesktop() {
                     {step === 2 && (
                       <div className="space-y-5">
                         <h3 className="font-display text-foreground mb-2" style={{ fontSize: 28, fontWeight: 400 }}>Vos coordonnées</h3>
-                        <p className="text-muted mb-6" style={{ fontSize: 14 }}>On vous rappelle sous 48h pour planifier la visite.</p>
+                        <p className="text-muted mb-6" style={{ fontSize: 14 }}>On vous rappelle rapidement pour planifier la visite.</p>
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                           <Input label="Nom complet *" value={data.nom} onChange={(v) => setData({ ...data, nom: v })} />
                           <Input label="Téléphone *" value={data.tel} onChange={(v) => setData({ ...data, tel: v })} />

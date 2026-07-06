@@ -763,7 +763,7 @@ function SubmittedScreen({ onReset }: { onReset: () => void }) {
         Votre demande a bien été envoyée.
       </h3>
       <p className="mt-6 text-muted max-w-md mx-auto" style={{ fontSize: 16, lineHeight: 1.6 }}>
-        Nous revenons vers vous sous 48h pour planifier la visite gratuite et établir un devis détaillé.
+        Nous revenons vers vous rapidement pour planifier la visite gratuite et établir un devis détaillé.
       </p>
       <button
         onClick={onReset}

@@ -236,7 +236,7 @@ export function Zone() {
 
 /* ============ FAQ ============ */
 export const FAQS = [
-  { q: "Sous combien de temps recevrai-je mon devis ?", a: "Après visite sur site, nous vous transmettons un devis détaillé sous 48 heures ouvrées, sans engagement." },
+  { q: "Sous combien de temps recevrai-je mon devis ?", a: "Après visite sur site, nous vous transmettons un devis détaillé, sans engagement." },
   { q: "L'enrobé peut-il être posé toute l'année ?", a: "L'enrobé à chaud requiert des températures supérieures à 5°C et un sol sec. Nous intervenons généralement de mars à novembre." },
   { q: "Quelle est la durée de vie d'un enrobé HCE ?", a: "Un enrobé bien préparé et compacté tient 20 à 30 ans selon l'usage, sans entretien lourd." },
   { q: "Faut-il un permis pour refaire ma cour ?", a: "Pour un simple revêtement à l'identique, aucune autorisation n'est nécessaire. Nous vous conseillons en cas de doute." },

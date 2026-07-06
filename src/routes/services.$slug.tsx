@@ -37,7 +37,7 @@ const SERVICES: Record<string, ServiceData> = {
   "enrobe-a-chaud": {
     n: "02",
     title: "Enrobé à chaud",
-    hero: "/__l5e/assets-v1/900635d3-6e67-4d85-a6f3-3ef39a652596/enrobe-a-chaud-hero.png",
+    hero: "/__l5e/assets-v1/2bde9de8-2a5c-41cf-89c8-66e170f365cd/enrobe-1.png",
     intro: "Pose à la main à 150°C, compactage maîtrisé, garantie décennale. La spécialité historique d'HCE depuis 2012.",
     prestations: ["Enrobé noir, rouge, saumon, bordeaux", "Enrobé sous différentes granulations", "Pose à la main à 150°C", "Compactage maîtrisé", "Garantie décennale"],
     methode: [

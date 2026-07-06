@@ -26,12 +26,12 @@ import { EditableImage } from "@/components/EditableImage";
 
 const HOME_SITE_ID = "11111111-1111-1111-1111-111111111111";
 
-const service01 = "/photos/06-chantier-bobcat-preparation.jpg";
-const service02 = "/__l5e/assets-v1/6be5916b-4243-4feb-8f29-69f57d0e2181/enrobe-a-chaud-allee.jpg";
-const service03 = "/__l5e/assets-v1/affc3bb4-5d7e-4326-8eae-ad72469a1178/maconnerie-generale-hero.png";
-const service04 = "/photos/09-detail-bordure-beton.jpg";
-const service05 = "/photos/13-cour-parking-muret.jpg";
-const service06 = "/__l5e/assets-v1/971fdf42-4607-43f7-9ca0-eee19d68bceb/finitions-soignees-hero.png";
+const service01 = "/__l5e/assets-v1/03fdbc07-bacb-4d20-9969-38b9031a8e33/preparation-terrain-1.png";
+const service02 = "/__l5e/assets-v1/2bde9de8-2a5c-41cf-89c8-66e170f365cd/enrobe-1.png";
+const service03 = "/__l5e/assets-v1/1c935b79-d832-4151-adea-da3380cec475/maconnerie-1.png";
+const service04 = "/__l5e/assets-v1/0ed1f7f2-328d-443e-87f3-5fa2803157a4/drainage-1.jpeg";
+const service05 = "/__l5e/assets-v1/4e61c550-2477-4cd0-a800-323188366b6e/bordures-1.png";
+const service06 = "/__l5e/assets-v1/d6604f6b-5402-4325-8f17-abcc914ef8e0/finitions-1.jpeg";
 const ctaCourtyard = "/photos/15-cour-golden-hour.jpg";
 
 if (typeof window !== "undefined") {

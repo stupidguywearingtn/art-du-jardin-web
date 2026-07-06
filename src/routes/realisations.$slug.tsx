@@ -313,7 +313,7 @@ function RealisationsPage() {
         <section className="relative w-full bg-depth-b py-12 md:py-20 px-6 text-center">
           <div className="label text-gold mb-4">— Un projet similaire ?</div>
           <p className="font-display italic text-foreground max-w-2xl mx-auto mb-8" style={{ fontSize: "clamp(20px, 2.6vw, 28px)" }}>
-            Recevez un devis détaillé sous 48h, visite gratuite.
+            Recevez un devis détaillé, visite gratuite.
           </p>
           <div className="flex flex-wrap gap-3 justify-center">
             <Link

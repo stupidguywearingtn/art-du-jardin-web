@@ -26,7 +26,7 @@ const WHY_US_SECTION_FALLBACK: WhyUsSection = {
 };
 
 const WHY_US_CARDS_FALLBACK: WhyUsCard[] = [
-  { id: "fb-1", title: "Enrobé à chaud", description: "Pose à la main à 180°C, compactage maîtrisé pour une durabilité maximale.", icon_name: "flame", display_order: 1, active: true },
+  { id: "fb-1", title: "Enrobé à chaud", description: "Pose à la main à 150°C, compactage maîtrisé pour une durabilité maximale.", icon_name: "flame", display_order: 1, active: true },
   { id: "fb-2", title: "1000+ chantiers", description: "Plus de 1000 chantiers réalisés dans le Jura et l'Ain depuis 2012, 14 années d'expérience.", icon_name: "star", display_order: 2, active: true },
   { id: "fb-3", title: "Devis détaillé", description: "Visite gratuite, devis sous 48h, prix tenus, aucune mauvaise surprise.", icon_name: "file-text", display_order: 3, active: true },
   { id: "fb-4", title: "Finitions soignées", description: "Bords nets, raccords maîtrisés, surface plane et homogène jusqu'à la dernière passe.", icon_name: "shield-check", display_order: 4, active: true },

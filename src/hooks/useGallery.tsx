@@ -31,9 +31,8 @@ type CategoryWithCount = GalleryCategory & { photo_count: number };
 
 const FALLBACK_CATS: GalleryCategory[] = [
   { id: "fb-cour", slug: "cour-allee-privee", title: "Cour & allée privée", description: "Cours résidentielles et allées privées en enrobé à chaud, finitions soignées.", cover_url: "/photos/15-cour-golden-hour.jpg", display_order: 1, active: true },
-  { id: "fb-pro", slug: "parking-voirie-pro", title: "Parking & voirie pro", description: "Parkings d'entreprise, voiries de copropriété, plateformes industrielles.", cover_url: "/photos/26-pro-batiment-commercial.jpg", display_order: 2, active: true },
+  { id: "fb-pro", slug: "parking-voirie-pro", title: "Parking, grand espace et voirie pro", description: "Parkings d'entreprise, voiries de copropriété, plateformes industrielles.", cover_url: "/photos/26-pro-batiment-commercial.jpg", display_order: 2, active: true },
   { id: "fb-prep", slug: "preparation-terrassement", title: "Préparation & terrassement", description: "Décaissement, nivellement, drainage et préparation de plateformes.", cover_url: "/photos/06-chantier-bobcat-preparation.jpg", display_order: 3, active: true },
-  { id: "fb-details", slug: "details-finitions", title: "Détails & finitions", description: "Médaillons, pavés, bordures, raccords millimétriques.", cover_url: "/photos/02-hero-medaillon-paves.jpg", display_order: 4, active: true },
   { id: "fb-chantier", slug: "chantier-en-cours", title: "Chantier en cours", description: "HCE à l'œuvre — pose, compactage, équipe en action.", cover_url: "/photos/01-hero-finisseur-vapeur-sunset.jpg", display_order: 5, active: true },
 ];
 

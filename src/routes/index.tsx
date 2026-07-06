@@ -452,7 +452,7 @@ function MarqueeStats() {
     "1000+ chantiers livrés",
     "14 années d'expérience",
     "Jura · Ain",
-    "Devis sous 48h",
+    "Devis détaillé",
     "Garantie décennale",
     "Enrobé à chaud",
     "Visite gratuite",

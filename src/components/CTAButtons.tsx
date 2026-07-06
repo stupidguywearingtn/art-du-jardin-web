@@ -69,7 +69,7 @@ export function CTASecondary({ children, href = `tel:${PHONE}`, light = false, c
 /* Bandeau sobre — respiration entre sections (fond asphalte, accent cuivre fin) */
 export function CTABanner() {
   const { get } = useSiteContentFields(HOME_SITE_ID);
-  const text = get("cta_banner", "text", "Un projet en tête ? Devis détaillé sous 48h, visite gratuite.");
+  const text = get("cta_banner", "text", "Un projet en tête ? Devis détaillé, visite gratuite.");
   const primaryLabel = get("cta_banner", "primary_label", "Demander mon devis");
 
   return (
@@ -211,7 +211,7 @@ export function ServiceMidCTA({ serviceName, bgImage }: { serviceName: string; b
           Vous avez un projet de <span className="text-gold">{serviceName.toLowerCase()}</span> ?
         </p>
         <p className="mt-3 text-muted text-sm md:text-base">
-          Devis détaillé sous 48h · Visite gratuite · Garantie décennale
+          Devis détaillé · Visite gratuite · Garantie décennale
         </p>
         <div className="mt-7 flex flex-wrap gap-3 justify-center">
           <CTAPrimary>Demander un devis pour ce projet</CTAPrimary>

@@ -20,9 +20,9 @@ export async function ensureWhyUsSeeded(): Promise<boolean> {
   const { count } = await supabase.from("why_us_cards").select("*", { head: true, count: "exact" });
   if ((count ?? 0) === 0) {
     await supabase.from("why_us_cards").insert([
-      { title: "Enrobé à chaud", description: "Pose à la main à 180°C, compactage maîtrisé pour une durabilité maximale.", icon_name: "flame", display_order: 1, active: true },
+      { title: "Enrobé à chaud", description: "Pose à la main à 150°C, compactage maîtrisé pour une durabilité maximale.", icon_name: "flame", display_order: 1, active: true },
       { title: "1000+ chantiers", description: "Plus de 1000 chantiers réalisés dans le Jura et l'Ain depuis 2012, 14 années d'expérience.", icon_name: "star", display_order: 2, active: true },
-      { title: "Devis détaillé", description: "Visite gratuite, devis sous 48h, prix tenus, aucune mauvaise surprise.", icon_name: "file-text", display_order: 3, active: true },
+      { title: "Devis détaillé", description: "Visite gratuite, devis détaillé, prix tenus, aucune mauvaise surprise.", icon_name: "file-text", display_order: 3, active: true },
       { title: "Finitions soignées", description: "Bords nets, raccords maîtrisés, surface plane et homogène jusqu'à la dernière passe.", icon_name: "shield-check", display_order: 4, active: true },
     ]);
   }
@@ -110,9 +110,8 @@ export async function ensureGallerySeeded(): Promise<boolean> {
       .from("gallery_categories")
       .insert([
         { slug: "cour-allee-privee", title: "Cour & allée privée", description: "Cours résidentielles et allées privées en enrobé à chaud, finitions soignées.", cover_url: "/photos/15-cour-golden-hour.jpg", display_order: 1, active: true },
-        { slug: "parking-voirie-pro", title: "Parking & voirie pro", description: "Parkings d'entreprise, voiries de copropriété, plateformes industrielles.", cover_url: "/photos/26-pro-batiment-commercial.jpg", display_order: 2, active: true },
+        { slug: "parking-voirie-pro", title: "Parking, grand espace et voirie pro", description: "Parkings d'entreprise, voiries de copropriété, plateformes industrielles.", cover_url: "/photos/26-pro-batiment-commercial.jpg", display_order: 2, active: true },
         { slug: "preparation-terrassement", title: "Préparation & terrassement", description: "Décaissement, nivellement, drainage et préparation de plateformes.", cover_url: "/photos/06-chantier-bobcat-preparation.jpg", display_order: 3, active: true },
-        { slug: "details-finitions", title: "Détails & finitions", description: "Médaillons, pavés, bordures, raccords millimétriques.", cover_url: "/photos/02-hero-medaillon-paves.jpg", display_order: 4, active: true },
         { slug: "chantier-en-cours", title: "Chantier en cours", description: "HCE à l'œuvre — pose, compactage, équipe en action.", cover_url: "/photos/01-hero-finisseur-vapeur-sunset.jpg", display_order: 5, active: true },
       ])
       .select();

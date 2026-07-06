@@ -38,8 +38,8 @@ const SERVICES: Record<string, ServiceData> = {
     n: "02",
     title: "Enrobé à chaud",
     hero: "/__l5e/assets-v1/900635d3-6e67-4d85-a6f3-3ef39a652596/enrobe-a-chaud-hero.png",
-    intro: "Pose à la main à 180°C, compactage maîtrisé, garantie décennale. La spécialité historique d'HCE depuis 2012.",
-    prestations: ["Enrobé noir, rouge, saumon, bordeaux", "Goudronnage fins ou épais", "Pose à la main à 180°C", "Compactage maîtrisé", "Garantie décennale"],
+    intro: "Pose à la main à 150°C, compactage maîtrisé, garantie décennale. La spécialité historique d'HCE depuis 2012.",
+    prestations: ["Enrobé noir, rouge, saumon, bordeaux", "Enrobé sous différentes granulations", "Pose à la main à 150°C", "Compactage maîtrisé", "Garantie décennale"],
     methode: [
       { t: "Préparation thermique", d: "Enrobé livré à température, application sans interruption." },
       { t: "Pose à la main", d: "Épaisseur régulière, pentes maîtrisées, joints soignés." },
@@ -88,7 +88,7 @@ const SERVICES: Record<string, ServiceData> = {
   },
   "finitions-soignees": {
     n: "06",
-    title: "Finitions soignées",
+    title: "Vous avez un projet d'aménagement de cour en enrobé",
     hero: "/__l5e/assets-v1/971fdf42-4607-43f7-9ca0-eee19d68bceb/finitions-soignees-hero.png",
     intro: "Bords nets, raccords maîtrisés, surface plane et homogène. Le souci du détail jusqu'à la dernière passe.",
     prestations: [
@@ -99,7 +99,7 @@ const SERVICES: Record<string, ServiceData> = {
     ],
     methode: [
       { t: "Contrôle visuel et de planéité", d: "Vérification complète avant de quitter le chantier." },
-      { t: "Reprise immédiate", d: "Tout défaut de finition repris sur le champ." },
+      { t: "Demande de validation", d: "Chaque étape est validée avec vous avant de poursuivre." },
       { t: "Livraison propre", d: "Chantier rendu propre, prêt à l'usage." },
     ],
     gallery: ["/photos/04-hero-golden-hour.jpg", "/photos/05-hero-chalet-bois-finition.jpg", "/photos/15-cour-golden-hour.jpg"],
@@ -265,7 +265,7 @@ function ServicePageBody() {
               Vous avez un projet de <span className="text-gold">{data.title.toLowerCase()}</span> ?
             </p>
             <p className="mt-3 text-muted text-sm md:text-base">
-              Devis détaillé sous 48h · Visite gratuite · Garantie décennale
+              Devis détaillé · Visite gratuite · Garantie décennale
             </p>
             <div className="mt-7">
               <Link

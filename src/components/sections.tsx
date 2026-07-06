@@ -236,7 +236,7 @@ export function Zone() {
 
 /* ============ FAQ ============ */
 export const FAQS = [
-  { q: "Sous combien de temps recevrai-je mon devis ?", a: "Après visite sur site, nous vous transmettons un devis détaillé sous 48 heures ouvrées, sans engagement." },
+  { q: "Sous combien de temps recevrai-je mon devis ?", a: "Après visite sur site, nous vous transmettons un devis détaillé, sans engagement." },
   { q: "L'enrobé peut-il être posé toute l'année ?", a: "L'enrobé à chaud requiert des températures supérieures à 5°C et un sol sec. Nous intervenons généralement de mars à novembre." },
   { q: "Quelle est la durée de vie d'un enrobé HCE ?", a: "Un enrobé bien préparé et compacté tient 20 à 30 ans selon l'usage, sans entretien lourd." },
   { q: "Faut-il un permis pour refaire ma cour ?", a: "Pour un simple revêtement à l'identique, aucune autorisation n'est nécessaire. Nous vous conseillons en cas de doute." },
@@ -647,7 +647,7 @@ function QuoteFormDesktop() {
                     {step === 2 && (
                       <div className="space-y-5">
                         <h3 className="font-display text-foreground mb-2" style={{ fontSize: 28, fontWeight: 400 }}>Vos coordonnées</h3>
-                        <p className="text-muted mb-6" style={{ fontSize: 14 }}>On vous rappelle sous 48h pour planifier la visite.</p>
+                        <p className="text-muted mb-6" style={{ fontSize: 14 }}>On vous rappelle rapidement pour planifier la visite.</p>
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                           <Input label="Nom complet *" value={data.nom} onChange={(v) => setData({ ...data, nom: v })} />
                           <Input label="Téléphone *" value={data.tel} onChange={(v) => setData({ ...data, tel: v })} />
@@ -763,7 +763,7 @@ function SubmittedScreen({ onReset }: { onReset: () => void }) {
         Votre demande a bien été envoyée.
       </h3>
       <p className="mt-6 text-muted max-w-md mx-auto" style={{ fontSize: 16, lineHeight: 1.6 }}>
-        Nous revenons vers vous sous 48h pour planifier la visite gratuite et établir un devis détaillé.
+        Nous revenons vers vous rapidement pour planifier la visite gratuite et établir un devis détaillé.
       </p>
       <button
         onClick={onReset}
@@ -1142,7 +1142,7 @@ function QuoteFormMobile() {
               {step === 2 && (
                 <div className="space-y-4 px-2">
                   <h3 className="font-display text-foreground mb-2" style={{ fontSize: 22, fontWeight: 400 }}>Vos coordonnées</h3>
-                  <p className="text-muted mb-6" style={{ fontSize: 13 }}>On vous rappelle sous 48h.</p>
+                  <p className="text-muted mb-6" style={{ fontSize: 13 }}>On vous rappelle rapidement.</p>
                   <Input label="Nom complet *" value={data.nom} onChange={(v) => setData({ ...data, nom: v })} />
                   <Input label="Téléphone *" value={data.tel} onChange={(v) => setData({ ...data, tel: v })} />
                   <Input label="Email *" value={data.email} onChange={(v) => setData({ ...data, email: v })} type="email" />

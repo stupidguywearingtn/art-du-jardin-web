@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from "react";
 import { useEditMode } from "@/hooks/useEditMode";
 import { useAuth } from "@/hooks/useAuth";
 import { supabase } from "@/integrations/supabase/client";
@@ -18,6 +19,23 @@ import { toast } from "sonner";
 export function EditModeToolbar() {
   const { isAdmin, enabled, toggle, drafts, hasDrafts, publish, cancel, publishing } = useEditMode();
   const { user } = useAuth();
+  const barRef = useRef<HTMLDivElement>(null);
+  const [barHeight, setBarHeight] = useState(44);
+
+  // La barre peut passer sur deux lignes selon la largeur d'écran et le
+  // nombre de boutons visibles (draft en attente, etc.) : un spacer figé à
+  // 44px ne matchait pas toujours la vraie hauteur -> contenu de la page
+  // recouvert par la barre ou grand espace vide selon les cas, ce qui
+  // pouvait donner l'impression d'un rendu cassé / d'un saut au chargement.
+  useEffect(() => {
+    if (!isAdmin || !barRef.current) return;
+    const el = barRef.current;
+    const ro = new ResizeObserver(([entry]) => {
+      setBarHeight(Math.ceil(entry.contentRect.height));
+    });
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, [isAdmin]);
 
   if (!isAdmin) return null;
 
@@ -32,6 +50,7 @@ export function EditModeToolbar() {
   return (
     <>
       <div
+        ref={barRef}
         className="fixed top-0 inset-x-0 z-[200] text-creme-50 shadow-[0_4px_18px_rgba(0,0,0,0.45)]"
         style={{ background: "var(--cuivre-500)", color: "var(--creme-50)", fontFamily: "var(--font-body)" }}
         role="region"
@@ -109,8 +128,9 @@ export function EditModeToolbar() {
         </div>
       </div>
 
-      {/* Spacer pour pousser le contenu de la page sous la barre */}
-      <div aria-hidden style={{ height: 44 }} />
+      {/* Spacer pour pousser le contenu de la page sous la barre — hauteur
+          mesurée en direct, jamais figée, pour matcher la vraie barre. */}
+      <div aria-hidden style={{ height: barHeight }} />
     </>
   );
 }

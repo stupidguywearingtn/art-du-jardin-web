@@ -12,6 +12,7 @@ import { useSiteContentFields } from "@/hooks/useSiteContentFields";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { Pencil, Trash2, Plus, Loader2 } from "lucide-react";
+import { optimizeImageUrl } from "@/lib/optimizeImage";
 
 const HOME_SITE_ID = "11111111-1111-1111-1111-111111111111";
 
@@ -269,7 +270,7 @@ function RealisationsPage() {
                         aria-label={`Ouvrir la photo ${idx + 1}`}
                       >
                         <img
-                          src={p.url}
+                          src={optimizeImageUrl(p.url, 700)}
                           alt={p.alt_text ?? category.title}
                           loading="lazy"
                           className="w-full h-auto object-cover transition-transform duration-700 group-hover/photo:scale-105"
@@ -393,7 +394,7 @@ function RealisationsPage() {
               aria-label="Suivant"
             >›</button>
             <img
-              src={photos[lightbox].url}
+              src={optimizeImageUrl(photos[lightbox].url, 1600)}
               alt={photos[lightbox].alt_text ?? category.title}
               className="max-h-[80vh] max-w-[90vw] object-contain"
               onClick={(e) => e.stopPropagation()}

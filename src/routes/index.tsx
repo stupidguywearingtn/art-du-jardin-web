@@ -23,6 +23,7 @@ import { EditModeProvider, useEditMode } from "@/hooks/useEditMode";
 import { EditModeToolbar } from "@/components/EditModeToolbar";
 import { EditableText } from "@/components/EditableText";
 import { EditableImage } from "@/components/EditableImage";
+import { optimizeImageUrl } from "@/lib/optimizeImage";
 
 const HOME_SITE_ID = "11111111-1111-1111-1111-111111111111";
 
@@ -245,6 +246,17 @@ function GesteMatiere() {
               />
             )}
           </EditableImage>
+          {/* Fondu vers le fond sombre de la section — la photo (ciel, lumière
+              du coucher de soleil) tranchait sinon nettement avec le panneau
+              texte à sa droite / en dessous sur mobile. */}
+          <div
+            className="absolute inset-0 pointer-events-none"
+            aria-hidden
+            style={{
+              background:
+                "linear-gradient(to bottom, transparent 60%, var(--asphalte-900) 100%), linear-gradient(to right, transparent 82%, var(--asphalte-900) 100%)",
+            }}
+          />
         </div>
         <div className="md:col-span-2 flex items-center px-6 md:px-12 py-12 md:py-24">
           <div>
@@ -268,8 +280,8 @@ function GesteMatiere() {
               multiline
             />
             <Link
-              to="/services/enrobe-a-chaud"
-
+              to="/services/$slug"
+              params={{ slug: "enrobe-a-chaud" }}
               className="inline-flex items-center gap-3 mt-10 text-gold border-b border-gold/40 pb-1 hover:border-gold transition-colors"
               style={{ fontFamily: "var(--font-body)", fontSize: 13, letterSpacing: "0.15em", textTransform: "uppercase" }}
             >
@@ -304,16 +316,16 @@ function MatiereFinitions() {
     { img: "/photos/10-detail-texture-enrobe-frais.jpg", t: "Grain & compactage", d: "Enrobé à chaud posé à la main à 150°C, compacté pour résister à la décennie." },
   ];
   return (
-    <section className="relative w-full bg-cream py-10 md:py-20 px-6 md:px-12 overflow-hidden">
+    <section className="relative w-full bg-depth-c py-10 md:py-20 px-6 md:px-12 overflow-hidden">
       <div className="max-w-3xl mx-auto text-center mb-16">
-        <EditableText section="matiere" field="label" value={v("matiere", "label", "— Détails & finitions")} as="div" className="label" style={{ color: "var(--cuivre-500)" }} />
+        <EditableText section="matiere" field="label" value={v("matiere", "label", "— Détails & finitions")} as="div" className="label text-gold" />
         <EditableText
           section="matiere"
           field="title"
           value={v("matiere", "title", "La matière fait\nla différence.")}
           as="h2"
-          className="font-display mt-6"
-          style={{ color: "var(--asphalte-900)", fontSize: "clamp(36px, 6vw, 72px)", fontWeight: 400, lineHeight: 1 }}
+          className="font-display mt-6 text-foreground"
+          style={{ fontSize: "clamp(36px, 6vw, 72px)", fontWeight: 400, lineHeight: 1 }}
           multiline
         />
       </div>
@@ -329,7 +341,7 @@ function MatiereFinitions() {
               key={i}
               data-mf-card
 
-              className="details-card group bg-[var(--creme-100)] overflow-hidden border-l-4 transition-all duration-500 hover:-translate-y-1 snap-start"
+              className="details-card group bg-card overflow-hidden border-l-4 transition-all duration-500 hover:-translate-y-1 snap-start"
               style={{ borderColor: "var(--cuivre-500)", flex: "0 0 80%", maxWidth: 360 }}
             >
               <div className="aspect-[4/3] overflow-hidden">
@@ -338,8 +350,8 @@ function MatiereFinitions() {
                 </EditableImage>
               </div>
               <div className="p-6">
-                <EditableText section="matiere" field={`item_${i}_t`} value={v("matiere", `item_${i}_t`, it.t)} as="h3" className="font-display" style={{ color: "var(--asphalte-900)", fontSize: 24, fontWeight: 500 }} />
-                <EditableText section="matiere" field={`item_${i}_d`} value={v("matiere", `item_${i}_d`, it.d)} as="p" className="mt-3" style={{ color: "var(--asphalte-700)", fontSize: 14, lineHeight: 1.6 }} multiline />
+                <EditableText section="matiere" field={`item_${i}_t`} value={v("matiere", `item_${i}_t`, it.t)} as="h3" className="font-display text-foreground" style={{ fontSize: 24, fontWeight: 500 }} />
+                <EditableText section="matiere" field={`item_${i}_d`} value={v("matiere", `item_${i}_d`, it.d)} as="p" className="mt-3 text-muted" style={{ fontSize: 14, lineHeight: 1.6 }} multiline />
               </div>
             </article>
           );
@@ -393,7 +405,7 @@ function Galerie() {
                 className={`relative group overflow-hidden aspect-[4/5] md:aspect-[4/5] block ${fullWidth}`}
                 style={{ background: "var(--surface)" }}
               >
-                <img src={cover} alt="Avant / Après" loading="lazy" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                <img src={optimizeImageUrl(cover, 900)} alt="Avant / Après" loading="lazy" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
                 <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.35) 55%, rgba(0,0,0,0.1) 100%)" }} />
                 <div className="absolute bottom-0 left-0 right-0 p-4 md:p-5 text-left">
                   <div className="label" style={{ color: "var(--gold)", fontSize: 9, marginBottom: 6 }}>Comparaisons</div>
@@ -417,7 +429,7 @@ function Galerie() {
               className={`relative group overflow-hidden aspect-[4/5] md:aspect-[4/5] block ${fullWidth}`}
               style={{ background: "var(--surface)" }}
             >
-              <img src={cover} alt={cat.title} loading="lazy" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+              <img src={optimizeImageUrl(cover, 900)} alt={cat.title} loading="lazy" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
               <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0.1) 100%)" }} />
               <div className="absolute bottom-0 left-0 right-0 p-4 md:p-5 text-left">
                 <div className="label" style={{ color: "var(--gold)", fontSize: 9, marginBottom: 6 }}>{count} photos</div>
@@ -584,6 +596,14 @@ function CornerGlow({ corner = "tl", tint = "gold" }: { corner?: "tl" | "tr" | "
 }
 
 /* ============ HERO ============ */
+// Ligne 1 = marque (grande, dense), ligne 2 = accroche (petite, dorée,
+// espacée) — avant, les deux lignes partageaient exactement la même taille
+// et graisse, seule la casse du texte saisi les distinguait.
+const HERO_LINE_STYLES: React.CSSProperties[] = [
+  { fontSize: "clamp(2.4rem, 9vw, 7.5rem)", fontWeight: 700, lineHeight: 1, letterSpacing: "-0.03em" },
+  { fontSize: "clamp(1rem, 2.6vw, 1.75rem)", fontWeight: 400, lineHeight: 1.3, letterSpacing: "0.06em" },
+];
+
 function Hero() {
   const titleRef = useRef<HTMLHeadingElement>(null);
   const lineRef = useRef<HTMLDivElement>(null);
@@ -601,6 +621,17 @@ function Hero() {
     if (editEnabled) return; // skip GSAP split animation in edit mode
     if (!titleRef.current) return;
     const chars = titleRef.current.querySelectorAll("[data-c]");
+    // Le contenu (line1/line2) arrive de Supabase de façon asynchrone : ce
+    // useEffect se redéclenche dès que le vrai texte remplace le texte par
+    // défaut. Sans reset explicite ni kill() de l'animation précédente, un
+    // second passage démarre sur des caractères déjà partiellement animés
+    // (ou dont les spans ont été recréés par React) -> lettres manquantes,
+    // mots coupés. On force un état de départ propre à chaque déclenchement
+    // et on tue proprement toute timeline en cours au nettoyage.
+    gsap.set(chars, { yPercent: -110, opacity: 0 });
+    if (lineRef.current) gsap.set(lineRef.current, { width: 0 });
+    if (subRef.current) gsap.set(subRef.current, { opacity: 0, y: 10 });
+
     const tl = gsap.timeline({ delay: 1.0 });
     tl.fromTo(chars,
       { yPercent: -110, opacity: 0 },
@@ -608,6 +639,10 @@ function Hero() {
     );
     if (lineRef.current) tl.fromTo(lineRef.current, { width: 0 }, { width: 120, duration: 0.8, ease: "power3.out" }, "-=0.3");
     if (subRef.current) tl.fromTo(subRef.current, { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.8 }, "-=0.4");
+
+    return () => {
+      tl.kill();
+    };
   }, [line1, line2, editEnabled]);
 
   const lines = [line1, line2];
@@ -623,34 +658,38 @@ function Hero() {
 
       <div className="relative z-10 flex h-full flex-col items-center justify-center px-6">
         {editEnabled ? (
-          <div className="text-center space-y-2">
+          <div className="text-center space-y-3">
             <EditableText
               section="hero"
               field="line1"
               value={line1}
               as="h1"
               className="font-display text-foreground block"
-              style={{ fontSize: "clamp(2rem, 7.5vw, 6.5rem)", fontWeight: 400, lineHeight: 1, letterSpacing: "-0.02em", wordBreak: "keep-all", overflowWrap: "normal", hyphens: "none" }}
+              style={HERO_LINE_STYLES[0]}
             />
             <EditableText
               section="hero"
               field="line2"
               value={line2}
-              as="h1"
-              className="font-display text-foreground block"
-              style={{ fontSize: "clamp(2rem, 7.5vw, 6.5rem)", fontWeight: 400, lineHeight: 1, letterSpacing: "-0.02em", wordBreak: "keep-all", overflowWrap: "normal", hyphens: "none" }}
+              as="p"
+              className="font-display text-gold block"
+              style={HERO_LINE_STYLES[1]}
             />
           </div>
         ) : (
           <h1
             ref={titleRef}
             className="font-display text-center text-foreground px-2"
-            style={{ fontSize: "clamp(2rem, 7.5vw, 6.5rem)", fontWeight: 400, lineHeight: 1, letterSpacing: "-0.02em", wordBreak: "keep-all", overflowWrap: "normal", hyphens: "none" }}
+            style={{ wordBreak: "keep-all", overflowWrap: "normal", hyphens: "none" }}
           >
             {lines.map((line, li) => {
               const words = line.split(" ");
               return (
-                <span key={li} className="block overflow-hidden" style={{ wordBreak: "keep-all", overflowWrap: "normal" }}>
+                <span
+                  key={li}
+                  className={`block overflow-hidden ${li === 1 ? "text-gold" : ""}`}
+                  style={{ ...HERO_LINE_STYLES[li], wordBreak: "keep-all", overflowWrap: "normal" }}
+                >
                   {words.map((word, wi) => (
                     <span key={wi} className="inline-block" style={{ whiteSpace: "nowrap", marginRight: wi < words.length - 1 ? "0.28em" : 0 }}>
                       {word.split("").map((c, ci) => (
@@ -704,8 +743,9 @@ function Philosophy() {
     <section className="relative w-full overflow-hidden bg-[#0e0e0f]">
       <div className="relative w-full flex items-center justify-center">
         <img
-          src={HCE_LOGO}
+          src={optimizeImageUrl(HCE_LOGO, 1600)}
           alt="HCE — Aménagement de cours en enrobé"
+          loading="lazy"
           className="w-full h-auto select-none pointer-events-none object-contain block"
           draggable={false}
         />

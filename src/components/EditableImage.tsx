@@ -12,6 +12,7 @@ import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { useEditMode } from "@/hooks/useEditMode";
+import { optimizeImageUrl } from "@/lib/optimizeImage";
 
 type Props = {
   section: string;
@@ -49,7 +50,9 @@ export function EditableImage({ section, field, value, children }: Props) {
     }
   };
 
-  if (!enabled) return <>{children(value)}</>;
+  const displayUrl = optimizeImageUrl(value);
+
+  if (!enabled) return <>{children(displayUrl)}</>;
 
   return (
     <>
@@ -60,7 +63,7 @@ export function EditableImage({ section, field, value, children }: Props) {
           onMouseEnter={(e) => { e.currentTarget.style.outline = "2px solid var(--cuivre-500)"; e.currentTarget.style.outlineOffset = "-2px"; }}
           onMouseLeave={(e) => { e.currentTarget.style.outline = "0 solid transparent"; }}
         >
-          {children(value)}
+          {children(displayUrl)}
         </div>
         <div
           className="absolute inset-0 flex items-center justify-center opacity-0 group-hover/editable:opacity-100 transition-opacity pointer-events-none"

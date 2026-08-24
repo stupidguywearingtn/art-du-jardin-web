@@ -7,6 +7,7 @@ import { useSiteContentFields } from "@/hooks/useSiteContentFields";
 import { EditModeProvider } from "@/hooks/useEditMode";
 import { EditModeToolbar } from "@/components/EditModeToolbar";
 import { EditableImage } from "@/components/EditableImage";
+import { optimizeImageUrl } from "@/lib/optimizeImage";
 
 const HOME_SITE_ID = "11111111-1111-1111-1111-111111111111";
 
@@ -246,7 +247,14 @@ function ServicePageBody() {
         {/* HERO */}
         <section className="relative w-full h-[80vh] overflow-hidden">
           <EditableImage section="service_images" field={slug} value={heroImg}>
-            {(url) => <img src={url} alt={data.title} className="absolute inset-0 w-full h-full object-cover" />}
+            {(url) => (
+              <img
+                src={url}
+                alt={data.title}
+                fetchPriority="high"
+                className="absolute inset-0 w-full h-full object-cover"
+              />
+            )}
           </EditableImage>
           <div
             className="absolute inset-0"
@@ -305,7 +313,7 @@ function ServicePageBody() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
             {data.gallery.map((g) => (
               <div key={g} className="aspect-[4/3] overflow-hidden">
-                <img src={g} alt={data.title} loading="lazy" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" />
+                <img src={optimizeImageUrl(g, 800)} alt={data.title} loading="lazy" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" />
               </div>
             ))}
           </div>

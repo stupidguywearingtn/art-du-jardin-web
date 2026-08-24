@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { SmoothScroll } from "@/components/SmoothScroll";
 import { MobileFloatingCTA } from "@/components/CTAButtons";
 import { WhatsAppFAB } from "@/components/WhatsAppFAB";
+import { optimizeImageUrl } from "@/lib/optimizeImage";
 
 export const Route = createFileRoute("/realisations/avant-apres")({
   component: AvantApresPage,
@@ -49,9 +50,10 @@ function MiniCarousel({ images, label }: { images: string[]; label: "Avant" | "A
       {slides.map((src, i) => (
         <img
           key={`${src}-${i}`}
-          src={src}
+          src={optimizeImageUrl(src, 900)}
           alt=""
           aria-hidden="true"
+          loading={i === 0 ? "eager" : "lazy"}
           className="absolute inset-0 w-full h-full object-cover transition-opacity duration-[800ms] ease-in-out"
           style={{ opacity: i === idx ? 1 : 0 }}
         />

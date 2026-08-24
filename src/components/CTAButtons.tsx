@@ -1,5 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import { useSiteContentFields } from "@/hooks/useSiteContentFields";
+import { optimizeImageUrl } from "@/lib/optimizeImage";
 
 const HOME_SITE_ID = "11111111-1111-1111-1111-111111111111";
 
@@ -203,7 +204,7 @@ export function ServiceMidCTA({ serviceName, bgImage }: { serviceName: string; b
       <div
         ref={ref}
         className="absolute inset-0 bg-cover bg-center"
-        style={{ backgroundImage: `url(${bgImage})` }}
+        style={{ backgroundImage: `url(${optimizeImageUrl(bgImage, 1200)})` }}
       />
       <div className="absolute inset-0" style={{ background: "rgba(14,14,15,0.7)" }} />
       <div className="relative z-10 px-6 py-14 md:py-16 text-center max-w-3xl mx-auto">

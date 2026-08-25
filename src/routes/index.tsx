@@ -205,6 +205,8 @@ const NAV_LINKS = [
 
 function SiteHeader() {
   const [open, setOpen] = useState(false);
+  const { isAdmin } = useAuth();
+  const { enabled: editEnabled, toggle: toggleEdit } = useEditMode();
   return (
     <>
       <header className="fixed top-0 left-0 right-0 z-[60] pointer-events-none">
@@ -238,15 +240,32 @@ function SiteHeader() {
             >
               03 84 52 61 48
             </a>
-            <Link
-              to="/signin"
-              className="inline-flex items-center justify-center w-9 h-9 rounded-full text-foreground/60 hover:text-gold hover:border-gold/50 transition-colors"
-              style={{ border: "1px solid rgba(255,255,255,0.15)" }}
-              title="Espace pro"
-              aria-label="Espace pro"
-            >
-              <KeyRound className="w-4 h-4" />
-            </Link>
+            {isAdmin ? (
+              <button
+                type="button"
+                onClick={toggleEdit}
+                className="inline-flex items-center justify-center w-9 h-9 rounded-full transition-colors"
+                style={{
+                  border: "1px solid rgba(255,255,255,0.15)",
+                  color: editEnabled ? "var(--asphalte-900)" : "var(--foreground)",
+                  background: editEnabled ? "var(--gold)" : "transparent",
+                }}
+                title={editEnabled ? "Désactiver le mode édition" : "Activer le mode édition"}
+                aria-label={editEnabled ? "Désactiver le mode édition" : "Activer le mode édition"}
+              >
+                <KeyRound className="w-4 h-4" />
+              </button>
+            ) : (
+              <Link
+                to="/signin"
+                className="inline-flex items-center justify-center w-9 h-9 rounded-full text-foreground/60 hover:text-gold hover:border-gold/50 transition-colors"
+                style={{ border: "1px solid rgba(255,255,255,0.15)" }}
+                title="Espace pro"
+                aria-label="Espace pro"
+              >
+                <KeyRound className="w-4 h-4" />
+              </Link>
+            )}
           </div>
 
           <button
@@ -284,14 +303,28 @@ function SiteHeader() {
             <a href="tel:0384526148" className="font-display text-foreground" style={{ fontSize: 24 }} onClick={() => setOpen(false)}>
               03 84 52 61 48
             </a>
-            <Link
-              to="/signin"
-              className="mt-4 inline-flex items-center gap-2 text-foreground/50 hover:text-gold transition-colors"
-              style={{ fontSize: 13, letterSpacing: "0.04em" }}
-              onClick={() => setOpen(false)}
-            >
-              <KeyRound className="w-3.5 h-3.5" /> Espace pro
-            </Link>
+            {isAdmin ? (
+              <button
+                type="button"
+                onClick={() => {
+                  toggleEdit();
+                  setOpen(false);
+                }}
+                className="mt-4 inline-flex items-center gap-2 transition-colors"
+                style={{ fontSize: 13, letterSpacing: "0.04em", color: editEnabled ? "var(--gold)" : "var(--foreground)", opacity: 0.85 }}
+              >
+                <KeyRound className="w-3.5 h-3.5" /> {editEnabled ? "Mode édition ACTIF" : "Activer le mode édition"}
+              </button>
+            ) : (
+              <Link
+                to="/signin"
+                className="mt-4 inline-flex items-center gap-2 text-foreground/50 hover:text-gold transition-colors"
+                style={{ fontSize: 13, letterSpacing: "0.04em" }}
+                onClick={() => setOpen(false)}
+              >
+                <KeyRound className="w-3.5 h-3.5" /> Espace pro
+              </Link>
+            )}
           </nav>
         </div>
       )}

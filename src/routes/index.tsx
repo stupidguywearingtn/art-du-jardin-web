@@ -191,18 +191,57 @@ function IndexBody() {
   );
 }
 
-/* ============ HEADER — burger mobile, plus de bouton ADMIN (URL /signin secrète) ============ */
+/* ============ HEADER — nav desktop + burger mobile ============
+   Avant : rien du tout en desktop (bouton burger caché md:hidden, aucun
+   remplaçant), et un tiroir mobile à 2 liens seulement -> aucun moyen de
+   naviguer vers les sections du site. */
+const NAV_LINKS = [
+  { href: "#services", label: "Services" },
+  { href: "#galerie", label: "Réalisations" },
+  { href: "#process", label: "Étapes" },
+  { href: "#devis", label: "Contact" },
+];
+
 function SiteHeader() {
   const [open, setOpen] = useState(false);
   return (
     <>
       <header className="fixed top-0 left-0 right-0 z-[60] pointer-events-none">
-        <div className="flex items-center justify-end px-4 md:px-8 py-4">
+        <div className="flex items-center justify-between px-4 md:px-8 py-3">
+          <a href="#top" className="pointer-events-auto font-display text-gold hidden md:inline-block" style={{ fontSize: 20 }}>
+            HCE
+          </a>
+
+          <nav
+            className="pointer-events-auto hidden md:flex items-center gap-7 px-6 py-2.5 rounded-full"
+            style={{ background: "rgba(14,14,15,0.55)", backdropFilter: "blur(8px)", border: "1px solid rgba(200,153,42,0.25)" }}
+            aria-label="Navigation principale"
+          >
+            {NAV_LINKS.map((l) => (
+              <a
+                key={l.href}
+                href={l.href}
+                className="text-foreground/85 hover:text-gold transition-colors"
+                style={{ fontSize: 13, letterSpacing: "0.04em" }}
+              >
+                {l.label}
+              </a>
+            ))}
+          </nav>
+
+          <a
+            href="tel:0384526148"
+            className="pointer-events-auto hidden md:inline-flex items-center gap-2 text-foreground hover:text-gold transition-colors font-medium"
+            style={{ fontSize: 13 }}
+          >
+            03 84 52 61 48
+          </a>
+
           <button
             type="button"
             onClick={() => setOpen(true)}
             aria-label="Ouvrir le menu"
-            className="md:hidden pointer-events-auto inline-flex items-center justify-center"
+            className="md:hidden pointer-events-auto inline-flex items-center justify-center ml-auto"
             style={{
               width: 40, height: 40, borderRadius: 3,
               background: "rgba(14,14,15,0.5)", backdropFilter: "blur(6px)",
@@ -219,8 +258,20 @@ function SiteHeader() {
             <button onClick={() => setOpen(false)} aria-label="Fermer" className="text-foreground text-3xl leading-none">×</button>
           </div>
           <nav className="flex-1 flex flex-col items-center justify-center gap-6 px-6">
-            <a href="#devis" className="font-display text-foreground" style={{ fontSize: 24 }} onClick={() => setOpen(false)}>Demander un devis</a>
-            <a href="tel:0384526148" className="font-display text-foreground" style={{ fontSize: 24 }}>03 84 52 61 48</a>
+            {NAV_LINKS.map((l) => (
+              <a
+                key={l.href}
+                href={l.href}
+                className="font-display text-foreground hover:text-gold transition-colors"
+                style={{ fontSize: 24 }}
+                onClick={() => setOpen(false)}
+              >
+                {l.label}
+              </a>
+            ))}
+            <a href="tel:0384526148" className="font-display text-foreground" style={{ fontSize: 24 }} onClick={() => setOpen(false)}>
+              03 84 52 61 48
+            </a>
           </nav>
         </div>
       )}
@@ -608,6 +659,7 @@ function Hero() {
   const titleRef = useRef<HTMLHeadingElement>(null);
   const lineRef = useRef<HTMLDivElement>(null);
   const subRef = useRef<HTMLDivElement>(null);
+  const hasPlayedOnceRef = useRef(false);
   const { get } = useSiteContent();
   const { enabled: editEnabled } = useEditMode();
   const v = useV();
@@ -632,7 +684,15 @@ function Hero() {
     if (lineRef.current) gsap.set(lineRef.current, { width: 0 });
     if (subRef.current) gsap.set(subRef.current, { opacity: 0, y: 10 });
 
-    const tl = gsap.timeline({ delay: 1.0 });
+    // Le délai cinématique d'1s n'a de sens qu'au tout premier passage
+    // (juste après le chargement de la page). Si l'effet se redéclenche
+    // ensuite parce que le vrai contenu Supabase vient de remplacer le
+    // texte par défaut, on ne veut pas resubir ce délai : le titre resterait
+    // invisible plusieurs secondes de plus, ce qui a l'air cassé/lent.
+    const delay = hasPlayedOnceRef.current ? 0 : 1.0;
+    hasPlayedOnceRef.current = true;
+
+    const tl = gsap.timeline({ delay });
     tl.fromTo(chars,
       { yPercent: -110, opacity: 0 },
       { yPercent: 0, opacity: 1, duration: 1, ease: "power4.out", stagger: 0.03 }
@@ -647,7 +707,7 @@ function Hero() {
 
   const lines = [line1, line2];
   return (
-    <section className="relative h-screen w-full overflow-hidden bg-background">
+    <section id="top" className="relative h-screen w-full overflow-hidden bg-background">
       <video
         className="absolute inset-0 h-full w-full object-cover"
         src="/videos/hero.mp4"
@@ -814,6 +874,7 @@ function Services() {
 
   return (
     <section
+      id="services"
       className="relative bg-background py-10 md:py-20 overflow-hidden"
       style={{ background: "radial-gradient(ellipse at center, var(--asphalte-700) 0%, var(--asphalte-900) 70%)" }}
     >
@@ -1047,7 +1108,7 @@ function Process() {
   }, []);
 
   return (
-    <section className="relative bg-depth-b py-10 md:py-20 px-6 md:px-12 overflow-hidden">
+    <section id="process" className="relative bg-depth-b py-10 md:py-20 px-6 md:px-12 overflow-hidden">
       <CornerGlow corner="tr" tint="gold" />
       <CornerGlow corner="bl" tint="green" />
       <GiantNumber n="03" position="right" />
@@ -1217,7 +1278,7 @@ function Footer() {
   const services = get("services", SERVICES) as typeof SERVICES;
   const v = useV();
   return (
-    <footer className="relative overflow-hidden pt-24 pb-10 px-6 md:px-12" style={{ background: "radial-gradient(circle at 20% 0%, rgba(180,130,90,0.18) 0%, transparent 45%), radial-gradient(circle at 80% 100%, rgba(255,255,255,0.08) 0%, transparent 40%), var(--footer)" }}>
+    <footer className="relative overflow-hidden pt-24 pb-44 md:pb-10 px-6 md:px-12" style={{ background: "radial-gradient(circle at 20% 0%, rgba(180,130,90,0.18) 0%, transparent 45%), radial-gradient(circle at 80% 100%, rgba(255,255,255,0.08) 0%, transparent 40%), var(--footer)" }}>
       <div
         className="absolute inset-x-0 top-1/2 -translate-y-1/2 text-center font-display pointer-events-none select-none whitespace-nowrap"
         style={{ opacity: 0.04, fontSize: "clamp(80px, 18vw, 280px)", color: "#FFFFFF", fontWeight: 300, lineHeight: 1 }}
@@ -1252,12 +1313,23 @@ function Footer() {
       </div>
       <div className="relative mt-24 pt-8 border-t border-gold/30 flex flex-wrap items-center justify-between gap-4 text-muted" style={{ fontSize: 12 }}>
         <EditableText section="footer" field="copyright" value={v("footer", "copyright", "© 2025 HCE SARL · Tous droits réservés")} as="span" />
-        <div className="flex items-center gap-3">
-          <EditableText section="footer" field="meta" value={v("footer", "meta", "Cize, Jura — 03 84 52 61 48")} as="span" />
-          <a href="/signin" className="opacity-40 hover:opacity-100 hover:text-gold transition-opacity" aria-label="Admin">Admin</a>
-        </div>
+        <EditableText section="footer" field="meta" value={v("footer", "meta", "Cize, Jura — 03 84 52 61 48")} as="span" />
       </div>
 
+      {/* Lien admin sur sa propre ligne, loin du bord bas où les boutons
+          flottants (WhatsApp, CTA devis mobile) restent fixes en
+          permanence — évite qu'il soit couvert/dur à toucher précisément.
+          Volontairement discret (pas de nav publique vers /signin). */}
+      <div className="relative mt-4 flex justify-center md:justify-end">
+        <a
+          href="/signin"
+          className="inline-flex items-center justify-center min-h-[44px] px-4 opacity-40 hover:opacity-100 hover:text-gold transition-opacity text-muted"
+          style={{ fontSize: 12 }}
+          aria-label="Administration du site"
+        >
+          Admin
+        </a>
+      </div>
     </footer>
   );
 }

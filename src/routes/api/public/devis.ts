@@ -5,18 +5,7 @@ import { createFileRoute } from '@tanstack/react-router'
 import { z } from 'zod'
 import { TEMPLATES } from '@/lib/email-templates/registry'
 
-const SITE_NAME = 'hcebtp'
-const SENDER_DOMAIN = 'notify.hcebtp.com'
-const FROM_DOMAIN = 'hcebtp.com'
 const TEMPLATE_NAME = 'devis-notification'
-
-function generateToken(): string {
-  const bytes = new Uint8Array(32)
-  crypto.getRandomValues(bytes)
-  return Array.from(bytes)
-    .map((b) => b.toString(16).padStart(2, '0'))
-    .join('')
-}
 
 const PayloadSchema = z.object({
   project_type_slug: z.string().max(64).nullable().optional(),
@@ -111,88 +100,35 @@ export const Route = createFileRoute('/api/public/devis')({
             ? template.subject(templateData)
             : template.subject
 
-        const messageId = crypto.randomUUID()
-
-        const normalizedEmail = to.toLowerCase()
-        const { data: existingToken, error: tokenLookupError } = await supabase
-          .from('email_unsubscribe_tokens')
-          .select('token, used_at')
-          .eq('email', normalizedEmail)
-          .maybeSingle()
-
-        if (tokenLookupError) {
-          await supabase.from('email_send_log').insert({
-            message_id: messageId,
-            template_name: TEMPLATE_NAME,
-            recipient_email: to,
-            status: 'failed',
-            error_message: 'Failed to look up unsubscribe token',
-          })
-          return new Response(JSON.stringify({ error: 'Email prepare failed' }), { status: 500, headers: cors })
+        const resendApiKey = process.env.RESEND_API_KEY
+        if (!resendApiKey) {
+          console.error('RESEND_API_KEY missing — devis archivé mais email non envoyé')
+          return new Response(JSON.stringify({ ok: true, emailed: false }), { status: 200, headers: cors })
         }
 
-        let unsubscribeToken = existingToken?.used_at ? generateToken() : existingToken?.token
-
-        if (!unsubscribeToken || existingToken?.used_at) {
-          unsubscribeToken = generateToken()
-          const { error: tokenError } = await supabase
-            .from('email_unsubscribe_tokens')
-            .upsert(
-              { token: unsubscribeToken, email: normalizedEmail, used_at: null },
-              { onConflict: 'email' }
-            )
-
-          if (tokenError) {
-            await supabase.from('email_send_log').insert({
-              message_id: messageId,
-              template_name: TEMPLATE_NAME,
-              recipient_email: to,
-              status: 'failed',
-              error_message: 'Failed to create unsubscribe token',
-            })
-            return new Response(JSON.stringify({ error: 'Email prepare failed' }), { status: 500, headers: cors })
-          }
-        }
-
-        await supabase.from('email_send_log').insert({
-          message_id: messageId,
-          template_name: TEMPLATE_NAME,
-          recipient_email: to,
-          status: 'pending',
-        })
-
-        const { error: enqueueError } = await supabase.rpc('enqueue_email', {
-          queue_name: 'transactional_emails',
-          payload: {
-            message_id: messageId,
-            to,
-            from: `${SITE_NAME} <noreply@${FROM_DOMAIN}>`,
-            sender_domain: SENDER_DOMAIN,
+        const resendRes = await fetch('https://api.resend.com/emails', {
+          method: 'POST',
+          headers: {
+            Authorization: `Bearer ${resendApiKey}`,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            from: 'HCE BTP <devis@hcebtp.com>',
+            to: [to],
+            reply_to: p.email,
             subject,
             html,
             text: plainText,
-            purpose: 'transactional',
-            label: TEMPLATE_NAME,
-            idempotency_key: messageId,
-            unsubscribe_token: unsubscribeToken,
-            reply_to: p.email,
-            queued_at: new Date().toISOString(),
-          },
+          }),
         })
 
-        if (enqueueError) {
-          console.error('Failed to enqueue devis email', enqueueError)
-          await supabase.from('email_send_log').insert({
-            message_id: messageId,
-            template_name: TEMPLATE_NAME,
-            recipient_email: to,
-            status: 'failed',
-            error_message: enqueueError.message || 'enqueue failed',
-          })
-          return new Response(JSON.stringify({ error: 'Email enqueue failed' }), { status: 500, headers: cors })
+        if (!resendRes.ok) {
+          const errText = await resendRes.text()
+          console.error('Resend send failed', errText)
+          return new Response(JSON.stringify({ ok: true, emailed: false }), { status: 200, headers: cors })
         }
 
-        return new Response(JSON.stringify({ ok: true, queued: true }), { status: 200, headers: cors })
+        return new Response(JSON.stringify({ ok: true, emailed: true }), { status: 200, headers: cors })
       },
     },
   },

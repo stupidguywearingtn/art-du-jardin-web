@@ -30,6 +30,7 @@
   --color-ring: var(--gold);
   --font-display: "Cormorant Garamond", serif;
   --font-body: "Inter", system-ui, -apple-system, sans-serif;
+  --font-brand: "Playfair Display", "Cormorant Garamond", serif;
 }
 
 :root {
@@ -86,6 +87,7 @@
 @layer utilities {
   .font-display { font-family: var(--font-display); }
   .font-body { font-family: var(--font-body); }
+  .font-brand { font-family: var(--font-brand); }
   .text-gold { color: var(--gold); }
   .bg-gold { background-color: var(--gold); }
   .border-gold { border-color: var(--gold); }

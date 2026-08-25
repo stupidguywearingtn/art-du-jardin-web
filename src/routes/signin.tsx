@@ -35,6 +35,16 @@ function LoginPage() {
     if (!loading && user && mode !== "forgot") nav({ to: "/" });
   }, [loading, user, nav, mode]);
 
+  // Déjà connecté : on redirige vers "/" sans jamais montrer le formulaire
+  // (évite l'effet "flash du formulaire vide puis renvoi 2s après").
+  if ((loading || user) && mode !== "forgot") {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-background px-4">
+        <p className="text-sm text-muted-foreground">Redirection…</p>
+      </div>
+    );
+  }
+
   async function submit(e: React.FormEvent) {
     e.preventDefault();
     setBusy(true);

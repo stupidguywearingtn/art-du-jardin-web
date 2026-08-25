@@ -24,6 +24,7 @@ import { EditModeToolbar } from "@/components/EditModeToolbar";
 import { EditableText } from "@/components/EditableText";
 import { EditableImage } from "@/components/EditableImage";
 import { optimizeImageUrl } from "@/lib/optimizeImage";
+import { KeyRound } from "lucide-react";
 
 const HOME_SITE_ID = "11111111-1111-1111-1111-111111111111";
 
@@ -229,13 +230,24 @@ function SiteHeader() {
             ))}
           </nav>
 
-          <a
-            href="tel:0384526148"
-            className="pointer-events-auto hidden md:inline-flex items-center gap-2 text-foreground hover:text-gold transition-colors font-medium"
-            style={{ fontSize: 13 }}
-          >
-            03 84 52 61 48
-          </a>
+          <div className="pointer-events-auto hidden md:flex items-center gap-4">
+            <a
+              href="tel:0384526148"
+              className="text-foreground hover:text-gold transition-colors font-medium"
+              style={{ fontSize: 13 }}
+            >
+              03 84 52 61 48
+            </a>
+            <Link
+              to="/signin"
+              className="inline-flex items-center justify-center w-9 h-9 rounded-full text-foreground/60 hover:text-gold hover:border-gold/50 transition-colors"
+              style={{ border: "1px solid rgba(255,255,255,0.15)" }}
+              title="Espace pro"
+              aria-label="Espace pro"
+            >
+              <KeyRound className="w-4 h-4" />
+            </Link>
+          </div>
 
           <button
             type="button"
@@ -272,6 +284,14 @@ function SiteHeader() {
             <a href="tel:0384526148" className="font-display text-foreground" style={{ fontSize: 24 }} onClick={() => setOpen(false)}>
               03 84 52 61 48
             </a>
+            <Link
+              to="/signin"
+              className="mt-4 inline-flex items-center gap-2 text-foreground/50 hover:text-gold transition-colors"
+              style={{ fontSize: 13, letterSpacing: "0.04em" }}
+              onClick={() => setOpen(false)}
+            >
+              <KeyRound className="w-3.5 h-3.5" /> Espace pro
+            </Link>
           </nav>
         </div>
       )}
@@ -647,16 +667,24 @@ function CornerGlow({ corner = "tl", tint = "gold" }: { corner?: "tl" | "tr" | "
 }
 
 /* ============ HERO ============ */
-// Ligne 1 = marque (grande, dense, validée). Ligne 2 = accroche, remise à
-// sa taille et couleur d'origine (blanc, même échelle que ligne 1) à la
-// demande du client — seul le poids/densité de la ligne 1 reste modifié.
+// "HCE" = nom de marque, titre principal (h1), police distincte (Playfair
+// Display) pour se démarquer du font-display utilisé partout ailleurs sur
+// le site. line1/line2 forment le sous-titre en dessous : même poids et
+// même taille sur les deux lignes pour un rendu homogène.
+const HCE_TITLE_STYLE: React.CSSProperties = {
+  fontSize: "clamp(2.4rem, 7vw, 5.5rem)",
+  fontWeight: 800,
+  lineHeight: 1,
+  letterSpacing: "0.06em",
+};
+
 const HERO_LINE_STYLES: React.CSSProperties[] = [
-  { fontSize: "clamp(2.4rem, 9vw, 7.5rem)", fontWeight: 700, lineHeight: 1, letterSpacing: "-0.03em" },
-  { fontSize: "clamp(2rem, 7.5vw, 6.5rem)", fontWeight: 400, lineHeight: 1, letterSpacing: "-0.02em" },
+  { fontSize: "clamp(1.5rem, 4vw, 3.2rem)", fontWeight: 500, lineHeight: 1.15, letterSpacing: "-0.01em" },
+  { fontSize: "clamp(1.5rem, 4vw, 3.2rem)", fontWeight: 500, lineHeight: 1.15, letterSpacing: "-0.01em" },
 ];
 
 function Hero() {
-  const titleRef = useRef<HTMLHeadingElement>(null);
+  const titleRef = useRef<HTMLDivElement>(null);
   const lineRef = useRef<HTMLDivElement>(null);
   const subRef = useRef<HTMLDivElement>(null);
   const hasPlayedOnceRef = useRef(false);
@@ -718,49 +746,60 @@ function Hero() {
 
       <div className="relative z-10 flex h-full flex-col items-center justify-center px-6">
         {editEnabled ? (
-          <div className="text-center space-y-3">
-            <EditableText
-              section="hero"
-              field="line1"
-              value={line1}
-              as="h1"
-              className="font-display text-foreground block"
-              style={HERO_LINE_STYLES[0]}
-            />
-            <EditableText
-              section="hero"
-              field="line2"
-              value={line2}
-              as="h1"
-              className="font-display text-foreground block"
-              style={HERO_LINE_STYLES[1]}
-            />
+          <div className="text-center space-y-4">
+            <h1 className="font-brand uppercase text-foreground block" style={HCE_TITLE_STYLE}>HCE</h1>
+            <div className="space-y-1">
+              <EditableText
+                section="hero"
+                field="line1"
+                value={line1}
+                as="p"
+                className="font-display text-foreground block"
+                style={HERO_LINE_STYLES[0]}
+              />
+              <EditableText
+                section="hero"
+                field="line2"
+                value={line2}
+                as="p"
+                className="font-display text-foreground block"
+                style={HERO_LINE_STYLES[1]}
+              />
+            </div>
           </div>
         ) : (
-          <h1
-            ref={titleRef}
-            className="font-display text-center text-foreground px-2"
-            style={{ wordBreak: "keep-all", overflowWrap: "normal", hyphens: "none" }}
-          >
-            {lines.map((line, li) => {
-              const words = line.split(" ");
-              return (
-                <span
-                  key={li}
-                  className="block overflow-hidden"
-                  style={{ ...HERO_LINE_STYLES[li], wordBreak: "keep-all", overflowWrap: "normal" }}
-                >
-                  {words.map((word, wi) => (
-                    <span key={wi} className="inline-block" style={{ whiteSpace: "nowrap", marginRight: wi < words.length - 1 ? "0.28em" : 0 }}>
-                      {word.split("").map((c, ci) => (
-                        <span key={ci} data-c className="inline-block">{c}</span>
-                      ))}
-                    </span>
-                  ))}
-                </span>
-              );
-            })}
-          </h1>
+          <div className="text-center px-2">
+            <h1
+              className="font-brand uppercase text-foreground block"
+              style={{ ...HCE_TITLE_STYLE, animation: "fadeUp 0.7s ease 0.5s both" }}
+            >
+              HCE
+            </h1>
+            <div
+              ref={titleRef}
+              className="font-display text-center text-foreground mt-3 md:mt-4"
+              style={{ wordBreak: "keep-all", overflowWrap: "normal", hyphens: "none" }}
+            >
+              {lines.map((line, li) => {
+                const words = line.split(" ");
+                return (
+                  <span
+                    key={li}
+                    className="block overflow-hidden"
+                    style={{ ...HERO_LINE_STYLES[li], wordBreak: "keep-all", overflowWrap: "normal" }}
+                  >
+                    {words.map((word, wi) => (
+                      <span key={wi} className="inline-block" style={{ whiteSpace: "nowrap", marginRight: wi < words.length - 1 ? "0.28em" : 0 }}>
+                        {word.split("").map((c, ci) => (
+                          <span key={ci} data-c className="inline-block">{c}</span>
+                        ))}
+                      </span>
+                    ))}
+                  </span>
+                );
+              })}
+            </div>
+          </div>
         )}
         <div ref={lineRef} className="mt-8 md:mt-10 h-px bg-gold" style={{ width: editEnabled ? 120 : 0 }} />
         <EditableText
@@ -1278,7 +1317,7 @@ function Footer() {
   const services = get("services", SERVICES) as typeof SERVICES;
   const v = useV();
   return (
-    <footer className="relative overflow-hidden pt-24 pb-44 md:pb-10 px-6 md:px-12" style={{ background: "radial-gradient(circle at 20% 0%, rgba(180,130,90,0.18) 0%, transparent 45%), radial-gradient(circle at 80% 100%, rgba(255,255,255,0.08) 0%, transparent 40%), var(--footer)" }}>
+    <footer className="relative overflow-hidden pt-24 pb-28 md:pb-10 px-6 md:px-12" style={{ background: "radial-gradient(circle at 20% 0%, rgba(180,130,90,0.18) 0%, transparent 45%), radial-gradient(circle at 80% 100%, rgba(255,255,255,0.08) 0%, transparent 40%), var(--footer)" }}>
       <div
         className="absolute inset-x-0 top-1/2 -translate-y-1/2 text-center font-display pointer-events-none select-none whitespace-nowrap"
         style={{ opacity: 0.04, fontSize: "clamp(80px, 18vw, 280px)", color: "#FFFFFF", fontWeight: 300, lineHeight: 1 }}
@@ -1314,21 +1353,6 @@ function Footer() {
       <div className="relative mt-24 pt-8 border-t border-gold/30 flex flex-wrap items-center justify-between gap-4 text-muted" style={{ fontSize: 12 }}>
         <EditableText section="footer" field="copyright" value={v("footer", "copyright", "© 2025 HCE SARL · Tous droits réservés")} as="span" />
         <EditableText section="footer" field="meta" value={v("footer", "meta", "Cize, Jura — 03 84 52 61 48")} as="span" />
-      </div>
-
-      {/* Lien admin sur sa propre ligne, loin du bord bas où les boutons
-          flottants (WhatsApp, CTA devis mobile) restent fixes en
-          permanence — évite qu'il soit couvert/dur à toucher précisément.
-          Volontairement discret (pas de nav publique vers /signin). */}
-      <div className="relative mt-4 flex justify-center md:justify-end">
-        <a
-          href="/signin"
-          className="inline-flex items-center justify-center min-h-[44px] px-4 opacity-40 hover:opacity-100 hover:text-gold transition-opacity text-muted"
-          style={{ fontSize: 12 }}
-          aria-label="Administration du site"
-        >
-          Admin
-        </a>
       </div>
     </footer>
   );

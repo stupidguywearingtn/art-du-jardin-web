@@ -6,4 +6,10 @@
 // You can pass additional config via defineConfig({ vite: { ... } }) if needed.
 import { defineConfig } from "@lovable.dev/vite-tanstack-config";
 
-export default defineConfig();
+// Detachement de l'hebergement Lovable/Cloudflare -> deploiement direct sur
+// Vercel. Le preset Nitro par defaut ("cloudflare-module", impose par le
+// wrapper Lovable) produit un bundle incompatible avec les Functions
+// Vercel ; on le force explicitement ici.
+export default defineConfig({
+  nitro: { preset: "vercel" },
+});

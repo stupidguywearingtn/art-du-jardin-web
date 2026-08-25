@@ -647,12 +647,12 @@ function CornerGlow({ corner = "tl", tint = "gold" }: { corner?: "tl" | "tr" | "
 }
 
 /* ============ HERO ============ */
-// Ligne 1 = marque (grande, dense), ligne 2 = accroche (petite, dorée,
-// espacée) — avant, les deux lignes partageaient exactement la même taille
-// et graisse, seule la casse du texte saisi les distinguait.
+// Ligne 1 = marque (grande, dense, validée). Ligne 2 = accroche, remise à
+// sa taille et couleur d'origine (blanc, même échelle que ligne 1) à la
+// demande du client — seul le poids/densité de la ligne 1 reste modifié.
 const HERO_LINE_STYLES: React.CSSProperties[] = [
   { fontSize: "clamp(2.4rem, 9vw, 7.5rem)", fontWeight: 700, lineHeight: 1, letterSpacing: "-0.03em" },
-  { fontSize: "clamp(1rem, 2.6vw, 1.75rem)", fontWeight: 400, lineHeight: 1.3, letterSpacing: "0.06em" },
+  { fontSize: "clamp(2rem, 7.5vw, 6.5rem)", fontWeight: 400, lineHeight: 1, letterSpacing: "-0.02em" },
 ];
 
 function Hero() {
@@ -731,8 +731,8 @@ function Hero() {
               section="hero"
               field="line2"
               value={line2}
-              as="p"
-              className="font-display text-gold block"
+              as="h1"
+              className="font-display text-foreground block"
               style={HERO_LINE_STYLES[1]}
             />
           </div>
@@ -747,7 +747,7 @@ function Hero() {
               return (
                 <span
                   key={li}
-                  className={`block overflow-hidden ${li === 1 ? "text-gold" : ""}`}
+                  className="block overflow-hidden"
                   style={{ ...HERO_LINE_STYLES[li], wordBreak: "keep-all", overflowWrap: "normal" }}
                 >
                   {words.map((word, wi) => (

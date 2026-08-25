@@ -25,7 +25,7 @@ const SERVICES: Record<string, ServiceData> = {
   "preparation-terrain": {
     n: "01",
     title: "Préparation de terrain",
-    hero: "/__l5e/assets-v1/03fdbc07-bacb-4d20-9969-38b9031a8e33/preparation-terrain-1.png",
+    hero: "/assets/preparation-terrain-1.png",
     intro: "De la lecture du sol à la viabilisation complète : HCE prépare votre terrain pour une pose d'enrobé qui dure dans le temps.",
     prestations: ["Aménagements extérieurs", "Terrassement VRD (Voirie et Réseaux Divers)", "Viabilisation de terrains", "Génie civil", "Puits perdus", "Drainage des sols", "Enrochement", "Aménagement de terrasses"],
     methode: [
@@ -34,15 +34,15 @@ const SERVICES: Record<string, ServiceData> = {
       { t: "Compactage par couches", d: "Plaque vibrante et rouleau, contrôle de portance." },
     ],
     gallery: [
-      "/__l5e/assets-v1/03fdbc07-bacb-4d20-9969-38b9031a8e33/preparation-terrain-1.png",
-      "/__l5e/assets-v1/2f9d82e3-e59e-4a65-b7c9-af967a37c003/preparation-terrain-2.png",
-      "/__l5e/assets-v1/e3cfae3a-0cee-4eb1-89a9-d0fa559e6c4d/preparation-terrain-3.png",
+      "/assets/preparation-terrain-1.png",
+      "/assets/preparation-terrain-2.png",
+      "/assets/preparation-terrain-3.png",
     ],
   },
   "enrobe-a-chaud": {
     n: "02",
     title: "Enrobé à chaud",
-    hero: "/__l5e/assets-v1/2bde9de8-2a5c-41cf-89c8-66e170f365cd/enrobe-1.png",
+    hero: "/assets/enrobe-1.png",
     intro: "Pose à la main à 150°C, compactage maîtrisé, garantie décennale. La spécialité historique d'HCE depuis 2012.",
     prestations: ["Enrobé noir, rouge, saumon, bordeaux", "Enrobé sous différentes granulations", "Pose à la main à 150°C", "Compactage maîtrisé", "Garantie décennale"],
     methode: [
@@ -51,15 +51,15 @@ const SERVICES: Record<string, ServiceData> = {
       { t: "Compactage en plusieurs passes", d: "Rouleau tandem pour une densité optimale." },
     ],
     gallery: [
-      "/__l5e/assets-v1/2bde9de8-2a5c-41cf-89c8-66e170f365cd/enrobe-1.png",
-      "/__l5e/assets-v1/3202c8fb-9eee-4884-9a36-914bde9f7c58/enrobe-2.png",
-      "/__l5e/assets-v1/0526a979-30b1-41f7-b575-64df03447d28/enrobe-3.png",
+      "/assets/enrobe-1.png",
+      "/assets/enrobe-2.png",
+      "/assets/enrobe-3.png",
     ],
   },
   "maconnerie-generale": {
     n: "03",
     title: "Maçonnerie générale",
-    hero: "/__l5e/assets-v1/1c935b79-d832-4151-adea-da3380cec475/maconnerie-1.png",
+    hero: "/assets/maconnerie-1.png",
     intro: "Pavage, dallage, médaillons sur mesure : une maçonnerie qui s'intègre à votre enrobé pour personnaliser votre extérieur.",
     prestations: ["Pavage", "Pose de bordures", "Dallage", "Médaillons et inserts décoratifs sur mesure"],
     methode: [
@@ -68,15 +68,15 @@ const SERVICES: Record<string, ServiceData> = {
       { t: "Finition jointoyée", d: "Joints sablés ou cimentés selon l'usage prévu." },
     ],
     gallery: [
-      "/__l5e/assets-v1/1c935b79-d832-4151-adea-da3380cec475/maconnerie-1.png",
-      "/__l5e/assets-v1/de15cd90-fcb8-4eeb-b8ca-64161a967e5c/maconnerie-2.png",
-      "/__l5e/assets-v1/ab5e67fa-0f52-439d-a295-dc9f241b56f8/maconnerie-3.png",
+      "/assets/maconnerie-1.png",
+      "/assets/maconnerie-2.png",
+      "/assets/maconnerie-3.png",
     ],
   },
   "drainage-pentes": {
     n: "04",
     title: "Drainage & pentes",
-    hero: "/__l5e/assets-v1/0ed1f7f2-328d-443e-87f3-5fa2803157a4/drainage-1.jpeg",
+    hero: "/assets/drainage-1.jpeg",
     intro: "Une cour qui dure, c'est d'abord une cour qui évacue l'eau. HCE étudie les pentes avant chaque pose.",
     prestations: ["Études de pente", "Drainage périphérique", "Évacuation des eaux pluviales", "Lecture du terrain avant pose"],
     methode: [
@@ -85,15 +85,15 @@ const SERVICES: Record<string, ServiceData> = {
       { t: "Pentes calculées", d: "Pente minimum 1.5 % vers les exutoires, vérifiée au laser." },
     ],
     gallery: [
-      "/__l5e/assets-v1/0ed1f7f2-328d-443e-87f3-5fa2803157a4/drainage-1.jpeg",
-      "/__l5e/assets-v1/d2e48fb9-8087-4957-b1af-aae69e595969/drainage-2.jpeg",
-      "/__l5e/assets-v1/51939538-bcea-4748-9bcc-b5d0c8221bfd/drainage-3.jpeg",
+      "/assets/drainage-1.jpeg",
+      "/assets/drainage-2.jpeg",
+      "/assets/drainage-3.jpeg",
     ],
   },
   "bordures-murets": {
     n: "05",
     title: "Bordures & murets",
-    hero: "/__l5e/assets-v1/4e61c550-2477-4cd0-a800-323188366b6e/bordures-1.png",
+    hero: "/assets/bordures-1.png",
     intro: "Bordures béton coulées sur place, pavées, ou petits murets de soutènement : la finition qui fait toute la différence.",
     prestations: ["Bordures béton coulées", "Bordures pavées", "Petits murets de soutènement", "Finitions périphériques"],
     methode: [
@@ -101,12 +101,12 @@ const SERVICES: Record<string, ServiceData> = {
       { t: "Coulage sur place", d: "Béton dosé pour résister au gel et à la décennie." },
       { t: "Décoffrage propre", d: "Finition lisse, arêtes nettes, prêt à recevoir l'enrobé." },
     ],
-    gallery: ["/__l5e/assets-v1/4e61c550-2477-4cd0-a800-323188366b6e/bordures-1.png", "/__l5e/assets-v1/3e3159a6-a482-4c58-b790-fbac0bd3a7fd/bordures-2.png", "/__l5e/assets-v1/ad358cad-0e34-425f-9f7b-14e476954b11/bordures-3.png"],
+    gallery: ["/assets/bordures-1.png", "/assets/bordures-2.png", "/assets/bordures-3.png"],
   },
   "finitions-soignees": {
     n: "06",
     title: "Vous avez un projet d'aménagement de cour en enrobé",
-    hero: "/__l5e/assets-v1/d6604f6b-5402-4325-8f17-abcc914ef8e0/finitions-1.jpeg",
+    hero: "/assets/finitions-1.jpeg",
     intro: "Bords nets, raccords maîtrisés, surface plane et homogène. Le souci du détail jusqu'à la dernière passe.",
     prestations: [
       "Bords et angles nets, sans bavure",
@@ -120,9 +120,9 @@ const SERVICES: Record<string, ServiceData> = {
       { t: "Livraison propre", d: "Chantier rendu propre, prêt à l'usage." },
     ],
     gallery: [
-      "/__l5e/assets-v1/d6604f6b-5402-4325-8f17-abcc914ef8e0/finitions-1.jpeg",
-      "/__l5e/assets-v1/d4aa6231-de96-4829-b629-85d725db7335/finitions-2.jpeg",
-      "/__l5e/assets-v1/433fa3c0-e168-44ee-9dca-d0052b9ce2e7/finitions-3.jpeg",
+      "/assets/finitions-1.jpeg",
+      "/assets/finitions-2.jpeg",
+      "/assets/finitions-3.jpeg",
     ],
   },
 };

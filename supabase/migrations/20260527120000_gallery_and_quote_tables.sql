@@ -64,7 +64,7 @@ create table if not exists public.project_types (
   description text,
   price_from numeric(10, 2),
   price_unit text not null default '€/m²',
-  show_price boolean not null default true,
+  show_price boolean not null default false,
   display_order int not null default 0,
   active boolean not null default true,
   updated_at timestamptz not null default now()

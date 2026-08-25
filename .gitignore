@@ -31,3 +31,7 @@ dist-ssr
 *.sln
 *.sw?
 .vercel
+
+# Contient SUPABASE_SERVICE_ROLE_KEY (acces admin complet, jamais en git)
+.env
+supabase/.temp/

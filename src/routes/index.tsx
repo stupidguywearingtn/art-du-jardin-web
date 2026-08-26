@@ -446,16 +446,28 @@ function MatiereFinitions() {
               data-mf-card
 
               className="details-card group bg-card overflow-hidden border-l-4 transition-all duration-500 hover:-translate-y-1 snap-start"
-              style={{ borderColor: "var(--cuivre-500)", flex: "0 0 80%", maxWidth: 360 }}
+              style={{ borderColor: "var(--cuivre-500)", flex: "0 0 80%", maxWidth: 360, boxShadow: "0 20px 45px -25px rgba(0,0,0,0.5)" }}
             >
-              <div className="aspect-[4/3] overflow-hidden">
+              <div className="relative aspect-[4/3] overflow-hidden">
                 <EditableImage section="matiere" field={`item_${i}_img`} value={img}>
                   {(url) => <img src={url} alt={it.t} loading="lazy" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />}
                 </EditableImage>
+                <div
+                  className="absolute inset-x-0 bottom-0 h-16 pointer-events-none"
+                  aria-hidden
+                  style={{ background: "linear-gradient(to top, rgba(0,0,0,0.55), transparent)" }}
+                />
               </div>
               <div className="p-6">
                 <EditableText section="matiere" field={`item_${i}_t`} value={v("matiere", `item_${i}_t`, it.t)} as="h3" className="font-display text-foreground" style={{ fontSize: 24, fontWeight: 500 }} />
                 <EditableText section="matiere" field={`item_${i}_d`} value={v("matiere", `item_${i}_d`, it.d)} as="p" className="mt-3 text-muted" style={{ fontSize: 14, lineHeight: 1.6 }} multiline />
+                <a
+                  href="#devis"
+                  className="inline-flex items-center gap-2 mt-5 text-gold border-b border-gold/40 pb-1 hover:border-gold transition-colors"
+                  style={{ fontFamily: "var(--font-body)", fontSize: 12, letterSpacing: "0.12em", textTransform: "uppercase" }}
+                >
+                  Nous contacter <span aria-hidden>→</span>
+                </a>
               </div>
             </article>
           );
@@ -1124,8 +1136,8 @@ function Transformation() {
 /* ============ PROCESS ============ */
 const PROCESS = [
   { n: "01", t: "Visite & Devis", d: "Déplacement gratuit, lecture du terrain et devis détaillé.", img: null as string | null },
-  { n: "02", t: "Préparation du sol", d: "Décaissement, nivellement laser, compactage et drainage maîtrisés.", img: "/photos/06-chantier-bobcat-preparation.jpg" },
-  { n: "03", t: "Pose & Finitions", d: "Enrobé à chaud posé à la main, bordures et maçonnerie soignées.", img: "/photos/01-hero-finisseur-vapeur-sunset.jpg" },
+  { n: "02", t: "Préparation du sol", d: "Décaissement, nivellement laser, compactage et drainage maîtrisés.", img: "/photos/process-preparation-sol.jpeg" },
+  { n: "03", t: "Pose & Finitions", d: "Enrobé à chaud posé à la main, bordures et maçonnerie soignées.", img: "/photos/process-pose-finition.jpeg" },
   { n: "04", t: "Contrôle & Finitions", d: "Vérification de la planéité, des pentes d'évacuation et des finitions de bordure. On ne quitte le chantier qu'une fois le rendu impeccable.", img: "/photos/03-hero-rouleau-compacteur.jpg" },
 ];
 
@@ -1256,18 +1268,25 @@ function ProcessStep({ step, left }: { step: { n: string; t: string; d: string; 
       className={`relative ${left ? "md:col-start-1 md:text-right md:pr-16" : "md:col-start-2 md:text-left md:pl-16"}`}
     >
       {img && (
-        <div className={`mb-4 overflow-hidden aspect-[4/3] max-w-sm ${left ? "md:ml-auto" : ""}`}>
-          <EditableImage section="process" field={`step_${step.n}_img`} value={img}>
-            {(url) => (
-              <img
-                src={url}
-                alt={t}
-                loading="lazy"
-                className="w-full h-full object-cover transition-transform duration-700"
-                style={{ transform: hover ? "scale(1.05)" : "scale(1)" }}
-              />
-            )}
-          </EditableImage>
+        <div className={`relative mb-6 max-w-sm ${left ? "md:ml-auto" : ""}`}>
+          <div className="absolute -top-2 -left-2 w-7 h-7 border-t-2 border-l-2 border-gold pointer-events-none" aria-hidden />
+          <div className="absolute -bottom-2 -right-2 w-7 h-7 border-b-2 border-r-2 border-gold pointer-events-none" aria-hidden />
+          <div
+            className="overflow-hidden aspect-[4/3] ring-1 ring-white/10"
+            style={{ boxShadow: "0 25px 60px -20px rgba(0,0,0,0.6)" }}
+          >
+            <EditableImage section="process" field={`step_${step.n}_img`} value={img}>
+              {(url) => (
+                <img
+                  src={url}
+                  alt={t}
+                  loading="lazy"
+                  className="w-full h-full object-cover transition-transform duration-700"
+                  style={{ transform: hover ? "scale(1.05)" : "scale(1)" }}
+                />
+              )}
+            </EditableImage>
+          </div>
         </div>
       )}
       <div className="relative">

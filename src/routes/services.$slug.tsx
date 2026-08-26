@@ -86,7 +86,6 @@ const SERVICES: Record<string, ServiceData> = {
     ],
     gallery: [
       "/assets/drainage-1.jpeg",
-      "/assets/drainage-2.jpeg",
       "/assets/drainage-3.jpeg",
     ],
   },
@@ -121,7 +120,6 @@ const SERVICES: Record<string, ServiceData> = {
     ],
     gallery: [
       "/assets/finitions-1.jpeg",
-      "/assets/finitions-2.jpeg",
       "/assets/finitions-3.jpeg",
     ],
   },
@@ -285,9 +283,9 @@ function ServicePageBody() {
         <section className="relative w-full overflow-hidden" style={{ minHeight: 200 }}>
           <div
             className="absolute inset-0 bg-cover bg-center"
-            style={{ backgroundImage: `url(${heroImg})` }}
+            style={{ backgroundImage: `url(${optimizeImageUrl(heroImg, 1600)})` }}
           />
-          <div className="absolute inset-0" style={{ background: "rgba(14,14,15,0.78)" }} />
+          <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(14,14,15,0.55) 0%, rgba(14,14,15,0.4) 50%, rgba(14,14,15,0.7) 100%)" }} />
           <div className="relative z-10 px-6 py-14 md:py-16 text-center max-w-3xl mx-auto">
             <p className="font-display italic text-foreground" style={{ fontSize: "clamp(20px, 2.6vw, 28px)", lineHeight: 1.3 }}>
               Vous avez un projet de <span className="text-gold">{data.title.toLowerCase()}</span> ?
@@ -310,7 +308,7 @@ function ServicePageBody() {
 
         {/* GALERIE */}
         <section className="px-6 md:px-12 py-16 max-w-6xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+          <div className={`grid grid-cols-1 gap-3 ${data.gallery.length <= 2 ? "md:grid-cols-2 max-w-3xl mx-auto" : "md:grid-cols-3"}`}>
             {data.gallery.map((g) => (
               <div key={g} className="aspect-[4/3] overflow-hidden">
                 <img src={optimizeImageUrl(g, 800)} alt={data.title} loading="lazy" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" />

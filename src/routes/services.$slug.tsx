@@ -280,12 +280,10 @@ function ServicePageBody() {
         </section>
 
         {/* MID-PAGE CTA — bande sombre avec photo */}
-        <section className="relative w-full overflow-hidden" style={{ minHeight: 200 }}>
-          <div
-            className="absolute inset-0 bg-cover bg-center"
-            style={{ backgroundImage: `url(${optimizeImageUrl(heroImg, 1600)})` }}
-          />
-          <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(14,14,15,0.55) 0%, rgba(14,14,15,0.4) 50%, rgba(14,14,15,0.7) 100%)" }} />
+        <section
+          className="relative w-full overflow-hidden border-y border-gold/15"
+          style={{ minHeight: 200, background: "var(--asphalte-900)" }}
+        >
           <div className="relative z-10 px-6 py-14 md:py-16 text-center max-w-3xl mx-auto">
             <p className="font-display italic text-foreground" style={{ fontSize: "clamp(20px, 2.6vw, 28px)", lineHeight: 1.3 }}>
               Vous avez un projet de <span className="text-gold">{data.title.toLowerCase()}</span> ?

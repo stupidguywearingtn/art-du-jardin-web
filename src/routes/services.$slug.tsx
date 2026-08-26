@@ -87,6 +87,7 @@ const SERVICES: Record<string, ServiceData> = {
     gallery: [
       "/assets/drainage-1.jpeg",
       "/assets/drainage-3.jpeg",
+      "/assets/drainage-4.jpeg",
     ],
   },
   "bordures-murets": {
@@ -100,7 +101,7 @@ const SERVICES: Record<string, ServiceData> = {
       { t: "Coulage sur place", d: "Béton dosé pour résister au gel et à la décennie." },
       { t: "Décoffrage propre", d: "Finition lisse, arêtes nettes, prêt à recevoir l'enrobé." },
     ],
-    gallery: ["/assets/bordures-1.png", "/assets/bordures-2.png", "/assets/bordures-3.png"],
+    gallery: ["/assets/bordures-1.png", "/assets/bordures-2.png", "/assets/bordures-3.png", "/assets/bordures-4.jpeg"],
   },
   "finitions-soignees": {
     n: "06",
@@ -121,6 +122,7 @@ const SERVICES: Record<string, ServiceData> = {
     gallery: [
       "/assets/finitions-1.jpeg",
       "/assets/finitions-3.jpeg",
+      "/assets/finitions-4.jpeg",
     ],
   },
 };
@@ -306,7 +308,15 @@ function ServicePageBody() {
 
         {/* GALERIE */}
         <section className="px-6 md:px-12 py-16 max-w-6xl mx-auto">
-          <div className={`grid grid-cols-1 gap-3 ${data.gallery.length <= 2 ? "md:grid-cols-2 max-w-3xl mx-auto" : "md:grid-cols-3"}`}>
+          <div
+            className={`grid grid-cols-1 gap-3 ${
+              data.gallery.length <= 2
+                ? "md:grid-cols-2 max-w-3xl mx-auto"
+                : data.gallery.length === 4
+                  ? "md:grid-cols-4"
+                  : "md:grid-cols-3"
+            }`}
+          >
             {data.gallery.map((g) => (
               <div key={g} className="aspect-[4/3] overflow-hidden">
                 <img src={optimizeImageUrl(g, 800)} alt={data.title} loading="lazy" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" />

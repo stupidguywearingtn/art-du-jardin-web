@@ -101,7 +101,7 @@ const SERVICES: Record<string, ServiceData> = {
       { t: "Coulage sur place", d: "Béton dosé pour résister au gel et à la décennie." },
       { t: "Décoffrage propre", d: "Finition lisse, arêtes nettes, prêt à recevoir l'enrobé." },
     ],
-    gallery: ["/assets/bordures-1.png", "/assets/bordures-2.png", "/assets/bordures-3.png", "/assets/bordures-4.jpeg"],
+    gallery: ["/assets/bordures-1.png", "/assets/bordures-2.png", "/assets/bordures-3.png"],
   },
   "finitions-soignees": {
     n: "06",

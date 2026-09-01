@@ -335,7 +335,7 @@ function SiteHeader() {
 /* ============ GESTE & MATIÈRE ============ */
 function GesteMatiere() {
   const v = useV();
-  const img = v("geste", "image", "/photos/01-hero-finisseur-vapeur-sunset.jpg");
+  const img = v("geste", "image", "/photos/geste-enrobe-a-chaud.png");
   return (
     <section className="relative w-full bg-depth-d overflow-hidden">
       <div className="grid grid-cols-1 md:grid-cols-5 md:min-h-[80vh]">
@@ -1138,7 +1138,7 @@ const PROCESS = [
   { n: "01", t: "Visite & Devis", d: "Déplacement gratuit, lecture du terrain et devis détaillé.", img: null as string | null },
   { n: "02", t: "Préparation du sol", d: "Décaissement, nivellement laser, compactage et drainage maîtrisés.", img: "/photos/process-preparation-sol.jpeg" },
   { n: "03", t: "Pose & Finitions", d: "Enrobé à chaud posé à la main, bordures et maçonnerie soignées.", img: "/photos/process-pose-finition.jpeg" },
-  { n: "04", t: "Contrôle & Finitions", d: "Vérification de la planéité, des pentes d'évacuation et des finitions de bordure. On ne quitte le chantier qu'une fois le rendu impeccable.", img: "/photos/09-detail-bordure-beton.jpg" },
+  { n: "04", t: "Contrôle & Finitions", d: "Vérification de la planéité, des pentes d'évacuation et des finitions de bordure. On ne quitte le chantier qu'une fois le rendu impeccable.", img: "/photos/process-controle-finitions.png" },
 ];
 
 function Process() {

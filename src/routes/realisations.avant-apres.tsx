@@ -41,8 +41,6 @@ function AvantApresRoute() {
   );
 }
 
-const PLACEHOLDER = "/photos/06-chantier-bobcat-preparation.jpg";
-
 /** Upload d'un fichier vers Supabase Storage après recadrage 4:5 forcé. */
 async function uploadBAFile(file: File): Promise<string | null> {
   try {
@@ -63,34 +61,32 @@ async function uploadBAFile(file: File): Promise<string | null> {
 }
 
 function MiniCarousel({ urls, label }: { urls: string[]; label: "Avant" | "Après" }) {
-  const slides = urls.length > 0 ? urls : [PLACEHOLDER];
   const [idx, setIdx] = useState(0);
+  const hasPhotos = urls.length > 0;
 
   useEffect(() => {
-    if (slides.length <= 1) return;
-    const id = setInterval(() => setIdx((i) => (i + 1) % slides.length), 3500);
+    if (urls.length <= 1) return;
+    const id = setInterval(() => setIdx((i) => (i + 1) % urls.length), 3500);
     return () => clearInterval(id);
-  }, [slides.length]);
+  }, [urls.length]);
 
   return (
     <div
       className="relative w-full overflow-hidden aspect-[4/5]"
       style={{ background: "var(--surface)" }}
     >
-      {slides.map((src, i) => (
-        <img
-          key={`${src}-${i}`}
-          src={optimizeImageUrl(src, 900)}
-          alt=""
-          aria-hidden="true"
-          loading={i === 0 ? "eager" : "lazy"}
-          className="absolute inset-0 w-full h-full object-cover transition-opacity duration-[800ms] ease-in-out"
-          style={{ opacity: i === idx ? 1 : 0 }}
-        />
-      ))}
-      {urls.length === 0 && (
-        <div className="absolute inset-0" style={{ background: "rgba(14,14,15,0.55)" }} />
-      )}
+      {hasPhotos &&
+        urls.map((src, i) => (
+          <img
+            key={`${src}-${i}`}
+            src={optimizeImageUrl(src, 900)}
+            alt=""
+            aria-hidden="true"
+            loading={i === 0 ? "eager" : "lazy"}
+            className="absolute inset-0 w-full h-full object-cover transition-opacity duration-[800ms] ease-in-out"
+            style={{ opacity: i === idx ? 1 : 0 }}
+          />
+        ))}
       <div
         className="absolute top-2 left-2 md:top-3 md:left-3 px-2.5 py-1 md:px-3 md:py-1.5 z-10"
         style={{
@@ -105,12 +101,12 @@ function MiniCarousel({ urls, label }: { urls: string[]; label: "Avant" | "Aprè
       >
         {label}
       </div>
-      {urls.length === 0 && (
+      {!hasPhotos && (
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
           <span
             className="text-center px-2"
             style={{
-              color: "rgba(255,255,255,0.55)",
+              color: "rgba(255,255,255,0.4)",
               fontSize: 11,
               fontFamily: "var(--font-body)",
               letterSpacing: "0.1em",

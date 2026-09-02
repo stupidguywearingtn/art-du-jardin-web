@@ -62,9 +62,26 @@ mail s'ouvre vers `yanisouammou063@gmail.com`. Pas idéal mais pas bloquant.
 
 ---
 
-## 🚀 Action 3 — Rien à faire côté déploiement
+## 🖼️ Action 3 — Apply SQL `SETUP-GALLERY-V2.sql` (2 min) — pour la galerie « Nos réalisations »
 
-Vercel et Lovable Cloud auto-déploient à chaque push GitHub. Mon dernier push est `4a40b29`.
+Nouvelle version de la galerie : les 4 cartes repartent **sans photo**
+(placeholder « Bientôt disponible »), chaque dossier propose **5 emplacements
+vides** uploadables depuis l'admin, et toute photo envoyée est **recadrée
+automatiquement au format 4:5** (1600×2000). La section « Avant / Après »
+passe elle aussi en base avec un back-office par emplacement.
+
+1. SQL Editor Supabase → colle tout [`supabase/SETUP-GALLERY-V2.sql`](./supabase/SETUP-GALLERY-V2.sql) → Run.
+2. Ça crée les tables `before_after_*`, **vide les photos de galerie existantes**
+   (section RESET, commente-la si tu veux les garder) et recharge le cache.
+
+Tant que ce n'est pas fait : le site tourne en mode « galerie vide » (fallback
+statique), l'upload admin des dossiers et de l'Avant/Après est désactivé.
+
+---
+
+## 🚀 Action 4 — Rien à faire côté déploiement
+
+Vercel et Lovable Cloud auto-déploient à chaque push GitHub.
 
 ---
 
@@ -87,8 +104,10 @@ Vercel et Lovable Cloud auto-déploient à chaque push GitHub. Mon dernier push 
 ### Test 3 — Photo /realisations
 1. Scroll jusqu'à « Nos réalisations » → clique « Cour & allée privée ».
 2. Sur `/realisations/cour-allee-privee`, barre cuivre `Mode admin — ajouter / remplacer / supprimer` au-dessus de la grille.
-3. Survole une photo → overlay sombre avec boutons « Remplacer » + « Supprimer ».
-4. « Remplacer » → choisis un fichier → upload (compression auto à 1920px) → la photo change en place.
+3. Grille de dossiers au format 4:5. Tant qu'un dossier a moins de 5 photos,
+   des **emplacements vides** en pointillés cuivre apparaissent (admin only).
+4. Clique un emplacement vide (ou « Remplacer » au survol d'une photo) → choisis
+   un fichier → **recadrage 4:5 auto (1600×2000)** puis upload → la photo apparaît.
 
 ### Test 4 — Formulaire devis
 1. Va dans `#devis`, complète les 3 étapes, soumets.

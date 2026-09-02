@@ -33,24 +33,56 @@ export const Route = createRootRoute({
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "Enrobé · Cours · Parkings · Terrassement — HCE Jura & Ain" },
-      { name: "description", content: "HCE — Enrobé à chaud, cours, parkings, terrassement dans le Jura et l'Ain depuis 2012. Pose à la main, devis détaillé, garantie décennale." },
+      {
+        name: "description",
+        content:
+          "HCE — Enrobé à chaud, cours, parkings, terrassement dans le Jura et l'Ain depuis 2012. Pose à la main, devis détaillé, garantie décennale.",
+      },
       { name: "author", content: "HCE" },
       { property: "og:site_name", content: "HCE" },
       { property: "og:type", content: "website" },
-      { property: "og:title", content: "Enrobé · Cours · Parkings · Terrassement — HCE Jura & Ain" },
-      { property: "og:description", content: "HCE — Enrobé à chaud, cours, parkings, terrassement dans le Jura et l'Ain depuis 2012. Pose à la main, devis détaillé, garantie décennale." },
+      {
+        property: "og:title",
+        content: "Enrobé · Cours · Parkings · Terrassement — HCE Jura & Ain",
+      },
+      {
+        property: "og:description",
+        content:
+          "HCE — Enrobé à chaud, cours, parkings, terrassement dans le Jura et l'Ain depuis 2012. Pose à la main, devis détaillé, garantie décennale.",
+      },
       { name: "twitter:card", content: "summary" },
-      { name: "twitter:title", content: "Enrobé · Cours · Parkings · Terrassement — HCE Jura & Ain" },
-      { name: "twitter:description", content: "HCE — Enrobé à chaud, cours, parkings, terrassement dans le Jura et l'Ain depuis 2012. Pose à la main, devis détaillé, garantie décennale." },
-      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/683b4530-b407-4cce-9cb0-7607d76ebb7c/id-preview-eb5e1275--27ec4cea-624d-4276-b609-fd4afffcfb65.lovable.app-1783340447523.png" },
-      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/683b4530-b407-4cce-9cb0-7607d76ebb7c/id-preview-eb5e1275--27ec4cea-624d-4276-b609-fd4afffcfb65.lovable.app-1783340447523.png" },
+      {
+        name: "twitter:title",
+        content: "Enrobé · Cours · Parkings · Terrassement — HCE Jura & Ain",
+      },
+      {
+        name: "twitter:description",
+        content:
+          "HCE — Enrobé à chaud, cours, parkings, terrassement dans le Jura et l'Ain depuis 2012. Pose à la main, devis détaillé, garantie décennale.",
+      },
+      {
+        property: "og:image",
+        content:
+          "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/683b4530-b407-4cce-9cb0-7607d76ebb7c/id-preview-eb5e1275--27ec4cea-624d-4276-b609-fd4afffcfb65.lovable.app-1783340447523.png",
+      },
+      {
+        name: "twitter:image",
+        content:
+          "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/683b4530-b407-4cce-9cb0-7607d76ebb7c/id-preview-eb5e1275--27ec4cea-624d-4276-b609-fd4afffcfb65.lovable.app-1783340447523.png",
+      },
     ],
     links: [
-      { rel: "icon", href: "/favicon.svg", type: "image/svg+xml" },
-      { rel: "apple-touch-icon", href: "/favicon.svg" },
+      { rel: "icon", href: "/favicon.ico", sizes: "any" },
+      { rel: "icon", type: "image/png", sizes: "32x32", href: "/favicon-32x32.png" },
+      { rel: "icon", type: "image/png", sizes: "16x16", href: "/favicon-16x16.png" },
+      { rel: "apple-touch-icon", sizes: "180x180", href: "/apple-touch-icon.png" },
+      { rel: "manifest", href: "/site.webmanifest" },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
-      { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700;800&display=swap" },
+      {
+        rel: "stylesheet",
+        href: "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700;800&display=swap",
+      },
       {
         rel: "stylesheet",
         href: appCss,

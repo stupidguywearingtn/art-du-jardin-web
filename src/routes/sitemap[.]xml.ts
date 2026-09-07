@@ -1,7 +1,11 @@
 import { createFileRoute } from "@tanstack/react-router";
 import type {} from "@tanstack/react-start";
 
-const BASE_URL = "https://hcebtp.com";
+// Hôte réellement servi : l'apex hcebtp.com répond 308 vers www.hcebtp.com.
+// Le sitemap, les canonical et robots.txt doivent tous pointer vers cet hôte,
+// sinon on donne au crawler des URLs qui redirigent (signal de canonicalisation
+// contradictoire, coûteux sur un domaine encore non découvert).
+const BASE_URL = "https://www.hcebtp.com";
 
 interface SitemapEntry {
   path: string;

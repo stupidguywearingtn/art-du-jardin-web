@@ -95,7 +95,7 @@ export const Route = createRootRoute({
           "@context": "https://schema.org",
           "@type": "Organization",
           name: "HCE",
-          url: "https://hcebtp.com",
+          url: "https://www.hcebtp.com",
           telephone: "+33 3 84 52 61 48",
           address: {
             "@type": "PostalAddress",

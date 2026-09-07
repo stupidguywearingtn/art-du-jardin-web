@@ -140,12 +140,12 @@ export const Route = createFileRoute("/services/$slug")({
           { name: "description", content: loaderData.intro },
           { property: "og:title", content: `${loaderData.title} — HCE` },
           { property: "og:description", content: loaderData.intro },
-          { property: "og:image", content: `https://hcebtp.com${loaderData.hero}` },
-          { property: "og:url", content: `https://hcebtp.com/services/${params.slug}` },
+          { property: "og:image", content: `https://www.hcebtp.com${loaderData.hero}` },
+          { property: "og:url", content: `https://www.hcebtp.com/services/${params.slug}` },
         ]
       : [{ title: "Service — HCE" }],
     links: loaderData
-      ? [{ rel: "canonical", href: `https://hcebtp.com/services/${params.slug}` }]
+      ? [{ rel: "canonical", href: `https://www.hcebtp.com/services/${params.slug}` }]
       : [],
     scripts: loaderData
       ? [
@@ -156,12 +156,12 @@ export const Route = createFileRoute("/services/$slug")({
               "@type": "Service",
               name: loaderData.title,
               description: loaderData.intro,
-              provider: { "@type": "LocalBusiness", name: "HCE", url: "https://hcebtp.com" },
+              provider: { "@type": "LocalBusiness", name: "HCE", url: "https://www.hcebtp.com" },
               areaServed: [
                 { "@type": "AdministrativeArea", name: "Jura" },
                 { "@type": "AdministrativeArea", name: "Ain" },
               ],
-              url: `https://hcebtp.com/services/${params.slug}`,
+              url: `https://www.hcebtp.com/services/${params.slug}`,
             }),
           },
         ]

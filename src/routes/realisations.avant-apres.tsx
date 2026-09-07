@@ -27,7 +27,9 @@ export const Route = createFileRoute("/realisations/avant-apres")({
           "Comparez nos chantiers avant et après : de la préparation au rendu final en enrobé.",
       },
       { name: "robots", content: "index,follow" },
+      { property: "og:url", content: "https://www.hcebtp.com/realisations/avant-apres" },
     ],
+    links: [{ rel: "canonical", href: "https://www.hcebtp.com/realisations/avant-apres" }],
   }),
 });
 

@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://hcebtp.com/sitemap.xml
+Sitemap: https://www.hcebtp.com/sitemap.xml

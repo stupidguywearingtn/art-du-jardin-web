@@ -31,6 +31,10 @@ export const Route = createFileRoute("/realisations/$slug")({
           "Découvrez nos réalisations en enrobé, cours, parkings et terrassement dans le Jura et l'Ain.",
       },
       { name: "robots", content: "index,follow" },
+      { property: "og:url", content: `https://www.hcebtp.com/realisations/${params.slug}` },
+    ],
+    links: [
+      { rel: "canonical", href: `https://www.hcebtp.com/realisations/${params.slug}` },
     ],
   }),
 });

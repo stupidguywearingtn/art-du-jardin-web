@@ -77,9 +77,9 @@ export const Route = createFileRoute("/")({
         content:
           "HCE — Enrobé à chaud, cours, parkings, terrassement dans le Jura et l'Ain depuis 2012. Pose à la main, devis détaillé.",
       },
-      { property: "og:url", content: "https://hcebtp.com/" },
+      { property: "og:url", content: "https://www.hcebtp.com/" },
     ],
-    links: [{ rel: "canonical", href: "https://hcebtp.com/" }],
+    links: [{ rel: "canonical", href: "https://www.hcebtp.com/" }],
     scripts: [
       {
         type: "application/ld+json",
@@ -87,7 +87,7 @@ export const Route = createFileRoute("/")({
           "@context": "https://schema.org",
           "@type": "LocalBusiness",
           name: "HCE",
-          url: "https://hcebtp.com",
+          url: "https://www.hcebtp.com",
           telephone: "+33 3 84 52 61 48",
           address: {
             "@type": "PostalAddress",

@@ -94,11 +94,17 @@ export const Route = createRootRoute({
         children: JSON.stringify({
           "@context": "https://schema.org",
           "@type": "Organization",
+          "@id": "https://www.hcebtp.com/#business",
           name: "HCE",
+          legalName: "HCE SARL",
           url: "https://www.hcebtp.com",
+          logo: "https://www.hcebtp.com/favicon-512x512.png",
           telephone: "+33 3 84 52 61 48",
+          email: "sarl.hce@laposte.net",
           address: {
             "@type": "PostalAddress",
+            streetAddress: "40 avenue Etienne Lamy",
+            postalCode: "39300",
             addressLocality: "Cize",
             addressRegion: "Jura",
             addressCountry: "FR",

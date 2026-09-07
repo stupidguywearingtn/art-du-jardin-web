@@ -86,15 +86,48 @@ export const Route = createFileRoute("/")({
         children: JSON.stringify({
           "@context": "https://schema.org",
           "@type": "LocalBusiness",
+          // @id partagé avec l'Organization du root et le provider des pages
+          // /services/* : sans lui, les moteurs voient trois entités « HCE »
+          // concurrentes au lieu d'une seule.
+          "@id": "https://www.hcebtp.com/#business",
           name: "HCE",
+          legalName: "HCE SARL",
           url: "https://www.hcebtp.com",
+          logo: "https://www.hcebtp.com/favicon-512x512.png",
           telephone: "+33 3 84 52 61 48",
+          email: "sarl.hce@laposte.net",
+          foundingDate: "2012",
+          // Adresse, email et horaires repris à l'identique du footer visible
+          // (voir Footer plus bas dans ce fichier) : aucun mismatch possible
+          // entre le JSON-LD et le contenu rendu.
           address: {
             "@type": "PostalAddress",
+            streetAddress: "40 avenue Etienne Lamy",
+            postalCode: "39300",
             addressLocality: "Cize",
             addressRegion: "Jura",
             addressCountry: "FR",
           },
+          // Cize (39300, Jura) — surtout pas Cize (01250, Ain), autre commune.
+          geo: {
+            "@type": "GeoCoordinates",
+            latitude: 46.726,
+            longitude: 5.914,
+          },
+          openingHoursSpecification: [
+            {
+              "@type": "OpeningHoursSpecification",
+              dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+              opens: "08:00",
+              closes: "18:00",
+            },
+            {
+              "@type": "OpeningHoursSpecification",
+              dayOfWeek: "Saturday",
+              opens: "08:00",
+              closes: "12:00",
+            },
+          ],
           areaServed: [
             { "@type": "AdministrativeArea", name: "Jura" },
             { "@type": "AdministrativeArea", name: "Ain" },

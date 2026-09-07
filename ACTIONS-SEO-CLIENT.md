@@ -62,20 +62,38 @@ téléphone doivent être **écrits exactement pareil partout** : site, fiche Go
 annuaires, signature d'email, réseaux sociaux. Une variante (« HCE BTP » ici,
 « HCE » là, deux formats de téléphone) affaiblit le recoupement.
 
-Bloc de référence, tel qu'il figure sur le site :
+Bloc de référence à recopier **à l'identique**, sans abréger ni reformuler :
 
 ```
-HCE
-Cize, Jura (39)
-03 84 52 61 48
-https://www.hcebtp.com
+Nom            : HCE
+Raison sociale : HCE SARL
+Adresse        : 40 avenue Etienne Lamy
+Code postal    : 39300
+Ville          : Cize
+Pays           : France
+Téléphone      : 03 84 52 61 48
+Email          : sarl.hce@laposte.net
+Site web       : https://www.hcebtp.com
+Horaires       : Lundi-Vendredi 8h-18h · Samedi 8h-12h
 ```
 
-> **À confirmer par le client** : l'adresse postale complète (numéro + rue + code
-> postal). Elle n'est pas publiée sur le site aujourd'hui. Dès que tu me la donnes,
-> je la mets dans les données structurées `LocalBusiness` — une adresse postale
-> complète et vérifiable est un des signaux les plus forts pour le référencement
-> local, et l'un des rares que le site n'envoie pas encore.
+> **Mise à jour du 07/09/2026** — l'adresse postale complète était notée ici comme
+> « à confirmer par le client ». C'était une erreur de ma part : elle **est** publiée
+> sur le site, dans le pied de page. Elle a donc été ajoutée aux données structurées
+> `LocalBusiness` le jour même, avec l'email et les horaires. Plus rien à confirmer
+> sur ce point. **Si l'un de ces éléments est faux, c'est le pied de page du site
+> qu'il faut corriger en premier** — c'est lui qui fait référence.
+
+### Trois pièges à éviter en recopiant ce bloc
+
+1. **Il existe deux communes nommées Cize en France** : Cize 01250 dans l'Ain et
+   Cize 39300 dans le Jura. HCE est dans **le Jura**. Toujours accoler le code postal
+   39300, et ne jamais laisser un annuaire géolocaliser « Cize » tout seul.
+2. **Le 06 81 78 96 41 du bouton WhatsApp ne doit jamais être déclaré comme téléphone
+   principal** dans un annuaire ou sur la fiche Google. Deux numéros principaux
+   différents cassent le recoupement. Le numéro de référence est le **03 84 52 61 48**.
+3. **Toujours `https://www.hcebtp.com`**, avec le `www` et sans slash final :
+   l'adresse sans `www` redirige, et une URL qui redirige affaiblit la citation.
 
 ---
 
@@ -119,3 +137,14 @@ c'est inefficace aujourd'hui et risqué.
   (2012, devis détaillé, 150 °C). C'est le fichier que lisent les IA.
 - Données structurées présentes : `Organization`, `LocalBusiness`, `FAQPage`
   (accueil), `Service` (pages services).
+- **07/09/2026** — `LocalBusiness` complété avec l'**adresse postale complète**
+  (40 avenue Etienne Lamy, 39300 Cize), les coordonnées GPS, l'email, la raison
+  sociale, l'année de création et les horaires d'ouverture, tous repris du pied de
+  page du site. C'était le signal local fort qui manquait (voir action 3).
+- **07/09/2026** — Les trois blocs de données structurées (`Organization` du root,
+  `LocalBusiness` de l'accueil, `provider` des pages services) partagent désormais
+  le même identifiant `@id`. Ils décrivaient la même entreprise sans être reliés :
+  les moteurs y voyaient trois entités « HCE » distinctes.
+- **07/09/2026** — Correction d'une erreur affichée au visiteur : sur la carte
+  « Zone d'intervention », le marqueur du siège pointait Cize **dans l'Ain**, à
+  55 km du vrai siège de Cize dans le Jura.

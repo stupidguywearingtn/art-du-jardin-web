@@ -156,7 +156,21 @@ export const Route = createFileRoute("/services/$slug")({
               "@type": "Service",
               name: loaderData.title,
               description: loaderData.intro,
-              provider: { "@type": "LocalBusiness", name: "HCE", url: "https://www.hcebtp.com" },
+              provider: {
+                "@type": "LocalBusiness",
+                "@id": "https://www.hcebtp.com/#business",
+                name: "HCE",
+                url: "https://www.hcebtp.com",
+                telephone: "+33 3 84 52 61 48",
+                address: {
+                  "@type": "PostalAddress",
+                  streetAddress: "40 avenue Etienne Lamy",
+                  postalCode: "39300",
+                  addressLocality: "Cize",
+                  addressRegion: "Jura",
+                  addressCountry: "FR",
+                },
+              },
               areaServed: [
                 { "@type": "AdministrativeArea", name: "Jura" },
                 { "@type": "AdministrativeArea", name: "Ain" },

@@ -178,6 +178,19 @@ client) — et parce que son blocage n'existait pas.
    horaires) dans « L'entreprise en bref » et dans « Contact ». Le reste du
    fichier, écrit par le premier run, n'a pas été touché.
 
+**Vérifié en ligne après déploiement** : le `LocalBusiness` servi sur
+`https://www.hcebtp.com/` contient bien l'adresse complète, `geo`, `email`,
+`legalName`, `foundingDate` et les horaires ; `llms.txt` servi en 200 avec le NAP
+complet aux deux endroits.
+
+**IndexNow relancé après déploiement : 12 URLs soumises → HTTP 200.** À noter
+pour demain : le premier run de la journée avait reçu **202** (« reçu, clé en
+cours de vérification »). Le passage à **200** signifie que la clé est désormais
+vérifiée et la soumission acceptée telle quelle. Le canal IndexNow est donc
+opérationnel — ce qui déplace la question : si Bing n'indexe toujours rien dans
+les jours qui viennent alors que les soumissions passent en 200, le blocage n'est
+plus la découverte mais l'absence de liens entrants (action 4 du fichier client).
+
 **Ce que j'ai décidé de NE PAS faire, et pourquoi :**
 - **Ne pas toucher au rendu de la carte** malgré un effet de bord connu de la
   correction : Cize (46.726/5.914) et Champagnole (46.747/5.911) ne sont qu'à
@@ -209,7 +222,10 @@ de suite.**
 2. **Vérifier le résultat IndexNow.** Si Bing indexe dans les jours qui suivent,
    c'est la preuve que le blocage était bien la découverte et non un filtre
    qualité. Si rien après ~2 semaines, c'est que le domaine a besoin de liens
-   entrants réels (action 4 du fichier client).
+   entrants réels (action 4 du fichier client). **Le canal lui-même fonctionne :
+   soumission en 202 au 1er run du 07/09, puis en 200 au 2e run le même jour, ce
+   qui veut dire que la clé est vérifiée.** Ne plus perdre de temps à diagnostiquer
+   IndexNow — s'il n'y a toujours rien dans Bing, le problème est ailleurs.
 3. **Titres et descriptions des pages `/realisations/*`.** Aujourd'hui le titre
    est généré par `params.slug.replace(/-/g, " ")` → « Réalisations · cour allee
    privee — HCE » : sans accents, sans majuscules, et les 5 pages partagent la

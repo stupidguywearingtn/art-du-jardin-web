@@ -320,6 +320,19 @@ Entreprise active · date de création au registre : 2010-04-01
   rendu JavaScript** — question tranchée, ne pas la rouvrir.
 - Aucun changement visible par le visiteur.
 
+**Vérifié en ligne après déploiement (commit `8a18f38`) :**
+- `llms.txt` servi avec le bloc SIREN/SIRET/NAF et la nouvelle Q/R, date au
+  8 septembre.
+- JSON-LD de l'accueil récupéré **en se présentant comme Googlebot** et parsé :
+  `Organization` et `LocalBusiness` portent bien `identifier` (SIREN + SIRET),
+  `sameAs` et `alternateName` ; le `geo` du `LocalBusiness` est bien en
+  46.7234 / 5.9186.
+- **Contrôle de non-régression du `FAQPage`** : les 6 questions balisées sont
+  toutes présentes dans le texte visible de la page. Aucun mismatch. (À refaire
+  à chaque run, c'est le risque signalé en « Hypothèses à vérifier ».)
+- `robots.txt`, `sitemap.xml` (12 URLs) et le fichier clé IndexNow toujours en 200.
+- **IndexNow relancé après vérification : 12 URLs → HTTP 200.**
+
 **Ce que j'ai décidé de NE PAS faire, et pourquoi :**
 - **Ne pas corriger l'adresse en « 40 B avenue Etienne Lamy »** malgré le
   registre. Le pied de page affiche `40`, et le JSON-LD doit refléter le contenu
@@ -418,6 +431,14 @@ de suite.**
   Cize : Cize (46.726/5.914) et Champagnole (46.747/5.911) sont à ~2,4 km, donc
   quasiment confondus au zoom 8. Exact géographiquement, discutable visuellement.
   Non touché — c'est une décision de design. À faire valider avant d'y toucher.
+- **Environnement du runner** : `bun install` **n'aboutit pas** (bloqué ~513 Mo
+  téléchargés, processus jamais rendu la main), et `npm ci` échoue déjà d'après
+  le run précédent. **Il n'y a donc pas de build complet possible depuis le
+  runner.** Contournement validé le 08/09 et suffisant pour du SEO :
+  `bun build <fichier> --no-bundle --outfile …` transpile un `.tsx` **sans
+  node_modules** et signale toute erreur de syntaxe ; et un bloc
+  `JSON.stringify({…})` peut être extrait et évalué dans `node` pour prouver
+  qu'il produit du JSON valide. Les deux ont servi ici avant de pousser.
 - **Le `FAQPage` de l'accueil est construit depuis la constante `FAQS`**, alors
   que la FAQ affichée peut être surchargée par le CMS (`get("faqs", FAQS)` dans
   `src/components/sections.tsx`). Aujourd'hui les deux coïncident. Mais si le

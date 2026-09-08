@@ -97,6 +97,24 @@ export const Route = createRootRoute({
           "@id": "https://www.hcebtp.com/#business",
           name: "HCE",
           legalName: "HCE SARL",
+          // Dénomination telle qu'inscrite au registre national des entreprises
+          // (SIREN 521683573). C'est sous ce libellé que l'entreprise apparaît
+          // dans les annuaires légaux : le donner en alternateName permet de
+          // rapprocher « HCE » du même sujet.
+          alternateName: "H.C.E. - HINI - COURS - ENROBE",
+          // Identifiants légaux français, seule clé qui désigne l'entreprise
+          // sans ambiguïté (deux communes s'appellent Cize, et « HCE » est un
+          // sigle très répandu). Source : registre national des entreprises,
+          // api recherche-entreprises.api.gouv.fr, consulté le 08/09/2026.
+          identifier: [
+            { "@type": "PropertyValue", name: "SIREN", value: "521683573" },
+            { "@type": "PropertyValue", name: "SIRET", value: "52168357300039" },
+          ],
+          // Fiche publique vérifiée en ligne le 08/09/2026 (HTTP 200, même
+          // SIREN et même adresse que le registre).
+          sameAs: [
+            "https://www.societe.com/societe/h-c-e-hini-cours-enrobe-521683573.html",
+          ],
           url: "https://www.hcebtp.com",
           logo: "https://www.hcebtp.com/favicon-512x512.png",
           telephone: "+33 3 84 52 61 48",

@@ -92,6 +92,17 @@ export const Route = createFileRoute("/")({
           "@id": "https://www.hcebtp.com/#business",
           name: "HCE",
           legalName: "HCE SARL",
+          // Voir __root.tsx pour le détail : dénomination au registre national
+          // des entreprises et identifiants légaux. Répétés ici parce que ce
+          // nœud est le plus complet et qu'il doit rester lisible seul.
+          alternateName: "H.C.E. - HINI - COURS - ENROBE",
+          identifier: [
+            { "@type": "PropertyValue", name: "SIREN", value: "521683573" },
+            { "@type": "PropertyValue", name: "SIRET", value: "52168357300039" },
+          ],
+          sameAs: [
+            "https://www.societe.com/societe/h-c-e-hini-cours-enrobe-521683573.html",
+          ],
           url: "https://www.hcebtp.com",
           logo: "https://www.hcebtp.com/favicon-512x512.png",
           telephone: "+33 3 84 52 61 48",
@@ -109,10 +120,13 @@ export const Route = createFileRoute("/")({
             addressCountry: "FR",
           },
           // Cize (39300, Jura) — surtout pas Cize (01250, Ain), autre commune.
+          // Géocodage officiel de l'établissement (SIRET 52168357300039) par
+          // l'INSEE, et non le centre de la commune : ~300 m plus précis.
+          // Source : recherche-entreprises.api.gouv.fr, consulté le 08/09/2026.
           geo: {
             "@type": "GeoCoordinates",
-            latitude: 46.726,
-            longitude: 5.914,
+            latitude: 46.7234,
+            longitude: 5.9186,
           },
           openingHoursSpecification: [
             {

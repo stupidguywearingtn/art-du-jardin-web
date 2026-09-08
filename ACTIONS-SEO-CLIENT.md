@@ -77,6 +77,45 @@ Site web       : https://www.hcebtp.com
 Horaires       : Lundi-Vendredi 8h-18h · Samedi 8h-12h
 ```
 
+### Identité légale — à recopier telle quelle dans les annuaires
+
+Relevée le 08/09/2026 dans le **registre national des entreprises** (source
+officielle : `recherche-entreprises.api.gouv.fr`). C'est cette identité-là que les
+annuaires légaux et les fiches automatiques utilisent déjà pour désigner
+l'entreprise :
+
+```
+Dénomination au registre : H.C.E. - HINI - COURS - ENROBE
+Sigle                    : H.C.E.
+Forme juridique          : SARL
+SIREN                    : 521 683 573
+SIRET (siège)            : 521 683 573 00039
+Code NAF/APE             : 43.12A — travaux de terrassement courants
+                           et travaux préparatoires
+Adresse au registre      : 40 B avenue Etienne Lamy, 39300 Cize
+```
+
+**À quoi ça sert :** « HCE » est un sigle très répandu et il existe deux communes
+nommées Cize. Le SIREN est la seule donnée qui désigne cette entreprise-ci sans
+ambiguïté. Il est désormais publié dans les données structurées du site et dans
+`llms.txt`, ce qui permet à Google et aux IA de rapprocher le domaine des fiches
+d'entreprise qui existent déjà — c'est le premier rattachement du site à une
+entité connue.
+
+### Deux points à arbitrer par le client
+
+1. **L'adresse du registre porte un « B » que le site n'affiche pas.** Le registre
+   dit `40 B avenue Etienne Lamy`, le pied de page du site dit
+   `40 avenue Etienne Lamy`. Les fiches automatiques (societe.com et les autres)
+   reprennent le `40 B`. Le site n'a **pas** été modifié : c'est au client de dire
+   quelle forme est la bonne pour le courrier. Si c'est bien `40 B`, il faut
+   corriger le pied de page du site — et le faire **avant** de demander la
+   validation postale de la fiche Google, qui utilise l'adresse officielle.
+2. **Le registre date la création de l'entreprise en avril 2010, le site dit 2012.**
+   Le site n'a pas été touché : 2012 est une donnée figée par le client. Les deux
+   peuvent se justifier (immatriculation 2010, début réel d'activité 2012), mais
+   si un annuaire affiche 2010 il ne s'agit pas d'une erreur de l'annuaire.
+
 > **Mise à jour du 07/09/2026** — l'adresse postale complète était notée ici comme
 > « à confirmer par le client ». C'était une erreur de ma part : elle **est** publiée
 > sur le site, dans le pied de page. Elle a donc été ajoutée aux données structurées
@@ -108,6 +147,13 @@ Il en faut donc au moins quelques-uns, réels et légitimes :
 - Les **fiches d'entreprise automatiques** (registre du commerce, annuaires
   d'entreprises) : beaucoup existent déjà sans le site ; la plupart permettent de
   revendiquer la fiche et d'y ajouter l'URL.
+  **Vérifié le 08/09/2026 : au moins une existe déjà et est en ligne** —
+  `https://www.societe.com/societe/h-c-e-hini-cours-enrobe-521683573.html`
+  (même SIREN, même adresse que le registre). Elle ne porte **pas** l'adresse du
+  site. C'est le point d'entrée le plus rapide à obtenir : revendiquer la fiche et
+  y ajouter `https://www.hcebtp.com` crée un lien depuis une page que Google
+  crawle déjà. Chercher aussi la fiche équivalente sur Pappers et sur
+  l'annuaire des entreprises de l'État, à partir du SIREN 521683573.
 - Un **compte Facebook / Instagram professionnel** avec le lien du site : ces
   pages sont crawlées très fréquemment.
 - Les **partenaires, fournisseurs ou clients pros** qui ont un site : un lien
@@ -148,3 +194,9 @@ c'est inefficace aujourd'hui et risqué.
 - **07/09/2026** — Correction d'une erreur affichée au visiteur : sur la carte
   « Zone d'intervention », le marqueur du siège pointait Cize **dans l'Ain**, à
   55 km du vrai siège de Cize dans le Jura.
+- **08/09/2026** — **Identifiants légaux publiés dans les données structurées** :
+  SIREN, SIRET, dénomination officielle au registre, et lien vers la fiche
+  d'entreprise publique existante. Le site n'était rattaché à aucune entité
+  connue ; il l'est maintenant. Coordonnées GPS remplacées par le géocodage
+  officiel INSEE de l'établissement (~300 m plus précis que le centre du village).
+  Aucun changement visible pour le visiteur.

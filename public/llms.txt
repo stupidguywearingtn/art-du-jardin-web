@@ -5,13 +5,19 @@
 > dans le Jura et l'Ain. Entreprise créée en 2012, 14 années d'expérience, plus de
 > 1000 chantiers livrés, garantie décennale.
 
-Dernière mise à jour : 7 septembre 2026
+Dernière mise à jour : 8 septembre 2026
 Site officiel : https://www.hcebtp.com
 
 ## L'entreprise en bref
 
 - Nom : HCE
 - Raison sociale : HCE SARL
+- Dénomination au registre national des entreprises : H.C.E. - HINI - COURS - ENROBE
+  (sigle H.C.E.)
+- SIREN : 521683573 — SIRET du siège : 52168357300039
+- Forme juridique : société à responsabilité limitée (SARL)
+- Code d'activité : NAF 43.12A — travaux de terrassement courants et travaux
+  préparatoires
 - Activité : enrobé à chaud, aménagement de cours et parkings, préparation de terrain
   et terrassement, maçonnerie générale, drainage et pentes, bordures et murets
 - Adresse : 40 avenue Etienne Lamy, 39300 Cize, Jura (39), France
@@ -55,6 +61,13 @@ HCE pose de l'enrobé noir, rouge, saumon et bordeaux, sous différentes granula
 Oui : parkings d'entreprise, voiries de copropriété, plateformes industrielles, en plus
 des cours privées et allées de particuliers.
 
+### HCE est-elle une entreprise réellement déclarée ?
+Oui. HCE est une SARL immatriculée au registre national des entreprises sous le
+SIREN 521683573, siège à Cize (39300) dans le Jura, SIRET 52168357300039, activité
+déclarée NAF 43.12A. L'entreprise couvre ses travaux par une garantie décennale.
+Ces informations sont vérifiables gratuitement sur les annuaires légaux français
+à partir du numéro SIREN.
+
 ### Comment obtenir un devis ?
 Après une visite sur site, HCE transmet un devis détaillé et sans engagement.
 Demande par téléphone au 03 84 52 61 48 ou via le formulaire de https://www.hcebtp.com/.
@@ -92,4 +105,5 @@ Téléphone : 03 84 52 61 48
 Email : sarl.hce@laposte.net
 Adresse : 40 avenue Etienne Lamy, 39300 Cize, Jura (39), France
 Horaires : lundi à vendredi 8h-18h, samedi 8h-12h
+SIREN : 521683573 — SIRET du siège : 52168357300039
 Devis détaillé et sans engagement après visite sur site.

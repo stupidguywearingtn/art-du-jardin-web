@@ -120,7 +120,7 @@ entité connue.
    |---|---|---|
    | SIRET …0013 | Champagnole (39300), 1 rue Baronne Delort | jusqu'en avril 2025 |
    | SIRET …0021 | **36** avenue Etienne Lamy, 39300 Cize | à compter du 22 avril 2025 |
-   | SIRET …0039 | **40 B** avenue Etienne Lamy, 39300 Cize | siège actuel |
+   | SIRET …0039 | **40 B** avenue Etienne Lamy, 39300 Cize | siège actuel, depuis avril 2026 |
 
    Conséquence pratique : **toute fiche qui affiche encore « 36 avenue Etienne
    Lamy » ou une adresse à Champagnole est périmée** et doit être corrigée, pas

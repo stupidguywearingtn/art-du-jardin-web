@@ -111,6 +111,22 @@ entité connue.
    quelle forme est la bonne pour le courrier. Si c'est bien `40 B`, il faut
    corriger le pied de page du site — et le faire **avant** de demander la
    validation postale de la fiche Google, qui utilise l'adresse officielle.
+   **Précision du 09/09/2026 : l'adresse du site est la bonne, à la lettre `B`
+   près.** L'entreprise a déménagé deux fois, ce qui explique les adresses
+   contradictoires que l'on trouve en ligne (relevé sur la fiche societe.com,
+   qui reprend les annonces légales) :
+
+   | Établissement | Adresse | Période |
+   |---|---|---|
+   | SIRET …0013 | Champagnole (39300), 1 rue Baronne Delort | jusqu'en avril 2025 |
+   | SIRET …0021 | **36** avenue Etienne Lamy, 39300 Cize | à compter du 22 avril 2025 |
+   | SIRET …0039 | **40 B** avenue Etienne Lamy, 39300 Cize | siège actuel |
+
+   Conséquence pratique : **toute fiche qui affiche encore « 36 avenue Etienne
+   Lamy » ou une adresse à Champagnole est périmée** et doit être corrigée, pas
+   recopiée. C'est le cas d'au moins une fiche vue en ligne (verif.com, référencée
+   sous le SIRET …0021). Une adresse périmée qui circule sur plusieurs annuaires
+   empêche Google de consolider l'entreprise en une seule entité.
 2. **Le registre date la création de l'entreprise en avril 2010, le site dit 2012.**
    Le site n'a pas été touché : 2012 est une donnée figée par le client. Les deux
    peuvent se justifier (immatriculation 2010, début réel d'activité 2012), mais
@@ -146,14 +162,28 @@ Il en faut donc au moins quelques-uns, réels et légitimes :
   l'adresse du site.
 - Les **fiches d'entreprise automatiques** (registre du commerce, annuaires
   d'entreprises) : beaucoup existent déjà sans le site ; la plupart permettent de
-  revendiquer la fiche et d'y ajouter l'URL.
-  **Vérifié le 08/09/2026 : au moins une existe déjà et est en ligne** —
-  `https://www.societe.com/societe/h-c-e-hini-cours-enrobe-521683573.html`
-  (même SIREN, même adresse que le registre). Elle ne porte **pas** l'adresse du
-  site. C'est le point d'entrée le plus rapide à obtenir : revendiquer la fiche et
-  y ajouter `https://www.hcebtp.com` crée un lien depuis une page que Google
-  crawle déjà. Chercher aussi la fiche équivalente sur Pappers et sur
-  l'annuaire des entreprises de l'État, à partir du SIREN 521683573.
+  revendiquer la fiche et d'y ajouter l'URL. C'est le point d'entrée le plus
+  rapide à obtenir : y ajouter `https://www.hcebtp.com` crée un lien depuis une
+  page que Google crawle déjà.
+
+  **Recensement du 09/09/2026 — quatre fiches existent déjà, aucune ne porte
+  l'adresse du site.** C'est très exactement le chaînon manquant : Google connaît
+  l'entreprise, mais aucun de ces documents ne mène au domaine.
+
+  | Fiche | Ce qu'elle publie | À faire |
+  |---|---|---|
+  | `societe.com/societe/h-c-e-hini-cours-enrobe-521683573.html` | SIREN et adresse conformes au registre, historique des établissements | revendiquer, ajouter l'URL |
+  | `118000.fr/e_C0092984566` | « HCE Hini Cours Enrobé à CIZE 39300 », **téléphone 03 84 52 61 48 conforme**, aucune adresse | revendiquer, ajouter l'URL **et** l'adresse |
+  | `pappers.fr/entreprise/hce-hini-cours-enrobe-521683573` | fiche légale (contenu non vérifiable depuis nos outils) | revendiquer, ajouter l'URL |
+  | `verif.com/societe/H.C.E.---HINI---COURS---ENROBE-521683573/` | référencée sous le SIRET …0021, donc **sur l'ancienne adresse (36 avenue Etienne Lamy)** | faire corriger l'adresse en priorité |
+
+  Les deux premières ont été vérifiées en lisant réellement la page. Les deux
+  suivantes refusent nos requêtes automatiques (HTTP 403) : leur existence est
+  certaine, leur contenu exact reste à contrôler à la main depuis un navigateur.
+
+  Les deux fiches vérifiées sont désormais déclarées dans les données structurées
+  du site (`sameAs`) : le site pointe vers elles. Le lien retour, lui, ne peut être
+  créé que depuis les fiches elles-mêmes — c'est l'action à mener ici.
 - Un **compte Facebook / Instagram professionnel** avec le lien du site : ces
   pages sont crawlées très fréquemment.
 - Les **partenaires, fournisseurs ou clients pros** qui ont un site : un lien

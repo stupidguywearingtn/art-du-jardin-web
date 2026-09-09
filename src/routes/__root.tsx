@@ -110,10 +110,17 @@ export const Route = createRootRoute({
             { "@type": "PropertyValue", name: "SIREN", value: "521683573" },
             { "@type": "PropertyValue", name: "SIRET", value: "52168357300039" },
           ],
-          // Fiche publique vérifiée en ligne le 08/09/2026 (HTTP 200, même
-          // SIREN et même adresse que le registre).
+          // Fiches publiques vérifiées en ligne avant d'être citées : on ne
+          // référence que des pages dont on a lu le contenu, jamais sur la seule
+          // foi d'un HTTP 200 (cf. SEO-JOURNAL, erreur du 08/09/2026).
+          // - societe.com : vérifiée le 08/09/2026 (même SIREN, même adresse
+          //   que le registre).
+          // - 118000.fr : vérifiée le 09/09/2026 — la page décrit bien « HCE
+          //   Hini Cours Enrobé à CIZE 39300 » et publie en microdonnées
+          //   (itemprop telephone) le 0384526148, exactement le numéro du site.
           sameAs: [
             "https://www.societe.com/societe/h-c-e-hini-cours-enrobe-521683573.html",
+            "https://www.118000.fr/e_C0092984566",
           ],
           url: "https://www.hcebtp.com",
           logo: "https://www.hcebtp.com/favicon-512x512.png",

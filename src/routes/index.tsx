@@ -100,8 +100,11 @@ export const Route = createFileRoute("/")({
             { "@type": "PropertyValue", name: "SIREN", value: "521683573" },
             { "@type": "PropertyValue", name: "SIRET", value: "52168357300039" },
           ],
+          // Voir __root.tsx : chaque fiche est vérifiée en lisant son contenu
+          // avant d'être citée. 118000.fr ajoutée le 09/09/2026.
           sameAs: [
             "https://www.societe.com/societe/h-c-e-hini-cours-enrobe-521683573.html",
+            "https://www.118000.fr/e_C0092984566",
           ],
           url: "https://www.hcebtp.com",
           logo: "https://www.hcebtp.com/favicon-512x512.png",

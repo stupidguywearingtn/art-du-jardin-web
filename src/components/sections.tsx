@@ -277,7 +277,7 @@ export function FAQ() {
             return (
               <div key={i} data-faq className="border-t border-gold/20 last:border-b">
                 <button
-
+                  aria-expanded={isOpen}
                   onClick={() => setOpen(isOpen ? null : i)}
                   className="w-full flex items-center justify-between gap-6 py-7 text-left group"
                 >
@@ -294,21 +294,35 @@ export function FAQ() {
                     +
                   </span>
                 </button>
-                <AnimatePresence initial={false}>
-                  {isOpen && (
-                    <motion.div
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: "auto", opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
-                      className="overflow-hidden"
-                    >
-                      <p className="pb-7 pr-12 text-muted" style={{ fontSize: 15, lineHeight: 1.7 }}>
-                        {f.a}
-                      </p>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
+                {/* La réponse reste montée en permanence et se replie à hauteur
+                    nulle. Auparavant elle n'était montée qu'à l'ouverture : le
+                    HTML servi ne contenait donc qu'une seule des six réponses,
+                    alors que le JSON-LD FAQPage les déclare toutes. Deux
+                    conséquences, l'une et l'autre corrigées ici — un balisage
+                    FAQPage sans équivalent visible dans la page est un mismatch
+                    sanctionnable, et les crawlers qui n'exécutent pas de
+                    JavaScript (ceux des IA au premier chef) ne pouvaient lire
+                    aucune des cinq autres réponses.
+                    Le repli passe par une transition CSS sur grid-template-rows
+                    et non par framer-motion : le style est alors rendu tel quel
+                    côté serveur, donc les items fermés arrivent déjà repliés et
+                    rien ne s'ouvre brièvement avant l'hydratation. */}
+                <div
+                  className="overflow-hidden"
+                  style={{
+                    display: "grid",
+                    gridTemplateRows: isOpen ? "1fr" : "0fr",
+                    opacity: isOpen ? 1 : 0,
+                    transition:
+                      "grid-template-rows 0.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1)",
+                  }}
+                >
+                  <div style={{ minHeight: 0 }}>
+                    <p className="pb-7 pr-12 text-muted" style={{ fontSize: 15, lineHeight: 1.7 }}>
+                      {f.a}
+                    </p>
+                  </div>
+                </div>
               </div>
             );
           })}

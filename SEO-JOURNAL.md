@@ -189,6 +189,48 @@ est bien le rattachement des deux, pas la notoriété.
   plus au markup actuel. Le comptage d'occurrences de `hcebtp`, lui, est fiable.
   À refaire proprement pour pouvoir suivre les concurrents.
 
+### Positions mesurées — 10/09/2026
+
+**Indexation : toujours nulle.** Établi par `WebSearch` (le seul canal exploitable
+aujourd'hui) : sur `hcebtp.com HCE Hini Cours Enrobé Cize`, **aucune page du domaine
+ne ressort**, alors que huit fiches d'entreprise décrivant HCE remontent (pappers,
+verif, kompass, societe, 118000, manageo, batiment.cc…). Un domaine indexé serait
+sorti en tête sur une requête qui le nomme. Même constat qu'au 09/09 : entreprise
+connue, domaine inconnu. Nous sommes à 3 jours de la 1re soumission IndexNow — délai
+encore normal.
+
+| Requête | Mesure (10/09/2026) |
+|---|---|
+| `site:hcebtp.com` (indexation) | **absent** (via WebSearch nommant le domaine) |
+| requêtes commerciales | **non mesurables ce jour** (voir encadré) |
+
+> ⚠️ **Aucun canal de SERP brut n'a fonctionné aujourd'hui — ne pas noter « absent »
+> par requête, ce serait inventer une continuité (erreur du 07/09).**
+> - **Bing RSS (`&format=rss`)** : dérive totale. Requête témoin `colas enrobe` →
+>   annonces immobilières allemandes ; `enrobe a chaud Jura` → sites d'université
+>   mexicaine (buap.mx). Le témoin prouve que le canal est mort, pas le site absent.
+>   La précaution du 09/09 (requête témoin obligatoire) a encore payé.
+> - **Mojeek** : HTTP 403. **DuckDuckGo lite/html** : `anomaly` (captcha) / code 000.
+>   **Ecosia** : 403. **Marginalia** : 302. Aucun exploitable en curl aujourd'hui.
+> - **`WebSearch`** reste utile pour l'indexation (nommer le domaine) et les
+>   mentions externes, mais ignore toujours `site:`.
+
+**Fiche externe découverte et vérifiée : manageo.fr.** `WebSearch` sur
+`hcebtp.com HCE Hini Cours Enrobé Cize` a fait remonter plusieurs annuaires. Une
+seule était lisible depuis le runner **et** porte l'adresse actuelle :
+`manageo.fr/entreprises/521683573.html` (HTTP 200, 86 Ko), qui affiche
+« ENTREPRISE H.C.E. - HINI - COURS - ENROBE », SIRET siège **52168357300039** et
+adresse **« 40 AVENUE ETIENNE LAMY 39300 CIZE »** — l'actuelle, pas l'ancienne
+« 36 » ni Champagnole. Ajoutée en `sameAs` (voir chantier du jour).
+
+Les autres restent invérifiables ou périmées depuis le runner :
+- **kompass.fr** (405), **verif.com** (403), **pappers.fr** (403),
+  **batiment.cc** (403) : contenu non lisible. verif/kompass affichent d'ailleurs
+  l'**ancienne** adresse (« 36 avenue Etienne Lamy » / Champagnole) d'après les
+  extraits de recherche — périmées, à ne pas citer.
+- **nosartisansontdutalent.fr** : bloqué par la politique réseau du runner
+  (`connect_rejected`). Non vérifiable ici.
+
 ---
 
 ## Chantiers faits
@@ -542,6 +584,76 @@ en faire) et historique des établissements ajoutés à l'action 4.
   **12 requêtes de suite ensuite : 12 × HTTP 200**, contenu conforme, apex et UA
   navigateur également. C'était le runner, comme pour le sitemap le 07/09.
 
+### 10/09/2026 — Titres et meta descriptions des `/realisations/*` + fiche manageo (commit `68f9fa2`)
+
+**Bascule sur le contenu, comme le journal le demandait depuis trois runs.** Le
+chantier en attente n°3 (titres `/realisations/*`) avait été reporté les 07, 08 et
+09/09 au profit du travail d'entité et de la FAQ. La consigne était explicite : ne
+pas le repousser une quatrième fois sans raison aussi forte. Aucune n'est apparue,
+donc il est traité.
+
+**Le défaut, confirmé à l'étape 2 (pas seulement lu dans le journal).** Dans
+`realisations.$slug.tsx`, le `<title>` était généré par
+`params.slug.replace(/-/g, " ")` → « Réalisations · cour allee privee — HCE » : sans
+accents, sans majuscules. Et les **5 URLs `/realisations/*` partageaient une meta
+description identique** (« Découvrez nos réalisations en enrobé… »). Sur 12 URLs au
+sitemap, 5 étaient donc mal titrées et non différenciées.
+
+**Ce qui a été fait :**
+1. **Tableau statique `REAL_META` (slug → titre + description)** dans
+   `realisations.$slug.tsx`, repris à l'identique des titres/descriptions des
+   catégories (`FALLBACK_CATS` de `useGallery.tsx`) — le `head()` n'a que le slug
+   car la catégorie se charge en asynchrone côté client. Chaque page a désormais un
+   `<title>` unique, accentué et géolocalisé (Jura/Ain), une meta description propre,
+   plus `og:title`/`og:description`. Repli en title-case pour un slug inconnu (au
+   lieu du slug brut).
+2. **`realisations.avant-apres.tsx`** : titre et description enrichis et géolocalisés
+   sur le même modèle (c'était la 5e URL qui partageait la description générique).
+3. **Angle GEO respecté sans rien inventer** : ces pages sont des galeries photo, les
+   descriptions décrivent ce qu'on y voit réellement ; chiffres client honorés
+   (150 °C, « posé à la main »). Pas de FAQ ni de JSON-LD ajouté ici → aucun risque
+   de mismatch.
+4. **Volet découverte (priorité tant que non indexé)** : `manageo.fr` ajoutée en
+   `sameAs` de l'`Organization` (`__root.tsx`) et du `LocalBusiness` (`index.tsx`),
+   3e référence externe corroborant l'entité. Vérifiée ce jour (adresse actuelle,
+   SIRET siège). Un commentaire daté explique la vérif dans chaque fichier.
+
+**Vérifications avant push :** les 4 fichiers transpilent sans erreur
+(`bun build --no-bundle`, méthode validée le 08/09 ; l'ENOENT d'outdir n'est pas une
+erreur de syntaxe).
+
+**Vérifié en ligne après déploiement (vu comme Googlebot) :**
+- Les **5 URLs `/realisations/*`** servent chacune un `<title>` et une meta
+  description **uniques, accentués, géolocalisés** (cour-allee-privee,
+  parking-voirie-pro, preparation-terrassement, chantier-en-cours, avant-apres —
+  tous distincts, contrôlés un par un).
+- **`sameAs` = 3 références** (societe.com, 118000.fr, manageo.fr) sur
+  l'`Organization` **et** le `LocalBusiness` (2 occurrences chacune). Aucune
+  régression.
+- **Non-régression FAQ** : les 6 réponses balisées sont toujours dans le HTML visible
+  (attention : « supérieure**s** à 5°C », sans espace → une comparaison naïve donne un
+  faux « absent », cf. leçon du 09/09).
+- **Contenu figé client intact** : 2012, 14 ans, 150 °C, « posé à la main »,
+  « Devis détaillé », garantie décennale. Aucun « 2005 ». Les 21 « 180 » du HTML sont
+  tous du CSS/icône (`sizes="180x180"`, `clamp(180px)`, `width:180px`), aucun
+  « 180 °C ». Les 2 « 48h » sont « réponse sous 24 à 48h » (délai de réponse à un
+  contact, pas le devis) et un tracé SVG WhatsApp — pas le « Devis sous 48h »
+  interdit. Pré-existants, non touchés.
+- **IndexNow relancé : 12 URLs → HTTP 200.**
+
+**Ce que j'ai décidé de NE PAS faire, et pourquoi :**
+- **Ne pas ajouter de `BreadcrumbList`** aux pages réalisations aujourd'hui (chantier
+  en attente n°6) : un seul chantier mené à fond. Reste en attente, naturel à coupler
+  avec ces pages un prochain jour.
+- **Ne pas ajouter kompass/verif/pappers/batiment.cc en `sameAs`** : soit
+  invérifiables depuis le runner (403/405), soit affichant l'ancienne adresse
+  (« 36 » / Champagnole) — on ne cite pas ce qu'on n'a pas lu, et surtout pas une
+  fiche périmée qui empêcherait Google de consolider l'entité.
+- **Ne pas toucher `llms.txt` ni sa date** : aucune catégorie ni aucun chiffre n'a
+  changé aujourd'hui ; bouger la date sans modification réelle serait un faux signal.
+- **Ne pas générer de `lastmod` au sitemap** (n°4) : toujours pas de date de
+  modification honnête par page.
+
 ---
 
 ## Chantiers en attente
@@ -558,10 +670,11 @@ de suite.**
    soumission en 202 au 1er run du 07/09, puis en 200 au 2e run le même jour, ce
    qui veut dire que la clé est vérifiée.** Ne plus perdre de temps à diagnostiquer
    IndexNow — s'il n'y a toujours rien dans Bing, le problème est ailleurs.
-3. **Titres et descriptions des pages `/realisations/*`.** Aujourd'hui le titre
-   est généré par `params.slug.replace(/-/g, " ")` → « Réalisations · cour allee
-   privee — HCE » : sans accents, sans majuscules, et les 5 pages partagent la
-   même meta description. Chantier propre et sans risque (head uniquement).
+3. ~~**Titres et descriptions des pages `/realisations/*`.**~~ **Fait le
+   10/09/2026** (commit `68f9fa2`). Les 5 URLs ont désormais des `<title>` et meta
+   descriptions uniques, accentués et géolocalisés (+ `og:title`/`og:description`),
+   via un tableau statique `REAL_META` dans `realisations.$slug.tsx` et un `head()`
+   enrichi sur `avant-apres`. Vérifié en ligne.
 4. **`lastmod` dans le sitemap.** Absent. À n'ajouter qu'avec une date honnête
    (date de commit du contenu), jamais une date générée à la volée.
 5. **Aucune page ne cible « goudronnage »** — le mot n'apparaît nulle part sur le
@@ -586,12 +699,13 @@ de suite.**
 10. **Angles déjà utilisés, à ne pas reprendre tout de suite** : 07/09 hôte
     canonique + IndexNow ; 07/09 (2e) NAP interne + consolidation `@id` ;
     08/09 identité légale + `sameAs` ; 09/09 lisibilité de la FAQ pour les
-    crawlers + recensement des fiches externes. **Le prochain run devrait
-    basculer sur le contenu** — le n°3 (titres `/realisations/*`) ou le n°5
-    (« goudronnage ») sont prêts à être pris et n'ont toujours jamais été traités.
-    Ils ont été reportés une fois de plus le 09/09 pour corriger un défaut trouvé
-    en cours de mesure ; ne pas les repousser une troisième fois sans raison
-    aussi forte.
+    crawlers + recensement des fiches externes ; **10/09 titres/descriptions
+    `/realisations/*` + `sameAs` manageo**. **Chantier de contenu encore jamais
+    pris : le n°5 (« goudronnage »)** — le mot n'apparaît toujours nulle part sur
+    le site alors que c'est le terme grand public. C'est le meilleur candidat
+    contenu pour le prochain run (le n°6 `BreadcrumbList` est plus technique et
+    sans risque, bon repli). Éviter de refaire du `sameAs`/identité, angle saturé
+    (4 runs sur 5).
 11. **Vérifier que les autres contenus dépliables du site sont bien dans le HTML
     servi.** Le défaut corrigé le 09/09 sur la FAQ vient d'un montage conditionnel
     (`{isOpen && …}`). `src/components/sections.tsx` contient d'autres

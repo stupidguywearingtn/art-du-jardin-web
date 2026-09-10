@@ -101,10 +101,13 @@ export const Route = createFileRoute("/")({
             { "@type": "PropertyValue", name: "SIRET", value: "52168357300039" },
           ],
           // Voir __root.tsx : chaque fiche est vérifiée en lisant son contenu
-          // avant d'être citée. 118000.fr ajoutée le 09/09/2026.
+          // avant d'être citée. 118000.fr ajoutée le 09/09/2026,
+          // manageo.fr ajoutée le 10/09/2026 (adresse actuelle « 40 avenue
+          // Etienne Lamy », SIRET siège 52168357300039).
           sameAs: [
             "https://www.societe.com/societe/h-c-e-hini-cours-enrobe-521683573.html",
             "https://www.118000.fr/e_C0092984566",
+            "https://www.manageo.fr/entreprises/521683573.html",
           ],
           url: "https://www.hcebtp.com",
           logo: "https://www.hcebtp.com/favicon-512x512.png",

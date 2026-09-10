@@ -118,9 +118,14 @@ export const Route = createRootRoute({
           // - 118000.fr : vérifiée le 09/09/2026 — la page décrit bien « HCE
           //   Hini Cours Enrobé à CIZE 39300 » et publie en microdonnées
           //   (itemprop telephone) le 0384526148, exactement le numéro du site.
+          // - manageo.fr : vérifiée le 10/09/2026 — la fiche 521683573 porte
+          //   la dénomination « H.C.E. - HINI - COURS - ENROBE », le SIRET
+          //   siège actuel 52168357300039 et l'adresse ACTUELLE « 40 AVENUE
+          //   ETIENNE LAMY 39300 CIZE » (pas l'ancienne « 36 » ni Champagnole).
           sameAs: [
             "https://www.societe.com/societe/h-c-e-hini-cours-enrobe-521683573.html",
             "https://www.118000.fr/e_C0092984566",
+            "https://www.manageo.fr/entreprises/521683573.html",
           ],
           url: "https://www.hcebtp.com",
           logo: "https://www.hcebtp.com/favicon-512x512.png",

@@ -18,19 +18,22 @@ const HOME_SITE_ID = "11111111-1111-1111-1111-111111111111";
 
 export const Route = createFileRoute("/realisations/avant-apres")({
   component: AvantApresRoute,
-  head: () => ({
-    meta: [
-      { title: "Avant / Après — HCE" },
-      {
-        name: "description",
-        content:
-          "Comparez nos chantiers avant et après : de la préparation au rendu final en enrobé.",
-      },
-      { name: "robots", content: "index,follow" },
-      { property: "og:url", content: "https://www.hcebtp.com/realisations/avant-apres" },
-    ],
-    links: [{ rel: "canonical", href: "https://www.hcebtp.com/realisations/avant-apres" }],
-  }),
+  head: () => {
+    const title = "Avant / après : chantiers d'enrobé en images — HCE";
+    const description =
+      "Comparez en images des chantiers HCE avant et après, dans le Jura et l'Ain : de la préparation du terrain au rendu final en enrobé à chaud.";
+    return {
+      meta: [
+        { title },
+        { name: "description", content: description },
+        { name: "robots", content: "index,follow" },
+        { property: "og:title", content: title },
+        { property: "og:description", content: description },
+        { property: "og:url", content: "https://www.hcebtp.com/realisations/avant-apres" },
+      ],
+      links: [{ rel: "canonical", href: "https://www.hcebtp.com/realisations/avant-apres" }],
+    };
+  },
 });
 
 function AvantApresRoute() {

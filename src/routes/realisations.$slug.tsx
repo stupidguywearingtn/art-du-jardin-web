@@ -20,23 +20,68 @@ const MIN_SLOTS = 5;
 
 const HOME_SITE_ID = "11111111-1111-1111-1111-111111111111";
 
+/**
+ * Titres et descriptions par catégorie de réalisation, rendus côté serveur.
+ * Le composant charge la catégorie de façon asynchrone (Supabase / fallback),
+ * donc `head()` n'a que le slug : ce tableau reprend à l'identique les titres
+ * et descriptions des catégories (voir FALLBACK_CATS dans `useGallery.tsx`)
+ * pour que le <title> et la meta description soient uniques, accentués et
+ * géolocalisés au lieu du slug brut. Aucun chiffre inventé : ces pages sont des
+ * galeries photo, les descriptions décrivent ce qu'on y voit.
+ */
+const REAL_META: Record<string, { title: string; description: string }> = {
+  "cour-allee-privee": {
+    title: "Cour et allée privée en enrobé — Jura et Ain — HCE",
+    description:
+      "Photos de cours et allées privées réalisées en enrobé à chaud par HCE dans le Jura et l'Ain : finitions soignées, bords nets. Devis détaillé, visite gratuite.",
+  },
+  "parking-voirie-pro": {
+    title: "Parkings et voiries en enrobé pour pros — Jura — HCE",
+    description:
+      "Réalisations HCE de parkings d'entreprise, voiries de copropriété et grandes plateformes en enrobé à chaud dans le Jura et l'Ain. Demandez un devis détaillé.",
+  },
+  "preparation-terrassement": {
+    title: "Préparation de terrain et terrassement dans le Jura — HCE",
+    description:
+      "Chantiers HCE de préparation de terrain et de terrassement dans le Jura : décaissement, nivellement, drainage et plateformes avant pose d'enrobé. Devis détaillé.",
+  },
+  "chantier-en-cours": {
+    title: "Chantiers d'enrobé en cours — HCE, Cize (Jura)",
+    description:
+      "HCE à l'œuvre dans le Jura et l'Ain : photos de chantiers d'enrobé en cours — pose à la main à 150 °C, compactage, équipe en action.",
+  },
+};
+
+/** Repli lisible pour un slug inconnu : « mots-avec-tirets » → « Mots avec tirets ». */
+function titleCaseSlug(slug: string): string {
+  return slug
+    .split("-")
+    .map((w) => (w ? w[0].toUpperCase() + w.slice(1) : w))
+    .join(" ");
+}
+
 export const Route = createFileRoute("/realisations/$slug")({
   component: RealisationsRoute,
-  head: ({ params }) => ({
-    meta: [
-      { title: `Réalisations · ${params.slug.replace(/-/g, " ")} — HCE` },
-      {
-        name: "description",
-        content:
-          "Découvrez nos réalisations en enrobé, cours, parkings et terrassement dans le Jura et l'Ain.",
-      },
-      { name: "robots", content: "index,follow" },
-      { property: "og:url", content: `https://www.hcebtp.com/realisations/${params.slug}` },
-    ],
-    links: [
-      { rel: "canonical", href: `https://www.hcebtp.com/realisations/${params.slug}` },
-    ],
-  }),
+  head: ({ params }) => {
+    const meta = REAL_META[params.slug] ?? {
+      title: `${titleCaseSlug(params.slug)} — Réalisations HCE`,
+      description:
+        "Découvrez les réalisations HCE en enrobé à chaud, cours, parkings et terrassement dans le Jura et l'Ain. Devis détaillé, visite gratuite.",
+    };
+    return {
+      meta: [
+        { title: meta.title },
+        { name: "description", content: meta.description },
+        { name: "robots", content: "index,follow" },
+        { property: "og:title", content: meta.title },
+        { property: "og:description", content: meta.description },
+        { property: "og:url", content: `https://www.hcebtp.com/realisations/${params.slug}` },
+      ],
+      links: [
+        { rel: "canonical", href: `https://www.hcebtp.com/realisations/${params.slug}` },
+      ],
+    };
+  },
 });
 
 function RealisationsRoute() {

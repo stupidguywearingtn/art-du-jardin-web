@@ -237,7 +237,7 @@ create table if not exists public.project_types (
   description text,
   price_from numeric(10, 2),
   price_unit text not null default '€/m²',
-  show_price boolean not null default true,
+  show_price boolean not null default false, -- FIGE : HCE n'affiche jamais de prix au visiteur
   display_order int not null default 0,
   active boolean not null default true,
   updated_at timestamptz not null default now()
@@ -308,9 +308,9 @@ on conflict (id) do nothing;
 
 insert into public.why_us_cards (title, description, icon_name, display_order)
 select * from (values
-  ('Enrobé à chaud',     'Pose à la main à 180°C, compactage maîtrisé pour une durabilité maximale.',                          'flame',        1),
+  ('Enrobé à chaud',     'Pose à la main à 150°C, compactage maîtrisé pour une durabilité maximale.',                          'flame',        1),
   ('1000+ chantiers',    'Plus de 1000 chantiers réalisés dans le Jura et l''Ain depuis 2012, 14 années d''expérience.',       'star',         2),
-  ('Devis détaillé',     'Visite gratuite, devis sous 48h, prix tenus, aucune mauvaise surprise.',                              'file-text',    3),
+  ('Devis détaillé',     'Visite gratuite, prix tenus, aucune mauvaise surprise.',                                             'file-text',    3),
   ('Finitions soignées', 'Bords nets, raccords maîtrisés, surface plane et homogène jusqu''à la dernière passe.',               'shield-check', 4)
 ) as v(title, description, icon_name, display_order)
 where not exists (select 1 from public.why_us_cards);
@@ -403,18 +403,21 @@ insert into public.quote_section (id, tag, title, subtitle)
 values (1, '— Demande de devis', 'Estimez votre projet', 'en 90 secondes.')
 on conflict (id) do nothing;
 
-insert into public.project_types (slug, label, description, price_from, price_unit, display_order)
+-- FIGE (consigne client) : show_price = false et price_from = NULL sur les 4 types.
+-- HCE ne communique AUCUN prix indicatif en ligne. Le type 2 s'appelle "Chemin",
+-- et jamais l'ancien libelle. Toute reprise de ce seed conserve ces valeurs.
+insert into public.project_types (slug, label, description, price_from, price_unit, show_price, display_order)
 values
-  ('cour',        'Cour privée',       'Enrobé à chaud, allée + bordure + finition.', 65, '€/m²', 1),
-  ('allee',       'Allée',             'Pose, bordures et finition soignée.',         75, '€/m²', 2),
-  ('parking',     'Parking pro',       'Voirie, poids-lourds possible.',              55, '€/m²', 3),
-  ('preparation', 'Préparation seule', 'Décaissement + nivellement.',                 30, '€/m²', 4)
+  ('cour',        'Cour privée',       'Enrobé à chaud, compactage',  NULL, '€/m²', false, 1),
+  ('allee',       'Chemin',            'Bordures + finition soignée', NULL, '€/m²', false, 2),
+  ('parking',     'Parking pro',       'et grand espace',             NULL, '€/m²', false, 3),
+  ('preparation', 'Préparation seule', 'Décaissement + nivellement',  NULL, '€/m²', false, 4)
 on conflict (slug) do nothing;
 
 -- FAQ et MARQUEE dans site_content (legacy keyed)
 insert into public.site_content (key, data) values
   ('faqs', '[
-    {"q":"Sous combien de temps recevrai-je mon devis ?","a":"Après visite sur site, nous vous transmettons un devis détaillé sous 48 heures ouvrées, sans engagement."},
+    {"q":"Sous combien de temps recevrai-je mon devis ?","a":"Après visite sur site, nous vous transmettons un devis détaillé, sans engagement."},
     {"q":"L''enrobé peut-il être posé toute l''année ?","a":"L''enrobé à chaud requiert des températures supérieures à 5°C et un sol sec. Nous intervenons généralement de mars à novembre."},
     {"q":"Quelle est la durée de vie d''un enrobé HCE ?","a":"Un enrobé bien préparé et compacté tient 20 à 30 ans selon l''usage, sans entretien lourd."},
     {"q":"Faut-il un permis pour refaire ma cour ?","a":"Pour un simple revêtement à l''identique, aucune autorisation n''est nécessaire. Nous vous conseillons en cas de doute."},
@@ -424,7 +427,7 @@ insert into public.site_content (key, data) values
 on conflict (key) do nothing;
 
 insert into public.site_content (key, data) values
-  ('marquee_items', '["1000+ chantiers livrés","14 années d''expérience","Jura · Ain","Devis sous 48h","Garantie décennale","Enrobé à chaud","Visite gratuite"]'::jsonb)
+  ('marquee_items', '["1000+ chantiers livrés","14 années d''expérience","Jura · Ain","Devis détaillé","Garantie décennale","Enrobé à chaud","Visite gratuite"]'::jsonb)
 on conflict (key) do nothing;
 
 -- Hero / footer / chiffres-clés dans site_content_fields (utilisés par useV)

@@ -231,6 +231,58 @@ Les autres restent invérifiables ou périmées depuis le runner :
 - **nosartisansontdutalent.fr** : bloqué par la politique réseau du runner
   (`connect_rejected`). Non vérifiable ici.
 
+### Positions mesurées — 11/09/2026
+
+**Indexation : toujours nulle, 4 jours après la 1re soumission IndexNow.** Deux
+mesures concordantes aujourd'hui, toutes deux via `WebSearch` (seul canal
+exploitable) :
+1. `hcebtp.com HCE Hini Cours Enrobé Cize` → **aucune page du domaine**, mais
+   **huit fiches d'annuaire** décrivant HCE (kompass, verif, pappers, societe,
+   118000, lagazettefrance, nosartisansontdutalent, manageo).
+2. **Test nouveau et plus probant que le précédent : recherche d'une phrase
+   exacte du site.** `"Médaillons et inserts pavés intégrés à l'enrobé"` (texte
+   unique de l'accueil, entre guillemets) → **zéro résultat hcebtp.com**, neuf
+   pages de concurrents sans rapport. Une page indexée ressort toujours sur une
+   citation exacte de son propre texte. **À refaire à chaque run : c'est le test
+   d'indexation le plus net dont on dispose ici, et il ne dépend pas de
+   l'opérateur `site:` que `WebSearch` ignore.**
+
+| Requête | Mesure (11/09/2026) | Évolution vs 10/09 |
+|---|---|---|
+| indexation (phrase exacte du site) | **absent** | inchangé |
+| indexation (requête nommant le domaine) | **absent** | inchangé |
+| requêtes commerciales | **non mesurables ce jour** (voir encadré) | indéterminé |
+
+**Ce que la SERP apprend quand même sur le marché** (requête
+`enrobé à chaud Jura entreprise` via `WebSearch`) : les positions sont tenues par
+**pagesjaunes.fr** (pages départementales « enrobé à chaud » et « travaux
+d'enrobés de goudron »), **socorebat-france.fr** (qui publie une page
+**« Enrobés goudron à Cize 39300 »**, soit la commune même du siège d'HCE),
+daniel-moquet.com et franc-comtoise-tp.fr. **Deux enseignements :** le vocabulaire
+« goudron / goudronnage » est bien celui des pages qui rankent, et un annuaire
+occupe déjà la requête sur la commune d'HCE. C'est ce constat qui a fait choisir
+le chantier du jour.
+
+> ⚠️ **Canaux de SERP brute : toujours aucun exploitable. Ne pas les re-tester un
+> par un demain, la liste est à jour.**
+> - **Bing RSS (`&format=rss`)** : toujours mort. Requête témoin `colas enrobe` →
+>   résultats sur le **Taj Mahal**. Le témoin obligatoire (leçon du 09/09) a encore
+>   évité une fausse mesure « absent ».
+> - **Mojeek** 403 · **DuckDuckGo** lite et html : HTTP 202 avec page d'anomalie ·
+>   **Brave** 429 · **Marginalia** 302 · **Ecosia** 403.
+> - **Startpage** : HTTP 200 et 22 Ko, **mais zéro lien de résultat** dans le HTML
+>   (page de challenge). **Piège** : c'est le seul canal qui répond 200 sans rien
+>   servir — un comptage naïf de liens y produirait « absent » pour tout. Vérifié
+>   et écarté le 11/09.
+> - **`WebSearch`** : le seul utilisable. Ignore `site:`, mais **respecte les
+>   guillemets de phrase exacte** — c'est ce qui rend le test n°2 ci-dessus fiable.
+
+**Contrôles techniques du jour** : accueil 200 (102 Ko), `robots.txt` 200,
+`llms.txt` 200, `/services/enrobe-a-chaud` 200. `sitemap.xml` a renvoyé **une fois
+`000` (connexion coupée) puis 200 trois fois de suite** — 2e occurrence du même
+incident après le 07/09. Toujours traité comme un aléa réseau du runner, mais
+**c'est la deuxième fois : si un 3e run le revoit, creuser sérieusement.**
+
 ---
 
 ## Chantiers faits
@@ -654,6 +706,86 @@ erreur de syntaxe).
 - **Ne pas générer de `lastmod` au sitemap** (n°4) : toujours pas de date de
   modification honnête par page.
 
+### 11/09/2026 — La requête « goudronnage » enfin couverte, avec sources (commit `47499e2`)
+
+**Chantier choisi : le n°5 des chantiers en attente**, le seul angle de contenu
+jamais pris, explicitement désigné par le run du 10/09 comme le meilleur candidat.
+Le mot « goudronnage » n'apparaissait **nulle part** sur le site, alors que c'est
+le mot que tapent les particuliers. La mesure du jour l'a confirmé côté marché :
+sur `enrobé à chaud Jura entreprise`, les pages qui rankent s'appellent « travaux
+d'enrobés de goudron dans le Jura » (pagesjaunes) et **« Enrobés goudron à Cize
+39300 »** (socorebat) — un annuaire occupe la requête sur la commune du siège.
+
+**Pourquoi ce chantier malgré la priorité « découverte »** : les leviers de
+découverte actionnables depuis le repo sont épuisés (hôte canonique, sitemap,
+IndexNow, entité `@id`, identifiants légaux, 3 `sameAs` vérifiés). Ce qui reste
+est **côté client** (Search Console, fiche d'établissement Google, premiers liens
+entrants) et figure dans `ACTIONS-SEO-CLIENT.md`. Continuer à empiler du `sameAs`
+aurait été le 5e run sur 6 sur le même angle, pour un gain nul.
+
+**Ce qui a été fait, sur `/services/enrobe-a-chaud` :**
+1. **Section visible « Ce qu'il faut savoir »**, cinq questions formulées comme on
+   les pose à voix haute, chaque réponse autonome en 2-3 phrases (60-80 mots, la
+   taille des passages qu'extraient les LLM) : goudronnage vs enrobé · ce qu'est un
+   BBSG et ce que dit la norme · pourquoi 150 °C · pose en hiver dans le Jura ·
+   chaud contre froid.
+2. **Contenu toujours monté, sans accordéon** — application directe de la leçon du
+   09/09 : un contenu replié en JS n'existe pas pour les crawlers d'IA.
+3. **`FAQPage` construit depuis le même tableau que la section rendue** (champ
+   `savoir.qa` de `ServiceData`) : le mismatch balisage/contenu est structurellement
+   impossible, il ne dépend pas d'une vigilance humaine.
+4. **`BreadcrumbList` ajouté aux six pages `/services/*`** (chantier en attente n°6,
+   moitié traitée) : JSON-LD pur, aucun changement de rendu.
+5. **`seoDescription` optionnelle** : la meta description de l'enrobé porte
+   maintenant le mot « goudronnage ». **La phrase d'intro affichée dans le héros n'a
+   pas été touchée** — pas de réécriture de contenu client.
+6. **Données métier sourcées, rien d'inventé.** Les seuls chiffres nouveaux
+   proviennent de deux sources **citées visiblement dans la page** : TotalEnergies
+   (le goudron vient du charbon, abandonné dans les constructions routières au
+   milieu des années 1980, cancérigène ; le bitume vient du pétrole) et
+   IDRRIM/CFTR-info n°17 (série NF EN 13108, BBSG = partie 1, marquage CE
+   obligatoire depuis le 1er mars 2008, retrait des NF P 98-1xx à cette date —
+   recoupé par une 2e recherche). Tout le reste (150 °C, pose à la main, > 5 °C et
+   sol sec, mars à novembre) est repris du contenu déjà publié par le client.
+7. **« Dernière mise à jour : 11 septembre 2026 »** visible, en `<time datetime>`.
+8. **`llms.txt`** : les quatre réponses correspondantes ajoutées, date du fichier
+   passée au 11/09 (modification réelle, donc date légitime).
+
+**Vérifié en ligne après déploiement (vu comme Googlebot) :**
+- `/services/enrobe-a-chaud` sert **4 blocs JSON-LD** : `Organization`, `Service`,
+  `BreadcrumbList` (2 items), `FAQPage` (5 items).
+- **Les 5 questions ET les 5 réponses du `FAQPage` sont présentes mot pour mot dans
+  le texte visible** (comparaison automatique après suppression des `<script>` et
+  des balises) — zéro mismatch.
+- Date, sources (TotalEnergies, IDRRIM), « NF EN 13108 », « BBSG » présents dans le
+  rendu ; meta description avec « Goudronnage ».
+- **Non-régression** : `/services/drainage-pentes` garde sa description d'origine,
+  a gagné le `BreadcrumbList`, et **n'a pas de `FAQPage`** ; les 6 réponses de la
+  FAQ de l'accueil sont toujours dans le HTML servi.
+- **Contenu figé client intact** sur la page : 2012, 150 °C, « Devis détaillé »,
+  garantie décennale. Aucun « 2005 », aucun « 180 °C », aucun « finisseur », aucun
+  « Devis sous 48h ».
+- **IndexNow relancé : 12 URLs → HTTP 200.**
+
+**Ce que j'ai décidé de NE PAS faire, et pourquoi :**
+- **Ne pas publier d'épaisseurs ni de granulométries chiffrées** (4-5 cm, 0/6,
+  0/10…), alors que c'est exactement le genre de données métier qui se fait citer.
+  Les seules sources trouvées sont des blogs d'agences qui se recopient, et la
+  norme NF P 98-130 est payante : **je n'ai pas pu lire la valeur, donc je ne la
+  publie pas.** À reprendre si une source primaire lisible apparaît (guide Cerema
+  en accès libre, CCTP départemental).
+- **Ne pas créer de page dédiée `/goudronnage`** : le routeur est en file-based
+  routing avec un `routeTree.gen.ts` généré au build, et **le runner ne peut pas
+  construire le projet** (ni `bun install` ni `npm ci` n'aboutissent). Ajouter une
+  route sans pouvoir la compiler, c'est risquer de casser le déploiement entier
+  pour une page. Enrichir une page existante donne le même bénéfice sans ce risque.
+- **Ne pas toucher la phrase d'intro du héros** ni aucun texte client existant.
+- **Ne pas ajouter de `BreadcrumbList` aux pages `/realisations/*`** aujourd'hui :
+  la moitié restante du n°6, à faire un autre jour.
+- **Ne pas ajouter `lagazettefrance.fr` en `sameAs`** alors que la fiche est
+  apparue aujourd'hui dans les résultats : je ne l'ai pas ouverte et lue depuis le
+  runner. Règle inchangée — on ne cite pas ce qu'on n'a pas vérifié.
+
 ---
 
 ## Chantiers en attente
@@ -677,10 +809,15 @@ de suite.**
    enrichi sur `avant-apres`. Vérifié en ligne.
 4. **`lastmod` dans le sitemap.** Absent. À n'ajouter qu'avec une date honnête
    (date de commit du contenu), jamais une date générée à la volée.
-5. **Aucune page ne cible « goudronnage »** — le mot n'apparaît nulle part sur le
-   site alors que c'est le terme que tapent les particuliers. À traiter en
-   contenu, pas en bourrage de mots-clés.
-6. **Pas de `BreadcrumbList`** sur les pages services et réalisations.
+5. ~~**Aucune page ne cible « goudronnage »**~~ **Fait le 11/09/2026** (commit
+   `47499e2`) : bloc de 5 Q/R sourcées sur `/services/enrobe-a-chaud`, `FAQPage`
+   correspondant, meta description, `llms.txt`. **Reste à faire dessus** : mesurer
+   dans quelques semaines si la page ressort sur « goudronnage cour Jura », et
+   compléter avec des épaisseurs/granulométries **le jour où une source primaire
+   lisible sera trouvée** (voir « décidé de ne pas faire » du 11/09).
+6. **`BreadcrumbList`** : **fait le 11/09/2026 sur les six pages `/services/*`**.
+   **Reste les 5 pages `/realisations/*`** — même patron, à copier depuis
+   `services.$slug.tsx`. Chantier court et sans risque, bon repli un jour chargé.
 7. ~~**Adresse postale complète absente** du `LocalBusiness`.~~ **Fait le
    07/09/2026 (2e run).** L'adresse était déjà publiée dans le pied de page du
    site, il n'y avait rien à demander au client.
@@ -699,13 +836,19 @@ de suite.**
 10. **Angles déjà utilisés, à ne pas reprendre tout de suite** : 07/09 hôte
     canonique + IndexNow ; 07/09 (2e) NAP interne + consolidation `@id` ;
     08/09 identité légale + `sameAs` ; 09/09 lisibilité de la FAQ pour les
-    crawlers + recensement des fiches externes ; **10/09 titres/descriptions
-    `/realisations/*` + `sameAs` manageo**. **Chantier de contenu encore jamais
-    pris : le n°5 (« goudronnage »)** — le mot n'apparaît toujours nulle part sur
-    le site alors que c'est le terme grand public. C'est le meilleur candidat
-    contenu pour le prochain run (le n°6 `BreadcrumbList` est plus technique et
-    sans risque, bon repli). Éviter de refaire du `sameAs`/identité, angle saturé
-    (4 runs sur 5).
+    crawlers + recensement des fiches externes ; 10/09 titres/descriptions
+    `/realisations/*` + `sameAs` manageo ; **11/09 contenu « goudronnage » sourcé
+    + `FAQPage`/`BreadcrumbList` sur les services**.
+    **Candidats pour le prochain run, par ordre d'intérêt :**
+    - **Le terme « terrassement » et la requête `terrassement Jura`** : la page
+      `/services/preparation-terrain` existe mais n'a **ni bloc de questions, ni
+      donnée métier, ni source** — exactement le manque que le 11/09 vient de
+      combler sur l'enrobé. Le champ `savoir` de `ServiceData` est déjà en place,
+      il suffit de le remplir (et le `FAQPage` suit tout seul). **C'est le
+      chantier le plus rentable et le plus rapide.**
+    - `BreadcrumbList` sur les `/realisations/*` (n°6, reliquat, sans risque).
+    - `lastmod` du sitemap depuis les dates de commit (n°4).
+    **Toujours à éviter** : un nouveau run `sameAs`/identité (angle saturé).
 11. **Vérifier que les autres contenus dépliables du site sont bien dans le HTML
     servi.** Le défaut corrigé le 09/09 sur la FAQ vient d'un montage conditionnel
     (`{isOpen && …}`). `src/components/sections.tsx` contient d'autres
@@ -717,7 +860,10 @@ de suite.**
     nul et il ne faut pas y toucher.
 12. **Compléter `sameAs` avec `pappers.fr` et `verif.com`** quand un moyen de
     lire ces pages existera (elles renvoient 403 depuis le runner). Ne pas les
-    ajouter sans avoir vu leur contenu.
+    ajouter sans avoir vu leur contenu. **Ajout du 11/09 : une 4e fiche est
+    apparue dans les résultats, `entreprises.lagazettefrance.fr/entreprise/
+    h.c.e.-hini-cours-enrobe-521683573`.** Non ouverte, donc non citée. À lire
+    et à ajouter si elle porte l'adresse actuelle — c'est un `sameAs` gratuit.
 
 ---
 
@@ -787,6 +933,25 @@ de suite.**
 
 ## Erreurs commises et corrigées
 
+- **11/09/2026 — j'ai détruit mon propre travail avec un `git reset --hard`
+  enchaîné à un `git checkout` qui avait échoué. À ne jamais reproduire.**
+  Commande lancée : `git checkout main 2>&1 | tail -2 && git reset --hard origin/main`.
+  Le `checkout` a refusé de basculer (modifications non commitées, message
+  « Aborting »), **mais le `tail` en fin de tuyau sort avec le code 0** : le `&&` a
+  donc laissé passer le `reset --hard`, qui a effacé les deux fichiers modifiés du
+  jour. Travail entièrement refait (le contenu était encore dans le fil), zéro perte
+  finale, mais du temps perdu.
+  **Trois règles à garder :**
+  1. **Ne jamais mettre `git checkout`/`git switch` dans un tuyau** : c'est le code
+     de sortie de la *dernière* commande du tuyau qui compte, pas celui de git.
+  2. **Ne jamais enchaîner un `reset --hard` derrière un `&&`** dans la même
+     commande qu'autre chose. Le `reset --hard` se lance seul, après avoir lu
+     `git status`.
+  3. **Commiter avant de changer de branche**, toujours. Le commit est gratuit,
+     le travail perdu ne l'est pas.
+  Rappel utile pour ce repo : le push se fait vers `main` (`git push origin HEAD:main`)
+  depuis la branche de travail — **il n'y a jamais besoin de basculer de branche.**
+
 - **07/09/2026 — `llms.txt` avait dérivé.** Il annonçait « depuis 2005 »,
   « devis gratuit sous 48h » et « 160°C » alors que le client a explicitement figé
   2012, « Devis détaillé » et 150 °C. Le fichier n'avait pas été mis à jour quand
@@ -854,6 +1019,34 @@ de suite.**
 ---
 
 ## Techniques apprises
+
+### 11/09/2026 — Où trouver de la donnée métier citable sans l'inventer
+Le volet GEO réclame « ce que personne d'autre ne publie » : épaisseurs,
+températures, normes. Le piège est de recopier des blogs d'agences qui se citent
+entre eux. Ce qui a marché aujourd'hui, à réutiliser :
+- **Les notes du CFTR / de l'IDRRIM sont en accès libre** (`idrrim.com`,
+  `dtrf.cerema.fr`) et font autorité — ce sont les organismes techniques de la
+  route. La note CFTR-info n°17 donne la structure des normes enrobés :
+  série **NF EN 13108**, **BBSG = partie 1**, **marquage CE obligatoire depuis le
+  1er mars 2008**, retrait des anciennes **NF P 98-1xx** à la même date. Recoupé
+  par une seconde recherche avant publication.
+- **`doc.cerema.fr` renvoie des 503 par intermittence**, mais les mêmes documents
+  sont souvent hébergés sur `idrrim.com` — chercher le titre plutôt que s'acharner
+  sur l'URL.
+- **Lire un PDF sans `pdftotext`** (absent du runner) : décompresser les flux
+  `stream…endstream` en zlib avec Python, extraire les chaînes entre parenthèses.
+  Sur les PDF à police sous-ensemble, le texte sort **décalé d'un offset constant
+  par casse** (ici +46 sur les minuscules) : `chr(ord(c)+46)` suffit à le rendre
+  lisible. Assez bon pour vérifier une affirmation, pas pour citer au mot près —
+  **les chiffres, eux, ne se décodent pas de façon fiable** (les chiffres sortent
+  en séquences d'échappement, j'ai donc recoupé la date de 2008 ailleurs plutôt
+  que de la déduire).
+- **Les normes AFNOR sont payantes** : NF P 98-130 (épaisseurs de mise en œuvre
+  par granularité) n'est pas lisible. **Donc on ne publie pas d'épaisseur.** Une
+  donnée métier non vérifiable ne vaut pas mieux qu'une donnée inventée.
+- **TotalEnergies** publie une page technique nette sur bitume/asphalte/goudron :
+  source industrielle, utilisable pour la distinction goudron (charbon, abandonné
+  dans les routes au milieu des années 1980) / bitume (pétrole).
 
 ### 07/09/2026 — IndexNow reste pertinent en 2026, y compris pour le GEO
 Source : blog Bing Webmaster, *IndexNow Drives Smarter and Faster Content

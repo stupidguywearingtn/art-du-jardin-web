@@ -19,6 +19,21 @@ type ServiceData = {
   prestations: string[];
   methode: { t: string; d: string }[];
   gallery: string[];
+  /* Description utilisée dans <title>/meta uniquement, quand la phrase d'intro
+     affichée dans le héros ne contient pas le vocabulaire réellement tapé par
+     les internautes. Aucun effet sur le rendu. */
+  seoDescription?: string;
+  /* Bloc « ce qu'il faut savoir » : questions posées telles qu'on les pose à
+     voix haute, réponse autonome de 2-3 phrases en tête. Rendu visible en clair
+     (jamais replié, jamais monté conditionnellement) ET repris tel quel dans le
+     JSON-LD FAQPage de la page : les deux viennent du même tableau, aucun
+     mismatch possible. */
+  savoir?: {
+    updated: string;
+    updatedLabel: string;
+    qa: { q: string; a: string }[];
+    sources: { label: string; url: string }[];
+  };
 };
 
 const SERVICES: Record<string, ServiceData> = {
@@ -55,6 +70,44 @@ const SERVICES: Record<string, ServiceData> = {
       "/assets/enrobe-2.png",
       "/assets/enrobe-3.png",
     ],
+    seoDescription:
+      "Goudronnage de cour, d'allée ou de parking dans le Jura et l'Ain : HCE pose l'enrobé à chaud à la main à 150°C et le compacte au rouleau. Devis détaillé, garantie décennale.",
+    savoir: {
+      updated: "2026-09-11",
+      updatedLabel: "11 septembre 2026",
+      qa: [
+        {
+          q: "Goudronnage et enrobé, est-ce la même chose ?",
+          a: "Dans le langage courant, oui : quand on parle de « goudronner » une cour, une allée ou un parking, ce qui est posé aujourd'hui est un enrobé bitumineux. Le goudron véritable est un produit issu du charbon, qui a cessé d'être utilisé dans les constructions routières au milieu des années 1980, son caractère cancérigène ayant été établi. L'enrobé à chaud qu'HCE pose dans le Jura et l'Ain est fait de granulats et de bitume, un liant issu de la distillation du pétrole : ce n'est pas du goudron.",
+        },
+        {
+          q: "Pourquoi mon devis d'enrobé parle-t-il de BBSG ?",
+          a: "BBSG veut dire « béton bitumineux semi-grenu » : c'est la famille d'enrobé la plus courante pour les cours, les allées et les parkings. Les enrobés à chaud sont couverts par la série de normes NF EN 13108, dont la partie 1 correspond précisément au BBSG. Depuis le 1er mars 2008, tout enrobé bitumineux à chaud mis sur le marché porte le marquage CE, et les anciennes normes françaises NF P 98-1xx ont été retirées à cette date.",
+        },
+        {
+          q: "Pourquoi l'enrobé se pose-t-il à 150°C ?",
+          a: "Parce qu'un enrobé ne se compacte que tant qu'il est chaud. HCE le pose à la main à 150°C puis le compacte au rouleau avant qu'il ne refroidisse : c'est ce compactage, fait dans la bonne fenêtre de température, qui donne au revêtement sa densité et son étanchéité. Posé trop froid, l'enrobé se referme mal et la surface reste poreuse — elle vieillit alors beaucoup plus vite.",
+        },
+        {
+          q: "Peut-on faire goudronner sa cour en hiver dans le Jura ?",
+          a: "Non, pas en plein hiver. L'enrobé à chaud demande une température extérieure supérieure à 5°C et un support sec : sur un sol gelé ou détrempé, l'enrobé n'accroche pas et refroidit trop vite pour être compacté correctement. HCE intervient donc généralement de mars à novembre dans le Jura et l'Ain, et la préparation du terrain se planifie en amont de cette fenêtre.",
+        },
+        {
+          q: "Quelle différence entre enrobé à chaud et enrobé à froid ?",
+          a: "L'enrobé à froid se livre prêt à l'emploi et se compacte sans chauffe : c'est une solution de réparation ponctuelle, pour reboucher un nid-de-poule ou une tranchée. L'enrobé à chaud, lui, est fabriqué en centrale, livré chaud et posé à 150°C : c'est celui qui donne une surface homogène sur une cour, une allée ou un parking entier. HCE travaille l'enrobé à chaud, en noir, rouge, saumon ou bordeaux et sous différentes granulations.",
+        },
+      ],
+      sources: [
+        {
+          label: "TotalEnergies — Bitume, asphalte et goudron : quelles différences ?",
+          url: "https://services.totalenergies.fr/professionnels/conseils/bitumes/quelles-differences-entre-bitume-asphalte-goudron",
+        },
+        {
+          label: "IDRRIM / CFTR-info n°17 — La normalisation européenne des enrobés (NF EN 13108)",
+          url: "https://www.idrrim.com/ressources/publications/1/374,Note17.pdf",
+        },
+      ],
+    },
   },
   "maconnerie-generale": {
     n: "03",
@@ -137,9 +190,9 @@ export const Route = createFileRoute("/services/$slug")({
     meta: loaderData
       ? [
           { title: `${loaderData.title} — HCE · Jura & Ain` },
-          { name: "description", content: loaderData.intro },
+          { name: "description", content: loaderData.seoDescription ?? loaderData.intro },
           { property: "og:title", content: `${loaderData.title} — HCE` },
-          { property: "og:description", content: loaderData.intro },
+          { property: "og:description", content: loaderData.seoDescription ?? loaderData.intro },
           { property: "og:image", content: `https://www.hcebtp.com${loaderData.hero}` },
           { property: "og:url", content: `https://www.hcebtp.com/services/${params.slug}` },
         ]
@@ -178,6 +231,46 @@ export const Route = createFileRoute("/services/$slug")({
               url: `https://www.hcebtp.com/services/${params.slug}`,
             }),
           },
+          {
+            type: "application/ld+json",
+            children: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "BreadcrumbList",
+              itemListElement: [
+                {
+                  "@type": "ListItem",
+                  position: 1,
+                  name: "Accueil",
+                  item: "https://www.hcebtp.com/",
+                },
+                {
+                  "@type": "ListItem",
+                  position: 2,
+                  name: loaderData.title,
+                  item: `https://www.hcebtp.com/services/${params.slug}`,
+                },
+              ],
+            }),
+          },
+          /* FAQPage construit depuis le même tableau que la section visible
+             plus bas dans la page : le balisage ne peut pas décrire une
+             question qui ne serait pas rendue. */
+          ...(loaderData.savoir
+            ? [
+                {
+                  type: "application/ld+json",
+                  children: JSON.stringify({
+                    "@context": "https://schema.org",
+                    "@type": "FAQPage",
+                    mainEntity: loaderData.savoir.qa.map((f) => ({
+                      "@type": "Question",
+                      name: f.q,
+                      acceptedAnswer: { "@type": "Answer", text: f.a },
+                    })),
+                  }),
+                },
+              ]
+            : []),
         ]
       : [],
   }),
@@ -353,6 +446,60 @@ function ServicePageBody() {
             ))}
           </div>
         </section>
+
+        {/* CE QU'IL FAUT SAVOIR — questions réelles, réponses autonomes.
+            Contenu rendu en clair et toujours monté : c'est lui que reprend le
+            JSON-LD FAQPage de cette page (même tableau `savoir.qa`). */}
+        {data.savoir && (
+          <section className="px-6 md:px-12 py-24 md:py-32 max-w-4xl mx-auto border-t border-gold/15">
+            <div className="label text-gold">— Ce qu'il faut savoir</div>
+            <h2 className="font-display mt-6 text-foreground" style={{ fontSize: "clamp(32px, 5vw, 56px)", fontWeight: 400, lineHeight: 1.05 }}>
+              Goudronnage ou enrobé : les questions qu'on nous pose
+            </h2>
+            <p className="mt-6 text-muted max-w-3xl" style={{ fontSize: 17, lineHeight: 1.7 }}>
+              « Faire goudronner sa cour » et « poser un enrobé à chaud » désignent
+              aujourd'hui le même chantier. Voici ce que recouvre réellement le mot, ce
+              que disent les normes, et à quelle saison le chantier est possible dans le
+              Jura et l'Ain.
+            </p>
+
+            <div className="mt-14 space-y-12">
+              {data.savoir.qa.map((f) => (
+                <article key={f.q}>
+                  <h3 className="font-display text-gold" style={{ fontSize: "clamp(21px, 2.4vw, 28px)", fontWeight: 400, lineHeight: 1.25 }}>
+                    {f.q}
+                  </h3>
+                  <p className="mt-4 text-foreground/90" style={{ fontSize: 17, lineHeight: 1.75 }}>
+                    {f.a}
+                  </p>
+                </article>
+              ))}
+            </div>
+
+            <div className="mt-16 border-t border-gold/15 pt-6 text-muted" style={{ fontSize: 14, lineHeight: 1.7 }}>
+              <p>
+                Dernière mise à jour :{" "}
+                <time dateTime={data.savoir.updated}>{data.savoir.updatedLabel}</time>
+              </p>
+              <p className="mt-2">
+                Sources :{" "}
+                {data.savoir.sources.map((s, i) => (
+                  <span key={s.url}>
+                    {i > 0 && " · "}
+                    <a
+                      href={s.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="underline decoration-gold/40 underline-offset-2 hover:text-gold"
+                    >
+                      {s.label}
+                    </a>
+                  </span>
+                ))}
+              </p>
+            </div>
+          </section>
+        )}
 
         {/* CTA */}
         <section id="service-cta-bottom" className="relative px-6 md:px-12 py-32 text-center bg-surface">

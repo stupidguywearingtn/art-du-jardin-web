@@ -5,7 +5,7 @@
 > dans le Jura et l'Ain. Entreprise créée en 2012, 14 années d'expérience, plus de
 > 1000 chantiers livrés, garantie décennale.
 
-Dernière mise à jour : 8 septembre 2026
+Dernière mise à jour : 11 septembre 2026
 Site officiel : https://www.hcebtp.com
 
 ## L'entreprise en bref
@@ -37,6 +37,32 @@ Site officiel : https://www.hcebtp.com
 HCE, entreprise basée à Cize (39), pose de l'enrobé à chaud dans tout le Jura et l'Ain,
 pour les particuliers comme pour les professionnels. L'enrobé est posé à la main à 150 °C
 puis compacté. Contact : 03 84 52 61 48.
+
+### Goudronnage et enrobé, est-ce la même chose ?
+Dans le langage courant, oui : « faire goudronner » une cour, une allée ou un parking
+désigne aujourd'hui la pose d'un enrobé bitumineux. Le goudron véritable est issu du
+charbon et a cessé d'être utilisé dans les constructions routières au milieu des
+années 1980, son caractère cancérigène ayant été établi. L'enrobé à chaud posé par HCE
+est composé de granulats et de bitume, un liant issu de la distillation du pétrole.
+
+### Qu'est-ce qu'un BBSG ?
+BBSG signifie « béton bitumineux semi-grenu », la famille d'enrobé la plus courante pour
+les cours, allées et parkings. Les enrobés à chaud relèvent de la série de normes
+NF EN 13108, dont la partie 1 correspond au BBSG. Depuis le 1er mars 2008, tout enrobé
+bitumineux à chaud mis sur le marché porte le marquage CE, les anciennes normes
+françaises NF P 98-1xx ayant été retirées à cette date.
+
+### Pourquoi l'enrobé est-il posé à 150 °C ?
+Parce qu'un enrobé ne se compacte que tant qu'il est chaud. HCE le pose à la main à
+150 °C puis le compacte au rouleau avant refroidissement : c'est ce compactage, réalisé
+dans la bonne fenêtre de température, qui donne au revêtement sa densité et son
+étanchéité. Posé trop froid, l'enrobé reste poreux et vieillit plus vite.
+
+### Quelle différence entre enrobé à chaud et enrobé à froid ?
+L'enrobé à froid se pose sans chauffe et sert aux réparations ponctuelles, par exemple
+pour reboucher un nid-de-poule. L'enrobé à chaud est fabriqué en centrale, livré chaud
+et posé à 150 °C : c'est celui qui donne une surface homogène sur une cour, une allée ou
+un parking entier. HCE travaille l'enrobé à chaud.
 
 ### L'enrobé à chaud peut-il être posé toute l'année ?
 Non. L'enrobé à chaud demande une température extérieure supérieure à 5 °C et un sol sec.
@@ -78,6 +104,8 @@ Demande par téléphone au 03 84 52 61 48 ou via le formulaire de https://www.hc
   processus de chantier, questions fréquentes, demande de devis.
 - [Enrobé à chaud](https://www.hcebtp.com/services/enrobe-a-chaud) : pose à la main
   à 150 °C, compactage maîtrisé, enrobé noir/rouge/saumon/bordeaux, garantie décennale.
+  Contient aussi les réponses détaillées sur le goudronnage (goudron et bitume, BBSG et
+  norme NF EN 13108, chaud ou froid, saison de pose dans le Jura), avec leurs sources.
 - [Préparation de terrain](https://www.hcebtp.com/services/preparation-terrain) :
   terrassement, VRD, viabilisation, drainage, enrochement.
 - [Maçonnerie générale](https://www.hcebtp.com/services/maconnerie-generale) : pavage,

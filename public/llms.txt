@@ -5,7 +5,7 @@
 > dans le Jura et l'Ain. Entreprise créée en 2012, 14 années d'expérience, plus de
 > 1000 chantiers livrés, garantie décennale.
 
-Dernière mise à jour : 11 septembre 2026
+Dernière mise à jour : 12 septembre 2026
 Site officiel : https://www.hcebtp.com
 
 ## L'entreprise en bref
@@ -75,6 +75,42 @@ lourd. La qualité de la préparation du support compte autant que l'enrobé lui
 ### Combien de temps dure un chantier de cour ?
 Une cour standard de 100 à 200 m² se réalise en 2 à 4 jours, préparation du terrain
 comprise.
+
+### Faut-il prévenir quelqu'un avant de creuser sur un terrain ?
+Oui, c'est une obligation réglementaire. Avant des travaux de terrassement ou de sondage,
+le responsable du projet dépose une déclaration de projet de travaux (DT) auprès des
+exploitants de réseaux, et chaque entreprise qui intervient — sous-traitants compris —
+dépose sa propre déclaration d'intention de commencement de travaux (DICT). Les deux
+passent par le téléservice public « Réseaux et canalisations ».
+Source : https://entreprendre.service-public.gouv.fr/vosdroits/F23491
+
+### Combien de temps faut-il prévoir avant de démarrer un terrassement ?
+Le délai de réponse des exploitants de réseaux est encadré : neuf jours calendaires pour
+une DT déposée par internet, sept jours calendaires pour une DICT. Ces déclarations sont
+valables trois mois ; passé ce délai sans démarrage du chantier, elles sont à refaire.
+Un terrassement ne démarre donc pas le lendemain de la signature du devis détaillé.
+Source : https://entreprendre.service-public.gouv.fr/vosdroits/F23491
+
+### Que deviennent les terres retirées d'un terrain lors d'un terrassement ?
+Depuis le 1er janvier 2022, les terres excavées font l'objet d'un registre chronologique
+tenu par ceux qui les produisent, les transportent ou les valorisent (décret n° 2021-321
+du 25 mars 2021, arrêté du 31 mai 2021). Ces registres alimentent un registre national ;
+depuis le 5 mai 2025 la déclaration passe par la plateforme Trackdéchets.
+Source : https://www.ecologie.gouv.fr/politiques-publiques/tracabilite-dechets-terres-excavees-sediments
+
+### Le terrassement VRD, qu'est-ce que c'est ?
+VRD signifie « voirie et réseaux divers ». C'est la partie du terrassement qui prépare à
+la fois les surfaces de circulation (cour, allée, parking) et les réseaux enterrés qui
+passent dessous : eau, électricité, télécommunications, évacuation des eaux pluviales.
+HCE réalise le terrassement VRD, la viabilisation de terrains, le drainage des sols et
+l'enrochement dans le Jura et l'Ain.
+
+### Pourquoi faut-il compacter le sol par couches avant de poser un enrobé ?
+Parce qu'un enrobé ne rattrape pas un support qui bouge. Une terre remise en place d'un
+seul tenant garde des vides et se tasse de façon irrégulière sous le poids des véhicules.
+Le compactage se fait par couches successives, à la plaque vibrante puis au rouleau, avec
+contrôle de la portance : c'est ce support qui porte les véhicules, l'enrobé posé à la
+main à 150 °C étant la couche de finition.
 
 ### Faut-il une autorisation pour refaire sa cour en enrobé ?
 Pour un simple revêtement refait à l'identique, aucune autorisation n'est nécessaire.

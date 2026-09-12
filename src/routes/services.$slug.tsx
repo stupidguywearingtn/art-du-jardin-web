@@ -29,6 +29,10 @@ type ServiceData = {
      JSON-LD FAQPage de la page : les deux viennent du même tableau, aucun
      mismatch possible. */
   savoir?: {
+    /* Titre et chapeau de la section : propres à chaque service, donc portés
+       par la donnée et non écrits en dur dans le rendu. */
+    heading: string;
+    lead: string;
     updated: string;
     updatedLabel: string;
     qa: { q: string; a: string }[];
@@ -53,6 +57,46 @@ const SERVICES: Record<string, ServiceData> = {
       "/assets/preparation-terrain-2.png",
       "/assets/preparation-terrain-3.png",
     ],
+    seoDescription:
+      "Terrassement, VRD et viabilisation dans le Jura et l'Ain : décaissement contrôlé, drainage et compactage par couches avant toute pose d'enrobé. Devis détaillé.",
+    savoir: {
+      heading: "Terrassement : les questions qu'on nous pose avant d'ouvrir le sol",
+      lead: "Avant de goudronner une cour ou de viabiliser un terrain, il y a le terrassement : des déclarations obligatoires, des délais réglementaires, des terres à évacuer et un sol à compacter. Voici ce que cela implique concrètement dans le Jura et l'Ain.",
+      updated: "2026-09-12",
+      updatedLabel: "12 septembre 2026",
+      qa: [
+        {
+          q: "Faut-il prévenir quelqu'un avant de creuser sur un terrain ?",
+          a: "Oui, et c'est une obligation réglementaire, pas une formalité interne à l'entreprise. Avant des travaux de terrassement ou de sondage, le responsable du projet adresse une déclaration de projet de travaux (DT) aux exploitants de réseaux, et chaque entreprise qui intervient sur le chantier — sous-traitants compris — dépose sa propre déclaration d'intention de commencement de travaux (DICT). Les deux passent par le téléservice public « Réseaux et canalisations », qui recense les réseaux d'électricité, de gaz, d'eau et de télécommunications présents sous la parcelle.",
+        },
+        {
+          q: "Combien de temps faut-il prévoir avant de démarrer un terrassement ?",
+          a: "Il faut compter le délai de réponse des exploitants de réseaux, qui est encadré : neuf jours calendaires pour une DT déposée par internet, sept jours calendaires pour une DICT. Ces déclarations ont en outre une durée de validité de trois mois — si le chantier n'a pas commencé dans ce délai, elles sont à refaire. C'est pourquoi un terrassement sérieux ne démarre pas le lendemain de la signature : le devis détaillé est établi, puis ces déclarations sont déposées avant la première ouverture du sol.",
+        },
+        {
+          q: "Que deviennent les terres retirées de mon terrain ?",
+          a: "Elles ne partent pas n'importe où. Depuis le 1er janvier 2022, les terres excavées font l'objet d'un registre chronologique tenu par ceux qui les produisent, les transportent ou les valorisent, en application du décret n° 2021-321 du 25 mars 2021 et de l'arrêté du 31 mai 2021. Ces registres alimentent un registre national, et depuis le 5 mai 2025 la déclaration passe par la plateforme Trackdéchets. Concrètement, un chantier de terrassement conforme sait dire où sont allées les terres sorties de votre parcelle.",
+        },
+        {
+          q: "Le terrassement VRD, qu'est-ce que c'est exactement ?",
+          a: "VRD veut dire « voirie et réseaux divers ». C'est la partie du terrassement qui prépare à la fois les surfaces de circulation — cour, allée, parking — et les réseaux enterrés qui passent dessous : eau, électricité, télécommunications, évacuation des eaux pluviales. Sur un terrain à viabiliser, c'est l'étape qui rend la parcelle utilisable avant toute finition de surface. HCE réalise le terrassement VRD, la viabilisation de terrains, le drainage des sols et l'enrochement dans le Jura et l'Ain.",
+        },
+        {
+          q: "Pourquoi faut-il compacter le sol par couches avant de poser un enrobé ?",
+          a: "Parce qu'un enrobé ne rattrape jamais un support qui bouge. Une terre remise en place d'un seul tenant conserve des vides : sous le poids des véhicules, elle se tasse de façon irrégulière, et la surface finit par se fissurer ou par retenir des flaques. Le compactage se fait donc par couches successives, à la plaque vibrante puis au rouleau, avec contrôle de la portance — c'est ce support-là qui porte les véhicules, l'enrobé posé à la main à 150°C n'étant que la couche de finition.",
+        },
+      ],
+      sources: [
+        {
+          label: "service-public.gouv.fr — Déclaration de travaux à proximité de réseaux (DT-DICT)",
+          url: "https://entreprendre.service-public.gouv.fr/vosdroits/F23491",
+        },
+        {
+          label: "Ministère de la Transition écologique — Traçabilité des déchets, terres excavées et sédiments",
+          url: "https://www.ecologie.gouv.fr/politiques-publiques/tracabilite-dechets-terres-excavees-sediments",
+        },
+      ],
+    },
   },
   "enrobe-a-chaud": {
     n: "02",
@@ -73,6 +117,8 @@ const SERVICES: Record<string, ServiceData> = {
     seoDescription:
       "Goudronnage de cour, d'allée ou de parking dans le Jura et l'Ain : HCE pose l'enrobé à chaud à la main à 150°C et le compacte au rouleau. Devis détaillé, garantie décennale.",
     savoir: {
+      heading: "Goudronnage ou enrobé : les questions qu'on nous pose",
+      lead: "« Faire goudronner sa cour » et « poser un enrobé à chaud » désignent aujourd'hui le même chantier. Voici ce que recouvre réellement le mot, ce que disent les normes, et à quelle saison le chantier est possible dans le Jura et l'Ain.",
       updated: "2026-09-11",
       updatedLabel: "11 septembre 2026",
       qa: [
@@ -454,13 +500,10 @@ function ServicePageBody() {
           <section className="px-6 md:px-12 py-24 md:py-32 max-w-4xl mx-auto border-t border-gold/15">
             <div className="label text-gold">— Ce qu'il faut savoir</div>
             <h2 className="font-display mt-6 text-foreground" style={{ fontSize: "clamp(32px, 5vw, 56px)", fontWeight: 400, lineHeight: 1.05 }}>
-              Goudronnage ou enrobé : les questions qu'on nous pose
+              {data.savoir.heading}
             </h2>
             <p className="mt-6 text-muted max-w-3xl" style={{ fontSize: 17, lineHeight: 1.7 }}>
-              « Faire goudronner sa cour » et « poser un enrobé à chaud » désignent
-              aujourd'hui le même chantier. Voici ce que recouvre réellement le mot, ce
-              que disent les normes, et à quelle saison le chantier est possible dans le
-              Jura et l'Ain.
+              {data.savoir.lead}
             </p>
 
             <div className="mt-14 space-y-12">

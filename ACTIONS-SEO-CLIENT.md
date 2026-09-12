@@ -181,6 +181,29 @@ Il en faut donc au moins quelques-uns, réels et légitimes :
   suivantes refusent nos requêtes automatiques (HTTP 403) : leur existence est
   certaine, leur contenu exact reste à contrôler à la main depuis un navigateur.
 
+  **Ajout du 12/09/2026 — une cinquième fiche, et c'est la plus intéressante des
+  cinq : PagesJaunes.** `pagesjaunes.fr/pros/52322496`, intitulée
+  « H.C.E Cize - Travaux publics (adresse, horaires) ». Elle n'avait jamais été
+  repérée par les runs précédents.
+
+  | Fiche | Ce qu'elle publie | À faire |
+  |---|---|---|
+  | `pagesjaunes.fr/pros/52322496` | fiche pro « H.C.E Cize — Travaux publics », avec adresse et horaires (contenu non vérifiable depuis nos outils, HTTP 403) | **revendiquer en priorité et y ajouter l'URL du site** |
+  | `entreprises.lagazettefrance.fr/entreprise/h.c.e.-hini-cours-enrobe-521683573` | fiche légale, mais référencée sous le SIRET …0021 : **ancienne adresse (36 avenue Etienne Lamy) et mention de Champagnole** | faire corriger l'adresse, ou ignorer |
+
+  **Pourquoi PagesJaunes passe devant le reste de l'action 4 :** c'est le seul des
+  cinq annuaires qui soit une fiche *commerciale* et non une fiche légale
+  automatique. Elle se revendique auprès de Solocal, elle accepte un lien vers le
+  site, et c'est un domaine que Google recrawle en permanence — c'est aujourd'hui
+  le point d'entrée le plus rapide vers `https://www.hcebtp.com`. Elle occupe par
+  ailleurs déjà des positions sur les requêtes que le site vise (voir les pages
+  départementales « enrobé à chaud » de PagesJaunes).
+
+  **La Gazette France, en revanche, ne doit pas être revendiquée en l'état** :
+  vérifiée en la lisant le 12/09/2026, elle affiche l'ancienne adresse. Elle n'a
+  pas été ajoutée aux `sameAs` du site pour cette raison — une fiche périmée de
+  plus empêche Google de consolider l'entreprise en une entité unique.
+
   Les deux fiches vérifiées sont désormais déclarées dans les données structurées
   du site (`sameAs`) : le site pointe vers elles. Le lien retour, lui, ne peut être
   créé que depuis les fiches elles-mêmes — c'est l'action à mener ici.

@@ -283,6 +283,57 @@ le chantier du jour.
 incident après le 07/09. Toujours traité comme un aléa réseau du runner, mais
 **c'est la deuxième fois : si un 3e run le revoit, creuser sérieusement.**
 
+### Positions mesurées — 12/09/2026
+
+**Indexation : toujours nulle, 5 jours après la 1re soumission IndexNow.** Deux
+mesures concordantes, toutes deux via `WebSearch` (toujours le seul canal
+exploitable) :
+1. **Phrase exacte du site** (le test le plus net, institué le 11/09) :
+   `"Médaillons et inserts pavés intégrés à l'enrobé"` entre guillemets →
+   **dix résultats, zéro hcebtp.com**, rien que des concurrents et deux brevets
+   américains. Une page indexée ressort toujours sur une citation exacte de son
+   propre texte.
+2. **Requête nommant le domaine** : `hcebtp.com HCE Hini Cours Enrobé Cize 39300`
+   → **aucune page du domaine**, mais **neuf fiches d'annuaire** décrivant HCE.
+
+| Requête | Mesure (12/09/2026) | Évolution vs 11/09 |
+|---|---|---|
+| indexation (phrase exacte du site) | **absent** | inchangé |
+| indexation (requête nommant le domaine) | **absent** | inchangé |
+| requêtes commerciales | **non mesurables ce jour** (aucun canal de SERP brute) | indéterminé |
+
+Les canaux de SERP brute n'ont **pas** été re-testés un par un : la liste du
+11/09 est à jour et tous étaient morts (Bing RSS, Mojeek, DuckDuckGo, Brave,
+Marginalia, Ecosia, Startpage). Ne pas y perdre de temps demain non plus.
+
+**Découverte du jour, et c'est la plus utile depuis plusieurs runs : une fiche
+PagesJaunes existe.** `pagesjaunes.fr/pros/52322496`, « H.C.E Cize - Travaux
+publics (adresse, horaires) ». Aucun des cinq runs précédents ne l'avait vue.
+C'est la **seule fiche commerciale** parmi les cinq connues (les autres sont des
+fiches légales automatiques), donc la seule qui se revendique auprès de Solocal
+et accepte un lien vers le site — et PagesJaunes est déjà le domaine qui tient
+les positions sur les requêtes visées (constat du 11/09). Passée en tête de
+l'action 4 du fichier client. **Non ajoutée en `sameAs` : HTTP 403 depuis le
+runner, donc contenu non lu** — règle inchangée.
+
+**Question ouverte n°12 tranchée : `lagazettefrance.fr` est écartée.** Elle, se
+lit très bien (HTTP 200, 130 Ko) et le journal demandait depuis le 11/09 de la
+lire pour en faire « un `sameAs` gratuit ». Lue aujourd'hui : elle est
+référencée sous le **SIRET …0021**, affiche **« 36 avenue Etienne Lamy »** et
+mentionne Champagnole — l'**ancienne** adresse. Elle n'a donc pas été ajoutée :
+une fiche périmée de plus empêche Google de consolider l'entité. `doctrine.fr`,
+également apparue, affiche aussi Champagnole → même sort. **Ne pas rouvrir ces
+deux-là.**
+
+**Contrôles techniques** : accueil, `robots.txt`, `sitemap.xml`, `llms.txt`,
+`/services/enrobe-a-chaud` tous en 200 du premier coup.
+`/services/preparation-terrain` a renvoyé **une fois `000` puis 200 cinq fois de
+suite**. C'est la 3e fois qu'un `000` isolé apparaît (07/09 et 11/09 sur le
+sitemap), mais **cette fois sur une autre URL, alors que le sitemap répondait
+200 du premier coup** : ça confirme l'hypothèse « aléa réseau du runner » et
+disqualifie l'hypothèse « sitemap intermittent ». Le point peut être considéré
+comme clos, sauf si un jour plusieurs URLs échouent ensemble.
+
 ---
 
 ## Chantiers faits
@@ -786,6 +837,90 @@ aurait été le 5e run sur 6 sur le même angle, pour un gain nul.
   apparue aujourd'hui dans les résultats : je ne l'ai pas ouverte et lue depuis le
   runner. Règle inchangée — on ne cite pas ce qu'on n'a pas vérifié.
 
+### 12/09/2026 — La requête « terrassement » couverte sur `/services/preparation-terrain` (commit `eaef5d4`)
+
+**Chantier choisi : le candidat n°1 désigné par le run du 11/09**, et pour la
+raison qu'il donnait : `/services/preparation-terrain` existait avec **ni bloc de
+questions, ni donnée métier, ni source**, alors que `terrassement Jura` est une
+des six requêtes visées et que le site y est absent. Le mécanisme (`savoir` dans
+`ServiceData`, `FAQPage` généré depuis le même tableau) était déjà en place
+depuis le 11/09 : il suffisait de le remplir. Angle différent de la veille
+(contenu enrobé) et surtout différent des quatre runs d'entité/`sameAs`.
+
+**Ce qui a été fait :**
+1. **Cinq Q/R sur `/services/preparation-terrain`**, questions posées à voix
+   haute, réponse autonome en 2-3 phrases en tête, contenu **toujours monté**
+   (leçon du 09/09) : déclaration avant de creuser · délai avant démarrage ·
+   devenir des terres excavées · ce qu'est le terrassement VRD · pourquoi
+   compacter par couches.
+2. **`FAQPage` construit depuis le même tableau que la section visible** — le
+   mismatch est structurellement impossible, comme sur l'enrobé.
+3. **Données métier sourcées, lues directement, rien d'inventé** :
+   - **DT-DICT** (lu sur `entreprendre.service-public.gouv.fr/vosdroits/F23491`) :
+     le responsable de projet dépose la **DT**, chaque entreprise intervenante
+     **et chaque sous-traitant** déposent leur **DICT** ; délais de réponse
+     **9 jours calendaires** (DT par internet) et **7 jours calendaires** (DICT) ;
+     **validité 3 mois** ; téléservice « Réseaux et canalisations ».
+   - **Terres excavées** (lu sur `ecologie.gouv.fr`) : registre chronologique
+     obligatoire depuis le **1er janvier 2022** (**décret n° 2021-321 du 25 mars
+     2021**, **arrêté du 31 mai 2021**), registre national, et **bascule sur
+     Trackdéchets au 5 mai 2025** après fusion avec le RNTDS.
+   Les deux sources sont **citées visiblement** en bas de la page.
+   C'est exactement le profil « ce que personne d'autre ne publie » : aucun site
+   de TP local n'explique le délai réglementaire qui retarde un chantier, ni la
+   traçabilité des terres — et la bascule Trackdéchets de mai 2025 est récente.
+4. **`seoDescription`** portant « terrassement », « VRD » et « viabilisation »
+   (la phrase d'intro du héros n'a **pas** été touchée).
+5. **`llms.txt`** : les cinq réponses ajoutées, date passée au 12 septembre
+   (modification réelle, donc date légitime).
+6. **Petit déplacement de code nécessaire** : le titre et le chapeau de la
+   section étaient écrits **en dur** dans le rendu et parlaient de goudronnage.
+   Ils passent en champs `heading`/`lead` de `savoir`. Texte de l'enrobé recopié
+   à l'identique → **aucun changement visible sur `/services/enrobe-a-chaud`**
+   (vérifié en ligne).
+
+**Vérifié en ligne après déploiement (vu comme Googlebot) :**
+- `/services/preparation-terrain` sert **4 blocs JSON-LD** : `Organization`,
+  `Service`, `BreadcrumbList`, `FAQPage`.
+- **Les 5 questions ET les 5 réponses sont présentes mot pour mot dans le texte
+  visible** (comparaison après suppression des `<script>` *et* `<style>`, accents
+  et apostrophes normalisés) — **zéro mismatch**.
+- Rendu contenant bien : DT-DICT, Trackdéchets, décret 2021-321, arrêté du
+  31 mai 2021, 5 mai 2025, VRD, portance, « 12 septembre 2026 », les deux liens
+  de sources. Meta description avec « Terrassement, VRD et viabilisation ».
+- **Non-régression, le vrai risque du jour** : `/services/enrobe-a-chaud` rend
+  toujours le même titre et le même chapeau, garde sa date du **11 septembre**,
+  ses 5 Q/R **sans mismatch**, BBSG / NF EN 13108 / TotalEnergies intacts ;
+  l'**accueil** garde ses **6 Q/R sans mismatch** ; `/services/drainage-pentes`
+  est inchangée et toujours sans `FAQPage`.
+- **Contenu figé client intact** : 150 °C, « posé à la main », « Devis détaillé ».
+  Aucun « 2005 », « 180 °C », « finisseur », « Devis sous 48h ».
+  *(« 2012 » est absent de cette page-là, et l'était déjà : seule la phrase
+  d'intro de l'enrobé porte « depuis 2012 ». Ce n'est pas une régression — ne pas
+  s'en alarmer demain.)*
+- **IndexNow relancé : 12 URLs → HTTP 200.**
+
+**Ce que j'ai décidé de NE PAS faire, et pourquoi :**
+- **Ne pas publier les seuils d'urbanisme des affouillements** (déclaration
+  préalable au-delà de 2 m de profondeur et 100 m²), alors que c'était la
+  question la plus demandée du lot et que quatre sources concordent.
+  **Légifrance répond 403** au runner (WebFetch et curl), le PDF de la
+  préfecture de l'Ain n'a pas pu être décodé de façon fiable, et il ne reste que
+  des cabinets d'avocats. Règle du 08/09 : on ne cite pas ce qu'on n'a pas lu.
+  **À reprendre le jour où une source primaire lisible apparaît** — c'est une
+  vraie question de particulier, elle mérite d'être couverte correctement.
+- **Ne pas ajouter `pagesjaunes.fr` en `sameAs`** malgré tout son intérêt :
+  HTTP 403, contenu non lu. Elle vaut surtout comme **action client** (lien
+  entrant), pas comme `sameAs`.
+- **Ne pas ajouter `lagazettefrance.fr` ni `doctrine.fr`** : lues, elles portent
+  l'ancienne adresse. Question close.
+- **Ne pas toucher la phrase d'intro du héros** de `preparation-terrain`, ni
+  aucun texte client existant.
+- **Ne pas ajouter de `BreadcrumbList` aux `/realisations/*`** (reliquat du n°6) :
+  un seul chantier mené à fond.
+- **Ne pas faire la veille de l'étape 5** : elle est prévue le lundi, on est
+  samedi.
+
 ---
 
 ## Chantiers en attente
@@ -839,16 +974,23 @@ de suite.**
     crawlers + recensement des fiches externes ; 10/09 titres/descriptions
     `/realisations/*` + `sameAs` manageo ; **11/09 contenu « goudronnage » sourcé
     + `FAQPage`/`BreadcrumbList` sur les services**.
+    **12/09 contenu « terrassement » sourcé (DT-DICT, terres excavées) sur
+    `/services/preparation-terrain` + repérage de la fiche PagesJaunes.**
     **Candidats pour le prochain run, par ordre d'intérêt :**
-    - **Le terme « terrassement » et la requête `terrassement Jura`** : la page
-      `/services/preparation-terrain` existe mais n'a **ni bloc de questions, ni
-      donnée métier, ni source** — exactement le manque que le 11/09 vient de
-      combler sur l'enrobé. Le champ `savoir` de `ServiceData` est déjà en place,
-      il suffit de le remplir (et le `FAQPage` suit tout seul). **C'est le
-      chantier le plus rentable et le plus rapide.**
+    - **Les quatre pages `/services/*` encore sans bloc `savoir`** :
+      `maconnerie-generale`, `drainage-pentes`, `bordures-murets`,
+      `finitions-soignees`. Le mécanisme est rodé (remplir `savoir`, le
+      `FAQPage` suit, `heading`/`lead` sont désormais dans la donnée).
+      **`drainage-pentes` est la plus rentable** : « drainage » et « pente » sont
+      des questions que les particuliers posent vraiment avant de goudronner, et
+      la page publie déjà « pente minimum 1.5 % ». Attention : ne pas répéter les
+      Q/R déjà publiées sur l'enrobé ou le terrassement.
     - `BreadcrumbList` sur les `/realisations/*` (n°6, reliquat, sans risque).
     - `lastmod` du sitemap depuis les dates de commit (n°4).
-    **Toujours à éviter** : un nouveau run `sameAs`/identité (angle saturé).
+    - Les seuils d'urbanisme des affouillements, **si** une source primaire
+      lisible apparaît (voir « décidé de ne pas faire » du 12/09).
+    **Toujours à éviter** : un nouveau run `sameAs`/identité (angle saturé) —
+    il ne reste d'ailleurs plus aucune fiche externe citable non traitée.
 11. **Vérifier que les autres contenus dépliables du site sont bien dans le HTML
     servi.** Le défaut corrigé le 09/09 sur la FAQ vient d'un montage conditionnel
     (`{isOpen && …}`). `src/components/sections.tsx` contient d'autres
@@ -860,10 +1002,16 @@ de suite.**
     nul et il ne faut pas y toucher.
 12. **Compléter `sameAs` avec `pappers.fr` et `verif.com`** quand un moyen de
     lire ces pages existera (elles renvoient 403 depuis le runner). Ne pas les
-    ajouter sans avoir vu leur contenu. **Ajout du 11/09 : une 4e fiche est
-    apparue dans les résultats, `entreprises.lagazettefrance.fr/entreprise/
-    h.c.e.-hini-cours-enrobe-521683573`.** Non ouverte, donc non citée. À lire
-    et à ajouter si elle porte l'adresse actuelle — c'est un `sameAs` gratuit.
+    ajouter sans avoir vu leur contenu. ~~**Ajout du 11/09 :
+    `entreprises.lagazettefrance.fr`.** À lire et à ajouter si elle porte
+    l'adresse actuelle.~~ **Traité le 12/09/2026 : lue, elle porte l'ANCIENNE
+    adresse (SIRET …0021, « 36 avenue Etienne Lamy », Champagnole) → écartée
+    définitivement, comme `doctrine.fr`. Ne pas les rouvrir.**
+    **Nouveau, 12/09 : `pagesjaunes.fr/pros/52322496` existe** (403 depuis le
+    runner, donc pas de `sameAs`). Sa valeur est ailleurs : c'est la seule fiche
+    *commerciale* des cinq, elle se revendique et accepte un lien vers le site.
+    Passée en tête de l'action 4 du fichier client — **c'est aujourd'hui le
+    meilleur levier de découverte identifié.**
 
 ---
 
@@ -1019,6 +1167,37 @@ de suite.**
 ---
 
 ## Techniques apprises
+
+### 12/09/2026 — Les sources publiques françaises lisibles depuis le runner
+Suite directe de la note du 11/09. La leçon du jour : **le droit français en
+ligne n'est pas accessible à parts égales**, et il faut viser les bons hôtes.
+- ✅ **`entreprendre.service-public.gouv.fr` et `www.service-public.gouv.fr` se
+  lisent parfaitement** via `WebFetch` et rendent des fiches précises et datées
+  (obligations, délais, validité). **C'est la meilleure source réglementaire
+  disponible ici** — autorité maximale, zéro blocage. Attention :
+  `service-public.fr` redirige en 301 vers `service-public.gouv.fr`, il faut
+  relancer sur l'URL d'arrivée.
+- ✅ **`ecologie.gouv.fr` se lit aussi**, et ses pages « politiques publiques »
+  donnent décrets, arrêtés et dates de bascule à jour.
+- ❌ **Légifrance répond 403** au runner, en `WebFetch` **comme** en curl avec
+  UA navigateur. `circulaires.gouv.fr` n'est qu'une redirection 302 vers
+  Légifrance : même impasse. **Ne pas réessayer, c'est du temps perdu** — passer
+  par la fiche service-public équivalente, qui dit la même chose en clair.
+- ❌ **`pagesjaunes.fr`, `pappers.fr`, `verif.com`, `kompass.fr`, `batiment.cc`
+  : 403/405.** Liste stable depuis trois runs.
+- ⚠️ **Décoder un PDF de préfecture : ne pas s'acharner.** Le PDF de l'Ain se
+  télécharge (curl échoue en `000`, mais `WebFetch` le sauve sur disque et
+  indique le chemin). En revanche l'extraction est piégeuse : les polices sont
+  sous-ensemblées, et **fusionner les tables `ToUnicode` de plusieurs polices
+  produit un texte qui ressemble à une substitution cohérente mais qui est
+  faux** — j'ai failli lire des seuils réglementaires dans du charabia. Le
+  décodage correct exige une table par police (`/F1`, `/F2`…), donc de résoudre
+  les `/Font` dans les objets — qui sont ici dans des `ObjStm` compressés.
+  **Conclusion : pour une donnée réglementaire, chercher la page HTML
+  équivalente sur un site en `.gouv.fr` plutôt que de décoder un PDF.**
+- **Règle réaffirmée** : quatre sources secondaires concordantes ne remplacent
+  pas une source primaire lue. Le seuil des affouillements n'a donc pas été
+  publié (cf. chantier du 12/09).
 
 ### 11/09/2026 — Où trouver de la donnée métier citable sans l'inventer
 Le volet GEO réclame « ce que personne d'autre ne publie » : épaisseurs,

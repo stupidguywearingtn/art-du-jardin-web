@@ -207,6 +207,38 @@ Il en faut donc au moins quelques-uns, réels et légitimes :
   Les deux fiches vérifiées sont désormais déclarées dans les données structurées
   du site (`sameAs`) : le site pointe vers elles. Le lien retour, lui, ne peut être
   créé que depuis les fiches elles-mêmes — c'est l'action à mener ici.
+
+  **Ajout du 13/09/2026 — une sixième fiche, lue et vérifiée : Mappy.**
+  `fr.mappy.com/poi/50adc51784ae2742a0054bfe`. Elle a pu être lue intégralement
+  (HTTP 200), ce qui la distingue de PagesJaunes, Pappers et Verif.
+
+  | Fiche | Ce qu'elle publie | À faire |
+  |---|---|---|
+  | `fr.mappy.com/poi/50adc51784ae2742a0054bfe` | « H.C.E Aménagement de Cours en Enrobés », **téléphone 03 84 52 61 48 conforme**, **adresse actuelle « 40 Bis av Etienne Lamy, 39300 Cize »**, activité « Travaux publics », horaires « du lundi au samedi : de 7h à 19h ». **Aucun lien vers le site.** | **revendiquer et y ajouter l'URL du site** ; corriger les horaires |
+
+  **Trois enseignements, qui valent au-delà de cette fiche :**
+
+  1. **C'est la seule fiche connue qui porte à la fois le bon téléphone et
+     l'adresse actuelle.** À ce titre elle a été ajoutée aux `sameAs` du site.
+     Elle n'affiche en revanche **aucun lien vers `https://www.hcebtp.com`** :
+     comme PagesJaunes, sa valeur réelle est le lien retour à créer.
+  2. **⚠️ Ne jamais juger une fiche sur l'extrait affiché par le moteur de
+     recherche.** L'extrait de Mappy annonce « 36 av Etienne Lamy » — l'ancienne
+     adresse. La page elle-même affiche « 40 Bis ». Si la règle « extrait périmé →
+     fiche écartée » avait été appliquée, la meilleure fiche disponible aurait été
+     jetée. **Ouvrir la page avant de conclure**, y compris pour les fiches déjà
+     classées comme périmées.
+  3. **Les horaires divergent de ceux du site** (site : Lun-Ven 8h-18h, Sam
+     8h-12h ; Mappy : Lun-Sam 7h-19h) et **le nom commercial diffère** de celui
+     des autres fiches. C'est une incohérence NAP à corriger au moment de
+     revendiquer : Google consolide d'autant mieux une entreprise que ses
+     coordonnées sont identiques partout.
+
+  **Point à trancher que cette fiche rouvre :** Mappy écrit « 40 **Bis** »,
+  le registre national « 40 **B** », le site « 40 ». Deux sources indépendantes
+  portent donc le complément que le site n'affiche pas. Cela renforce la question
+  déjà posée plus haut (« Deux points à arbitrer par le client ») sans la
+  trancher — le site n'a **pas** été modifié.
 - Un **compte Facebook / Instagram professionnel** avec le lien du site : ces
   pages sont crawlées très fréquemment.
 - Les **partenaires, fournisseurs ou clients pros** qui ont un site : un lien

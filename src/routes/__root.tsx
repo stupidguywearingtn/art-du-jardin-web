@@ -126,6 +126,12 @@ export const Route = createRootRoute({
             "https://www.societe.com/societe/h-c-e-hini-cours-enrobe-521683573.html",
             "https://www.118000.fr/e_C0092984566",
             "https://www.manageo.fr/entreprises/521683573.html",
+            /* Vérifiée le 13/09/2026 : la fiche publie le téléphone 03 84 52 61 48
+               (identique au site) et l'adresse actuelle « 40 Bis av Etienne Lamy,
+               39300 Cize ». Attention, l'extrait affiché dans les moteurs porte
+               encore l'ANCIENNE adresse (« 36 av Etienne Lamy ») : c'est la page
+               elle-même qui fait foi, pas le snippet. */
+            "https://fr.mappy.com/poi/50adc51784ae2742a0054bfe",
           ],
           url: "https://www.hcebtp.com",
           logo: "https://www.hcebtp.com/favicon-512x512.png",

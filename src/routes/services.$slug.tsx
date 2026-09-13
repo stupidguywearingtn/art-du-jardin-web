@@ -188,6 +188,46 @@ const SERVICES: Record<string, ServiceData> = {
       "/assets/drainage-3.jpeg",
       "/assets/drainage-4.jpeg",
     ],
+    seoDescription:
+      "Drainage et pentes avant pose d'enrobé dans le Jura et l'Ain : étude des écoulements, pente minimum 1,5 % vers les exutoires, drains périphériques et évacuation des eaux pluviales. Devis détaillé.",
+    savoir: {
+      heading: "Drainage, pentes et eaux pluviales : les questions qu'on nous pose",
+      lead: "Poser un enrobé sur une cour, une allée ou un parking imperméabilise une surface qui absorbait jusque-là une partie de la pluie : cette eau doit désormais aller quelque part. Voici où elle part, ce que dit la réglementation, et pourquoi la pente se calcule avant la pose et non après, dans le Jura et l'Ain.",
+      updated: "2026-09-13",
+      updatedLabel: "13 septembre 2026",
+      qa: [
+        {
+          q: "Une cour goudronnée peut-elle envoyer l'eau chez le voisin ?",
+          a: "C'est le premier point à régler, et il est encadré par la loi. Le terrain situé en contrebas est tenu de recevoir les eaux qui s'écoulent naturellement du terrain situé au-dessus : c'est la servitude naturelle d'écoulement, prévue aux articles 640 et 641 du Code civil. Mais cette obligation ne vaut que pour un écoulement naturel, c'est-à-dire sans intervention humaine, et elle tombe si le propriétaire du terrain supérieur aggrave cet écoulement — par exemple en installant un drainage qui dirige les eaux vers la parcelle voisine. Elle ne concerne par ailleurs que les eaux de pluie, de source et de fonte des neiges, pas les eaux usées. C'est pour cette raison qu'HCE identifie les points bas et les exutoires avant de goudronner.",
+        },
+        {
+          q: "Quelle pente faut-il pour qu'une cour en enrobé évacue l'eau ?",
+          a: "HCE applique une pente minimum de 1,5 % vers les exutoires, vérifiée au laser — soit 1,5 cm de dénivelé par mètre parcouru. En dessous, les irrégularités inévitables de toute surface posée suffisent à créer des zones de rétention : l'eau n'a plus de sens d'écoulement franc et elle stagne. Cette pente se décide avant le terrassement, car elle se rattrape dans les niveaux du support : l'enrobé est une couche de finition d'épaisseur régulière, il épouse la forme qu'on lui donne dessous, il ne la corrige pas.",
+        },
+        {
+          q: "Pourquoi des flaques se forment-elles sur un enrobé ?",
+          a: "Une flaque signale presque toujours un problème de niveaux, pas un défaut du revêtement lui-même. Trois causes reviennent : une pente insuffisante ou orientée vers un point qui n'a pas d'exutoire, un exutoire absent ou sous-dimensionné au point bas, ou un support qui s'est tassé après la pose et a formé une cuvette. L'eau qui stagne fait vieillir la surface plus vite : elle reste en contact avec le revêtement, s'infiltre par le moindre défaut, et en hiver elle gèle — or l'eau augmente de volume en gelant, ce qui travaille le matériau. C'est précisément ce que le diagnostic d'écoulement, fait avant la pose, sert à éviter.",
+        },
+        {
+          q: "Refaire un parking de plus de 500 m² : y a-t-il des obligations sur les eaux de pluie ?",
+          a: "Oui, et elles visent aussi les rénovations, pas seulement les parkings neufs. Les parcs de stationnement extérieurs de plus de 500 m², nouvellement construits et ouverts au public ou faisant l'objet d'une rénovation lourde, doivent comporter sur au moins 50 % de leur surface des revêtements de surface, des aménagements hydrauliques ou des dispositifs végétalisés favorisant la perméabilité et l'infiltration des eaux pluviales ou leur évaporation. Cette obligation figure à l'article L111-19-1 du Code de l'urbanisme et s'applique aux projets soumis à autorisation d'urbanisme ; le même article prévoit également un dispositif d'ombrage. Pour un parking d'entreprise ou de copropriété, cela se prépare dès le devis, car la répartition des surfaces en dépend.",
+        },
+        {
+          q: "Faut-il un drain, ou la pente suffit-elle ?",
+          a: "Les deux ne traitent pas la même eau, et l'une ne remplace pas l'autre. La pente évacue l'eau de surface, celle qui tombe sur la cour et doit rejoindre un exutoire. Le drain périphérique traite l'eau présente dans le sol : venues d'eau d'un terrain en pente, remontées, ruissellement collecté en amont par la parcelle. Un support gorgé d'eau perd sa portance, et un enrobé posé dessus finit par se déformer quelle que soit la qualité de la pose. HCE commence donc par un diagnostic d'écoulement, puis pose drains et regards là où l'eau arrive réellement ; lorsqu'aucun exutoire n'existe à proximité, l'évacuation peut passer par un puits perdu.",
+        },
+      ],
+      sources: [
+        {
+          label: "service-public.gouv.fr — Doit-on recevoir les eaux qui s'écoulent du terrain de son voisin ? (articles 640 et 641 du Code civil)",
+          url: "https://www.service-public.gouv.fr/particuliers/vosdroits/F2443",
+        },
+        {
+          label: "entreprendre.service-public.gouv.fr — Ombrage et gestion des eaux pluviales des parcs de stationnement (article L111-19-1 du Code de l'urbanisme)",
+          url: "https://entreprendre.service-public.gouv.fr/vosdroits/F38106",
+        },
+      ],
+    },
   },
   "bordures-murets": {
     n: "05",

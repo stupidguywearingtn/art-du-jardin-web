@@ -5,7 +5,7 @@
 > dans le Jura et l'Ain. Entreprise créée en 2012, 14 années d'expérience, plus de
 > 1000 chantiers livrés, garantie décennale.
 
-Dernière mise à jour : 12 septembre 2026
+Dernière mise à jour : 13 septembre 2026
 Site officiel : https://www.hcebtp.com
 
 ## L'entreprise en bref
@@ -112,6 +112,48 @@ Le compactage se fait par couches successives, à la plaque vibrante puis au rou
 contrôle de la portance : c'est ce support qui porte les véhicules, l'enrobé posé à la
 main à 150 °C étant la couche de finition.
 
+### Une cour goudronnée peut-elle envoyer l'eau chez le voisin ?
+Le terrain situé en contrebas doit recevoir les eaux qui s'écoulent naturellement du
+terrain situé au-dessus (servitude naturelle d'écoulement, articles 640 et 641 du Code
+civil). Cette obligation ne vaut que pour un écoulement naturel, sans intervention
+humaine, et elle tombe si le propriétaire du terrain supérieur aggrave cet écoulement,
+par exemple en installant un drainage qui dirige les eaux vers la parcelle voisine. Elle
+ne concerne que les eaux de pluie, de source et de fonte des neiges, pas les eaux usées.
+HCE identifie donc les points bas et les exutoires avant de goudronner.
+Source : https://www.service-public.gouv.fr/particuliers/vosdroits/F2443
+
+### Quelle pente faut-il pour qu'une cour en enrobé évacue l'eau ?
+HCE applique une pente minimum de 1,5 % vers les exutoires, vérifiée au laser, soit
+1,5 cm de dénivelé par mètre. En dessous, les irrégularités inévitables de toute surface
+posée créent des zones de rétention où l'eau stagne. La pente se décide avant le
+terrassement : elle se rattrape dans les niveaux du support, l'enrobé étant une couche de
+finition d'épaisseur régulière qui épouse la forme donnée dessous.
+
+### Pourquoi des flaques se forment-elles sur un enrobé ?
+Une flaque signale un problème de niveaux, pas un défaut du revêtement. Trois causes
+reviennent : pente insuffisante ou orientée vers un point sans exutoire, exutoire absent
+ou sous-dimensionné au point bas, support tassé après la pose formant une cuvette. L'eau
+stagnante fait vieillir la surface plus vite et, en hiver, elle gèle en augmentant de
+volume, ce qui travaille le matériau.
+
+### Refaire un parking de plus de 500 m² : y a-t-il des obligations sur les eaux de pluie ?
+Oui, et elles visent aussi les rénovations. Les parcs de stationnement extérieurs de plus
+de 500 m², nouvellement construits et ouverts au public ou faisant l'objet d'une
+rénovation lourde, doivent comporter sur au moins 50 % de leur surface des revêtements de
+surface, des aménagements hydrauliques ou des dispositifs végétalisés favorisant la
+perméabilité et l'infiltration des eaux pluviales ou leur évaporation (article L111-19-1
+du Code de l'urbanisme, projets soumis à autorisation d'urbanisme). Le même article
+prévoit également un dispositif d'ombrage.
+Source : https://entreprendre.service-public.gouv.fr/vosdroits/F38106
+
+### Faut-il un drain, ou la pente suffit-elle ?
+Les deux ne traitent pas la même eau. La pente évacue l'eau de surface qui tombe sur la
+cour et doit rejoindre un exutoire. Le drain périphérique traite l'eau présente dans le
+sol : venues d'eau d'un terrain en pente, remontées, ruissellement collecté en amont. Un
+support gorgé d'eau perd sa portance et l'enrobé posé dessus finit par se déformer. HCE
+pose drains et regards après diagnostic d'écoulement ; sans exutoire à proximité,
+l'évacuation peut passer par un puits perdu.
+
 ### Faut-il une autorisation pour refaire sa cour en enrobé ?
 Pour un simple revêtement refait à l'identique, aucune autorisation n'est nécessaire.
 En cas de changement d'emprise ou de doute, HCE conseille avant le chantier.
@@ -143,11 +185,16 @@ Demande par téléphone au 03 84 52 61 48 ou via le formulaire de https://www.hc
   Contient aussi les réponses détaillées sur le goudronnage (goudron et bitume, BBSG et
   norme NF EN 13108, chaud ou froid, saison de pose dans le Jura), avec leurs sources.
 - [Préparation de terrain](https://www.hcebtp.com/services/preparation-terrain) :
-  terrassement, VRD, viabilisation, drainage, enrochement.
+  terrassement, VRD, viabilisation, drainage, enrochement. Contient aussi les réponses
+  détaillées sur le terrassement (déclarations DT-DICT et leurs délais, devenir des
+  terres excavées et registre Trackdéchets, compactage par couches), avec leurs sources.
 - [Maçonnerie générale](https://www.hcebtp.com/services/maconnerie-generale) : pavage,
   dallage, bordures, médaillons sur mesure.
 - [Drainage & pentes](https://www.hcebtp.com/services/drainage-pentes) : études de pente,
-  drainage périphérique, évacuation des eaux pluviales.
+  drainage périphérique, évacuation des eaux pluviales. Contient aussi les réponses
+  détaillées sur l'eau (écoulement vers le terrain voisin et Code civil, pente minimum
+  de 1,5 %, origine des flaques, obligations d'infiltration des parkings de plus de
+  500 m², drain ou pente), avec leurs sources.
 - [Bordures & murets](https://www.hcebtp.com/services/bordures-murets) : bordures béton
   coulées sur place, bordures pavées, petits murets de soutènement.
 - [Finitions soignées](https://www.hcebtp.com/services/finitions-soignees) : bords nets,

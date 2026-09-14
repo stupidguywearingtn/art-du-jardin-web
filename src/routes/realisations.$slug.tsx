@@ -7,7 +7,7 @@ import { WhatsAppFAB } from "@/components/WhatsAppFAB";
 import { EditModeProvider, useEditMode } from "@/hooks/useEditMode";
 import { EditModeToolbar } from "@/components/EditModeToolbar";
 import { useAuth } from "@/hooks/useAuth";
-import { useGalleryByCategorySlug } from "@/hooks/useGallery";
+import { useGalleryByCategorySlug, fallbackCategoryBySlug } from "@/hooks/useGallery";
 import { useSiteContentFields } from "@/hooks/useSiteContentFields";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
@@ -52,6 +52,144 @@ const REAL_META: Record<string, { title: string; description: string }> = {
   },
 };
 
+/**
+ * Maillage interne des pages `/realisations/*`.
+ *
+ * Constat du 14/09/2026 : aucune page du site ne liait ces URLs dans le HTML
+ * servi (les cartes de la galerie d'accueil sont rendues côté client), et les
+ * pages elles-mêmes ne renvoyaient qu'un lien vers `/`. Elles n'étaient donc
+ * atteignables que par le sitemap. Ce tableau relie chaque dossier aux
+ * services que le chantier met réellement en œuvre — aucune association
+ * décorative : un parking passe bien par la préparation de terrain, une
+ * cour privée par les finitions.
+ *
+ * `/realisations` n'existe pas comme route (HTTP 404) : ne jamais y pointer.
+ */
+const RELATED_SERVICES: Record<string, { slug: string; label: string }[]> = {
+  "cour-allee-privee": [
+    { slug: "enrobe-a-chaud", label: "Enrobé à chaud" },
+    { slug: "finitions-soignees", label: "Finitions soignées" },
+  ],
+  "parking-voirie-pro": [
+    { slug: "enrobe-a-chaud", label: "Enrobé à chaud" },
+    { slug: "preparation-terrain", label: "Préparation de terrain" },
+  ],
+  "preparation-terrassement": [
+    { slug: "preparation-terrain", label: "Préparation de terrain" },
+    { slug: "drainage-pentes", label: "Drainage & pentes" },
+  ],
+  "chantier-en-cours": [
+    { slug: "enrobe-a-chaud", label: "Enrobé à chaud" },
+    { slug: "preparation-terrain", label: "Préparation de terrain" },
+  ],
+};
+
+/**
+ * Les autres dossiers de réalisations, pour le bloc « Voir aussi ».
+ * Seuls les slugs sont listés ici : le libellé est résolu par
+ * `fallbackCategoryBySlug`, la même source que le `<h1>` de la page cible.
+ * Recopier les titres ici les ferait diverger au premier renommage.
+ *
+ * `avant-apres` n'y figure pas : c'est une route statique distincte
+ * (`/realisations/avant-apres`) et non un paramètre de `$slug`, elle est donc
+ * liée à part avec son propre `to`.
+ */
+const ALL_CAT_SLUGS = [
+  "cour-allee-privee",
+  "parking-voirie-pro",
+  "preparation-terrassement",
+  "chantier-en-cours",
+];
+
+/**
+ * En-tête fixe de la page. Extrait pour être rendu à l'identique dans les
+ * trois états (chargement, catégorie introuvable, page complète) : le HTML
+ * servi doit contenir les mêmes liens que la page vue par le visiteur.
+ */
+function CategoryHeader() {
+  return (
+    <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-background/70 border-b border-gold/15">
+      <div className="px-6 md:px-12 py-4 flex items-center justify-between">
+        <Link to="/" className="font-display text-gold text-2xl" style={{ fontWeight: 500 }}>
+          HCE
+        </Link>
+        <Link
+          to="/"
+          hash="galerie"
+          className="label text-gold hover:text-foreground transition-colors"
+        >
+          ← Retour
+        </Link>
+      </div>
+    </header>
+  );
+}
+
+/**
+ * Bloc « Voir aussi » : les autres dossiers et les services correspondants.
+ * Rendu dans l'état de chargement **et** dans la page complète — servir aux
+ * robots des liens que le visiteur ne verrait pas serait du cloaking.
+ */
+function SeeAlso({ slug }: { slug: string }) {
+  const others = ALL_CAT_SLUGS.filter((s) => s !== slug).map((s) => ({
+    slug: s,
+    label: fallbackCategoryBySlug(s)?.title ?? titleCaseSlug(s),
+  }));
+  const services = RELATED_SERVICES[slug] ?? [
+    { slug: "enrobe-a-chaud", label: "Enrobé à chaud" },
+    { slug: "preparation-terrain", label: "Préparation de terrain" },
+  ];
+  return (
+    <section className="relative w-full bg-background px-6 md:px-12 py-12 md:py-16 border-t border-gold/15">
+      <div className="max-w-5xl mx-auto grid gap-10 md:grid-cols-2">
+        <div>
+          <h2 className="label text-gold">— Autres réalisations</h2>
+          <ul className="mt-4 space-y-2">
+            {others.map((c) => (
+              <li key={c.slug}>
+                <Link
+                  to="/realisations/$slug"
+                  params={{ slug: c.slug }}
+                  className="text-muted hover:text-gold transition-colors"
+                  style={{ fontFamily: "var(--font-body)", fontSize: 15 }}
+                >
+                  {c.label}
+                </Link>
+              </li>
+            ))}
+            <li>
+              <Link
+                to="/realisations/avant-apres"
+                className="text-muted hover:text-gold transition-colors"
+                style={{ fontFamily: "var(--font-body)", fontSize: 15 }}
+              >
+                Avant / après
+              </Link>
+            </li>
+          </ul>
+        </div>
+        <div>
+          <h2 className="label text-gold">— Les prestations mises en œuvre</h2>
+          <ul className="mt-4 space-y-2">
+            {services.map((s) => (
+              <li key={s.slug}>
+                <Link
+                  to="/services/$slug"
+                  params={{ slug: s.slug }}
+                  className="text-muted hover:text-gold transition-colors"
+                  style={{ fontFamily: "var(--font-body)", fontSize: 15 }}
+                >
+                  {s.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 /** Repli lisible pour un slug inconnu : « mots-avec-tirets » → « Mots avec tirets ». */
 function titleCaseSlug(slug: string): string {
   return slug
@@ -63,6 +201,7 @@ function titleCaseSlug(slug: string): string {
 export const Route = createFileRoute("/realisations/$slug")({
   component: RealisationsRoute,
   head: ({ params }) => {
+    const cat = fallbackCategoryBySlug(params.slug);
     const meta = REAL_META[params.slug] ?? {
       title: `${titleCaseSlug(params.slug)} — Réalisations HCE`,
       description:
@@ -80,6 +219,37 @@ export const Route = createFileRoute("/realisations/$slug")({
       links: [
         { rel: "canonical", href: `https://www.hcebtp.com/realisations/${params.slug}` },
       ],
+      /* Fil d'ariane à deux niveaux, comme sur les pages `/services/*`.
+         Pas de niveau « Réalisations » intermédiaire : `/realisations` n'est
+         pas une route du site et répond 404 — un fil d'ariane ne doit pointer
+         que vers des URLs réelles. Émis pour les seules catégories connues :
+         baliser un slug quelconque reviendrait à décrire une page qui finira
+         sur l'écran « Catégorie introuvable ». */
+      scripts: cat
+        ? [
+            {
+              type: "application/ld+json",
+              children: JSON.stringify({
+                "@context": "https://schema.org",
+                "@type": "BreadcrumbList",
+                itemListElement: [
+                  {
+                    "@type": "ListItem",
+                    position: 1,
+                    name: "Accueil",
+                    item: "https://www.hcebtp.com/",
+                  },
+                  {
+                    "@type": "ListItem",
+                    position: 2,
+                    name: cat.title,
+                    item: `https://www.hcebtp.com/realisations/${params.slug}`,
+                  },
+                ],
+              }),
+            },
+          ]
+        : [],
     };
   },
 });
@@ -200,11 +370,55 @@ function RealisationsPage() {
     setTouchStart(null);
   };
 
+  // État de chargement = **le seul état rendu côté serveur**. `loading` part à
+  // `true` et les données n'arrivent que dans un `useEffect`, qui ne s'exécute
+  // jamais au rendu serveur : tout ce qui n'est pas ici est absent du HTML
+  // servi. Avant le 14/09/2026 cette branche ne renvoyait que « Chargement… »,
+  // soit 62 caractères de texte, sans <h1> ni aucun lien — ces pages étaient
+  // donc vides pour tout robot qui n'exécute pas de JavaScript (c'est le cas
+  // de la plupart des crawlers d'IA). On y rend désormais le titre, la
+  // description et le maillage, résolus de façon synchrone depuis le slug.
   if (loading) {
+    const fb = fallbackCategoryBySlug(slug);
+    // Slug inconnu : on garde le shell minimal d'origine. Rendre un titre
+    // fabriqué à partir de n'importe quel slug transformerait
+    // `/realisations/<n'importe quoi>` en soft 404 crédible, donc en espace de
+    // crawl infini. Ces URLs finissent de toute façon sur la branche 404
+    // ci-dessous une fois le chargement terminé.
+    if (!fb) {
+      return (
+        <main className="bg-background text-foreground min-h-screen flex items-center justify-center">
+          <span className="label text-gold">Chargement…</span>
+        </main>
+      );
+    }
     return (
-      <main className="bg-background text-foreground min-h-screen flex items-center justify-center">
-        <span className="label text-gold">Chargement…</span>
-      </main>
+      <>
+        <EditModeToolbar />
+        <main className="bg-background text-foreground overflow-x-hidden">
+          <CategoryHeader />
+          <section className="relative w-full pt-32 md:pt-40 pb-12 md:pb-16 px-6 md:px-12 bg-depth-a overflow-hidden">
+            <div className="max-w-5xl mx-auto">
+              <div className="label text-gold">— Réalisations</div>
+              <h1
+                className="font-display mt-4 text-foreground"
+                style={{ fontSize: "clamp(40px, 7vw, 96px)", fontWeight: 400, lineHeight: 0.95 }}
+              >
+                {fb.title}
+              </h1>
+              {fb.description && (
+                <p className="mt-6 max-w-2xl text-muted" style={{ fontSize: 16, lineHeight: 1.7 }}>
+                  {fb.description}
+                </p>
+              )}
+            </div>
+          </section>
+          <section className="relative w-full px-4 md:px-12 py-12 md:py-20 bg-background">
+            <div className="text-center label text-gold">Chargement des photos…</div>
+          </section>
+          <SeeAlso slug={slug} />
+        </main>
+      </>
     );
   }
 
@@ -247,20 +461,7 @@ function RealisationsPage() {
       <WhatsAppFAB />
       <main className="bg-background text-foreground overflow-x-hidden">
         {/* HEADER */}
-        <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-background/70 border-b border-gold/15">
-          <div className="px-6 md:px-12 py-4 flex items-center justify-between">
-            <Link to="/" className="font-display text-gold text-2xl" style={{ fontWeight: 500 }}>
-              HCE
-            </Link>
-            <Link
-              to="/"
-              hash="galerie"
-              className="label text-gold hover:text-foreground transition-colors"
-            >
-              ← Retour
-            </Link>
-          </div>
-        </header>
+        <CategoryHeader />
 
         {/* HERO catégorie */}
         <section className="relative w-full pt-32 md:pt-40 pb-12 md:pb-16 px-6 md:px-12 bg-depth-a overflow-hidden">
@@ -453,6 +654,9 @@ function RealisationsPage() {
             </div>
           )}
         </section>
+
+        {/* Maillage interne — identique à celui de l'état de chargement */}
+        <SeeAlso slug={slug} />
 
         {/* CTA bas */}
         <section className="relative w-full bg-depth-b py-12 md:py-20 px-6 text-center">

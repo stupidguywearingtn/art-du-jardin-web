@@ -72,6 +72,21 @@ const FALLBACK_CATS: GalleryCategory[] = [
   },
 ];
 
+/**
+ * Titre et description statiques d'une catégorie, résolus **de façon
+ * synchrone** depuis le slug.
+ *
+ * Utile au rendu serveur : `useGalleryByCategorySlug` démarre à
+ * `loading: true` et ne charge ses données que dans un `useEffect`, qui ne
+ * s'exécute jamais côté serveur. Sans cette résolution synchrone, le HTML
+ * servi pour `/realisations/{slug}` ne contient aucun titre ni texte.
+ * Source unique : le même `FALLBACK_CATS` que le repli asynchrone, donc
+ * aucun risque de voir diverger le texte servi et le texte affiché.
+ */
+export function fallbackCategoryBySlug(slug: string): GalleryCategory | null {
+  return FALLBACK_CATS.find((c) => c.slug === slug) ?? null;
+}
+
 /* Galerie vidée : plus aucune photo par défaut. Les emplacements se
    remplissent via l'admin (5 slots minimum par catégorie, extensibles). */
 const FALLBACK_PHOTOS: Record<string, Omit<GalleryPhoto, "category_id">[]> = {};

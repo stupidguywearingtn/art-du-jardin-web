@@ -451,9 +451,146 @@ deux URLs. **Conforme à la conclusion du 12/09 (aléa réseau du runner, point
 clos)** : ne pas rouvrir le sujet tant que plusieurs URLs n'échouent pas ensemble
 de façon durable.
 
+### Positions mesurées — 15/09/2026
+
+**Indexation : toujours nulle, 8 jours après la 1re soumission IndexNow.** Deux
+mesures concordantes, via `WebSearch` (toujours le seul canal exploitable) :
+1. **Phrase exacte du site** (test institué le 11/09) :
+   `"Médaillons et inserts pavés intégrés à l'enrobé"` → **huit résultats, zéro
+   hcebtp.com** (concurrents du secteur uniquement : mavrotp, esprit-veranda,
+   aravis-enrobage, pajot-tp, europavage68, abers-amenagement, perenia, cuinet).
+2. **Requête nommant le domaine** : `hcebtp.com HCE Hini Cours Enrobé Cize 39300
+   travaux publics` → **aucune page du domaine**, mais **neuf fiches d'annuaire**
+   (kompass, pappers, verif, doctrine, societe, pagesjaunes, 118000, lagazette,
+   manageo) — même liste qu'aux 12, 13 et 14/09.
+
+| Requête | Mesure (15/09/2026) | Évolution vs 14/09 |
+|---|---|---|
+| indexation (phrase exacte du site) | **absent** | inchangé |
+| indexation (requête nommant le domaine) | **absent** | inchangé |
+| requêtes commerciales | **non mesurables** (aucun canal de SERP brute) | indéterminé |
+
+Les canaux de SERP brute n'ont **pas** été re-testés : la liste du 11/09 est à
+jour (Bing RSS, Mojeek, DuckDuckGo, Brave, Marginalia, Ecosia, Startpage — tous
+morts). Ne pas y perdre de temps demain non plus.
+
+**Contrôles techniques** : accueil, `/services/enrobe-a-chaud`,
+`/services/maconnerie-generale`, `/realisations/cour-allee-privee`,
+`robots.txt`, `sitemap.xml`, `llms.txt` — **tous en 200 du premier coup**, aucun
+`000`. `robots.txt` relu intégralement : `User-agent: *`, `Allow: /` et la
+directive `Sitemap: https://www.hcebtp.com/sitemap.xml` sont bien là. Rien ne
+bloque la découverte côté serveur, la cause reste l'absence de liens entrants.
+
+> ⚠️ **Nouvelle table de référence du volume de texte servi — ne pas la comparer
+> à celle du 14/09.** Mon extracteur d'aujourd'hui donne des valeurs
+> systématiquement un peu plus hautes que celui du 14/09 (accueil 5 340 contre
+> 5 160 pour le *même* HTML : vérifié, le code n'avait pas bougé entre-temps).
+> Les deux mesurent « texte hors `<script>`/`<style>` », mais ne normalisent pas
+> les espaces de la même façon. **Un écart de 2-4 % entre deux runs ne prouve
+> donc rien** : ne comparer que des chiffres produits par le même script, ou
+> refaire la mesure des deux états comme aujourd'hui.
+
+Valeurs mesurées **avant** le chantier du jour, vues comme Googlebot :
+
+| URL | Texte servi (15/09) | JSON-LD | Liens `/realisations/*` |
+|---|---|---|---|
+| accueil | 5 340 car. | 3 | **0** |
+| `/services/drainage-pentes` | 5 502 car. | 4 | 0 |
+| `/services/preparation-terrain` | 4 632 car. | 4 | 0 |
+| `/services/enrobe-a-chaud` | 3 938 car. | 4 | 0 |
+| `/services/maconnerie-generale` | **904 car.** | 3 | 0 |
+| `/realisations/cour-allee-privee` | 391 car. | 2 | 4 |
+| `/realisations/avant-apres` | 193 car. | 1 | 0 |
+
 ---
 
 ## Chantiers faits
+
+### 15/09/2026 — La galerie de l'accueil rend enfin ses liens côté serveur (commit `4ab0962`)
+
+**Chantier choisi : le candidat n°1 laissé par le run du 14/09**, re-vérifié et
+toujours vrai à l'étape 2 (l'accueil servait **zéro** `href` vers
+`/realisations/*`). C'est la moitié manquante du chantier d'hier : les quatre
+pages catégories avaient été rendues lisibles, mais restaient orphelines de la
+page la plus forte du site.
+
+> 🔓 **Le verrou qui bloquait ce chantier hier a sauté, et c'est la découverte la
+> plus réutilisable du run : le projet SE CONSTRUIT et SE TESTE en local.**
+> Le 14/09 avait renoncé à toucher l'accueil parce que « le runner ne peut pas
+> construire le projet (`bun install` n'aboutit pas) » — donc impossible de
+> tester un changement de rendu avant de pousser. **C'est faux avec npm.** Voir
+> la recette complète dans « Techniques apprises ».
+
+**Cause, exactement la même famille que le défaut du 09/09 (FAQ) et du 14/09
+(`/realisations/$slug`) :** `useGalleryCategories()` renvoyait
+`categories: cats ?? []`, et `cats` démarre à `null` tant que `loadAll()` n'a pas
+répondu. Or `loadAll()` n'est appelé que depuis un `useEffect`, **qui ne
+s'exécute jamais au rendu serveur**. La grille servie était donc vide, alors
+qu'un repli statique (`fallbackCategoriesWithCount()`) existait déjà dans le
+même fichier et n'était utilisé que par le chemin asynchrone.
+
+**Ce qui a été fait — une seule ligne de comportement changée :**
+`categories: cats ?? []` devient `categories: cats ?? fallbackCategoriesWithCount()`
+dans `src/hooks/useGallery.tsx`, avec le commentaire qui explique pourquoi.
+**Même source que le repli asynchrone**, donc le visiteur voit exactement les
+mêmes liens que les robots — pas de cloaking. C'est le patron appliqué le 14/09
+à `realisations.$slug.tsx` et le 07/09 à `llms.txt` : une source unique.
+`useGalleryCategories` n'a **qu'un seul consommateur** (`src/routes/index.tsx:703`)
+et celui-ci ignore `loading` : le changement est contenu, vérifié par `grep`.
+
+**Vérifié EN LOCAL avant de pousser (nouveau, et c'est ce qui rend ce run sûr) :**
+- Serveur de rendu local, vu comme Googlebot, **état d'origine** : accueil
+  **5 340 car., 0 lien `/realisations/*`** — *chiffre strictement identique à la
+  production du jour*, donc le local reproduit fidèlement le serveur.
+- **État corrigé** : accueil **5 681 car., 4 liens `/realisations/*`**
+  (`cour-allee-privee`, `parking-voirie-pro`, `preparation-terrassement`,
+  `avant-apres`), 3 blocs JSON-LD et 6 liens `/services/*` intacts.
+- Non-régression locale sur `/services/enrobe-a-chaud` (3 938),
+  `/services/maconnerie-generale` (904), `/realisations/cour-allee-privee` (391),
+  `/realisations/avant-apres` (193) : **aucun écart**.
+- `npx tsc --noEmit`, `npx eslint`, `npx prettier --check` : **tous OK**.
+
+**Vérifié EN LIGNE après déploiement (vu comme Googlebot) :**
+- Accueil **5 681 car.** et **4 liens `/realisations/*`** — la valeur locale, au
+  caractère près.
+- **Non-régression complète** : `drainage-pentes` 5 502, `preparation-terrain`
+  4 632, `enrobe-a-chaud` 3 938, `maconnerie-generale` 904,
+  `cour-allee-privee` 391, `avant-apres` 193 — **identiques aux valeurs mesurées
+  avant le chantier**. `sameAs` = 4 partout, JSON-LD au complet.
+- **Contenu figé client intact** : 2012, 150, « posé à la main », « Devis
+  détaillé », garantie décennale présents ; **aucun terme interdit** (2005, 180,
+  finisseur, « Devis sous 48h », « Garantie & SAV ») sur aucune page contrôlée.
+- **IndexNow relancé après vérification : 12 URLs → HTTP 200.**
+
+**Point à connaître : `/realisations/chantier-en-cours` n'est toujours pas liée
+depuis l'accueil.** Ce n'est pas un oubli — la grille remplace délibérément cette
+carte par le bloc « Avant / Après » (`index.tsx`, `isChantier`). La page reste
+atteignable par le sitemap et par le bloc « Voir aussi » des trois autres
+dossiers. **Ne pas « corriger » ça sans décision produit : ce serait ajouter une
+5e carte visible sur l'accueil.**
+
+**Ce que j'ai décidé de NE PAS faire, et pourquoi :**
+- **Ne pas afficher les `description` des catégories sur les cartes.** Le texte
+  existe dans `FALLBACK_CATS` et serait du contenu servi en plus, mais c'est un
+  changement visuel sur la page la plus importante du site, sans rapport avec le
+  défaut du jour. Règle « en cas de doute sur le rendu, ne pas le faire ».
+- **Ne pas remplir le bloc `savoir` de `maconnerie-generale`** (904 car., la page
+  la plus maigre du site). **Ça reste le meilleur candidat contenu**, mais c'eût
+  été un deuxième chantier dans la même journée.
+- **Ne pas toucher à `llms.txt`.** Vérifié ligne à ligne : les 5 entrées
+  `/realisations/*` portent exactement les titres de `FALLBACK_CATS`, **aucune
+  dérive**. Le contenu rédactionnel n'a pas changé aujourd'hui — seule son
+  accessibilité aux robots — donc bumper « Dernière mise à jour : 13 septembre
+  2026 » serait la dérive que la consigne interdit.
+- **Ne pas créer la page `/realisations`** (n°14) ni le `BreadcrumbList` de
+  `avant-apres` (n°6) : chantiers distincts, et leur valeur est nulle tant que
+  rien n'est indexé.
+- **Ne rien changer au déploiement**, bien que le build local produise un dossier
+  `.vercel/output/` — 3e indice concordant que l'hébergement est Vercel alors que
+  la consigne dit Lovable Cloud. **Constat, pas action** : à ne trancher qu'avec
+  le client.
+
+---
 
 ### 14/09/2026 — Les 4 pages `/realisations/*` étaient vides sans JavaScript (commit `352c250`)
 
@@ -1268,26 +1405,33 @@ Lun-Ven 8h-18h / Sam 8h-12h, Mappy Lun-Sam 7h-19h) signalés comme incohérence 
 Par ordre de priorité. **Alterner les angles, ne pas refaire le même deux jours
 de suite.**
 
-> 🔴 **CANDIDAT N°1 POUR LE PROCHAIN RUN — la galerie de l'accueil ne rend
-> aucun lien côté serveur.** Découvert le 14/09. L'accueil affiche bien un
-> `<h2>` « Nos réalisations. », mais les cartes de catégories sont rendues côté
-> client : **le HTML servi de l'accueil ne contient aucun `href` vers
-> `/realisations/*`** (vérifié : ses seuls liens de contenu sont les 6
-> `/services/*` et `/signin`). Les pages réalisations ne sont donc liées, depuis
-> le 14/09, que les unes aux autres — la page la plus forte du site ne leur
-> transmet rien.
-> **Pourquoi ça n'a pas été fait le 14/09** : c'est une section visuelle qui
-> fonctionne, sur la page la plus importante du site, et le runner **ne peut pas
-> construire le projet** — impossible de tester avant de pousser.
-> **Méthode recommandée** : ne pas refactoriser la section. Appliquer le même
-> patron que `realisations.$slug.tsx` le 14/09 — rendre les cartes depuis
-> `FALLBACK_CATS` (résolution synchrone, déjà exportée via
-> `fallbackCategoryBySlug`) tant que les données client ne sont pas arrivées,
-> de sorte que les `href` existent dans le HTML servi et que le visiteur voie
-> exactement les mêmes liens. Le code concerné est dans `src/routes/index.tsx`
-> autour des lignes 754 et 813 (`to="/realisations/avant-apres"` et
-> `to="/realisations/$slug"`). **Vérifier après déploiement que l'accueil sert
-> toujours 5 160 caractères au minimum et ses 3 blocs JSON-LD.**
+> ✅ ~~**CANDIDAT N°1 — la galerie de l'accueil ne rend aucun lien côté
+> serveur.**~~ **Fait le 15/09/2026** (commit `4ab0962`) : l'accueil sert
+> désormais 4 liens `/realisations/*` et 5 681 caractères, vérifié en local
+> puis en ligne. Le verrou invoqué le 14/09 (« le runner ne peut pas construire
+> le projet ») **était faux** — voir la recette de build local dans
+> « Techniques apprises », c'est l'acquis le plus réutilisable du 15/09.
+
+> 🔴 **CANDIDAT N°1 POUR LE PROCHAIN RUN — `/services/maconnerie-generale` ne
+> sert que 904 caractères**, contre 3 938 à 5 502 pour les quatre autres pages
+> service. C'est la page la plus maigre du site et **le meilleur candidat contenu
+> depuis trois runs** ; le 14/09 comme le 15/09 l'ont écartée pour ne pas faire
+> deux chantiers le même jour, pas parce qu'elle ne le mérite pas.
+> **Pourquoi elle est rentable** : elle porte déjà « médaillons et inserts sur
+> mesure », c'est-à-dire le vocabulaire des requêtes décoratives (pavage,
+> dallage), et l'accueil contient la phrase « Médaillons et inserts pavés
+> intégrés à l'enrobé » qui sert de test d'indexation depuis le 11/09.
+> **Méthode** : bloc `savoir` sur le patron des 11, 12 et 13/09 (réponse directe
+> en tête de chaque H2, H2 formulés comme des questions posées à voix haute,
+> chiffres et sources primaires, `FAQPage` strictement aligné sur la FAQ
+> visible). **Ne pas répéter les Q/R déjà publiées** sur l'enrobé (11/09), le
+> terrassement (12/09) ou le drainage (13/09).
+> **Matière repérée et non exploitée** : le volet *ombrage* des parkings
+> existants de plus de 1 500 m² (échéance juillet 2026), fiche
+> `entreprendre.service-public.gouv.fr/vosdroits/F38106`, lue le 13/09.
+> **Mesurer avant / après avec le banc d'essai local** (recette du 15/09), et
+> **le même script pour les deux mesures** (voir l'avertissement du 15/09 sur les
+> écarts d'extracteur).
 
 1. **Vérifier l'indexation à chaque run.** Tant que `site:hcebtp.com` ne renvoie
    rien, la priorité reste la découverte, pas le contenu.
@@ -1345,25 +1489,26 @@ de suite.**
     plus de 500 m²) sur `/services/drainage-pentes` + `sameAs` mappy.**
     **14/09 rendu serveur des 4 pages `/realisations/$slug` (62 → ~380 car.),
     maillage interne « Voir aussi » et `BreadcrumbList` + veille du lundi.**
-    **⚠️ Le 14/09 était un run TECHNIQUE / MAILLAGE. Le run du 15/09 doit
-    changer d'angle — mais l'exception est le candidat n°1 encadré en tête de
-    cette section (galerie de l'accueil), qui est la suite directe et de loin le
-    plus rentable : le traiter prime sur la règle d'alternance.**
+    **15/09 rendu serveur des cartes de la galerie de l'accueil (0 → 4 liens
+    `/realisations/*`) + mise en place du banc d'essai de build local.**
+    **⚠️ Les 14 et 15/09 étaient DEUX runs TECHNIQUES / MAILLAGE d'affilée. Le
+    run du 16/09 doit être un run de CONTENU — et le candidat n°1 encadré en tête
+    de cette section (`maconnerie-generale`) en est justement un. Le filon
+    « rendu serveur » est par ailleurs épuisé : les trois cas connus (FAQ 09/09,
+    `/realisations/$slug` 14/09, galerie de l'accueil 15/09) sont corrigés.**
     **Candidats pour le prochain run, par ordre d'intérêt :**
-    - 🔴 **La galerie de l'accueil, rendue côté serveur** — voir l'encadré en
-      tête de section. C'est la moitié manquante du chantier du 14/09.
-    - **Les trois pages `/services/*` encore sans bloc `savoir`** :
-      `maconnerie-generale`, `bordures-murets`, `finitions-soignees`. Mécanisme
-      rodé. La plus rentable est **`maconnerie-generale`** (pavage, dallage,
-      médaillons : c'est le vocabulaire des requêtes décoratives, et la page
-      porte déjà « médaillons et inserts sur mesure »). Attention : ne pas
-      répéter les Q/R déjà publiées sur l'enrobé, le terrassement ou le drainage.
-      **Matière déjà repérée et non exploitée** : le volet *ombrage* des parkings
-      existants de plus de 1 500 m² (échéance juillet 2026) de la fiche
-      `entreprendre.service-public.gouv.fr/vosdroits/F38106`, lue le 13/09.
+    - 🔴 **`/services/maconnerie-generale`, bloc `savoir`** — voir l'encadré en
+      tête de section. 904 car. contre 3 938 à 5 502 ailleurs.
+    - **Les deux autres pages `/services/*` sans bloc `savoir`** :
+      `bordures-murets` et `finitions-soignees`. **Les mesurer d'abord** : elles
+      n'ont jamais été relevées et pourraient être aussi maigres que
+      `maconnerie-generale`. Attention, `finitions-soignees` porte un `title`
+      anormal (voir « Hypothèses à vérifier »).
     - **Créer une vraie page `/realisations`** (n°14) : hub listant les 5
-      dossiers, aujourd'hui inexistante (404).
+      dossiers, aujourd'hui inexistante (404). **Désormais testable en local
+      avant de pousser** (recette du 15/09), ce qui lève le principal frein.
     - `BreadcrumbList` sur `/realisations/avant-apres` (n°6, reliquat).
+      Page à 193 car., la plus maigre du site après les catégories.
     - `lastmod` du sitemap depuis les dates de commit (n°4).
     - Les seuils d'urbanisme des affouillements, **si** une source primaire
       lisible apparaît (voir « décidé de ne pas faire » du 12/09).
@@ -1503,6 +1648,21 @@ de suite.**
 
 ## Erreurs commises et corrigées
 
+- **15/09/2026 — « le runner ne peut pas construire le projet » était faux, et
+  cette conclusion a coûté un run entier.** Le 14/09, un `bun install` qui
+  n'aboutit pas m'avait fait écrire au journal que le projet n'était pas
+  constructible ici, et **c'est sur cette base que le chantier de l'accueil a été
+  reporté** (« impossible de tester avant de pousser »). Vérifié aujourd'hui :
+  `npm install` puis `npm run build` passent en une quarantaine de secondes, et
+  `npx vite dev` sert un vrai rendu serveur qui reproduit la production au
+  caractère près. Le chantier a été fait en quelques minutes, avec une
+  vérification avant / après que le 14/09 n'avait pas.
+  **Leçon : un outil qui échoue ne prouve rien sur les autres.** Avant d'écrire
+  au journal qu'une capacité manque — et surtout avant de reporter un chantier
+  pour cette raison — essayer la deuxième voie évidente. C'est la même famille
+  d'erreur que le 13/09 (« un extrait de moteur ne vaut pas lecture ») : une
+  observation partielle promue en fait général.
+
 - **14/09/2026 — ma première version du correctif fabriquait des soft 404.**
   En rendant la branche de chargement des `/realisations/*`, j'avais écrit
   `{fb?.title ?? titleCaseSlug(slug)}` : pour **n'importe quel** slug, la page
@@ -1633,6 +1793,51 @@ de suite.**
 ---
 
 ## Techniques apprises
+
+### 15/09/2026 — ⚙️ RECETTE : construire le projet et voir le HTML servi, en local, avant de pousser
+
+**À lire avant tout chantier qui touche au rendu. C'est ce qui manquait depuis
+l'ouverture du journal**, et ce qui a fait renoncer le run du 14/09 à corriger
+l'accueil. La conclusion « le runner ne peut pas construire le projet » venait
+d'un `bun install` qui n'aboutit pas. **`bun` échoue, `npm` marche.**
+
+Deux pièges à ne pas re-découvrir :
+- **`npm ci` échoue** (`EUSAGE`, `Missing: miniflare@… from lock file`) :
+  `package.json` et `package-lock.json` ne sont pas synchrones. Il faut
+  `npm install`, qui **réécrit `package-lock.json`** — donc **ne jamais le lancer
+  dans le dépôt de travail**, sous peine de committer un lockfile modifié.
+  Travailler sur une copie : `git archive HEAD | tar -x -C <dossier de travail>`.
+- **`npx vite preview` ne marche pas** : il cherche `dist/server/server.js`,
+  alors que le build produit `.vercel/output/`. Ne pas insister.
+  **C'est `npx vite dev` qui rend le service** — il fait bien du SSR.
+
+La recette qui a fonctionné (~20 s d'install, ~16 s de build) :
+
+```bash
+SP=<scratchpad>; rm -rf $SP/build-test; mkdir -p $SP/build-test
+git archive HEAD | tar -x -C $SP/build-test
+cd $SP/build-test && npm install --no-audit --no-fund   # PAS npm ci
+npm run build                                            # contrôle: doit sortir en 0
+npx vite dev --host 127.0.0.1 --port 4175 &              # --host obligatoire (pas d'IPv6 ici)
+curl -s --noproxy '*' -A "Mozilla/5.0 (compatible; Googlebot/2.1)" http://127.0.0.1:4175/
+```
+
+- **`--host 127.0.0.1` est obligatoire** : sans lui, `listen EAFNOSUPPORT` (pas
+  d'IPv6 sur le runner). Et `--noproxy '*'` sur le `curl`, sinon la requête part
+  dans le proxy sortant.
+- **Le serveur a du HMR** : copier un fichier modifié dans `$SP/build-test/src/`
+  suffit à re-mesurer, sans relancer quoi que ce soit. C'est comme ça que
+  l'avant / après du jour a été obtenu.
+- **Contrôles qui passent tous ici** : `npx tsc --noEmit`, `npx eslint <fichier>`,
+  `npx prettier --check <fichier>`.
+
+**Ce que ça change, et qui vaut plus que le chantier du jour :** on peut
+désormais mesurer le HTML servi **avant** de pousser. Aujourd'hui le local a
+donné **5 340 caractères pour l'accueil d'origine — exactement la valeur de la
+production le même jour**, ce qui valide la fidélité du banc d'essai. La règle
+« en cas de doute sur un changement touchant au rendu, ne pas le faire » ne doit
+donc plus servir d'échappatoire : **le doute se lève par la mesure**. Elle reste
+valable pour ce qu'on ne peut pas mesurer (le rendu visuel, faute de navigateur).
 
 ### 14/09/2026 (veille du lundi) — Google a publié sa doctrine officielle sur l'IA, et elle contredit plusieurs habitudes du GEO
 

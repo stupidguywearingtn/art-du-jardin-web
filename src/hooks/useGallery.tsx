@@ -134,7 +134,17 @@ async function loadAll() {
   notify();
 }
 
-/** Public: list categories with photo counts. */
+/**
+ * Public: list categories with photo counts.
+ *
+ * Tant que la base n'a pas répondu, on renvoie `FALLBACK_CATS` **au lieu d'un
+ * tableau vide**. C'est ce qui rend les cartes de la galerie présentes dans le
+ * HTML servi : `loadAll()` ne tourne que dans un `useEffect`, qui ne s'exécute
+ * jamais au rendu serveur — sans ce repli, l'accueil ne contenait aucun lien
+ * vers `/realisations/*` et ces pages étaient orphelines pour les crawlers.
+ * Même source que le repli asynchrone (`fallbackCategoriesWithCount`), donc le
+ * visiteur voit exactement les mêmes liens que les robots.
+ */
 export function useGalleryCategories() {
   const [cats, setCats] = useState<CategoryWithCount[] | null>(_cachedCategories);
   useEffect(() => {
@@ -146,7 +156,11 @@ export function useGalleryCategories() {
       listeners.delete(listener);
     };
   }, []);
-  return { categories: cats ?? [], loading: cats === null, reload: loadAll };
+  return {
+    categories: cats ?? fallbackCategoriesWithCount(),
+    loading: cats === null,
+    reload: loadAll,
+  };
 }
 
 /** Public: list photos for one category slug. Uses static fallback when DB empty/unreachable. */

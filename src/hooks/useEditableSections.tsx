@@ -152,7 +152,7 @@ export function useGallerySection() {
 
 // ============ QUOTE_SECTION (header simulateur) ============
 export type QuoteSectionHeader = { tag: string; title: string; subtitle: string };
-const QS_FALLBACK: QuoteSectionHeader = { tag: "— Demande de devis", title: "Demandez votre devis", subtitle: "réponse sous 24 à 48h." };
+const QS_FALLBACK: QuoteSectionHeader = { tag: "— Demande de devis", title: "Estimez votre projet", subtitle: "en 90 secondes." };
 let _qsCache: QuoteSectionHeader | null = null;
 const _qsListeners = new Set<() => void>();
 async function loadQuoteSection() {

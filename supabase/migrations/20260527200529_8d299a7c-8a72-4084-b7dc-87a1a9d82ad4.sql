@@ -66,7 +66,7 @@ CREATE TABLE IF NOT EXISTS public.project_types (
   description TEXT,
   price_from NUMERIC,
   price_unit TEXT NOT NULL DEFAULT '€/m²',
-  show_price BOOLEAN NOT NULL DEFAULT true,
+  show_price BOOLEAN NOT NULL DEFAULT false, -- FIGE : aucun prix affiche au visiteur
   display_order INT NOT NULL DEFAULT 0,
   active BOOLEAN NOT NULL DEFAULT true,
   created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -87,20 +87,20 @@ INSERT INTO public.why_us_section (id, tag, title, cta_text) VALUES
   (1, '— Pourquoi HCE', 'Quatre raisons, une certitude.', 'Convaincu ? Recevez un devis personnalisé.') ON CONFLICT (id) DO NOTHING;
 
 INSERT INTO public.why_us_cards (title, description, icon_name, display_order, active) VALUES
-  ('Enrobé à chaud', 'Pose à la main à 180°C, compactage maîtrisé pour une durabilité maximale.', 'flame', 1, true),
+  ('Enrobé à chaud', 'Pose à la main à 150°C, compactage maîtrisé pour une durabilité maximale.', 'flame', 1, true),
   ('1000+ chantiers', 'Plus de 1000 chantiers réalisés dans le Jura et l''Ain depuis 2012, 14 années d''expérience.', 'star', 2, true),
-  ('Devis détaillé', 'Visite gratuite, devis sous 48h, prix tenus, aucune mauvaise surprise.', 'file-text', 3, true),
+  ('Devis détaillé', 'Visite gratuite, prix tenus, aucune mauvaise surprise.', 'file-text', 3, true),
   ('Finitions soignées', 'Bords nets, raccords maîtrisés, surface plane et homogène jusqu''à la dernière passe.', 'shield-check', 4, true);
 
 INSERT INTO public.quote_section (id, tag, title, subtitle) VALUES
-  (1, '— Demande de devis', 'Demandez votre devis', 'réponse sous 24 à 48h.') ON CONFLICT (id) DO NOTHING;
+  (1, '— Demande de devis', 'Estimez votre projet', 'en 90 secondes.') ON CONFLICT (id) DO NOTHING;
 
 -- show_price=false partout : HCE ne communique pas de prix indicatif en ligne
 -- (retire aussi le "price_from" pour ne pas laisser un chiffre fantome dans
 -- les donnees, meme non affiche).
 INSERT INTO public.project_types (slug, label, description, price_from, price_unit, show_price, display_order, active) VALUES
   ('cour', 'Cour privée', 'Enrobé à chaud, compactage', NULL, '€/m²', false, 1, true),
-  ('allee', 'Allée', 'Bordures + finition soignée', NULL, '€/m²', false, 2, true),
-  ('parking', 'Parking pro', 'Voirie poids lourds possible', NULL, '€/m²', false, 3, true),
+  ('allee', 'Chemin', 'Bordures + finition soignée', NULL, '€/m²', false, 2, true),
+  ('parking', 'Parking pro', 'et grand espace', NULL, '€/m²', false, 3, true),
   ('preparation', 'Préparation seule', 'Décaissement + nivellement', NULL, '€/m²', false, 4, true)
   ON CONFLICT (slug) DO NOTHING;

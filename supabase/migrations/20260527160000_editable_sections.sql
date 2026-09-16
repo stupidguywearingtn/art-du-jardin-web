@@ -48,9 +48,9 @@ on conflict (id) do nothing;
 
 insert into public.why_us_cards (title, description, icon_name, display_order)
 select * from (values
-  ('Enrobé à chaud', 'Pose à la main à 180°C, compactage maîtrisé pour une durabilité maximale.', 'flame', 1),
+  ('Enrobé à chaud', 'Pose à la main à 150°C, compactage maîtrisé pour une durabilité maximale.', 'flame', 1),
   ('1000+ chantiers', 'Plus de 1000 chantiers réalisés dans le Jura et l''Ain depuis 2012, 14 années d''expérience.', 'star', 2),
-  ('Devis détaillé', 'Visite gratuite, devis sous 48h, prix tenus, aucune mauvaise surprise.', 'file-text', 3),
+  ('Devis détaillé', 'Visite gratuite, prix tenus, aucune mauvaise surprise.', 'file-text', 3),
   ('Finitions soignées', 'Bords nets, raccords maîtrisés, surface plane et homogène jusqu''à la dernière passe.', 'shield-check', 4)
 ) as v(title, description, icon_name, display_order)
 where not exists (select 1 from public.why_us_cards);

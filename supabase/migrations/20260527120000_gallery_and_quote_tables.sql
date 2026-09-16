@@ -198,7 +198,7 @@ end $$;
 insert into public.project_types (slug, label, description, price_from, price_unit, display_order)
 values
   ('cour',        'Cour privée',      'Enrobé à chaud, compactage',          65, '€/m²', 1),
-  ('allee',       'Allée',            'Bordures + finition soignée',         75, '€/m²', 2),
+  ('allee',       'Chemin',           'Bordures + finition soignée',       NULL, '€/m²', 2),
   ('parking',     'Parking pro',      'Voirie poids lourds possible',        55, '€/m²', 3),
   ('preparation', 'Préparation seule','Décaissement + nivellement',          30, '€/m²', 4)
 on conflict (slug) do update set

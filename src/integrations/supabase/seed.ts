@@ -85,10 +85,11 @@ export async function ensureProjectTypesSeeded(): Promise<boolean> {
   const { count } = await supabase.from("project_types").select("*", { head: true, count: "exact" });
   if ((count ?? 0) === 0) {
     await supabase.from("project_types").insert([
-      { slug: "cour", label: "Cour privée", description: "Enrobé à chaud, allée + bordure + finition.", price_from: 65, price_unit: "€/m²", show_price: false, display_order: 1, active: true },
-      { slug: "allee", label: "Chemin", description: "Pose, bordures et finition soignée.", price_from: 75, price_unit: "€/m²", show_price: false, display_order: 2, active: true },
-      { slug: "parking", label: "Parking pro", description: "et grand espace.", price_from: 55, price_unit: "€/m²", show_price: false, display_order: 3, active: true },
-      { slug: "preparation", label: "Préparation seule", description: "Décaissement + nivellement.", price_from: 30, price_unit: "€/m²", show_price: false, display_order: 4, active: true },
+      // FIGE : price_from = null et show_price = false (aucun prix affiché au visiteur).
+      { slug: "cour", label: "Cour privée", description: "Enrobé à chaud, compactage", price_from: null, price_unit: "€/m²", show_price: false, display_order: 1, active: true },
+      { slug: "allee", label: "Chemin", description: "Bordures + finition soignée", price_from: null, price_unit: "€/m²", show_price: false, display_order: 2, active: true },
+      { slug: "parking", label: "Parking pro", description: "et grand espace", price_from: null, price_unit: "€/m²", show_price: false, display_order: 3, active: true },
+      { slug: "preparation", label: "Préparation seule", description: "Décaissement + nivellement", price_from: null, price_unit: "€/m²", show_price: false, display_order: 4, active: true },
     ]);
   }
   return true;

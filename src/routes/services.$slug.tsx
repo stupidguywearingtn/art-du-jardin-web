@@ -171,6 +171,51 @@ const SERVICES: Record<string, ServiceData> = {
       "/assets/maconnerie-2.png",
       "/assets/maconnerie-3.png",
     ],
+    seoDescription:
+      "Pavage, dallage, bordures et médaillons intégrés à l'enrobé dans le Jura et l'Ain : motif dessiné avec vous, pose au cordeau, joints sablés ou cimentés. Devis détaillé.",
+    savoir: {
+      heading: "Pavage, dallage et médaillons : les questions qu'on nous pose",
+      lead: "Le pavage, le dallage et les médaillons ne remplacent pas l'enrobé : ils s'y intègrent. Voici comment les deux techniques se posent sur un même chantier, ce que disent les normes des pavés, des dalles et des bordures, et à partir de quand une autorisation d'urbanisme entre en jeu, dans le Jura et l'Ain.",
+      updated: "2026-09-16",
+      updatedLabel: "16 septembre 2026",
+      qa: [
+        {
+          q: "Peut-on intégrer des pavés ou un médaillon dans une cour en enrobé ?",
+          a: "Oui, et c'est la raison d'être de la plupart des maçonneries qu'HCE réalise : les deux techniques se posent sur le même chantier et sur le même support. Le motif — médaillon, rosace, ligne de calepinage, contour d'entrée — est dessiné et calé avec vous avant les travaux, les pavés ou les dalles sont posés au cordeau et au niveau laser, puis l'enrobé à chaud vient occuper le reste de la surface autour d'eux. C'est la pose à la main, à 150°C, qui rend ce mariage possible : elle permet de travailler au plus près des courbes et des jonctions, ce qu'une pose mécanisée, faite pour les grandes surfaces régulières, permet mal.",
+        },
+        {
+          q: "Pavés en béton ou pavés en pierre naturelle : qu'est-ce qui change ?",
+          a: "Ce sont deux familles de produits distinctes, chacune régie par sa propre norme européenne. Les pavés en béton relèvent de la NF EN 1338, homologuée en février 2004, qui couvre les pavés préfabriqués en béton destinés aux piétons comme aux véhicules — chemins piétonniers, pistes cyclables, parkings, routes, aires industrielles. Les pavés de pierre naturelle relèvent de la NF EN 1342, publiée en février 2013, qui vise les pavés de pierre utilisés en revêtement de sol extérieur et de route. Les deux normes définissent le marquage du produit et l'évaluation de sa conformité : un pavé vendu pour ces usages est identifiable, quel que soit le matériau. Le choix se fait ensuite sur l'aspect recherché, le calepinage voulu et le budget.",
+        },
+        {
+          q: "À quoi sert vraiment une bordure au bord d'un enrobé ?",
+          a: "À tenir la rive, et pas seulement à faire joli. La norme NF EN 1340, qui couvre les éléments de bordure et de caniveau préfabriqués en béton, énumère leurs fonctions : séparation, délimitation physique ou visuelle, drainage, et butée des zones dallées ou des autres revêtements. C'est ce dernier rôle qu'on oublie le plus souvent : sans butée, le bord d'une cour finit par s'effriter sous les roues, parce que rien ne retient le matériau latéralement. Les dalles en béton ont de la même façon leur norme, la NF EN 1339. HCE pose des bordures béton coulées sur place ou des bordures pavées, selon la forme à suivre.",
+        },
+        {
+          q: "Faut-il une autorisation d'urbanisme pour créer des places de stationnement ?",
+          a: "Cela dépend de la capacité de l'aire et de son ouverture au public, jamais du revêtement choisi. D'après service-public.gouv.fr, un permis d'aménager est exigé pour une aire de stationnement ouverte au public lorsque l'aménagement crée une capacité d'accueil totale d'au moins 50 unités ; en dessous de ce seuil, l'aire de stationnement fait partie des aménagements de faible importance qui relèvent de la déclaration préalable. Ces deux fiches ont été vérifiées le 13 février 2026. Pour une cour de maison, c'est le plan local d'urbanisme de la commune qui tranche : la mairie est le bon interlocuteur avant de lancer le chantier.",
+        },
+        {
+          q: "Joints sablés ou joints cimentés : lequel choisir ?",
+          a: "Cela se décide sur l'usage prévu de la surface, et c'est un vrai choix, pas un détail de finition. Un joint sablé reste perméable et un peu souple : il laisse passer l'eau, se recharge facilement et encaisse les micro-mouvements du support sans casser, mais il se creuse au nettoyeur haute pression et laisse la végétation s'installer. Un joint cimenté donne une surface fermée, facile à balayer et à laver, au prix de la rigidité : si le support bouge, c'est le joint qui se fissure. La décision se prend au moment du calepinage, en même temps que le dessin du motif.",
+        },
+      ],
+      sources: [
+        {
+          label: "AFNOR Norm'Info — NF EN 1338, Pavés en béton : prescriptions et méthodes d'essai",
+          url: "https://norminfo.afnor.org/norme/nf-en-1338/paves-en-beton-prescriptions-et-methodes-dessai/73708",
+        },
+        {
+          label: "AFNOR Norm'Info — NF EN 1340, Éléments pour bordures de trottoir en béton",
+          url: "https://norminfo.afnor.org/norme/nf-en-1340/elements-pour-bordures-de-trottoir-en-beton-prescriptions-et-methodes-dessai/69403",
+        },
+        {
+          label:
+            "service-public.gouv.fr — Permis d'aménager (aires de stationnement ouvertes au public)",
+          url: "https://www.service-public.gouv.fr/particuliers/vosdroits/F17665",
+        },
+      ],
+    },
   },
   "drainage-pentes": {
     n: "04",

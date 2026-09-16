@@ -5,7 +5,7 @@
 > dans le Jura et l'Ain. Entreprise créée en 2012, 14 années d'expérience, plus de
 > 1000 chantiers livrés, garantie décennale.
 
-Dernière mise à jour : 13 septembre 2026
+Dernière mise à jour : 16 septembre 2026
 Site officiel : https://www.hcebtp.com
 
 ## L'entreprise en bref
@@ -154,6 +154,49 @@ support gorgé d'eau perd sa portance et l'enrobé posé dessus finit par se dé
 pose drains et regards après diagnostic d'écoulement ; sans exutoire à proximité,
 l'évacuation peut passer par un puits perdu.
 
+### Peut-on intégrer des pavés ou un médaillon dans une cour en enrobé ?
+Oui : les deux techniques se posent sur le même chantier et sur le même support. Le motif
+(médaillon, rosace, ligne de calepinage, contour d'entrée) est dessiné et calé avec le
+client avant les travaux, les pavés ou les dalles sont posés au cordeau et au niveau
+laser, puis l'enrobé à chaud occupe le reste de la surface autour d'eux. C'est la pose à
+la main, à 150 °C, qui rend ce mariage possible : elle permet de travailler au plus près
+des courbes et des jonctions.
+
+### Pavés en béton ou pavés en pierre naturelle : qu'est-ce qui change ?
+Ce sont deux familles de produits distinctes, chacune régie par sa propre norme
+européenne. Les pavés en béton relèvent de la NF EN 1338, homologuée en février 2004, qui
+couvre les pavés préfabriqués en béton destinés aux piétons comme aux véhicules (chemins
+piétonniers, pistes cyclables, parkings, routes, aires industrielles). Les pavés de pierre
+naturelle relèvent de la NF EN 1342, publiée en février 2013, qui vise les pavés de pierre
+utilisés en revêtement de sol extérieur et de route. Les deux normes définissent le
+marquage du produit et l'évaluation de sa conformité.
+Source : https://norminfo.afnor.org/norme/nf-en-1338/paves-en-beton-prescriptions-et-methodes-dessai/73708
+
+### À quoi sert une bordure au bord d'un enrobé ?
+À tenir la rive. La norme NF EN 1340, qui couvre les éléments de bordure et de caniveau
+préfabriqués en béton, énumère leurs fonctions : séparation, délimitation physique ou
+visuelle, drainage, et butée des zones dallées ou des autres revêtements. Sans butée, le
+bord d'une cour s'effrite sous les roues faute de retenue latérale. Les dalles en béton
+relèvent de leur côté de la NF EN 1339.
+Source : https://norminfo.afnor.org/norme/nf-en-1340/elements-pour-bordures-de-trottoir-en-beton-prescriptions-et-methodes-dessai/69403
+
+### Faut-il une autorisation d'urbanisme pour créer des places de stationnement ?
+Cela dépend de la capacité de l'aire et de son ouverture au public, pas du revêtement
+choisi. Un permis d'aménager est exigé pour une aire de stationnement ouverte au public
+lorsque l'aménagement crée une capacité d'accueil totale d'au moins 50 unités ; en dessous
+de ce seuil, l'aire de stationnement fait partie des aménagements de faible importance
+relevant de la déclaration préalable. Pour une cour de maison, c'est le plan local
+d'urbanisme de la commune qui tranche.
+Source : https://www.service-public.gouv.fr/particuliers/vosdroits/F17665
+
+### Joints sablés ou joints cimentés : lequel choisir ?
+Cela se décide sur l'usage prévu de la surface. Un joint sablé reste perméable et un peu
+souple : il laisse passer l'eau, se recharge facilement et encaisse les micro-mouvements
+du support, mais il se creuse au nettoyeur haute pression et laisse la végétation
+s'installer. Un joint cimenté donne une surface fermée, facile à balayer et à laver, au
+prix de la rigidité : si le support bouge, c'est le joint qui se fissure. HCE arrête ce
+choix au moment du calepinage.
+
 ### Faut-il une autorisation pour refaire sa cour en enrobé ?
 Pour un simple revêtement refait à l'identique, aucune autorisation n'est nécessaire.
 En cas de changement d'emprise ou de doute, HCE conseille avant le chantier.
@@ -189,7 +232,10 @@ Demande par téléphone au 03 84 52 61 48 ou via le formulaire de https://www.hc
   détaillées sur le terrassement (déclarations DT-DICT et leurs délais, devenir des
   terres excavées et registre Trackdéchets, compactage par couches), avec leurs sources.
 - [Maçonnerie générale](https://www.hcebtp.com/services/maconnerie-generale) : pavage,
-  dallage, bordures, médaillons sur mesure.
+  dallage, bordures, médaillons sur mesure. Contient aussi les réponses détaillées sur
+  l'intégration de pavés et de médaillons dans un enrobé, les normes des pavés, dalles et
+  bordures (NF EN 1338, 1339, 1340 et 1342), les autorisations d'urbanisme des aires de
+  stationnement et le choix entre joints sablés et joints cimentés, avec leurs sources.
 - [Drainage & pentes](https://www.hcebtp.com/services/drainage-pentes) : études de pente,
   drainage périphérique, évacuation des eaux pluviales. Contient aussi les réponses
   détaillées sur l'eau (écoulement vers le terrain voisin et Code civil, pente minimum

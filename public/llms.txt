@@ -5,7 +5,7 @@
 > dans le Jura et l'Ain. Entreprise créée en 2012, 14 années d'expérience, plus de
 > 1000 chantiers livrés, garantie décennale.
 
-Dernière mise à jour : 16 septembre 2026
+Dernière mise à jour : 17 septembre 2026
 Site officiel : https://www.hcebtp.com
 
 ## L'entreprise en bref
@@ -197,6 +197,55 @@ s'installer. Un joint cimenté donne une surface fermée, facile à balayer et �
 prix de la rigidité : si le support bouge, c'est le joint qui se fissure. HCE arrête ce
 choix au moment du calepinage.
 
+### À quoi sert un muret de soutènement dans une cour ?
+À retenir la terre là où le terrain change de niveau, pour que la surface au-dessus reste
+plane et utilisable. Un mur de soutènement peut céder de trois façons, qui sont les trois
+vérifications demandées par la norme NF P94-281, document d'application nationale de
+l'Eurocode 7 : portance du sol sous la semelle, glissement du mur sur sa base, et
+excentrement (basculement sous la poussée des terres). HCE réalise de petits murets de
+soutènement en accompagnement d'un chantier de cour ou d'allée ; au-delà, le
+dimensionnement relève d'un calcul géotechnique et d'un bureau d'études.
+Source : https://norminfo.afnor.org/norme/prnf-p94-281/justification-des-ouvrages-geotechniques-normes-dapplication-nationale-de-leurocode-7-ouvrages-de-soutenement-murs/210865
+
+### Faut-il une autorisation pour construire un mur chez soi ?
+Une déclaration préalable de travaux est obligatoire dès que le mur atteint 2 mètres de
+hauteur, mais aussi, quelle que soit sa hauteur, si le terrain est en secteur protégé,
+dans une zone désignée par le plan local d'urbanisme, ou dans une commune qui a soumis les
+clôtures à déclaration (article R*421-12 du Code de l'urbanisme). Ces règles visent les
+clôtures et les murs de clôture. Un mur de soutènement n'est pas une clôture : son régime
+dépend du plan local d'urbanisme de la commune, et la mairie est l'interlocuteur.
+Source : https://www.service-public.gouv.fr/particuliers/vosdroits/F3131
+
+### Le mur entre chez moi et chez le voisin est-il mitoyen ?
+Il est présumé mitoyen s'il sépare deux propriétés appartenant à des propriétaires
+différents. La présomption tombe si le mur porte des marques de non-mitoyenneté : sommet à
+une seule pente, tuiles ou bordures d'un seul côté — le mur appartient alors au
+propriétaire de ce côté. Sur un mur mitoyen, les frais d'entretien et de réparation se
+partagent à proportion des droits de chacun et les réparations non urgentes supposent un
+accord ; chacun supporte le coût des dégradations qu'il cause (articles 653 à 673 du Code
+civil).
+Source : https://www.service-public.gouv.fr/particuliers/vosdroits/F2415
+
+### Bordure coulée sur place ou bordure préfabriquée : qu'est-ce qui change ?
+La bordure préfabriquée est un produit industriel moulé en usine, de dimensions fixes,
+couvert par la norme NF EN 1340. La bordure coulée sur place est fabriquée sur le chantier
+au coffrage et sort du champ de cette norme produit : sa tenue dépend du coffrage, du
+béton mis en œuvre et du décoffrage. À l'usage, la différence est la forme : un élément
+préfabriqué suit une ligne droite ou un rayon standard, une bordure coulée épouse la forme
+réelle de la cour, courbes comprises, sans interruption tous les mètres. HCE coffre et
+coule sur place, ou pose des bordures pavées.
+Source : https://norminfo.afnor.org/norme/nf-en-1340/elements-pour-bordures-de-trottoir-en-beton-prescriptions-et-methodes-dessai/69403
+
+### Peut-on couler des bordures et des murets toute l'année dans le Jura ?
+Pas indifféremment : un béton frais redoute le gel tant qu'il n'a pas pris. À la station
+Météo-France de Champagnole, à 2 km de Cize et à 537 m d'altitude, les normales 1991-2020
+relèvent 111,7 jours de gel par an (température minimale inférieure ou égale à 0 °C), dont
+21,8 en janvier, 20,9 en février et 20,4 en décembre, et 35,2 jours par an où elle descend
+à -5 °C ou en dessous. La température moyenne annuelle y est de 9,4 °C et le cumul annuel
+de précipitations de 1 573,2 mm. La période des travaux se cale avec le client au moment
+du devis, établi après visite sur site.
+Source : https://object.files.data.gouv.fr/meteofrance/data/synchro_ftp/REF_STATION/FICHECLIM_39097003.pdf
+
 ### Faut-il une autorisation pour refaire sa cour en enrobé ?
 Pour un simple revêtement refait à l'identique, aucune autorisation n'est nécessaire.
 En cas de changement d'emprise ou de doute, HCE conseille avant le chantier.
@@ -242,7 +291,11 @@ Demande par téléphone au 03 84 52 61 48 ou via le formulaire de https://www.hc
   de 1,5 %, origine des flaques, obligations d'infiltration des parkings de plus de
   500 m², drain ou pente), avec leurs sources.
 - [Bordures & murets](https://www.hcebtp.com/services/bordures-murets) : bordures béton
-  coulées sur place, bordures pavées, petits murets de soutènement.
+  coulées sur place, bordures pavées, petits murets de soutènement. Contient aussi les
+  réponses détaillées sur le rôle d'un muret de soutènement et sa norme de justification
+  (NF P94-281), l'autorisation d'urbanisme d'un mur, la mitoyenneté, le choix entre
+  bordure coulée et bordure préfabriquée, et la tenue au gel dans le Jura (normales
+  Météo-France de Champagnole), avec leurs sources.
 - [Finitions soignées](https://www.hcebtp.com/services/finitions-soignees) : bords nets,
   raccords maîtrisés, surface plane et homogène jusqu'à la dernière passe.
 - [Avant / Après](https://www.hcebtp.com/realisations/avant-apres) : comparatifs de

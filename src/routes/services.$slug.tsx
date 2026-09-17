@@ -286,6 +286,61 @@ const SERVICES: Record<string, ServiceData> = {
       { t: "Décoffrage propre", d: "Finition lisse, arêtes nettes, prêt à recevoir l'enrobé." },
     ],
     gallery: ["/assets/bordures-1.png", "/assets/bordures-2.png", "/assets/bordures-3.png"],
+    seoDescription:
+      "Bordures béton coulées sur place, bordures pavées et petits murets de soutènement dans le Jura et l'Ain : autorisation d'urbanisme, mur mitoyen, tenue au gel. Devis détaillé.",
+    savoir: {
+      heading: "Bordures et murets : les questions qu'on nous pose",
+      lead: "Une bordure tient la rive d'une cour, un muret retient la terre : ce sont deux ouvrages différents, avec chacun leurs règles. Voici quand une autorisation d'urbanisme entre en jeu, à qui appartient le mur qui sépare deux terrains, ce qui distingue une bordure coulée sur place d'une bordure préfabriquée, et ce que l'hiver jurassien impose au béton.",
+      updated: "2026-09-17",
+      updatedLabel: "17 septembre 2026",
+      qa: [
+        {
+          q: "À quoi sert un muret de soutènement dans une cour ?",
+          a: "À retenir la terre là où le terrain change de niveau, pour que la surface au-dessus reste plane et utilisable. Dès qu'une cour est terrassée dans une pente — le cas courant dans le Jura — il faut soit adoucir le talus, ce qui consomme de la place, soit le retenir par un ouvrage, ce qui n'en consomme pas. Un mur de soutènement peut céder de trois façons, et ce sont exactement les trois vérifications que demande la norme de justification de ces ouvrages, la NF P94-281, document d'application nationale de l'Eurocode 7 : la portance du sol sous la semelle, le glissement du mur sur sa base, et l'excentrement, c'est-à-dire le basculement sous la poussée des terres. HCE réalise de petits murets de soutènement en accompagnement d'un chantier de cour ou d'allée ; au-delà, quand la hauteur retenue devient importante ou qu'un véhicule circule juste derrière, le dimensionnement relève d'un calcul géotechnique et d'un bureau d'études, pas d'une finition de maçonnerie. Cette norme est elle-même en cours de révision : le projet est passé en enquête publique jusqu'au 16 mars 2026, pour une publication attendue fin 2026.",
+        },
+        {
+          q: "Faut-il une autorisation pour construire un mur chez soi ?",
+          a: "Oui dans plusieurs cas précis, et la hauteur n'est que l'un d'eux. Une déclaration préalable de travaux est obligatoire dès que le mur atteint 2 mètres de hauteur, mais aussi, quelle que soit sa hauteur, si le terrain se trouve en secteur protégé, dans une zone désignée par le plan local d'urbanisme, ou dans une commune qui a décidé de soumettre les clôtures à déclaration. Ces règles, rappelées par service-public.gouv.fr dans une fiche vérifiée le 5 décembre 2025 et prévues à l'article R*421-12 du Code de l'urbanisme, visent les clôtures et les murs de clôture. Un mur de soutènement, lui, n'est pas une clôture : sa fonction est de retenir les terres, et son régime dépend du plan local d'urbanisme de la commune. Dans les deux cas, la mairie est le bon interlocuteur, et la question se règle avant le chantier plutôt qu'après.",
+        },
+        {
+          q: "Le mur entre chez moi et chez le voisin est-il mitoyen ?",
+          a: "Il est présumé mitoyen s'il sépare deux propriétés appartenant à des propriétaires différents — bâtiments, cours, jardins ou champs. Cette présomption tombe si le mur porte des marques de non-mitoyenneté : un sommet à une seule pente, ou des tuiles et des bordures situées d'un seul côté ; le mur appartient alors au propriétaire de ce côté-là. La distinction n'a rien de théorique quand on refait une cour. Sur un mur mitoyen, les frais d'entretien et de réparation se partagent entre les deux propriétaires à proportion de leurs droits, et les réparations autres qu'urgentes supposent leur accord ; chacun supporte en revanche le coût des dégradations qu'il cause. Ces règles figurent aux articles 653 à 673 du Code civil, et la fiche service-public.gouv.fr correspondante a été vérifiée le 14 septembre 2026. Autrement dit : avant d'adosser un muret, de rehausser une séparation ou de décaisser au pied d'un mur existant, il faut savoir à qui il appartient.",
+        },
+        {
+          q: "Bordure coulée sur place ou bordure préfabriquée : qu'est-ce qui change ?",
+          a: "La bordure préfabriquée est un produit industriel : des éléments de béton moulés en usine, de dimensions fixes, couverts par la norme NF EN 1340 qui vise les éléments de bordure et de caniveau préfabriqués en béton. La bordure coulée sur place est un ouvrage fabriqué sur le chantier, au coffrage, et elle sort donc du champ de cette norme produit : sa tenue dépend du coffrage, du béton mis en œuvre et du décoffrage, pas d'un marquage. Ce qui les sépare à l'usage, c'est la forme. Un élément préfabriqué suit une ligne droite ou un rayon standard, et une courbe se rattrape en ouvrant les joints ; une bordure coulée épouse la forme réelle de la cour, courbes comprises, sans interruption tous les mètres. HCE coffre puis coule sur place, ou pose des bordures pavées lorsque le dessin le demande. Le rôle structurel de la bordure — la butée qui empêche la rive de l'enrobé de s'effriter sous les roues — est le même dans les deux cas ; il est détaillé sur la page Maçonnerie générale.",
+        },
+        {
+          q: "Peut-on couler des bordures et des murets toute l'année dans le Jura ?",
+          a: "Pas indifféremment : un béton frais redoute le gel tant qu'il n'a pas pris, et l'hiver jurassien n'est pas une saison neutre. À la station Météo-France de Champagnole, à 2 km de Cize et à 537 m d'altitude, les normales 1991-2020 relèvent 111,7 jours de gel par an, c'est-à-dire de jours où la température minimale descend à 0 °C ou en dessous — dont 21,8 en janvier, 20,9 en février et 20,4 en décembre — et 35,2 jours par an où elle descend à -5 °C ou en dessous. La température moyenne annuelle y est de 9,4 °C. L'eau est l'autre paramètre local, et il est marquant : la même station relève 1 573,2 mm de précipitations par an. C'est ce cumul qui fait qu'une bordure n'est pas ici un simple élément de décoration — elle canalise le ruissellement vers les exutoires au lieu de le laisser attaquer la rive de l'enrobé. En pratique, la période des travaux se cale avec vous au moment du devis, qui est établi après une visite sur site.",
+        },
+      ],
+      sources: [
+        {
+          label:
+            "service-public.gouv.fr — Quelles sont les règles pour construire ou installer une clôture ? (article R*421-12 du Code de l'urbanisme)",
+          url: "https://www.service-public.gouv.fr/particuliers/vosdroits/F3131",
+        },
+        {
+          label: "service-public.gouv.fr — Mur mitoyen (articles 653 à 673 du Code civil)",
+          url: "https://www.service-public.gouv.fr/particuliers/vosdroits/F2415",
+        },
+        {
+          label:
+            "AFNOR Norm'Info — NF P94-281, Justification des ouvrages géotechniques : ouvrages de soutènement, murs",
+          url: "https://norminfo.afnor.org/norme/prnf-p94-281/justification-des-ouvrages-geotechniques-normes-dapplication-nationale-de-leurocode-7-ouvrages-de-soutenement-murs/210865",
+        },
+        {
+          label: "AFNOR Norm'Info — NF EN 1340, Éléments pour bordures de trottoir en béton",
+          url: "https://norminfo.afnor.org/norme/nf-en-1340/elements-pour-bordures-de-trottoir-en-beton-prescriptions-et-methodes-dessai/69403",
+        },
+        {
+          label:
+            "Météo-France — Fiche climatologique de la station de Champagnole (39), indicatif 39097003, statistiques 1991-2020",
+          url: "https://object.files.data.gouv.fr/meteofrance/data/synchro_ftp/REF_STATION/FICHECLIM_39097003.pdf",
+        },
+      ],
+    },
   },
   "finitions-soignees": {
     n: "06",

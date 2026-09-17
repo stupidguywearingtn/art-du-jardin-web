@@ -39,6 +39,13 @@ tranchée le 08/09, ne pas la rouvrir.
 > `useEffect` et masque tout derrière un état de chargement est invisible aux
 > robots, même sur un site SSR.**
 
+> ⚙️ **Depuis le 17/09/2026, la mesure du texte servi a un instrument unique et
+> versionné : `scripts/mesure-texte-servi.mjs`.** L'utiliser pour TOUTE mesure
+> (production comme banc d'essai local, avant comme après). Les tables des 14,
+> 15 et 16/09 ci-dessous viennent d'extracteurs jetables différents et **ne sont
+> pas comparables au caractère près** avec les valeurs du 17/09 et suivantes ;
+> la table de référence à jour est celle du 17/09.
+
 **Volume de texte servi, référence mesurée le 14/09/2026** (vu comme Googlebot,
 `<script>` **et** `<style>` retirés). Toute page qui s'écarte franchement de ces
 valeurs signale un problème de rendu :
@@ -563,9 +570,197 @@ Toutes les valeurs de la table du 15/09 sont **retrouvées au caractère près**
 chiffres que la production avant le chantier : la fidélité du banc est
 re-confirmée pour la deuxième fois.
 
+### Positions mesurées — 17/09/2026
+
+**Indexation : toujours nulle, 10 jours après la 1re soumission IndexNow.** Trois
+mesures, via `WebSearch` (toujours le seul canal exploitable) :
+1. **Phrase exacte du site** (test institué le 11/09) :
+   `"Médaillons et inserts pavés intégrés à l'enrobé"` → **dix résultats, zéro
+   hcebtp.com**. Nouveauté : cette fois **aucun concurrent non plus**, uniquement
+   des brevets (Google Patents, USPTO, OPIC, EPO). Le moteur n'a donc pas
+   d'appariement français sur cette phrase aujourd'hui.
+2. **Requête nommant le domaine** : `hcebtp.com HCE Cize 39300 enrobé travaux
+   publics` → **aucune page du domaine**, et cette fois **aucune fiche
+   d'annuaire non plus** : dix pages Wikipédia de communes homonymes. ⚠️ La
+   formulation de la requête a été raccourcie par rapport aux runs précédents
+   (« HCE Hini Cours Enrobé » retiré) parce que la version longue a échoué en
+   « search unavailable ». **Ce résultat n'est donc PAS comparable à celui des
+   12→16/09 : c'est un changement de requête, pas une disparition des fiches.**
+   Reprendre la formulation longue demain.
+3. **`site:hcebtp.com`** → dix pages Wikipédia d'acronymes (CEB, CBP, HBD…),
+   **zéro résultat du domaine**. L'opérateur `site:` n'est visiblement pas honoré
+   par ce canal : il ne prouve rien de plus que les deux autres mesures, mais il
+   ne les contredit pas.
+
+| Requête | Mesure (17/09/2026) | Évolution vs 16/09 |
+|---|---|---|
+| indexation (phrase exacte du site) | **absent** | inchangé |
+| indexation (requête nommant le domaine) | **absent** | inchangé (requête modifiée) |
+| `site:hcebtp.com` | **absent** | inchangé |
+| requêtes commerciales | **non mesurables** (aucun canal de SERP brute) | indéterminé |
+
+⚠️ **`WebSearch` a échoué trois fois sur huit appels aujourd'hui** (« Web search
+error: unavailable »), avec succès à la relance immédiate à chaque fois. Même
+famille d'aléa que les `000` du runner sur `curl` : **relancer avant de
+conclure, et ne jamais changer la formulation d'une requête de suivi pour
+contourner un échec** — c'est exactement ce qui a cassé la comparabilité de la
+mesure n°2 ci-dessus.
+
+**Contrôles techniques** : accueil, les six `/services/*`, les cinq
+`/realisations/*`, `robots.txt`, `sitemap.xml`, `llms.txt` — **tous en 200 du
+premier coup**, aucun `000`. `sitemap.xml` relu intégralement : 12 URLs, et
+**`/realisations` n'y figure pas** — le 404 de cette URL n'est donc pas exposé
+aux robots, point à ne pas rouvrir en urgence.
+
+> ⚠️ **Nouvelle échelle de mesure, et cette fois elle est figée dans le dépôt.**
+> Le problème signalé le 15/09 (deux extracteurs, deux séries de chiffres) est
+> réglé : `scripts/mesure-texte-servi.mjs` est désormais versionné et **c'est lui
+> la référence à partir d'aujourd'hui**. Il normalise en plus les entités
+> hexadécimales (`&#x27;`), ce que les extracteurs jetables des runs précédents
+> ne faisaient pas : ses valeurs sont donc **systématiquement un peu plus basses**
+> (bordures-murets 879 au lieu de 884, maçonnerie 5 080 au lieu de 5 295).
+> **Ne pas lire ça comme une régression.** Toutes les valeurs ci-dessous sont
+> produites par ce script ; les tables des 14, 15 et 16/09 ne leur sont pas
+> comparables au caractère près.
+
+Les douze URLs du sitemap, mesurées **avant** le chantier du jour :
+
+| URL | Texte servi (17/09) | JSON-LD | Liens `/realisations/*` |
+|---|---|---|---|
+| accueil | 5 455 car. | 3 | 4 |
+| `/services/drainage-pentes` | 5 198 car. | 4 | 0 |
+| `/services/maconnerie-generale` | 5 080 car. | 4 | 0 |
+| `/services/preparation-terrain` | 4 482 car. | 4 | 0 |
+| `/services/enrobe-a-chaud` | 3 783 car. | 4 | 0 |
+| `/services/finitions-soignees` | **1 080 car.** | 3 | 0 |
+| `/services/bordures-murets` | **879 car.** | 3 | 0 |
+| `/realisations/parking-voirie-pro` | 381 car. | 2 | 5 |
+| `/realisations/preparation-terrassement` | 380 car. | 2 | 5 |
+| `/realisations/cour-allee-privee` | 379 car. | 2 | 5 |
+| `/realisations/chantier-en-cours` | 353 car. | 2 | 5 |
+| `/realisations/avant-apres` | **188 car.** | 1 | 1 |
+
+C'est la première fois que **les douze URLs** sont mesurées d'un coup — les
+quatre `/realisations/$slug` se tiennent bien (353 à 381 car., 2 JSON-LD,
+5 liens internes chacune), le 14/09 a donc tenu. La page la plus maigre du site
+après le chantier du jour sera `/realisations/avant-apres` (188 car., 1 seul
+JSON-LD, pas de `BreadcrumbList`).
+
 ---
 
 ## Chantiers faits
+
+### 17/09/2026 — `bordures-murets` passe de 879 à 7 012 caractères, avec les normales climatiques de la station Météo-France voisine
+
+**Chantier choisi** : le bloc « Ce qu'il faut savoir » de
+`/services/bordures-murets`, désigné candidat n°1 par le run du 16/09. C'était la
+page la plus maigre du site (879 caractères servis contre 3 783 à 5 455 pour les
+autres pages service) et la dernière, avec `finitions-soignees`, à n'avoir aucun
+contenu de fond.
+
+**Pourquoi cet angle plutôt qu'un autre.** Le 16/09 était déjà un run de contenu,
+et la règle est d'alterner. Deux raisons de ne pas alterner aujourd'hui : la page
+était mesurée, chiffrée et documentée depuis la veille (matière déjà repérée, donc
+chantier menable jusqu'au bout dans un seul run), et surtout la matière trouvée
+en cours de route s'est révélée bien meilleure que prévu — les normales
+climatiques de la station Météo-France de **Champagnole, à 2 km de Cize**. C'est
+la donnée locale la plus différenciante publiée sur ce site à ce jour, et elle
+n'a de sens que sur une page qui parle de béton. **Le prochain run doit changer
+d'angle : trois runs de contenu d'affilée, c'est assez.**
+
+**Ce qui a été fait, précisément** (fichier `src/routes/services.$slug.tsx`,
+entrée `bordures-murets`) :
+- Un `savoir` de **5 questions**, sur le patron des 11, 12, 13 et 16/09 : réponse
+  autonome de 2-3 phrases en tête, H3 formulés comme des questions posées à voix
+  haute, développement ensuite.
+  1. *À quoi sert un muret de soutènement dans une cour ?* — les **trois
+     états-limites** que vérifie la norme de justification (portance sous la
+     semelle, glissement sur la base, excentrement/basculement), et la limite
+     honnête du métier : au-delà du petit muret, c'est un calcul géotechnique et
+     un bureau d'études, pas une finition de maçonnerie.
+  2. *Faut-il une autorisation pour construire un mur chez soi ?* — déclaration
+     préalable dès **2 m**, plus les trois cas indépendants de la hauteur
+     (secteur protégé, zone du PLU, commune ayant soumis les clôtures à
+     déclaration), article **R*421-12** du Code de l'urbanisme. Nuance qui fait
+     la valeur de la réponse : **un mur de soutènement n'est pas une clôture**,
+     son régime dépend du PLU.
+  3. *Le mur entre chez moi et chez le voisin est-il mitoyen ?* — présomption de
+     mitoyenneté, **marques de non-mitoyenneté** (sommet à une seule pente,
+     tuiles ou bordures d'un seul côté), partage des frais au prorata,
+     articles **653 à 673** du Code civil.
+  4. *Bordure coulée sur place ou bordure préfabriquée ?* — la préfabriquée est
+     un produit couvert par **NF EN 1340**, la coulée sur place **sort du champ
+     de cette norme produit** : sa tenue dépend du coffrage et du béton. Angle
+     volontairement différent de la Q/R n°3 du 16/09, qui utilisait la même norme
+     pour le rôle de butée ; la réponse renvoie d'ailleurs le lecteur vers la
+     page maçonnerie pour ce point.
+  5. *Peut-on couler des bordures et des murets toute l'année dans le Jura ?* —
+     **111,7 jours de gel par an**, dont 21,8 en janvier, 20,9 en février et
+     20,4 en décembre ; **35,2 jours/an à -5 °C ou moins** ; température moyenne
+     annuelle **9,4 °C** ; **1 573,2 mm** de précipitations par an. Toutes ces
+     valeurs sont les normales 1991-2020 de la station Météo-France de
+     Champagnole (indicatif 39097003, alt. 537 m), à 2 km de Cize.
+- **5 sources** liées et visibles en pied de bloc : les deux fiches
+  service-public.gouv.fr (F3131 vérifiée le 05/12/2025, F2415 vérifiée le
+  14/09/2026), deux fiches AFNOR Norm'Info (NF P94-281, NF EN 1340) et la fiche
+  climatologique Météo-France.
+- `seoDescription` propre à la page (la phrase d'intro affichée ne contient aucun
+  des mots réellement tapés : « autorisation », « mitoyen », « gel »).
+- Report intégral des 5 Q/R dans `public/llms.txt`, avec leurs sources, plus
+  l'entrée « Bordures & murets » de la liste des pages enrichie et la date de
+  mise à jour passée au 17 septembre 2026.
+
+**Mesure avant / après, au banc d'essai local, même script pour les deux côtés** :
+
+| URL | Avant | Après | JSON-LD |
+|---|---|---|---|
+| `/services/bordures-murets` | 879 car. | **7 012 car.** | 3 → **4** (`FAQPage`) |
+| `/services/maconnerie-generale` | 5 080 car. | 5 080 car. | 4 → 4 |
+| `/services/finitions-soignees` | 1 080 car. | 1 080 car. | 3 → 3 |
+| accueil | 5 455 car. | 5 455 car. | 3 → 3 |
+
+Le banc local a redonné **exactement** les valeurs de la production avant
+modification (879, 5 080, 1 080, 5 455) : fidélité re-confirmée pour la
+**troisième** fois. Et les trois autres pages sont inchangées au caractère près —
+le chantier n'a rien débordé.
+
+**Contrôles passés avant de pousser** :
+- `npm run build` sort en 0.
+- `npx tsc --noEmit` : aucune erreur.
+- **`FAQPage` vérifié par script** : les 5 questions ET les 5 réponses du JSON-LD
+  sont retrouvées mot pour mot dans le texte visible du HTML servi, et les
+  4 blocs JSON-LD de la page parsent (`Organization`, `Service`,
+  `BreadcrumbList`, `FAQPage`). **Aucun mismatch possible.**
+- `node scripts/check-contenu-fige.mjs` : aucune régression.
+- ⚠️ `npx prettier --check` **échoue sur ce fichier — mais il échouait déjà sur
+  `HEAD`**, avant toute modification : **58 erreurs `prettier/prettier` avant,
+  58 après**, comptées des deux côtés. Mes ajouts n'en introduisent aucune.
+  **Ne pas reformater ce fichier** : ce serait un diff de plusieurs centaines de
+  lignes sans aucun gain SEO, exactement le refactor que les consignes
+  interdisent. Corriger le contrôle du 15/09 au journal : « prettier --check
+  passe » n'est plus vrai depuis les gros littéraux de données.
+
+**Décidé de NE PAS faire aujourd'hui, et pourquoi :**
+- **`/services/finitions-soignees`** (1 080 car.), l'autre page maigre : un seul
+  chantier mené à fond vaut mieux que deux à moitié. Elle reste candidate, mais
+  son `title` anormal (voir « Hypothèses à vérifier ») doit être tranché avec le
+  client **avant ou pendant** son chantier.
+- **Citer Wikipédia comme source du climat.** C'est par l'article « Cize (Jura) »
+  que la station de Champagnole a été identifiée, et j'ai d'abord envisagé de le
+  mettre en source faute de pouvoir lire le PDF Météo-France. Le détour par la
+  source primaire a finalement réussi (voir « Techniques apprises ») **et a donné
+  quatre chiffres de plus que Wikipédia n'en reprend** — dont les jours de gel,
+  qui sont le cœur de la réponse. Règle : **ne jamais se rabattre sur le
+  secondaire avant d'avoir vraiment essayé le primaire.**
+- **Publier le nombre de jours sans dégel (Tx ≤ 0 °C).** La ligne du PDF est
+  entrelacée avec celle des rafales de vent et mon recoupement par la somme des
+  mois ne tombe pas juste (8,3 contre 9,3). Les quatre autres valeurs, elles,
+  se recoupent exactement. **Un chiffre dont je ne suis pas sûr ne se publie
+  pas** — celui-là est écarté, pas « arrondi ».
+- **Toucher au `title` de la page** (« Bordures & murets — HCE · Jura & Ain ») :
+  il suit le patron des cinq autres pages service, il n'y a rien à corriger.
+
+---
 
 ### 16/09/2026 — `maconnerie-generale`, la page la plus maigre du site, passe de 904 à 5 300 caractères (commit `47eaa16`)
 
@@ -1577,20 +1772,24 @@ de suite.**
 > `seoDescription` et report dans `llms.txt`. **904 → 5 300 caractères servis**,
 > vérifié en local puis en ligne.
 
-> 🔴 **CANDIDAT N°1 POUR LE PROCHAIN RUN — `/services/bordures-murets`
-> (913 car.) et `/services/finitions-soignees` (1 115 car.), les deux dernières
-> pages service sans bloc `savoir`.** Mesurées pour la première fois le
-> 16/09/2026 : elles sont bien aussi maigres que `maconnerie-generale` l'était.
-> **Prendre `bordures-murets` en premier** — c'est la plus maigre, et la matière
-> est déjà repérée : la norme **NF EN 1340** énumère les fonctions d'une bordure
-> (séparation, délimitation, drainage, **butée**), source déjà lue et vérifiée le
-> 16/09. **Attention à ne pas redire la Q/R n°3 de `maconnerie-generale`** : y
-> creuser plutôt les murets de soutènement et les bordures coulées sur place, qui
-> ne sont traités nulle part. **`finitions-soignees` porte par ailleurs un
-> `title` anormal** (voir « Hypothèses à vérifier ») — à trancher avant ou
-> pendant son chantier, pas après.
-> **Méthode dans les deux cas** : patron des 11, 12, 13 et 16/09, mesure
-> avant/après au banc d'essai local avec **le même script pour les deux mesures**.
+> ✅ ~~**`/services/bordures-murets` (879 car.), la page la plus maigre du
+> site.**~~ **Fait le 17/09/2026** : bloc de 5 Q/R sourcées (états-limites d'un
+> mur de soutènement, déclaration préalable à 2 m, mitoyenneté, bordure coulée
+> contre préfabriquée, 111,7 jours de gel/an à 2 km de Cize), `FAQPage`,
+> `seoDescription` et report dans `llms.txt`. **879 → 7 012 caractères servis.**
+
+> 🔴 **CANDIDAT CONTENU POUR PLUS TARD — `/services/finitions-soignees`
+> (1 080 car.), la dernière page service sans bloc `savoir`.**
+> ⚠️ **Mais le 17/09 était le troisième run de contenu d'affilée (16, 17/09 +
+> le 13/09) : le prochain run doit changer d'angle**, pas enchaîner. Garder
+> cette page pour le run d'après.
+> Quand elle sera prise : **son `title` anormal** (voir « Hypothèses à
+> vérifier ») doit être tranché avec le client **avant ou pendant** le chantier,
+> pas après. Matière possible et non exploitée : le volet *ombrage* des parkings
+> de plus de 1 500 m² (échéance juillet 2026), fiche
+> `entreprendre.service-public.gouv.fr/vosdroits/F38106`, lue le 13/09.
+> **Méthode** : patron des 11, 12, 13, 16 et 17/09, mesure avant/après au banc
+> d'essai local avec **`scripts/mesure-texte-servi.mjs` des deux côtés**.
 
 > 📌 *Archive de l'encadré du 15/09, conservé pour la trace du raisonnement :*
 > `/services/maconnerie-generale` ne servait que 904 caractères,
@@ -1675,25 +1874,27 @@ de suite.**
     **16/09 contenu « pavage / dallage / bordures » sourcé (normes NF EN 1338,
     1339, 1340, 1342 et seuil des 50 unités en urbanisme) sur
     `/services/maconnerie-generale` + `FAQPage` + `seoDescription` + llms.txt.**
-    **⚠️ Le 16/09 était un run de CONTENU, après deux runs techniques. Le filon
-    « rendu serveur » est épuisé : les trois cas connus (FAQ 09/09,
+    **17/09 contenu « bordures et murets » sourcé (états-limites NF P94-281,
+    déclaration préalable à 2 m et R*421-12, mitoyenneté 653-673 du Code civil,
+    normales climatiques Météo-France de Champagnole) sur
+    `/services/bordures-murets` + `FAQPage` + `seoDescription` + llms.txt,
+    et versionnement de `scripts/mesure-texte-servi.mjs`.**
+    **🔴 TROIS RUNS DE CONTENU D'AFFILÉE (13, 16, 17/09 — le 16 et le 17 sur
+    des pages service jumelles). Le prochain run DOIT changer d'angle.**
+    Le filon « rendu serveur » est épuisé : les trois cas connus (FAQ 09/09,
     `/realisations/$slug` 14/09, galerie de l'accueil 15/09) sont corrigés.
-    Le 17/09 peut rester sur le contenu sans se répéter — les deux dernières
-    pages maigres attendent — ou basculer sur le maillage / la page
-    `/realisations`, qui n'a pas été touché depuis le 15/09.**
     **Candidats pour le prochain run, par ordre d'intérêt :**
-    - 🔴 **`/services/bordures-murets` (913 car.) puis
-      `/services/finitions-soignees` (1 115 car.), blocs `savoir`** — voir
-      l'encadré en tête de section. Ce sont les deux dernières pages service
-      sans bloc `savoir`, et elles sont mesurées depuis le 16/09.
-    - **Créer une vraie page `/realisations`** (n°14) : hub listant les 5
+    - 🔴 **Créer une vraie page `/realisations`** (n°14) : hub listant les 5
       dossiers, aujourd'hui inexistante (404). **Désormais testable en local
       avant de pousser** (recette du 15/09), ce qui lève le principal frein.
-      **C'est le meilleur candidat non-contenu**, et il change d'angle après le
-      run rédactionnel du 16/09.
-    - `BreadcrumbList` sur `/realisations/avant-apres` (n°6, reliquat).
-      Page à 193 car., la plus maigre du site après les catégories.
+      **C'est le meilleur candidat, et il change enfin d'angle.** Elle est en
+      plus la destination naturelle d'une requête « réalisations enrobé Jura ».
+    - **`/realisations/avant-apres`** : 188 car. et **un seul JSON-LD**, c'est
+      désormais la page la plus maigre du site de loin. Elle cumule le reliquat
+      `BreadcrumbList` (n°6) et un manque de contenu. Bon chantier court.
     - `lastmod` du sitemap depuis les dates de commit (n°4).
+    - `/services/finitions-soignees` (1 080 car.) — **le run d'après, pas le
+      prochain** : ce serait un quatrième run de contenu de suite.
     - Les seuils d'urbanisme des affouillements, **si** une source primaire
       lisible apparaît (voir « décidé de ne pas faire » du 12/09).
     **Toujours à éviter** : un nouveau run `sameAs`/identité (angle saturé).
@@ -1831,6 +2032,22 @@ de suite.**
 ---
 
 ## Erreurs commises et corrigées
+
+- **17/09/2026 — j'ai changé la formulation d'une requête de suivi pour
+  contourner une panne, et j'ai cassé la série de mesures.** La requête
+  d'indexation `hcebtp.com HCE Hini Cours Enrobé Cize 39300 travaux publics`,
+  utilisée à l'identique du 12 au 16/09, a échoué en « Web search error:
+  unavailable ». Au lieu de la relancer telle quelle, je l'ai **raccourcie**, et
+  la version courte n'a ramené aucune des neuf fiches d'annuaire que les cinq
+  runs précédents relevaient. Pendant un instant, ça ressemblait à une
+  disparition des fiches — ça n'en était pas une, c'est une autre requête.
+  **Règle : une requête de suivi est un instrument de mesure. On la relance
+  mot pour mot après un échec ; si on doit vraiment la changer, on mesure les
+  deux versions le même jour pour garder le point de raccord.** Même famille
+  d'erreur que les extracteurs de texte jetables du 15/09, et corrigée de la
+  même façon : figer l'instrument.
+  *(La panne elle-même est bénigne : 3 échecs sur 8 appels, chaque fois suivis
+  d'un succès à la relance immédiate. Comme les `000` de `curl`, on relance.)*
 
 - 🔴 **16/09/2026 — `git reset --hard` a effacé le chantier du jour, non commité.
   Lire ceci avant toute manipulation de branche.** Le dépôt local était sur la
@@ -1999,6 +2216,68 @@ de suite.**
 ---
 
 ## Techniques apprises
+
+### 17/09/2026 — 📚 Les fiches climatologiques Météo-France sont lisibles, et le « piège PDF » n'est pas une fatalité
+
+**C'est l'acquis le plus réutilisable du run, et il contredit une règle écrite
+ici les 11, 12 et 16/09** (« WebFetch n'extrait rien d'un PDF, ne pas insister »).
+La règle est vraie de `WebFetch`. Elle est **fausse du PDF lui-même** : beaucoup
+de PDF administratifs français ont des flux de contenu **non compressés**, et
+leur texte se reconstruit en quelques lignes de Python sans aucune dépendance
+(`pdftotext` n'est pas installé sur le runner).
+
+**La recette qui a marché**, à réutiliser telle quelle :
+
+```python
+import re
+d = open('fiche.pdf','rb').read().decode('latin-1')
+items, cur = [], (0.0, 0.0)
+for m in re.finditer(r'1 0 0 1 ([-\d.]+) ([-\d.]+) cm|BT\s(.*?)ET', d, re.S):
+    if m.group(3) is not None:                 # un bloc de texte
+        s = ''.join(re.findall(r'\((?:\\.|[^()])*\)', m.group(3)))
+        s = re.sub(r'[()]', '', s).strip()
+        if s: items.append((cur[1], cur[0], s))   # (y, x, texte)
+    else:
+        cur = (float(m.group(1)), float(m.group(2)))   # position courante
+rows = {}
+for y, x, s in items: rows.setdefault(round(y), []).append((x, s))
+for y in sorted(rows, reverse=True):
+    print(round(y), '|', ' '.join(s for x, s in sorted(rows[y])))
+```
+
+**Le point clé, c'est le regroupement par ordonnée `y`** : un tableau de PDF est
+une suite de cellules indépendantes, et sans ce regroupement on obtient une
+bouillie de nombres sans étiquette. Avec, chaque ligne du tableau se relit
+telle quelle. Deux pièges rencontrés :
+- **Une image en ASCII85 au début du fichier** produit du faux texte entre
+  parenthèses. Filtrer sur `BT … ET` (et non sur `(…)`) l'élimine.
+- **Deux tableaux à la même hauteur fusionnent** (ici « rafales ≥ 16 m/s » et
+  « Tx ≤ 0 °C » : une ligne sur deux appartient à l'autre tableau). **Recouper
+  systématiquement chaque valeur annuelle par la somme des douze mois** : quand
+  la somme tombe juste, la ligne est bien démêlée ; sinon, le chiffre ne se
+  publie pas. C'est ce recoupement qui a validé 111,7 / 35,2 / 10,0 et écarté
+  le « jours sans dégel ».
+
+**Où sont ces fiches.** `donneespubliques.meteofrance.fr/FichesClim/…` redirige
+vers « donnée indisponible » (piège : le `curl` renvoie **200** sur une page
+d'erreur de 346 octets — toujours vérifier la TAILLE, pas seulement le code).
+L'URL qui marche est sur data.gouv.fr :
+`https://object.files.data.gouv.fr/meteofrance/data/synchro_ftp/REF_STATION/FICHECLIM_<indicatif>.pdf`
+— ici `39097003` pour Champagnole. **Comment trouver l'indicatif de la station
+la plus proche d'une commune** : l'article Wikipédia de la commune (section
+Climat) le donne en référence, avec la distance à vol d'oiseau. Wikipédia sert
+ici d'**index vers la source primaire**, il n'est pas cité comme source.
+
+**Ce que la fiche contient et que personne ne publie côté concurrence** : pour
+la station de Champagnole (indicatif 39097003, alt. 537 m, normales 1991-2020,
+fiche éditée le 06/06/2026) — moyennes mensuelles et annuelles de température
+max / moyenne / min, hauteur de précipitations, **nombre moyen de jours avec
+Tn ≤ 0 °C / ≤ -5 °C / ≤ -10 °C et Tx ≥ 25 °C / ≥ 30 °C**, degrés-jours unifiés,
+vent, et les records avec leur date. **C'est de la donnée métier locale
+directement exploitable** : gel pour le béton et la maçonnerie, chaleur pour la
+pose d'enrobé, pluie pour le drainage. **Chaque page de fond du site peut y
+puiser un chiffre qui lui est propre** — à faire, sans jamais réutiliser deux
+fois le même.
 
 ### 16/09/2026 — 📚 `norminfo.afnor.org` : les normes AFNOR sont citables gratuitement
 

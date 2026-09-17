@@ -28,7 +28,6 @@ const PATHS = [
   "/services/drainage-pentes",
   "/services/bordures-murets",
   "/services/finitions-soignees",
-  "/realisations/avant-apres",
   "/realisations/cour-allee-privee",
   "/realisations/parking-voirie-pro",
   "/realisations/preparation-terrassement",

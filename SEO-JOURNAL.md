@@ -2619,3 +2619,13 @@ la plupart sont des blogs d'agences) :
   Perplexity. **Non applicable ici** : pas de présence Reddit à fabriquer pour un
   artisan du Jura, et poster soi-même serait exactement le genre de faux signal
   que le client a refusé. Noté pour ne pas y revenir.
+
+---
+
+## 2026-09-17 — Décision client (hors run SEO) : section « Avant / Après » supprimée
+
+- Demande du client : retirer la section « Avant / Après » des réalisations.
+- Carte « Avant / Après » retirée de la galerie d'accueil → la carte « Chantier en cours » reprend sa place.
+- `/realisations/avant-apres` redirige en **301** vers `/#galerie` (URL déjà soumise via sitemap + IndexNow, pas de 404).
+- Retirée du sitemap (11 URLs), de `llms.txt`, de `indexnow-submit.mjs`, de `mesure-texte-servi.mjs` et du bloc « Autres réalisations ».
+- **Ne pas la réintroduire** (garde-fou ajouté dans `npm run check:fige`). Les tables `before_after_*` restent en base, non utilisées.

@@ -20,6 +20,7 @@ Le script `npm run check:fige` échoue si une de ces valeurs revient dans le rep
 | `Garantie & SAV` | `Finition soignée` / `Travail de qualité` (garder la mention légale « garantie décennale ») |
 | `Reprise immédiate` | `Demande de validation` |
 | Section avis / témoignages | Supprimée (demande client) |
+| Section / carte « Avant / Après » dans la galerie, page `/realisations/avant-apres` | Supprimée (demande client, 17/09/2026) — l'URL redirige en 301 vers `/#galerie`, la carte « Chantier en cours » reprend sa place |
 
 ## Pourquoi ces valeurs sont déjà revenues une fois
 

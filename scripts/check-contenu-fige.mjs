@@ -54,6 +54,8 @@ const RULES = [
     msg: "« enrobé fin ou épais » — dire « sous différentes granulations »" },
   { re: /Garantie\s*&\s*SAV|Garantie\s*et\s*SAV/gi,
     msg: "« Garantie & SAV » supprimé — garder seulement la mention légale décennale" },
+  { re: /to="\/realisations\/avant-apres"|path:\s*"\/realisations\/avant-apres"|useBeforeAfter/g,
+    msg: "section « Avant / Après » — supprimée à la demande du client (17/09/2026)" },
   { re: /Reprise\s*imm[ée]diate/gi,
     msg: "« Reprise immédiate » — remplacé par « Demande de validation »" },
 ];

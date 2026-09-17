@@ -89,10 +89,10 @@ const RELATED_SERVICES: Record<string, { slug: string; label: string }[]> = {
  * Seuls les slugs sont listés ici : le libellé est résolu par
  * `fallbackCategoryBySlug`, la même source que le `<h1>` de la page cible.
  * Recopier les titres ici les ferait diverger au premier renommage.
+
  *
- * `avant-apres` n'y figure pas : c'est une route statique distincte
- * (`/realisations/avant-apres`) et non un paramètre de `$slug`, elle est donc
- * liée à part avec son propre `to`.
+ * La page « Avant / après » a été retirée à la demande du client (17/09/2026) :
+ * ne pas la relier ici. Voir CONTENU-FIGE.md.
  */
 const ALL_CAT_SLUGS = [
   "cour-allee-privee",
@@ -157,15 +157,6 @@ function SeeAlso({ slug }: { slug: string }) {
                 </Link>
               </li>
             ))}
-            <li>
-              <Link
-                to="/realisations/avant-apres"
-                className="text-muted hover:text-gold transition-colors"
-                style={{ fontFamily: "var(--font-body)", fontSize: 15 }}
-              >
-                Avant / après
-              </Link>
-            </li>
           </ul>
         </div>
         <div>

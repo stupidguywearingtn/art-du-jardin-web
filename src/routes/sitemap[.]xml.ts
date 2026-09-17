@@ -25,7 +25,6 @@ export const Route = createFileRoute("/sitemap.xml")({
           { path: "/services/drainage-pentes", changefreq: "monthly", priority: "0.8" },
           { path: "/services/bordures-murets", changefreq: "monthly", priority: "0.8" },
           { path: "/services/finitions-soignees", changefreq: "monthly", priority: "0.8" },
-          { path: "/realisations/avant-apres", changefreq: "weekly", priority: "0.7" },
           { path: "/realisations/cour-allee-privee", changefreq: "weekly", priority: "0.7" },
           { path: "/realisations/parking-voirie-pro", changefreq: "weekly", priority: "0.7" },
           { path: "/realisations/preparation-terrassement", changefreq: "weekly", priority: "0.7" },

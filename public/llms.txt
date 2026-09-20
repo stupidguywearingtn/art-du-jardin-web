@@ -298,6 +298,13 @@ Demande par téléphone au 03 84 52 61 48 ou via le formulaire de https://www.hc
   Météo-France de Champagnole), avec leurs sources.
 - [Finitions soignées](https://www.hcebtp.com/services/finitions-soignees) : bords nets,
   raccords maîtrisés, surface plane et homogène jusqu'à la dernière passe.
+- [Réalisations](https://www.hcebtp.com/realisations) : page mère des quatre dossiers
+  de chantiers (cours et allées privées, parkings et voiries pro, préparation et
+  terrassement, chantiers en cours). Contient aussi les réponses détaillées sur la
+  garantie décennale appliquée à une cour ou un parking (voirie et ouvrages de
+  viabilité couverts, point de départ du délai à la réception des travaux,
+  attestation d'assurance à remettre avant l'ouverture du chantier) et sur la zone
+  d'intervention d'HCE, avec leurs sources.
 - [Cour & allée privée](https://www.hcebtp.com/realisations/cour-allee-privee) : cours
   résidentielles et allées privées en enrobé à chaud.
 - [Parking, grand espace et voirie pro](https://www.hcebtp.com/realisations/parking-voirie-pro) :

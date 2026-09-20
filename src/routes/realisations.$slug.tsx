@@ -8,6 +8,7 @@ import { EditModeProvider, useEditMode } from "@/hooks/useEditMode";
 import { EditModeToolbar } from "@/components/EditModeToolbar";
 import { useAuth } from "@/hooks/useAuth";
 import { useGalleryByCategorySlug, fallbackCategoryBySlug } from "@/hooks/useGallery";
+import { REAL_CAT_SLUGS, RELATED_SERVICES, titleCaseSlug } from "@/lib/realisations";
 import { useSiteContentFields } from "@/hooks/useSiteContentFields";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
@@ -53,53 +54,13 @@ const REAL_META: Record<string, { title: string; description: string }> = {
 };
 
 /**
- * Maillage interne des pages `/realisations/*`.
- *
- * Constat du 14/09/2026 : aucune page du site ne liait ces URLs dans le HTML
- * servi (les cartes de la galerie d'accueil sont rendues côté client), et les
- * pages elles-mêmes ne renvoyaient qu'un lien vers `/`. Elles n'étaient donc
- * atteignables que par le sitemap. Ce tableau relie chaque dossier aux
- * services que le chantier met réellement en œuvre — aucune association
- * décorative : un parking passe bien par la préparation de terrain, une
- * cour privée par les finitions.
- *
- * `/realisations` n'existe pas comme route (HTTP 404) : ne jamais y pointer.
+ * Les autres dossiers de réalisations, pour le bloc « Voir aussi », et les
+ * services correspondants, viennent tous deux de `@/lib/realisations` :
+ * le hub `/realisations` (créé le 20/09/2026) lit exactement les mêmes
+ * tableaux. Les libellés, eux, sont résolus par `fallbackCategoryBySlug`,
+ * la même source que le `<h1>` de la page cible — les recopier ici les
+ * ferait diverger au premier renommage.
  */
-const RELATED_SERVICES: Record<string, { slug: string; label: string }[]> = {
-  "cour-allee-privee": [
-    { slug: "enrobe-a-chaud", label: "Enrobé à chaud" },
-    { slug: "finitions-soignees", label: "Finitions soignées" },
-  ],
-  "parking-voirie-pro": [
-    { slug: "enrobe-a-chaud", label: "Enrobé à chaud" },
-    { slug: "preparation-terrain", label: "Préparation de terrain" },
-  ],
-  "preparation-terrassement": [
-    { slug: "preparation-terrain", label: "Préparation de terrain" },
-    { slug: "drainage-pentes", label: "Drainage & pentes" },
-  ],
-  "chantier-en-cours": [
-    { slug: "enrobe-a-chaud", label: "Enrobé à chaud" },
-    { slug: "preparation-terrain", label: "Préparation de terrain" },
-  ],
-};
-
-/**
- * Les autres dossiers de réalisations, pour le bloc « Voir aussi ».
- * Seuls les slugs sont listés ici : le libellé est résolu par
- * `fallbackCategoryBySlug`, la même source que le `<h1>` de la page cible.
- * Recopier les titres ici les ferait diverger au premier renommage.
-
- *
- * La page « Avant / après » a été retirée à la demande du client (17/09/2026) :
- * ne pas la relier ici. Voir CONTENU-FIGE.md.
- */
-const ALL_CAT_SLUGS = [
-  "cour-allee-privee",
-  "parking-voirie-pro",
-  "preparation-terrassement",
-  "chantier-en-cours",
-];
 
 /**
  * En-tête fixe de la page. Extrait pour être rendu à l'identique dans les
@@ -131,7 +92,7 @@ function CategoryHeader() {
  * robots des liens que le visiteur ne verrait pas serait du cloaking.
  */
 function SeeAlso({ slug }: { slug: string }) {
-  const others = ALL_CAT_SLUGS.filter((s) => s !== slug).map((s) => ({
+  const others = REAL_CAT_SLUGS.filter((s) => s !== slug).map((s) => ({
     slug: s,
     label: fallbackCategoryBySlug(s)?.title ?? titleCaseSlug(s),
   }));
@@ -145,6 +106,15 @@ function SeeAlso({ slug }: { slug: string }) {
         <div>
           <h2 className="label text-gold">— Autres réalisations</h2>
           <ul className="mt-4 space-y-2">
+            <li>
+              <Link
+                to="/realisations"
+                className="text-muted hover:text-gold transition-colors"
+                style={{ fontFamily: "var(--font-body)", fontSize: 15 }}
+              >
+                Tous les dossiers de réalisations
+              </Link>
+            </li>
             {others.map((c) => (
               <li key={c.slug}>
                 <Link
@@ -181,14 +151,6 @@ function SeeAlso({ slug }: { slug: string }) {
   );
 }
 
-/** Repli lisible pour un slug inconnu : « mots-avec-tirets » → « Mots avec tirets ». */
-function titleCaseSlug(slug: string): string {
-  return slug
-    .split("-")
-    .map((w) => (w ? w[0].toUpperCase() + w.slice(1) : w))
-    .join(" ");
-}
-
 export const Route = createFileRoute("/realisations/$slug")({
   component: RealisationsRoute,
   head: ({ params }) => {
@@ -207,15 +169,12 @@ export const Route = createFileRoute("/realisations/$slug")({
         { property: "og:description", content: meta.description },
         { property: "og:url", content: `https://www.hcebtp.com/realisations/${params.slug}` },
       ],
-      links: [
-        { rel: "canonical", href: `https://www.hcebtp.com/realisations/${params.slug}` },
-      ],
-      /* Fil d'ariane à deux niveaux, comme sur les pages `/services/*`.
-         Pas de niveau « Réalisations » intermédiaire : `/realisations` n'est
-         pas une route du site et répond 404 — un fil d'ariane ne doit pointer
-         que vers des URLs réelles. Émis pour les seules catégories connues :
-         baliser un slug quelconque reviendrait à décrire une page qui finira
-         sur l'écran « Catégorie introuvable ». */
+      links: [{ rel: "canonical", href: `https://www.hcebtp.com/realisations/${params.slug}` }],
+      /* Fil d'ariane à trois niveaux depuis le 20/09/2026 : le hub
+         `/realisations` existe désormais comme route réelle (il répondait 404
+         jusque-là, d'où les deux niveaux précédents). Émis pour les seules
+         catégories connues : baliser un slug quelconque reviendrait à décrire
+         une page qui finira sur l'écran « Catégorie introuvable ». */
       scripts: cat
         ? [
             {
@@ -233,6 +192,12 @@ export const Route = createFileRoute("/realisations/$slug")({
                   {
                     "@type": "ListItem",
                     position: 2,
+                    name: "Réalisations",
+                    item: "https://www.hcebtp.com/realisations",
+                  },
+                  {
+                    "@type": "ListItem",
+                    position: 3,
                     name: cat.title,
                     item: `https://www.hcebtp.com/realisations/${params.slug}`,
                   },

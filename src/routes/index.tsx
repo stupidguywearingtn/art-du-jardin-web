@@ -737,6 +737,14 @@ function Galerie() {
         <p className="mt-4 max-w-xl mx-auto text-muted" style={{ fontSize: 14 }}>
           Choisissez une catégorie pour voir tous les chantiers en grand.
         </p>
+        {/* Lien vers le hub `/realisations` (créé le 20/09/2026). Il donne à la
+            page mère un lien entrant depuis l'accueil : sans lui elle ne serait
+            atteignable que par le sitemap. */}
+        <p className="mt-4">
+          <Link to="/realisations" className="label text-gold border-b border-gold/40 pb-1">
+            Tous les dossiers de réalisations <span aria-hidden>→</span>
+          </Link>
+        </p>
       </div>
 
       <div className="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-5">

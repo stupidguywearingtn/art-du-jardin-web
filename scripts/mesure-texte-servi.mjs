@@ -19,7 +19,7 @@
  *   node scripts/mesure-texte-servi.mjs https://www.hcebtp.com
  *   node scripts/mesure-texte-servi.mjs http://127.0.0.1:4175 /services/bordures-murets
  *
- * Sans chemin, mesure les 12 URLs du sitemap. Sortie : une ligne par URL,
+ * Sans chemin, mesure toutes les URLs du sitemap. Sortie : une ligne par URL,
  * colonnes séparées par des tabulations — code HTTP, caractères de texte,
  * nombre de blocs JSON-LD, nombre de liens /realisations/* distincts, URL.
  */
@@ -34,6 +34,7 @@ const SITEMAP = [
   "/services/drainage-pentes",
   "/services/bordures-murets",
   "/services/finitions-soignees",
+  "/realisations",
   "/realisations/cour-allee-privee",
   "/realisations/parking-voirie-pro",
   "/realisations/preparation-terrassement",

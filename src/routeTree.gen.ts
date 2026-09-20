@@ -14,6 +14,7 @@ import { Route as SigninRouteImport } from './routes/signin'
 import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as DemoRouteImport } from './routes/demo'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as RealisationsIndexRouteImport } from './routes/realisations.index'
 import { Route as ServicesGarantieSavRouteImport } from './routes/services.garantie-sav'
 import { Route as ServicesSlugRouteImport } from './routes/services.$slug'
 import { Route as RealisationsAvantApresRouteImport } from './routes/realisations.avant-apres'
@@ -48,6 +49,11 @@ const DemoRoute = DemoRouteImport.update({
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RealisationsIndexRoute = RealisationsIndexRouteImport.update({
+  id: '/realisations/',
+  path: '/realisations/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ServicesGarantieSavRoute = ServicesGarantieSavRouteImport.update({
@@ -115,6 +121,7 @@ export interface FileRoutesByFullPath {
   '/realisations/avant-apres': typeof RealisationsAvantApresRoute
   '/services/$slug': typeof ServicesSlugRoute
   '/services/garantie-sav': typeof ServicesGarantieSavRoute
+  '/realisations/': typeof RealisationsIndexRoute
   '/api/public/devis': typeof ApiPublicDevisRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
   '/lovable/email/queue/process': typeof LovableEmailQueueProcessRoute
@@ -132,6 +139,7 @@ export interface FileRoutesByTo {
   '/realisations/avant-apres': typeof RealisationsAvantApresRoute
   '/services/$slug': typeof ServicesSlugRoute
   '/services/garantie-sav': typeof ServicesGarantieSavRoute
+  '/realisations': typeof RealisationsIndexRoute
   '/api/public/devis': typeof ApiPublicDevisRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
   '/lovable/email/queue/process': typeof LovableEmailQueueProcessRoute
@@ -150,6 +158,7 @@ export interface FileRoutesById {
   '/realisations/avant-apres': typeof RealisationsAvantApresRoute
   '/services/$slug': typeof ServicesSlugRoute
   '/services/garantie-sav': typeof ServicesGarantieSavRoute
+  '/realisations/': typeof RealisationsIndexRoute
   '/api/public/devis': typeof ApiPublicDevisRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
   '/lovable/email/queue/process': typeof LovableEmailQueueProcessRoute
@@ -169,6 +178,7 @@ export interface FileRouteTypes {
     | '/realisations/avant-apres'
     | '/services/$slug'
     | '/services/garantie-sav'
+    | '/realisations/'
     | '/api/public/devis'
     | '/lovable/email/suppression'
     | '/lovable/email/queue/process'
@@ -186,6 +196,7 @@ export interface FileRouteTypes {
     | '/realisations/avant-apres'
     | '/services/$slug'
     | '/services/garantie-sav'
+    | '/realisations'
     | '/api/public/devis'
     | '/lovable/email/suppression'
     | '/lovable/email/queue/process'
@@ -203,6 +214,7 @@ export interface FileRouteTypes {
     | '/realisations/avant-apres'
     | '/services/$slug'
     | '/services/garantie-sav'
+    | '/realisations/'
     | '/api/public/devis'
     | '/lovable/email/suppression'
     | '/lovable/email/queue/process'
@@ -221,6 +233,7 @@ export interface RootRouteChildren {
   RealisationsAvantApresRoute: typeof RealisationsAvantApresRoute
   ServicesSlugRoute: typeof ServicesSlugRoute
   ServicesGarantieSavRoute: typeof ServicesGarantieSavRoute
+  RealisationsIndexRoute: typeof RealisationsIndexRoute
   ApiPublicDevisRoute: typeof ApiPublicDevisRoute
   LovableEmailSuppressionRoute: typeof LovableEmailSuppressionRoute
   LovableEmailQueueProcessRoute: typeof LovableEmailQueueProcessRoute
@@ -263,6 +276,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/realisations/': {
+      id: '/realisations/'
+      path: '/realisations'
+      fullPath: '/realisations/'
+      preLoaderRoute: typeof RealisationsIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/services/garantie-sav': {
@@ -349,6 +369,7 @@ const rootRouteChildren: RootRouteChildren = {
   RealisationsAvantApresRoute: RealisationsAvantApresRoute,
   ServicesSlugRoute: ServicesSlugRoute,
   ServicesGarantieSavRoute: ServicesGarantieSavRoute,
+  RealisationsIndexRoute: RealisationsIndexRoute,
   ApiPublicDevisRoute: ApiPublicDevisRoute,
   LovableEmailSuppressionRoute: LovableEmailSuppressionRoute,
   LovableEmailQueueProcessRoute: LovableEmailQueueProcessRoute,

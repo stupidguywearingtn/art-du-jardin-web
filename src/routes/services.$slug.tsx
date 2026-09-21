@@ -363,6 +363,52 @@ const SERVICES: Record<string, ServiceData> = {
       "/assets/finitions-3.jpeg",
       "/assets/finitions-4.jpeg",
     ],
+    seoDescription:
+      "Finitions d'enrobé dans le Jura et l'Ain : bords nets, raccords entre bandes, surface plane sans flaque, chantier rendu propre et gravats évacués. Devis détaillé après visite sur site.",
+    savoir: {
+      heading: "Finitions et fin de chantier : les questions qu'on nous pose",
+      lead: "La finition est la partie du chantier que le client voit vraiment : les bords, les raccords entre bandes, la planéité, et l'état dans lequel le chantier est rendu. Voici à quoi se reconnaît un enrobé bien posé, pourquoi une ligne apparaît parfois entre deux bandes, où partent les gravats d'une cour refaite, et ce qu'un devis doit obligatoirement dire à ce sujet.",
+      updated: "2026-09-21",
+      updatedLabel: "21 septembre 2026",
+      qa: [
+        {
+          q: "Comment reconnaît-on un enrobé bien posé ?",
+          a: "À trois choses visibles à l'œil nu, sans aucun instrument : des bords francs, sans bavure ni épaisseur qui s'effrite ; des raccords entre bandes qu'on ne sent pas sous le pied ; et une surface qui ne retient pas l'eau une fois la pluie passée. Ces trois points se jugent à la réception du chantier, et ce sont eux qui font la différence entre deux surfaces posées avec le même enrobé. Côté normalisation, la mise en œuvre des enrobés à chaud et leur contrôle sur chantier relèvent de la norme NF P98-150-1, homologuée le 26 juin 2010 et toujours en vigueur (son réexamen est programmé au 1er juin 2030). Son domaine d'application mérite d'être connu d'un particulier : il ne couvre pas seulement les couches de roulement, de liaison et d'assise d'une route, mais aussi les « revêtements d'accotements, de trottoirs et les parties annexes des chaussées ainsi qu'au travail de reprofilage » — autrement dit exactement le type de surfaces qu'on refait dans une cour, une allée ou un parking. HCE fait un contrôle visuel et de planéité avant de quitter le chantier.",
+        },
+        {
+          q: "Pourquoi voit-on parfois une ligne entre deux bandes d'enrobé ?",
+          a: "Parce qu'un enrobé se pose par bandes successives, et que la jonction entre deux bandes est l'endroit le plus fragile de toute la surface. Une ligne légèrement visible n'est pas forcément un défaut ; en revanche, un joint mal traité se désagrège avant le reste du revêtement. La raison est thermique : deux bandes ne se lient entre elles que tant que le matériau est encore assez chaud pour être compacté ensemble. Si la première bande a refroidi avant que la seconde arrive contre elle, le joint reste une simple mise bout à bout, plus poreuse, par où l'eau entre puis gèle. C'est là que la pose à la main à 150 °C prend son intérêt : elle permet de travailler la jonction et les rives au plus près, y compris sur des courbes et autour d'un obstacle, là où une bande large impose un tracé rectiligne. Le nombre de bandes nécessaires se décide en fonction de la forme de la surface, avant le début de la pose.",
+        },
+        {
+          q: "Qui évacue les gravats d'une cour refaite, et où vont-ils ?",
+          a: "C'est l'entreprise qui s'en charge, et ils ne partent pas n'importe où : les déchets d'un chantier se trient à la source, par flux, puis se déposent dans une installation qui accepte ce flux-là. Pour une cour ou un parking, l'essentiel du volume relève de la fraction minérale. Les flux à trier séparément sur un chantier de construction ou de démolition sont le bois, les fractions minérales, le métal, le verre, le plastique et le plâtre — la fraction minérale regroupant le béton et les gravats, donc les croûtes d'enrobé et l'ancien support décaissé. Deux cas de dispense existent et concernent précisément les petits chantiers : un chantier qui dispose de moins de 40 m² de surface de stockage, ou dont le volume total de déchets reste inférieur à 10 m³. Un chantier de cour chez un particulier tombe souvent dans l'un des deux, ce qui ne dispense pas de déposer les déchets dans une installation qui les accepte.",
+        },
+        {
+          q: "Qu'est-ce qu'un devis de travaux doit indiquer sur les déchets du chantier ?",
+          a: "Quatre informations, obligatoires depuis le 1er juillet 2021 : une estimation de la quantité totale de déchets que le chantier va produire, les modalités de gestion et d'enlèvement prévues, le ou les points de collecte où l'entreprise compte les déposer, et une estimation des coûts associés. Ces mentions sont fixées par le décret n° 2020-1817 du 29 décembre 2020 et s'appliquent aux devis de travaux de construction, de rénovation et de démolition de bâtiments, ainsi qu'aux travaux de jardinage. Le point de collecte doit être identifié précisément : raison sociale, adresse et type d'installation. En fin de parcours, l'installation qui reçoit les déchets remet gratuitement un bordereau de dépôt, rempli conjointement avec l'entreprise, qui mentionne la date du dépôt, l'installation, la nature et les quantités déposées, l'entreprise et le client. C'est une des raisons pour lesquelles le devis d'HCE est détaillé et établi après une visite sur site : la quantité de déchets d'un chantier de cour ne s'estime pas au téléphone.",
+        },
+        {
+          q: "Comment la finition se valide-t-elle avant la fin du chantier ?",
+          a: "Étape par étape avec le client, et pas seulement au moment de partir : chaque étape est validée avant de passer à la suivante, et un contrôle visuel et de planéité est fait avant de quitter le chantier. La raison est simple : sur un enrobé, presque tout ce qui détermine la surface finale se décide avant la dernière passe. Les niveaux du support, l'emplacement des exutoires, le tracé des bordures, la position des raccords et le calepinage d'un éventuel motif se jouent pendant la préparation et la pose. Une fois l'enrobé posé et refroidi, ces choix ne se reprennent plus sans toucher au revêtement lui-même. D'où l'intérêt de valider en cours de chantier plutôt que de tout découvrir à la fin. Les travaux d'HCE sont par ailleurs couverts par une garantie décennale.",
+        },
+      ],
+      sources: [
+        {
+          label:
+            "NF P98-150-1 — mise en œuvre et contrôle sur chantier des enrobés à chaud (Afnor)",
+          url: "https://norminfo.afnor.org/norme/nf-p98-150-1/enrobes-hydrocarbones-execution-des-assises-de-chaussees-couches-de-liaison-et-couches-de-roulement-partie-1-enrobes-hydrocarbones-a-chaud-constituants-formulation-fabrication-transport-mise-en-oeuvre-et-controle-sur-chantier/77679",
+        },
+        {
+          label:
+            "Décret n° 2020-1817 du 29 décembre 2020 — mentions déchets sur les devis (Légifrance)",
+          url: "https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000042841880",
+        },
+        {
+          label: "Tri à la source des déchets d'entreprise (service-public.gouv.fr)",
+          url: "https://entreprendre.service-public.gouv.fr/vosdroits/F37782",
+        },
+      ],
+    },
   },
 };
 

@@ -570,6 +570,47 @@ Toutes les valeurs de la table du 15/09 sont **retrouvées au caractère près**
 chiffres que la production avant le chantier : la fidélité du banc est
 re-confirmée pour la deuxième fois.
 
+### Positions mesurées — 21/09/2026
+
+**Indexation : toujours nulle, 14 jours après la 1re soumission IndexNow.** Trois
+mesures via `WebSearch`, mêmes protocoles que les runs précédents :
+1. **Phrase exacte du site** `"Médaillons et inserts pavés intégrés à l'enrobé"`
+   → dix résultats, **zéro hcebtp.com**. Ce sont les mêmes concurrents français
+   qu'au 20/09 (mavrotp, aravis-enrobage, pajot-tp, perenia, abers-amenagement,
+   europavage68, cuinet) + deux brevets USPTO. Appariement français présent sur
+   la phrase, le site n'en fait toujours pas partie. **Inchangé vs 20/09.**
+2. **Requête nommant le domaine** `hcebtp.com HCE Hini Cours Enrobé Cize 39300
+   enrobé travaux publics` → **aucune page du domaine**, neuf fiches d'annuaire
+   (kompass, pappers, verif, societe, pagesjaunes, 118000, lagazettefrance,
+   nosartisansontdutalent, manageo). **Inchangé vs 20/09.**
+3. **`site:hcebtp.com`** → dix pages sans rapport (Wikipédia d'acronymes, chnbtp,
+   Facebook HBTP), **zéro résultat du domaine**. L'opérateur `site:` n'est
+   toujours pas honoré par ce canal. **Inchangé.**
+
+| Requête | Mesure (21/09/2026) | Évolution vs 20/09 |
+|---|---|---|
+| indexation (phrase exacte du site) | **absent** | inchangé |
+| indexation (requête nommant le domaine) | **absent** | inchangé — 9 fiches d'annuaire |
+| `site:hcebtp.com` | **absent** | inchangé |
+| requêtes commerciales | **non mesurables** (pas de SERP brute via ce canal) | indéterminé |
+
+✅ **`WebSearch` n'a échoué aucune fois aujourd'hui.**
+
+**Volume de texte servi en production** (`scripts/mesure-texte-servi.mjs`, vu comme
+Googlebot) : **identique au 20/09 au caractère près sur les douze URLs** — accueil
+5 499, `/realisations` 6 258, bordures-murets 7 012, maconnerie 5 080, drainage
+5 198, preparation-terrain 4 482, enrobe-a-chaud 3 783, **finitions-soignees
+1 080** (avant le chantier du jour), les quatre dossiers 373-401. Les 12 URLs du
+sitemap répondent 200. Rien n'a bougé côté prod depuis le 20/09 (aucun commit
+entre les deux).
+
+> 🔎 **Découverte de veille du 21/09 (voir « Techniques apprises ») : une fiche
+> Google existe déjà pour HCE et accumule des avis (4,5/5, 16 avis), visible sur
+> l'annuaire PagesJaunes « enrobé à chaud – Jura ».** Cela corrige l'hypothèse
+> tenue depuis le 07/09 selon laquelle « il n'existe pas de fiche Google » :
+> `ACTIONS-SEO-CLIENT.md` (Action 2) a été mis à jour — la revendiquer et y
+> déclarer le site, au lieu d'en créer une nouvelle.
+
 ### Positions mesurées — 20/09/2026
 
 > ⚠️ **Trou de trois jours : aucun run les 18 et 19/09.** Le journal passe
@@ -725,6 +766,68 @@ JSON-LD, pas de `BreadcrumbList`).
 ---
 
 ## Chantiers faits
+
+### 21/09/2026 — `/services/finitions-soignees` passe de 1 080 à 6 821 caractères : la dernière page service sans bloc `savoir` en a un, sur la finition et la fin de chantier
+
+**Chantier choisi** : enrichir `/services/finitions-soignees`, désignée « candidat
+n°1 du prochain run » par le run du 20/09 — la dernière des six pages service sans
+bloc « ce qu'il faut savoir », et la page la plus maigre du site (1 080 car.) une
+fois le hub `/realisations` créé. La série de trois runs de contenu (13, 16,
+17/09) avait été rompue par le chantier d'architecture du 20/09 : reprendre du
+contenu aujourd'hui n'était donc plus un quatrième run de suite.
+
+**Ce qui a été fait**, sur le patron des blocs `savoir` des pages service (réponse
+autonome de 2-3 phrases en tête de chaque H3, questions posées comme à voix haute,
+chiffres et sources primaires, `FAQPage` construit depuis le **même** tableau que
+la section visible → aucun mismatch possible) :
+- **5 Q/R sourcées**, sur un angle inédit (la finition et la fin de chantier, pas
+  la technique de pose déjà couverte ailleurs) :
+  1. *Comment reconnaît-on un enrobé bien posé ?* — bords francs, raccords qu'on ne
+     sent pas, pas de rétention d'eau ; norme de mise en œuvre **NF P98-150-1**
+     (homologuée le 26/06/2010, en vigueur, réexamen au 01/06/2030), dont le
+     domaine d'application couvre explicitement « revêtements d'accotements, de
+     trottoirs et parties annexes » — donc les cours et allées.
+  2. *Pourquoi voit-on parfois une ligne entre deux bandes ?* — le joint est le
+     point fragile ; raison thermique ; intérêt de la pose à la main à 150 °C.
+  3. *Qui évacue les gravats, et où vont-ils ?* — tri à la source par flux (bois,
+     fractions minérales, métal, verre, plastique, plâtre), dispenses des petits
+     chantiers (< 40 m² de stockage ou < 10 m³).
+  4. *Qu'est-ce qu'un devis doit indiquer sur les déchets ?* — les 4 mentions du
+     **décret n° 2020-1817** obligatoires depuis le 01/07/2021, + bordereau de
+     dépôt gratuit.
+  5. *Comment la finition se valide-t-elle avant la fin du chantier ?* —
+     validation étape par étape, contrôle de planéité, garantie décennale.
+- `seoDescription` géolocalisée (Jura & Ain, gravats, chantier rendu propre).
+- 3 sources primaires vérifiées ce jour : **NF P98-150-1** (norminfo.afnor.org,
+  lue), **décret n° 2020-1817** (Légifrance, lu), **tri à la source** (fiche
+  entreprendre.service-public.gouv.fr F37782, lue).
+- Report du contenu dans `public/llms.txt` (entrée de page + « Dernière mise à
+  jour » passée au 21/09) — le fichier avait dérivé, il disait encore 17/09 alors
+  que le hub `/realisations` y avait été ajouté le 20/09.
+
+**Mesuré au banc d'essai local** (recette du 15/09, même script des deux côtés) :
+avant **1 080 car. / 3 blocs JSON-LD**, après **6 821 car. / 4 blocs**. Le banc
+reproduisait la prod au caractère près avant modification (1 080). **FAQPage
+vérifié strictement aligné sur le texte visible** (script `verif-faq.mjs` : 5/5
+Q et 5/5 R retrouvées dans le HTML servi). `npx tsc --noEmit` propre ; **eslint à
+parité exacte avec HEAD (60 = 60), zéro nouvelle violation** — le repo porte 60
+erreurs prettier pré-existantes, non introduites par ce chantier, et non
+corrigées ici pour ne pas noyer le diff de contenu dans un reformatage global.
+
+**Ce que je n'ai PAS fait, et pourquoi** :
+- **Le `title` anormal de la page** (« Vous avez un projet d'aménagement de cour en
+  enrobé », une accroche là où les cinq autres services ont un nom court) : le run
+  du 20/09 demandait de le trancher « avant ou pendant » ce chantier. **Non touché** :
+  c'est du contenu visible, et le client a figé la formule « Finition soignée /
+  Travail de qualité ». Le corriger de ma propre initiative risquait d'écraser un
+  libellé validé. **Reste à soumettre au client** (voir « Hypothèses à vérifier »).
+- **Le volet *ombrage* des parkings > 1 500 m²** (fiche F38106, repéré le 13/09) :
+  écarté ici, il relève du drainage/urbanisme déjà traité sur `/drainage-pentes`
+  et `/maconnerie-generale` (parkings > 500 m², seuil des 50 unités) ; le remettre
+  ici aurait fait doublon. L'angle finition/fin de chantier était plus propre à la
+  page et non couvert ailleurs.
+- **Reformater les 60 erreurs prettier du fichier** : hors périmètre, aurait mêlé
+  du bruit de formatage au diff de contenu.
 
 ### 20/09/2026 — `/realisations` existait dans les têtes mais pas sur le serveur : le hub passe de 404 à 6 258 caractères (commit `5debf51`)
 
@@ -1952,9 +2055,12 @@ de suite.**
 >    `https://www.hcebtp.com` — c'est la seule fiche *commerciale* des neuf,
 >    elle accepte un lien sortant, et elle est déjà indexée. **Meilleur levier
 >    identifié, inchangé depuis le 12/09.**
-> 2. **Créer une fiche Google Business Profile** pour HCE à Cize 39300 : c'est
->    la porte d'entrée la plus directe vers l'index de Google pour une entreprise
->    locale, et elle n'existe pas.
+> 2. ~~**Créer une fiche Google Business Profile**~~ **CORRIGÉ le 21/09 : la fiche
+>    existe déjà** (note Google 4,5/5, 16 avis, vue sur l'annuaire PagesJaunes
+>    départemental). Il ne faut donc pas en créer une (doublon) mais **revendiquer
+>    la fiche existante et y déclarer `https://www.hcebtp.com`**. C'est la porte
+>    d'entrée la plus directe vers l'index de Google, et un levier encore plus fort
+>    qu'une création puisqu'elle porte déjà 16 avis. Voir Action 2 du fichier client.
 > 3. **Google Search Console** : ajouter la propriété `www.hcebtp.com` et
 >    soumettre le sitemap. Aucun équivalent n'existe depuis le dépôt, IndexNow
 >    ne couvrant pas Google.
@@ -1983,19 +2089,28 @@ de suite.**
 > contre préfabriquée, 111,7 jours de gel/an à 2 km de Cize), `FAQPage`,
 > `seoDescription` et report dans `llms.txt`. **879 → 7 012 caractères servis.**
 
-> 🔴 **CANDIDAT N°1 DU PROCHAIN RUN — `/services/finitions-soignees`
-> (1 080 car.), la dernière page service sans bloc `savoir`, et désormais la
-> page la plus maigre du site sans concurrence.**
-> ✅ **La condition posée le 17/09 est levée** : le run du 20/09 a changé
-> d'angle (architecture, pas contenu), donc reprendre du contenu demain n'est
-> plus un quatrième run de suite. **C'est son tour.**
-> Quand elle sera prise : **son `title` anormal** (voir « Hypothèses à
-> vérifier ») doit être tranché avec le client **avant ou pendant** le chantier,
-> pas après. Matière possible et non exploitée : le volet *ombrage* des parkings
-> de plus de 1 500 m² (échéance juillet 2026), fiche
-> `entreprendre.service-public.gouv.fr/vosdroits/F38106`, lue le 13/09.
-> **Méthode** : patron des 11, 12, 13, 16 et 17/09, mesure avant/après au banc
-> d'essai local avec **`scripts/mesure-texte-servi.mjs` des deux côtés**.
+> ✅ ~~**CANDIDAT N°1 DU PROCHAIN RUN — `/services/finitions-soignees`
+> (1 080 car.).**~~ **Fait le 21/09/2026** : bloc de 5 Q/R sourcées sur la
+> finition et la fin de chantier (NF P98-150-1, décret n° 2020-1817 sur les
+> mentions déchets des devis, tri à la source), `FAQPage`, `seoDescription`,
+> report dans `llms.txt`. **1 080 → 6 821 caractères servis.** **Les six pages
+> service ont désormais toutes un bloc `savoir`.** Le `title` anormal n'a PAS
+> été touché (contenu figé client → à soumettre, voir « Hypothèses à vérifier »).
+>
+> 🔴 **CANDIDAT N°1 DU PROCHAIN RUN (au 21/09) — plus de page service maigre :
+> changer de terrain.** Les six services sont traités. Les meilleurs candidats
+> restants, par ordre d'intérêt :
+> - **`lastmod` dans le sitemap** depuis les dates de commit (n°4) — chantier
+>   court et net, sûr, bon repli. À ne faire qu'avec des dates honnêtes.
+> - **Enrichir le hub `/realisations`** d'un second bloc de Q/R : il a été créé
+>   le 20/09, il a désormais eu le temps d'exister, et c'est la page de
+>   destination naturelle d'une requête « réalisations enrobé Jura ».
+> - **Enrichir l'accueil** ou une `/realisations/$slug` (les 4 dossiers plafonnent
+>   à ~400 car. servis — mais attention, c'est du contenu de galerie, pas de la
+>   rédaction : vérifier d'abord qu'il y a de la matière honnête à ajouter).
+> **Méthode inchangée** : patron des blocs `savoir`, mesure avant/après au banc
+> d'essai local avec **`scripts/mesure-texte-servi.mjs` des deux côtés**, et
+> **`verif-faq.mjs`** pour prouver l'alignement JSON-LD/visible avant de pousser.
 
 > 📌 *Archive de l'encadré du 15/09, conservé pour la trace du raisonnement :*
 > `/services/maconnerie-generale` ne servait que 904 caractères,
@@ -2091,9 +2206,14 @@ de suite.**
     trois niveaux sur les pages dossier, maillage depuis l'accueil, Q/R sourcées
     sur la garantie décennale appliquée à la voirie (fiche service-public
     F2034) + `src/lib/realisations.ts` comme source unique.**
-    **✅ La série de trois runs de contenu (13, 16, 17/09) a été rompue le 20/09
-    par un chantier d'architecture. Le prochain run peut reprendre du contenu :
-    `/services/finitions-soignees`.**
+    **21/09 contenu « finition et fin de chantier » sourcé (NF P98-150-1 sur la
+    mise en œuvre, décret n° 2020-1817 sur les mentions déchets des devis, tri à
+    la source F37782) sur `/services/finitions-soignees` + `FAQPage` +
+    `seoDescription` + llms.txt + veille du lundi (AI Overviews & recherche
+    locale) + correction de l'hypothèse « pas de fiche Google ».**
+    **✅ Les six pages service ont maintenant toutes un bloc `savoir`. Le filon
+    « page service maigre » est épuisé : le prochain run doit changer de terrain
+    (sitemap `lastmod`, enrichir le hub `/realisations`, ou l'accueil).**
     Le filon « rendu serveur » est épuisé : les trois cas connus (FAQ 09/09,
     `/realisations/$slug` 14/09, galerie de l'accueil 15/09) sont corrigés.
     **Candidats pour le prochain run, par ordre d'intérêt (état au 20/09) :**
@@ -2254,6 +2374,22 @@ de suite.**
 
 ## Erreurs commises et corrigées
 
+- **21/09/2026 — l'hypothèse « il n'existe pas de fiche Google » était fausse.**
+  Depuis le 07/09, l'Action 2 du fichier client et le chantier n°2 « débloquer
+  l'indexation » disaient tous deux qu'il fallait **créer** une fiche Google
+  Business Profile parce qu'elle « n'existe pas ». En mesurant la visibilité ce
+  jour, l'annuaire PagesJaunes départemental (page lisible depuis le runner)
+  affiche une **note Google de 4,5/5 sur 16 avis** pour HCE à Cize. Une note
+  Google implique un établissement Google Maps existant. **La fiche existe donc
+  déjà** — le conseil « en créer une » était non seulement inutile mais risqué
+  (créer un doublon dégrade le référencement local). **Corrigé** : `Action 2` de
+  `ACTIONS-SEO-CLIENT.md` réécrite pour dire « revendiquer la fiche existante et y
+  déclarer `https://www.hcebtp.com` », et l'alerte du 20/09 dans « Chantiers en
+  attente » reste valable sur le fond (le déblocage est hors dépôt) mais son
+  point n°2 est à lire à la lumière de cette correction. **Leçon de méthode** :
+  ne jamais poser « ça n'existe pas » sans l'avoir cherché ; l'annuaire
+  départemental PagesJaunes est lisible là où les fiches `/pros/` sont en 403,
+  et il porte les notes Google — c'est un instrument de mesure gratuit.
 - **17/09/2026 — j'ai changé la formulation d'une requête de suivi pour
   contourner une panne, et j'ai cassé la série de mesures.** La requête
   d'indexation `hcebtp.com HCE Hini Cours Enrobé Cize 39300 travaux publics`,
@@ -2437,6 +2573,46 @@ de suite.**
 ---
 
 ## Techniques apprises
+
+### 21/09/2026 (veille du lundi) — 📚 Une fiche Google existe déjà pour HCE, et l'état de l'art confirme que le hors-site pèse bien plus que le site
+
+**1. Découverte la plus actionnable du jour : la fiche Google existe déjà.**
+En mesurant la visibilité, l'annuaire PagesJaunes « enrobé à chaud – Jura »
+(`pagesjaunes.fr/annuaire/departement/jura-39/enrobe-a-chaud`, page **lisible**
+depuis le runner, contrairement aux `/pros/` en 403) affiche pour « H.C.E
+Aménagement de Cours en Enrobés » à Cize une **note Google de 4,5/5 sur 16 avis**.
+Une note Google ne s'affiche que si un établissement Google Maps / Business
+Profile existe. **Conclusion : la fiche n'est pas à créer, elle est à
+revendiquer.** C'est un meilleur levier qu'une création (16 avis = de l'autorité
+déjà accumulée), et il ne lui manque probablement que le champ Site web pointant
+`https://www.hcebtp.com`. Corrigé dans `ACTIONS-SEO-CLIENT.md` (Action 2) et dans
+« Erreurs commises et corrigées ». **Limite à connaître** : la note vient d'un
+extrait d'annuaire, pas d'un accès direct à la fiche (Google Maps non ouvrable
+proprement depuis le runner) ; le fait que la fiche existe est solide (double
+lecture, WebSearch + WebFetch), son statut exact (revendiquée ou non) reste à
+confirmer par le client quand il y accédera.
+
+**2. État de l'art AI Overviews & recherche locale (septembre 2026), sources
+sérieuses et datées :**
+- **Search Engine Journal / étude Whitespark** : les AI Overviews apparaissent
+  sur **68 % des requêtes locales** (vs 39 % pour le pack local classique). Une
+  entreprise peut être 1re du pack local et **absente de l'AI Overview** pour la
+  même requête : ce sont deux systèmes distincts.
+  (`searchenginejournal.com/ai-overviews-now-answer-most-local-searches-how-to-get-your-business-cited/580757/`)
+- **Analyse Omniscient Digital (23 000+ citations)** : le contenu du site propre
+  ne pèse que **23 %** des citations ; **77 % viennent du hors-site**. → confirme
+  frontalement le verdict du 20/09 : *ce qui manque à hcebtp.com est hors du
+  dépôt* (fiche Google, annuaires, liens entrants), pas un chantier de contenu.
+- **Ahrefs (17 M de citations IA)** : le contenu cité est en moyenne **25,7 %
+  plus frais** que le contenu classiquement bien classé. → le « Dernière mise à
+  jour » visible et honnête reste payant ; ne l'actualiser que sur vrai changement.
+- **Placement dans la page** : ~**44 %** des citations viennent des premiers 30 %
+  de la page. → pour un bloc `savoir`, garder la réponse autonome **en tête** du
+  H3 (déjà la règle) et ne pas enterrer les Q/R trop bas dans la page.
+**Applicable ici** : rien de neuf à coder aujourd'hui, mais deux confirmations
+fortes — (a) le hors-site est le vrai levier, donc continuer à pousser le client
+vers la fiche Google et les annuaires ; (b) la fraîcheur et la structure
+réponse-en-tête, déjà appliquées, sont les bons réflexes GEO.
 
 ### 20/09/2026 — ⚙️ Deux acquis réutilisables : une route neuve dans ce routeur, et une source décennale qui parle enfin de voirie
 

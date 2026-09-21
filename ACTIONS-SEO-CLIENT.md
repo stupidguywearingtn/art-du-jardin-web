@@ -38,20 +38,36 @@ Sans cette action, le reste n'aura qu'un effet lent et indirect.
 
 ---
 
-## Action 2 — Fiche Google Business Profile (20 min)
+## Action 2 — Fiche Google Business Profile : la revendiquer, pas la créer (20 min)
 
 Pour une entreprise locale, la fiche d'établissement est le premier point d'entrée :
 elle est indexée immédiatement, elle fait exister l'entreprise sur les recherches
 « près de moi », et elle porte un lien vers le site.
 
-1. https://business.google.com → créer la fiche.
-2. Catégorie principale suggérée : **Entreprise de travaux publics** ou
+> ⚠️ **Constat du 21/09/2026 — une fiche Google existe déjà et n'est apparemment
+> pas revendiquée.** Les pages annuaire (dont l'annuaire PagesJaunes « enrobé à
+> chaud – Jura ») affichent pour « H.C.E Aménagement de Cours en Enrobés » à Cize
+> une **note Google de 4,5/5 sur 16 avis**. Une note Google ne s'affiche que si un
+> établissement Google Maps existe : la fiche est donc déjà là et accumule des
+> avis. **Il ne faut donc pas en créer une nouvelle (cela ferait un doublon), mais
+> revendiquer celle qui existe.** C'est un levier plus fort et plus rapide qu'une
+> création : une fiche avec 16 avis porte déjà de l'autorité, il ne manque que le
+> lien vers le site et la validation du propriétaire.
+
+1. Aller sur https://business.google.com (ou chercher « HCE Cize » sur Google
+   Maps) → **trouver la fiche existante** et cliquer sur « Revendiquer / Gérer cet
+   établissement ». Ne pas en recréer une.
+2. Vérifier la catégorie principale : **Entreprise de travaux publics** ou
    **Entrepreneur en revêtement routier**. Catégories secondaires : terrassement,
    maçonnerie.
 3. **Zone desservie** : Jura (39) et Ain (01), plutôt qu'une adresse visible si
    l'activité se fait chez le client.
-4. Site web : `https://www.hcebtp.com` (avec le `www`).
-5. La validation par courrier postal prend 1 à 2 semaines : à lancer tôt.
+4. **Le plus important pour la découverte du site : renseigner le champ Site web
+   avec `https://www.hcebtp.com`** (avec le `www`). C'est ce lien, depuis une fiche
+   déjà indexée par Google, qui est le meilleur candidat pour déclencher le crawl
+   du domaine.
+5. La validation (courrier postal ou autre méthode proposée) prend 1 à 2 semaines :
+   à lancer tôt.
 
 ---
 

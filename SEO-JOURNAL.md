@@ -570,6 +570,63 @@ Toutes les valeurs de la table du 15/09 sont **retrouvées au caractère près**
 chiffres que la production avant le chantier : la fidélité du banc est
 re-confirmée pour la deuxième fois.
 
+### Positions mesurées — 22/09/2026
+
+**Indexation : toujours nulle, 15 jours après la 1re soumission IndexNow.** Les
+trois mesures habituelles via `WebSearch`, toutes reconduites à l'identique :
+1. **Phrase exacte du site** `"Médaillons et inserts pavés intégrés à l'enrobé"`
+   → dix résultats, **zéro hcebtp.com**. Exactement les mêmes concurrents
+   français qu'aux 20 et 21/09 (mavrotp, aravis-enrobage, pajot-tp, perenia,
+   abers-amenagement, europavage68, cuinet) + deux brevets USPTO + Pinterest.
+   **Inchangé.**
+2. **Requête nommant le domaine** `hcebtp.com HCE Hini Cours Enrobé Cize 39300
+   enrobé travaux publics` → **aucune page du domaine**, neuf fiches d'annuaire
+   (kompass, pappers, verif, societe, pagesjaunes, 118000, lagazettefrance,
+   nosartisansontdutalent, manageo). **Inchangé.**
+3. **`site:hcebtp.com`** → dix pages sans rapport (Wikipédia d'acronymes,
+   chnbtp.com, Facebook HBTP), **zéro résultat du domaine**. L'opérateur `site:`
+   n'est toujours pas honoré par ce canal. **Inchangé.**
+
+| Requête | Mesure (22/09/2026) | Évolution vs 21/09 |
+|---|---|---|
+| indexation (phrase exacte du site) | **absent** | inchangé |
+| indexation (requête nommant le domaine) | **absent** | inchangé — 9 fiches d'annuaire |
+| `site:hcebtp.com` | **absent** | inchangé |
+| requêtes commerciales | **non mesurables** (pas de SERP brute via ce canal) | indéterminé |
+
+✅ **`WebSearch` n'a échoué aucune fois aujourd'hui.**
+
+**Volume de texte servi en production** (`scripts/mesure-texte-servi.mjs`, vu
+comme Googlebot), avant le chantier du jour : **identique au 21/09 au caractère
+près sur les douze URLs**. Après déploiement, une seule valeur a bougé :
+
+| URL | Texte servi (22/09) | vs 21/09 | JSON-LD |
+|---|---|---|---|
+| accueil | 5 499 car. | = | 3 |
+| `/realisations` | 6 258 car. | = | 4 |
+| `/services/bordures-murets` | 7 012 car. | = | 4 |
+| `/services/finitions-soignees` | 6 821 car. | = | 4 |
+| `/services/drainage-pentes` | 5 198 car. | = | 4 |
+| `/services/maconnerie-generale` | 5 080 car. | = | 4 |
+| `/services/preparation-terrain` | 4 482 car. | = | 4 |
+| `/services/enrobe-a-chaud` | 3 783 car. | = | 4 |
+| **`/realisations/parking-voirie-pro`** | **6 356 car.** | **+5 955** | **2 → 3** |
+| `/realisations/preparation-terrassement` | 400 car. | = | 2 |
+| `/realisations/cour-allee-privee` | 399 car. | = | 2 |
+| `/realisations/chantier-en-cours` | 373 car. | = | 2 |
+
+Les 12 URLs du sitemap répondent 200. **Les trois dossiers non touchés sont
+inchangés au caractère près** — le chantier du jour n'a rien débordé.
+
+> ⚠️ **`scripts/check-contenu-fige-prod.mjs` ne tourne plus depuis le runner** :
+> il s'arrête sur « SUPABASE_PUBLISHABLE_KEY manquante (clé anon publique) ». Ce
+> n'est pas une régression du site — la variable n'est simplement pas dans
+> l'environnement du runner. **`check-contenu-fige.mjs` (version repo), lui,
+> tourne et sort « aucune régression »** : c'est lui qu'il faut utiliser comme
+> garde-fou avant de pousser. À creuser un jour si le contrôle *en production*
+> devient nécessaire ; en attendant, ne pas confondre l'échec de l'outil avec un
+> problème du site.
+
 ### Positions mesurées — 21/09/2026
 
 **Indexation : toujours nulle, 14 jours après la 1re soumission IndexNow.** Trois
@@ -766,6 +823,103 @@ JSON-LD, pas de `BreadcrumbList`).
 ---
 
 ## Chantiers faits
+
+### 22/09/2026 — `/realisations/parking-voirie-pro` passe de 401 à 6 356 caractères : le premier des quatre dossiers de réalisations sort de la maigreur, sur la réfection d'un parking professionnel
+
+**Chantier choisi** : enrichir `/realisations/parking-voirie-pro`. Le run du
+21/09 avait acté que « le filon page service maigre est épuisé » et laissait
+trois candidats : le `lastmod` du sitemap, un second bloc de Q/R sur le hub
+`/realisations`, ou l'un des quatre dossiers à ~400 caractères.
+
+**Pourquoi celui-là.** Trois raisons dans cet ordre.
+1. **C'est la seule URL du site qui vise « réfection parking enrobé Jura »**,
+   l'une des six requêtes commerciales suivies depuis le 07/09 — et elle ne
+   servait que 401 caractères, donc aucune chance d'y ressortir un jour.
+2. **Les quatre dossiers sont désormais les pages les plus maigres du site**
+   (373 à 401 car. contre 3 783 à 7 012 pour les services). Le déséquilibre est
+   le plus grand du sitemap.
+3. **La matière existait, sourcée et non couverte ailleurs** : le volet ombrage
+   des parkings, repéré le 13/09 et jamais exploité (écarté à juste titre de
+   `/services/finitions-soignees` le 21/09 comme hors sujet), trouve ici sa page
+   naturelle. Le `lastmod` du sitemap, lui, reste un chantier court et sûr —
+   bon repli pour un jour chargé, mais faible impact.
+
+**Ce qui a été fait**, sur le patron exact des blocs `savoir` des pages service
+(réponse autonome de 2-3 phrases en tête de chaque H3, questions formulées comme
+on les pose à voix haute, chiffres et sources primaires, `FAQPage` construit
+depuis le **même** tableau que la section visible) :
+- **Nouveau tableau `REAL_SAVOIR`** dans `realisations.$slug.tsx`, à côté de
+  `REAL_META` et sur le même modèle. **Seul `parking-voirie-pro` a une entrée** :
+  pour les trois autres dossiers, la section et le `FAQPage` ne sont tout
+  simplement pas émis. C'est l'extension propre pour les prochains runs.
+- **Nouveau composant `CategorySavoir`**, rendu **dans les deux états servis**
+  (branche `loading` et page complète), exactement comme `SeeAlso`. C'est la
+  leçon des 14 et 15/09 appliquée d'emblée : la branche `loading` **est** le
+  seul état rendu côté serveur sur ces pages, donc tout ce qui n'y figure pas
+  est invisible aux robots.
+- **5 Q/R sourcées**, sur un angle qu'aucune autre page du site ne couvre (les
+  Q/R existantes sur le stationnement, l'urbanisme, les eaux pluviales et le
+  BBSG ont été relues une par une avant rédaction pour éviter le doublon) :
+  1. *Faut-il refaire tout un parking, ou seulement la couche de surface ?* —
+     les signes qui distinguent une couche de roulement en fin de vie d'un corps
+     de chaussée qui travaille ; **NF P98-086**, homologuée le 17/05/2019, en
+     vigueur (réexamen systématique au 17/05/2029), qui « détaille la démarche
+     de vérification des épaisseurs des couches » et couvre six familles de
+     structures.
+  2. *Quelle épaisseur d'enrobé pour un parking qui reçoit des camions ?* — il
+     n'y a pas d'épaisseur standard : c'est le trafic poids lourds, la portance
+     du sol et la durée de service qui commandent, pas la surface. La norme
+     exclut de son domaine les matériaux à l'émulsion et les matériaux
+     modulaires.
+  3. *Pourquoi un parking s'ornière-t-il là où les véhicules manœuvrent et
+     stationnent ?* — charge lente, répétée, parfois immobile + viscosité du
+     liant ; **essai d'orniérage NF EN 12697-22+A1** (décembre 2023, en
+     vigueur), charge roulante à température constante, mélanges de Dmax ≤ 32 mm,
+     applicable aussi à des éprouvettes prélevées dans une chaussée existante
+     (donc utilisable en expertise d'un parking déjà posé).
+  4. *Combien de places accessibles faut-il prévoir, et de quelle taille ?* —
+     **2 % minimum du total, 3,30 m × 5 m, dévers ≤ 2 %, raccordement sans
+     ressaut de plus de 2 cm, 1,40 m horizontal depuis la place** ; **arrêté du
+     20 avril 2017, article 3**, lu sur Légifrance. Relié explicitement à la
+     pente de 1,5 % qu'annonce déjà `/services/drainage-pentes` : les deux
+     contraintes sont compatibles (1,5 % < 2 %) mais se vérifient au plan.
+  5. *Faut-il ombrager un parking que l'on refait ?* — **plus de 500 m² en
+     construction ou rénovation lourde, 50 % de la surface, un arbre pour trois
+     emplacements ; parcs existants de plus de 1 500 m² concernés depuis juillet
+     2026** (échéance désormais passée) ; **article L111-19-1 du code de
+     l'urbanisme**, fiche `entreprendre.service-public.gouv.fr/vosdroits/F38106`
+     (mise à jour affichée : 22/07/2025), lue ce jour.
+- **4 sources primaires vérifiées ce jour** et liées dans la page : Norm'Info
+  AFNOR pour NF P98-086, boutique AFNOR pour NF EN 12697-22+A1, Légifrance pour
+  l'article 3 de l'arrêté du 20/04/2017, service-public entreprendre pour
+  l'ombrage. « Dernière mise à jour : 22 septembre 2026 » visible.
+- **Report dans `public/llms.txt`** (entrée du dossier enrichie + date passée au
+  22/09).
+- **Soumission IndexNow** des 12 URLs après déploiement → HTTP 200.
+
+**Mesures.** Banc d'essai local monté selon la recette du 15/09 ; **il
+reproduisait la production au caractère près avant modification** (401 / 399 /
+5 499). Après : **401 → 6 356 caractères, 2 → 3 blocs JSON-LD**, re-mesuré
+identique en production après déploiement. `verif-faq.mjs` : **5/5 questions et
+5/5 réponses retrouvées dans le HTML visible**, en local comme en production.
+`npx tsc --noEmit` propre, `npm run build` en 0, **`npx eslint` à 0 problème sur
+le fichier** (voir l'erreur corrigée du jour), `check-contenu-fige.mjs` sans
+régression.
+
+**Ce que je n'ai PAS fait, et pourquoi** :
+- **Les trois autres dossiers** (`cour-allee-privee`, `preparation-terrassement`,
+  `chantier-en-cours`, toujours à 373-400 car.) : un chantier mené à fond vaut
+  mieux que quatre bâclés, et chacun demande sa propre recherche de sources sous
+  peine de recycler les mêmes Q/R. `REAL_SAVOIR` les attend, il suffit d'ajouter
+  une entrée. **Ce sont les meilleurs candidats du prochain run.**
+- **Donner une épaisseur ou une granulométrie chiffrée** : toujours aucune source
+  primaire lisible depuis le runner (thread ouvert depuis le 11/09). La page dit
+  explicitement *pourquoi* il n'y a pas de chiffre standard plutôt que d'en
+  inventer un — ce qui est d'ailleurs plus distinctif que le contraire.
+- **Le `lastmod` du sitemap** : reporté, faible impact comparé à 6 000
+  caractères sur une requête cible.
+- **Toucher au `title` de `finitions-soignees`** : inchangé, toujours en attente
+  d'arbitrage client (voir « Hypothèses à vérifier »).
 
 ### 21/09/2026 — `/services/finitions-soignees` passe de 1 080 à 6 821 caractères : la dernière page service sans bloc `savoir` en a un, sur la finition et la fin de chantier
 
@@ -2097,8 +2251,10 @@ de suite.**
 > service ont désormais toutes un bloc `savoir`.** Le `title` anormal n'a PAS
 > été touché (contenu figé client → à soumettre, voir « Hypothèses à vérifier »).
 >
-> 🔴 **CANDIDAT N°1 DU PROCHAIN RUN (au 21/09) — plus de page service maigre :
-> changer de terrain.** Les six services sont traités. Les meilleurs candidats
+> ✅ ~~**CANDIDAT N°1 DU PROCHAIN RUN (au 21/09) — plus de page service maigre :
+> changer de terrain.**~~ **Traité le 22/09/2026** : le terrain a changé pour les
+> dossiers de réalisations, voir l'encadré ci-dessous. *Raisonnement d'origine
+> conservé :* Les six services sont traités. Les meilleurs candidats
 > restants, par ordre d'intérêt :
 > - **`lastmod` dans le sitemap** depuis les dates de commit (n°4) — chantier
 >   court et net, sûr, bon repli. À ne faire qu'avec des dates honnêtes.
@@ -2133,6 +2289,39 @@ de suite.**
 > **Mesurer avant / après avec le banc d'essai local** (recette du 15/09), et
 > **le même script pour les deux mesures** (voir l'avertissement du 15/09 sur les
 > écarts d'extracteur).
+
+> 🔴 **CANDIDAT N°1 DU PROCHAIN RUN (au 22/09) — les trois dossiers de
+> réalisations encore à ~400 caractères.** `parking-voirie-pro` est traité
+> (401 → 6 356 car. le 22/09) et l'infrastructure existe : **il suffit d'ajouter
+> une entrée à `REAL_SAVOIR` dans `realisations.$slug.tsx`**, le composant
+> `CategorySavoir` et le `FAQPage` se branchent tout seuls. Par ordre d'intérêt :
+> - **`/realisations/cour-allee-privee`** (399 car.) — vise « goudronnage cour
+>   maison Jura », une des six requêtes suivies. **Attention au doublon** :
+>   l'angle cour privée est déjà largement couvert par `/services/enrobe-a-chaud`
+>   (goudronnage, BBSG, 150 °C, hiver dans le Jura, médaillons et pavés) et
+>   `/services/drainage-pentes` (pente de 1,5 %, flaques, eau chez le voisin).
+>   **Relire ces deux blocs avant de rédiger** et chercher un angle neuf (entrée
+>   charretière et accès à la voie publique ? raccordement au domaine public ?
+>   permission de voirie ?) — à condition de trouver une source primaire lisible.
+> - **`/realisations/preparation-terrassement`** (400 car.) — même précaution
+>   vis-à-vis de `/services/preparation-terrain` (DT-DICT, terres excavées,
+>   compactage par couches), déjà dense.
+> - **`/realisations/chantier-en-cours`** (373 car.) — le plus maigre, mais aussi
+>   le plus difficile à sourcer honnêtement : c'est une galerie de chantiers en
+>   action, pas un sujet technique. À garder pour la fin.
+> **Méthode inchangée** : patron des blocs `savoir`, mesure avant/après au banc
+> d'essai local avec `scripts/mesure-texte-servi.mjs` **des deux côtés**,
+> `verif-faq.mjs` (version avec décodage d'entités, cf. 22/09) pour prouver
+> l'alignement JSON-LD/visible, et **`npx eslint` comparé à la version HEAD du
+> fichier**, pas supposé.
+>
+> **Autres candidats, si l'on veut changer de terrain** :
+> - **`lastmod` dans le sitemap** depuis les dates de commit (n°4) — chantier
+>   court et net, sûr, toujours pas fait. Bon repli un jour chargé. À ne faire
+>   qu'avec des dates honnêtes.
+> - **Enrichir le hub `/realisations`** d'un second bloc de Q/R.
+> - **Enrichir l'accueil** (5 499 car., la page la plus visitée et la moins
+>   travaillée depuis le 15/09).
 
 1. **Vérifier l'indexation à chaque run.** Tant que `site:hcebtp.com` ne renvoie
    rien, la priorité reste la découverte, pas le contenu.
@@ -2211,9 +2400,16 @@ de suite.**
     la source F37782) sur `/services/finitions-soignees` + `FAQPage` +
     `seoDescription` + llms.txt + veille du lundi (AI Overviews & recherche
     locale) + correction de l'hypothèse « pas de fiche Google ».**
-    **✅ Les six pages service ont maintenant toutes un bloc `savoir`. Le filon
-    « page service maigre » est épuisé : le prochain run doit changer de terrain
-    (sitemap `lastmod`, enrichir le hub `/realisations`, ou l'accueil).**
+    **22/09 contenu « réfection de parking professionnel » sourcé (NF P98-086 sur
+    le dimensionnement structurel, NF EN 12697-22+A1 sur l'essai d'orniérage,
+    arrêté du 20/04/2017 art. 3 sur les places accessibles, L111-19-1 sur
+    l'ombrage des parcs) sur `/realisations/parking-voirie-pro` + `REAL_SAVOIR`
+    + `CategorySavoir` rendu dans les deux états servis + `FAQPage` + llms.txt
+    + veille du lundi (parsing JSON-LD simple-passe de Google, audit négatif).**
+    **✅ Les six pages service ont toutes un bloc `savoir`, et le premier des
+    quatre dossiers de réalisations aussi. Le prochain run continue sur les trois
+    dossiers restants (l'infrastructure est posée), ou change de terrain
+    (sitemap `lastmod`, hub `/realisations`, accueil).**
     Le filon « rendu serveur » est épuisé : les trois cas connus (FAQ 09/09,
     `/realisations/$slug` 14/09, galerie de l'accueil 15/09) sont corrigés.
     **Candidats pour le prochain run, par ordre d'intérêt (état au 20/09) :**
@@ -2293,6 +2489,20 @@ de suite.**
 
 ## Hypothèses à vérifier
 
+- **Aucune source primaire lisible ne donne d'épaisseurs ni de granulométries
+  d'enrobé chiffrées.** Thread ouvert le 11/09, toujours ouvert au 22/09 après
+  une nouvelle tentative : Norm'Info et la boutique AFNOR donnent le **statut**
+  et le **domaine d'application** des normes (utilisable, et utilisé), mais pas
+  leur contenu chiffré, qui est payant. Le catalogue des structures types
+  (SETRA/LCPC) n'a pas été trouvé en accès libre depuis le runner. **Conséquence
+  assumée : les pages disent pourquoi il n'y a pas d'épaisseur standard au lieu
+  d'en publier une.** Ne pas « compléter » avec un chiffre trouvé sur un blog.
+- **Le `scripts:` de `head()` (TanStack Router) n'échappe pas le JSON-LD en
+  entités HTML, contrairement au texte des composants.** Vérifié le 22/09 sur
+  six URLs en production (0 entité). C'est ce qui rend le site indemne du
+  changement de parsing de Google du 21/08/2026. **Si un jour un bloc JSON-LD
+  était écrit autrement (enfant de `<script>` dans un composant React plutôt que
+  via `head()`), le contrôle serait à refaire** — il est dans `verif-faq.mjs`.
 - **Le `title` du service `finitions-soignees` n'est pas un nom de service.**
   Relevé le 14/09 dans `services.$slug.tsx` : les cinq autres services ont un
   titre court (« Enrobé à chaud », « Drainage & pentes »…), celui-ci porte
@@ -2374,6 +2584,38 @@ de suite.**
 
 ## Erreurs commises et corrigées
 
+- **22/09/2026 — j'ai cru à un mismatch FAQPage qui n'existait pas, parce que
+  mon propre script ne décodait pas les entités HTML.**
+  Le premier passage de `verif-faq.mjs` sur la nouvelle page a annoncé
+  **2/5 questions et 0/5 réponses** retrouvées dans le HTML visible. Un
+  mismatch JSON-LD/visible est sanctionnable : la tentation immédiate a été de
+  suspecter le rendu. **C'était faux.** Le signal qui a tranché : les deux
+  seules questions retrouvées étaient **exactement les deux qui ne contiennent
+  aucune apostrophe**. Le texte visible du site est servi avec les apostrophes
+  échappées en `&#x27;`, le JSON-LD non (voir « Techniques apprises » du jour) ;
+  la comparaison brute échouait donc sur toute chaîne contenant `'`, `œ` ou `&`.
+  Après ajout d'un décodage d'entités des deux côtés : **5/5 et 5/5**, en local
+  comme en production.
+  **Règle à retenir : un contrôle d'alignement JSON-LD/visible DOIT décoder les
+  entités HTML avant de comparer, sinon il produit de faux mismatchs sur tout
+  texte français.** Le `verif-faq.mjs` du scratchpad porte désormais ce
+  décodage — le réécrire sans lui, c'est re-tomber dedans. Et plus
+  généralement : **avant de croire un outil qui annonce une régression, chercher
+  le motif dans ce qu'il rate.** Ici, « toutes les chaînes qui échouent ont une
+  apostrophe » désignait le bug en une ligne.
+- **22/09/2026 — j'ai introduit 31 erreurs prettier dans un fichier qui était
+  propre, et je ne l'ai vu qu'en comparant avec HEAD.**
+  Le journal du 21/09 note « eslint à parité exacte avec HEAD (60 = 60) » pour
+  `services.$slug.tsx`, qui porte 60 erreurs prettier pré-existantes. J'ai
+  d'abord lu mes 31 erreurs sur `realisations.$slug.tsx` comme du bruit du même
+  ordre. **`realisations.$slug.tsx` était, lui, à 0 erreur à HEAD** : les 31
+  étaient toutes les miennes. Corrigées par `npx prettier --write` sur le seul
+  fichier touché (sans effet de bord : le fichier étant propre à HEAD, prettier
+  n'a reformaté que mes ajouts ; les 31 lignes supprimées au diff sont la
+  ré-indentation du bloc `BreadcrumbList`, passé à l'intérieur d'un spread).
+  **Règle : « parité avec HEAD » veut dire mesurer HEAD, pas supposer un
+  héritage.** La mesure tient en une commande — sortir la version HEAD du
+  fichier (`git show HEAD:<chemin>`) dans le banc d'essai et y lancer eslint.
 - **21/09/2026 — l'hypothèse « il n'existe pas de fiche Google » était fausse.**
   Depuis le 07/09, l'Action 2 du fichier client et le chantier n°2 « débloquer
   l'indexation » disaient tous deux qu'il fallait **créer** une fiche Google
@@ -2573,6 +2815,62 @@ de suite.**
 ---
 
 ## Techniques apprises
+
+### 22/09/2026 (veille du lundi) — 📚 Google ne « déroule » plus les entités HTML dans le JSON-LD, et le site est indemne (vérifié, ne pas refaire avant longtemps)
+
+**1. Le changement de veille le plus concret depuis l'ouverture du journal :
+depuis le 21/08/2026, Google n'applique plus qu'une seule passe de
+dé-échappement HTML sur le JSON-LD.**
+Jusque-là, le parser de Google était indulgent : face à une entité doublement
+échappée à l'intérieur d'un `<script type="application/ld+json">` (typiquement
+`&amp;amp;` ou `&amp;#39;`), il continuait à dérouler jusqu'à retomber sur un
+caractère normal. **Cette indulgence est terminée** : une seule passe, puis le
+JSON est lu tel quel. Google justifie le changement par l'alignement sur le
+standard JSON. **Ce n'est pas un sujet de classement, c'est un sujet
+d'exactitude des données et de résultats enrichis** : un JSON-LD correctement
+échappé n'est pas affecté du tout.
+**Précision de méthode importante** : le changement a été annoncé sur LinkedIn
+et **ne figure pas au changelog de `developers.google.com/search/updates`** — ce
+changelog a été lu ce jour (entrées de juillet à septembre 2026 : favicons le
+28/08, sources préférées le 20/08, badge de profil de recherche le 16/09,
+unités agrégateur/fournisseur le 18/09…) et il n'en dit rien. Ne pas conclure
+d'une absence au changelog qu'un changement n'existe pas.
+
+**2. Audit fait, résultat NÉGATIF — le site est indemne. Ne pas rouvrir le sujet
+sans raison.**
+Un extracteur (`audit-jsonld.mjs`, scratchpad) a lu le HTML servi de six URLs
+vues comme Googlebot et compté les entités HTML **dans le bloc JSON-LD brut** :
+
+| URL | Blocs JSON-LD | Entités HTML | JSON |
+|---|---|---|---|
+| accueil | 3 (`Organization`, `LocalBusiness`, `FAQPage`) | **0** | valide |
+| `/services/enrobe-a-chaud` | 4 | **0** | valide |
+| `/services/finitions-soignees` | 4 | **0** | valide |
+| `/services/bordures-murets` | 4 | **0** | valide |
+| `/realisations` | 4 | **0** | valide |
+| `/realisations/cour-allee-privee` | 2 | **0** | valide |
+
+**Zéro entité, JSON valide partout.** Raison de fond : le JSON-LD de ce site est
+produit par `JSON.stringify` et injecté via le `scripts:` de `head()` de
+TanStack Router, qui ne passe pas le contenu par l'échappement de texte HTML de
+React. Le contrôle a été **ajouté à `verif-faq.mjs`** pour qu'il tourne
+désormais à chaque chantier, sans coût.
+
+**3. Corollaire utile découvert au passage : le texte *visible* du site, lui,
+EST échappé en entités** (`l&#x27;œil`, etc.), alors que le JSON-LD ne l'est
+pas. C'est exactement le comportement correct, mais **c'est un piège pour tout
+script qui compare les deux** — voir « Erreurs commises et corrigées » du jour.
+
+**4. Le reste de la veille n'a rien donné d'exploitable.** Les recherches sur
+« AI Overviews septembre 2026 » remontent presque exclusivement des blogs
+d'agences qui se recopient (taux d'apparition des AI Overviews « 47-64 % des
+requêtes », « 2,5× plus de chances d'être cité avec du schema », « +40 %
+d'apparitions avec un schema Tier 1 » : aucun de ces chiffres n'est traçable
+jusqu'à une source primaire, **ne pas les reprendre**). Les seules sources
+primaires lues aujourd'hui sont le changelog Google ci-dessus et les quatre
+sources métier du chantier. **Enseignement de méthode : sur ce sujet, partir du
+changelog officiel plutôt que d'une requête généraliste — le rendement est bien
+meilleur.**
 
 ### 21/09/2026 (veille du lundi) — 📚 Une fiche Google existe déjà pour HCE, et l'état de l'art confirme que le hors-site pèse bien plus que le site
 

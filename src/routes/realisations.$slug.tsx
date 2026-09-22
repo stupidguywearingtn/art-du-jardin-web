@@ -54,6 +54,81 @@ const REAL_META: Record<string, { title: string; description: string }> = {
 };
 
 /**
+ * Bloc « ce qu'il faut savoir » par dossier de réalisations, sur le patron des
+ * pages service : question posée telle qu'on la pose à voix haute, réponse
+ * autonome de 2-3 phrases en tête, chiffres et sources primaires ensuite.
+ *
+ * Pourquoi ici : au 22/09/2026 les quatre `/realisations/$slug` ne servaient
+ * que 373 à 401 caractères de texte — un titre, une description d'une ligne et
+ * du maillage. Ce sont les pages les plus maigres du site depuis que les six
+ * services ont été traités, et `parking-voirie-pro` est la seule URL qui vise
+ * la requête « réfection parking enrobé Jura ».
+ *
+ * Le même tableau alimente la section visible ET le JSON-LD FAQPage de la
+ * page : aucun mismatch possible. Les trois autres dossiers n'ont pas encore
+ * d'entrée — la section et le FAQPage ne sont alors tout simplement pas émis.
+ */
+const REAL_SAVOIR: Record<
+  string,
+  {
+    heading: string;
+    lead: string;
+    updated: string;
+    updatedLabel: string;
+    qa: { q: string; a: string }[];
+    sources: { label: string; url: string }[];
+  }
+> = {
+  "parking-voirie-pro": {
+    heading: "Refaire un parking professionnel : ce qui se décide avant la première tonne d'enrobé",
+    lead: "Un parking d'entreprise ne se traite pas comme une cour de maison : ce sont le trafic poids lourds, l'accessibilité des places et, depuis 2023, l'ombrage qui commandent le projet — pas la surface à couvrir. Voici cinq questions qui se posent avant un chantier de réfection, avec les textes qui s'appliquent.",
+    updated: "2026-09-22",
+    updatedLabel: "22 septembre 2026",
+    qa: [
+      {
+        q: "Faut-il refaire tout un parking, ou seulement la couche de surface ?",
+        a: "Cela dépend de ce qui est abîmé, et la différence se voit à l'œil. Si le revêtement est fissuré, désenrobé ou terni mais que la surface reste plane, c'est la couche de roulement qui est en fin de vie et elle peut se renouveler seule. Si l'on voit des affaissements, des ornières profondes, des faïençages en mailles serrées ou des nids-de-poule qui reviennent toujours au même endroit, c'est le corps de chaussée qui travaille en dessous : un tapis neuf posé par-dessus reproduira le même défaut en une à deux saisons. Ce second cas relève d'un calcul de structure, pas d'un choix d'épaisseur au jugé : la norme française NF P98-086, homologuée le 17 mai 2019 et toujours en vigueur (réexamen systématique prévu au 17 mai 2029), « détaille la démarche de vérification des épaisseurs des couches » et couvre six familles de structures de chaussée — souple, bitumineuse, semi-rigide, mixte, inverse et en béton. Seule une visite sur place permet de trancher entre les deux : c'est l'objet du devis détaillé établi après visite.",
+      },
+      {
+        q: "Quelle épaisseur d'enrobé faut-il pour un parking qui reçoit des camions ?",
+        a: "Il n'existe pas d'épaisseur standard : elle se déduit du trafic poids lourds attendu, de la portance du sol en place et de la durée de service visée : c'est exactement l'objet de la norme NF P98-086, dont le domaine d'application vise les chaussées neuves « ouvertes au trafic poids lourds ». Conséquence concrète pour un maître d'ouvrage : à surface égale, un parking de bureaux où ne circulent que des véhicules légers et une aire où manœuvrent des semi-remorques ne se dimensionnent pas de la même façon — c'est le nombre et le poids des poids lourds qui commande, pas le nombre de mètres carrés. À noter que cette norme exclut de son domaine les matériaux à l'émulsion et les matériaux modulaires : les pavés et les dalles d'une zone piétonne adjacente relèvent d'autres règles.",
+      },
+      {
+        q: "Pourquoi un parking s'ornière-t-il là où les véhicules manœuvrent et stationnent ?",
+        a: "Parce qu'à ces endroits la charge est lente, répétée et parfois complètement immobile, et que le bitume est un liant visqueux : plus la charge dure longtemps et plus il fait chaud, plus le matériau flue. Les ornières apparaissent donc en priorité dans les allées de manœuvre, devant les quais et sur les emplacements où stationnent les véhicules lourds — rarement au milieu des zones parcourues vite. Cette sensibilité se mesure en laboratoire avant même la pose : l'essai d'orniérage normalisé NF EN 12697-22+A1 (décembre 2023, en vigueur) fait passer une charge roulante à température constante sur une éprouvette et mesure la profondeur d'ornière obtenue. Il s'applique aux mélanges bitumineux dont la plus grande dimension granulaire est inférieure ou égale à 32 mm, et il peut être conduit aussi bien sur des éprouvettes fabriquées en laboratoire que sur des éprouvettes prélevées dans une chaussée existante — c'est donc aussi un outil d'expertise pour un parking déjà posé qui se déforme.",
+      },
+      {
+        q: "Combien de places accessibles faut-il prévoir sur un parking, et de quelle taille ?",
+        a: "Les places adaptées destinées à l'usage du public représentent au minimum 2 % du nombre total de places prévues pour le public, avec une largeur minimale de 3,30 m et une longueur minimale de 5 m. La place doit former un espace horizontal au dévers près, inférieur ou égal à 2 %, et se raccorder sans ressaut de plus de 2 cm au cheminement d'accès à l'entrée du bâtiment ou à l'ascenseur, ce cheminement restant horizontal au dévers près sur au moins 1,40 m depuis la place. Ces valeurs sont celles de l'article 3 de l'arrêté du 20 avril 2017, qui vise les établissements recevant du public lors de leur construction et les installations ouvertes au public lors de leur aménagement. Elles ont une conséquence directe sur le calepinage : une place adaptée est sensiblement plus large qu'une place courante, et son dévers maximal de 2 % doit se concilier avec la pente d'évacuation de l'eau — la pente minimale de 1,5 % qu'HCE applique vers les exutoires reste sous ce plafond, mais les deux contraintes se vérifient au plan, avant le terrassement, pas au moment de la pose.",
+      },
+      {
+        q: "Faut-il ombrager un parking que l'on refait ?",
+        a: "Oui, au-delà d'un seuil de surface, et c'est devenu l'un des premiers points à trancher. Les parcs de stationnement extérieurs de plus de 500 m² faisant l'objet d'une construction ou d'une rénovation lourde doivent comporter des dispositifs d'ombrage — arbres à canopée large ou ombrières — sur au moins 50 % de leur surface, au titre de l'article L111-19-1 du code de l'urbanisme ; pour la solution arborée, le ratio retenu est d'un arbre pour trois emplacements de stationnement. Les parcs déjà existants de plus de 1 500 m² sont concernés à partir de juillet 2026, échéance désormais passée. Des exemptions sont prévues, notamment en cas d'impossibilité technique, de contraintes de sécurité ou de contraintes patrimoniales. Ce volet ne relève pas de la pose d'enrobé elle-même, mais il change l'emprise, le calepinage et parfois les fondations du parking : il vaut mieux l'avoir tranché avant le décaissement qu'après la pose.",
+      },
+    ],
+    sources: [
+      {
+        label: "NF P98-086 — dimensionnement structurel des chaussées neuves (AFNOR Norm'Info)",
+        url: "https://norminfo.afnor.org/norme/nf-p98-086/dimensionnement-structurel-des-chaussees-routieres-application-aux-chaussees-neuves/121315",
+      },
+      {
+        label: "NF EN 12697-22+A1 — essai d'orniérage des mélanges bitumineux (AFNOR)",
+        url: "https://www.boutique.afnor.org/en-gb/standard/nf-en-1269722-a1/bituminous-mixtures-test-methods-part-22-wheel-tracking/fa208593/366516",
+      },
+      {
+        label: "Arrêté du 20 avril 2017, article 3 — places de stationnement adaptées (Légifrance)",
+        url: "https://www.legifrance.gouv.fr/jorf/article_jo/JORFARTI000034485468",
+      },
+      {
+        label:
+          "Ombrage des parcs de stationnement extérieurs (entreprendre.service-public.gouv.fr)",
+        url: "https://entreprendre.service-public.gouv.fr/vosdroits/F38106",
+      },
+    ],
+  },
+};
+
+/**
  * Les autres dossiers de réalisations, pour le bloc « Voir aussi », et les
  * services correspondants, viennent tous deux de `@/lib/realisations` :
  * le hub `/realisations` (créé le 20/09/2026) lit exactement les mêmes
@@ -151,6 +226,75 @@ function SeeAlso({ slug }: { slug: string }) {
   );
 }
 
+/**
+ * Section « Ce qu'il faut savoir » du dossier, si le slug en a une.
+ * Rendue dans l'état de chargement **et** dans la page complète, exactement
+ * comme `SeeAlso` : c'est ce texte que reprend le JSON-LD FAQPage émis par
+ * `head()`, et servir aux robots un contenu que le visiteur ne verrait pas
+ * serait du cloaking. Contenu toujours monté, jamais replié.
+ */
+function CategorySavoir({ slug }: { slug: string }) {
+  const savoir = REAL_SAVOIR[slug];
+  if (!savoir) return null;
+  return (
+    <section className="relative w-full bg-background px-6 md:px-12 py-16 md:py-24 border-t border-gold/15">
+      <div className="max-w-4xl mx-auto">
+        <div className="label text-gold">— Ce qu'il faut savoir</div>
+        <h2
+          className="font-display mt-6 text-foreground"
+          style={{ fontSize: "clamp(28px, 4.4vw, 48px)", fontWeight: 400, lineHeight: 1.1 }}
+        >
+          {savoir.heading}
+        </h2>
+        <p className="mt-6 text-muted max-w-3xl" style={{ fontSize: 17, lineHeight: 1.7 }}>
+          {savoir.lead}
+        </p>
+
+        <div className="mt-14 space-y-12">
+          {savoir.qa.map((f) => (
+            <article key={f.q}>
+              <h3
+                className="font-display text-gold"
+                style={{ fontSize: "clamp(21px, 2.4vw, 28px)", fontWeight: 400, lineHeight: 1.25 }}
+              >
+                {f.q}
+              </h3>
+              <p className="mt-4 text-foreground/90" style={{ fontSize: 17, lineHeight: 1.75 }}>
+                {f.a}
+              </p>
+            </article>
+          ))}
+        </div>
+
+        <div
+          className="mt-16 border-t border-gold/15 pt-6 text-muted"
+          style={{ fontSize: 14, lineHeight: 1.7 }}
+        >
+          <p>
+            Dernière mise à jour : <time dateTime={savoir.updated}>{savoir.updatedLabel}</time>
+          </p>
+          <p className="mt-2">
+            Sources :{" "}
+            {savoir.sources.map((s, i) => (
+              <span key={s.url}>
+                {i > 0 && " · "}
+                <a
+                  href={s.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="underline decoration-gold/40 underline-offset-2 hover:text-gold"
+                >
+                  {s.label}
+                </a>
+              </span>
+            ))}
+          </p>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 export const Route = createFileRoute("/realisations/$slug")({
   component: RealisationsRoute,
   head: ({ params }) => {
@@ -175,37 +319,59 @@ export const Route = createFileRoute("/realisations/$slug")({
          jusque-là, d'où les deux niveaux précédents). Émis pour les seules
          catégories connues : baliser un slug quelconque reviendrait à décrire
          une page qui finira sur l'écran « Catégorie introuvable ». */
-      scripts: cat
-        ? [
-            {
-              type: "application/ld+json",
-              children: JSON.stringify({
-                "@context": "https://schema.org",
-                "@type": "BreadcrumbList",
-                itemListElement: [
-                  {
-                    "@type": "ListItem",
-                    position: 1,
-                    name: "Accueil",
-                    item: "https://www.hcebtp.com/",
-                  },
-                  {
-                    "@type": "ListItem",
-                    position: 2,
-                    name: "Réalisations",
-                    item: "https://www.hcebtp.com/realisations",
-                  },
-                  {
-                    "@type": "ListItem",
-                    position: 3,
-                    name: cat.title,
-                    item: `https://www.hcebtp.com/realisations/${params.slug}`,
-                  },
-                ],
-              }),
-            },
-          ]
-        : [],
+      scripts: [
+        ...(cat
+          ? [
+              {
+                type: "application/ld+json",
+                children: JSON.stringify({
+                  "@context": "https://schema.org",
+                  "@type": "BreadcrumbList",
+                  itemListElement: [
+                    {
+                      "@type": "ListItem",
+                      position: 1,
+                      name: "Accueil",
+                      item: "https://www.hcebtp.com/",
+                    },
+                    {
+                      "@type": "ListItem",
+                      position: 2,
+                      name: "Réalisations",
+                      item: "https://www.hcebtp.com/realisations",
+                    },
+                    {
+                      "@type": "ListItem",
+                      position: 3,
+                      name: cat.title,
+                      item: `https://www.hcebtp.com/realisations/${params.slug}`,
+                    },
+                  ],
+                }),
+              },
+            ]
+          : []),
+        /* FAQPage construit depuis le MÊME tableau que la section visible
+           (`REAL_SAVOIR`), rendue par `CategorySavoir` dans les deux états
+           servis : le JSON-LD ne peut donc pas décrire une FAQ absente de la
+           page. Non émis pour un dossier qui n'a pas encore de bloc. */
+        ...(REAL_SAVOIR[params.slug]
+          ? [
+              {
+                type: "application/ld+json",
+                children: JSON.stringify({
+                  "@context": "https://schema.org",
+                  "@type": "FAQPage",
+                  mainEntity: REAL_SAVOIR[params.slug].qa.map((f) => ({
+                    "@type": "Question",
+                    name: f.q,
+                    acceptedAnswer: { "@type": "Answer", text: f.a },
+                  })),
+                }),
+              },
+            ]
+          : []),
+      ],
     };
   },
 });
@@ -372,6 +538,7 @@ function RealisationsPage() {
           <section className="relative w-full px-4 md:px-12 py-12 md:py-20 bg-background">
             <div className="text-center label text-gold">Chargement des photos…</div>
           </section>
+          <CategorySavoir slug={slug} />
           <SeeAlso slug={slug} />
         </main>
       </>
@@ -612,6 +779,7 @@ function RealisationsPage() {
         </section>
 
         {/* Maillage interne — identique à celui de l'état de chargement */}
+        <CategorySavoir slug={slug} />
         <SeeAlso slug={slug} />
 
         {/* CTA bas */}

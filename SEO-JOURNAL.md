@@ -570,6 +570,64 @@ Toutes les valeurs de la table du 15/09 sont **retrouvées au caractère près**
 chiffres que la production avant le chantier : la fidélité du banc est
 re-confirmée pour la deuxième fois.
 
+### Positions mesurées — 23/09/2026
+
+**Indexation : toujours nulle, 16 jours après la 1re soumission IndexNow.** Les
+trois mesures habituelles via `WebSearch`, reconduites à l'identique :
+1. **Phrase exacte du site** `"Médaillons et inserts pavés intégrés à l'enrobé"`
+   → dix résultats, **zéro hcebtp.com**. Exactement les mêmes concurrents
+   français qu'aux 20, 21 et 22/09 (mavrotp, aravis-enrobage, pajot-tp, perenia,
+   abers-amenagement, europavage68, cuinet) + deux brevets USPTO + Pinterest.
+   **Inchangé.**
+2. **Requête nommant le domaine** `hcebtp.com HCE Hini Cours Enrobé Cize 39300
+   enrobé travaux publics` → **aucune page du domaine**, les mêmes neuf fiches
+   d'annuaire (kompass, pappers, verif, societe, pagesjaunes, 118000,
+   lagazettefrance, nosartisansontdutalent, manageo). **Inchangé.**
+3. **`site:hcebtp.com`** → dix pages sans rapport (Wikipédia d'acronymes,
+   chnbtp.com, h-btp.com, hsabati.com), **zéro résultat du domaine**. L'opérateur
+   `site:` n'est toujours pas honoré par ce canal. **Inchangé.**
+
+| Requête | Mesure (23/09/2026) | Évolution vs 22/09 |
+|---|---|---|
+| indexation (phrase exacte du site) | **absent** | inchangé |
+| indexation (requête nommant le domaine) | **absent** | inchangé — 9 fiches d'annuaire |
+| `site:hcebtp.com` | **absent** | inchangé |
+| requêtes commerciales | **non mesurables** (pas de SERP brute via ce canal) | indéterminé |
+
+✅ **`WebSearch` n'a échoué aucune fois aujourd'hui.**
+
+> 📉 **Constat de fond, seizième jour : l'extrait kompass renvoyé par la
+> recherche du jour affiche encore « 36 Avenue Etienne Lamy », l'ANCIENNE
+> adresse.** C'est cohérent avec ce que le journal sait depuis le 09/09 (36 =
+> ancien siège, avril 2025 → avril 2026). Cela ne tranche toujours PAS le
+> statut de la fiche elle-même — voir le point 13 des chantiers en attente,
+> et la nouvelle tentative de lecture ci-dessous.
+
+**Volume de texte servi en production** (`scripts/mesure-texte-servi.mjs`, vu
+comme Googlebot), **avant** le chantier du jour : identique au 22/09 au
+caractère près sur les douze URLs. **Après** déploiement, une seule valeur a
+bougé :
+
+| URL | Texte servi (23/09) | vs 22/09 | JSON-LD |
+|---|---|---|---|
+| accueil | 5 499 car. | = | 3 |
+| `/realisations` | 6 258 car. | = | 4 |
+| `/services/bordures-murets` | 7 012 car. | = | 4 |
+| `/services/finitions-soignees` | 6 821 car. | = | 4 |
+| `/services/drainage-pentes` | 5 198 car. | = | 4 |
+| `/services/maconnerie-generale` | 5 080 car. | = | 4 |
+| `/services/preparation-terrain` | 4 482 car. | = | 4 |
+| `/services/enrobe-a-chaud` | 3 783 car. | = | 4 |
+| `/realisations/parking-voirie-pro` | 6 356 car. | = | 3 |
+| **`/realisations/cour-allee-privee`** | **7 670 car.** | **+7 271** | **2 → 3** |
+| `/realisations/preparation-terrassement` | 400 car. | = | 2 |
+| `/realisations/chantier-en-cours` | 373 car. | = | 2 |
+
+Les 12 URLs du sitemap répondent 200. **Les onze URLs non touchées sont
+inchangées au caractère près.** `scripts/verif-faq.mjs` (nouveau, versionné ce
+jour) passe en **✓ sur les sept FAQPage du site**, en local comme en production.
+Soumission IndexNow des 12 URLs après déploiement : **HTTP 200**.
+
 ### Positions mesurées — 22/09/2026
 
 **Indexation : toujours nulle, 15 jours après la 1re soumission IndexNow.** Les
@@ -823,6 +881,102 @@ JSON-LD, pas de `BreadcrumbList`).
 ---
 
 ## Chantiers faits
+
+### 23/09/2026 — `/realisations/cour-allee-privee` passe de 399 à 7 670 caractères : le deuxième dossier sort de la maigreur, sur tout ce qui se joue à la limite de la propriété (commit `eafd0a3`)
+
+**Pourquoi cette page, et pourquoi cet angle.** C'était le candidat n°1 laissé
+par le run du 22/09 : 399 caractères servis, et la seule URL du site qui vise
+« goudronnage cour maison Jura », une des six requêtes suivies. Le run du 22/09
+avait posé une réserve explicite — **risque de doublon** avec
+`/services/enrobe-a-chaud` (goudronnage, BBSG, 150 °C, hiver dans le Jura,
+médaillons) et `/services/drainage-pentes` (pente de 1,5 %, flaques, eau chez le
+voisin). Les deux blocs ont été relus avant d'écrire une ligne, et l'angle
+retenu est celui qu'il suggérait : **tout ce qui se passe à la limite de la
+propriété**, sujet jamais abordé nulle part sur le site. Aucune des cinq
+questions ne recoupe une question déjà publiée (vérifié sur les 30 `q:` de
+`services.$slug.tsx`).
+
+**Ce qui a été fait.** Une entrée `cour-allee-privee` ajoutée à `REAL_SAVOIR`
+dans `src/routes/realisations.$slug.tsx`. L'infrastructure posée le 22/09 a
+tenu sa promesse : **aucune autre ligne de code n'a été nécessaire** — le
+composant `CategorySavoir` et le `FAQPage` de `head()` se branchent sur la seule
+présence de la clé. Cinq Q/R, chacune ouverte par une réponse autonome de deux à
+trois phrases, chacune adossée à un texte primaire relu mot pour mot sur
+Légifrance ou service-public.gouv.fr :
+
+1. **« Faut-il une autorisation pour raccorder une allée privée à la route ? »**
+   — art. **L113-2 du code de la voirie routière** (en vigueur depuis le
+   28/12/2007), cité in extenso : permission de voirie s'il y a emprise, permis
+   de stationnement sinon, autorisations « délivrées à titre précaire et
+   révocable ». Complété par **L111-1** (le domaine public routier est celui de
+   l'État, des départements **et** des communes), qui répond à la vraie question
+   pratique : à quel guichet s'adresser.
+2. **« Peut-on buser le fossé qui longe la route pour élargir son entrée ? »**
+   — le fossé est une dépendance du domaine public routier ; le buser est une
+   emprise. Sans autorisation : **art. R\*116-2** (en vigueur depuis le
+   01/03/1994), alinéas 1° et 6° cités mot pour mot, contravention de 5e classe
+   → **1 500 € au plus, 3 000 € en récidive** (**art. 131-13 du code pénal**).
+3. **« Une entreprise sonne et propose du goudronnage “avec l'enrobé qui
+   reste” : que dit la loi ? »** — **art. L221-10 du code de la consommation**
+   (en vigueur depuis le 01/07/2016), premier alinéa cité in extenso : aucun
+   paiement avant sept jours. Plus les quatorze jours de rétractation
+   (**L221-18**, prolongés de douze mois si l'information n'a pas été donnée) et
+   l'obligation de contrat écrit, daté, signé, avec formulaire de rétractation
+   (fiche **F23224** de `entreprendre.service-public.gouv.fr`, qui donne aussi
+   la sanction de l'encaissement anticipé : 2 ans et 150 000 €).
+4. **« Qui paie le goudronnage d'un chemin d'accès partagé ? »** — **art. 697 et
+   698 du code civil**, cités mot pour mot : les ouvrages sont à la charge du
+   bénéficiaire de la servitude, pas du propriétaire du fonds assujetti, sauf
+   titre contraire. Et **art. 682** pour le cas de l'enclave.
+5. **« L'eau d'une cour goudronnée peut-elle être renvoyée vers la route ? »**
+   — **art. R\*116-2, 4°**, cité mot pour mot (substances laissées écouler sur
+   les voies publiques). Facette du drainage jamais traitée : `drainage-pentes`
+   couvre le **voisin** (Code civil 640/641) et les flaques, pas la **voie
+   publique**.
+
+`public/llms.txt` a été mis à jour dans la foulée (la ligne du dossier résumait
+la galerie, elle décrit maintenant aussi les cinq réponses et leurs textes).
+
+**Outillage : `scripts/verif-faq.mjs` est enfin versionné.** Le journal le
+citait comme un outil existant depuis le 11/09 — **il ne l'était pas** : chaque
+run le réécrivait en jetable, et c'est exactement ce qui a produit le faux
+mismatch du 22/09. La version versionnée fige la règle apprise ce jour-là :
+**décodage des entités HTML des DEUX côtés avant comparaison**, plus la
+normalisation des apostrophes typographiques et des espaces insécables. Elle
+sort en code 1 dès qu'une Q ou une R du JSON-LD manque au visible, et elle
+signale aussi un bloc JSON-LD illisible.
+
+**Contrôles avant push, tous au banc d'essai local (recette du 15/09) :**
+- Banc d'essai **fidèle à la production au caractère près sur les douze URLs**
+  avant modification — la mesure avant/après est donc comparable.
+- `/realisations/cour-allee-privee` : **399 → 7 670 caractères**, JSON-LD
+  **2 → 3**. **Les onze autres URLs : identiques au caractère près.**
+- `verif-faq.mjs` : **5/5 questions et 5/5 réponses** sur la nouvelle page, et
+  **aucune régression** sur les six autres FAQPage du site (accueil 6/6,
+  `/realisations` 4/4, `parking-voirie-pro` 5/5, trois pages service 5/5).
+- `npx tsc --noEmit`, `npx eslint`, `npx prettier --check` : propres.
+- `node scripts/check-contenu-fige.mjs` : « aucune régression ».
+- Diff vs `HEAD` : **purement additif** sur le `.tsx` (54 lignes ajoutées, 0
+  retirée), une ligne remplacée dans `llms.txt`.
+
+**Vérifié en production après déploiement** : 7 670 caractères, `verif-faq.mjs`
+✓, les onze autres URLs inchangées, IndexNow HTTP 200 sur les 12 URLs.
+
+**Ce qui a été volontairement PAS fait aujourd'hui, et pourquoi :**
+- **Aucune promesse commerciale inventée.** Une première rédaction disait
+  « aucune somme demandée le jour même : c'est ainsi qu'HCE travaille ».
+  C'était un engagement que le client n'a jamais formulé. Réécrit en « ces trois
+  règles s'imposent à toute entreprise qui vient chez vous, HCE comprise », qui
+  est juridiquement exact et n'invente rien. La formule figée **« devis
+  détaillé »** a été reprise telle quelle.
+- **Aucune épaisseur ni granulométrie d'enrobé.** Le thread ouvert le 11/09
+  reste ouvert : pas de source primaire lisible et gratuite. Le blocage est
+  contourné, pas résolu.
+- **Rien touché au technique pour l'indexation.** Conformément au verdict du
+  20/09 : ce chantier a été choisi pour sa valeur propre, pas parce qu'il
+  « aiderait l'indexation ». Il ne l'aidera pas.
+- **`/realisations/preparation-terrassement` et `chantier-en-cours` non
+  traités.** Un seul chantier par jour, mené à fond.
 
 ### 22/09/2026 — `/realisations/parking-voirie-pro` passe de 401 à 6 356 caractères : le premier des quatre dossiers de réalisations sort de la maigreur, sur la réfection d'un parking professionnel
 
@@ -2290,8 +2444,35 @@ de suite.**
 > **le même script pour les deux mesures** (voir l'avertissement du 15/09 sur les
 > écarts d'extracteur).
 
-> 🔴 **CANDIDAT N°1 DU PROCHAIN RUN (au 22/09) — les trois dossiers de
-> réalisations encore à ~400 caractères.** `parking-voirie-pro` est traité
+> ✅ ~~**CANDIDAT N°1 DU PROCHAIN RUN (au 22/09) — `/realisations/cour-allee-privee`.**~~
+> **Fait le 23/09/2026** (commit `eafd0a3`) : bloc de 5 Q/R sourcées sur
+> l'accès à la voie publique (L113-2 et L111-1 du code de la voirie routière),
+> le busage du fossé et l'amende de 5e classe (R\*116-2, 131-13 du code pénal),
+> le démarchage à domicile (L221-10 et L221-18 du code de la consommation, fiche
+> F23224), le financement d'un chemin d'accès partagé (682, 697, 698 du code
+> civil) et l'écoulement vers la voie publique (R\*116-2, 4°). **399 → 7 670
+> caractères servis**, `FAQPage` aligné 5/5, `llms.txt` à jour. **La réserve de
+> doublon posée le 22/09 a été levée en relisant les deux blocs concernés avant
+> de rédiger : aucune des cinq questions ne recoupe les 30 déjà publiées.**
+>
+> 🔴 **CANDIDAT N°1 DU PROCHAIN RUN (au 23/09) — `/realisations/preparation-terrassement`
+> (400 car.).** Il reste **deux** dossiers maigres sur quatre, et
+> l'infrastructure est rodée : **une entrée dans `REAL_SAVOIR` suffit**, le
+> composant et le `FAQPage` se branchent seuls (vérifié deux fois, les 22 et
+> 23/09). **Attention au doublon** : `/services/preparation-terrain` est déjà
+> dense (DT-DICT, terres excavées, compactage par couches, délais) — **relire
+> ses 5 Q/R avant de rédiger**. Angles repérés et NON encore utilisés, à
+> condition de trouver une source primaire lisible : le **classement GTR des
+> sols** et la portance (si une source gratuite existe, ce qui n'a jamais été
+> vérifié) ; la **réutilisation des déblais sur site** plutôt que l'évacuation ;
+> les **seuils d'urbanisme des affouillements et exhaussements** (thread ouvert
+> depuis le 12/09, jamais résolu — **le vérifier d'abord, ne pas le supposer**).
+> Le dernier dossier, `/realisations/chantier-en-cours` (373 car.), reste **le
+> plus difficile à sourcer honnêtement** : c'est une galerie de chantiers en
+> action, pas un sujet technique. À garder pour la fin.
+>
+> 📌 *Raisonnement d'origine du 22/09, conservé :* les trois dossiers de
+> réalisations encore à ~400 caractères. `parking-voirie-pro` est traité
 > (401 → 6 356 car. le 22/09) et l'infrastructure existe : **il suffit d'ajouter
 > une entrée à `REAL_SAVOIR` dans `realisations.$slug.tsx`**, le composant
 > `CategorySavoir` et le `FAQPage` se branchent tout seuls. Par ordre d'intérêt :
@@ -2406,8 +2587,18 @@ de suite.**
     l'ombrage des parcs) sur `/realisations/parking-voirie-pro` + `REAL_SAVOIR`
     + `CategorySavoir` rendu dans les deux états servis + `FAQPage` + llms.txt
     + veille du lundi (parsing JSON-LD simple-passe de Google, audit négatif).**
-    **✅ Les six pages service ont toutes un bloc `savoir`, et le premier des
-    quatre dossiers de réalisations aussi. Le prochain run continue sur les trois
+    **23/09 contenu « accès à la voie publique et démarchage » sourcé (L113-2 et
+    L111-1 du code de la voirie routière, R\*116-2 et 131-13 du code pénal,
+    L221-10 et L221-18 du code de la consommation + fiche F23224, articles 682,
+    697 et 698 du code civil) sur `/realisations/cour-allee-privee` +
+    `REAL_SAVOIR` + `FAQPage` + llms.txt, et versionnement de
+    `scripts/verif-faq.mjs`.**
+    **✅ Les six pages service ont toutes un bloc `savoir`, et deux des quatre
+    dossiers de réalisations aussi (`parking-voirie-pro` le 22/09,
+    `cour-allee-privee` le 23/09). Il en reste deux :
+    `preparation-terrassement` (400 car.) puis `chantier-en-cours` (373 car.).**
+    *Constat du 22/09, conservé :* les six pages service ont toutes un bloc
+    `savoir`, et le premier des quatre dossiers de réalisations aussi. Le prochain run continue sur les trois
     dossiers restants (l'infrastructure est posée), ou change de terrain
     (sitemap `lastmod`, hub `/realisations`, accueil).**
     Le filon « rendu serveur » est épuisé : les trois cas connus (FAQ 09/09,
@@ -2449,7 +2640,14 @@ de suite.**
     mais faible tant que rien ne lie ces URLs. À traiter le jour où un vrai 404
     sera possible côté route.
 13. **Re-statuer `kompass.fr` et `verif.com`, jugées périmées sans avoir été
-    lues.** Les deux ont été classées « ancienne adresse » **sur la seule foi
+    lues.** ⏳ **Nouvelle tentative le 23/09/2026, toujours infructueuse** :
+    `fr.kompass.com` renvoie désormais **405 Method Not Allowed** (et non plus
+    403), `verif.com` **403**. Les deux restent illisibles depuis le runner, et
+    leur statut reste donc **non établi**. L'extrait de recherche du 23/09
+    affiche bien « 36 Avenue Etienne Lamy » pour kompass, mais c'est **un
+    extrait**, exactement ce que le 13/09 a appris à ne pas prendre pour argent
+    comptant. Ne pas rouvrir avant qu'un moyen de lire ces pages apparaisse.
+    *Constat d'origine :* Les deux ont été classées « ancienne adresse » **sur la seule foi
     d'extraits de recherche**, jamais en ouvrant la page (403 au runner). Le
     run du 13/09 a montré qu'un extrait peut avoir des mois de retard alors que
     la page est à jour (cas mappy). Leur statut n'est donc **pas** établi — ni
@@ -2583,6 +2781,34 @@ de suite.**
 ---
 
 ## Erreurs commises et corrigées
+
+- **23/09/2026 — le journal affirmait qu'un outil existait alors qu'il n'avait
+  jamais été committé.**
+  Depuis le 11/09, les entrées de ce journal renvoyaient à `verif-faq.mjs`
+  comme à un instrument disponible (« le contrôle est dans `verif-faq.mjs` »,
+  « utiliser `verif-faq.mjs` pour prouver l'alignement »). **`find . -name
+  "verif-faq*"` ne renvoyait rien au 23/09** : le fichier n'a jamais existé
+  dans le dépôt, chaque run le réécrivait de mémoire et le jetait. C'est la
+  cause racine du faux mismatch du 22/09 — la version jetable de ce jour-là
+  ignorait le décodage des entités HTML que les versions précédentes avaient
+  peut-être eu. **Corrigé le 23/09 : `scripts/verif-faq.mjs` est versionné,
+  documenté, et embarque la règle des entités.**
+  **Règle à retenir : un outil qui n'est pas committé n'existe pas. Avant de
+  compter sur un script cité dans ce journal, faire `ls scripts/`.**
+
+- **23/09/2026 — j'ai failli prêter à HCE un engagement commercial que le
+  client n'a jamais formulé (rattrapé avant le push).**
+  Une première rédaction du bloc sur le démarchage à domicile concluait :
+  « aucune somme demandée le jour même : c'est la règle, et c'est ainsi
+  qu'HCE travaille ». Les deux premières propositions sont du droit, la
+  troisième est une **affirmation invérifiable sur les pratiques de
+  l'entreprise** — exactement le type d'invention que les consignes
+  interdisent. Réécrit en « ces trois règles s'imposent à toute entreprise qui
+  vient chez vous, HCE comprise », qui est juridiquement exact et ne promet
+  rien au nom du client.
+  **Règle à retenir : citer un texte qui s'impose à l'entreprise est factuel ;
+  affirmer que l'entreprise le respecte est un témoignage, et on n'en invente
+  pas. La nuance se joue sur un demi-membre de phrase.**
 
 - **22/09/2026 — j'ai cru à un mismatch FAQPage qui n'existait pas, parce que
   mon propre script ne décodait pas les entités HTML.**
@@ -2815,6 +3041,56 @@ de suite.**
 ---
 
 ## Techniques apprises
+
+### 23/09/2026 — ⚙️ Deux acquis réutilisables : un outil de contrôle enfin versionné, et un filon de sources juridiques gratuit et inépuisable
+
+**1. Ne jamais croire le journal quand il dit qu'un outil « existe ».** Le
+journal citait `verif-faq.mjs` comme un instrument disponible depuis le 11/09.
+**Il n'a jamais été dans le dépôt** — `find . -name "verif-faq*"` ne renvoie
+rien au 23/09. Chaque run le réécrivait de mémoire, avec des règles différentes,
+et c'est très exactement ce qui a produit le faux mismatch du 22/09. Il est
+maintenant versionné dans `scripts/verif-faq.mjs`, avec la règle du 22/09 figée
+dedans (décodage des entités des deux côtés) et la documentation de la raison
+d'être en tête de fichier. **Règle générale à en tirer : un outil qui n'est pas
+committé n'existe pas. Si un run le réécrit, il doit le versionner, pas le
+jeter.** Le même reproche vaut potentiellement pour d'autres « outils »
+mentionnés dans ce journal — vérifier par `ls scripts/` avant de compter dessus.
+
+**2. Légifrance est lisible depuis le runner, et c'est le filon le plus riche
+trouvé jusqu'ici.** Après des semaines d'impasses sur les normes AFNOR (contenu
+payant) et les catalogues SETRA (introuvables), le constat du jour est net :
+**`legifrance.gouv.fr/codes/article_lc/<LEGIARTI…>` se lit sans difficulté et
+rend le texte verbatim d'un article, avec sa date d'entrée en vigueur.** Cinq
+articles ont été relevés mot pour mot en une session (L113-2 et R\*116-2 du code
+de la voirie routière, L221-10 du code de la consommation, 697 et 698 du code
+civil). **Méthode qui marche, à réutiliser telle quelle :**
+- L'identifiant `LEGIARTI…` se trouve par `WebSearch` en citant un fragment
+  exact du texte recherché entre guillemets. Chercher le numéro d'article seul
+  ramène surtout des blogs juridiques — **ne pas les citer, ils paraphrasent**.
+- ⚠️ **Un même numéro d'article peut correspondre à plusieurs `LEGIARTI…`** :
+  l'ancien, abrogé, et celui en vigueur. C'est arrivé aujourd'hui sur L221-10
+  (`LEGIARTI000006292359` est l'ancien, abrogé au 01/07/2016 ;
+  `LEGIARTI000032226864` est celui en vigueur). **Toujours demander explicitement
+  l'état de l'article dans le prompt de `WebFetch` et refuser un texte dont le
+  contenu ne correspond pas au numéro annoncé.**
+- Une URL `codes/section_lc/…` rend plusieurs articles d'un coup — pratique pour
+  une section courte (697 à 702 ici).
+- ⚠️ **`service-public.fr` redirige en 301 vers `service-public.gouv.fr`** :
+  utiliser directement le nouveau domaine, et `entreprendre.service-public.gouv.fr`
+  pour les fiches « côté entreprise ». Les anciens identifiants de fiche (F…)
+  restent valables.
+
+**Pourquoi ça compte pour le GEO et pas seulement pour le SEO :** un bloc qui
+cite un article de code mot pour mot, avec sa date d'entrée en vigueur et le
+montant exact d'une amende, est un passage **autonome et vérifiable**. C'est le
+profil de contenu que les LLM reprennent, et c'est ce que les concurrents
+directs (vus dans les SERP de la phrase-test depuis le 11/09) ne publient
+jamais : ils décrivent leurs prestations, pas le droit qui s'y applique.
+
+**3. Le chantier du jour confirme que l'infrastructure `REAL_SAVOIR` tient.**
+Deuxième dossier enrichi, **zéro ligne de code hors du tableau de données**. Le
+prochain run peut traiter `preparation-terrassement` sans rouvrir la mécanique :
+il n'y a qu'à écrire cinq Q/R et cinq sources.
 
 ### 22/09/2026 (veille du lundi) — 📚 Google ne « déroule » plus les entités HTML dans le JSON-LD, et le site est indemne (vérifié, ne pas refaire avant longtemps)
 

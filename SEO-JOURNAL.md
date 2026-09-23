@@ -596,6 +596,18 @@ trois mesures habituelles via `WebSearch`, reconduites à l'identique :
 
 ✅ **`WebSearch` n'a échoué aucune fois aujourd'hui.**
 
+> 🔔 **Notification envoyée au client le 23/09/2026, et cadence à respecter.**
+> Le run du jour a **notifié** que l'indexation est nulle depuis 16 jours et que
+> les trois leviers restants (revendiquer la fiche PagesJaunes
+> `pagesjaunes.fr/pros/52322496`, revendiquer la fiche Google Business Profile
+> existante, ajouter `www.hcebtp.com` à la Search Console) demandent **ses
+> accès**, pas du code. **Ne pas re-notifier ce même blocage tous les jours :**
+> une alerte quotidienne sur un fait inchangé perd son sens le jour où quelque
+> chose bougera vraiment. **Règle posée ici : re-notifier au plus tôt le
+> 30/09/2026** (une fois par semaine), ou immédiatement si l'indexation arrive,
+> si une position mesurable apparaît, ou si un contrôle casse. Les runs
+> intermédiaires journalisent, ils n'alertent pas.
+
 > 📉 **Constat de fond, seizième jour : l'extrait kompass renvoyé par la
 > recherche du jour affiche encore « 36 Avenue Etienne Lamy », l'ANCIENNE
 > adresse.** C'est cohérent avec ce que le journal sait depuis le 09/09 (36 =

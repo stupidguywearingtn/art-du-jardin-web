@@ -310,7 +310,16 @@ Demande par téléphone au 03 84 52 61 48 ou via le formulaire de https://www.hc
   attestation d'assurance à remettre avant l'ouverture du chantier) et sur la zone
   d'intervention d'HCE, avec leurs sources.
 - [Cour & allée privée](https://www.hcebtp.com/realisations/cour-allee-privee) : cours
-  résidentielles et allées privées en enrobé à chaud.
+  résidentielles et allées privées en enrobé à chaud. Contient aussi les réponses
+  détaillées sur ce qui se décide avant de goudronner une cour de maison — l'autorisation
+  nécessaire pour raccorder une allée privée à la route (permission de voirie ou permis de
+  stationnement, article L113-2 du code de la voirie routière), le busage du fossé de bord
+  de route et l'amende de 5e classe encourue sans autorisation (article R*116-2, 1 500 €
+  au plus, 3 000 € en récidive), les trois règles opposables à un démarchage à domicile
+  pour du goudronnage (aucun paiement avant sept jours — article L221-10 du code de la
+  consommation, quatorze jours de rétractation, contrat écrit daté et signé), qui paie le
+  goudronnage d'un chemin d'accès partagé (articles 682, 697 et 698 du code civil) et
+  pourquoi l'eau d'une cour ne se renvoie pas vers la voie publique — avec leurs sources.
 - [Parking, grand espace et voirie pro](https://www.hcebtp.com/realisations/parking-voirie-pro) :
   parkings d'entreprise, voiries de copropriété, plateformes industrielles. Contient aussi
   les réponses détaillées sur la réfection d'un parking professionnel — refaire toute la

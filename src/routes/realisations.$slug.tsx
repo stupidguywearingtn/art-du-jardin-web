@@ -79,6 +79,60 @@ const REAL_SAVOIR: Record<
     sources: { label: string; url: string }[];
   }
 > = {
+  "cour-allee-privee": {
+    heading:
+      "Goudronner une cour ou une allée de maison : les questions qui se posent avant le devis",
+    lead: "Une cour privée s'arrête rarement à la limite de la propriété : elle se raccorde à une route, traverse parfois un fossé, et dessert quelquefois plusieurs maisons. Ces trois points relèvent de textes précis, et ce sont eux qui décident du calendrier du chantier bien plus que la météo. Voici cinq questions à trancher avant de signer, avec les textes applicables.",
+    updated: "2026-09-23",
+    updatedLabel: "23 septembre 2026",
+    qa: [
+      {
+        q: "Faut-il une autorisation pour raccorder une allée privée à la route ?",
+        a: "Oui, dès que les travaux touchent la route elle-même — bordure, accotement, trottoir, fossé — et non pas seulement quand on refait l'intérieur de la propriété. L'article L113-2 du code de la voirie routière, en vigueur depuis le 28 décembre 2007, pose la règle : « l'occupation du domaine public routier n'est autorisée que si elle a fait l'objet, soit d'une permission de voirie dans le cas où elle donne lieu à emprise, soit d'un permis de stationnement dans les autres cas. Ces autorisations sont délivrées à titre précaire et révocable. » Deux conséquences pratiques. D'abord, la demande se fait auprès du gestionnaire de la voie concernée : l'article L111-1 du même code définit le domaine public routier comme « l'ensemble des biens du domaine public de l'Etat, des départements et des communes affectés aux besoins de la circulation terrestre » — ce n'est donc pas toujours la mairie, et une entrée sur route départementale ne se traite pas au même guichet qu'une entrée sur voie communale. Ensuite, « précaire et révocable » n'est pas une formule de style : l'autorisation obtenue n'est pas un droit acquis sur la route. Le partage est simple à retenir : ce qui est chez vous est à vous, ce qui déborde sur la route se demande.",
+      },
+      {
+        q: "Peut-on buser le fossé qui longe la route pour élargir son entrée ?",
+        a: "Pas de sa propre initiative : un fossé de bord de route est une dépendance du domaine public routier, pas un morceau du terrain riverain. Le buser ou le combler crée une emprise, et relève donc de la permission de voirie de l'article L113-2. Le faire sans l'avoir demandée est une contravention de la cinquième classe au titre de l'article R*116-2 du code de la voirie routière, en vigueur depuis le 1er mars 1994, qui vise ceux qui « sans autorisation, auront empiété sur le domaine public routier ou accompli un acte portant ou de nature à porter atteinte à l'intégrité de ce domaine ou de ses dépendances » (1°) et ceux qui, « sans autorisation préalable, auront exécuté un travail sur le domaine public routier » (6°). L'amende encourue pour la cinquième classe est de 1 500 € au plus, portée à 3 000 € en cas de récidive lorsque le règlement le prévoit, selon l'article 131-13 du code pénal. C'est la raison pour laquelle un chantier d'accès commence par une question administrative et non par un coup de pelle : le délai d'instruction du gestionnaire de voirie doit être intégré au planning dès la visite, sinon c'est lui qui décale la pose.",
+      },
+      {
+        q: "Une entreprise sonne à la porte et propose du goudronnage « avec l'enrobé qui reste » : que dit la loi ?",
+        a: "Trois règles s'appliquent à tout contrat signé chez vous, et elles sont vérifiables sur-le-champ. Un : le professionnel ne peut rien encaisser tout de suite. L'article L221-10 du code de la consommation, en vigueur depuis le 1er juillet 2016, dispose que « le professionnel ne peut recevoir aucun paiement ou aucune contrepartie, sous quelque forme que ce soit, de la part du consommateur avant l'expiration d'un délai de sept jours à compter de la conclusion du contrat hors établissement ». Deux : vous disposez de quatorze jours pour vous rétracter sans avoir à vous justifier (article L221-18 du même code) — et si l'entreprise a omis de vous informer de ce droit, le délai est prolongé de douze mois. Trois : le contrat doit être écrit, daté, signé des deux parties et accompagné d'un formulaire de rétractation. La fiche officielle « Démarchage à domicile : règles à respecter » de service-public.gouv.fr rappelle que l'encaissement avant sept jours est puni de deux ans d'emprisonnement et de 150 000 € d'amende. Ces trois règles s'imposent à toute entreprise qui vient chez vous, HCE comprise : un devis détaillé remis pour être relu au calme, daté, et aucune somme encaissée le jour même. Une pression à signer et à payer immédiatement, au motif qu'il resterait de l'enrobé d'un chantier voisin, est incompatible avec ces textes.",
+      },
+      {
+        q: "Qui paie le goudronnage d'un chemin d'accès partagé entre plusieurs maisons ?",
+        a: "En l'absence de clause contraire, celui qui bénéficie du passage, pas celui dont le terrain le supporte. Le code civil est explicite en deux articles : « celui auquel est due une servitude a droit de faire tous les ouvrages nécessaires pour en user et pour la conserver » (article 697), et « ces ouvrages sont à ses frais, et non à ceux du propriétaire du fonds assujetti, à moins que le titre d'établissement de la servitude ne dise le contraire » (article 698). Autrement dit, empierrer ou enrober un chemin de desserte est un droit du bénéficiaire, à sa charge, sauf si l'acte qui a créé la servitude en décide autrement — d'où la première chose à faire : relire cet acte. Quand le terrain n'a aucune issue sur la voie publique, c'est l'article 682 qui joue : le propriétaire enclavé « est fondé à réclamer sur les fonds de ses voisins un passage suffisant pour assurer la desserte complète de ses fonds, à charge d'une indemnité proportionnée au dommage qu'il peut occasionner ». Côté chantier, cela a une conséquence très concrète : avant de chiffrer un accès partagé, il faut savoir qui commande, qui paie et sur quelle largeur le passage est établi, sinon le devis porte sur une surface que personne n'assume.",
+      },
+      {
+        q: "L'eau d'une cour goudronnée peut-elle être renvoyée vers la route ?",
+        a: "C'est la pente à éviter, et le motif est d'abord réglementaire. Le même article R*116-2 du code de la voirie routière punit d'une amende de cinquième classe ceux qui « auront laissé écouler ou auront répandu ou jeté sur les voies publiques des substances susceptibles de nuire à la salubrité et à la sécurité publiques ou d'incommoder le public » (4°). Une cour imperméabilisée qui déverse son ruissellement sur la chaussée relève de cette logique — et dans le Jura, le risque n'est pas théorique : ce qui s'écoule sur la route en novembre y gèle en décembre, à l'endroit précis où les véhicules freinent pour tourner. La règle de conception qui en découle est simple : une cour se pente vers un exutoire situé sur la propriété — caniveau, grille, noue, puits d'infiltration — et jamais vers la voie publique par défaut. C'est un point à arrêter au plan, avant le décaissement : une fois l'enrobé posé et compacté, une pente ne se corrige pas, elle se refait.",
+      },
+    ],
+    sources: [
+      {
+        label:
+          "Article L113-2 du code de la voirie routière — permission de voirie et permis de stationnement (Légifrance)",
+        url: "https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000017924078",
+      },
+      {
+        label:
+          "Article R*116-2 du code de la voirie routière — contraventions de voirie (Légifrance)",
+        url: "https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000006398642",
+      },
+      {
+        label:
+          "Article L221-10 du code de la consommation — pas de paiement avant sept jours (Légifrance)",
+        url: "https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000032226864",
+      },
+      {
+        label: "Démarchage à domicile : règles à respecter (entreprendre.service-public.gouv.fr)",
+        url: "https://entreprendre.service-public.gouv.fr/vosdroits/F23224",
+      },
+      {
+        label: "Articles 697 et 698 du code civil — ouvrages et frais d'une servitude (Légifrance)",
+        url: "https://www.legifrance.gouv.fr/codes/section_lc/LEGITEXT000006070721/LEGISCTA000006150128/",
+      },
+    ],
+  },
   "parking-voirie-pro": {
     heading: "Refaire un parking professionnel : ce qui se décide avant la première tonne d'enrobé",
     lead: "Un parking d'entreprise ne se traite pas comme une cour de maison : ce sont le trafic poids lourds, l'accessibilité des places et, depuis 2023, l'ombrage qui commandent le projet — pas la surface à couvrir. Voici cinq questions qui se posent avant un chantier de réfection, avec les textes qui s'appliquent.",

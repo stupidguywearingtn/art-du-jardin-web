@@ -570,6 +570,63 @@ Toutes les valeurs de la table du 15/09 sont **retrouvées au caractère près**
 chiffres que la production avant le chantier : la fidélité du banc est
 re-confirmée pour la deuxième fois.
 
+### Positions mesurées — 24/09/2026
+
+**Indexation : toujours nulle, 17 jours après la 1re soumission IndexNow.** Les
+trois mesures habituelles via `WebSearch`, reconduites à l'identique :
+1. **Phrase exacte du site** `"Médaillons et inserts pavés intégrés à l'enrobé"`
+   → dix résultats, **zéro hcebtp.com**. Exactement les mêmes concurrents
+   français qu'aux 20, 21, 22 et 23/09 (mavrotp, aravis-enrobage, pajot-tp,
+   perenia, abers-amenagement, europavage68, cuinet) + deux brevets USPTO +
+   Pinterest. **Inchangé.**
+2. **Requête nommant le domaine** `hcebtp.com HCE Hini Cours Enrobé Cize 39300
+   enrobé travaux publics` → **aucune page du domaine**, les mêmes neuf fiches
+   d'annuaire (kompass, pappers, verif, societe, pagesjaunes, 118000,
+   lagazettefrance, nosartisansontdutalent, manageo). **Inchangé.**
+3. **`site:hcebtp.com`** → dix pages sans rapport (Wikipédia d'acronymes,
+   chnbtp.com, h-btp.com, Facebook HBTP), **zéro résultat du domaine**.
+   L'opérateur `site:` n'est toujours pas honoré par ce canal. **Inchangé.**
+
+| Requête | Mesure (24/09/2026) | Évolution vs 23/09 |
+|---|---|---|
+| indexation (phrase exacte du site) | **absent** | inchangé |
+| indexation (requête nommant le domaine) | **absent** | inchangé — 9 fiches d'annuaire |
+| `site:hcebtp.com` | **absent** | inchangé |
+| requêtes commerciales | **non mesurables** (pas de SERP brute via ce canal) | indéterminé |
+
+✅ **`WebSearch` n'a échoué aucune fois aujourd'hui.**
+
+> 🔕 **Pas de notification client aujourd'hui, et c'est volontaire.** La règle
+> posée le 23/09 tient : le blocage est inchangé, les trois leviers restants
+> demandent les accès du client, et re-notifier un fait identique chaque jour
+> userait l'alerte. **Prochaine alerte au plus tôt le 30/09/2026**, ou
+> immédiatement si l'indexation arrive, si une position mesurable apparaît ou
+> si un contrôle casse.
+
+**Volume de texte servi en production** (`scripts/mesure-texte-servi.mjs`, vu
+comme Googlebot), **avant** le chantier du jour : identique au 23/09 au
+caractère près sur les douze URLs. Mesure **après** au banc d'essai local
+(le banc a redonné les onze autres valeurs au caractère près — fidélité
+re-confirmée pour la troisième fois) :
+
+| URL | Texte servi (24/09) | vs 23/09 | JSON-LD |
+|---|---|---|---|
+| accueil | 5 499 car. | = | 3 |
+| `/realisations` | 6 258 car. | = | 4 |
+| `/services/bordures-murets` | 7 012 car. | = | 4 |
+| `/services/finitions-soignees` | 6 821 car. | = | 4 |
+| `/services/drainage-pentes` | 5 198 car. | = | 4 |
+| `/services/maconnerie-generale` | 5 080 car. | = | 4 |
+| `/services/preparation-terrain` | 4 482 car. | = | 4 |
+| `/services/enrobe-a-chaud` | 3 783 car. | = | 4 |
+| `/realisations/cour-allee-privee` | 7 670 car. | = | 3 |
+| `/realisations/parking-voirie-pro` | 6 356 car. | = | 3 |
+| **`/realisations/preparation-terrassement`** | **9 255 car.** | **+8 855** | **2 → 3** |
+| `/realisations/chantier-en-cours` | 373 car. | = | 2 |
+
+Les 12 URLs du sitemap répondent 200. `scripts/verif-faq.mjs` passe en **✓ sur
+les onze FAQPage du site** au banc d'essai local, le nouveau compris (5/5).
+
 ### Positions mesurées — 23/09/2026
 
 **Indexation : toujours nulle, 16 jours après la 1re soumission IndexNow.** Les
@@ -893,6 +950,112 @@ JSON-LD, pas de `BreadcrumbList`).
 ---
 
 ## Chantiers faits
+
+### 24/09/2026 — `/realisations/preparation-terrassement` passe de 400 à 9 255 caractères : le troisième dossier sort de la maigreur, sur le cadre juridique d'un terrassement (commit `9d25d67`)
+
+**Pourquoi cette page, et pourquoi cet angle.** C'était le candidat n°1 laissé
+par le run du 23/09, et le raisonnement tenait toujours ce matin : sur les
+douze URLs du sitemap, il ne restait que deux pages sous les 500 caractères
+servis (`preparation-terrassement` à 400, `chantier-en-cours` à 373), et
+l'infrastructure `REAL_SAVOIR` est rodée depuis le 22/09 — **une entrée de
+tableau suffit, zéro ligne de mécanique**. Le vrai risque, identifié d'avance
+par le journal, n'était pas technique mais éditorial : `/services/preparation-terrain`
+est déjà dense sur le terrassement (DT-DICT, délais de réponse des exploitants
+de réseaux, terres excavées et registre, VRD, compactage par couches). **Ses
+cinq Q/R ont été relues avant d'écrire une seule ligne**, et l'angle retenu est
+délibérément à côté : non pas *comment on terrasse*, mais **ce qui se règle sur
+le papier avant le premier coup de godet** — urbanisme, limites, voisinage,
+archéologie, argiles. Aucune des cinq nouvelles questions ne recoupe les
+35 déjà publiées sur le site.
+
+**Ce qui a été fait, précisément.**
+- Une entrée `preparation-terrassement` dans `REAL_SAVOIR`
+  (`src/routes/realisations.$slug.tsx`) : `heading`, `lead`, `updated`
+  (2026-09-24), cinq Q/R et **sept sources**, toutes Légifrance.
+- Les cinq questions, avec leur source primaire lue mot pour mot :
+  1. **« Faut-il une autorisation pour décaisser ou remblayer un terrain ? »**
+     Double seuil cumulatif : **plus de deux mètres de profondeur ou de hauteur
+     ET au moins cent mètres carrés** → déclaration préalable, article
+     **R\*421-23 f)** du code de l'urbanisme, en vigueur depuis le 01/01/2016,
+     cité verbatim. Au-dessus de **deux hectares** → permis d'aménager, article
+     **R\*421-19 k)**, en vigueur depuis le 29/07/2026, cité verbatim. L'exception
+     « nécessaires à l'exécution d'un permis de construire » est rappelée.
+     **Ce point ferme un thread ouvert le 12/09 et jamais résolu** (« les seuils
+     d'urbanisme des affouillements, si une source primaire lisible apparaît »).
+  2. **« Comment être sûr de la limite de propriété avant de faire venir la
+     pelle ? »** Article **646 du code civil**, en vigueur depuis le 21/03/1804
+     et jamais modifié, cité en entier : le bornage s'impose au voisin et se
+     fait à frais communs.
+  3. **« Le terrassement peut-il causer un litige avec le voisin, et qui en
+     répond ? »** Article **1253 du code civil**, en vigueur depuis le
+     17/04/2024 (loi n° 2024-346 du 15 avril 2024), premier alinéa cité
+     verbatim : responsabilité **de plein droit**, et le texte vise nommément
+     **le maître d'ouvrage** — donc le client qui commande, pas seulement
+     l'entreprise. Le second alinéa (antériorité) est résumé, pas travesti.
+  4. **« On a mis au jour quelque chose en creusant : faut-il le déclarer ? »**
+     Article **L531-14 du code du patrimoine** (en vigueur depuis le 24/02/2004),
+     énumération citée verbatim, et **L531-15** sur la poursuite des fouilles
+     réservée à l'État ou à son autorisation.
+  5. **« Mon terrain est-il argileux, et qu'est-ce que ça change avant de
+     terrasser ? »** **Arrêté du 22 juillet 2020** définissant les zones
+     exposées au retrait-gonflement des sols argileux (en vigueur le
+     10/08/2020) : trois critères d'évaluation, seules les expositions
+     **moyenne ou forte** sont visées, carte sur Géorisques. Puis **L132-5 du
+     CCH** (en vigueur depuis le 01/07/2021), cité verbatim : l'étude
+     géotechnique préalable est due **à la vente** d'un terrain non bâti
+     constructible et « reste annexée au titre de propriété du terrain et suit
+     les mutations successives de celui-ci » — d'où le conseil honnête : le
+     document existe souvent déjà, il est à ressortir, pas à commander. Objet
+     de l'étude défini par **R132-4 du CCH**, cité verbatim.
+- `public/llms.txt` : entrée du dossier complétée avec ces cinq points, et
+  **date de « Dernière mise à jour » portée au 24/09** — elle était restée au
+  22/09 alors que le fichier avait changé le 23 (voir « Erreurs »).
+- Commentaire d'en-tête de `REAL_SAVOIR` remis à jour : il annonçait « les
+  trois autres dossiers », il n'en reste qu'un.
+
+**Contrôles passés avant de pousser** (banc d'essai local, recette du 15/09) :
+`npm run build` en 0, `npx tsc --noEmit` propre, `npx eslint` propre après un
+`prettier --write` (deux erreurs de formatage `prettier/prettier` sur les
+retours à la ligne de `label:`, corrigées), `check-contenu-fige.mjs` sans
+régression, `verif-faq.mjs` en ✓ sur les onze FAQPage. Mesure des deux côtés
+avec `scripts/mesure-texte-servi.mjs` : **400 → 9 255 caractères servis**,
+JSON-LD 2 → 3, et **les onze autres URLs identiques au caractère près** à la
+production du jour.
+
+**Ce que j'ai décidé de NE PAS faire, et pourquoi.**
+- **Ne pas citer la norme NF P11-300 (classification GTR des sols).** C'était
+  l'angle n°1 repéré par le run du 23/09 (« la portance, si une source gratuite
+  existe, ce qui n'a jamais été vérifié »). **Vérifié aujourd'hui : non.** La
+  fiche Norm'Info lue renvoie un titre (« Terrassements — Classification
+  complémentaire des matériaux de terrassement », publiée le 22/01/2025) qui ne
+  correspond pas au libellé historique de NF P11-300, et aucun domaine
+  d'application n'est affiché. **Deux normes distinctes se répondent sous la
+  même référence dans ce catalogue, et le contenu chiffré reste payant.**
+  Conclusion : on ne cite pas ce qu'on n'a pas lu sans ambiguïté. Thread à
+  refermer, ne pas le rouvrir sans une source qui lève la confusion.
+- **Ne pas donner l'exposition au retrait-gonflement des argiles de Cize.**
+  C'aurait été la meilleure donnée locale de la page. **L'API Géorisques
+  répond 503 aujourd'hui** sur toutes les routes de données (`/api/v1/rga`,
+  `/api/v1/gaspar/risques`), et les routes devinées renvoient « no Route
+  matched ». La page renvoie donc le lecteur vers la carte publique au lieu
+  d'affirmer un classement invérifié. **À retenter un autre jour** — voir
+  « Hypothèses à vérifier ».
+- **Ne pas reprendre l'angle « réutiliser les déblais sur place ».** Il était
+  dans les candidats du 23/09, mais il touche au même sujet que la Q/R
+  « Que deviennent les terres retirées de mon terrain ? » déjà publiée sur
+  `/services/preparation-terrain`. Un doublon d'angle sur deux pages du même
+  site est exactement ce que la méthode cherche à éviter.
+- **Ne pas toucher à `REAL_META`.** La description de la page décrit la galerie
+  photo ; les runs des 22 et 23/09 n'y ont pas touché non plus pour les deux
+  autres dossiers. Cohérence gardée.
+- **Ne pas citer la décision du Conseil d'État du 14/06/2012 (n° 342445)** sur
+  le fait que le seuil de 2 m n'est pas une moyenne : elle n'est apparue que
+  dans des blogs juridiques, jamais en source primaire lue. Elle aurait été
+  pertinente, mais la règle du journal est claire.
+
+**Ce qui reste.** Un seul dossier encore maigre : `/realisations/chantier-en-cours`
+(373 car.), et c'est le plus difficile à sourcer honnêtement — c'est une
+galerie de chantiers en action, pas un sujet technique.
 
 ### 23/09/2026 — `/realisations/cour-allee-privee` passe de 399 à 7 670 caractères : le deuxième dossier sort de la maigreur, sur tout ce qui se joue à la limite de la propriété (commit `eafd0a3`)
 
@@ -2467,7 +2630,41 @@ de suite.**
 > doublon posée le 22/09 a été levée en relisant les deux blocs concernés avant
 > de rédiger : aucune des cinq questions ne recoupe les 30 déjà publiées.**
 >
-> 🔴 **CANDIDAT N°1 DU PROCHAIN RUN (au 23/09) — `/realisations/preparation-terrassement`
+> ✅ ~~**CANDIDAT N°1 DU PROCHAIN RUN (au 23/09) — `/realisations/preparation-terrassement`
+> (400 car.).**~~ **Fait le 24/09/2026** (commit `9d25d67`) : bloc de 5 Q/R sourcées
+> sur le cadre juridique d'un terrassement — seuils de la déclaration préalable et
+> du permis d'aménager pour un affouillement ou un exhaussement (R\*421-23 f et
+> R\*421-19 k du code de l'urbanisme), droit au bornage à frais communs (646 code
+> civil), responsabilité de plein droit du maître d'ouvrage pour trouble anormal de
+> voisinage depuis la loi du 15/04/2024 (1253 code civil), déclaration immédiate
+> d'une découverte fortuite (L531-14 et L531-15 code du patrimoine), zonage
+> retrait-gonflement des argiles et étude géotechnique annexée au titre de propriété
+> (arrêté du 22/07/2020, L132-5 et R132-4 du CCH). **400 → 9 255 caractères servis**,
+> `FAQPage` aligné 5/5, `llms.txt` à jour. Les deux réserves du 23/09 ont été levées
+> par vérification : le classement GTR n'a **pas** de source gratuite exploitable
+> (voir « décidé de ne pas faire »), et les seuils d'urbanisme des affouillements,
+> eux, en ont une — le thread ouvert le 12/09 est refermé.
+>
+> 🔴 **CANDIDAT N°1 DU PROCHAIN RUN (au 24/09) — changer de terrain, pas s'acharner
+> sur le dernier dossier.** Il ne reste qu'une page maigre,
+> `/realisations/chantier-en-cours` (373 car.), et c'est **la plus difficile à
+> sourcer honnêtement de tout le site** : une galerie de chantiers en action n'a pas
+> de sujet technique propre, et les angles voisins (pose à 150 °C, compactage,
+> saison) sont déjà pris par `/services/enrobe-a-chaud` et
+> `/services/preparation-terrain`. **Ne pas la traiter pour la cocher.** Par ordre
+> d'intérêt réel :
+> - **`lastmod` dans le sitemap** depuis les dates de commit (point n°4) — jamais
+>   fait, court, net, sans risque de rendu, et c'est le seul chantier technique
+>   restant qui se justifie côté SEO. **À ne faire qu'avec des dates honnêtes**
+>   (date du dernier commit qui a touché le contenu de l'URL).
+> - **Enrichir l'accueil** (5 499 car.) : la page la plus visitée, et la moins
+>   travaillée depuis le 15/09.
+> - **Enrichir le hub `/realisations`** d'un second bloc de Q/R : créé le 20/09, il
+>   a eu le temps d'exister.
+> - `/realisations/chantier-en-cours`, **le jour où une matière honnête apparaît**
+>   et pas avant.
+>
+> 📌 *Raisonnement d'origine du 23/09, conservé :* **CANDIDAT N°1 — `/realisations/preparation-terrassement`
 > (400 car.).** Il reste **deux** dossiers maigres sur quatre, et
 > l'infrastructure est rodée : **une entrée dans `REAL_SAVOIR` suffit**, le
 > composant et le `FAQPage` se branchent seuls (vérifié deux fois, les 22 et
@@ -2605,10 +2802,21 @@ de suite.**
     697 et 698 du code civil) sur `/realisations/cour-allee-privee` +
     `REAL_SAVOIR` + `FAQPage` + llms.txt, et versionnement de
     `scripts/verif-faq.mjs`.**
-    **✅ Les six pages service ont toutes un bloc `savoir`, et deux des quatre
+    **24/09 contenu « cadre juridique d'un terrassement » sourcé (R\*421-23 f et
+    R\*421-19 k du code de l'urbanisme sur les affouillements et exhaussements,
+    646 du code civil sur le bornage, 1253 du code civil sur le trouble anormal
+    de voisinage, L531-14 et L531-15 du code du patrimoine sur les découvertes
+    fortuites, arrêté du 22 juillet 2020 + L132-5 et R132-4 du CCH sur les sols
+    argileux) sur `/realisations/preparation-terrassement` + `REAL_SAVOIR` +
+    `FAQPage` + llms.txt.**
+    **✅ Les six pages service ont toutes un bloc `savoir`, et trois des quatre
     dossiers de réalisations aussi (`parking-voirie-pro` le 22/09,
-    `cour-allee-privee` le 23/09). Il en reste deux :
-    `preparation-terrassement` (400 car.) puis `chantier-en-cours` (373 car.).**
+    `cour-allee-privee` le 23/09, `preparation-terrassement` le 24/09). Il n'en
+    reste qu'un : `chantier-en-cours` (373 car.), le plus dur à sourcer — et le
+    filon « page maigre » est donc à bout de souffle. Le prochain run change de
+    terrain (sitemap `lastmod`, accueil, hub `/realisations`).**
+    *Constat du 23/09, conservé :* il restait alors deux dossiers,
+    `preparation-terrassement` (400 car.) puis `chantier-en-cours` (373 car.).
     *Constat du 22/09, conservé :* les six pages service ont toutes un bloc
     `savoir`, et le premier des quatre dossiers de réalisations aussi. Le prochain run continue sur les trois
     dossiers restants (l'infrastructure est posée), ou change de terrain
@@ -2699,6 +2907,27 @@ de suite.**
 
 ## Hypothèses à vérifier
 
+- **L'API Géorisques a répondu 503 sur toutes ses routes de données le
+  24/09/2026** (`/api/v1/rga`, `/api/v1/gaspar/risques`), alors que le domaine
+  lui-même répond et que la route inexistante renvoie proprement « no Route
+  matched ». C'est donc une **indisponibilité du service, pas un blocage du
+  runner**. Enjeu : cette API donnerait l'**exposition au retrait-gonflement des
+  argiles de Cize et des communes voisines**, c'est-à-dire une donnée locale,
+  officielle et chiffrée, exactement le profil de contenu qui se fait citer par
+  une IA. **À retenter à chaque occasion** ; le jour où elle répond, la Q/R
+  « Mon terrain est-il argileux ? » de `/realisations/preparation-terrassement`
+  peut être complétée d'un chiffre propre à la zone d'intervention.
+- **La classification GTR des sols (NF P11-300) n'a toujours pas de source
+  gratuite exploitable — thread refermé le 24/09/2026, ne pas le rouvrir à
+  l'aveugle.** La fiche Norm'Info consultée affiche le titre « Terrassements —
+  Classification complémentaire des matériaux de terrassement » (publiée le
+  22/01/2025), qui ne correspond pas au libellé historique de NF P11-300
+  (« Exécution des terrassements — Classification des matériaux utilisables dans
+  la construction des remblais et des couches de forme »), sans domaine
+  d'application affiché. Deux textes distincts se répondent sous la même
+  référence dans ce catalogue. **Tant que la confusion n'est pas levée par une
+  source claire, ne citer ni l'un ni l'autre** : c'est exactement le cas où un
+  extrait donne l'illusion d'une lecture.
 - **Aucune source primaire lisible ne donne d'épaisseurs ni de granulométries
   d'enrobé chiffrées.** Thread ouvert le 11/09, toujours ouvert au 22/09 après
   une nouvelle tentative : Norm'Info et la boutique AFNOR donnent le **statut**
@@ -2794,6 +3023,15 @@ de suite.**
 
 ## Erreurs commises et corrigées
 
+- **24/09/2026 — `llms.txt` a changé le 23/09 sans que sa date de « Dernière
+  mise à jour » suive : elle est restée au 22 septembre 2026 pendant deux
+  jours.** Le fichier est statique et le journal le sait (« il dérive dès que
+  les catégories changent ») ; la dérive du jour n'était pas dans les
+  catégories mais dans **l'en-tête**, que personne ne relisait. Corrigé le
+  24/09, portée au 24 septembre 2026. **Règle à appliquer : tout run qui touche
+  `public/llms.txt` met la ligne 8 à sa propre date, dans le même commit.** Une
+  date de mise à jour fausse est plus dommageable qu'une absence de date pour
+  un fichier dont l'intérêt est précisément d'être frais.
 - **23/09/2026 — le journal affirmait qu'un outil existait alors qu'il n'avait
   jamais été committé.**
   Depuis le 11/09, les entrées de ce journal renvoyaient à `verif-faq.mjs`
@@ -3053,6 +3291,47 @@ de suite.**
 ---
 
 ## Techniques apprises
+
+### 24/09/2026 — ⚙️ Trois acquis de méthode : le seuil réglementaire comme matière première, le piège des références de normes, et un catalogue de sources encore ouvert
+
+**1. Le seuil chiffré est le format de contenu le plus citable qui existe, et le
+droit français en est plein.** Le chantier du jour repose sur cinq textes qui
+ont tous la même forme : une condition, un chiffre, une conséquence. « Plus de
+deux mètres **et** au moins cent mètres carrés → déclaration préalable » ;
+« deux hectares → permis d'aménager » ; « exposition moyenne ou forte → étude
+géotechnique ». **C'est exactement ce qu'une IA extrait et restitue**, parce
+que le passage se suffit à lui-même et qu'il est vérifiable. Les concurrents
+vus dans les SERP depuis le 11/09 décrivent leurs prestations ; aucun ne publie
+de seuil. **À réutiliser comme grille de recherche** : pour n'importe quel
+sujet de chantier, chercher d'abord s'il existe un seuil réglementaire, et
+seulement ensuite de la prose technique.
+
+**2. ⚠️ Une référence de norme peut désigner deux textes différents dans le
+catalogue AFNOR — le piège du jour, à ne pas re-découvrir.** La recherche
+« NF P11-300 » sur Norm'Info renvoie deux fiches : le texte historique
+(« Exécution des terrassements — Classification des matériaux utilisables dans
+la construction des remblais et des couches de forme ») et une fiche portant la
+même référence mais intitulée « Terrassements — Classification complémentaire
+des matériaux de terrassement », publiée le 22/01/2025. **La fiche ouverte a
+rendu le second titre sans domaine d'application.** C'est le même piège que
+celui des `LEGIARTI` multiples repéré le 23/09 sur L221-10, transposé aux
+normes. **Règle : quand le titre rendu ne correspond pas au libellé attendu de
+la référence, on ne cite pas — on considère la source comme non lue.**
+
+**3. Le catalogue de sources primaires lisibles depuis le runner s'élargit
+encore, et deux nouveaux codes y entrent.** Après le code de la voirie
+routière, le code de la consommation et le code civil (23/09), la session du
+jour a lu verbatim sur Légifrance : le **code de l'urbanisme** (R\*421-19,
+R\*421-23), le **code du patrimoine** (L531-14, L531-15), le **code de la
+construction et de l'habitation** (L132-5, R132-4) et un **arrêté au JORF**
+(`legifrance.gouv.fr/jorf/id/JORFTEXT…`, format qui rend bien les articles 1 et
+2 d'un texte court). **La méthode du 23/09 tient telle quelle** : trouver le
+`LEGIARTI…` par une recherche citant un fragment exact entre guillemets, puis
+demander explicitement l'état et la date d'entrée en vigueur. Deux formats
+utiles confirmés : `codes/section_lc/…` pour lire plusieurs articles voisins
+d'un coup (L531-14 et L531-15 ici), et `jorf/id/JORFTEXT…` pour un arrêté.
+**Ce qui reste fermé** : les normes AFNOR au-delà du statut et du domaine, les
+catalogues SETRA/LCPC, et — nouveauté du jour — **l'API Géorisques, en 503**.
 
 ### 23/09/2026 — ⚙️ Deux acquis réutilisables : un outil de contrôle enfin versionné, et un filon de sources juridiques gratuit et inépuisable
 

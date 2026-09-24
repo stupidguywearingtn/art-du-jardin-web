@@ -43,7 +43,7 @@ const service02 = "/assets/enrobe-1.png";
 const service03 = "/assets/maconnerie-1.png";
 const service04 = "/assets/drainage-1.jpeg";
 const service05 = "/assets/bordures-1.png";
-const service06 = "/assets/finitions-1.jpeg";
+const service06 = "/photos/1.png";
 const ctaCourtyard = "/photos/15-cour-golden-hour.jpg";
 
 if (typeof window !== "undefined") {

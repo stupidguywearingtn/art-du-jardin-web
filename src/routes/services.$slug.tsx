@@ -168,7 +168,7 @@ const SERVICES: Record<string, ServiceData> = {
     ],
     gallery: [
       "/assets/maconnerie-1.png",
-      "/assets/maconnerie-2.png",
+      "/photos/2.png",
       "/assets/maconnerie-3.png",
     ],
     seoDescription:

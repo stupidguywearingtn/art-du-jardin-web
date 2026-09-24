@@ -627,6 +627,25 @@ re-confirmée pour la troisième fois) :
 Les 12 URLs du sitemap répondent 200. `scripts/verif-faq.mjs` passe en **✓ sur
 les onze FAQPage du site** au banc d'essai local, le nouveau compris (5/5).
 
+> ⚠️ **Pas de soumission IndexNow aujourd'hui, et c'est un constat à retenir sur
+> le circuit de déploiement.** Le run travaille sur la branche imposée
+> `claude/upbeat-wozniak-b61370`, pas sur `main`, et **le déploiement se fait au
+> push sur `main`**. Après les deux commits poussés, la production a été
+> interrogée **douze fois sur dix minutes** : elle sert toujours 400 caractères
+> pour `/realisations/preparation-terrassement`. La fusion vers `main` a donc
+> lieu **après** la fin de la session — au 24/09, `origin/main` et la tête de la
+> branche du run précédent pointaient d'ailleurs sur le même commit `d736cf3`,
+> ce qui confirme que la fusion finit bien par arriver.
+> **Conséquence méthodologique : soumettre IndexNow avant le déploiement ne sert
+> à rien** — on annoncerait aux moteurs une page inchangée, ce qui gaspille
+> exactement le signal qu'on cherche à émettre. Les mesures « après » des runs
+> précédents venaient d'un déploiement observé dans la session ; **ce n'est pas
+> garanti, et ce n'est pas une régression du site.**
+> **Règle pour les runs suivants : mesurer la production en DÉBUT de run pour
+> constater le déploiement de la veille, et n'envoyer IndexNow que si la
+> production a réellement changé.** Le chantier du 24/09 est donc à soumettre par
+> le run du 25/09, une fois la valeur 9 255 constatée en ligne.
+
 ### Positions mesurées — 23/09/2026
 
 **Indexation : toujours nulle, 16 jours après la 1re soumission IndexNow.** Les

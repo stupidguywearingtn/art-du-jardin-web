@@ -65,7 +65,7 @@ const REAL_META: Record<string, { title: string; description: string }> = {
  * la requête « réfection parking enrobé Jura ».
  *
  * Le même tableau alimente la section visible ET le JSON-LD FAQPage de la
- * page : aucun mismatch possible. Les trois autres dossiers n'ont pas encore
+ * page : aucun mismatch possible. Le dossier `chantier-en-cours` n'a pas encore
  * d'entrée — la section et le FAQPage ne sont alors tout simplement pas émis.
  */
 const REAL_SAVOIR: Record<
@@ -177,6 +177,69 @@ const REAL_SAVOIR: Record<
         label:
           "Ombrage des parcs de stationnement extérieurs (entreprendre.service-public.gouv.fr)",
         url: "https://entreprendre.service-public.gouv.fr/vosdroits/F38106",
+      },
+    ],
+  },
+  "preparation-terrassement": {
+    heading: "Terrasser un terrain : ce qui se règle sur le papier avant le premier coup de godet",
+    lead: "Un terrassement se prépare autant au bureau que sur le terrain. Selon la profondeur et la surface remuées, il relève d'une déclaration en mairie ; il se déroule presque toujours à quelques mètres d'un voisin ; et ce qui sort du sol — une limite mal placée, une argile gonflante, un vestige — peut arrêter le chantier net. Voici cinq points à trancher avant de faire venir la pelle, avec les textes applicables. Les déclarations de réseaux (DT-DICT), le devenir des terres évacuées et le compactage par couches sont traités à part, sur la page Préparation de terrain.",
+    updated: "2026-09-24",
+    updatedLabel: "24 septembre 2026",
+    qa: [
+      {
+        q: "Faut-il une autorisation pour décaisser ou remblayer un terrain ?",
+        a: "Au-delà d'un double seuil, oui ; en dessous, non — et les deux conditions sont cumulatives. Une déclaration préalable est exigée quand le terrassement dépasse deux mètres de profondeur (ou de hauteur, s'il s'agit d'un remblai) et porte sur au moins cent mètres carrés. Si l'un des deux seuils n'est pas atteint, aucune formalité d'urbanisme n'est due à ce titre. Le texte est l'article R*421-23 du code de l'urbanisme, en vigueur depuis le 1er janvier 2016, qui soumet à déclaration préalable, « à moins qu'ils ne soient nécessaires à l'exécution d'un permis de construire, les affouillements et exhaussements du sol dont la hauteur, s'il s'agit d'un exhaussement, ou la profondeur dans le cas d'un affouillement, excède deux mètres et qui portent sur une superficie supérieure ou égale à cent mètres carrés » (f). Un cran au-dessus, c'est un permis d'aménager qu'il faut : l'article R*421-19 k) du même code vise les mêmes travaux lorsqu'ils « portent sur une superficie supérieure ou égale à deux hectares ». Deux remarques pratiques. D'abord, l'exception compte autant que la règle : un décaissement nécessaire à l'exécution d'un permis de construire est déjà couvert par ce permis, il n'y a pas de déclaration à refaire. Ensuite, ces seuils sont nationaux : c'est en mairie, au service urbanisme, que l'on vérifie ce que le document d'urbanisme local ajoute pour la parcelle concernée.",
+      },
+      {
+        q: "Comment être sûr de la limite de propriété avant de faire venir la pelle ?",
+        a: "En faisant borner le terrain — et c'est un droit que l'on peut imposer à son voisin, pas une faveur à négocier. L'article 646 du code civil, en vigueur depuis le 21 mars 1804 et jamais modifié depuis, tient en deux phrases : « Tout propriétaire peut obliger son voisin au bornage de leurs propriétés contiguës. Le bornage se fait à frais communs. » Le voisin ne peut donc pas refuser, et la dépense se partage entre les deux. Pourquoi cela se joue avant le terrassement et non après : un décaissement suit une limite, et une plateforme, une bordure ou un mur posés à partir d'une limite fausse ne se rattrapent pas au réglage — ils se déposent. Une clôture, une haie ou un ancien muret ne valent pas bornage : ce sont des ouvrages, pas des points de droit. En pratique, les bornes existantes se repèrent et se relèvent avant l'ouverture du sol, car une borne arrachée par un godet ne se replace pas à l'estime : elle est remise en place par un géomètre-expert.",
+      },
+      {
+        q: "Le terrassement peut-il causer un litige avec le voisin, et qui en répond ?",
+        a: "Oui, et depuis le 15 avril 2024 la règle est écrite noir sur blanc dans le code civil — elle vise d'ailleurs le maître d'ouvrage, c'est-à-dire celui qui commande les travaux, et pas seulement l'entreprise qui les exécute. L'article 1253, en vigueur depuis le 17 avril 2024, dispose que « le propriétaire, le locataire, l'occupant sans titre, le bénéficiaire d'un titre ayant pour objet principal de l'autoriser à occuper ou à exploiter un fonds, le maître d'ouvrage ou celui qui en exerce les pouvoirs qui est à l'origine d'un trouble excédant les inconvénients normaux de voisinage est responsable de plein droit du dommage qui en résulte ». « De plein droit » est le mot important : il n'y a pas de faute à prouver, seulement un trouble anormal et un dommage. Sur un chantier de terrassement, les sujets concrets sont toujours les mêmes : vibrations, poussière, boue laissée sur la chaussée, stationnement des engins, eaux détournées pendant les travaux. Ce que cela change dans l'organisation du chantier : prévenir les voisins de la période et de la durée, caler l'accès des camions, nettoyer la voie en fin de journée, et ne pas laisser un merlon de terre s'égoutter chez le voisin en attendant l'évacuation. Le second alinéa du même article réserve le cas des activités antérieures à l'arrivée de la personne lésée, à condition qu'elles soient conformes aux lois et règlements et qu'elles se soient poursuivies sans aggravation du trouble — une antériorité, donc, qui ne couvre pas un chantier nouveau.",
+      },
+      {
+        q: "On a mis au jour quelque chose en creusant : faut-il le déclarer ?",
+        a: "Oui, immédiatement au maire, et l'obligation pèse sur deux personnes à la fois : celui qui découvre et le propriétaire du terrain. Le chantier ne reprend pas comme si de rien n'était. L'article L531-14 du code du patrimoine, en vigueur depuis le 24 février 2004, vise le cas où, « par suite de travaux ou d'un fait quelconque, des monuments, des ruines, substructions, mosaïques, éléments de canalisation antique, vestiges d'habitation ou de sépulture anciennes, des inscriptions ou généralement des objets pouvant intéresser la préhistoire, l'histoire, l'art, l'archéologie ou la numismatique sont mis au jour » : l'inventeur et le propriétaire « sont tenus d'en faire la déclaration immédiate au maire », qui transmet sans délai au préfet, lequel saisit l'autorité compétente en matière d'archéologie. La suite dépend de ce qui a été trouvé : aux termes de l'article L531-15, si la poursuite des recherches présente un intérêt public au point de vue de la préhistoire, de l'histoire, de l'art ou de l'archéologie, « les fouilles ne peuvent être poursuivies que par l'Etat ou après autorisation de l'Etat ». À retenir : la liste du texte est large — une canalisation ancienne ou des fondations en pierre suffisent, il n'est pas question que de trésors — et la déclaration est le seul moyen de sécuriser la reprise du chantier.",
+      },
+      {
+        q: "Mon terrain est-il argileux, et qu'est-ce que ça change avant de terrasser ?",
+        a: "Cela se vérifie gratuitement, carte à l'appui, sur le site public Géorisques, et la réponse a une portée réglementaire : seules les zones classées en exposition moyenne ou forte au retrait-gonflement des sols argileux sont concernées par le dispositif. C'est l'arrêté du 22 juillet 2020 définissant les zones exposées au phénomène de mouvement de terrain différentiel consécutif à la sécheresse et à la réhydratation des sols argileux, entré en vigueur le 10 août 2020, qui fixe ce zonage : l'exposition des formations argileuses y est évaluée sur trois critères — la nature lithologique des terrains, leur composition minéralogique et leur comportement géotechnique — et son article 2 précise que les zones d'exposition faible ne sont pas visées par le dispositif du code de la construction et de l'habitation. Ce que cela implique juridiquement porte sur la vente, pas sur les travaux : « en cas de vente d'un terrain non bâti constructible, une étude géotechnique préalable est fournie par le vendeur » (article L132-5 du code de la construction et de l'habitation, en vigueur depuis le 1er juillet 2021), étude qui « reste annexée au titre de propriété du terrain et suit les mutations successives de celui-ci ». La conséquence pratique est celle-là : sur un terrain acquis non bâti en zone moyenne ou forte, cette étude existe déjà et voyage avec le titre de propriété — c'est le document à ressortir avant de terrasser, plutôt qu'une étude à commander. Son objet, défini par l'article R132-4 du même code, est de « procéder à une première identification des risques géotechniques d'un site et à la définition des principes généraux de construction ». HCE ne réalise pas ces études géotechniques : elle terrasse, draine et prépare les plateformes — mais savoir si la parcelle est en zone argileuse avant de dessiner les niveaux évite de découvrir le sujet une fois le sol ouvert.",
+      },
+    ],
+    sources: [
+      {
+        label:
+          "Article R*421-23 du code de l'urbanisme — affouillements et exhaussements soumis à déclaration préalable (Légifrance)",
+        url: "https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000031764703",
+      },
+      {
+        label: "Article R*421-19 du code de l'urbanisme — seuil du permis d'aménager (Légifrance)",
+        url: "https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000034355339",
+      },
+      {
+        label: "Article 646 du code civil — droit au bornage, à frais communs (Légifrance)",
+        url: "https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000006429902",
+      },
+      {
+        label:
+          "Article 1253 du code civil — troubles anormaux du voisinage, loi n° 2024-346 du 15 avril 2024 (Légifrance)",
+        url: "https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000006437138",
+      },
+      {
+        label:
+          "Articles L531-14 et L531-15 du code du patrimoine — découvertes fortuites (Légifrance)",
+        url: "https://www.legifrance.gouv.fr/codes/section_lc/LEGITEXT000006074236/LEGISCTA000006177313",
+      },
+      {
+        label:
+          "Arrêté du 22 juillet 2020 définissant les zones exposées au retrait-gonflement des sols argileux (Légifrance)",
+        url: "https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000042220805",
+      },
+      {
+        label:
+          "Article L132-5 du code de la construction et de l'habitation — étude géotechnique préalable (Légifrance)",
+        url: "https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000041588033",
       },
     ],
   },

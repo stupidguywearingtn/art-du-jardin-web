@@ -5,7 +5,7 @@
 > dans le Jura et l'Ain. Entreprise créée en 2012, 14 années d'expérience, plus de
 > 1000 chantiers livrés, garantie décennale.
 
-Dernière mise à jour : 22 septembre 2026
+Dernière mise à jour : 24 septembre 2026
 Site officiel : https://www.hcebtp.com
 
 ## L'entreprise en bref
@@ -332,7 +332,19 @@ Demande par téléphone au 03 84 52 61 48 ou via le formulaire de https://www.hc
   de l'urbanisme, parcs existants de plus de 1 500 m² concernés depuis juillet 2026) —
   avec leurs sources.
 - [Préparation & terrassement](https://www.hcebtp.com/realisations/preparation-terrassement) :
-  décaissement, nivellement, drainage, préparation de plateformes.
+  décaissement, nivellement, drainage, préparation de plateformes. Contient aussi les
+  réponses détaillées sur ce qui se règle avant le premier coup de godet — le double
+  seuil qui déclenche une déclaration préalable pour un décaissement ou un remblai
+  (plus de deux mètres ET au moins cent mètres carrés, article R*421-23 du code de
+  l'urbanisme ; permis d'aménager à partir de deux hectares, article R*421-19), le
+  droit au bornage opposable au voisin et à frais communs (article 646 du code civil),
+  la responsabilité de plein droit du maître d'ouvrage pour trouble anormal de voisinage
+  depuis la loi du 15 avril 2024 (article 1253 du code civil), la déclaration immédiate
+  au maire d'une découverte fortuite en creusant (articles L531-14 et L531-15 du code du
+  patrimoine) et ce que change un terrain classé en exposition moyenne ou forte au
+  retrait-gonflement des argiles (arrêté du 22 juillet 2020, carte sur Géorisques, étude
+  géotechnique annexée au titre de propriété — article L132-5 du code de la construction
+  et de l'habitation) — avec leurs sources.
 - [Chantier en cours](https://www.hcebtp.com/realisations/chantier-en-cours) : chantiers
   HCE en action — pose, compactage, équipe au travail.
 

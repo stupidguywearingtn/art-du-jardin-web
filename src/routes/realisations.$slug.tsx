@@ -65,8 +65,9 @@ const REAL_META: Record<string, { title: string; description: string }> = {
  * la requête « réfection parking enrobé Jura ».
  *
  * Le même tableau alimente la section visible ET le JSON-LD FAQPage de la
- * page : aucun mismatch possible. Les trois autres dossiers n'ont pas encore
- * d'entrée — la section et le FAQPage ne sont alors tout simplement pas émis.
+ * page : aucun mismatch possible. Au 25/09/2026, trois dossiers sur quatre ont
+ * leur entrée ; `chantier-en-cours` n'en a pas encore — la section et le
+ * FAQPage ne sont alors tout simplement pas émis.
  */
 const REAL_SAVOIR: Record<
   string,
@@ -177,6 +178,65 @@ const REAL_SAVOIR: Record<
         label:
           "Ombrage des parcs de stationnement extérieurs (entreprendre.service-public.gouv.fr)",
         url: "https://entreprendre.service-public.gouv.fr/vosdroits/F38106",
+      },
+    ],
+  },
+  "preparation-terrassement": {
+    heading: "Terrassement : les questions qu'on se pose devant un terrain décaissé",
+    lead: "Un terrassement se juge mal en photo : ce qui décide de la tenue d'une cour ou d'un parking est ce qui se passe sous la surface, et se vérifie avec des essais normalisés. Trois choses se tranchent avant le premier godet — l'autorisation d'urbanisme, la nature du sol en place et le sort des terres sorties — et une quatrième, la saison, décide du planning dans le Jura. Voici cinq questions avec les textes et les normes applicables.",
+    updated: "2026-09-25",
+    updatedLabel: "25 septembre 2026",
+    qa: [
+      {
+        q: "Faut-il une autorisation d'urbanisme pour terrasser un terrain ?",
+        a: "Cela dépend de deux chiffres, et de deux seulement : la hauteur ou la profondeur du mouvement de terre, et la surface qu'il couvre. Le code de l'urbanisme soumet à déclaration préalable, « à moins qu'ils ne soient nécessaires à l'exécution d'un permis de construire, les affouillements et exhaussements du sol dont la hauteur, s'il s'agit d'un exhaussement, ou la profondeur dans le cas d'un affouillement, excède deux mètres et qui portent sur une superficie supérieure ou égale à cent mètres carrés » (article R*421-23 f, en vigueur depuis le 1er janvier 2016). Au-delà, le régime change : le même mouvement de terre de plus de deux mètres portant sur deux hectares ou plus relève du permis d'aménager (article R*421-19 k, dans sa version en vigueur depuis le 29 juillet 2026). Deux précisions qui évitent les mauvaises surprises. D'abord les deux conditions sont cumulatives : un décaissement de 2,50 m sur 40 m² n'atteint pas le seuil, un décaissement de 1,50 m sur 600 m² non plus. Ensuite « excède deux mètres » se lit au point le plus profond, pas en moyenne sur le chantier — un terrain en pente rattrapé par un déblai-remblai peut franchir le seuil sur une bande étroite sans que la moyenne le laisse deviner. En cas de doute, la question se pose au service urbanisme de la commune avant de commander la pelle, pas après.",
+      },
+      {
+        q: "Comment sait-on si le sol d'un terrain peut porter une cour ou un parking ?",
+        a: "On le sait en classant le matériau, et cette classification est normalisée : elle ne relève pas de l'appréciation à la pelle. La référence européenne est la NF EN 16907-2, « Terrassement — Partie 2 : classification des matériaux », publiée le 7 septembre 2019, qui établit « un référentiel commun pour la description et la classification des matériaux à l'usage de toutes les parties impliquées dans la conception, la planification et la réalisation des travaux de terrassements ». Elle est complétée en France par la NF P11-300, « Terrassements — Classification complémentaire des matériaux de terrassement », publiée le 22 janvier 2025 — c'est la filiation de ce que le métier appelle encore la « classification GTR ». Ce qu'il faut en retenir sur un chantier : un sol se décrit par sa granulométrie, par son argilosité et par son état hydrique, et c'est ce troisième paramètre qui surprend les maîtres d'ouvrage. Un même limon est réutilisable en remblai s'il est sec et inutilisable s'il est détrempé ; ce n'est pas la nature du sol qui a changé, c'est son état le jour où on le manipule. D'où une conséquence pratique constante : un devis de terrassement se fait après visite du terrain, et une averse prolongée peut déplacer un chantier de quelques jours sans que rien n'ait été mal prévu.",
+      },
+      {
+        q: "Comment vérifie-t-on qu'une plateforme est réellement bien compactée ?",
+        a: "Par un essai, pas à l'œil ni au bruit du rouleau. La méthode française de référence pour le contrôle de compactage est la NF P94-105, « Sols : reconnaissance et essais — Contrôle de la qualité du compactage — Méthode au pénétromètre dynamique à énergie variable — Principe et méthode d'étalonnage du pénétromètre — Exploitation des résultats — Interprétation », dont la version en vigueur a été publiée le 15 octobre 2025 et remplace celle d'avril 2012. Le principe : on enfonce une pointe dans le remblai déjà compacté et on mesure la résistance rencontrée en fonction de la profondeur, ce qui permet de voir le compactage couche par couche, y compris là où l'œil ne voit qu'une surface plane. Son domaine couvre les remblais courants, y compris les ouvrages à fonction routière, ferroviaire ou hydraulique, ainsi que les remblais de fouilles et de tranchées — c'est-à-dire exactement les cas d'une cour, d'un parking ou d'une tranchée de réseau rebouchée. L'intérêt pour un particulier est simple à formuler : une tranchée mal recompactée se voit rarement le jour de la réception, et toujours deux hivers plus tard, sous la forme d'un affaissement en ligne droite au-dessus du réseau.",
+      },
+      {
+        q: "À quelle période de l'année vaut-il mieux terrasser dans le Jura ?",
+        a: "Entre le printemps et la fin de l'été, et le climat local l'explique chiffres en main. À la station Météo-France de Champagnole (indicatif 39097003, altitude 537 m), la plus proche de Cize, les normales 1991-2020 donnent 1 573,2 mm de précipitations par an, réparties sur 143,6 jours de pluie d'au moins 1 mm — soit près de deux jours sur cinq. Surtout, la répartition n'est pas plate : décembre (167,9 mm) et novembre (158,6 mm) sont les deux mois les plus arrosés de l'année, devant octobre (145,2 mm), tandis qu'avril (113,2 mm), juillet (116,8 mm) et février (116,4 mm) sont les plus secs. Or l'eau ne gêne pas seulement le confort de travail : elle change l'état hydrique du sol, donc sa classe au sens de la NF EN 16907-2, donc ce qu'on a le droit d'en faire. Un limon réutilisable en septembre part à l'évacuation en novembre. À cela s'ajoute la contrainte de la pose d'enrobé qui suit : HCE pose à la main à 150 °C, et un support saturé d'eau n'est pas un support sur lequel on termine un chantier. Concrètement, un projet décidé en automne se planifie souvent pour le printemps suivant — ce n'est pas un délai commercial, c'est le sol qui l'impose.",
+      },
+      {
+        q: "Peut-on réutiliser la terre sortie du chantier au lieu de la faire évacuer ?",
+        a: "Pas librement : des terres excavées sont juridiquement des déchets, et elles ne cessent de l'être qu'à des conditions précises. L'arrêté du 4 juin 2021 fixe les critères de sortie du statut de déchet pour les terres excavées et sédiments préparés en vue d'une utilisation en génie civil ou en aménagement, et son article 2 pose cinq conditions cumulatives : conformité des terres entrantes puis des terres préparées aux critères de son annexe I, existence d'un contrat de cession avec l'aménageur, application d'un système de gestion de la qualité, et respect des exigences de ses articles 3 à 6. Le contrat de cession n'est pas une formalité vague : il mentionne la localisation géographique d'origine, la période d'excavation, le volume, le site receveur, l'engagement sur l'usage prévu et les opérations de préparation effectuées. Un point mérite d'être connu des maîtres d'ouvrage, parce qu'il est contre-intuitif : l'arrêté interdit les opérations de mélange ayant pour objectif d'atteindre les critères de qualité. On ne dilue pas un lot médiocre dans un lot propre pour le faire passer. C'est aussi pour cela qu'un terrassement sérieux raisonne par lot homogène, issu d'une même zone d'excavation, et sait dire d'où vient chaque volume.",
+      },
+    ],
+    sources: [
+      {
+        label:
+          "Article R*421-23 du code de l'urbanisme — affouillements et exhaussements soumis à déclaration préalable (Légifrance)",
+        url: "https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000031764703",
+      },
+      {
+        label:
+          "Article R*421-19 du code de l'urbanisme — affouillements et exhaussements soumis à permis d'aménager (Légifrance)",
+        url: "https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000033498273",
+      },
+      {
+        label: "NF EN 16907-2 — terrassement, classification des matériaux (AFNOR Norm'Info)",
+        url: "https://norminfo.afnor.org/norme/nf-p11-300/execution-des-terrassements-classification-des-materiaux-utilisables-dans-la-construction-des-remblais-et-des-couches-de/91521",
+      },
+      {
+        label:
+          "NF P94-105 — contrôle de la qualité du compactage au pénétromètre dynamique (AFNOR Norm'Info)",
+        url: "https://norminfo.afnor.org/norme/nf-p94-105/sols-reconnaissance-et-essais-controle-de-la-qualite-du-compactage-methode-au-penetrometre-dynamique-a-energie-variable/80751",
+      },
+      {
+        label:
+          "Fiche climatologique de la station de Champagnole (39097003), normales 1991-2020 — Météo-France",
+        url: "https://object.files.data.gouv.fr/meteofrance/data/synchro_ftp/REF_STATION/FICHECLIM_39097003.pdf",
+      },
+      {
+        label:
+          "Arrêté du 4 juin 2021 — sortie du statut de déchet des terres excavées et sédiments (Légifrance)",
+        url: "https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000043704475",
       },
     ],
   },

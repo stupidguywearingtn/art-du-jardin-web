@@ -570,6 +570,73 @@ Toutes les valeurs de la table du 15/09 sont **retrouvées au caractère près**
 chiffres que la production avant le chantier : la fidélité du banc est
 re-confirmée pour la deuxième fois.
 
+### Positions mesurées — 25/09/2026
+
+**Indexation : toujours nulle, 18 jours après la 1re soumission IndexNow.** Les
+trois mesures habituelles via `WebSearch`, reconduites à l'identique :
+1. **Phrase exacte du site** `"Médaillons et inserts pavés intégrés à l'enrobé"`
+   → dix résultats, **zéro hcebtp.com**. Les mêmes concurrents français qu'aux
+   20, 21, 22 et 23/09 (mavrotp, aravis-enrobage, pajot-tp, perenia,
+   abers-amenagement, europavage68, cuinet) + **lizetp.com, nouveau dans le
+   jeu** + un brevet USPTO. **Inchangé sur le fond.**
+2. **Requête nommant le domaine** `hcebtp.com HCE Hini Cours Enrobé Cize 39300
+   enrobé travaux publics` → **aucune page du domaine**, neuf fiches d'annuaire
+   (kompass, pappers, verif, **doctrine**, societe, pagesjaunes, 118000,
+   lagazettefrance, manageo). `nosartisansontdutalent` est sorti du jeu au
+   profit de `doctrine` — simple rotation du canal, aucune conséquence.
+   **Inchangé.**
+3. **`site:hcebtp.com`** → dix pages sans rapport (Wikipédia d'acronymes,
+   chnbtp.com, Facebook HBTP), **zéro résultat du domaine**. L'opérateur
+   `site:` n'est toujours pas honoré par ce canal. **Inchangé.**
+
+| Requête | Mesure (25/09/2026) | Évolution vs 23/09 |
+|---|---|---|
+| indexation (phrase exacte du site) | **absent** | inchangé |
+| indexation (requête nommant le domaine) | **absent** | inchangé — 9 fiches d'annuaire |
+| `site:hcebtp.com` | **absent** | inchangé |
+| requêtes commerciales | **non mesurables** (pas de SERP brute via ce canal) | indéterminé |
+
+✅ **`WebSearch` n'a échoué aucune fois aujourd'hui.**
+
+> 🔕 **Pas de notification client aujourd'hui, et c'est volontaire.** La règle
+> posée le 23/09 tient : re-notifier au plus tôt le **30/09/2026**, ou
+> immédiatement si l'indexation arrive, si une position mesurable apparaît, ou
+> si un contrôle casse. Rien de tout cela n'est survenu : le run journalise, il
+> n'alerte pas. **Le 30/09 est donc toujours la prochaine échéance d'alerte.**
+
+> ⚠️ **Il n'y a pas eu de run SEO le 24/09/2026.** Le seul commit de cette
+> date, `503e6ab` (« remplace visuel survol service Finitions et médaillon
+> Maçonnerie »), est une **modification d'images hors run SEO** : aucune entrée
+> de journal, et aucun effet mesurable sur le texte servi (les douze URLs
+> étaient au caractère près sur les valeurs du 23/09 au début du run du jour).
+> Ne pas chercher une entrée manquante du 24/09, il n'y en a pas.
+
+**Volume de texte servi en production** (`scripts/mesure-texte-servi.mjs`, vu
+comme Googlebot), **avant** le chantier du jour : identique au 23/09 au
+caractère près sur les douze URLs. **Après** déploiement, une seule valeur a
+bougé :
+
+| URL | Texte servi (25/09) | vs 23/09 | JSON-LD |
+|---|---|---|---|
+| accueil | 5 499 car. | = | 3 |
+| `/realisations` | 6 258 car. | = | 4 |
+| `/services/bordures-murets` | 7 012 car. | = | 4 |
+| `/services/finitions-soignees` | 6 821 car. | = | 4 |
+| `/services/drainage-pentes` | 5 198 car. | = | 4 |
+| `/services/maconnerie-generale` | 5 080 car. | = | 4 |
+| `/services/preparation-terrain` | 4 482 car. | = | 4 |
+| `/services/enrobe-a-chaud` | 3 783 car. | = | 4 |
+| `/realisations/cour-allee-privee` | 7 670 car. | = | 3 |
+| `/realisations/parking-voirie-pro` | 6 356 car. | = | 3 |
+| **`/realisations/preparation-terrassement`** | **8 156 car.** | **+7 756** | **2 → 3** |
+| `/realisations/chantier-en-cours` | 373 car. | = | 2 |
+
+**C'est désormais la page la plus longue du site** (8 156 car., devant
+`cour-allee-privee` à 7 670). Les 12 URLs du sitemap répondent 200, **les onze
+URLs non touchées sont inchangées au caractère près**, `scripts/verif-faq.mjs`
+passe en **✓ sur les huit FAQPage du site** en local comme en production, et la
+soumission IndexNow des 12 URLs après déploiement sort en **HTTP 200**.
+
 ### Positions mesurées — 23/09/2026
 
 **Indexation : toujours nulle, 16 jours après la 1re soumission IndexNow.** Les
@@ -893,6 +960,101 @@ JSON-LD, pas de `BreadcrumbList`).
 ---
 
 ## Chantiers faits
+
+### 25/09/2026 — `/realisations/preparation-terrassement` passe de 400 à 8 156 caractères : le troisième dossier sort de la maigreur, sur ce qui se joue sous la surface (commit `68f7a52`)
+
+**Pourquoi cette page.** C'était le candidat n°1 laissé explicitement par le run
+du 23/09 : 400 caractères servis, l'avant-dernier dossier maigre, et une
+infrastructure entièrement rodée — **une entrée dans `REAL_SAVOIR` suffit**,
+`CategorySavoir` et le `FAQPage` se branchent seuls. Vérifié une troisième fois
+aujourd'hui : c'est bien le cas, aucune autre ligne de code n'a été nécessaire.
+
+**Le risque du jour était le doublon, et il a été traité avant de rédiger.**
+`/services/preparation-terrain` est déjà dense et couvre DT-DICT, les délais de
+neuf et sept jours calendaires, la validité de trois mois, les terres excavées
+(décret n° 2021-321, Trackdéchets), la définition du VRD et le compactage par
+couches. **Ses cinq Q/R ont été relues intégralement avant d'écrire une ligne**,
+et aucune des cinq nouvelles questions ne les recoupe : là où la page service
+répond « qui prévenir et quand », le dossier répond « ce que le sol impose ».
+
+**Les cinq questions, et pourquoi chacune tient.**
+1. *Faut-il une autorisation d'urbanisme pour terrasser un terrain ?* — **le
+   thread ouvert le 12/09 et jamais résolu est enfin tranché, sources en main.**
+   Déclaration préalable pour les affouillements et exhaussements qui excèdent
+   **deux mètres ET portent sur 100 m² ou plus** (article R\*421-23 f du code de
+   l'urbanisme, en vigueur depuis le 01/01/2016, texte cité mot pour mot) ;
+   **permis d'aménager** au-delà de deux mètres ET **deux hectares** (article
+   R\*421-19 k, **version en vigueur depuis le 29/07/2026** — c'est une version
+   très récente, la citer datée est un avantage net sur la concurrence). Deux
+   précisions ajoutées parce qu'elles évitent les erreurs réelles : les seuils
+   sont **cumulatifs**, et « excède deux mètres » se lit **au point le plus
+   profond, pas en moyenne**.
+2. *Comment sait-on si le sol peut porter une cour ou un parking ?* — la
+   classification des matériaux : **NF EN 16907-2** « Terrassement — Partie 2 :
+   classification des matériaux », publiée le **07/09/2019**, complétée en France
+   par **NF P11-300** « Terrassements — Classification complémentaire des
+   matériaux de terrassement », publiée le **22/01/2025** (c'est la filiation de
+   ce que le métier appelle « classification GTR »). L'idée exploitable : un sol
+   se décrit par granulométrie, argilosité et **état hydrique**, et c'est ce
+   troisième paramètre qui décide — le même limon est réutilisable sec et
+   inutilisable détrempé.
+3. *Comment vérifie-t-on qu'une plateforme est réellement bien compactée ?* —
+   **NF P94-105**, version publiée le **15/10/2025** (elle remplace celle d'avril
+   2012), méthode au **pénétromètre dynamique à énergie variable**. Son domaine
+   couvre les remblais courants à fonction routière et **les remblais de fouilles
+   et de tranchées** : exactement le cas de la tranchée de réseau rebouchée qui
+   s'affaisse deux hivers plus tard.
+4. *À quelle période de l'année terrasser dans le Jura ?* — **normales 1991-2020
+   de la station Météo-France de Champagnole (39097003, alt. 537 m)** :
+   **1 573,2 mm de précipitations par an**, sur **143,6 jours de pluie ≥ 1 mm**,
+   décembre (**167,9 mm**) et novembre (**158,6 mm**) étant les mois les plus
+   arrosés devant octobre (145,2 mm), avril (113,2 mm) et février (116,4 mm) les
+   plus secs. Le lien avec la question 2 est ce qui rend le passage citable : la
+   pluie change l'**état hydrique**, donc la classe du sol, donc ce qu'on a le
+   droit d'en faire.
+5. *Peut-on réutiliser la terre du chantier au lieu de l'évacuer ?* — **arrêté du
+   4 juin 2021**, sortie du statut de déchet des terres excavées : **cinq
+   critères cumulatifs** (article 2), **contrat de cession** détaillant origine,
+   période d'excavation, volume, site receveur et préparations effectuées, et
+   surtout l'**interdiction des opérations de mélange destinées à atteindre les
+   critères de qualité** — le point contre-intuitif que personne ne publie côté
+   concurrence.
+
+**Contrôles, tous passés avant le push.** Banc d'essai local monté selon la
+recette du 15/09 (`git archive HEAD | tar -x`, `npm install`, `npx vite dev
+--host 127.0.0.1 --port 4175`) : **le local a donné 400 / 373 / 5 499 sur les
+trois URLs témoins, exactement les valeurs de la production le même jour — la
+fidélité du banc est confirmée pour la troisième fois.** Puis, le même script
+des deux côtés : **400 → 8 156 caractères**, JSON-LD **2 → 3**, et les onze
+autres URLs inchangées au caractère près. `verif-faq.mjs` : **5/5 sur la
+nouvelle page et ✓ sur les sept autres FAQPage**, en local puis en production.
+`npx tsc --noEmit`, `npx eslint` sur le fichier, `npx prettier --check` et
+`npm run build` sortent tous en 0 ; `check-contenu-fige.mjs` ne signale aucune
+régression.
+
+**Ce que j'ai décidé de NE PAS faire, et pourquoi.**
+- **Ne pas prétendre que les terres réutilisées sur leur propre site sortent du
+  champ des déchets.** C'est la formulation de la directive européenne, et
+  l'hypothèse de départ du run était qu'elle figurait à l'article **L541-4-1 du
+  code de l'environnement**. **Vérification faite sur Légifrance : elle n'y est
+  pas.** L'article exclut les sols **non excavés**, les sédiments déplacés dans
+  les eaux de surface, les effluents gazeux, etc. — pas les terres réutilisées
+  sur place. La question 5 a donc été recentrée sur ce qui est réellement
+  sourcé : l'arrêté du 4 juin 2021. **Ne pas rouvrir cette piste sans un texte
+  français qui la porte noir sur blanc.**
+- **Ne pas publier les moyennes `Rr ≥ 5 mm` (91,4 j) et `Rr ≥ 10 mm` (56,9 j)**
+  de la fiche Météo-France. La somme des douze mois donne 91,6 et 56,7 : un écart
+  de 0,2 imputable aux arrondis mensuels, sans doute bénin, mais la règle du
+  17/09 dit que **seul un chiffre dont le total annuel tombe juste se publie**.
+  Les deux valeurs retenues (1 573,2 mm et 143,6 j) tombent **exactement** juste.
+- **Ne pas affirmer que NF EN 16907-2 remplace la NF P11-300 de 1992.** La fiche
+  Norm'Info ne le dit pas, et la NF P11-300 de 2025 porte un titre différent
+  (« classification **complémentaire** »). Les deux normes sont donc citées côte
+  à côte, sans relation de remplacement inventée.
+- **Ne pas toucher au dernier dossier maigre `chantier-en-cours`** (373 car.) :
+  un chantier par jour, et c'est le plus difficile à sourcer honnêtement.
+- **Ne pas notifier le client** : la cadence hebdomadaire posée le 23/09
+  s'applique, prochaine échéance le 30/09.
 
 ### 23/09/2026 — `/realisations/cour-allee-privee` passe de 399 à 7 670 caractères : le deuxième dossier sort de la maigreur, sur tout ce qui se joue à la limite de la propriété (commit `eafd0a3`)
 
@@ -2224,9 +2386,13 @@ depuis le 11/09 : il suffisait de le remplir. Angle différent de la veille
 - **IndexNow relancé : 12 URLs → HTTP 200.**
 
 **Ce que j'ai décidé de NE PAS faire, et pourquoi :**
-- **Ne pas publier les seuils d'urbanisme des affouillements** (déclaration
-  préalable au-delà de 2 m de profondeur et 100 m²), alors que c'était la
-  question la plus demandée du lot et que quatre sources concordent.
+- ✅ ~~**Ne pas publier les seuils d'urbanisme des affouillements** (déclaration
+  préalable au-delà de 2 m de profondeur et 100 m²)~~ **RÉSOLU le 25/09/2026 :
+  Légifrance est lisible depuis le 23/09, l'article R\*421-23 f a été lu et cité
+  mot pour mot sur `/realisations/preparation-terrassement`, avec l'article
+  R\*421-19 k pour le permis d'aménager. Thread refermé, ne pas le rouvrir.**
+  *Constat d'origine du 12/09 conservé :* c'était la
+  question la plus demandée du lot et quatre sources concordaient.
   **Légifrance répond 403** au runner (WebFetch et curl), le PDF de la
   préfecture de l'Ain n'a pas pu être décodé de façon fiable, et il ne reste que
   des cabinets d'avocats. Règle du 08/09 : on ne cite pas ce qu'on n'a pas lu.
@@ -2467,8 +2633,41 @@ de suite.**
 > doublon posée le 22/09 a été levée en relisant les deux blocs concernés avant
 > de rédiger : aucune des cinq questions ne recoupe les 30 déjà publiées.**
 >
-> 🔴 **CANDIDAT N°1 DU PROCHAIN RUN (au 23/09) — `/realisations/preparation-terrassement`
-> (400 car.).** Il reste **deux** dossiers maigres sur quatre, et
+> ✅ ~~**CANDIDAT N°1 DU PROCHAIN RUN (au 23/09) — `/realisations/preparation-terrassement`
+> (400 car.).**~~ **Fait le 25/09/2026** (commit `68f7a52`) : bloc de 5 Q/R
+> sourcées sur les seuils d'autorisation d'urbanisme d'un mouvement de terre
+> (R\*421-23 f et R\*421-19 k du code de l'urbanisme), la classification des sols
+> (NF EN 16907-2 du 07/09/2019 et NF P11-300 du 22/01/2025), le contrôle réel du
+> compactage (NF P94-105 du 15/10/2025, pénétromètre dynamique à énergie
+> variable), la saison de terrassement dans le Jura (normales Météo-France de
+> Champagnole : 1 573,2 mm/an sur 143,6 jours de pluie ≥ 1 mm) et la sortie du
+> statut de déchet des terres excavées (arrêté du 4 juin 2021). **400 → 8 156
+> caractères servis**, `FAQPage` aligné 5/5, `llms.txt` à jour. **Le thread des
+> seuils d'affouillement, ouvert le 12/09 et jamais résolu, est tranché.** La
+> réserve de doublon avec `/services/preparation-terrain` a été levée en relisant
+> ses cinq Q/R avant de rédiger. *Raisonnement d'origine conservé ci-dessous.*
+>
+> 🔴 **CANDIDAT N°1 DU PROCHAIN RUN (au 25/09) — changer de terrain, PAS
+> `chantier-en-cours`.** Il ne reste qu'un dossier maigre, `/realisations/chantier-en-cours`
+> (373 car.), et c'est **le plus difficile à sourcer honnêtement** : une galerie
+> de chantiers en action, pas un sujet technique. Ne l'ouvrir que le jour où un
+> angle honnête apparaît (le compactage en cours de pose ? la température de
+> 150 °C et sa fenêtre de mise en œuvre ? — à condition de trouver une source
+> primaire lisible, ce qui n'a jamais été vérifié). **Les meilleurs candidats du
+> 26/09, par ordre d'intérêt :**
+> - **`lastmod` dans le sitemap** depuis les dates de commit (point n°4) —
+>   toujours pas fait après neuf runs, court, net et sûr. **C'est son tour.** Les
+>   dates existent maintenant page par page (`git log -1 --format=%cI` sur le
+>   fichier qui porte le contenu), donc la contrainte « uniquement des dates
+>   honnêtes » est satisfaisable sans rien inventer.
+> - **Enrichir le hub `/realisations`** d'un second bloc de Q/R : créé le 20/09,
+>   il a eu le temps d'exister, et c'est la destination naturelle d'une requête
+>   « réalisations enrobé Jura ».
+> - **Enrichir l'accueil** (5 499 car.) : la page la plus visitée, et la moins
+>   travaillée depuis le 15/09.
+>
+> 📌 *Raisonnement d'origine du 23/09, conservé :* `/realisations/preparation-terrassement`
+> (400 car.). Il reste **deux** dossiers maigres sur quatre, et
 > l'infrastructure est rodée : **une entrée dans `REAL_SAVOIR` suffit**, le
 > composant et le `FAQPage` se branchent seuls (vérifié deux fois, les 22 et
 > 23/09). **Attention au doublon** : `/services/preparation-terrain` est déjà
@@ -2605,7 +2804,19 @@ de suite.**
     697 et 698 du code civil) sur `/realisations/cour-allee-privee` +
     `REAL_SAVOIR` + `FAQPage` + llms.txt, et versionnement de
     `scripts/verif-faq.mjs`.**
-    **✅ Les six pages service ont toutes un bloc `savoir`, et deux des quatre
+    **25/09 contenu « terrassement : urbanisme, sols et compactage » sourcé
+    (R\*421-23 f et R\*421-19 k du code de l'urbanisme, NF EN 16907-2 et
+    NF P11-300 pour la classification des matériaux, NF P94-105 pour le contrôle
+    de compactage, normales de précipitations Météo-France de Champagnole,
+    arrêté du 4 juin 2021 sur la sortie du statut de déchet des terres excavées)
+    sur `/realisations/preparation-terrassement` + `REAL_SAVOIR` + `FAQPage` +
+    llms.txt.**
+    **✅ MISE À JOUR DU 25/09 : les six pages service ET trois des quatre
+    dossiers de réalisations ont un bloc `savoir`. Il n'en reste qu'un,
+    `chantier-en-cours` (373 car.), et c'est le plus dur à sourcer — le filon
+    « page maigre » est donc quasiment épuisé lui aussi. Le prochain run change
+    de terrain (sitemap `lastmod`, hub `/realisations`, accueil).**
+    *Constat périmé du 23/09, conservé :* **Les six pages service ont toutes un bloc `savoir`, et deux des quatre
     dossiers de réalisations aussi (`parking-voirie-pro` le 22/09,
     `cour-allee-privee` le 23/09). Il en reste deux :
     `preparation-terrassement` (400 car.) puis `chantier-en-cours` (373 car.).**
@@ -2793,6 +3004,30 @@ de suite.**
 ---
 
 ## Erreurs commises et corrigées
+
+- **25/09/2026 — le chantier a été poussé sur la branche assignée par
+  l'environnement, et n'a donc PAS été déployé pendant six minutes.**
+  L'environnement d'exécution demande de développer et de pousser sur
+  `claude/upbeat-wozniak-1f20t3`. Fait — puis la production a été interrogée
+  huit fois de suite sans changer : **seule `main` déclenche un déploiement**.
+  Corrigé le jour même par une avance rapide de `main` sur le commit
+  (`git checkout main && git merge --ff-only <sha> && git push origin main`),
+  après quoi la production a servi la nouvelle page en moins de 45 secondes.
+  **La consigne de maintenance avait raison depuis le début (« Commit direct sur
+  main ») ; c'est l'environnement qui induit en erreur.** Voir le détail dans
+  « Techniques apprises » du 25/09. **Aucune perte : le commit est le même sur
+  les deux branches, rien n'a été réécrit.**
+
+- **25/09/2026 — j'ai commencé la rédaction en croyant que l'exemption des
+  terres réutilisées sur leur site d'excavation figurait à l'article L541-4-1 du
+  code de l'environnement.** C'est la formulation de la directive européenne, pas
+  celle du droit français. **Vérification faite sur Légifrance avant d'écrire une
+  ligne : l'article ne contient pas cette exemption.** La question a été
+  recentrée sur l'arrêté du 4 juin 2021, qui traite réellement du sujet. **Rien
+  de faux n'a été publié** — l'erreur a été arrêtée à la vérification, ce qui est
+  précisément le rôle de l'étape « source primaire lue avant d'écrire ». **Règle
+  générale à retenir : ne jamais transposer une formulation de directive
+  européenne sans vérifier l'article français de transposition.**
 
 - **23/09/2026 — le journal affirmait qu'un outil existait alors qu'il n'avait
   jamais été committé.**
@@ -3053,6 +3288,62 @@ de suite.**
 ---
 
 ## Techniques apprises
+
+### 25/09/2026 — ⚙️ Trois acquis opérationnels : la branche qui déploie, les normes récemment révisées, et une hypothèse juridique tuée net
+
+**1. ⚠️ SEULE `main` DÉPLOIE. Le point le plus coûteux du run, à ne pas
+re-découvrir.** L'environnement d'exécution assigne une branche de travail
+(`claude/upbeat-wozniak-1f20t3`) et demande d'y pousser. **Pousser là n'a aucun
+effet sur la production** : le commit a été poussé sur cette branche, puis la
+production a été interrogée **huit fois sur six minutes** et servait toujours
+l'ancienne page. Ce n'est qu'après un `git push origin main` (en avance rapide,
+la branche n'étant que `main` + 1 commit) que le déploiement est parti, visible
+en production **moins de 45 secondes plus tard**.
+**Règle à appliquer telle quelle au prochain run : le chantier n'est terminé que
+lorsque le commit est sur `main` et que `mesure-texte-servi.mjs` le confirme en
+production.** La consigne de maintenance le dit déjà (« Commit direct sur
+main »), c'est l'environnement qui suggère autre chose.
+**Piège associé, rencontré le même jour :** `git log --oneline main..<branche>`
+a d'abord fait croire que quatre commits des runs précédents manquaient sur
+`main`. **C'était la réf locale `main` qui était périmée**, pas la branche
+distante : après `git fetch origin main`, `origin/main` les contenait tous.
+**Toujours raisonner sur `origin/main` après un fetch, jamais sur `main` local**
+— c'est le point n°8 des chantiers en attente, illustré.
+
+**2. 📚 Norm'Info sert aussi à repérer les normes RÉCEMMENT révisées, et c'est
+un filon GEO à part entière.** La fiche Norm'Info ne donne pas que le titre et
+le statut : elle donne la **date de publication de la version en vigueur**. Deux
+trouvailles du jour, toutes deux inexploitées par la concurrence parce qu'elles
+sont trop fraîches pour les contenus recyclés :
+- **NF P11-300**, republiée le **22/01/2025** sous un titre nouveau,
+  « Terrassements — Classification complémentaire des matériaux de
+  terrassement » (et non plus l'intitulé de 1992 sur les remblais et couches de
+  forme) ;
+- **NF P94-105**, republiée le **15/10/2025**, qui remplace la version d'avril
+  2012.
+**Ce que ça vaut :** citer une norme **avec la date de sa version en vigueur**
+est exactement ce qui fait la différence pour une IA, qui cherche des passages
+datés et vérifiables. **À réutiliser : avant d'écrire sur un sujet technique,
+chercher l'indice de la norme sur `norminfo.afnor.org` et regarder sa date de
+publication — si elle est de moins de deux ans, c'est l'angle du contenu.**
+Rappel du 16/09 toujours valable : Norm'Info donne titre, statut et domaine
+d'application **gratuitement**, le texte intégral reste payant, et on ne cite
+que ce qu'on a lu sur la fiche.
+
+**3. 🔴 L'exemption « terres réutilisées sur leur propre site » n'est PAS à
+l'article L541-4-1 du code de l'environnement.** Hypothèse de départ du run,
+héritée de la formulation de la directive européenne. **Vérifiée sur Légifrance,
+elle est fausse :** l'article exclut du régime des déchets les **sols non
+excavés** (y compris pollués), les sédiments déplacés dans les eaux de surface,
+les effluents gazeux, le CO₂ stocké, les matières agricoles et sylvicoles
+naturelles, les matières radioactives, les sous-produits animaux, les explosifs
+déclassés et les matières premières pour aliments animaux — **pas les terres
+excavées réutilisées sur place**. Le texte français qui traite réellement du
+sujet est l'**arrêté du 4 juin 2021**, qui fixe cinq critères cumulatifs de
+sortie du statut de déchet (article 2). **Ne pas rouvrir cette piste sans un
+texte français qui la porte noir sur blanc** — et, plus généralement, **ne
+jamais transposer une formulation de directive européenne dans un contenu
+français sans vérifier l'article de transposition.**
 
 ### 23/09/2026 — ⚙️ Deux acquis réutilisables : un outil de contrôle enfin versionné, et un filon de sources juridiques gratuit et inépuisable
 
@@ -3536,7 +3827,10 @@ ligne n'est pas accessible à parts égales**, et il faut viser les bons hôtes.
   équivalente sur un site en `.gouv.fr` plutôt que de décoder un PDF.**
 - **Règle réaffirmée** : quatre sources secondaires concordantes ne remplacent
   pas une source primaire lue. Le seuil des affouillements n'a donc pas été
-  publié (cf. chantier du 12/09).
+  publié (cf. chantier du 12/09). **Suite le 25/09/2026 : la source primaire est
+  devenue lisible (Légifrance répond depuis le 23/09) et le seuil a été publié,
+  cité mot pour mot. La règle a tenu treize jours et a fini par payer — attendre
+  la source primaire n'est pas renoncer, c'est différer.**
 
 ### 11/09/2026 — Où trouver de la donnée métier citable sans l'inventer
 Le volet GEO réclame « ce que personne d'autre ne publie » : épaisseurs,

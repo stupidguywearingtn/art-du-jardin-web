@@ -8,6 +8,7 @@ import { EditModeProvider } from "@/hooks/useEditMode";
 import { EditModeToolbar } from "@/components/EditModeToolbar";
 import { EditableImage } from "@/components/EditableImage";
 import { optimizeImageUrl } from "@/lib/optimizeImage";
+import { PAGE_UPDATED, type PageUpdate } from "@/lib/lastmod";
 
 const HOME_SITE_ID = "11111111-1111-1111-1111-111111111111";
 
@@ -33,8 +34,10 @@ type ServiceData = {
        par la donnée et non écrits en dur dans le rendu. */
     heading: string;
     lead: string;
-    updated: string;
-    updatedLabel: string;
+    /* Date de mise à jour : lue dans `src/lib/lastmod.ts`, la source unique
+       que partagent la mention visible ci-dessous et le `<lastmod>` du
+       sitemap. Ne pas réécrire la date ici. */
+    updated: PageUpdate;
     qa: { q: string; a: string }[];
     sources: { label: string; url: string }[];
   };
@@ -62,8 +65,7 @@ const SERVICES: Record<string, ServiceData> = {
     savoir: {
       heading: "Terrassement : les questions qu'on nous pose avant d'ouvrir le sol",
       lead: "Avant de goudronner une cour ou de viabiliser un terrain, il y a le terrassement : des déclarations obligatoires, des délais réglementaires, des terres à évacuer et un sol à compacter. Voici ce que cela implique concrètement dans le Jura et l'Ain.",
-      updated: "2026-09-12",
-      updatedLabel: "12 septembre 2026",
+      updated: PAGE_UPDATED["/services/preparation-terrain"],
       qa: [
         {
           q: "Faut-il prévenir quelqu'un avant de creuser sur un terrain ?",
@@ -119,8 +121,7 @@ const SERVICES: Record<string, ServiceData> = {
     savoir: {
       heading: "Goudronnage ou enrobé : les questions qu'on nous pose",
       lead: "« Faire goudronner sa cour » et « poser un enrobé à chaud » désignent aujourd'hui le même chantier. Voici ce que recouvre réellement le mot, ce que disent les normes, et à quelle saison le chantier est possible dans le Jura et l'Ain.",
-      updated: "2026-09-11",
-      updatedLabel: "11 septembre 2026",
+      updated: PAGE_UPDATED["/services/enrobe-a-chaud"],
       qa: [
         {
           q: "Goudronnage et enrobé, est-ce la même chose ?",
@@ -176,8 +177,7 @@ const SERVICES: Record<string, ServiceData> = {
     savoir: {
       heading: "Pavage, dallage et médaillons : les questions qu'on nous pose",
       lead: "Le pavage, le dallage et les médaillons ne remplacent pas l'enrobé : ils s'y intègrent. Voici comment les deux techniques se posent sur un même chantier, ce que disent les normes des pavés, des dalles et des bordures, et à partir de quand une autorisation d'urbanisme entre en jeu, dans le Jura et l'Ain.",
-      updated: "2026-09-16",
-      updatedLabel: "16 septembre 2026",
+      updated: PAGE_UPDATED["/services/maconnerie-generale"],
       qa: [
         {
           q: "Peut-on intégrer des pavés ou un médaillon dans une cour en enrobé ?",
@@ -238,8 +238,7 @@ const SERVICES: Record<string, ServiceData> = {
     savoir: {
       heading: "Drainage, pentes et eaux pluviales : les questions qu'on nous pose",
       lead: "Poser un enrobé sur une cour, une allée ou un parking imperméabilise une surface qui absorbait jusque-là une partie de la pluie : cette eau doit désormais aller quelque part. Voici où elle part, ce que dit la réglementation, et pourquoi la pente se calcule avant la pose et non après, dans le Jura et l'Ain.",
-      updated: "2026-09-13",
-      updatedLabel: "13 septembre 2026",
+      updated: PAGE_UPDATED["/services/drainage-pentes"],
       qa: [
         {
           q: "Une cour goudronnée peut-elle envoyer l'eau chez le voisin ?",
@@ -291,8 +290,7 @@ const SERVICES: Record<string, ServiceData> = {
     savoir: {
       heading: "Bordures et murets : les questions qu'on nous pose",
       lead: "Une bordure tient la rive d'une cour, un muret retient la terre : ce sont deux ouvrages différents, avec chacun leurs règles. Voici quand une autorisation d'urbanisme entre en jeu, à qui appartient le mur qui sépare deux terrains, ce qui distingue une bordure coulée sur place d'une bordure préfabriquée, et ce que l'hiver jurassien impose au béton.",
-      updated: "2026-09-17",
-      updatedLabel: "17 septembre 2026",
+      updated: PAGE_UPDATED["/services/bordures-murets"],
       qa: [
         {
           q: "À quoi sert un muret de soutènement dans une cour ?",
@@ -368,8 +366,7 @@ const SERVICES: Record<string, ServiceData> = {
     savoir: {
       heading: "Finitions et fin de chantier : les questions qu'on nous pose",
       lead: "La finition est la partie du chantier que le client voit vraiment : les bords, les raccords entre bandes, la planéité, et l'état dans lequel le chantier est rendu. Voici à quoi se reconnaît un enrobé bien posé, pourquoi une ligne apparaît parfois entre deux bandes, où partent les gravats d'une cour refaite, et ce qu'un devis doit obligatoirement dire à ce sujet.",
-      updated: "2026-09-21",
-      updatedLabel: "21 septembre 2026",
+      updated: PAGE_UPDATED["/services/finitions-soignees"],
       qa: [
         {
           q: "Comment reconnaît-on un enrobé bien posé ?",
@@ -708,7 +705,7 @@ function ServicePageBody() {
             <div className="mt-16 border-t border-gold/15 pt-6 text-muted" style={{ fontSize: 14, lineHeight: 1.7 }}>
               <p>
                 Dernière mise à jour :{" "}
-                <time dateTime={data.savoir.updated}>{data.savoir.updatedLabel}</time>
+                <time dateTime={data.savoir.updated.iso}>{data.savoir.updated.label}</time>
               </p>
               <p className="mt-2">
                 Sources :{" "}

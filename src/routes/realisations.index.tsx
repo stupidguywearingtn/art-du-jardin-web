@@ -4,6 +4,7 @@ import { MobileFloatingCTA } from "@/components/CTAButtons";
 import { WhatsAppFAB } from "@/components/WhatsAppFAB";
 import { fallbackCategoryBySlug } from "@/hooks/useGallery";
 import { REAL_CAT_SLUGS, RELATED_SERVICES, titleCaseSlug } from "@/lib/realisations";
+import { PAGE_UPDATED } from "@/lib/lastmod";
 
 /**
  * HUB `/realisations` — créé le 20/09/2026.
@@ -52,8 +53,7 @@ const DOSSIERS: Record<string, string> = {
 const SAVOIR = {
   heading: "Ce qu'on nous demande avant de signer",
   lead: "Regarder des photos de chantiers ne dit pas ce qui se passe après, une fois l'enrobé posé et la facture payée. Voici ce que couvre réellement la garantie décennale sur une cour ou un parking, à partir de quand elle court, quel document l'entreprise doit remettre avant d'ouvrir le chantier, et d'où HCE intervient.",
-  updated: "2026-09-20",
-  updatedLabel: "20 septembre 2026",
+  updated: PAGE_UPDATED["/realisations"],
   qa: [
     {
       q: "Une cour ou un parking en enrobé est-il couvert par la garantie décennale ?",
@@ -315,7 +315,8 @@ function HubRealisations() {
             style={{ fontSize: 14, lineHeight: 1.7 }}
           >
             <p>
-              Dernière mise à jour : <time dateTime={SAVOIR.updated}>{SAVOIR.updatedLabel}</time>
+              Dernière mise à jour :{" "}
+              <time dateTime={SAVOIR.updated.iso}>{SAVOIR.updated.label}</time>
             </p>
             <p className="mt-2">
               Sources :{" "}

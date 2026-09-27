@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import type {} from "@tanstack/react-start";
+import { PAGE_UPDATED } from "@/lib/lastmod";
 
 // Hôte réellement servi : l'apex hcebtp.com répond 308 vers www.hcebtp.com.
 // Le sitemap, les canonical et robots.txt doivent tous pointer vers cet hôte,
@@ -12,6 +13,17 @@ interface SitemapEntry {
   changefreq?: "always" | "hourly" | "daily" | "weekly" | "monthly" | "yearly" | "never";
   priority?: string;
 }
+
+// `lastmod` n'est pas écrit ici : il est lu dans `src/lib/lastmod.ts`, qui est
+// aussi ce qu'affiche la page (« Dernière mise à jour : … »). Les deux ne
+// peuvent donc pas diverger — et c'est la condition pour que Google accorde
+// du crédit au `lastmod` : il compare la valeur annoncée à ce que voit
+// l'utilisateur, et ignore le `lastmod` de tout le sitemap s'il le juge peu
+// fiable. Les URLs absentes de la table (l'accueil et
+// `/realisations/chantier-en-cours`, qui ne publient aucune date de mise à
+// jour) sortent simplement sans `lastmod` : l'élément est facultatif par URL.
+const lastmodOf = (path: string): string | undefined =>
+  (PAGE_UPDATED as Record<string, { iso: string }>)[path]?.iso;
 
 export const Route = createFileRoute("/sitemap.xml")({
   server: {
@@ -36,6 +48,7 @@ export const Route = createFileRoute("/sitemap.xml")({
           [
             `  <url>`,
             `    <loc>${BASE_URL}${e.path}</loc>`,
+            lastmodOf(e.path) ? `    <lastmod>${lastmodOf(e.path)}</lastmod>` : null,
             e.changefreq ? `    <changefreq>${e.changefreq}</changefreq>` : null,
             e.priority ? `    <priority>${e.priority}</priority>` : null,
             `  </url>`,

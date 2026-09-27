@@ -15,6 +15,7 @@ import { toast } from "sonner";
 import { Pencil, Trash2, Plus, Loader2, ImagePlus } from "lucide-react";
 import { optimizeImageUrl } from "@/lib/optimizeImage";
 import { cropCover } from "@/lib/cropImage";
+import { PAGE_UPDATED, type PageUpdate } from "@/lib/lastmod";
 
 /** Nombre d'emplacements toujours proposés à l'admin par dossier (extensible). */
 const MIN_SLOTS = 5;
@@ -74,8 +75,9 @@ const REAL_SAVOIR: Record<
   {
     heading: string;
     lead: string;
-    updated: string;
-    updatedLabel: string;
+    /* Date de mise à jour : lue dans `src/lib/lastmod.ts`, la source unique
+       que partagent la mention visible et le `<lastmod>` du sitemap. */
+    updated: PageUpdate;
     qa: { q: string; a: string }[];
     sources: { label: string; url: string }[];
   }
@@ -84,8 +86,7 @@ const REAL_SAVOIR: Record<
     heading:
       "Goudronner une cour ou une allée de maison : les questions qui se posent avant le devis",
     lead: "Une cour privée s'arrête rarement à la limite de la propriété : elle se raccorde à une route, traverse parfois un fossé, et dessert quelquefois plusieurs maisons. Ces trois points relèvent de textes précis, et ce sont eux qui décident du calendrier du chantier bien plus que la météo. Voici cinq questions à trancher avant de signer, avec les textes applicables.",
-    updated: "2026-09-23",
-    updatedLabel: "23 septembre 2026",
+    updated: PAGE_UPDATED["/realisations/cour-allee-privee"],
     qa: [
       {
         q: "Faut-il une autorisation pour raccorder une allée privée à la route ?",
@@ -137,8 +138,7 @@ const REAL_SAVOIR: Record<
   "parking-voirie-pro": {
     heading: "Refaire un parking professionnel : ce qui se décide avant la première tonne d'enrobé",
     lead: "Un parking d'entreprise ne se traite pas comme une cour de maison : ce sont le trafic poids lourds, l'accessibilité des places et, depuis 2023, l'ombrage qui commandent le projet — pas la surface à couvrir. Voici cinq questions qui se posent avant un chantier de réfection, avec les textes qui s'appliquent.",
-    updated: "2026-09-22",
-    updatedLabel: "22 septembre 2026",
+    updated: PAGE_UPDATED["/realisations/parking-voirie-pro"],
     qa: [
       {
         q: "Faut-il refaire tout un parking, ou seulement la couche de surface ?",
@@ -184,8 +184,7 @@ const REAL_SAVOIR: Record<
   "preparation-terrassement": {
     heading: "Terrassement : les questions qu'on se pose devant un terrain décaissé",
     lead: "Un terrassement se juge mal en photo : ce qui décide de la tenue d'une cour ou d'un parking est ce qui se passe sous la surface, et se vérifie avec des essais normalisés. Trois choses se tranchent avant le premier godet — l'autorisation d'urbanisme, la nature du sol en place et le sort des terres sorties — et une quatrième, la saison, décide du planning dans le Jura. Voici cinq questions avec les textes et les normes applicables.",
-    updated: "2026-09-25",
-    updatedLabel: "25 septembre 2026",
+    updated: PAGE_UPDATED["/realisations/preparation-terrassement"],
     qa: [
       {
         q: "Faut-il une autorisation d'urbanisme pour terrasser un terrain ?",
@@ -385,7 +384,7 @@ function CategorySavoir({ slug }: { slug: string }) {
           style={{ fontSize: 14, lineHeight: 1.7 }}
         >
           <p>
-            Dernière mise à jour : <time dateTime={savoir.updated}>{savoir.updatedLabel}</time>
+            Dernière mise à jour : <time dateTime={savoir.updated.iso}>{savoir.updated.label}</time>
           </p>
           <p className="mt-2">
             Sources :{" "}

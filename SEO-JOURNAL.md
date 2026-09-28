@@ -579,6 +579,77 @@ Toutes les valeurs de la table du 15/09 sont **retrouvées au caractère près**
 chiffres que la production avant le chantier : la fidélité du banc est
 re-confirmée pour la deuxième fois.
 
+### Positions mesurées — 28/09/2026
+
+**Indexation : toujours nulle, 21 jours après la 1re soumission IndexNow.** Les
+trois mesures habituelles via `WebSearch`, reconduites à l'identique :
+1. **Phrase exacte du site** `"Médaillons et inserts pavés intégrés à l'enrobé"`
+   → dix résultats, **zéro hcebtp.com**. Les mêmes concurrents français qu'aux
+   20, 21, 22, 23, 25 et 27/09 (mavrotp, pajot-tp, aravis-enrobage,
+   abers-amenagement, europavage68, perenia, cuinet) + deux brevets USPTO +
+   Pinterest. **Inchangé, y compris dans l'ordre.**
+2. **Requête nommant le domaine** `hcebtp.com HCE Hini Cours Enrobé Cize 39300
+   enrobé travaux publics` → **aucune page du domaine**, neuf fiches d'annuaire
+   (kompass, pappers, verif, doctrine, societe, pagesjaunes, 118000,
+   lagazettefrance, manageo) — **exactement les mêmes qu'aux 25 et 27/09**.
+   **Inchangé.**
+3. **`site:hcebtp.com`** → neuf pages sans rapport (Wikipédia d'acronymes HTP /
+   HCB / HBD, chnbtp.com, Facebook HBTP), **zéro résultat du domaine**.
+   L'opérateur `site:` n'est toujours pas honoré par ce canal. **Inchangé.**
+
+| Requête | Mesure (28/09/2026) | Évolution vs 27/09 |
+|---|---|---|
+| indexation (phrase exacte du site) | **absent** | inchangé |
+| indexation (requête nommant le domaine) | **absent** | inchangé — 9 fiches d'annuaire |
+| `site:hcebtp.com` | **absent** | inchangé |
+| requêtes commerciales | **non mesurables** (pas de SERP brute via ce canal) | indéterminé |
+
+✅ **`WebSearch` n'a échoué aucune fois aujourd'hui** (3 requêtes d'indexation +
+5 requêtes de veille et de sourçage, 8 réponses exploitables). Les canaux de
+SERP brute n'ont **pas** été re-testés : la liste du 11/09 est à jour, tous
+étaient morts. Ne pas y perdre de temps demain.
+
+> 🔕 **Pas de notification client aujourd'hui, et c'est volontaire.** La règle du
+> 23/09 tient : la prochaine échéance d'alerte est le **30/09/2026**, soit dans
+> deux jours — **c'est le run du 30 qui doit la déclencher**, ou n'importe quel
+> run si l'indexation arrive, si une position mesurable apparaît, ou si un
+> contrôle casse. Rien de tout cela n'est survenu aujourd'hui.
+
+**Volume de texte servi en production** (`scripts/mesure-texte-servi.mjs`, vu
+comme Googlebot). **Avant** le chantier du jour : identique au 27/09 **au
+caractère près sur les douze URLs**. **Après** déploiement : seule
+`/realisations` bouge, de 6 258 à **13 260** caractères ; les onze autres sont
+inchangées au caractère près — mesuré, pas supposé.
+
+| URL | Texte servi (28/09) | vs 27/09 | JSON-LD | lastmod |
+|---|---|---|---|---|
+| accueil | 5 499 car. | = | 3 | *(aucun, volontaire)* |
+| `/realisations` | **13 260 car.** | **+7 002** | 4 | **2026-09-28** |
+| `/services/bordures-murets` | 7 012 car. | = | 4 | 2026-09-17 |
+| `/services/finitions-soignees` | 6 821 car. | = | 4 | 2026-09-21 |
+| `/services/drainage-pentes` | 5 198 car. | = | 4 | 2026-09-13 |
+| `/services/maconnerie-generale` | 5 080 car. | = | 4 | 2026-09-16 |
+| `/services/preparation-terrain` | 4 482 car. | = | 4 | 2026-09-12 |
+| `/services/enrobe-a-chaud` | 3 783 car. | = | 4 | 2026-09-11 |
+| `/realisations/cour-allee-privee` | 7 670 car. | = | 3 | 2026-09-23 |
+| `/realisations/parking-voirie-pro` | 6 356 car. | = | 3 | 2026-09-22 |
+| `/realisations/preparation-terrassement` | 8 156 car. | = | 3 | 2026-09-25 |
+| `/realisations/chantier-en-cours` | 373 car. | = | 2 | *(aucun, volontaire)* |
+
+Les 12 URLs du sitemap répondent 200. `scripts/verif-faq.mjs` passe en **✓ sur
+les onze FAQPage** en production, dont **8/8 sur `/realisations`** (contre 4/4
+hier) — attention, **lancé sans argument il ne contrôle que l'accueil** : lui
+passer la liste des URLs pour couvrir tout le site. `scripts/verif-lastmod.mjs`
+passe en **✓ sur les 12 URLs**, et la soumission IndexNow des 12 URLs après
+déploiement sort en **HTTP 200**.
+
+**Délai de déploiement observé** : ~2 min 30 entre le `git push origin HEAD:main`
+et la première réponse de production servant le nouveau contenu (deux essais
+espacés de 25 s). Plus lent que les 45 s du 25/09, mais du même ordre : ne pas
+s'alarmer avant 5 minutes, et **ne pas juger le déploiement sur
+`mesure-texte-servi.mjs`, qui interroge les 12 URLs à chaque essai** — un
+`curl` sur la seule page modifiée suffit et va vingt fois plus vite.
+
 ### Positions mesurées — 27/09/2026
 
 **Indexation : toujours nulle, 20 jours après la 1re soumission IndexNow.** Les
@@ -1038,6 +1109,111 @@ JSON-LD, pas de `BreadcrumbList`).
 ---
 
 ## Chantiers faits
+
+### 28/09/2026 — Le hub `/realisations` passe de 6 258 à 13 260 caractères : quatre questions sur ce qui encadre un chantier, dont le taux de TVA que personne ne publie honnêtement (commit `79dca13`)
+
+**Chantier choisi** : le candidat n°1 désigné le 27/09, sans hésitation. Le hub
+était la seule page « de fond » du site à ne porter que **4** Q/R quand les
+quatre dossiers et les six services en ont 5, et c'est la destination naturelle
+d'une requête « réalisations enrobé Jura ». Angle retenu : **ce qui encadre un
+chantier d'enrobé une fois les photos prises** — exactement les questions qu'un
+client se pose avant de signer, et que les concurrents vus dans les SERP de la
+phrase-test ne traitent jamais (ils décrivent leurs prestations, pas le droit ni
+la fiscalité qui s'y appliquent).
+
+**Les quatre questions ajoutées** (le bloc passe de 4 à 8 Q/R), toutes sourcées
+sur des textes primaires lus verbatim aujourd'hui :
+
+1. **« Comment se passe la réception des travaux d'une cour ou d'un parking ? »**
+   — article **1792-6 alinéa 1 du code civil** (en vigueur depuis le 1er janvier
+   1979, loi n° 78-12 du 4 janvier 1978), cité mot pour mot : la réception est
+   « l'acte par lequel le maître de l'ouvrage déclare accepter l'ouvrage avec ou
+   sans réserves », elle intervient « à la demande de la partie la plus
+   diligente » et est « en tout état de cause, prononcée contradictoirement ».
+   **Le journal du 20/09 citait déjà le PV comme point de départ de la décennale
+   sans jamais expliquer l'acte lui-même** : le trou est comblé.
+2. **« Un défaut apparaît trois mois après la fin du chantier : qui le
+   reprend ? »** — **garantie de parfait achèvement**, article 1792-6 alinéas 2
+   à 6. Un an à compter de la réception, **tous** les désordres signalés quelle
+   que soit leur gravité, réserves au PV ou « voie de notification écrite » pour
+   ceux révélés après ; délais de reprise « fixés d'un commun accord » ; à
+   défaut, travaux « aux frais et risques de l'entrepreneur défaillant » après
+   mise en demeure infructueuse ; et la limite, verbatim : la garantie « ne
+   s'étend pas aux travaux nécessaires pour remédier aux effets de l'usure
+   normale ou de l'usage ». La différence de nature avec la décennale (un an
+   mais sans tri des désordres / dix ans mais solidité et impropriété seules)
+   est posée noir sur blanc.
+3. **« Une allée ou une cour en enrobé peut-elle bénéficier de la TVA à 10 % ? »**
+   — **la trouvaille du jour, et la plus rentable.** La doctrine fiscale admet
+   que « les travaux portant sur les voies d'accès principales à la maison
+   d'habitation (allée privative, voie d'accès au garage, etc.) » relèvent du
+   taux réduit de l'**article 279-0 bis du CGI**, et l'annexe **BOI-ANNX-000208
+   (version du 31/07/2024)** cite **nommément « travaux de revêtement :
+   enrobage, dallage et pavage »**, l'abaissement de bordure de trottoir donnant
+   accès au garage, et la pose de bordures et caniveaux le long de ces voies.
+   Exclus et donc à 20 % : les éléments d'agrément d'espaces verts (piscines,
+   bassins d'ornement, éclairage des végétaux) et tout ce qui porte sur un local
+   professionnel ou une voirie d'activité, le taux réduit ne visant que les
+   locaux à usage d'habitation achevés depuis plus de deux ans. Point pratique
+   rarement publié : **c'est le client qui certifie les conditions**, et
+   **BOI-TVA-LIQ-30-20-90-30 (version du 22/10/2025)** dit que « le prestataire
+   devra conserver à l'appui de sa comptabilité le devis ou la facture sur lequel
+   figurent les informations certifiées par le client permettant de bénéficier du
+   taux réduit ». **Aucun prix n'est écrit nulle part** — c'est un taux légal,
+   pas un tarif, et la règle du simulateur n'est pas touchée.
+4. **« Le client doit-il garantir le paiement des travaux avant qu'ils
+   commencent ? »** — **article 1799-1 du code civil** (en vigueur depuis le
+   1er janvier 2014) et **article 1er du décret n° 99-658 du 30 juillet 1999**
+   (rédaction en vigueur depuis le 6 novembre 2014) : seuil de **12 000 € HT**,
+   sommes dues entendues du prix convenu « déduction faite des arrhes et
+   acomptes versés lors de la conclusion » ; crédit spécifique affecté ou
+   cautionnement solidaire ; sursis d'exécution possible « après mise en demeure
+   restée sans effet à l'issue d'un délai de quinze jours ». **Et la nuance que
+   les blogs juridiques écrasent : le texte écarte expressément l'obligation
+   « lorsque le maître de l'ouvrage conclut un marché de travaux pour son propre
+   compte et pour la satisfaction de besoins ne ressortissant pas à une activité
+   professionnelle en rapport avec ce marché »** — donc un particulier qui fait
+   refaire sa cour n'a aucun cautionnement à fournir. Dit comme ça, le passage
+   répond à la vraie question posée, dans les deux sens.
+
+**Ce qui a été touché, et rien d'autre** : le tableau `SAVOIR` de
+`src/routes/realisations.index.tsx` (4 Q/R → 8, et 2 sources → 7), la date de
+`/realisations` dans `src/lib/lastmod.ts` (20/09 → 28/09, source unique de la
+date visible **et** du `lastmod` du sitemap), et l'entrée `/realisations` de
+`public/llms.txt` + son en-tête « Dernière mise à jour ». **Zéro ligne de code
+hors données** : le composant visible et le `FAQPage` lisent le même tableau, ils
+se sont branchés seuls — troisième confirmation après les 22, 23 et 25/09 que
+cette infrastructure tient.
+
+**Contrôles avant push, tous verts** : banc d'essai local (recette du 15/09,
+`npm install` puis `npx vite dev`) mesuré **avant** (6 258 car., exactement la
+valeur de production le même jour → banc fidèle) et **après** (13 260 car.) avec
+le **même** script ; `verif-faq.mjs` **8/8 questions et 8/8 réponses** ;
+`verif-lastmod.mjs` 12 URLs cohérentes ; `tsc --noEmit`, `eslint`,
+`prettier --check` et `npm run check:fige` en code 0. **Après déploiement**, les
+mêmes contrôles refaits en production : 13 260 car. sur le hub, **onze autres
+URLs inchangées au caractère près**, 11 FAQPage ✓, 12 `lastmod` ✓, IndexNow en
+HTTP 200.
+
+**Ce que j'ai décidé de NE PAS faire, et pourquoi :**
+- **Ne pas ouvrir `/realisations/chantier-en-cours` (373 car.)**, le dernier
+  contenu maigre du site. Toujours aucun angle sourçable honnêtement : c'est une
+  galerie de chantiers en action, et les deux pistes évoquées depuis le 25/09
+  (compactage en cours de pose, fenêtre de mise en œuvre à 150 °C) supposent une
+  source primaire chiffrée qui n'existe pas en accès libre — c'est le thread
+  ouvert depuis le 11/09 sur les épaisseurs et granulométries. Rien changé à ce
+  constat aujourd'hui.
+- **Ne pas reporter la Q/R TVA sur `/services/enrobe-a-chaud`**, où elle aurait
+  aussi du sens. Un contenu dupliqué entre deux pages du même site se cannibalise,
+  et le hub est le bon porteur : il couvre les deux publics (particulier et pro),
+  ce que la réponse distingue justement. **Si un jour la page service doit en
+  parler, l'angle doit être différent, pas recopié.**
+- **Ne pas toucher à l'accueil** le même jour : un chantier par jour, mené au
+  bout. L'accueil reste le candidat n°1 du prochain run.
+- **Ne pas ajouter de `HowTo`** malgré la consigne de maintenance qui le
+  mentionne : aucune page du site n'est procédurale aujourd'hui, et un `HowTo`
+  posé sur un contenu qui n'en est pas un est un mismatch. Constat à réévaluer le
+  jour où une page décrit vraiment une procédure étape par étape.
 
 ### 27/09/2026 — Le sitemap a enfin un `lastmod`, et il ne peut plus mentir : il lit la date que la page affiche (commit `51d45aa`)
 
@@ -2838,7 +3014,44 @@ de suite.**
 > `lastmod`, volontairement. `scripts/verif-lastmod.mjs` garde l'alignement.
 > **Le point n°4 ci-dessous, en attente depuis le 09/09, est clos.**
 >
-> 🔴 **CANDIDAT N°1 DU PROCHAIN RUN (au 27/09) — enrichir le hub
+> ✅ ~~**CANDIDAT N°1 DU PROCHAIN RUN (au 27/09) — enrichir le hub
+> `/realisations` d'un second bloc de Q/R.**~~ **Fait le 28/09/2026** (commit
+> `79dca13`) : quatre Q/R sourcées sur la réception des travaux (article 1792-6
+> al. 1 du code civil), la garantie de parfait achèvement d'un an et sa
+> différence avec la décennale (al. 2 à 6), le taux de TVA d'une allée privée
+> (article 279-0 bis du CGI, BOI-ANNX-000208 du 31/07/2024 qui nomme
+> l'« enrobage », BOI-TVA-LIQ-30-20-90-30 du 22/10/2025) et la garantie de
+> paiement des marchés privés (article 1799-1 du code civil, seuil de 12 000 €
+> HT du décret n° 99-658). **Le bloc passe de 4 à 8 Q/R, 6 258 → 13 260
+> caractères servis**, `FAQPage` aligné 8/8, `lastmod` avancé au 28/09,
+> `llms.txt` à jour. Les trois angles repérés le 27/09 (réception, parfait
+> achèvement, paiement) ont tous trouvé leur source primaire ; le quatrième
+> (TVA) est une trouvaille du jour.
+>
+> 🔴 **CANDIDAT N°1 DU PROCHAIN RUN (au 28/09) — enrichir l'accueil
+> (5 499 car.).** C'est désormais le meilleur candidat restant, et de loin :
+> **la page la plus visitée du site, la seule page de fond sans « Dernière mise
+> à jour », et la moins travaillée depuis le 15/09** (où seul le rendu des liens
+> de galerie avait été corrigé, pas le contenu). Elle porte déjà un `FAQPage` de
+> 6 Q/R **construit depuis la constante `FAQS` de `src/components/sections.tsx`,
+> qui peut être surchargée par le CMS** — lire l'entrée correspondante des
+> « Hypothèses à vérifier » AVANT d'y toucher : ajouter une Q/R dans `FAQS` est
+> sans danger, mais le jour où le client édite la FAQ depuis l'admin, le JSON-LD
+> ne suivra pas. **Attention au doublon** : 30 Q/R de services + 23 Q/R de
+> réalisations sont déjà publiées, **les relire avant de rédiger**. Angles qui
+> n'appartiennent à aucune page existante et qui conviennent à un accueil :
+> comment se déroule une visite de chantier et ce qu'elle permet de chiffrer ;
+> ce qu'un devis de travaux doit obligatoirement mentionner (décret n° 2020-1817
+> sur les déchets est déjà cité sur `finitions-soignees` — chercher autre chose,
+> par exemple les mentions du devis de travaux côté consommateur) ; quelle
+> surface minimale justifie une intervention. **Si l'accueil reçoit un bloc
+> daté, ajouter sa clé dans `src/lib/lastmod.ts`** — le sitemap suivra seul, et
+> `verif-lastmod.mjs` le contrôlera.
+> *Repli sûr* : `/realisations/chantier-en-cours` (373 car.) reste le dernier
+> contenu maigre, mais **toujours sans angle sourçable** (voir « décidé de ne pas
+> faire » du 28/09). Ne l'ouvrir que le jour où une source primaire apparaît.
+>
+> 📌 *Raisonnement d'origine du 27/09, conservé :* **enrichir le hub
 > `/realisations` d'un second bloc de Q/R.** C'est le meilleur des candidats
 > restants : créé le 20/09, il a eu le temps d'exister, il est la destination
 > naturelle d'une requête « réalisations enrobé Jura », et il ne porte
@@ -3223,6 +3436,24 @@ de suite.**
 
 ## Erreurs commises et corrigées
 
+- **28/09/2026 — je suis retombé dans le piège du `git fetch` multi-réf, le jour
+  même où le journal le décrivait.** Premier geste du run :
+  `git fetch origin main claude/upbeat-wozniak-0goiw0`. La branche assignée
+  **n'existait pas encore sur le dépôt distant** (`couldn't find remote ref`),
+  donc **le fetch a échoué en entier et `origin/main` est resté sur le 22/09** —
+  d'où six commits qui semblaient « en attente » et une minute passée à croire
+  que les runs des 23 au 27/09 n'étaient pas déployés. Corrigé par
+  `git fetch origin main` seul : `origin/main` était en fait **strictement égal à
+  HEAD**. **Règle durcie pour les prochains runs : la branche de travail assignée
+  par l'environnement n'existe pas sur `origin` au démarrage — ne JAMAIS la mettre
+  dans le même `git fetch` que `main`.** Fetcher `main` seul, toujours. Et
+  l'existence d'une réf `origin/<branche>` en local ne prouve rien : c'est un
+  reste de clonage, `git ls-remote --heads origin` est le seul juge.
+- **28/09/2026 — rappel confirmé, pas une erreur du jour : seule `main`
+  déploie.** Le commit a été poussé sur `main` (`git push origin HEAD:main`) et la
+  production a servi le nouveau contenu ~2 min 30 plus tard, puis la branche
+  assignée a été poussée séparément pour respecter la consigne d'environnement.
+  **L'ordre compte : `main` d'abord, la branche ensuite.**
 - **27/09/2026 — j'ai cru pendant plusieurs minutes que les runs du 23 et du
   25/09 n'avaient jamais été déployés.** `git fetch origin main <branche-qui-
   n'existe-pas>` a échoué sur la seconde réf et **n'a donc actualisé ni l'une ni
@@ -3518,6 +3749,80 @@ de suite.**
 ---
 
 ## Techniques apprises
+
+### 28/09/2026 (veille du lundi) — 📚 Google élague des types de données structurées mais ne recule pas sur le principe (le site est indemne, vérifié), et ⚙️ le BOFiP est lisible depuis le runner : un second filon de sources primaires datées
+
+**1. 📚 Veille : ce qui a changé côté données structurées en 2026, et pourquoi
+ça ne nous coûte rien.** Google a supprimé en 2026 le support de plusieurs types
+de résultats enrichis — d'après les sources secondaires lues aujourd'hui : en
+juin, **Book Actions, Course Info, Claim Review, Estimated Salary, Learning
+Video, Special Announcement et Vehicle Listing** ; en juillet, la fin de
+**Special Announcement** (héritage du Covid) ; et une note de dépréciation sur
+**Practice Problem**, que la presse SEO a lue comme un recul général alors
+qu'elle ne visait qu'une fonctionnalité peu utilisée. La position officielle
+citée est l'inverse d'un désengagement : Google dit retirer « some features that
+aren't being used very often and aren't adding significant value to users ».
+**Contrôle négatif fait tout de suite, et c'est lui qui compte** : l'inventaire
+des `@type` du dépôt (`grep` sur `src/`) ne contient que **Organization,
+LocalBusiness, Service, FAQPage, BreadcrumbList, CollectionPage et ItemList** —
+**aucun** des types retirés. **Rien à changer, et rien à re-vérifier avant
+longtemps.** *Réserve honnête, à lever un autre jour :* cette liste vient de
+sources secondaires (Search Engine Journal du 11/11/2025 et résumés de moteur),
+**pas** d'une page de Google. Deux impasses rencontrées : `searchengineland.com`
+répond **403 à `WebFetch`** (ne pas réessayer), et
+`developers.google.com/search/blog/<année>/<mois>` **n'est pas une URL d'index
+valide → 404** (deviner un chemin de billet ne marche pas ; passer par
+`developers.google.com/search/updates`).
+
+**2. 📚 Le reste de la veille confirme la stratégie en cours, sans rien ajouter
+d'applicable aujourd'hui.** Trois points revenus de plusieurs sources : les
+données structurées servent désormais de **signal de fiabilité d'entité** réutilisé
+par les réponses génératives (et pas seulement de déclencheur de résultat
+enrichi) ; la fiche **Google Business Profile alimente directement les AI
+Overviews** sur les requêtes locales — ce qui **renforce encore l'action n°2 du
+fichier client** (revendiquer la fiche existante et y déclarer le site) ; et la
+« prominence » locale pèse de plus en plus sur l'engagement réel plutôt que sur
+les seuls liens. **Aucune de ces trois choses n'est faisable depuis le dépôt** :
+elles confirment l'alerte du 20/09 au lieu de la contredire. Ne pas rouvrir de
+chantier code au motif qu'il « aiderait l'indexation ».
+
+**3. ⚙️ RECETTE — le BOFiP se lit depuis le runner, et chaque page porte sa date
+de version dans son URL.** C'est le second filon de sources primaires après
+Légifrance (23/09), et le premier qui couvre la **fiscalité**, sujet dont aucun
+concurrent du secteur ne parle honnêtement. Méthode qui a marché du premier coup :
+- Chercher par `WebSearch` un **fragment exact** du texte visé + l'identifiant
+  `BOI-…`. Les blogs de paysagistes et de fiscalistes paraphrasent — **ne pas les
+  citer**.
+- L'URL utile a la forme
+  `bofip.impots.gouv.fr/bofip/<n>-PGP.html/identifiant=<BOI-…>-<AAAAMMJJ>`.
+  **Le suffixe de date est la date de la version**, donc une citation
+  vérifiable et datée sans avoir à la deviner. Vérifier qu'on cite bien la
+  version la plus récente : plusieurs dates coexistent pour un même identifiant
+  (ici 2012, 2014, 2024 pour `BOI-ANNX-000208`, et 2012, 2014, 2024, **2025**
+  pour `BOI-TVA-LIQ-30-20-90-30`) — **la plus ancienne sort souvent en tête des
+  résultats de recherche.**
+- Les **annexes `BOI-ANNX-…`** sont les pages les plus rentables : ce sont des
+  tableaux cas par cas (ici « travaux extérieurs et assimilés : cours
+  d'immeubles, terrasses, vérandas, espaces verts ») qui **nomment les techniques
+  du métier**. Celle du 31/07/2024 écrit littéralement « travaux de revêtement :
+  enrobage, dallage et pavage ». Un contenu qui cite ça se distingue
+  immédiatement.
+**Pourquoi ça vaut pour le GEO** : une réponse qui dit « oui à 10 % dans ce cas,
+non à 20 % dans cet autre », avec l'article du CGI, l'identifiant de doctrine et
+la date de version, est un passage autonome et vérifiable — le profil exact de ce
+qu'une IA reprend. **Filon non épuisé** : le même corpus traite du taux applicable
+aux travaux sur locaux professionnels, des attestations, et de la distinction
+entretien / amélioration. À réutiliser, en citant toujours la version datée.
+
+**4. ⚙️ Deux pièges d'outillage relevés aujourd'hui, à ne pas re-découvrir.**
+- **`scripts/verif-faq.mjs` lancé sans argument ne contrôle que l'accueil**
+  (« 6/6 »), ce qui peut laisser croire que tout le site est vérifié. Pour
+  couvrir les onze `FAQPage`, **lui passer la liste des URLs**. Le `✓` global sur
+  une base ne dit rien des pages profondes.
+- **`scripts/mesure-texte-servi.mjs` interroge les 12 URLs à chaque appel** : s'en
+  servir pour attendre un déploiement coûte des minutes pour rien. Attendre avec
+  un `curl` sur la seule page modifiée (ou sur `/sitemap.xml` pour voir bouger le
+  `lastmod`), puis lancer la mesure complète une fois.
 
 ### 27/09/2026 — ⚙️ Trois acquis : un `git fetch` qui ment, l'outil pour dater un bloc, et le contrôle négatif obligatoire
 

@@ -34,7 +34,7 @@ export const PAGE_UPDATED = {
   "/services/drainage-pentes": { iso: "2026-09-13", label: "13 septembre 2026" },
   "/services/bordures-murets": { iso: "2026-09-17", label: "17 septembre 2026" },
   "/services/finitions-soignees": { iso: "2026-09-21", label: "21 septembre 2026" },
-  "/realisations": { iso: "2026-09-20", label: "20 septembre 2026" },
+  "/realisations": { iso: "2026-09-28", label: "28 septembre 2026" },
   "/realisations/cour-allee-privee": { iso: "2026-09-23", label: "23 septembre 2026" },
   "/realisations/parking-voirie-pro": { iso: "2026-09-22", label: "22 septembre 2026" },
   "/realisations/preparation-terrassement": { iso: "2026-09-25", label: "25 septembre 2026" },

@@ -5,7 +5,7 @@
 > dans le Jura et l'Ain. Entreprise créée en 2012, 14 années d'expérience, plus de
 > 1000 chantiers livrés, garantie décennale.
 
-Dernière mise à jour : 25 septembre 2026
+Dernière mise à jour : 28 septembre 2026
 Site officiel : https://www.hcebtp.com
 
 ## L'entreprise en bref
@@ -304,11 +304,21 @@ Demande par téléphone au 03 84 52 61 48 ou via le formulaire de https://www.hc
   sur un devis (décret n° 2020-1817) et la validation étape par étape — avec leurs sources.
 - [Réalisations](https://www.hcebtp.com/realisations) : page mère des quatre dossiers
   de chantiers (cours et allées privées, parkings et voiries pro, préparation et
-  terrassement, chantiers en cours). Contient aussi les réponses détaillées sur la
-  garantie décennale appliquée à une cour ou un parking (voirie et ouvrages de
-  viabilité couverts, point de départ du délai à la réception des travaux,
-  attestation d'assurance à remettre avant l'ouverture du chantier) et sur la zone
-  d'intervention d'HCE, avec leurs sources.
+  terrassement, chantiers en cours). Contient aussi les réponses détaillées sur ce qui
+  encadre un chantier d'enrobé une fois les photos prises — la garantie décennale
+  appliquée à une cour ou un parking (voirie et ouvrages de viabilité couverts, point de
+  départ du délai à la réception des travaux, attestation d'assurance à remettre avant
+  l'ouverture du chantier), la réception des travaux elle-même (acte contradictoire,
+  réserves au procès-verbal, article 1792-6 du code civil), la garantie de parfait
+  achèvement d'un an et sa différence avec la décennale (notification écrite, reprise aux
+  frais et risques après mise en demeure, exclusion de l'usure normale), le taux de TVA
+  applicable à une allée privée ou à un accès au garage (taux réduit de 10 % de l'article
+  279-0 bis du CGI sur la voie d'accès principale d'une habitation achevée depuis plus de
+  deux ans, « enrobage » nommément cité par le BOFiP, taux normal de 20 % pour les espaces
+  verts d'agrément et les locaux professionnels, information certifiée par le client sur le
+  devis ou la facture), la garantie de paiement des marchés privés (article 1799-1 du code
+  civil, seuil de 12 000 € HT du décret n° 99-658, exclusion du particulier agissant pour
+  son propre compte) et la zone d'intervention d'HCE, avec leurs sources.
 - [Cour & allée privée](https://www.hcebtp.com/realisations/cour-allee-privee) : cours
   résidentielles et allées privées en enrobé à chaud. Contient aussi les réponses
   détaillées sur ce qui se décide avant de goudronner une cour de maison — l'autorisation

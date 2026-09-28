@@ -52,7 +52,7 @@ const DOSSIERS: Record<string, string> = {
  */
 const SAVOIR = {
   heading: "Ce qu'on nous demande avant de signer",
-  lead: "Regarder des photos de chantiers ne dit pas ce qui se passe après, une fois l'enrobé posé et la facture payée. Voici ce que couvre réellement la garantie décennale sur une cour ou un parking, à partir de quand elle court, quel document l'entreprise doit remettre avant d'ouvrir le chantier, et d'où HCE intervient.",
+  lead: "Regarder des photos de chantiers ne dit pas ce qui se passe autour : ce qu'on signe à la fin, qui reprend un défaut apparu après coup, à quel taux de TVA les travaux sont facturés, et ce que la loi prévoit sur le paiement. Voici, sources à l'appui, ce que couvre la garantie décennale sur une cour ou un parking, à partir de quand elle court, comment se passe la réception des travaux, ce que change la garantie de parfait achèvement d'un an, quel document l'entreprise doit remettre avant d'ouvrir le chantier, quand le taux réduit de TVA à 10 % s'applique à une allée, ce que le code civil impose au client sur la garantie de paiement, et d'où HCE intervient.",
   updated: PAGE_UPDATED["/realisations"],
   qa: [
     {
@@ -64,8 +64,24 @@ const SAVOIR = {
       a: "Le délai démarre le lendemain de la signature du procès-verbal de réception des travaux, et il court dix ans. C'est donc la réception — le moment où le maître d'ouvrage accepte l'ouvrage — qui déclenche le compte à rebours, et non la date du devis, du début du chantier ou de la facture. Passé ces dix ans, plus aucune action en justice ne peut être engagée contre le constructeur sur ce fondement. Concrètement, sur une cour ou un parking, cela veut dire qu'il faut un document de réception daté : sans lui, le point de départ de la garantie n'est pas établi. Source : service-public.gouv.fr, fiche vérifiée le 10 avril 2026.",
     },
     {
+      q: "Comment se passe la réception des travaux d'une cour ou d'un parking ?",
+      a: "C'est un acte juridique, pas une visite de courtoisie : l'article 1792-6 du code civil définit la réception comme « l'acte par lequel le maître de l'ouvrage déclare accepter l'ouvrage avec ou sans réserves ». Elle intervient à la demande de la partie la plus diligente, à l'amiable ou, à défaut, judiciairement, et elle est « en tout état de cause, prononcée contradictoirement » — donc jamais par l'entreprise seule. Concrètement, sur une surface en enrobé, cela veut dire une visite commune en fin de chantier et un procès-verbal daté et signé, où les réserves éventuelles sont écrites noir sur blanc. Ces réserves comptent double : elles ouvrent la reprise au titre de la garantie de parfait achèvement, et la date du procès-verbal fixe le point de départ des dix ans de la décennale. Ce qui se regarde à ce moment-là sur de l'enrobé posé : les raccords au seuil et autour des regards, la tenue des rives, la planéité, et l'écoulement de l'eau — c'est-à-dire précisément ce qui ne se vérifie qu'une fois la surface finie et refroidie. Article en vigueur depuis le 1er janvier 1979, créé par la loi n° 78-12 du 4 janvier 1978, relevé verbatim sur Légifrance le 28 septembre 2026.",
+    },
+    {
+      q: "Un défaut apparaît trois mois après la fin du chantier : qui le reprend ?",
+      a: "L'entreprise, au titre de la garantie de parfait achèvement : pendant un an à compter de la réception, elle doit réparer tous les désordres signalés, quelle que soit leur gravité. C'est le deuxième alinéa de l'article 1792-6 du code civil, et il vise aussi bien les réserves inscrites au procès-verbal de réception que les défauts « révélés postérieurement à la réception », à condition pour ceux-là d'être signalés « par voie de notification écrite » — un courrier ou un courriel daté, donc, pas un appel téléphonique. C'est la différence de nature avec la décennale : la décennale dure dix ans mais ne vise que les désordres qui compromettent la solidité de l'ouvrage ou le rendent impropre à son usage, tandis que la garantie de parfait achèvement ne dure qu'un an mais ne trie pas les désordres. Deux précisions que le texte donne et qu'on lit rarement ailleurs : les délais de reprise sont « fixés d'un commun accord » par le maître d'ouvrage et l'entreprise, et en l'absence d'accord ou en cas d'inexécution dans le délai fixé, les travaux peuvent, après mise en demeure restée infructueuse, être exécutés aux frais et risques de l'entreprise défaillante. Une limite, en revanche : la garantie « ne s'étend pas aux travaux nécessaires pour remédier aux effets de l'usure normale ou de l'usage ». Article relevé verbatim sur Légifrance le 28 septembre 2026.",
+    },
+    {
       q: "Quel document l'entreprise doit-elle remettre avant d'ouvrir le chantier ?",
       a: "Une attestation d'assurance de responsabilité civile décennale, remise au maître d'ouvrage avant l'ouverture du chantier. La loi impose en outre de la joindre au devis et à la facture : ce n'est pas un document à réclamer, c'est un document que le professionnel fournit. Deux points de vigilance que la fiche officielle signale et qu'on lit rarement ailleurs. D'abord, seuls les travaux déclarés dans le contrat d'assurance sont couverts — une entreprise assurée pour un métier ne l'est pas automatiquement pour un autre. Ensuite, l'ouverture du chantier doit intervenir pendant la période de validité du contrat, donc la date de l'attestation compte autant que son existence. L'absence de garantie décennale est un délit puni de 6 mois d'emprisonnement et de 75 000 € d'amende, prévu à l'article L243-3 du Code des assurances.",
+    },
+    {
+      q: "Une allée ou une cour en enrobé peut-elle bénéficier de la TVA à 10 % ?",
+      a: "Oui lorsqu'il s'agit de la voie d'accès principale d'une maison d'habitation achevée depuis plus de deux ans. La doctrine fiscale publiée au BOFiP admet que « les travaux portant sur les voies d'accès principales à la maison d'habitation (allée privative, voie d'accès au garage, etc.) » relèvent du taux réduit de 10 % de l'article 279-0 bis du code général des impôts, et l'annexe qui détaille les travaux extérieurs cite nommément, parmi ceux qui en bénéficient, les « travaux de revêtement : enrobage, dallage et pavage », l'abaissement de la bordure de trottoir qui permet d'emprunter la voie d'accès au garage, et la pose de bordures et de caniveaux le long de ces voies (BOI-ANNX-000208, version du 31 juillet 2024). Ce qui n'entre pas dans le taux réduit : les éléments d'agrément et d'aménagement d'espaces verts — piscines, bassins d'ornement, éclairage des végétaux — qui restent au taux normal de 20 %, et les travaux réalisés sur un local professionnel, un parking d'entreprise ou une voirie d'activité, puisque le taux réduit ne vise que les locaux à usage d'habitation. Un point pratique qui surprend souvent : c'est le client qui certifie que les conditions sont réunies, et non l'entreprise qui en juge. Le BOFiP précise que « le prestataire devra conserver à l'appui de sa comptabilité le devis ou la facture sur lequel figurent les informations certifiées par le client permettant de bénéficier du taux réduit » (BOI-TVA-LIQ-30-20-90-30, version du 22 octobre 2025). Le taux applicable à un chantier dépend donc de la situation du logement, pas du type d'enrobé posé.",
+    },
+    {
+      q: "Le client doit-il garantir le paiement des travaux avant qu'ils commencent ?",
+      a: "Un particulier qui fait refaire sa cour pour son propre compte n'a aucun cautionnement à fournir : l'article 1799-1 du code civil écarte expressément cette obligation « lorsque le maître de l'ouvrage conclut un marché de travaux pour son propre compte et pour la satisfaction de besoins ne ressortissant pas à une activité professionnelle en rapport avec ce marché ». Pour un maître d'ouvrage professionnel, en revanche, l'obligation existe dès que les sommes dues dépassent 12 000 € hors taxes — seuil fixé par l'article 1er du décret n° 99-658 du 30 juillet 1999, qui précise que ces sommes s'entendent du prix convenu au titre du marché, « déduction faite des arrhes et acomptes versés lors de la conclusion » de celui-ci. Le code prévoit alors deux mécanismes : soit un crédit spécifique affecté aux travaux, et l'établissement de crédit ne peut verser le montant du prêt à personne d'autre qu'à l'entreprise tant que sa créance n'est pas intégralement payée ; soit un cautionnement solidaire consenti par un établissement de crédit, une société de financement, une entreprise d'assurance ou un organisme de garantie collective. Tant qu'aucune garantie n'est fournie et que l'entreprise reste impayée des travaux exécutés, le texte l'autorise à surseoir à l'exécution du contrat « après mise en demeure restée sans effet à l'issue d'un délai de quinze jours ». Article en vigueur depuis le 1er janvier 2014 et décret en vigueur dans sa rédaction du 6 novembre 2014, relevés verbatim sur Légifrance le 28 septembre 2026.",
     },
     {
       q: "Où HCE réalise-t-elle ces chantiers ?",
@@ -77,6 +93,31 @@ const SAVOIR = {
       label:
         "service-public.gouv.fr — Garantie décennale des constructeurs (article 1792 du Code civil, article L243-3 du Code des assurances), fiche vérifiée le 10 avril 2026",
       url: "https://www.service-public.gouv.fr/particuliers/vosdroits/F2034",
+    },
+    {
+      label:
+        "Légifrance — article 1792-6 du code civil (réception des travaux et garantie de parfait achèvement), version en vigueur depuis le 1er janvier 1979",
+      url: "https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000006443552",
+    },
+    {
+      label:
+        "Légifrance — article 1799-1 du code civil (garantie de paiement des marchés de travaux privés), version en vigueur depuis le 1er janvier 2014",
+      url: "https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000027645885",
+    },
+    {
+      label:
+        "Légifrance — article 1er du décret n° 99-658 du 30 juillet 1999 (seuil de 12 000 € HT de la garantie de paiement)",
+      url: "https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000029716750",
+    },
+    {
+      label:
+        "BOFiP — BOI-ANNX-000208, taux de TVA applicables aux travaux extérieurs et assimilés (cours d'immeubles, terrasses, espaces verts), version du 31 juillet 2024",
+      url: "https://bofip.impots.gouv.fr/bofip/1735-PGP.html/identifiant=BOI-ANNX-000208-20240731",
+    },
+    {
+      label:
+        "BOFiP — BOI-TVA-LIQ-30-20-90-30, taux réduit sur les locaux d'habitation achevés depuis plus de deux ans, version du 22 octobre 2025",
+      url: "https://bofip.impots.gouv.fr/bofip/1733-PGP.html/identifiant=BOI-TVA-LIQ-30-20-90-30-20251022",
     },
     {
       label:

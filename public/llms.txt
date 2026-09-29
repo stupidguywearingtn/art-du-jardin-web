@@ -5,7 +5,7 @@
 > dans le Jura et l'Ain. Entreprise créée en 2012, 14 années d'expérience, plus de
 > 1000 chantiers livrés, garantie décennale.
 
-Dernière mise à jour : 28 septembre 2026
+Dernière mise à jour : 29 septembre 2026
 Site officiel : https://www.hcebtp.com
 
 ## L'entreprise en bref
@@ -268,10 +268,72 @@ Ces informations sont vérifiables gratuitement sur les annuaires légaux franç
 Après une visite sur site, HCE transmet un devis détaillé et sans engagement.
 Demande par téléphone au 03 84 52 61 48 ou via le formulaire de https://www.hcebtp.com/.
 
+### Une entreprise de travaux est-elle obligée de remettre un devis ?
+Oui, pour l'essentiel des corps d'état du bâtiment. La fiche service-public.gouv.fr
+« Devis obligatoire : activités concernées » (vérifiée le 9 septembre 2022) range parmi
+les prestations pour lesquelles un devis doit être remis avant l'exécution la maçonnerie,
+l'isolation, la menuiserie, la couverture et l'étanchéité, la plomberie, la plâtrerie, la
+peinture, la vitrerie, les revêtements, l'électricité et l'évacuation des eaux pluviales.
+L'obligation vise les prestations de dépannage, de réparation et d'entretien — donc, en
+extérieur, la réfection d'une cour, d'une allée ou d'un parking existants. À défaut de
+devis, l'amende administrative peut atteindre 3 000 € pour une personne physique et
+15 000 € pour une société. Mentions obligatoires : date de rédaction, nom et adresse de
+l'entreprise, nom du client, lieu d'exécution, nature exacte des travaux, décompte
+détaillé en quantité et en prix, taux horaire de main-d'œuvre TTC et modalités de décompte
+du temps, frais de déplacement, somme globale HT et TTC avec le taux de TVA, durée de
+validité, et mention du caractère gratuit ou payant du devis.
+
+### Le devis d'une entreprise de travaux peut-il être payant ?
+Oui, c'est légalement possible : la fiche service-public.gouv.fr précise que « le devis
+peut être fait gratuitement ou être payant ». C'est pour cette raison que la mention du
+caractère gratuit ou payant, et son coût le cas échéant, figure parmi les mentions
+obligatoires du devis. La durée de validité de l'offre en fait également partie : au-delà
+de cette durée, l'entreprise n'est plus tenue par le prix annoncé. Chez HCE, le devis est
+détaillé, établi après visite sur site, et sans engagement.
+
+### Un devis signé vaut-il contrat pour des travaux ?
+Oui. La fiche service-public.gouv.fr « Quel contrat conclure avec une entreprise pour des
+travaux dans le logement ? » (vérifiée le 28 mars 2024) indique qu'un écrit n'est pas
+juridiquement obligatoire mais vivement conseillé comme preuve, et qu'un devis accepté
+peut en tenir lieu. Chaque partie conserve un original. À y faire figurer avant signature :
+plans et descriptif des travaux, matériaux, coût de la main-d'œuvre, location éventuelle de
+matériel, modalités de paiement et prix définitif, dates de début et de fin de chantier,
+éventuelles clauses de pénalité et références d'assurance.
+
+### Arrhes ou acompte : l'argent versé d'avance est-il perdu en cas d'annulation ?
+Tout dépend du mot écrit sur le devis. L'article L214-1 du code de la consommation (version
+en vigueur depuis le 1er juillet 2016) pose que « sauf stipulation contraire […] les sommes
+versées d'avance sont des arrhes, au sens de l'article 1590 du code civil », et que « dans
+ce cas, chacun des contractants peut revenir sur son engagement, le consommateur en perdant
+les arrhes, le professionnel en les restituant au double ». Par défaut, l'argent versé
+d'avance est donc de l'arrhe et chacun peut se dédire. Si le devis qualifie expressément la
+somme d'acompte, l'engagement devient ferme des deux côtés et celui qui renonce reste tenu
+du contrat. Arrhes et acompte ne sont pas synonymes.
+
+### Dans quel délai les travaux doivent-ils être réalisés si le devis ne donne aucune date ?
+Trente jours au plus tard. L'article L216-1 du code de la consommation prévoit qu'« à défaut
+d'indication ou d'accord quant à la date de délivrance ou de fourniture, le professionnel
+délivre le bien ou fournit le service sans retard injustifié et au plus tard trente jours
+après la conclusion du contrat ». En cas de dépassement, l'article L216-6 permet au client
+de notifier la suspension du paiement (articles 1219 et 1220 du code civil) ou de résoudre
+le contrat après mise en demeure d'exécuter dans un délai supplémentaire raisonnable ; la
+résolution est immédiate si l'entreprise refuse d'exécuter ou si la date convenue était une
+condition essentielle du contrat. Articles en vigueur depuis le 1er octobre 2021,
+applicables aux contrats conclus à compter du 1er janvier 2022. Pour de l'enrobé à chaud,
+qui demande un support sec et plus de 5 °C, mieux vaut une date ou une période écrite au
+devis que cette règle supplétive.
+
 ## Pages
 
 - [Accueil](https://www.hcebtp.com/) : présentation d'HCE, services, réalisations,
-  processus de chantier, questions fréquentes, demande de devis.
+  processus de chantier, questions fréquentes, demande de devis. Contient aussi les
+  réponses détaillées sur ce qui précède le chantier — le caractère obligatoire du devis
+  et ses mentions (fiche service-public.gouv.fr « Devis obligatoire : activités
+  concernées », amendes de 3 000 € et 15 000 €), le devis gratuit ou payant et sa durée de
+  validité, la valeur contractuelle d'un devis signé (fiche service-public.gouv.fr sur le
+  contrat de travaux dans un logement), la différence entre arrhes et acompte (article
+  L214-1 du code de la consommation) et le délai d'exécution de trente jours à défaut de
+  date écrite (articles L216-1 et L216-6 du code de la consommation) — avec leurs sources.
 - [Enrobé à chaud](https://www.hcebtp.com/services/enrobe-a-chaud) : pose à la main
   à 150 °C, compactage maîtrisé, enrobé noir/rouge/saumon/bordeaux, garantie décennale.
   Contient aussi les réponses détaillées sur le goudronnage (goudron et bitume, BBSG et

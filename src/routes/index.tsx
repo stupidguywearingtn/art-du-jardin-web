@@ -34,6 +34,7 @@ import { EditModeToolbar } from "@/components/EditModeToolbar";
 import { EditableText } from "@/components/EditableText";
 import { EditableImage } from "@/components/EditableImage";
 import { optimizeImageUrl } from "@/lib/optimizeImage";
+import { PAGE_UPDATED } from "@/lib/lastmod";
 import { KeyRound, ImageOff } from "lucide-react";
 
 const HOME_SITE_ID = "11111111-1111-1111-1111-111111111111";
@@ -57,6 +58,76 @@ function useV() {
   return (section: string, field: string, fallback: string) =>
     getDraft(section, field) ?? get(section, field, fallback);
 }
+
+/**
+ * « AVANT DE SIGNER » — bloc de fond de l'accueil.
+ *
+ * Questions posées telles qu'on les pose à voix haute, réponse autonome en
+ * tête de chaque réponse. Ce tableau est la SOURCE UNIQUE de la section
+ * visible plus bas ET de la partie correspondante du JSON-LD `FAQPage` de la
+ * page : les deux ne peuvent pas diverger.
+ *
+ * Sujet choisi parce qu'aucune autre page ne le couvre : les six pages
+ * service et les quatre dossiers de réalisations traitent la technique, le
+ * droit de l'urbanisme, la voirie et les garanties d'après-chantier ; le
+ * contrat lui-même (devis, signature, acompte, délai) n'était nulle part.
+ * C'est aussi le sujet de la section qui suit immédiatement, le simulateur de
+ * devis.
+ */
+const AVANT_SIGNATURE = {
+  heading: "Avant de signer : ce que dit la loi sur le devis, l'acompte et les délais",
+  lead: "Un devis de travaux n'est pas qu'un prix. C'est le document qui fixe ce qui sera fait, ce qui est couvert, ce qui se passe si le chantier glisse, et ce qu'il advient de l'argent versé d'avance si l'un des deux change d'avis. Voici, textes à l'appui, les cinq points que la loi tranche et que l'on découvre en général trop tard.",
+  updated: PAGE_UPDATED["/"],
+  qa: [
+    {
+      q: "Une entreprise de travaux est-elle obligée de me remettre un devis ?",
+      a: "Oui, pour l'essentiel des corps d'état du bâtiment. La fiche officielle « Devis obligatoire : activités concernées » de service-public.gouv.fr range parmi les prestations pour lesquelles un devis doit être remis avant l'exécution la maçonnerie, l'isolation, la menuiserie, la couverture et l'étanchéité, la plomberie, la plâtrerie, la peinture, la vitrerie, les revêtements, l'électricité et l'évacuation des eaux pluviales. Une précision que l'on lit rarement : cette obligation vise les prestations de dépannage, de réparation et d'entretien — c'est-à-dire, sur une surface extérieure, typiquement la réfection d'une cour, d'une allée ou d'un parking existants. L'entreprise qui ne remet pas de devis s'expose à une amende administrative pouvant aller jusqu'à 3 000 € pour une personne physique et 15 000 € pour une société. Ce que le document doit porter est également fixé : date de rédaction, nom et adresse de l'entreprise, nom du client, lieu d'exécution, nature exacte des travaux, décompte détaillé en quantité et en prix de chaque prestation et de chaque produit, taux horaire de main-d'œuvre TTC et modalités de décompte du temps, frais de déplacement, somme globale à payer hors taxes et toutes taxes comprises avec le taux de TVA appliqué, durée de validité de l'offre, et mention du caractère gratuit ou payant du devis. S'y ajoutent, pour des travaux de bâtiment, l'assurance décennale de l'entreprise et les modalités d'enlèvement et de gestion des déchets du chantier — ce dernier point est détaillé sur notre page consacrée aux finitions et à la fin de chantier. Fiche service-public.gouv.fr vérifiée le 9 septembre 2022.",
+    },
+    {
+      q: "Le devis peut-il m'être facturé, et combien de temps reste-t-il valable ?",
+      a: "Il peut l'être : la fiche service-public.gouv.fr est explicite, « le devis peut être fait gratuitement ou être payant ». Ce n'est donc pas un droit acquis, et c'est précisément pour cela que la mention du caractère gratuit ou payant, et le cas échéant son coût, font partie des mentions obligatoires du devis lui-même : vous devez le savoir avant, pas en recevant la facture. Deuxième mention obligatoire souvent ignorée : la durée de validité de l'offre. Un devis n'engage l'entreprise sur son prix que pendant cette durée — au-delà, elle peut refaire son chiffrage, ce qui est normal quand les prix des matériaux et de l'énergie bougent entre deux saisons. Vérifiez donc deux lignes avant tout : la durée de validité, et le caractère gratuit ou payant. Chez HCE, le devis est détaillé et établi après visite sur site, sans engagement de votre part.",
+    },
+    {
+      q: "Que se passe-t-il exactement quand je signe le devis ?",
+      a: "Le devis accepté devient le contrat : il n'y a rien d'autre à signer. La fiche service-public.gouv.fr consacrée au contrat de travaux dans un logement le dit sans détour — un écrit n'est pas juridiquement obligatoire, mais il est vivement conseillé parce qu'il sert de preuve en cas de litige, et un devis accepté peut en tenir lieu. Chaque partie doit conserver un original. Ce que la même fiche recommande d'y faire figurer avant de signer, au-delà du prix : les plans et le descriptif des travaux, les matériaux retenus, le coût de la main-d'œuvre, la location éventuelle de matériel, les modalités de paiement et le prix définitif, les dates de début et de fin de chantier, les éventuelles clauses de pénalité, et les références d'assurance. Un contrat conclu par voie électronique est valable, à condition que le client ait accepté ce format et qu'il ait pu vérifier le détail de sa commande avant de la confirmer. Fiche service-public.gouv.fr vérifiée le 28 mars 2024.",
+    },
+    {
+      q: "L'acompte que je verse, je le perds si j'annule ?",
+      a: "Cela dépend d'un seul mot écrit sur le devis, et c'est la question la plus mal comprise de toutes. Par défaut, vous ne perdez pas tout et vous pouvez renoncer : l'article L214-1 du code de la consommation pose que « sauf stipulation contraire, pour tout contrat de vente ou de prestation de services conclu entre un professionnel et un consommateur, les sommes versées d'avance sont des arrhes, au sens de l'article 1590 du code civil », et ajoute que « dans ce cas, chacun des contractants peut revenir sur son engagement, le consommateur en perdant les arrhes, le professionnel en les restituant au double ». Autrement dit : à défaut de précision, l'argent versé d'avance est de l'arrhe, chacun peut se dédire, et l'entreprise qui se désiste doit rembourser le double. Mais les trois premiers mots comptent : « sauf stipulation contraire ». Si le devis qualifie expressément la somme d'acompte, la logique s'inverse — l'acompte scelle un engagement ferme des deux côtés, et celui qui renonce reste tenu du contrat. Avant de verser quoi que ce soit, cherchez donc le mot employé dans le document : arrhes ou acompte, ce ne sont pas des synonymes. Article en vigueur depuis le 1er juillet 2016, relevé verbatim sur Légifrance le 29 septembre 2026.",
+    },
+    {
+      q: "Le devis ne donne aucune date : dans quel délai les travaux doivent-ils être faits ?",
+      a: "Trente jours au plus tard, en l'absence de toute indication. L'article L216-1 du code de la consommation prévoit que le professionnel exécute la prestation à la date ou dans le délai indiqué au consommateur, et qu'« à défaut d'indication ou d'accord quant à la date de délivrance ou de fourniture, le professionnel délivre le bien ou fournit le service sans retard injustifié et au plus tard trente jours après la conclusion du contrat ». Si ce délai n'est pas tenu, l'article L216-6 ouvre deux voies au client : notifier la suspension du paiement dans les conditions des articles 1219 et 1220 du code civil, ou résoudre le contrat après avoir mis l'entreprise en demeure d'exécuter dans un délai supplémentaire raisonnable. La résolution peut même être immédiate, sans mise en demeure préalable, si l'entreprise refuse d'exécuter ou si l'exécution à la date convenue constituait une condition essentielle du contrat — et rien de tout cela n'interdit de demander en plus des dommages et intérêts. Conséquence pratique pour de l'enrobé à chaud : ce délai par défaut de trente jours est court au regard d'un métier suspendu à la météo, puisque la pose demande un support sec et des températures supérieures à 5 °C. Mieux vaut donc que le devis porte lui-même une date ou une période écrite, convenue entre les deux parties, plutôt que de laisser jouer la règle supplétive. Articles en vigueur depuis le 1er octobre 2021, applicables aux contrats conclus à compter du 1er janvier 2022, relevés verbatim sur Légifrance le 29 septembre 2026.",
+    },
+  ],
+  sources: [
+    {
+      label:
+        "service-public.gouv.fr — Devis obligatoire : activités concernées (mentions obligatoires, amendes de 3 000 € et 15 000 €), fiche vérifiée le 9 septembre 2022",
+      url: "https://entreprendre.service-public.gouv.fr/vosdroits/F31144",
+    },
+    {
+      label:
+        "service-public.gouv.fr — Quel contrat conclure avec une entreprise pour des travaux dans le logement ?, fiche vérifiée le 28 mars 2024",
+      url: "https://www.service-public.gouv.fr/particuliers/vosdroits/F2533",
+    },
+    {
+      label:
+        "Légifrance — article L214-1 du code de la consommation (arrhes et acomptes), version en vigueur depuis le 1er juillet 2016",
+      url: "https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000032226990",
+    },
+    {
+      label:
+        "Légifrance — article L216-1 du code de la consommation (délai d'exécution, trente jours à défaut d'indication), version en vigueur depuis le 1er octobre 2021",
+      url: "https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000032226968",
+    },
+    {
+      label:
+        "Légifrance — article L216-6 du code de la consommation (suspension du paiement et résolution du contrat en cas de retard), version en vigueur depuis le 1er octobre 2021",
+      url: "https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000032226955",
+    },
+  ],
+};
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -163,7 +234,13 @@ export const Route = createFileRoute("/")({
         children: JSON.stringify({
           "@context": "https://schema.org",
           "@type": "FAQPage",
-          mainEntity: FAQS.map((f) => ({
+          /* Les DEUX sections de questions rendues par cette page, dans leur
+             ordre d'apparition : la FAQ courte (`FAQS`) puis le bloc de fond
+             « Avant de signer » (`AVANT_SIGNATURE.qa`). Un seul `FAQPage` par
+             page, alimenté par les mêmes tableaux que le contenu visible —
+             toute question ajoutée ici l'est donc des deux côtés.
+             `scripts/verif-faq.mjs` le prouve sur le site réellement servi. */
+          mainEntity: [...FAQS, ...AVANT_SIGNATURE.qa].map((f) => ({
             "@type": "Question",
             name: f.q,
             acceptedAnswer: { "@type": "Answer", text: f.a },
@@ -257,6 +334,8 @@ function IndexBody() {
         <Galerie />
         <SectionDivider variant="marquee" />
         <FAQ />
+        <SectionDivider />
+        <AvantSignature />
         <SectionDivider />
         <QuoteForm />
         <SectionDivider />
@@ -1797,6 +1876,90 @@ function ProcessStep({
         />
       </div>
     </div>
+  );
+}
+
+/* ============ AVANT DE SIGNER — bloc de fond sourcé ============
+   Rendu en clair et TOUJOURS monté : aucun `useEffect`, aucun état de
+   chargement, aucun repli conditionnel. C'est la condition pour que le texte
+   soit dans le HTML servi aux robots (cf. le défaut des `/realisations/*`
+   corrigé le 14/09/2026), et c'est ce texte que reprend le `FAQPage` de la
+   page. Placé juste avant le simulateur de devis, dont il est le pendant
+   juridique. */
+function AvantSignature() {
+  return (
+    <section id="avant-signature" className="px-6 md:px-12 py-24 md:py-32 max-w-4xl mx-auto">
+      <div className="label text-gold">— Avant de signer</div>
+      <h2
+        className="font-display mt-6 text-foreground"
+        style={{ fontSize: "clamp(32px, 5vw, 56px)", fontWeight: 400, lineHeight: 1.05 }}
+      >
+        {AVANT_SIGNATURE.heading}
+      </h2>
+      <p className="mt-6 text-muted max-w-3xl" style={{ fontSize: 17, lineHeight: 1.7 }}>
+        {AVANT_SIGNATURE.lead}
+      </p>
+
+      <div className="mt-14 space-y-12">
+        {AVANT_SIGNATURE.qa.map((f) => (
+          <article key={f.q}>
+            <h3
+              className="font-display text-gold"
+              style={{ fontSize: "clamp(21px, 2.4vw, 28px)", fontWeight: 400, lineHeight: 1.25 }}
+            >
+              {f.q}
+            </h3>
+            <p className="mt-4 text-foreground/90" style={{ fontSize: 17, lineHeight: 1.75 }}>
+              {f.a}
+            </p>
+          </article>
+        ))}
+      </div>
+
+      {/* Maillage interne : les deux pages qui prolongent le sujet. Hors du
+          tableau `qa`, donc sans effet sur le JSON-LD. */}
+      <div className="mt-14 flex flex-wrap gap-x-6 gap-y-2" style={{ fontSize: 15 }}>
+        <Link
+          to="/services/$slug"
+          params={{ slug: "finitions-soignees" }}
+          className="text-gold underline decoration-gold/40 underline-offset-4"
+        >
+          Finitions et fin de chantier <span aria-hidden>→</span>
+        </Link>
+        <Link
+          to="/realisations"
+          className="text-gold underline decoration-gold/40 underline-offset-4"
+        >
+          Réception, garanties et TVA des travaux <span aria-hidden>→</span>
+        </Link>
+      </div>
+
+      <div
+        className="mt-12 border-t border-gold/15 pt-6 text-muted"
+        style={{ fontSize: 14, lineHeight: 1.7 }}
+      >
+        <p>
+          Dernière mise à jour :{" "}
+          <time dateTime={AVANT_SIGNATURE.updated.iso}>{AVANT_SIGNATURE.updated.label}</time>
+        </p>
+        <p className="mt-2">
+          Sources :{" "}
+          {AVANT_SIGNATURE.sources.map((s, i) => (
+            <span key={s.url}>
+              {i > 0 && " · "}
+              <a
+                href={s.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline decoration-gold/40 underline-offset-2 hover:text-gold"
+              >
+                {s.label}
+              </a>
+            </span>
+          ))}
+        </p>
+      </div>
+    </section>
   );
 }
 

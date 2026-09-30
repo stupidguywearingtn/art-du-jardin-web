@@ -45,7 +45,7 @@ const service03 = "/assets/maconnerie-1.png";
 const service04 = "/assets/drainage-1.jpeg";
 const service05 = "/assets/bordures-1.png";
 const service06 = "/photos/1.png";
-const ctaCourtyard = "/photos/15-cour-golden-hour.jpg";
+const ctaCourtyard = "/photos/27-parking-enrobe-montagne.jpg";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);

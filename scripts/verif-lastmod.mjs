@@ -26,7 +26,7 @@
  */
 
 const UA = "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)";
-const base = (process.argv[2] || "https://www.hcebtp.com").replace(/\/$/, "");
+const base = (process.argv[2] || "https://www.hcetp.com").replace(/\/$/, "");
 
 const MOIS = [
   "janvier",

@@ -422,12 +422,12 @@ export const Route = createFileRoute("/services/$slug")({
           { name: "description", content: loaderData.seoDescription ?? loaderData.intro },
           { property: "og:title", content: `${loaderData.title} — HCE` },
           { property: "og:description", content: loaderData.seoDescription ?? loaderData.intro },
-          { property: "og:image", content: `https://www.hcebtp.com${loaderData.hero}` },
-          { property: "og:url", content: `https://www.hcebtp.com/services/${params.slug}` },
+          { property: "og:image", content: `https://www.hcetp.com${loaderData.hero}` },
+          { property: "og:url", content: `https://www.hcetp.com/services/${params.slug}` },
         ]
       : [{ title: "Service — HCE" }],
     links: loaderData
-      ? [{ rel: "canonical", href: `https://www.hcebtp.com/services/${params.slug}` }]
+      ? [{ rel: "canonical", href: `https://www.hcetp.com/services/${params.slug}` }]
       : [],
     scripts: loaderData
       ? [
@@ -440,9 +440,9 @@ export const Route = createFileRoute("/services/$slug")({
               description: loaderData.intro,
               provider: {
                 "@type": "LocalBusiness",
-                "@id": "https://www.hcebtp.com/#business",
+                "@id": "https://www.hcetp.com/#business",
                 name: "HCE",
-                url: "https://www.hcebtp.com",
+                url: "https://www.hcetp.com",
                 telephone: "+33 3 84 52 61 48",
                 address: {
                   "@type": "PostalAddress",
@@ -457,7 +457,7 @@ export const Route = createFileRoute("/services/$slug")({
                 { "@type": "AdministrativeArea", name: "Jura" },
                 { "@type": "AdministrativeArea", name: "Ain" },
               ],
-              url: `https://www.hcebtp.com/services/${params.slug}`,
+              url: `https://www.hcetp.com/services/${params.slug}`,
             }),
           },
           {
@@ -470,13 +470,13 @@ export const Route = createFileRoute("/services/$slug")({
                   "@type": "ListItem",
                   position: 1,
                   name: "Accueil",
-                  item: "https://www.hcebtp.com/",
+                  item: "https://www.hcetp.com/",
                 },
                 {
                   "@type": "ListItem",
                   position: 2,
                   name: loaderData.title,
-                  item: `https://www.hcebtp.com/services/${params.slug}`,
+                  item: `https://www.hcetp.com/services/${params.slug}`,
                 },
               ],
             }),

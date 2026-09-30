@@ -23,7 +23,7 @@ import { PAGE_UPDATED } from "@/lib/lastmod";
  * puissent pas diverger.
  */
 
-const URL_HUB = "https://www.hcebtp.com/realisations";
+const URL_HUB = "https://www.hcetp.com/realisations";
 
 const TITRE = "Réalisations HCE — enrobé, cours et parkings dans le Jura";
 const DESCRIPTION =
@@ -150,7 +150,7 @@ export const Route = createFileRoute("/realisations/")({
           "@context": "https://schema.org",
           "@type": "BreadcrumbList",
           itemListElement: [
-            { "@type": "ListItem", position: 1, name: "Accueil", item: "https://www.hcebtp.com/" },
+            { "@type": "ListItem", position: 1, name: "Accueil", item: "https://www.hcetp.com/" },
             { "@type": "ListItem", position: 2, name: "Réalisations", item: URL_HUB },
           ],
         }),
@@ -168,7 +168,7 @@ export const Route = createFileRoute("/realisations/")({
           name: "Réalisations HCE",
           description: DESCRIPTION,
           inLanguage: "fr-FR",
-          publisher: { "@id": "https://www.hcebtp.com/#business" },
+          publisher: { "@id": "https://www.hcetp.com/#business" },
           mainEntity: {
             "@type": "ItemList",
             itemListOrder: "https://schema.org/ItemListOrderAscending",
@@ -177,7 +177,7 @@ export const Route = createFileRoute("/realisations/")({
               "@type": "ListItem",
               position: i + 1,
               name: dossierTitre(slug),
-              url: `https://www.hcebtp.com/realisations/${slug}`,
+              url: `https://www.hcetp.com/realisations/${slug}`,
             })),
           },
         }),

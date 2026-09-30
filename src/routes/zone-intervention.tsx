@@ -32,7 +32,7 @@ import { PAGE_UPDATED } from "@/lib/lastmod";
  * contenu monté après le premier rendu n'existe pas pour un robot.
  */
 
-const URL_ZONE = "https://www.hcebtp.com/zone-intervention";
+const URL_ZONE = "https://www.hcetp.com/zone-intervention";
 
 const TITRE = "Zone d'intervention HCE — Jura et Ain, depuis Cize (39300)";
 const DESCRIPTION =
@@ -147,7 +147,7 @@ export const Route = createFileRoute("/zone-intervention")({
           "@context": "https://schema.org",
           "@type": "BreadcrumbList",
           itemListElement: [
-            { "@type": "ListItem", position: 1, name: "Accueil", item: "https://www.hcebtp.com/" },
+            { "@type": "ListItem", position: 1, name: "Accueil", item: "https://www.hcetp.com/" },
             { "@type": "ListItem", position: 2, name: "Zone d'intervention", item: URL_ZONE },
           ],
         }),
@@ -168,7 +168,7 @@ export const Route = createFileRoute("/zone-intervention")({
           name: "Zone d'intervention HCE — Jura et Ain",
           description: DESCRIPTION,
           inLanguage: "fr-FR",
-          publisher: { "@id": "https://www.hcebtp.com/#business" },
+          publisher: { "@id": "https://www.hcetp.com/#business" },
         }),
       },
       {

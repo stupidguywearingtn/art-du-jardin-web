@@ -12,7 +12,7 @@
 // redimensionner — un window.location.origin en local (localhost) n'est
 // jamais atteignable par leurs serveurs. On cible donc toujours le domaine
 // public de prod, y compris en dev/preview.
-const PUBLIC_ORIGIN = "https://hcebtp.com";
+const PUBLIC_ORIGIN = "https://www.hcetp.com";
 
 export function optimizeImageUrl(src: string, width = 1200): string {
   if (!src || !src.startsWith("/assets/")) return src;

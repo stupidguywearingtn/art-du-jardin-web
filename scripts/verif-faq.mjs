@@ -15,7 +15,7 @@
  * Usage :
  *   node scripts/verif-faq.mjs <url> [url...]
  *   node scripts/verif-faq.mjs http://127.0.0.1:4175/realisations/cour-allee-privee
- *   node scripts/verif-faq.mjs https://www.hcebtp.com/services/enrobe-a-chaud
+ *   node scripts/verif-faq.mjs https://www.hcetp.com/services/enrobe-a-chaud
  *
  * Sortie : une ligne de bilan par URL, puis le détail des Q/R introuvables.
  * Code de sortie 1 dès qu'une question ou une réponse du JSON-LD n'est pas

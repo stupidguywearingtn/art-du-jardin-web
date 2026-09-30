@@ -8,13 +8,13 @@
  * GEO le plus direct dont on dispose depuis le repo.
  *
  * Prérequis : le fichier clé doit être déployé et accessible publiquement à
- * https://www.hcebtp.com/<KEY>.txt et contenir exactement la clé.
+ * https://www.hcetp.com/<KEY>.txt et contenir exactement la clé.
  *
  * Usage :  node scripts/indexnow-submit.mjs
  */
 
 const KEY = "051b2d7c5dec4c46e59a45f33361b9ff";
-const HOST = "www.hcebtp.com";
+const HOST = "www.hcetp.com";
 const ORIGIN = `https://${HOST}`;
 const KEY_LOCATION = `${ORIGIN}/${KEY}.txt`;
 const ENDPOINT = "https://api.indexnow.org/indexnow";

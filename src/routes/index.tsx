@@ -148,9 +148,9 @@ export const Route = createFileRoute("/")({
         content:
           "HCE — Enrobé à chaud, cours, parkings, terrassement dans le Jura et l'Ain depuis 2012. Pose à la main, devis détaillé.",
       },
-      { property: "og:url", content: "https://www.hcebtp.com/" },
+      { property: "og:url", content: "https://www.hcetp.com/" },
     ],
-    links: [{ rel: "canonical", href: "https://www.hcebtp.com/" }],
+    links: [{ rel: "canonical", href: "https://www.hcetp.com/" }],
     scripts: [
       {
         type: "application/ld+json",
@@ -160,7 +160,7 @@ export const Route = createFileRoute("/")({
           // @id partagé avec l'Organization du root et le provider des pages
           // /services/* : sans lui, les moteurs voient trois entités « HCE »
           // concurrentes au lieu d'une seule.
-          "@id": "https://www.hcebtp.com/#business",
+          "@id": "https://www.hcetp.com/#business",
           name: "HCE",
           legalName: "HCE SARL",
           // Voir __root.tsx pour le détail : dénomination au registre national
@@ -184,8 +184,8 @@ export const Route = createFileRoute("/")({
                L'extrait moteur affiche encore l'ancienne adresse — lire la page. */
             "https://fr.mappy.com/poi/50adc51784ae2742a0054bfe",
           ],
-          url: "https://www.hcebtp.com",
-          logo: "https://www.hcebtp.com/favicon-512x512.png",
+          url: "https://www.hcetp.com",
+          logo: "https://www.hcetp.com/favicon-512x512.png",
           telephone: "+33 3 84 52 61 48",
           email: "sarl.hce@laposte.net",
           foundingDate: "2012",

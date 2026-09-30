@@ -94,7 +94,7 @@ export const Route = createRootRoute({
         children: JSON.stringify({
           "@context": "https://schema.org",
           "@type": "Organization",
-          "@id": "https://www.hcebtp.com/#business",
+          "@id": "https://www.hcetp.com/#business",
           name: "HCE",
           legalName: "HCE SARL",
           // Dénomination telle qu'inscrite au registre national des entreprises
@@ -133,8 +133,8 @@ export const Route = createRootRoute({
                elle-même qui fait foi, pas le snippet. */
             "https://fr.mappy.com/poi/50adc51784ae2742a0054bfe",
           ],
-          url: "https://www.hcebtp.com",
-          logo: "https://www.hcebtp.com/favicon-512x512.png",
+          url: "https://www.hcetp.com",
+          logo: "https://www.hcetp.com/favicon-512x512.png",
           telephone: "+33 3 84 52 61 48",
           email: "sarl.hce@laposte.net",
           address: {

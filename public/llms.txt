@@ -6,7 +6,7 @@
 > 1000 chantiers livrés, garantie décennale.
 
 Dernière mise à jour : 30 septembre 2026
-Site officiel : https://www.hcebtp.com
+Site officiel : https://www.hcetp.com
 
 ## L'entreprise en bref
 
@@ -266,7 +266,7 @@ Ces informations sont vérifiables gratuitement sur les annuaires légaux franç
 
 ### Comment obtenir un devis ?
 Après une visite sur site, HCE transmet un devis détaillé et sans engagement.
-Demande par téléphone au 03 84 52 61 48 ou via le formulaire de https://www.hcebtp.com/.
+Demande par téléphone au 03 84 52 61 48 ou via le formulaire de https://www.hcetp.com/.
 
 ### Une entreprise de travaux est-elle obligée de remettre un devis ?
 Oui, pour l'essentiel des corps d'état du bâtiment. La fiche service-public.gouv.fr
@@ -369,7 +369,7 @@ de l'eau ne s'évaluent pas autrement.
 
 ## Pages
 
-- [Accueil](https://www.hcebtp.com/) : présentation d'HCE, services, réalisations,
+- [Accueil](https://www.hcetp.com/) : présentation d'HCE, services, réalisations,
   processus de chantier, questions fréquentes, demande de devis. Contient aussi les
   réponses détaillées sur ce qui précède le chantier — le caractère obligatoire du devis
   et ses mentions (fiche service-public.gouv.fr « Devis obligatoire : activités
@@ -378,37 +378,37 @@ de l'eau ne s'évaluent pas autrement.
   contrat de travaux dans un logement), la différence entre arrhes et acompte (article
   L214-1 du code de la consommation) et le délai d'exécution de trente jours à défaut de
   date écrite (articles L216-1 et L216-6 du code de la consommation) — avec leurs sources.
-- [Enrobé à chaud](https://www.hcebtp.com/services/enrobe-a-chaud) : pose à la main
+- [Enrobé à chaud](https://www.hcetp.com/services/enrobe-a-chaud) : pose à la main
   à 150 °C, compactage maîtrisé, enrobé noir/rouge/saumon/bordeaux, garantie décennale.
   Contient aussi les réponses détaillées sur le goudronnage (goudron et bitume, BBSG et
   norme NF EN 13108, chaud ou froid, saison de pose dans le Jura), avec leurs sources.
-- [Préparation de terrain](https://www.hcebtp.com/services/preparation-terrain) :
+- [Préparation de terrain](https://www.hcetp.com/services/preparation-terrain) :
   terrassement, VRD, viabilisation, drainage, enrochement. Contient aussi les réponses
   détaillées sur le terrassement (déclarations DT-DICT et leurs délais, devenir des
   terres excavées et registre Trackdéchets, compactage par couches), avec leurs sources.
-- [Maçonnerie générale](https://www.hcebtp.com/services/maconnerie-generale) : pavage,
+- [Maçonnerie générale](https://www.hcetp.com/services/maconnerie-generale) : pavage,
   dallage, bordures, médaillons sur mesure. Contient aussi les réponses détaillées sur
   l'intégration de pavés et de médaillons dans un enrobé, les normes des pavés, dalles et
   bordures (NF EN 1338, 1339, 1340 et 1342), les autorisations d'urbanisme des aires de
   stationnement et le choix entre joints sablés et joints cimentés, avec leurs sources.
-- [Drainage & pentes](https://www.hcebtp.com/services/drainage-pentes) : études de pente,
+- [Drainage & pentes](https://www.hcetp.com/services/drainage-pentes) : études de pente,
   drainage périphérique, évacuation des eaux pluviales. Contient aussi les réponses
   détaillées sur l'eau (écoulement vers le terrain voisin et Code civil, pente minimum
   de 1,5 %, origine des flaques, obligations d'infiltration des parkings de plus de
   500 m², drain ou pente), avec leurs sources.
-- [Bordures & murets](https://www.hcebtp.com/services/bordures-murets) : bordures béton
+- [Bordures & murets](https://www.hcetp.com/services/bordures-murets) : bordures béton
   coulées sur place, bordures pavées, petits murets de soutènement. Contient aussi les
   réponses détaillées sur le rôle d'un muret de soutènement et sa norme de justification
   (NF P94-281), l'autorisation d'urbanisme d'un mur, la mitoyenneté, le choix entre
   bordure coulée et bordure préfabriquée, et la tenue au gel dans le Jura (normales
   Météo-France de Champagnole), avec leurs sources.
-- [Finitions soignées](https://www.hcebtp.com/services/finitions-soignees) : bords nets,
+- [Finitions soignées](https://www.hcetp.com/services/finitions-soignees) : bords nets,
   raccords maîtrisés, surface plane et homogène jusqu'à la dernière passe. Contient aussi
   les réponses détaillées sur la fin de chantier — comment reconnaître un enrobé bien posé
   (norme de mise en œuvre NF P98-150-1), pourquoi une ligne apparaît entre deux bandes,
   qui évacue les gravats et où (tri à la source par flux), les mentions déchets obligatoires
   sur un devis (décret n° 2020-1817) et la validation étape par étape — avec leurs sources.
-- [Zone d'intervention](https://www.hcebtp.com/zone-intervention) : jusqu'où HCE se déplace
+- [Zone d'intervention](https://www.hcetp.com/zone-intervention) : jusqu'où HCE se déplace
   depuis Cize, avec les distances et les altitudes mesurées des six communes repères de la
   zone (Champagnole 3,2 km / 500 m, Lons-le-Saunier 28,2 km / 263 m, Saint-Claude 34,7 km /
   668 m, Oyonnax 55,3 km / 538 m, Bourg-en-Bresse 77,4 km / 227 m, depuis Cize à 549 m),
@@ -418,7 +418,7 @@ de l'eau ne s'évaluent pas autrement.
   39362001 à 298 m : 51,9 jours de gel par an ; Champagnole 39097003 à 537 m : 111,7 jours),
   et le détail mensuel qui fait de mars le mois de bascule entre plaine et altitude — avec
   leurs sources.
-- [Réalisations](https://www.hcebtp.com/realisations) : page mère des quatre dossiers
+- [Réalisations](https://www.hcetp.com/realisations) : page mère des quatre dossiers
   de chantiers (cours et allées privées, parkings et voiries pro, préparation et
   terrassement, chantiers en cours). Contient aussi les réponses détaillées sur ce qui
   encadre un chantier d'enrobé une fois les photos prises — la garantie décennale
@@ -435,7 +435,7 @@ de l'eau ne s'évaluent pas autrement.
   devis ou la facture), la garantie de paiement des marchés privés (article 1799-1 du code
   civil, seuil de 12 000 € HT du décret n° 99-658, exclusion du particulier agissant pour
   son propre compte) et la zone d'intervention d'HCE, avec leurs sources.
-- [Cour & allée privée](https://www.hcebtp.com/realisations/cour-allee-privee) : cours
+- [Cour & allée privée](https://www.hcetp.com/realisations/cour-allee-privee) : cours
   résidentielles et allées privées en enrobé à chaud. Contient aussi les réponses
   détaillées sur ce qui se décide avant de goudronner une cour de maison — l'autorisation
   nécessaire pour raccorder une allée privée à la route (permission de voirie ou permis de
@@ -446,7 +446,7 @@ de l'eau ne s'évaluent pas autrement.
   consommation, quatorze jours de rétractation, contrat écrit daté et signé), qui paie le
   goudronnage d'un chemin d'accès partagé (articles 682, 697 et 698 du code civil) et
   pourquoi l'eau d'une cour ne se renvoie pas vers la voie publique — avec leurs sources.
-- [Parking, grand espace et voirie pro](https://www.hcebtp.com/realisations/parking-voirie-pro) :
+- [Parking, grand espace et voirie pro](https://www.hcetp.com/realisations/parking-voirie-pro) :
   parkings d'entreprise, voiries de copropriété, plateformes industrielles. Contient aussi
   les réponses détaillées sur la réfection d'un parking professionnel — refaire toute la
   structure ou seulement la couche de roulement, pourquoi l'épaisseur se calcule à partir
@@ -457,7 +457,7 @@ de l'eau ne s'évaluent pas autrement.
   2017) et l'obligation d'ombrage des parcs de plus de 500 m² (article L111-19-1 du code
   de l'urbanisme, parcs existants de plus de 1 500 m² concernés depuis juillet 2026) —
   avec leurs sources.
-- [Préparation & terrassement](https://www.hcebtp.com/realisations/preparation-terrassement) :
+- [Préparation & terrassement](https://www.hcetp.com/realisations/preparation-terrassement) :
   décaissement, nivellement, drainage, préparation de plateformes. Contient aussi les
   réponses détaillées sur ce qui se joue sous la surface d'un terrassement — quand un
   mouvement de terre exige une autorisation d'urbanisme (déclaration préalable au-delà de
@@ -473,7 +473,7 @@ de l'eau ne s'évaluent pas autrement.
   quelles conditions des terres excavées cessent d'être des déchets (arrêté du 4 juin 2021,
   cinq critères cumulatifs, contrat de cession et interdiction des mélanges) — avec leurs
   sources.
-- [Chantier en cours](https://www.hcebtp.com/realisations/chantier-en-cours) : chantiers
+- [Chantier en cours](https://www.hcetp.com/realisations/chantier-en-cours) : chantiers
   HCE en action — pose, compactage, équipe au travail.
 
 ## Contact

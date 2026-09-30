@@ -16,7 +16,7 @@
  *
  * Usage :
  *   node scripts/mesure-texte-servi.mjs <base> [chemin...]
- *   node scripts/mesure-texte-servi.mjs https://www.hcebtp.com
+ *   node scripts/mesure-texte-servi.mjs https://www.hcetp.com
  *   node scripts/mesure-texte-servi.mjs http://127.0.0.1:4175 /services/bordures-murets
  *
  * Sans chemin, mesure toutes les URLs du sitemap. Sortie : une ligne par URL,
@@ -42,7 +42,7 @@ const SITEMAP = [
   "/realisations/chantier-en-cours",
 ];
 
-const base = (process.argv[2] ?? "https://www.hcebtp.com").replace(/\/$/, "");
+const base = (process.argv[2] ?? "https://www.hcetp.com").replace(/\/$/, "");
 const paths = process.argv.length > 3 ? process.argv.slice(3) : SITEMAP;
 
 function texteServi(html) {

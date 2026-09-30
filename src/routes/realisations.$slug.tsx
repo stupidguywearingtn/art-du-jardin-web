@@ -424,9 +424,9 @@ export const Route = createFileRoute("/realisations/$slug")({
         { name: "robots", content: "index,follow" },
         { property: "og:title", content: meta.title },
         { property: "og:description", content: meta.description },
-        { property: "og:url", content: `https://www.hcebtp.com/realisations/${params.slug}` },
+        { property: "og:url", content: `https://www.hcetp.com/realisations/${params.slug}` },
       ],
-      links: [{ rel: "canonical", href: `https://www.hcebtp.com/realisations/${params.slug}` }],
+      links: [{ rel: "canonical", href: `https://www.hcetp.com/realisations/${params.slug}` }],
       /* Fil d'ariane à trois niveaux depuis le 20/09/2026 : le hub
          `/realisations` existe désormais comme route réelle (il répondait 404
          jusque-là, d'où les deux niveaux précédents). Émis pour les seules
@@ -445,19 +445,19 @@ export const Route = createFileRoute("/realisations/$slug")({
                       "@type": "ListItem",
                       position: 1,
                       name: "Accueil",
-                      item: "https://www.hcebtp.com/",
+                      item: "https://www.hcetp.com/",
                     },
                     {
                       "@type": "ListItem",
                       position: 2,
                       name: "Réalisations",
-                      item: "https://www.hcebtp.com/realisations",
+                      item: "https://www.hcetp.com/realisations",
                     },
                     {
                       "@type": "ListItem",
                       position: 3,
                       name: cat.title,
-                      item: `https://www.hcebtp.com/realisations/${params.slug}`,
+                      item: `https://www.hcetp.com/realisations/${params.slug}`,
                     },
                   ],
                 }),

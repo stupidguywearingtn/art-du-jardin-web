@@ -579,6 +579,103 @@ Toutes les valeurs de la table du 15/09 sont **retrouvées au caractère près**
 chiffres que la production avant le chantier : la fidélité du banc est
 re-confirmée pour la deuxième fois.
 
+### Positions mesurées — 30/09/2026
+
+**Indexation : toujours nulle, 23 jours après la 1re soumission IndexNow.** Les
+trois mesures habituelles via `WebSearch`, reconduites à l'identique :
+1. **Phrase exacte du site** `"Médaillons et inserts pavés intégrés à l'enrobé"`
+   → dix résultats, **zéro hcebtp.com**. ⚠️ **Nouveauté de méthode à connaître :
+   la liste des concurrents a nettement bougé aujourd'hui** (apparus :
+   daniel-moquet, galerie-creation, lemoniteur, forumconstruire, esprit-veranda,
+   gonord ; disparus : abers-amenagement, europavage68, cuinet, les deux brevets
+   USPTO, Pinterest ; maintenus : mavrotp, pajot-tp, aravis-enrobage, perenia).
+   **C'est la première fois depuis le 20/09 que cette SERP n'est pas identique
+   au caractère près.** Ne pas en tirer de conclusion sur hcebtp.com : le
+   domaine reste absent. Mais **l'argument « SERP inchangée = canal stable » ne
+   tient plus** : ce canal se réordonne, donc son immobilité passée n'était pas
+   une garantie de fiabilité.
+2. **`site:hcebtp.com`** → neuf pages sans rapport (Wikipédia d'acronymes HTP /
+   HCB / HBD, Hitkarini College, Cebu IT Park, Hassania School of Public Works,
+   gumroad, lawinsider, community.hpe.com), **zéro résultat du domaine**.
+   L'opérateur `site:` n'est toujours pas honoré par ce canal. **Inchangé.**
+3. **Requête nommant le domaine** `hcebtp.com HCE Hini Cours Enrobé Cize 39300
+   enrobé travaux publics` → **aucune page du domaine**, dix fiches d'annuaire.
+   **Changement notable dans la composition** : `doctrine.fr` a disparu de la
+   liste, et **deux pages d'annuaire départemental PagesJaunes sont apparues** —
+   `pagesjaunes.fr/annuaire/departement/jura-39/enrobe-a-chaud` et
+   `pagesjaunes.fr/annuaire/departement/ain-01/entreprise-de-btp`. Les huit
+   autres sont les habituelles (kompass, pappers, verif, societe, 118000, mappy,
+   lagazettefrance, manageo). **Ces deux pages départementales confirment par
+   l'observation le levier PagesJaunes identifié le 12/09** : l'annuaire est
+   indexé sur exactement les requêtes que le site vise, et il porte déjà une
+   fiche HCE.
+
+| Requête | Mesure (30/09/2026) | Évolution vs 29/09 |
+|---|---|---|
+| indexation (phrase exacte du site) | **absent** | inchangé (mais SERP réordonnée) |
+| indexation (requête nommant le domaine) | **absent** | inchangé — 10 fiches d'annuaire |
+| `site:hcebtp.com` | **absent** | inchangé |
+| requêtes commerciales | **non mesurables** (pas de SERP brute via ce canal) | indéterminé |
+
+✅ **`WebSearch` n'a échoué aucune fois aujourd'hui** (3 requêtes d'indexation +
+2 requêtes de sourçage, 5 réponses exploitables). Les canaux de SERP brute
+n'ont **pas** été re-testés : la liste du 11/09 est à jour, tous étaient morts.
+
+> 🔔 **Notification client ENVOYÉE le 30/09/2026 — l'échéance hebdomadaire
+> annoncée par le run du 29/09 a bien été tenue.** Contenu : indexation nulle à
+> 23 jours, site sain (12 URLs en 200, contrôles verts), l'entreprise connue de
+> 10 annuaires mais rien qui relie ces fiches au site, puis les **trois actions
+> hors-dépôt** (Search Console, revendiquer la fiche Google Business Profile
+> existante, revendiquer `pagesjaunes.fr/pros/52322496`) et **le `title`
+> anormal de `/services/finitions-soignees` à arbitrer**, comme le run du 29/09
+> l'avait demandé.
+> **Règle de cadence reconduite : ne pas re-notifier avant le 07/10/2026**, sauf
+> si l'indexation arrive ou si un contrôle casse. Le blocage est inchangé depuis
+> le 20/09 et le répéter tous les jours le rendrait inaudible.
+
+**Volume de texte servi en production** (`scripts/mesure-texte-servi.mjs`, vu
+comme Googlebot). **Avant** le chantier du jour : identique au 29/09 **au
+caractère près sur les douze URLs**. **Après** déploiement : la page neuve
+apparaît, et seules les deux pages qui reçoivent un lien entrant bougent — les
+neuf autres sont inchangées au caractère près, mesuré et non supposé.
+
+| URL | Texte servi (30/09) | vs 29/09 | JSON-LD | lastmod |
+|---|---|---|---|---|
+| accueil | **13 526 car.** | **+148** *(lien ajouté)* | 3 | 2026-09-29 |
+| `/realisations` | **13 491 car.** | **+231** *(lien ajouté)* | 4 | 2026-09-28 |
+| `/realisations/preparation-terrassement` | 8 156 car. | = | 3 | 2026-09-25 |
+| **`/zone-intervention`** | **8 578 car.** | **page créée** | **4** | **2026-09-30** |
+| `/realisations/cour-allee-privee` | 7 670 car. | = | 3 | 2026-09-23 |
+| `/services/bordures-murets` | 7 012 car. | = | 4 | 2026-09-17 |
+| `/services/finitions-soignees` | 6 821 car. | = | 4 | 2026-09-21 |
+| `/realisations/parking-voirie-pro` | 6 356 car. | = | 3 | 2026-09-22 |
+| `/services/drainage-pentes` | 5 198 car. | = | 4 | 2026-09-13 |
+| `/services/maconnerie-generale` | 5 080 car. | = | 4 | 2026-09-16 |
+| `/services/preparation-terrain` | 4 482 car. | = | 4 | 2026-09-12 |
+| `/services/enrobe-a-chaud` | 3 783 car. | = | 4 | 2026-09-11 |
+| `/realisations/chantier-en-cours` | 373 car. | = | 2 | *(aucun, volontaire)* |
+
+**Le sitemap passe de 12 à 13 URLs**, toutes en 200. `scripts/verif-faq.mjs`
+passe en **✓ sur les douze `FAQPage`** en production, dont **4/4 sur la page
+neuve**. `scripts/verif-lastmod.mjs` passe en **✓ sur les 13 URLs, dont 12 avec
+`lastmod`** (contre 11 hier). La soumission IndexNow des **13** URLs sort en
+**HTTP 200**.
+
+⚠️ **Le banc d'essai local est fidèle au caractère près, vérifié une fois de
+plus** : les 13 valeurs mesurées sur `http://127.0.0.1:4176` avant push sont
+**identiques aux 13 valeurs de production** après déploiement. C'est le
+troisième contrôle concordant (15/09, 29/09, 30/09) — **le banc peut servir de
+preuve avant push, ce n'est plus une approximation.**
+
+**Délai de déploiement observé** : entre 40 et 120 secondes entre le
+`git push origin HEAD:main` et la première réponse servant la page neuve (3
+essais espacés de 40 s ; le 1er a renvoyé **404**, le 3e un 200 complet).
+⚠️ **Piège propre à une ROUTE NEUVE, à ne pas re-découvrir : pendant le
+déploiement, l'URL répond 404, pas 503.** Un 404 sur une route qu'on vient de
+créer ne veut donc pas dire que la route est ratée — il faut réessayer avant de
+conclure. Le 2e essai a par ailleurs renvoyé `HTTP 000` au `curl` tout en
+servant déjà le contenu : **contrôler le contenu, pas seulement le code**.
+
 ### Positions mesurées — 29/09/2026
 
 **Indexation : toujours nulle, 22 jours après la 1re soumission IndexNow.** Les
@@ -1195,6 +1292,105 @@ JSON-LD, pas de `BreadcrumbList`).
 ---
 
 ## Chantiers faits
+
+### 30/09/2026 — `/zone-intervention` : la première page du site consacrée à la géographie, avec des distances et des altitudes mesurées (commit `6cc006e`)
+
+**Pourquoi ce chantier.** Le run du 29/09 a déclaré le filon « page maigre »
+épuisé et posé que le prochain chantier se choisirait **sur la requête**. Son
+candidat n°1 était une page de zone d'intervention, sous une condition
+explicite : *« À trancher avant de rédiger : y a-t-il de la matière honnête, ou
+non ? Si non, ne pas le faire. »* **La condition a été tranchée par l'affirmative
+avant d'écrire une ligne**, et c'est ce qui a rendu le chantier possible : trois
+référentiels publics répondent depuis le runner et donnent de la donnée que
+personne dans le secteur ne publie (voir « Techniques apprises » du jour).
+
+Le manque était réel et vérifié : les six requêtes suivies nomment toutes un
+département, le `LocalBusiness` de l'accueil déclare bien
+`areaServed: [Jura, Ain]`, et pourtant **aucune page ne traitait la géographie
+elle-même** — le hub `/realisations` la mentionnait en une phrase, c'était tout.
+
+**Ce qui a été publié.** Route statique `src/routes/zone-intervention.tsx`,
+**8 578 caractères servis**, 4 blocs JSON-LD (`BreadcrumbList`, `WebPage`,
+`FAQPage`), une table visible et un bloc de 4 Q/R. Toutes les valeurs sont
+relevées le 30/09/2026 sur des sources primaires, aucune saisie de seconde main :
+
+- **Table des six communes repères**, avec distance orthodromique depuis le
+  point central de Cize et altitude IGN RGE ALTI au même point : Champagnole
+  3,2 km / 500 m, Lons-le-Saunier 28,2 km / 263 m, Saint-Claude 34,7 km / 668 m,
+  Oyonnax 55,3 km / 538 m, Bourg-en-Bresse 77,4 km / 227 m, depuis Cize à 549 m.
+  Populations INSEE dans la même table.
+- **L'effet chiffré de l'altitude sur le calendrier**, établi en comparant deux
+  stations Météo-France distantes de 29 km et séparées de 239 m de dénivelé :
+  Lons-le-Saunier (indicatif **39362001**, 298 m) → 51,9 jours de gel/an,
+  11,8 °C, 1 147,4 mm ; Champagnole (39097003, 537 m) → 111,7 jours, 9,4 °C,
+  1 573,2 mm. Soit **2,15 fois plus de jours de gel et 426 mm d'eau en plus**,
+  la même année et dans le même département. **C'est le passage le plus citable
+  de la page** : un rapport chiffré, local, daté, qu'aucun concurrent ne publie.
+- **Le détail mensuel qui fait de mars le mois de bascule** : 17,9 jours de gel
+  en mars à 537 m contre 5,6 à 298 m. Plus les deux chiffres qui empêchent de
+  conclure que la plaine est sans contrainte (10,3 jours sans dégel et 1,5 jour
+  à -10 °C ou moins à Lons-le-Saunier).
+- **Une Q/R de cadrage honnête** (« HCE intervient-elle dans ma commune si elle
+  n'est pas dans cette liste ? ») qui dit que les six villes sont des repères et
+  non une liste fermée, et renvoie l'estimation à la visite sur site.
+
+**Contrôle de doublon fait AVANT rédaction, sur les 57 Q/R déjà publiées**, et
+c'est lui qui a façonné la page :
+- `/services/bordures-murets` publiait déjà les normales **annuelles** de
+  Champagnole. Elles ne sont donc **pas le sujet** ici : elles ne servent que de
+  terme de comparaison à la station de Lons-le-Saunier, **entièrement nouvelle
+  sur le site**. C'est ce qui sauve le bloc de la redite.
+- `/realisations/preparation-terrassement` publiait déjà le détail mensuel des
+  **précipitations** de Champagnole → **non repris du tout**.
+- Le hub `/realisations` répond déjà « Où HCE réalise-t-elle ces chantiers ? » et
+  y traite l'homonymie Cize (39) / Cize (01). **Cet angle a été délibérément
+  laissé au hub**, alors qu'il était prévu au départ comme un bloc entier : c'est
+  la découverte de cette Q/R existante qui l'a fait retirer.
+
+**Ce que la page ne dit PAS, volontairement** : aucun prix, aucun délai, aucun
+frais de déplacement — rien de tout cela n'est connu. Et **aucune commune que
+l'entreprise n'a pas elle-même déclarée n'a été ajoutée** : les six sont
+exactement celles de `src/components/InteractiveMap.tsx`. La consigne du 29/09
+(« ne pas fabriquer de pages de villes vides et interchangeables ») est tenue
+non pas en s'abstenant, mais en publiant **une** page réellement informée.
+
+**Câblage complet** (rien d'oublié, vérifié un par un) : `routeTree.gen.ts`
+régénéré par le build et recopié dans le dépôt, clé dans `src/lib/lastmod.ts`,
+entrée dans `sitemap[.]xml.ts` (13 URLs), `public/llms.txt` (4 Q/R + fiche de
+page + date d'en-tête), `scripts/mesure-texte-servi.mjs`,
+`scripts/indexnow-submit.mjs`, et **deux liens entrants** — depuis la section
+zone de l'accueil et depuis le hub `/realisations`, tous deux vérifiés présents
+dans le HTML servi.
+
+**Contrôles passés avant push, au banc d'essai local** : `npm run build` en 0,
+`npx tsc --noEmit` en 0, `npx eslint` propre sur la page neuve, `verif-faq`
+4/4 sur la page neuve et 12/12 pages alignées, `verif-lastmod` 13 URLs
+cohérentes, contenu figé intact, et **les neuf URLs non touchées inchangées au
+caractère près**. Puis les mêmes contrôles rejoués en production après
+déploiement, avec des valeurs identiques.
+
+**Ce que j'ai décidé de NE PAS faire aujourd'hui, et pourquoi.**
+- **Pas de bloc sur « l'enrobé chaud supporte-t-il le trajet jusqu'au
+  chantier ? »**, alors que c'est la question la plus naturelle sur une page de
+  zone et la plus proche de la requête « enrobé à chaud ». Raison : elle demande
+  une fenêtre de température de mise en œuvre sourcée, et **la fiche Norm'Info
+  de la NF P98-150-1 a répondu 404** sur l'URL essayée. Sans source primaire,
+  ç'aurait été du raisonnement présenté comme du fait. **Angle à garder en tête
+  pour un prochain run, à condition de trouver la source** — c'est le meilleur
+  angle non couvert du site avec les épaisseurs.
+- **Pas de nœud `Service` avec `areaServed` dans le JSON-LD.** L'accueil déclare
+  déjà `areaServed: [AdministrativeArea Jura, Ain]` sur son `LocalBusiness`, et
+  six `Service` existent sur les pages service. Une septième déclaration
+  concurrente vaut moins qu'une seule cohérente. La page porte donc `WebPage` +
+  `BreadcrumbList` + `FAQPage`, et `publisher` pointe vers `#business`, **le
+  seul `@id` publié par ce site** (règle du 20/09 : ne jamais inventer de nœud).
+- **Pas de liste des 33 communes du code postal 39300**, pourtant récupérée en un
+  appel. C'aurait été du remplissage géographique et une revendication de
+  couverture que le client n'a pas faite — exactement le piège annoncé.
+- **Pas de correction du « à 2 km de Cize »** écrit sur deux pages existantes
+  (voir « Hypothèses à vérifier » du jour) : c'est du contenu en ligne qui
+  fonctionne, et la nouvelle page dit « moins de 5 km », qui est la valeur
+  mesurée. On ne réécrit pas l'existant sur cette base.
 
 ### 29/09/2026 — L'accueil passe de 5 499 à 13 378 caractères : le seul sujet qu'aucune des dix autres pages ne couvrait, le contrat lui-même (commit `6a11554`)
 
@@ -3362,7 +3558,57 @@ de suite.**
 > - **Enrichir l'accueil** (5 499 car., la page la plus visitée et la moins
 >   travaillée depuis le 15/09).
 
-> 🔴 **CANDIDAT N°1 DU PROCHAIN RUN (au 29/09) — le filon « page maigre » est
+> ✅ ~~**CANDIDAT N°1 DU PROCHAIN RUN (au 29/09) — une page de destination pour
+> une requête géographique non couverte.**~~ **Fait le 30/09/2026** (commit
+> `6cc006e`) : création de `/zone-intervention`, **8 578 caractères servis**,
+> 4 blocs JSON-LD, table des six communes repères (distances orthodromiques
+> depuis Cize et altitudes IGN RGE ALTI) et 4 Q/R dont la comparaison chiffrée
+> de deux stations Météo-France séparées de 239 m de dénivelé (51,9 contre
+> 111,7 jours de gel par an). La condition posée le 29/09 — *« y a-t-il de la
+> matière honnête, ou non ? »* — a été **tranchée par l'affirmative avant
+> rédaction**, en vérifiant que trois référentiels publics répondent depuis le
+> runner. La précaution « pas de pages de villes interchangeables » est tenue :
+> **une** page informée, six communes qui sont celles déclarées par l'entreprise,
+> aucune ajoutée.
+
+> 🔴 **CANDIDAT N°1 DU PROCHAIN RUN (au 30/09) — les épaisseurs, les
+> granulométries et la fenêtre de température de pose : le dernier trou béant du
+> site, MAIS seulement si une source primaire apparaît.** Le run du 30/09 a buté
+> dessus une cinquième fois : le bloc « l'enrobé chaud supporte-t-il le trajet
+> jusqu'au chantier ? » a été **abandonné faute de source** (la fiche Norm'Info
+> de la NF P98-150-1 a répondu 404). C'est pourtant la question la plus naturelle
+> sur les requêtes « enrobé à chaud Jura » et « enrobé à chaud Ain ».
+> ⚠️ **Ne pas y consacrer un run entier à l'aveugle** — cinq tentatives ont
+> échoué depuis le 11/09. **Piste neuve et non essayée**, repérée le 30/09 :
+> `llms.txt` affirme déjà quelque part que l'enrobé à chaud « demande un support
+> sec et plus de 5 °C ». **D'où vient ce « 5 °C » ?** S'il a une source, elle
+> ouvre le sujet ; s'il n'en a pas, c'est un chiffre non sourcé publié sur le
+> site et il faut le traiter comme tel. **Commencer par ça : c'est une question
+> à dix minutes, pas un run.**
+> Les autres candidats, par ordre d'intérêt :
+> - **Le risque `FAQS` / CMS sur l'accueil.** L'accueil porte 11 questions dont
+>   6 surchargeables depuis l'admin ; le jour où le client en édite une, le
+>   JSON-LD ne suivra pas → mismatch sanctionnable. Générer le `FAQPage` depuis
+>   la base plutôt que depuis la constante. **Chantier technique, pas éditorial**,
+>   il touche au chargement de la page : voir « Hypothèses à vérifier », à
+>   évaluer sérieusement, pas à improviser un jour chargé. **C'est le seul
+>   défaut structurel connu qui reste sur le site.**
+> - **Enrichir `/zone-intervention`**, mais **pas avant plusieurs jours** : elle
+>   vient d'être créée, laissons-la exister (c'est la règle qui a bien servi pour
+>   le hub `/realisations`, créé le 20/09 et enrichi le 28/09). Angles repérés et
+>   non utilisés : la fenêtre de température de pose (voir ci-dessus), et les
+>   contraintes d'accès d'un camion d'enrobé en voirie étroite **si** une source
+>   apparaît.
+> - **`/realisations/chantier-en-cours`** (373 car.), la seule page sans bloc de
+>   fond, **toujours sans angle sourçable**. Ne l'ouvrir que le jour où une source
+>   primaire apparaît — ce qui rejoint exactement le sujet des épaisseurs et des
+>   températures ci-dessus. **Si ce filon s'ouvre, il débloque les deux d'un
+>   coup.**
+> - **Le `title` anormal de `/services/finitions-soignees`** : **transmis au
+>   client dans la notification du 30/09**, comme demandé. Ne rien faire tant
+>   qu'il n'a pas répondu — c'est du contenu visible figé.
+
+> 📌 *Raisonnement d'origine du 29/09, conservé :* **le filon « page maigre » est
 > épuisé : le prochain chantier se choisit sur la REQUÊTE, plus sur le nombre
 > de caractères.** Onze des douze URLs portent maintenant un bloc de fond
 > sourcé et daté ; la seule qui n'en a pas, `/realisations/chantier-en-cours`
@@ -3515,6 +3761,21 @@ de suite.**
     recours via les articles L216-1 et L216-6) + `FAQPage` de l'accueil porté de
     6 à 11 questions + première clé `"/"` dans `lastmod.ts` + deux liens
     internes + llms.txt.**
+    **30/09 création de `/zone-intervention` (0 → 8 578 car.) : première page
+    géographique du site, table des six communes repères avec distances
+    orthodromiques depuis Cize et altitudes IGN RGE ALTI, comparaison chiffrée
+    des stations Météo-France de Lons-le-Saunier (39362001, 298 m) et de
+    Champagnole (39097003, 537 m) sur les jours de gel, les précipitations et la
+    température moyenne, détail mensuel faisant de mars le mois de bascule,
+    `WebPage` + `BreadcrumbList` + `FAQPage`, deux liens entrants (accueil et hub
+    `/realisations`) + notification hebdomadaire au client.**
+    **✅ MISE À JOUR DU 30/09 : douze des treize URLs portent un bloc de fond
+    sourcé et daté, et le site a désormais une page par grande intention —
+    services, réalisations, géographie, contrat. Le prochain chantier ne se
+    choisit plus ni sur le volume ni sur l'intention manquante, mais sur la
+    SOURCE : c'est la disponibilité d'une source primaire qui décide, et le
+    sujet en attente est celui des épaisseurs / granulométries / températures.**
+    *Constat du 29/09, conservé :*
     **✅ MISE À JOUR DU 29/09 : les onze pages de fond du site portent
     désormais un bloc sourcé et daté. Le filon « page maigre » est ÉPUISÉ — il
     ne reste que `chantier-en-cours` (373 car.), sans angle sourçable. Le
@@ -3618,6 +3879,31 @@ de suite.**
 ---
 
 ## Hypothèses à vérifier
+
+- **Deux pages publient « la station Météo-France de Champagnole, à 2 km de
+  Cize », alors que la distance mesurée est de 4,8 km.** Relevé le 30/09/2026 :
+  la station 39097003 est à 46°45'24"N / 5°53'09"E, le point central de Cize
+  (INSEE 39153) à 46,7209 / 5,9212, soit **4,8 km** à vol d'oiseau. Le « 2 km »
+  figure sur `/services/bordures-murets` (17/09) et dans la Q/R « Où HCE
+  réalise-t-elle ces chantiers ? » du hub `/realisations` (« à deux kilomètres de
+  Champagnole »). ⚠️ **Non corrigé volontairement** : c'est du contenu en ligne
+  qui fonctionne, l'écart est petit, et il se peut que la mesure d'origine ait
+  été prise depuis un autre point (le siège au 40 avenue Etienne Lamy plutôt que
+  le centroïde communal — ce qui est plausible et rendrait le « 2 km » défendable
+  pour la distance commune-à-commune). **La page `/zone-intervention` dit « moins
+  de 5 km », qui est la valeur mesurée depuis le centroïde.** À trancher un jour
+  creux en géocodant l'adresse exacte du siège, pas en réécrivant l'existant sur
+  la foi d'une mesure prise depuis un autre point.
+- **`llms.txt` affirme que l'enrobé à chaud « demande un support sec et plus de
+  5 °C » — ce « 5 °C » n'a aucune source identifiée.** Relevé le 30/09/2026 dans
+  la Q/R sur le délai de trente jours. Il est antérieur aux runs récents et n'a
+  jamais été rattaché à une source primaire. **Deux issues possibles, et il faut
+  trancher laquelle** : soit il a une source (et elle ouvre alors le sujet des
+  températures de pose, en attente depuis le 11/09), soit il n'en a pas et c'est
+  **un chiffre non sourcé publié sur le site**, ce que la consigne interdit.
+  ⚠️ **Ne pas le supprimer sans vérifier** — il est peut-être exact — mais ne pas
+  le réutiliser ailleurs tant qu'il n'est pas sourcé. **Premier geste du
+  prochain run qui ouvrira le sujet enrobé.**
 
 - **`scripts/check-contenu-fige-prod.mjs` ne tourne plus depuis le runner** :
   il sort sur `SUPABASE_PUBLISHABLE_KEY manquante (clé anon publique)`, relevé
@@ -3729,6 +4015,40 @@ de suite.**
 ---
 
 ## Erreurs commises et corrigées
+
+- **30/09/2026 — j'ai écrit des caractères d'espace invisibles dans du code, et
+  seul ESLint l'a vu.** Pour formater les populations de la table, la première
+  version appelait
+  `c.hab.toLocaleString("fr-FR").replace(/\u202f|\u00a0/g, " ")`. Les séquences
+  `\u202f` et `\u00a0` **ont été écrites dans le fichier sous forme de caractères
+  littéraux** (espace fine insécable U+202F et espace insécable U+00A0) au lieu
+  de séquences d'échappement ASCII. Résultat : `no-irregular-whitespace` en
+  erreur, et une expression régulière contenant des caractères invisibles —
+  illisible et fragile. **Corrigé** par un formateur déterministe et purement
+  ASCII : `String(c.hab).replace(/\B(?=(\d{3})+(?!\d))/g, " ")`, qui a en prime
+  l'avantage de **ne pas dépendre des données de locale ICU du runtime** (un
+  `toLocaleString` peut rendre un séparateur différent côté serveur et côté
+  navigateur, donc produire une divergence d'hydratation).
+  **Deux leçons :** *(a)* ne jamais supposer qu'une séquence `\uXXXX` écrite dans
+  un outil d'édition arrive échappée dans le fichier — **le vérifier au
+  `cat -A`** ; *(b)* **lancer ESLint sur tout fichier neuf avant de le pousser**
+  — ici c'est le seul contrôle qui a attrapé le problème, ni `tsc`, ni le build,
+  ni la mesure de texte servi ne l'ont signalé. Une assertion Python
+  (`assert '\u202f' not in s`) a été ajoutée au correctif pour prouver que le
+  fichier est propre, plutôt que de le supposer.
+- **30/09/2026 — j'ai cru `verif-faq.mjs` plus bavard qu'il n'est, et j'ai
+  failli conclure trop vite.** Lancé avec une simple base
+  (`node scripts/verif-faq.mjs https://www.hcebtp.com`), il **ne contrôle que
+  l'accueil** et affiche une seule ligne « 11/11 » — ce qui ressemble à un bilan
+  complet. Passé un chemin nu (`/zone-intervention`), il échoue en
+  `Failed to parse URL`. ⚠️ **Ce script prend des URLs COMPLÈTES, une par page, et
+  n'a pas de liste interne** (contrairement à `mesure-texte-servi.mjs` et à
+  `verif-lastmod.mjs`, qui prennent une base). **Conséquence pour les prochains
+  runs : pour prouver que les douze `FAQPage` sont alignés, il faut lui passer
+  les douze URLs explicitement.** C'est ce qui a été fait ensuite, au banc puis
+  en production. Sans ça, le run aurait annoncé « FAQ vérifiée » en n'ayant
+  vérifié que l'accueil — exactement le genre de contrôle en trompe-l'œil que ce
+  journal traque depuis le 08/09.
 
 - **28/09/2026 — je suis retombé dans le piège du `git fetch` multi-réf, le jour
   même où le journal le décrivait.** Premier geste du run :
@@ -4043,6 +4363,82 @@ de suite.**
 ---
 
 ## Techniques apprises
+
+### 30/09/2026 — ⚙️ Trois référentiels publics géolocalisés lisibles depuis le runner, l'index des stations Météo-France enfin trouvé, et un extrait de moteur qui se trompe sur un chiffre
+
+**1. ⚙️ FILON — trois référentiels publics de géodonnées répondent depuis le
+runner, et ils donnent de la donnée locale que personne dans le BTP ne publie.**
+C'est l'acquis le plus réutilisable du jour : il ouvre un type de contenu entier
+(le géographique) qui était jusqu'ici jugé infaisable honnêtement.
+- **`geo.api.gouv.fr/communes`** (API Découpage administratif, données
+  INSEE/IGN). Champs utiles :
+  `?nom=<commune>&fields=nom,code,codeDepartement,population,centre,surface`.
+  Rend le **code INSEE**, la **population**, la **surface** et le **point central**
+  de la commune. Recherche par `nom` (attention : rend les homonymes, utile) ou
+  par `codePostal` (rend les 33 communes du 39300, par exemple).
+- **`data.geopf.fr/altimetrie/1.0/calcul/alti/rest/elevation.json?lon=…&lat=…&resource=ign_rge_alti_wld&zonly=true`**
+  → **altitude réelle IGN RGE ALTI** en un appel, réponse
+  `{"elevations": [530.42]}`. Aucune clé, aucune inscription.
+- **Distance orthodromique** calculée en local (formule de haversine, R =
+  6 371,0088 km). **Toujours l'annoncer comme « à vol d'oiseau »** : ce n'est pas
+  une distance routière, et en moyenne montagne l'écart est important.
+⚠️ **Trois pièges rencontrés, tous coûteux :**
+- **Le proxy sortant coupe ces APIs de façon intermittente**
+  (`ws_closed_mid_exchange`, `Connection reset by peer`) : 4 appels sur 6 ont
+  échoué au premier essai. **Toujours envelopper dans une boucle de reprise
+  avec attente croissante** — un script Python de 5 lignes a tout récupéré là où
+  une boucle `curl` en shell perdait la moitié des résultats silencieusement.
+- **L'altitude rendue est celle du POINT INTERROGÉ**, pas celle « de la ville ».
+  Interroger le point central d'une commune étalée donne une valeur qui peut
+  s'écarter de dizaines de mètres de l'altitude usuellement citée. **Le dire
+  dans le texte publié** — c'est ce qui a été fait — plutôt que de laisser croire
+  à une précision qu'on n'a pas.
+- **Les homonymes sont réels et piègent** : `?nom=Cize` rend **Cize 39153**
+  (Jura, 797 hab, 549 m) **et Cize 01106** (Ain, 168 hab, 324 m), à 68 km l'une
+  de l'autre. Le code INSEE est le seul identifiant sûr — pas le nom, pas le
+  code postal.
+
+**2. ⚙️ RECETTE — trouver l'indicatif d'une station Météo-France, ce que le
+17/09 avait laissé en suspens.** Le 17/09 a établi que les fiches
+`FICHECLIM_<indicatif>.pdf` sont lisibles sur
+`object.files.data.gouv.fr/meteofrance/data/synchro_ftp/REF_STATION/`, mais pas
+comment **trouver l'indicatif**. Deux acquis aujourd'hui :
+- ❌ **L'indicatif n'est PAS « code INSEE + 00N ».** Huit essais construits sur
+  cette hypothèse (`39300001`, `01053001`, `39478001`…) ont tous renvoyé **404**.
+  Champagnole `39097003` coïncide avec son code INSEE **par hasard**. Ne pas
+  perdre de temps à deviner.
+- ✅ **Ce qui marche : `WebSearch` sur `FICHECLIM <ville> indicatif station`** —
+  le premier résultat donne l'URL exacte, donc l'indicatif. C'est ainsi que
+  **Lons-le-Saunier = 39362001** a été trouvé (station située sur la commune de
+  **Montmorot**, code INSEE 39362 — ce qui explique définitivement pourquoi la
+  déduction depuis le code INSEE de la ville ne peut pas marcher).
+- ✅ **Le bucket S3 se liste**, ce qui donne un index complet si besoin :
+  `object.files.data.gouv.fr/meteofrance/?list-type=2&prefix=data/synchro_ftp/REF_STATION/&max-keys=40`
+  (pagination par `NextContinuationToken`). **Le dossier lui-même renvoie
+  `NoSuchKey`** : c'est la forme `?list-type=2&prefix=` qu'il faut, pas l'URL du
+  répertoire.
+- **Reconnaître une fiche absente : 404 avec un corps de 431 octets.** Comparer
+  la **taille** (une vraie fiche pèse ~120 ko), pas seulement le code, comme le
+  17/09 l'avait déjà noté pour une autre URL.
+- **La recette de lecture du PDF du 17/09 fonctionne telle quelle**, y compris
+  le regroupement par ordonnée `y`. Le recoupement annuel/somme des douze mois a
+  de nouveau servi : les précipitations tombent **exactement** juste sur les deux
+  stations (1 573,2 et 1 147,4), et **la ligne `Tn ≤ -5 °C` de Lons-le-Saunier
+  est fusionnée avec un autre tableau et amputée d'un mois → écartée, non
+  publiée.** Les lignes propres l'ont été.
+
+**3. 📚 LEÇON — un extrait de moteur peut se tromper sur un CHIFFRE, pas
+seulement être périmé.** Le 13/09 avait appris qu'un extrait pouvait avoir des
+mois de retard. Aujourd'hui, pire : l'extrait `WebSearch` sur la fiche de
+Lons-le-Saunier annonçait *« average maximum 16 °C, average 7,7 °C »*. La fiche
+primaire, lue et recoupée, donne **max 16,0 °C, moyenne 11,8 °C, minimale
+7,7 °C** — l'extrait avait **pris la température minimale pour la moyenne**. Le
+chiffre existait bien dans la source, mais sous une autre étiquette.
+**C'est ce qui aurait été publié si la fiche n'avait pas été ouverte.** Contrôle
+qui l'a attrapé en deux secondes et qu'il faut systématiser : **la moyenne doit
+tomber entre le min et le max** — ici (7,7 + 16,0) / 2 = 11,85 ≈ 11,8 ✓.
+**Règle : tout chiffre relevé dans un extrait doit être recoupé par une
+cohérence interne, pas seulement par sa présence dans la source.**
 
 ### 29/09/2026 — ⚙️ Trois acquis : lire Légifrance à coup sûr, forcer le verbatim français de WebFetch, et un gisement de sources entier resté inexploité
 

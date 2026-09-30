@@ -314,6 +314,19 @@ function HubRealisations() {
               </article>
             ))}
           </div>
+
+          <p className="mt-12 max-w-3xl text-muted" style={{ fontSize: 15, lineHeight: 1.7 }}>
+            Tous ces chantiers ont été réalisés dans le Jura et l'Ain. Les distances et les
+            altitudes mesurées des communes de la zone, et ce que l'altitude change au calendrier
+            d'un chantier, sont détaillées sur la page{" "}
+            <Link
+              to="/zone-intervention"
+              className="underline decoration-gold/40 underline-offset-2 hover:text-gold"
+            >
+              zone d'intervention
+            </Link>
+            .
+          </p>
         </section>
 
         {/* CE QU'IL FAUT SAVOIR — questions réelles, réponses autonomes.

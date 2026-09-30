@@ -5,7 +5,7 @@
 > dans le Jura et l'Ain. Entreprise créée en 2012, 14 années d'expérience, plus de
 > 1000 chantiers livrés, garantie décennale.
 
-Dernière mise à jour : 29 septembre 2026
+Dernière mise à jour : 30 septembre 2026
 Site officiel : https://www.hcebtp.com
 
 ## L'entreprise en bref
@@ -323,6 +323,50 @@ applicables aux contrats conclus à compter du 1er janvier 2022. Pour de l'enrob
 qui demande un support sec et plus de 5 °C, mieux vaut une date ou une période écrite au
 devis que cette règle supplétive.
 
+### Jusqu'où HCE se déplace-t-elle depuis Cize ?
+Dans le Jura (39) et dans l'Ain (01). Les six communes repères de la zone, avec leur
+distance à vol d'oiseau depuis le centre de Cize : Champagnole 3,2 km, Lons-le-Saunier
+28,2 km, Saint-Claude 34,7 km, Oyonnax 55,3 km, Bourg-en-Bresse 77,4 km. L'essentiel de la
+zone tient donc dans un rayon d'environ 35 km autour du siège, les deux villes de l'Ain
+étant les seules à le dépasser franchement. Ces six communes sont des repères, pas une
+liste fermée : la zone déclarée est départementale. Distances calculées entre les points
+centraux publiés par l'API Découpage administratif de l'État (données INSEE/IGN), relevés
+le 30 septembre 2026 ; ce sont des distances à vol d'oiseau, pas des distances routières.
+
+### Pourquoi l'altitude d'un chantier compte-t-elle plus que sa distance ?
+Parce que la distance coûte du temps de trajet, alors que l'altitude retire des semaines au
+calendrier. Altitudes relevées le 30 septembre 2026 sur le référentiel RGE ALTI de l'IGN, au
+point central de chaque commune : Bourg-en-Bresse 227 m, Lons-le-Saunier 263 m, Champagnole
+500 m, Oyonnax 538 m, Cize 549 m, Saint-Claude 668 m — soit 441 m d'amplitude sur la zone.
+Deux stations Météo-France chiffrent l'effet de ce dénivelé, à 29 km de distance seulement.
+Normales 1991-2020 : à Lons-le-Saunier (indicatif 39362001, 298 m), 51,9 jours de gel par an,
+11,8 °C de température moyenne, 1 147,4 mm de précipitations ; à Champagnole (indicatif
+39097003, 537 m), 111,7 jours de gel, 9,4 °C et 1 573,2 mm. Donc 239 m de plus, c'est
+2,15 fois plus de jours de gel et 426 mm d'eau en plus, la même année et dans le même
+département. Fiches climatologiques éditées le 6 juin 2026.
+
+### Quels mois de l'année sont compromis pour un chantier, et à quel endroit ?
+Décembre, janvier et février partout ; mars et novembre en altitude seulement, et c'est mars
+qui fait la bascule. Normales 1991-2020, nombre moyen de jours où la température minimale
+descend à 0 °C ou en dessous. À Champagnole (537 m) : janvier 21,8, février 20,9, décembre
+20,4, mars 17,9, avril 9,0, mai 1,4 — cinq mois pleins franchement hivernaux. À
+Lons-le-Saunier (298 m) : janvier 14,0, février 11,3, décembre 13,1, mars 5,6. Le mois qui
+reste hivernal à 537 m est donc déjà praticable 240 m plus bas. Mais « plaine » ne veut pas
+dire « sans contrainte » : Lons-le-Saunier compte 10,3 jours par an où la température ne
+repasse pas au-dessus de 0 °C de toute la journée et 1,5 jour à -10 °C ou moins, contre
+10,0 jours à -10 °C ou moins et 35,2 jours à -5 °C ou moins à Champagnole. Un projet décidé
+à l'automne se planifie souvent pour le printemps suivant, et ce décalage est plus long en
+altitude qu'en plaine.
+
+### HCE intervient-elle dans une commune qui n'est pas dans sa liste de villes ?
+Très probablement si elle se trouve dans le Jura ou dans l'Ain : la zone déclarée par
+l'entreprise est départementale, et les six villes citées servent à en donner l'étendue
+réelle, pas à la restreindre. La vérification se fait par téléphone au 03 84 52 61 48 : la
+réponse dépend de la commune, mais aussi de la nature et de la taille du chantier. Un prix,
+en revanche, ne se donne pas par téléphone — un chantier d'enrobé se chiffre après une
+visite sur site, parce que la surface, l'accès des engins, l'état du support et l'évacuation
+de l'eau ne s'évaluent pas autrement.
+
 ## Pages
 
 - [Accueil](https://www.hcebtp.com/) : présentation d'HCE, services, réalisations,
@@ -364,6 +408,16 @@ devis que cette règle supplétive.
   (norme de mise en œuvre NF P98-150-1), pourquoi une ligne apparaît entre deux bandes,
   qui évacue les gravats et où (tri à la source par flux), les mentions déchets obligatoires
   sur un devis (décret n° 2020-1817) et la validation étape par étape — avec leurs sources.
+- [Zone d'intervention](https://www.hcebtp.com/zone-intervention) : jusqu'où HCE se déplace
+  depuis Cize, avec les distances et les altitudes mesurées des six communes repères de la
+  zone (Champagnole 3,2 km / 500 m, Lons-le-Saunier 28,2 km / 263 m, Saint-Claude 34,7 km /
+  668 m, Oyonnax 55,3 km / 538 m, Bourg-en-Bresse 77,4 km / 227 m, depuis Cize à 549 m),
+  relevées sur l'API Découpage administratif de l'État et le référentiel RGE ALTI de l'IGN.
+  Contient aussi ce que l'altitude change au calendrier d'un chantier d'enrobé, chiffré en
+  comparant deux stations Météo-France séparées de 239 m de dénivelé (Lons-le-Saunier
+  39362001 à 298 m : 51,9 jours de gel par an ; Champagnole 39097003 à 537 m : 111,7 jours),
+  et le détail mensuel qui fait de mars le mois de bascule entre plaine et altitude — avec
+  leurs sources.
 - [Réalisations](https://www.hcebtp.com/realisations) : page mère des quatre dossiers
   de chantiers (cours et allées privées, parkings et voiries pro, préparation et
   terrassement, chantiers en cours). Contient aussi les réponses détaillées sur ce qui

@@ -4,6 +4,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { motion, AnimatePresence } from "framer-motion";
 import { toast } from "sonner";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { Link } from "@tanstack/react-router";
 import { CTAInline } from "@/components/CTAButtons";
 import { useSiteContent } from "@/hooks/useSiteContent";
 import { useProjectTypes, type ProjectType } from "@/hooks/useProjectTypes";
@@ -217,6 +218,17 @@ export function Zone() {
               {section.cta_text}
             </p>
           )}
+          <p className="mt-6 text-muted" style={{ fontSize: 15, lineHeight: 1.7 }}>
+            Distances et altitudes mesurées commune par commune, et ce que l'altitude change à la
+            période des travaux :{" "}
+            <Link
+              to="/zone-intervention"
+              className="underline decoration-gold/40 underline-offset-2 hover:text-gold"
+            >
+              voir la zone d'intervention en détail
+            </Link>
+            .
+          </p>
         </div>
         <div className="lg:col-span-8 relative min-h-[420px] md:min-h-[560px] border border-border overflow-hidden bg-surface">
           <iframe

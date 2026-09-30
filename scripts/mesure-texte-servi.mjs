@@ -34,6 +34,7 @@ const SITEMAP = [
   "/services/drainage-pentes",
   "/services/bordures-murets",
   "/services/finitions-soignees",
+  "/zone-intervention",
   "/realisations",
   "/realisations/cour-allee-privee",
   "/realisations/parking-voirie-pro",

@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as ZoneInterventionRouteImport } from './routes/zone-intervention'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as SigninRouteImport } from './routes/signin'
 import { Route as ResetPasswordRouteImport } from './routes/reset-password'
@@ -26,6 +27,11 @@ import { Route as LovableEmailTransactionalSendRouteImport } from './routes/lova
 import { Route as LovableEmailTransactionalPreviewRouteImport } from './routes/lovable/email/transactional/preview'
 import { Route as LovableEmailQueueProcessRouteImport } from './routes/lovable/email/queue/process'
 
+const ZoneInterventionRoute = ZoneInterventionRouteImport.update({
+  id: '/zone-intervention',
+  path: '/zone-intervention',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
   path: '/sitemap.xml',
@@ -116,6 +122,7 @@ export interface FileRoutesByFullPath {
   '/reset-password': typeof ResetPasswordRoute
   '/signin': typeof SigninRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/zone-intervention': typeof ZoneInterventionRoute
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
   '/realisations/$slug': typeof RealisationsSlugRoute
   '/realisations/avant-apres': typeof RealisationsAvantApresRoute
@@ -134,6 +141,7 @@ export interface FileRoutesByTo {
   '/reset-password': typeof ResetPasswordRoute
   '/signin': typeof SigninRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/zone-intervention': typeof ZoneInterventionRoute
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
   '/realisations/$slug': typeof RealisationsSlugRoute
   '/realisations/avant-apres': typeof RealisationsAvantApresRoute
@@ -153,6 +161,7 @@ export interface FileRoutesById {
   '/reset-password': typeof ResetPasswordRoute
   '/signin': typeof SigninRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/zone-intervention': typeof ZoneInterventionRoute
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
   '/realisations/$slug': typeof RealisationsSlugRoute
   '/realisations/avant-apres': typeof RealisationsAvantApresRoute
@@ -173,6 +182,7 @@ export interface FileRouteTypes {
     | '/reset-password'
     | '/signin'
     | '/sitemap.xml'
+    | '/zone-intervention'
     | '/email/unsubscribe'
     | '/realisations/$slug'
     | '/realisations/avant-apres'
@@ -191,6 +201,7 @@ export interface FileRouteTypes {
     | '/reset-password'
     | '/signin'
     | '/sitemap.xml'
+    | '/zone-intervention'
     | '/email/unsubscribe'
     | '/realisations/$slug'
     | '/realisations/avant-apres'
@@ -209,6 +220,7 @@ export interface FileRouteTypes {
     | '/reset-password'
     | '/signin'
     | '/sitemap.xml'
+    | '/zone-intervention'
     | '/email/unsubscribe'
     | '/realisations/$slug'
     | '/realisations/avant-apres'
@@ -228,6 +240,7 @@ export interface RootRouteChildren {
   ResetPasswordRoute: typeof ResetPasswordRoute
   SigninRoute: typeof SigninRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  ZoneInterventionRoute: typeof ZoneInterventionRoute
   EmailUnsubscribeRoute: typeof EmailUnsubscribeRoute
   RealisationsSlugRoute: typeof RealisationsSlugRoute
   RealisationsAvantApresRoute: typeof RealisationsAvantApresRoute
@@ -243,6 +256,13 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/zone-intervention': {
+      id: '/zone-intervention'
+      path: '/zone-intervention'
+      fullPath: '/zone-intervention'
+      preLoaderRoute: typeof ZoneInterventionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/sitemap.xml': {
       id: '/sitemap.xml'
       path: '/sitemap.xml'
@@ -364,6 +384,7 @@ const rootRouteChildren: RootRouteChildren = {
   ResetPasswordRoute: ResetPasswordRoute,
   SigninRoute: SigninRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
+  ZoneInterventionRoute: ZoneInterventionRoute,
   EmailUnsubscribeRoute: EmailUnsubscribeRoute,
   RealisationsSlugRoute: RealisationsSlugRoute,
   RealisationsAvantApresRoute: RealisationsAvantApresRoute,

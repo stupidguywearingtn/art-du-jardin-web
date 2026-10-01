@@ -8,6 +8,18 @@ et à compléter en fin de run.
 
 ## État des lieux
 
+> 🔴 **DOMAINE — À LIRE AVANT TOUT (mis à jour le 01/10/2026).**
+> **Le site est servi sur `https://www.hcetp.com`** (sans le `b`), depuis la
+> bascule du 30/09/2026 (commit `f07b19f`). `hcebtp.com`, `www.hcebtp.com` et
+> `hcetp.com` **redirigent en 308** vers cet hôte, vérifié au `curl` le
+> 01/10/2026. La preview reste `hcebtp.lovable.app`.
+> ⚠️ **Tout ce qui est écrit plus bas dans ce journal avant le 01/10/2026 nomme
+> l'ANCIEN domaine `hcebtp.com`.** Ces mentions sont des relevés datés, elles
+> n'ont pas été réécrites — **les lire comme de l'histoire, pas comme l'état
+> actuel**. La consigne du run nomme aussi encore `hcebtp.com` : elle est périmée
+> sur ce point.
+> **Mesurer toujours `www.hcetp.com`.** Les scripts de `scripts/` sont déjà à jour.
+
 *Au 09/09/2026.*
 
 **Identité légale de l'entreprise — référence vérifiée, ne plus la rechercher.**
@@ -578,6 +590,140 @@ Toutes les valeurs de la table du 15/09 sont **retrouvées au caractère près**
 (même script de mesure). Le banc d'essai local a redonné exactement les mêmes
 chiffres que la production avant le chantier : la fidélité du banc est
 re-confirmée pour la deuxième fois.
+
+### Positions mesurées — 01/10/2026
+
+> 🔴 **ÉVÉNEMENT MAJEUR DÉCOUVERT CE RUN — LE DOMAINE A CHANGÉ. Le site n'est
+> plus sur `hcebtp.com` mais sur `www.hcetp.com` (sans le `b`).**
+> La bascule a été faite **le 30/09/2026 à 11h56** par le commit `f07b19f`
+> (« seo: bascule vers le nouveau domaine www.hcetp.com », auteur Yanis Ouammou).
+> **Aucun run ne l'avait journalisée** : le commit de journal du 30/09 (`98ff21a`)
+> est ANTÉRIEUR à la bascule, donc tout le journal jusqu'ici parle d'un domaine
+> qui n'est plus celui du site. **La consigne du run elle-même parle encore de
+> hcebtp.com : elle est périmée sur ce point.**
+> **Règle à retenir : relire `git log` avant de faire confiance au journal.** Le
+> journal est la mémoire, mais il ne connaît que ce que le dernier run a écrit —
+> un changement fait *après* la dernière entrée est invisible. Les commits, eux,
+> ne mentent pas.
+
+**État des redirections, mesuré au `curl` (01/10/2026) :**
+
+| Hôte | Code | Destination |
+|---|---|---|
+| `https://www.hcetp.com/` | **200** | — *(hôte servi)* |
+| `https://hcetp.com/` | **308** | `https://www.hcetp.com/` |
+| `https://www.hcebtp.com/` | **308** | `https://www.hcetp.com/` |
+| `https://hcebtp.com/` | **308** | `https://www.hcetp.com/` |
+| `https://hcebtp.lovable.app/` | 200 | — *(preview, inchangée)* |
+
+**L'ancien domaine n'est donc pas perdu** : les trois variantes redirigent en 308
+permanent vers le nouvel hôte. Google recommande explicitement ce type de
+redirection pour un déplacement de site (« we recommend that you use HTTP
+permanent redirects if possible, such as `301` and `308` »,
+`developers.google.com/search/docs/crawling-indexing/site-move-with-url-changes`,
+lu le 01/10/2026). **Rien à réparer côté technique.**
+
+**Indexation : toujours nulle — et désormais nulle sur le NOUVEAU domaine.**
+Trois mesures via `WebSearch` :
+1. **`site:hcetp.com`** → neuf résultats sans rapport (Wikipédia d'acronymes HCT /
+   JCET / HCPT, Hitkarini College, C. Abdul Hakeem College, Harris County Dept of
+   Education, bureau Hong Kong-Taïwan, un PDF hrsa.gov, sites.bu.edu), **zéro
+   résultat du domaine**. L'opérateur `site:` n'est toujours pas honoré par ce
+   canal — **inchangé, ne pas réinterpréter ce résultat comme une information.**
+2. **Phrase exacte du site** `"Médaillons et inserts pavés intégrés à l'enrobé"`
+   → dix résultats, **zéro hcetp.com et zéro hcebtp.com**. ⚠️ **La SERP s'est
+   encore réordonnée** (nouveaux : lizetp, ligerio, amenagement-mineral, fredtoma ;
+   maintenus : daniel-moquet, mavrotp, galerie-creation, aravis-enrobage, gonord,
+   perenia). **Deuxième réordonnancement consécutif** après celui du 30/09 : la
+   conclusion du 30/09 (« ce canal se réordonne, son immobilité n'était pas une
+   garantie ») est confirmée une seconde fois.
+3. **Requête nommant le nouveau domaine** `hcetp.com HCE Hini Cours Enrobé Cize
+   39300 enrobé travaux publics` → **aucune page du domaine**, neuf fiches
+   d'annuaire (pappers, verif, kompass, societe, PagesJaunes départemental Ain,
+   118000, lagazettefrance, mappy, manageo). **Même constat que les 24 jours
+   précédents : l'entreprise est connue, le site ne l'est pas.**
+
+**Requête commerciale mesurée** (`enrobé à chaud Jura entreprise`) → dix
+résultats, **HCE absent**. Les positions sont tenues par les deux pages
+départementales **PagesJaunes** (« enrobé à chaud – Jura », « travaux d'enrobés de
+goudron dans le Jura »), **SFCTP / franc-comtoise-tp.fr** (Commenailles, 39, trois
+pages dans les dix), socorebat, daniel-moquet, un-max-de-services-jura.
+⚠️ **SFCTP est le concurrent direct le mieux placé** : entreprise du Jura, même
+métier, et elle place **trois URLs** sur cette requête dont une page dédiée à la
+*personnalisation d'enrobé* — exactement l'angle « médaillons et inserts » que
+porte l'accueil de HCE. À retenir pour le jour où le site sera indexé.
+
+| Requête | Mesure (01/10/2026) | Évolution vs 30/09 |
+|---|---|---|
+| indexation (phrase exacte du site) | **absent** | inchangé (SERP réordonnée 2× de suite) |
+| indexation (requête nommant le domaine) | **absent** | inchangé — 9 fiches d'annuaire |
+| `site:hcetp.com` | **absent** | inchangé (opérateur non honoré) |
+| `enrobé à chaud Jura entreprise` | **absent** | 1re mesure sur cette requête |
+
+**Volume de texte servi en production** (`scripts/mesure-texte-servi.mjs`, vu
+comme Googlebot, sur `https://www.hcetp.com`) : **les 13 URLs rendent exactement
+les mêmes valeurs qu'au 30/09, au caractère près.**
+
+| URL | Texte servi (01/10) | vs 30/09 | JSON-LD |
+|---|---|---|---|
+| accueil | 13 526 car. | = | 3 |
+| `/realisations` | 13 491 car. | = | 4 |
+| `/zone-intervention` | 8 578 car. | = | 4 |
+| `/realisations/preparation-terrassement` | 8 156 car. | = | 3 |
+| `/realisations/cour-allee-privee` | 7 670 car. | = | 3 |
+| `/services/bordures-murets` | 7 012 car. | = | 4 |
+| `/services/finitions-soignees` | 6 821 car. | = | 4 |
+| `/realisations/parking-voirie-pro` | 6 356 car. | = | 3 |
+| `/services/drainage-pentes` | 5 198 car. | = | 4 |
+| `/services/maconnerie-generale` | 5 080 car. | = | 4 |
+| `/services/preparation-terrain` | 4 482 car. | = | 4 |
+| `/services/enrobe-a-chaud` | 3 783 car. | = | 4 |
+| `/realisations/chantier-en-cours` | 373 car. | = | 2 |
+
+✅ **La bascule de domaine n'a rien cassé — vérifié, pas supposé.** Les contrôles
+passés sur le nouvel hôte :
+- `scripts/verif-faq.mjs` sur les 13 URLs → **✓ 12/12 `FAQPage` alignés** sur la
+  FAQ visible (11/11 sur l'accueil, 8/8 sur `/realisations`, 5/5 ou 4/4 ailleurs).
+- `scripts/verif-lastmod.mjs` → **✓ 13 URLs cohérentes, 12 avec `lastmod`** aligné
+  sur la date affichée par la page.
+- `robots.txt` → `Allow: /` et `Sitemap: https://www.hcetp.com/sitemap.xml`.
+- `sitemap.xml` → **13 `<loc>`, toutes sur `www.hcetp.com`**, toutes en 200.
+- **Canonical et `og:url` relevés un par un sur les 13 URLs** : auto-référents sur
+  `https://www.hcetp.com`, et **`noindex` absent partout (0/13)**.
+- **Zéro occurrence de `hcebtp` dans le HTML servi des 13 URLs** (compté page par
+  page, total = 0). `llms.txt` en ligne : **0 occurrence** de l'ancien domaine.
+- Contenu figé client vérifié sur l'accueil en ligne : `2012` ✓, `posé à la main`
+  ✓, `150` ✓, `Devis détaillé` ✓, `garantie décennale` ✓ — et les interdits
+  absents : `2005`, `20 ans`, `finisseur`, `Devis sous 48h`, `Garantie & SAV` à 0.
+  *(Les 4 occurrences de « 180 » sont `sizes="180x180"` de l'apple-touch-icon et
+  des valeurs CSS — contrôlées une par une, aucune n'est une température.)*
+  ⚠️ `scripts/check-contenu-fige-prod.mjs` **n'a PAS pu tourner** : il exige
+  `SUPABASE_PUBLISHABLE_KEY`, absente de l'environnement du runner. Le contrôle a
+  donc été fait au `grep` sur le HTML servi. **À savoir pour les prochains runs :
+  ce script n'est pas utilisable depuis le runner en l'état.**
+
+🔔 **IndexNow : première soumission du nouveau domaine, et elle apprend quelque
+chose.** Le fichier clé est bien servi sur le nouvel hôte
+(`/051b2d7c5dec4c46e59a45f33361b9ff.txt`, HTTP 200, contenu conforme) et les 13
+URLs sont parties → **HTTP 202**, là où l'ancien domaine renvoyait **toujours
+200** sur 24 soumissions. Le script documente lui-même le sens du code : 202 =
+« accepté, clé en cours de vérification », *cas normal pour un domaine encore
+inconnu des moteurs*. **Ce 202 est donc une mesure, pas un incident** : c'est la
+confirmation côté Bing que `www.hcetp.com` part d'une page blanche.
+**C'était très probablement la première soumission du nouveau domaine** : le
+commit de bascule a modifié `scripts/indexnow-submit.mjs` mais rien n'indique
+qu'il ait été exécuté ensuite, et le 202 va dans ce sens.
+
+> 🔔 **Notification client : ENVOYÉE ce run, en dérogeant à la cadence
+> hebdomadaire.** La règle du 30/09 disait « ne pas re-notifier avant le
+> 07/10/2026, sauf si l'indexation arrive ou si un contrôle casse ». **La
+> dérogation est justifiée par un troisième cas que la règle n'avait pas prévu :
+> le domaine a changé, et les instructions que le client doit suivre pointaient
+> toutes vers l'ancien.** Le laisser agir une semaine de plus sur
+> `ACTIONS-SEO-CLIENT.md` non corrigé l'aurait conduit à déclarer une URL qui
+> redirige dans sa Search Console, sa fiche Google et sa fiche PagesJaunes.
+> **Cadence pour la suite : prochaine notification de routine le 08/10/2026**,
+> sauf indexation ou contrôle cassé.
 
 ### Positions mesurées — 30/09/2026
 
@@ -1292,6 +1438,91 @@ JSON-LD, pas de `BreadcrumbList`).
 ---
 
 ## Chantiers faits
+
+### 01/10/2026 — La bascule de domaine était faite dans le code mais pas dans l'appareil de découverte : `ACTIONS-SEO-CLIENT.md` envoyait le client déclarer une URL qui redirige
+
+**Pourquoi ce chantier et pas un autre.** Le run a commencé par constater que le
+domaine avait changé la veille (commit `f07b19f`) sans qu'aucun run ne le
+journalise. La question s'est donc posée : la bascule est-elle complète ? La
+réponse mesurée est **oui côté code, non côté hors-dépôt**.
+
+Côté code, tout avait suivi (canonical, `og:url`, sitemap, `robots.txt`,
+données structurées, `llms.txt`, scripts) — **vérifié page par page, et pas
+supposé** : 0 occurrence de l'ancien domaine dans le HTML servi des 13 URLs,
+canonical auto-référent partout, 12/12 `FAQPage` alignés, 13/13 en 200. **Il n'y
+avait rien à corriger dans le code, et rien n'a été touché.**
+
+Côté hors-dépôt, en revanche, le trou était béant. `ACTIONS-SEO-CLIENT.md` est le
+document qui porte **les trois seuls leviers capables de débloquer l'indexation**
+(Search Console, fiche Google Business Profile, fiche PagesJaunes) — ceux que le
+journal désigne depuis le 20/09 comme « hors du dépôt et demandant le client ».
+**Ces trois leviers consistent précisément à déclarer l'adresse du site dans un
+service tiers.** Et le document disait `https://www.hcebtp.com` en **11
+endroits**. Le client qui l'aurait appliqué cette semaine aurait déclaré, dans sa
+Search Console, sur sa fiche Google et sur sa fiche PagesJaunes, **une URL qui
+redirige en 308** — alors que le document lui-même avertit, trois lignes plus
+bas, qu'« une URL qui redirige affaiblit la citation ». Le chantier le plus utile
+du jour n'était donc pas d'écrire du contenu : c'était de réparer la seule
+instruction qui pouvait faire du mal.
+
+**Ce qui a été fait, précisément.**
+1. **Les 11 occurrences instructionnelles passent à `www.hcetp.com`** — Search
+   Console (création de propriété et inspection d'URL), champ « Site web » de la
+   fiche Google, bloc NAP de référence à recopier dans les annuaires, consigne
+   « toujours `www`, sans slash final », action 4 sur les fiches d'annuaire, et le
+   constat sur PagesJaunes/Mappy.
+2. **Les 2 occurrences historiques sont conservées telles quelles** (l'entrée datée
+   du 07/09 « tous les signaux d'hôte alignés sur `www.hcebtp.com` » et la mention
+   de l'ancien `hcebtp.com` sans `www`). **Les réécrire aurait falsifié un
+   relevé daté.** Le remplacement a donc été borné aux lignes 1-268 et vérifié
+   après coup.
+3. **Un bandeau rouge en tête du fichier** : le domaine servi, le tableau des
+   trois redirections 308 mesurées au `curl`, le fait que la redirection est du
+   bon type avec la citation Google, la consigne « partout où une adresse doit
+   être déclarée, c'est `www.hcetp.com` », et **deux points qui ne vont pas de
+   soi** — (a) la migration ne fait rien perdre puisque rien n'était indexé, mais
+   elle remet le compteur de découverte à zéro, (b) **ne pas laisser expirer
+   `hcebtp.com`**, sinon toute citation créée par erreur sur l'ancienne adresse
+   meurt.
+4. **Action 1 enrichie d'un arbitrage qui a changé de réponse avec la bascule :
+   propriété de domaine plutôt que préfixe d'URL.** Une propriété de domaine
+   (`hcetp.com`, sans protocole) couvre d'un coup les quatre variantes
+   www/non-www × http/https, là où un préfixe d'URL ne montre que l'hôte exact
+   saisi. Elle exige une validation **DNS TXT**, qui est la seule méthode acceptée
+   pour ce type — et comme le DNS du nouveau domaine vient d'être configuré,
+   l'accès est sous la main maintenant. Le préfixe d'URL est conservé comme repli
+   explicite. **C'est le seul ajout de fond du run, et il est justifié par le
+   changement de domaine, pas par du remplissage.**
+5. **Trois entrées datées ajoutées à la section « déjà fait côté code »** : la
+   bascule du 30/09 avec la liste des signaux vérifiés, le constat du 01/10 que
+   le volume servi est intact au caractère près et que les contrôles passent, et
+   la première soumission IndexNow du nouveau domaine avec l'explication du 202.
+
+**Ce qui a été décidé de NE PAS faire, et pourquoi.**
+- **Les 4 références à `hcebtp.com` qui restent dans le code n'ont pas été
+  touchées** : `src/routes/lovable/email/transactional/send.ts` (`SITE_NAME`,
+  `SENDER_DOMAIN = notify.hcebtp.com`, `FROM_DOMAIN = hcebtp.com`) et
+  `src/routes/api/public/devis.ts` (`from: 'HCE BTP <devis@hcebtp.com>'`). **Ce
+  sont des domaines d'envoi d'e-mail, vérifiés chez le prestataire d'envoi (DKIM/
+  SPF).** Les renommer sans avoir vérifié le nouveau domaine chez Resend
+  **casserait l'e-mail du formulaire de devis**, c'est-à-dire la conversion du
+  site. Ce n'est pas un sujet SEO : l'e-mail public affiché sur le site est
+  `sarl.hce@laposte.net`, pas une adresse du domaine. **Porté en « Hypothèses à
+  vérifier » comme question au client, pas traité en silence.**
+- **Aucune réécriture de contenu, aucune nouvelle page.** Le chantier du jour
+  était la migration ; ouvrir en plus un chantier rédactionnel aurait fait deux
+  chantiers le même jour, ce que le journal proscrit.
+- **L'adresse n'a pas été retouchée.** Les relevés du jour sur kompass et mappy
+  affichent encore « 36 avenue Etienne Lamy » : c'est l'**ancienne** adresse
+  (SIRET …0021), question déjà tranchée les 09/09 et 13/09. **Point clos, ne pas
+  le rouvrir** — le site affiche `40 avenue Etienne Lamy`, qui est la bonne.
+- **Pas de Changement d'adresse en Search Console.** L'outil exige que les deux
+  domaines y soient validés, et il n'y a rien à transférer : aucune page de
+  l'ancien domaine n'a jamais été indexée en 24 jours de mesure. ⚠️ **Nuance à ne
+  pas déformer : la doc Google ne dit PAS que l'outil exige un contenu déjà
+  indexé.** C'est l'absence d'indexation *constatée ici* qui rend l'outil sans
+  objet, pas une règle de Google. Vérifié en lisant la doc, après avoir d'abord
+  supposé le contraire.
 
 ### 30/09/2026 — `/zone-intervention` : la première page du site consacrée à la géographie, avec des distances et des altitudes mesurées (commit `6cc006e`)
 
@@ -3296,6 +3527,54 @@ Lun-Ven 8h-18h / Sam 8h-12h, Mappy Lun-Sam 7h-19h) signalés comme incohérence 
 Par ordre de priorité. **Alterner les angles, ne pas refaire le même deux jours
 de suite.**
 
+> 🆕 **CANDIDAT N°1 DU PROCHAIN RUN (au 01/10/2026) —
+> `/services/enrobe-a-chaud`, 3 783 caractères : la page la plus maigre du site
+> hors galerie, et c'est la page du métier principal.**
+> **Pourquoi elle, et pourquoi maintenant.** Les 11 autres pages rédigées tiennent
+> entre 4 482 et 13 526 caractères ; celle-ci est **la dernière sous les 4 000**.
+> Or c'est la page qui porte **le service qui donne son nom à l'entreprise** et la
+> requête commerciale mesurée ce run (« enrobé à chaud Jura entreprise »), sur
+> laquelle le site est absent. Elle a bien reçu un bloc de Q/R le 11/09 (sur le
+> goudronnage), mais c'est le plus ancien et le plus court des six.
+> **Angle repéré ce run, et il est précis.** Le concurrent le mieux placé sur cette
+> requête est **SFCTP / `franc-comtoise-tp.fr`** (Commenailles, 39), qui place
+> **trois URLs dans les dix résultats**, dont une page dédiée à la
+> **personnalisation d'enrobé**. C'est l'angle à contester — et HCE a de quoi le
+> faire honnêtement, puisque l'accueil porte déjà « médaillons et inserts pavés
+> intégrés à l'enrobé » et la pose à la main à 150 °C.
+> **Matière métier à chercher (ce que personne ne publie, cf. ÉTAPE 4)** :
+> épaisseurs et granulométries normalisées par usage (piéton / véhicule léger /
+> poids lourd), ce que la norme **NF EN 13108** et **NF P98-150-1** imposent
+> réellement, la fenêtre de pose dans le Jura reliée aux **normales Météo-France
+> déjà relevées** (Champagnole 39097003 : 111,7 jours de gel/an ; Crotenay
+> 39362001 : 51,9), et la différence chaud/froid déjà sourcée le 11/09.
+> ⚠️ **Avant de rédiger : relire les 5 Q/R du 11/09 de cette même page ET celles
+> de `finitions-soignees` (21/09)** pour ne pas doubler. Le journal signale que le
+> filon « page maigre » a été déclaré épuisé le 29/09 — **cette page est
+> l'exception qui restait**, pas une réouverture du filon.
+> **Méthode inchangée** : patron des blocs `savoir`, réponse directe en tête de
+> chaque H2, H2 formulés comme des questions posées à voix haute, sources
+> primaires datées, `FAQPage` strictement aligné sur la FAQ visible, mesure
+> avant/après au banc d'essai local avec `scripts/mesure-texte-servi.mjs` des deux
+> côtés, puis `verif-faq.mjs` et `verif-lastmod.mjs` avant de pousser, et report
+> dans `llms.txt`.
+
+> 🆕 **01/10/2026 — Indicateur de progrès gratuit à relever à chaque run : le code
+> de retour d'IndexNow.** `www.hcetp.com` renvoie **202** (clé en cours de
+> vérification, hôte inconnu des moteurs) là où l'ancien domaine renvoyait **200**
+> sur 24 soumissions. **Un passage de 202 à 200 signifierait que Bing a lu le
+> fichier clé** — premier signe de vie côté moteur, et il ne coûte rien à mesurer.
+> Le noter dans la table de positions à chaque run.
+
+> ⚠️ **01/10/2026 — Rappel sur la priorité, inchangée depuis le 20/09 et renforcée
+> par la bascule.** Le domaine est neuf : le compteur de découverte est à zéro, et
+> **aucun chantier de contenu ne déclenchera l'indexation.** Les trois leviers
+> restent hors du dépôt (Search Console sur `hcetp.com`, revendication de la fiche
+> Google existante, revendication de `pagesjaunes.fr/pros/52322496`), tous
+> désormais documentés avec le bon domaine dans `ACTIONS-SEO-CLIENT.md`.
+> **Ne pas ouvrir de chantier au motif qu'il « aiderait l'indexation ».** Choisir
+> les chantiers pour leur valeur propre.
+
 > 🚨 **ALERTE DU 20/09/2026 — le délai de deux semaines fixé le 07/09 est
 > écoulé, et le verdict est tombé : le domaine a besoin de liens entrants
 > réels.**
@@ -3880,6 +4159,35 @@ de suite.**
 
 ## Hypothèses à vérifier
 
+> 🆕 **01/10/2026 — L'e-mail reste sur l'ancien domaine : question au client.**
+> Quatre références à `hcebtp.com` subsistent dans le code, toutes liées à
+> l'envoi d'e-mail : `SITE_NAME = "hcebtp"`, `SENDER_DOMAIN = "notify.hcebtp.com"`
+> et `FROM_DOMAIN = "hcebtp.com"` dans
+> `src/routes/lovable/email/transactional/send.ts`, et
+> `from: 'HCE BTP <devis@hcebtp.com>'` dans `src/routes/api/public/devis.ts`.
+> `ACTIONS-USER-REQUISES.md` mentionne par ailleurs `devis@hcebtp.com` « à terme,
+> après vérification du domaine dans Resend ».
+> **Elles n'ont PAS été modifiées, et il ne faut pas les modifier à l'aveugle** :
+> un domaine d'envoi doit être vérifié (DKIM/SPF) chez le prestataire avant
+> d'être utilisé. Changer la chaîne sans faire la vérification côté Resend
+> **casse l'e-mail du formulaire de devis**.
+> **Question à poser : l'e-mail bascule-t-il aussi sur `hcetp.com` ?** Si oui,
+> c'est une action client chez Resend (vérifier `notify.hcetp.com`), et le code
+> suivra *ensuite*. Si non, laisser tel quel : ce n'est pas un problème SEO —
+> l'adresse publique du site est `sarl.hce@laposte.net`. **Impact SEO réel :
+> quasi nul** (aucun de ces domaines n'apparaît dans une page servie, mesuré à 0
+> sur les 13 URLs). **Ne pas en faire un chantier SEO ; juste ne pas l'oublier.**
+
+> 🆕 **01/10/2026 — `scripts/check-contenu-fige-prod.mjs` est inutilisable depuis
+> le runner.** Il s'arrête sur `SUPABASE_PUBLISHABLE_KEY manquante (clé anon
+> publique)`. Le contrôle du contenu figé a donc été fait au `grep` sur le HTML
+> servi, ce qui marche mais ne couvre que l'accueil.
+> **À vérifier : la clé anon est publique par nature** (c'est son rôle), donc soit
+> elle peut être lue depuis le bundle servi et le script pourrait s'en passer,
+> soit il faut la fournir au runner. **Ne rien changer au script sans avoir
+> tranché** : il sert de garde-fou sur du contenu figé client, le casser coûterait
+> plus que l'inconvénient actuel.
+
 - **Deux pages publient « la station Météo-France de Champagnole, à 2 km de
   Cize », alors que la distance mesurée est de 4,8 km.** Relevé le 30/09/2026 :
   la station 39097003 est à 46°45'24"N / 5°53'09"E, le point central de Cize
@@ -4363,6 +4671,57 @@ de suite.**
 ---
 
 ## Techniques apprises
+
+### 01/10/2026 — ⚙️ Trois acquis : le journal ne voit pas ce qui suit sa dernière entrée, le code 202 d'IndexNow est une mesure, et Google avalise le 308
+
+**1. ⚠️ LE PLUS IMPORTANT — le journal ne connaît que ce que le dernier run a
+écrit. Lire `git log` AVANT de lui faire confiance.**
+Le domaine du site a changé le 30/09 à 11h56 (commit `f07b19f`). Le commit de
+journal du 30/09 (`98ff21a`) est **antérieur** à cette bascule. Résultat : les
+353 Ko de journal, *y compris l'entrée la plus récente*, décrivent un domaine qui
+n'est plus celui du site — et **la consigne du run elle-même est périmée sur ce
+point**, puisqu'elle nomme `hcebtp.com`. Un run qui aurait fait confiance au
+journal et à sa consigne aurait travaillé une journée entière sur le mauvais
+domaine.
+**Recette à appliquer en ouverture de chaque run, après la lecture du journal :**
+```
+git log --oneline -15        # ce qui a bougé depuis la dernière entrée
+curl -sS -o /dev/null -w "%{http_code} %{redirect_url}\n" https://<domaine>/
+```
+Un commit non journalisé est le cas normal, pas l'exception : le client et
+d'autres sessions poussent aussi sur `main`. **Corollaire : l'étape « mesurer
+avant d'agir » doit inclure « vérifier quel domaine on mesure ».**
+
+**2. ⚙️ IndexNow : `202` au lieu de `200` est une information, pas une panne.**
+L'ancien domaine a renvoyé **200** sur 24 soumissions consécutives. La première
+soumission du nouveau domaine renvoie **202**. Le script le documente lui-même :
+200 = accepté, **202 = accepté, clé en cours de vérification — « cas normal pour
+un domaine encore inconnu des moteurs »**. Donc :
+- **Ne pas traiter un 202 comme un échec** et ne pas resoumettre en boucle.
+- **Le 202 se lit comme une mesure** : il confirme, depuis Bing, que l'hôte est
+  neuf et inconnu. C'est le seul signal d'indexation qu'on obtienne sans Search
+  Console, et il est gratuit.
+- **Il devrait repasser à 200** une fois la clé vérifiée : si un prochain run voit
+  200 sur `www.hcetp.com`, c'est que Bing a au moins lu le fichier clé. **À
+  surveiller — c'est un indicateur de progrès, à relever à chaque run.**
+
+**3. 📚 Google avalise explicitement le `308` pour un déplacement de site.**
+Doc lue le 01/10/2026 :
+`developers.google.com/search/docs/crawling-indexing/site-move-with-url-changes`.
+Verbatim : « *we recommend that you use HTTP permanent redirects if possible,
+such as `301` and `308`* ». Utile ici parce que Lovable Cloud sert du **308** et
+non du 301 sur les trois variantes de l'ancien domaine : **le 308 n'est pas un
+pis-aller, c'est une des deux formes recommandées.** Ne pas perdre de temps à
+chercher à le convertir en 301.
+Même doc, sur l'outil **Changement d'adresse** : « *You only need this tool when
+moving from one domain or subdomain to another* » et elle exige que les variantes
+soient **validées dans la Search Console**.
+⚠️ **Erreur de raisonnement évitée de justesse, à ne pas refaire** : j'ai d'abord
+supposé que la doc conditionnait cet outil à un contenu déjà indexé, et j'allais
+l'écrire comme un fait sourcé. **La doc ne dit pas ça.** Ce qui est vrai ici,
+c'est que *dans ce cas précis* l'outil n'a rien à transférer, puisque rien n'a
+jamais été indexé — c'est une conclusion tirée de nos mesures, pas une règle
+Google. **Vérifier la source avant d'attribuer à Google une règle qui arrange.**
 
 ### 30/09/2026 — ⚙️ Trois référentiels publics géolocalisés lisibles depuis le runner, l'index des stations Météo-France enfin trouvé, et un extrait de moteur qui se trompe sur un chiffre
 

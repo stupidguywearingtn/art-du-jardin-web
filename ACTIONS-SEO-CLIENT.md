@@ -1,11 +1,46 @@
 # SEO — les 4 actions que seul le client peut faire
 
-> Constat au 7 septembre 2026 : **aucune page de hcebtp.com n'est présente dans les
-> index Google ni Bing**. Une recherche sur la marque elle-même ne renvoie rien.
+> 🔴 **LE DOMAINE A CHANGÉ LE 30/09/2026 — relire ce fichier avant d'agir.**
+> Le site est désormais servi sur **`https://www.hcetp.com`** (sans le `b`).
+> L'ancien **`hcebtp.com`** n'est pas mort : vérifié le 01/10/2026, `hcebtp.com`,
+> `www.hcebtp.com` et `hcetp.com` **redirigent tous les trois en 308** vers
+> `https://www.hcetp.com`, qui répond 200. C'est le bon type de redirection —
+> Google écrit noir sur blanc : « we recommend that you use HTTP permanent
+> redirects if possible, such as `301` and `308` »
+> ([doc Google, déplacement de site avec changement d'URL](https://developers.google.com/search/docs/crawling-indexing/site-move-with-url-changes)).
+> Rien à réparer côté technique, donc.
 >
-> Ce n'est PAS un problème de code. Le site a été vérifié :
-> `robots.txt` en `Allow: /`, sitemap valide à 12 URLs (HTTP 200), aucun `noindex`,
-> canonical présent sur toutes les pages, HTML servi en 200 par le serveur.
+> **Mais toutes les actions ci-dessous ont été écrites pour l'ancien domaine.**
+> Elles ont été corrigées le 01/10/2026 pour pointer vers `www.hcetp.com`.
+> **Conséquence pratique : partout où une adresse de site doit être déclarée —
+> Search Console, fiche Google, PagesJaunes, annuaires — c'est
+> `https://www.hcetp.com` qu'il faut saisir, jamais l'ancienne.** Déclarer une
+> URL qui redirige affaiblit la citation : c'est précisément l'erreur que ce
+> fichier faisait courir tant qu'il n'était pas à jour.
+>
+> **Deux points à savoir sur ce changement de domaine :**
+> 1. **Il ne fait rien perdre.** L'outil « Changement d'adresse » de la Search
+>    Console sert à transférer la réputation d'un domaine vers un autre et exige
+>    que les deux soient validés dans la Search Console. Ici il n'y a rien à
+>    transférer : aucune page de l'ancien domaine n'a jamais été indexée (mesuré
+>    du 07/09 au 30/09, 24 jours de suite). La migration est donc indolore — mais
+>    elle **remet le compteur de découverte à zéro**, et c'est bien l'action 1 qui
+>    reste la priorité.
+> 2. **Ne pas laisser expirer `hcebtp.com`.** Tant qu'il redirige, toute citation
+>    créée par erreur sur l'ancienne adresse continue de mener au site. S'il
+>    expire, ces liens meurent.
+>
+> ---
+>
+> Constat au 7 septembre 2026, **toujours vrai au 01/10/2026** (revérifié sur le
+> nouveau domaine) : **aucune page du site n'est présente dans les index Google
+> ni Bing**. Une recherche sur la marque elle-même ne renvoie rien.
+>
+> Ce n'est PAS un problème de code. Le site a été vérifié, et revérifié sur
+> `www.hcetp.com` le 01/10/2026 : `robots.txt` en `Allow: /`, sitemap valide à
+> **13 URLs** (toutes HTTP 200), aucun `noindex`, canonical présent et
+> auto-référent sur toutes les pages, HTML servi en 200 par le serveur, et les
+> 12 blocs `FAQPage` alignés sur la FAQ réellement visible.
 >
 > Le problème est en amont : **les moteurs n'ont jamais découvert le domaine.**
 > Un moteur découvre un site de deux façons — un lien depuis un site déjà connu,
@@ -21,16 +56,26 @@
 C'est le seul canal qui dit directement à Google « ce domaine existe ».
 
 1. Aller sur https://search.google.com/search-console
-2. Ajouter une propriété → choisir **Préfixe d'URL** → saisir `https://www.hcebtp.com`
-   (bien avec le `www` : c'est l'hôte réellement servi, l'adresse sans `www`
-   redirige vers lui).
-3. Valider la propriété. La méthode la plus simple ici : **balise HTML** ou
-   **fichier HTML** → dans ce cas, transmets le contenu de la balise / le fichier,
-   je le pose dans le repo et il est en ligne au prochain déploiement.
-   La validation par **enregistrement DNS TXT** marche aussi si tu as la main sur
-   le domaine.
+2. Ajouter une propriété. **Deux choix possibles, et depuis la bascule de domaine
+   le premier est devenu le meilleur :**
+   - **Propriété de domaine** (recommandé) → saisir `hcetp.com` sans `https://`
+     ni `www`. Elle couvre d'un coup `hcetp.com`, `www.hcetp.com`, le `http` et le
+     `https` : une seule propriété pour tout le domaine, donc aucune donnée qui
+     passe à côté. **Elle se valide obligatoirement par enregistrement DNS TXT** —
+     c'est la seule méthode acceptée pour ce type de propriété. Comme le DNS du
+     nouveau domaine vient d'être configuré, l'accès est déjà sous la main : c'est
+     le bon moment, et ça évite d'avoir à ajouter une seconde propriété plus tard.
+   - **Préfixe d'URL** (repli si le DNS n'est pas accessible) → saisir
+     `https://www.hcetp.com` (bien avec le `www` : c'est l'hôte réellement servi,
+     les adresses sans `www` redirigent vers lui). ⚠️ Cette propriété-là ne montre
+     **que** l'hôte exact saisi.
+3. Valider la propriété. Pour une **propriété de domaine**, c'est le DNS TXT
+   (ci-dessus). Pour un **préfixe d'URL**, la méthode la plus simple est la
+   **balise HTML** ou le **fichier HTML** → dans ce cas, transmets le contenu de
+   la balise / le fichier, je le pose dans le repo et il est en ligne au prochain
+   déploiement.
 4. Une fois validé : menu **Sitemaps** → soumettre `sitemap.xml`.
-5. Menu **Inspection d'URL** → coller `https://www.hcebtp.com/` → bouton
+5. Menu **Inspection d'URL** → coller `https://www.hcetp.com/` → bouton
    **Demander une indexation**. À refaire pour les 2-3 pages les plus importantes
    (`/services/enrobe-a-chaud`, `/services/preparation-terrain`).
 
@@ -63,7 +108,7 @@ elle est indexée immédiatement, elle fait exister l'entreprise sur les recherc
 3. **Zone desservie** : Jura (39) et Ain (01), plutôt qu'une adresse visible si
    l'activité se fait chez le client.
 4. **Le plus important pour la découverte du site : renseigner le champ Site web
-   avec `https://www.hcebtp.com`** (avec le `www`). C'est ce lien, depuis une fiche
+   avec `https://www.hcetp.com`** (avec le `www`). C'est ce lien, depuis une fiche
    déjà indexée par Google, qui est le meilleur candidat pour déclencher le crawl
    du domaine.
 5. La validation (courrier postal ou autre méthode proposée) prend 1 à 2 semaines :
@@ -89,7 +134,7 @@ Ville          : Cize
 Pays           : France
 Téléphone      : 03 84 52 61 48
 Email          : sarl.hce@laposte.net
-Site web       : https://www.hcebtp.com
+Site web       : https://www.hcetp.com
 Horaires       : Lundi-Vendredi 8h-18h · Samedi 8h-12h
 ```
 
@@ -163,7 +208,7 @@ entité connue.
 2. **Le 06 81 78 96 41 du bouton WhatsApp ne doit jamais être déclaré comme téléphone
    principal** dans un annuaire ou sur la fiche Google. Deux numéros principaux
    différents cassent le recoupement. Le numéro de référence est le **03 84 52 61 48**.
-3. **Toujours `https://www.hcebtp.com`**, avec le `www` et sans slash final :
+3. **Toujours `https://www.hcetp.com`**, avec le `www` et sans slash final :
    l'adresse sans `www` redirige, et une URL qui redirige affaiblit la citation.
 
 ---
@@ -179,7 +224,7 @@ Il en faut donc au moins quelques-uns, réels et légitimes :
 - Les **fiches d'entreprise automatiques** (registre du commerce, annuaires
   d'entreprises) : beaucoup existent déjà sans le site ; la plupart permettent de
   revendiquer la fiche et d'y ajouter l'URL. C'est le point d'entrée le plus
-  rapide à obtenir : y ajouter `https://www.hcebtp.com` crée un lien depuis une
+  rapide à obtenir : y ajouter `https://www.hcetp.com` crée un lien depuis une
   page que Google crawle déjà.
 
   **Recensement du 09/09/2026 — quatre fiches existent déjà, aucune ne porte
@@ -211,7 +256,7 @@ Il en faut donc au moins quelques-uns, réels et légitimes :
   cinq annuaires qui soit une fiche *commerciale* et non une fiche légale
   automatique. Elle se revendique auprès de Solocal, elle accepte un lien vers le
   site, et c'est un domaine que Google recrawle en permanence — c'est aujourd'hui
-  le point d'entrée le plus rapide vers `https://www.hcebtp.com`. Elle occupe par
+  le point d'entrée le plus rapide vers `https://www.hcetp.com`. Elle occupe par
   ailleurs déjà des positions sur les requêtes que le site vise (voir les pages
   départementales « enrobé à chaud » de PagesJaunes).
 
@@ -236,7 +281,7 @@ Il en faut donc au moins quelques-uns, réels et légitimes :
 
   1. **C'est la seule fiche connue qui porte à la fois le bon téléphone et
      l'adresse actuelle.** À ce titre elle a été ajoutée aux `sameAs` du site.
-     Elle n'affiche en revanche **aucun lien vers `https://www.hcebtp.com`** :
+     Elle n'affiche en revanche **aucun lien vers `https://www.hcetp.com`** :
      comme PagesJaunes, sa valeur réelle est le lien retour à créer.
   2. **⚠️ Ne jamais juger une fiche sur l'extrait affiché par le moteur de
      recherche.** L'extrait de Mappy annonce « 36 av Etienne Lamy » — l'ancienne
@@ -301,3 +346,25 @@ c'est inefficace aujourd'hui et risqué.
   connue ; il l'est maintenant. Coordonnées GPS remplacées par le géocodage
   officiel INSEE de l'établissement (~300 m plus précis que le centre du village).
   Aucun changement visible pour le visiteur.
+- **30/09/2026** — **Bascule vers le nouveau domaine `www.hcetp.com`.** Tous les
+  signaux d'hôte ont suivi : canonical, `og:url`, `sitemap.xml`, `robots.txt`,
+  données structurées, `llms.txt` et les scripts de contrôle. Vérifié le
+  01/10/2026 en lisant le HTML réellement servi : **zéro occurrence de l'ancien
+  domaine** sur les pages contrôlées, canonical auto-référent sur
+  `https://www.hcetp.com/`, `robots.txt` en `Allow: /` déclarant le bon sitemap,
+  et les 13 URLs du sitemap en 200.
+- **01/10/2026** — **Le volume de contenu servi est intact après la bascule** :
+  les 13 URLs rendent exactement le même nombre de caractères qu'au 30/09, au
+  caractère près (mesuré avec `scripts/mesure-texte-servi.mjs` des deux côtés).
+  Les 12 blocs `FAQPage` sont toujours alignés sur la FAQ visible
+  (`scripts/verif-faq.mjs`, 12/12 ✓) et les 12 `lastmod` toujours cohérents avec
+  la date affichée par chaque page (`scripts/verif-lastmod.mjs` ✓). **Le
+  changement de domaine n'a donc rien cassé** — c'est vérifié, pas supposé.
+- **01/10/2026** — **Première soumission IndexNow du nouveau domaine.** Le
+  fichier clé est bien servi sur `www.hcetp.com` (HTTP 200, contenu conforme) et
+  les 13 URLs ont été soumises → **HTTP 202**. À noter : l'ancien domaine
+  renvoyait toujours 200 ; le **202 signifie « accepté, clé en cours de
+  vérification »**, ce qui est la réponse attendue pour un hôte encore inconnu
+  des moteurs. C'est donc la confirmation, côté Bing, que `www.hcetp.com` part
+  d'une page blanche. Google ne participe pas à IndexNow : **l'action 1 reste
+  indispensable et redevient urgente.**

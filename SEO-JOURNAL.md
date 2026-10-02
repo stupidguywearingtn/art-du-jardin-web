@@ -8,6 +8,53 @@ et à compléter en fin de run.
 
 ## État des lieux
 
+> 🔴 **02/10/2026 — LE DÉPLOIEMENT NE PART PLUS. Le code est sur `main`, la
+> production sert encore la version du 30/09. À LIRE AVANT TOUT CHANTIER.**
+> **Les faits, mesurés :**
+> - `origin/main` est à `0b4d0cd`, poussé le **02/10/2026 à 07:23 UTC** (chantier
+>   du jour). Le push est confirmé (`84dddba..0b4d0cd HEAD -> main`).
+> - **26 minutes plus tard**, `https://www.hcetp.com/services/enrobe-a-chaud` sert
+>   toujours **3 783 caractères** au lieu des 11 856 mesurés au banc d'essai
+>   local, et `https://www.hcetp.com/llms.txt` affiche encore « Dernière mise à
+>   jour : 30 septembre 2026 ».
+> - `x-vercel-cache: MISS`, `age: 0`, `cache-control: must-revalidate` → **ce
+>   n'est pas un cache CDN** : la fonction déployée contient encore l'ancien code.
+> - **La preview `hcebtp.lovable.app` est encore plus en retard** : elle sert
+>   **11 occurrences de `hcebtp.com`**, donc une version **antérieure à la bascule
+>   de domaine du 30/09**.
+> - **Le dernier déploiement réellement visible en production date du 30/09**
+>   (bascule de domaine `f07b19f` + `/zone-intervention` `6cc006e`, tous deux en
+>   ligne). Le commit du 01/10 (`84dddba`) ne touchait qu'un `.md` : **son
+>   non-déploiement était invisible**. Le chantier du 02/10 est le premier
+>   changement de code depuis le 30/09, et c'est lui qui révèle le blocage.
+> **Ce qui a été écarté, vérifié et pas supposé :**
+> - ❌ **Pas un problème de code** : `npx tsc --noEmit` en 0, `npm run build` en 0
+>   (14 s), `npm run check:fige` en 0, `verif-faq.mjs` 10/10, `verif-lastmod.mjs`
+>   13/13 — tous **avant** le push.
+> - ❌ **Pas un problème de branche** : le push est allé sur `main` (`git push
+>   origin HEAD:main`), et c'est `main` qui déploie (acquis du 25/09).
+> - ❌ **Pas un workflow CI en échec** : le dépôt n'a **aucun** workflow
+>   (`.github/workflows` absent). Le déploiement passe uniquement par
+>   l'intégration Git de Vercel.
+> - ❌ **Pas un changement de configuration** : `vite.config.ts` impose toujours
+>   `nitro: { preset: "vercel" }`, et il n'a pas été modifié.
+> **Ce qui reste et ne peut pas être fait d'ici :** consulter le tableau de bord
+> Vercel. Les trois causes plausibles, par ordre de vraisemblance : déploiement en
+> échec (le candidat le plus sérieux est **`npm ci`, qui ne peut pas réussir sur
+> ce dépôt** — `package-lock.json` est désynchronisé, voir « Techniques
+> apprises » du 02/10 ; si Vercel est passé de `bun`/`npm install` à `npm ci`, le
+> build échoue sans toucher au code), déploiement en file d'attente, ou
+> intégration GitHub déconnectée du projet Vercel.
+> 🔔 **Le client a été notifié le 02/10/2026**, en dérogation à la cadence
+> hebdomadaire (prochaine routine prévue le 08/10) : la règle du 01/10 prévoyait
+> explicitement la dérogation « si un contrôle casse ». **C'en est un, et c'est le
+> plus grave possible : le travail quotidien ne parvient plus au site.**
+> ⚠️ **Consigne pour le prochain run : VÉRIFIER CE POINT EN PREMIER, avant de
+> choisir un chantier.** Mesurer `/services/enrobe-a-chaud` en production — s'il
+> rend 11 856 caractères, le déploiement est reparti et le chantier du 02/10 est
+> effectivement en ligne ; s'il rend encore 3 783, **ne pas empiler un nouveau
+> chantier de contenu par-dessus un chantier non déployé**, et relancer l'alerte.
+
 > 🔴 **DOMAINE — À LIRE AVANT TOUT (mis à jour le 01/10/2026).**
 > **Le site est servi sur `https://www.hcetp.com`** (sans le `b`), depuis la
 > bascule du 30/09/2026 (commit `f07b19f`). `hcebtp.com`, `www.hcebtp.com` et
@@ -648,6 +695,10 @@ jour : **les 13 URLs rendent exactement les mêmes valeurs qu'au 01/10 et au
 11 856 caractères** — mesuré au banc d'essai local, et le banc est fidèle : les
 deux pages de contrôle (accueil 13 526, `/services/finitions-soignees` 6 821) y
 rendent exactement la valeur de production.
+
+🔴 **Et le chantier du jour N'EST PAS EN LIGNE : le déploiement ne part plus.**
+Voir l'encadré rouge en tête d'« État des lieux » — le code est sur `main`, la
+production sert encore la version du 30/09, et la cause est hors du dépôt.
 
 **Contrôles passés avant push** : `npx tsc --noEmit` en 0, `npm run build` en 0,
 `npm run check:fige` en 0, `verif-faq.mjs` **✓ 10/10** sur la page modifiée,

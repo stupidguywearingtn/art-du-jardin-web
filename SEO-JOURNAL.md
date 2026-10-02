@@ -13,10 +13,18 @@ et à compléter en fin de run.
 > **Les faits, mesurés :**
 > - `origin/main` est à `0b4d0cd`, poussé le **02/10/2026 à 07:23 UTC** (chantier
 >   du jour). Le push est confirmé (`84dddba..0b4d0cd HEAD -> main`).
-> - **26 minutes plus tard**, `https://www.hcetp.com/services/enrobe-a-chaud` sert
->   toujours **3 783 caractères** au lieu des 11 856 mesurés au banc d'essai
+> - **46 minutes plus tard** (dernier relevé à 08:09 UTC, après une vingtaine de
+>   mesures espacées de 30 à 45 s), `https://www.hcetp.com/services/enrobe-a-chaud`
+>   sert toujours **3 783 caractères** au lieu des 11 856 mesurés au banc d'essai
 >   local, et `https://www.hcetp.com/llms.txt` affiche encore « Dernière mise à
 >   jour : 30 septembre 2026 ».
+> - ⚠️ **Et ce ne sont pas un, mais QUATRE pushes sur `main` qui sont restés sans
+>   effet** (`0b4d0cd`, `46987cd`, `9a1014b`, `6220bb5`, entre 07:23 et 08:05 UTC).
+>   Chacun est une occasion de déclenchement distincte. **Cela affaiblit nettement
+>   l'hypothèse « déploiement lent ou en file d'attente » et renforce celle d'une
+>   intégration qui ne reçoit plus l'événement, ou de builds qui échouent.**
+>   Pour mémoire, l'acquis du 25/09 chiffrait le délai normal : production à jour
+>   **moins de 45 secondes** après un push sur `main`.
 > - `x-vercel-cache: MISS`, `age: 0`, `cache-control: must-revalidate` → **ce
 >   n'est pas un cache CDN** : la fonction déployée contient encore l'ancien code.
 > - **La preview `hcebtp.lovable.app` est encore plus en retard** : elle sert

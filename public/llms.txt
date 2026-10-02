@@ -5,7 +5,7 @@
 > dans le Jura et l'Ain. Entreprise créée en 2012, 14 années d'expérience, plus de
 > 1000 chantiers livrés, garantie décennale.
 
-Dernière mise à jour : 30 septembre 2026
+Dernière mise à jour : 2 octobre 2026
 Site officiel : https://www.hcetp.com
 
 ## L'entreprise en bref
@@ -63,6 +63,55 @@ L'enrobé à froid se pose sans chauffe et sert aux réparations ponctuelles, pa
 pour reboucher un nid-de-poule. L'enrobé à chaud est fabriqué en centrale, livré chaud
 et posé à 150 °C : c'est celui qui donne une surface homogène sur une cour, une allée ou
 un parking entier. HCE travaille l'enrobé à chaud.
+
+### Quelle épaisseur d'enrobé faut-il pour une cour ou une allée ?
+Pour une couche de roulement en béton bitumineux semi-grenu, l'épaisseur courante est de
+5 à 8 cm selon la granularité, avec un minimum de 4 à 5 cm (fiche technique « Béton
+Bitumineux Semi Grenu » du conseil départemental de la Meuse). En dessous, il s'agit de
+couches minces ou très minces, d'au plus 4 cm, qui exigent un support déjà dense et
+imperméabilisé. La note d'information n° 43 de l'IDRRIM (décembre 2020), consacrée aux
+zones à hiver rigoureux, recommande pour les cas les plus sollicités « des couches de
+roulement d'épaisseur suffisante (type BBSG de 5 à 7 cm) ». L'épaisseur se décide avec la
+portance du support et l'usage réel de la surface.
+
+### Que veut dire 0/10 ou 0/14 sur un devis d'enrobé ?
+C'est la classe granulaire : le plus gros granulat du mélange mesure 10 ou 14 millimètres.
+Le BBSG se formule dans ces deux classes. Ce chiffre commande l'épaisseur minimale de la
+couche et la rugosité de la surface finie. En climat hivernal rigoureux, l'IDRRIM (note
+n° 43, décembre 2020) recommande un module de richesse d'au moins 3,4 pour un BBSG 0/10 et
+d'au moins 3,2 pour un 0/14 — ce module, défini par la norme NF P 98-149, traduit
+l'épaisseur du film de liant autour des granulats, donc la tenue à l'eau dans le temps.
+
+### Peut-on poser un enrobé neuf par-dessus un ancien enrobé ?
+Parfois, et à conditions précises. Selon la note IDRRIM n° 43 (décembre 2020), le
+rechargement n'est pas possible sur une couche mince quel que soit son état, sur un BBSG
+fissuré ou dégradé, ni sur un enduit superficiel d'usure vieilli : il faut alors raboter,
+nettoyer le support en enlevant les fines et les plaques décollées, puis reprofiler. La
+note proscrit également l'empilement de couches minces. La fiche technique du département
+de la Meuse fixe un seuil mesurable : reprofilage ou fraisage dès que la déformation
+transversale dépasse 2 cm. Le collage se fait à l'émulsion de bitume dosée à 250 à
+300 g/m² de liant résiduel.
+
+### Pourquoi un enrobé se dégrade-t-il après un hiver ?
+Parce que l'eau s'infiltre puis gèle. Selon la note IDRRIM n° 43 (décembre 2020), « la
+résistance d'une couche de roulement aux hivers rigoureux dépend essentiellement de sa
+capacité à limiter l'infiltration et l'accumulation d'eau », et les nids-de-poule et
+arrachements ponctuels « dépendent souvent de négligence à l'application et d'un mauvais
+compactage des enrobés bitumineux ». La note liste parmi ses points de vigilance le
+travail manuel au démarrage, les enrobés refroidis et les zones difficiles d'accès — c'est
+la raison pour laquelle HCE compacte au rouleau immédiatement après la pose à la main à
+150 °C. En entretien, elle recommande en secteur de montagne de ponter une fissure dès
+qu'elle atteint 2 mm de largeur.
+
+### Le bitume est-il choisi différemment en altitude ?
+Oui. Pour les zones à hiver rigoureux, la note IDRRIM n° 43 (décembre 2020) écrit que les
+grades de bitumes routiers inférieurs à 35/50 sont à proscrire en couche de roulement, et
+que le liant final doit viser un 35/50, « voire 50/70 pour les trafics plus faibles ou
+au-dessus de 700 m, et 70/100 au-dessus de 1 000 m » : plus l'altitude est élevée, plus le
+bitume doit rester souple pour ne pas casser au froid. Ces recommandations visent les
+chaussées circulées, pas une cour de maison. Repères locaux mesurés : Cize est à 549 m et
+Saint-Claude à 668 m d'altitude (IGN RGE ALTI), et la station Météo-France de Champagnole,
+à moins de 5 km de Cize, relève 111,7 jours de gel par an sur les normales 1991-2020.
 
 ### L'enrobé à chaud peut-il être posé toute l'année ?
 Non. L'enrobé à chaud demande une température extérieure supérieure à 5 °C et un sol sec.
@@ -381,7 +430,12 @@ de l'eau ne s'évaluent pas autrement.
 - [Enrobé à chaud](https://www.hcetp.com/services/enrobe-a-chaud) : pose à la main
   à 150 °C, compactage maîtrisé, enrobé noir/rouge/saumon/bordeaux, garantie décennale.
   Contient aussi les réponses détaillées sur le goudronnage (goudron et bitume, BBSG et
-  norme NF EN 13108, chaud ou froid, saison de pose dans le Jura), avec leurs sources.
+  norme NF EN 13108, chaud ou froid, saison de pose dans le Jura) et sur la mise en œuvre
+  elle-même — épaisseurs de couche de roulement, classes granulaires 0/10 et 0/14 et module
+  de richesse, conditions dans lesquelles un enrobé neuf peut être posé sur l'ancien,
+  origine des dégradations hivernales et entretien des fissures, choix du grade de bitume
+  selon l'altitude (note d'information IDRRIM n° 43 de décembre 2020, fiche technique BBSG
+  du département de la Meuse) — avec leurs sources.
 - [Préparation de terrain](https://www.hcetp.com/services/preparation-terrain) :
   terrassement, VRD, viabilisation, drainage, enrochement. Contient aussi les réponses
   détaillées sur le terrassement (déclarations DT-DICT et leurs délais, devenir des

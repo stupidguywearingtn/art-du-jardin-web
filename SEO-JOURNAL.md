@@ -591,6 +591,73 @@ Toutes les valeurs de la table du 15/09 sont **retrouvées au caractère près**
 chiffres que la production avant le chantier : la fidélité du banc est
 re-confirmée pour la deuxième fois.
 
+### Positions mesurées — 02/10/2026
+
+**Indexation : toujours nulle — mais le premier signe de vie côté moteur est
+arrivé, et il était prévu par le run précédent.**
+
+🟢 **IndexNow passe de 202 à 200.** Le run du 01/10 avait posé cet indicateur
+noir sur blanc : « un passage de 202 à 200 signifierait que Bing a lu le fichier
+clé — premier signe de vie côté moteur ». C'est arrivé aujourd'hui, à la deuxième
+soumission du nouveau domaine : fichier clé servi en 200, 13 URLs soumises →
+**HTTP 200** (hier : 202, « accepté, clé en cours de vérification »). **Ce que ça
+prouve et ce que ça ne prouve pas** : Bing a vérifié la propriété de
+`www.hcetp.com` et accepte désormais les soumissions sans réserve — ce n'est
+**pas** une indexation, et ça ne dit rien de Google, qui ne participe pas au
+protocole. Mais c'est le premier retour positif d'un moteur depuis la bascule de
+domaine, et il a été obtenu par une mesure gratuite. **Continuer à relever ce
+code à chaque run.**
+
+**Les trois mesures d'indexation, inchangées :**
+1. **Phrase exacte du site** `"Médaillons et inserts pavés intégrés à l'enrobé"`
+   → dix résultats, **zéro hcetp.com**. ⚠️ **La SERP est cette fois STRICTEMENT
+   identique à celle du 01/10** (daniel-moquet, galerie-creation, mavrotp,
+   aravis-enrobage, gonord, perenia, lizetp, ligerio, amenagement-mineral,
+   fredtoma) — après deux réordonnancements consécutifs les 30/09 et 01/10. À
+   noter pour ne pas surinterpréter : l'immobilité d'un jour ne vaut pas garantie,
+   la leçon du 30/09 reste valable.
+2. **`site:hcetp.com`** → neuf résultats sans rapport, identiques à ceux du 01/10
+   (Wikipédia d'acronymes, Hitkarini College, hrsa.gov, sites.bu.edu). **Opérateur
+   toujours non honoré par ce canal : ce résultat n'est pas une information.**
+3. **Requête nommant le domaine et l'entité** → **aucune page du domaine**, neuf
+   fiches d'annuaire. ⚠️ **La composition a changé : PagesJaunes départemental
+   sort, `nosartisansontdutalent.fr` entre** — une fiche jamais repérée par les 25
+   runs précédents. Voir le chantier du jour, point 2.
+
+**Requête commerciale** `enrobé à chaud Jura entreprise` → neuf résultats, **HCE
+absent**, inchangé vs 01/10. SFCTP (`franc-comtoise-tp.fr`, Commenailles 39)
+place désormais **quatre URLs** dans les neuf (accueil, fabrication/pose,
+personnalisation d'enrobé, aménagements extérieurs) contre trois hier. Les deux
+pages départementales PagesJaunes tiennent les deux premières places.
+
+| Requête | Mesure (02/10/2026) | Évolution vs 01/10 |
+|---|---|---|
+| indexation (phrase exacte du site) | **absent** | inchangé (SERP identique, 1re fois) |
+| indexation (requête nommant le domaine) | **absent** | inchangé — 9 fiches, dont 1 nouvelle |
+| `site:hcetp.com` | **absent** | inchangé (opérateur non honoré) |
+| `enrobé à chaud Jura entreprise` | **absent** | inchangé — SFCTP passe de 3 à 4 URLs |
+| **code IndexNow** | **200** | 🟢 **202 → 200** (Bing a lu le fichier clé) |
+
+**Volume de texte servi en production** (`scripts/mesure-texte-servi.mjs`, vu
+comme Googlebot, sur `https://www.hcetp.com`), relevé **avant** le chantier du
+jour : **les 13 URLs rendent exactement les mêmes valeurs qu'au 01/10 et au
+30/09, au caractère près** (13 526 / 13 491 / 8 578 / 8 156 / 7 670 / 7 012 /
+6 821 / 6 356 / 5 198 / 5 080 / 4 482 / 3 783 / 373).
+
+**Après le chantier du jour**, `/services/enrobe-a-chaud` passe de **3 783 à
+11 856 caractères** — mesuré au banc d'essai local, et le banc est fidèle : les
+deux pages de contrôle (accueil 13 526, `/services/finitions-soignees` 6 821) y
+rendent exactement la valeur de production.
+
+**Contrôles passés avant push** : `npx tsc --noEmit` en 0, `npm run build` en 0,
+`npm run check:fige` en 0, `verif-faq.mjs` **✓ 10/10** sur la page modifiée,
+`verif-lastmod.mjs` **✓ 13 URLs cohérentes** dont `/services/enrobe-a-chaud` au
+`2026-10-02`. Contenu figé revérifié sur le HTML servi : `finisseur` 0, `2005` 0,
+`20 ans` 0, `Devis sous 48h` 0, `Garantie & SAV` 0 ; `150°C` 17, `à la main` 17,
+`2012` 4, `garantie décennale` 7. *(Les 4 occurrences de « 180 » sont le
+`sizes="180x180"` de l'apple-touch-icon, un numéro dans l'URL 118000 des `sameAs`
+et un `linear-gradient(180deg…)` — contrôlées une par une, aucune température.)*
+
 ### Positions mesurées — 01/10/2026
 
 > 🔴 **ÉVÉNEMENT MAJEUR DÉCOUVERT CE RUN — LE DOMAINE A CHANGÉ. Le site n'est
@@ -1438,6 +1505,133 @@ JSON-LD, pas de `BreadcrumbList`).
 ---
 
 ## Chantiers faits
+
+### 02/10/2026 — `/services/enrobe-a-chaud` passe de 3 783 à 11 856 caractères : la page du métier principal sort de la maigreur, sur ce qui se décide au devis et qu'on ne voit plus une fois la cour finie
+
+**Pourquoi ce chantier.** C'était le candidat n°1 posé par le run du 01/10, et
+rien n'avait changé entre-temps : avec 3 783 caractères servis, cette page était
+**la dernière du site sous les 4 000** (les onze autres pages rédigées tiennent
+entre 4 482 et 13 526), alors qu'elle porte **le service qui donne son nom à
+l'entreprise** et la requête commerciale mesurée depuis le 01/10
+(« enrobé à chaud Jura entreprise »), sur laquelle le site est absent. Son bloc de
+Q/R du 11/09 était le plus ancien et le plus court des six. Le run précédent étant
+un chantier documentaire (migration de domaine), l'angle alterne bien.
+
+**L'angle, et pourquoi il ne double rien.** Les 5 Q/R du 11/09 traitent du
+**vocabulaire** (goudron contre bitume, BBSG, 150 °C, saison, chaud contre froid).
+Les 5 nouvelles traitent de la **mise en œuvre** : épaisseur, classe granulaire,
+rechargement sur l'ancien, origine des dégradations hivernales, grade de bitume
+selon l'altitude. **Les 30 Q/R des autres pages ont été relues avant de rédiger**,
+et deux sujets ont été écartés pour doublon :
+- **la saison de pose chiffrée** — `/zone-intervention` (30/09) la traite déjà en
+  détail avec les normales mensuelles de Champagnole et de Lons-le-Saunier. La
+  rouvrir ici aurait répété la même donnée sur deux pages.
+- **les joints entre bandes et le contrôle de finition** — déjà traités sur
+  `/services/finitions-soignees` (21/09).
+
+**Les cinq questions ajoutées, et la source de chaque chiffre.**
+1. **« Quelle épaisseur d'enrobé faut-il pour une cour ou une allée ? »** — 5 à
+   8 cm en moyenne, 4 à 5 cm au minimum selon la granularité (fiche technique
+   « Béton Bitumineux Semi Grenu » du **conseil départemental de la Meuse**,
+   verbatim « Moyenne : 5 à 8 cm selon granularité », « Mini : 4 à 5 cm selon
+   granularité ») ; et « des couches de roulement d'épaisseur suffisante (type BBSG
+   de 5 à 7 cm) » pour les cas les plus sollicités (**IDRRIM, note d'information
+   n° 43, décembre 2020**). Plus le fait que les couches minces ou très minces
+   (≤ 4 cm) exigent un support déjà dense et imperméabilisé.
+2. **« Sur un devis d'enrobé, que veut dire 0/10 ou 0/14 ? »** — classe granulaire,
+   module de richesse **K ≥ 3,4 (0/10) et K ≥ 3,2 (0/14)** en climat hivernal
+   rigoureux, norme **NF P 98-149** citée par l'IDRRIM pour sa définition, et les
+   bornes de macrotexture du tableau 2 de la note (PMT 0,4 à 1,3 mm pour un BBSG
+   0/10 ; 0,5 à 1,4 mm pour un 0/14) **avec leur raison hivernale** : une surface
+   trop ouverte se déverglace mal et souffre des lames de déneigement.
+3. **« Peut-on poser un enrobé neuf par-dessus l'ancien ? »** — la réponse la plus
+   utile du lot, parce qu'elle est contre-intuitive et verbatim : le rechargement
+   « n'est pas possible » « sur une couche mince (BBTM ou BBM), quel que soit son
+   état », « sur un BBSG fissuré ou dégradé », ni « sur un ESU vieilli » (IDRRIM
+   n° 43). Plus l'interdiction d'« empilement de couches minces », le seuil
+   mesurable de la fiche Meuse (reprofilage ou fraisage dès 2 cm de déformation
+   transversale) et le dosage de la couche d'accrochage (250 à 300 g/m² de liant
+   résiduel).
+4. **« Pourquoi un enrobé se dégrade-t-il après un hiver ? »** — l'eau, pas le
+   froid : « La résistance d'une couche de roulement aux hivers rigoureux dépend
+   essentiellement de sa capacité à limiter l'infiltration et l'accumulation
+   d'eau » ; les nids-de-poule et arrachements « dépendent souvent de négligence à
+   l'application et d'un mauvais compactage des enrobés bitumineux » (IDRRIM
+   n° 43, note écrite après l'hiver 2009-2010 qui avait dégradé les routes du
+   nord-est). Repère d'entretien donné au lecteur : ponter une fissure dès 2 mm en
+   secteur de montagne, émulsion sous 1 cm non ramifiée, purge au-delà de 3 cm.
+5. **« Le bitume est-il le même en altitude qu'en plaine ? »** — la trouvaille du
+   run : une règle de métier où **l'altitude figure noir sur blanc**. Grades
+   inférieurs à 35/50 « à proscrire en couche de roulement », liant final visant un
+   35/50, « voire 50/70 pour les trafics plus faibles ou au-dessus de 700 m, et
+   70/100 au-dessus de 1 000 m » (IDRRIM n° 43). Recoupé avec les altitudes IGN
+   déjà relevées le 30/09 (Cize 549 m, Saint-Claude 668 m) et les 111,7 jours de
+   gel de la station Météo-France de Champagnole.
+
+**Ce qui a été fait au-delà du texte.**
+- `PAGE_UPDATED["/services/enrobe-a-chaud"]` passe au **2026-10-02** — donc la
+  date visible et le `lastmod` du sitemap bougent ensemble, par construction.
+- **`llms.txt` mis à jour** : les 5 nouvelles Q/R y sont reportées en version
+  condensée, la description de la page dans la section « Pages » décrit le nouveau
+  contenu, et l'en-tête « Dernière mise à jour » passe au 2 octobre 2026.
+- `heading` et `lead` du bloc réécrits pour couvrir les deux moitiés du bloc (le
+  vocabulaire puis la mise en œuvre). **Aucun contenu figé client touché** :
+  `prestations`, `methode`, `intro` et `seoDescription` sont inchangés.
+
+**Ce qui a été décidé de NE PAS faire, et pourquoi.**
+- **Aucune question sur le tonnage** (« combien de tonnes pour 100 m² ? »), pourtant
+  très demandée. Elle exige une masse volumique, et **aucune source primaire lue
+  aujourd'hui n'en donne une** : les seuls chiffres trouvés venaient de blogs
+  commerciaux. Question laissée ouverte plutôt que publiée sans source.
+- **Aucune mention du finisseur**, alors que la note IDRRIM en parle beaucoup
+  (finisseur pleine largeur recommandé sur voies circulées, « finisseur non
+  préchauffé » parmi les points de vigilance). Le contenu figé par le client dit
+  « posé à la main » et proscrit « posé au finisseur » : les passages concernés ont
+  été volontairement écartés, et seuls les points de vigilance compatibles ont été
+  cités (travail manuel au démarrage, enrobés refroidis, zones d'accès difficile).
+  Vérifié après coup : **0 occurrence de « finisseur » dans le HTML servi.**
+- **Aucun prix**, alors que la fiche de la Meuse en publie (12 à 18 €/m² pour la
+  couche de roulement seule, jusqu'à 50 €/m² avec reconstitution du corps de
+  chaussée). Ce sont des prix de marché public routier, sans rapport avec un devis
+  de particulier, et la règle du site interdit d'afficher un prix au visiteur.
+- **Aucune affirmation sur la classe hivernale du Jura.** La note IDRRIM vise les
+  zones H3/H4, définies par un cumul de jours de neige et de verglas supérieur à
+  30 par an. **Le classement n'est pas publié commune par commune**, et la fiche
+  Météo-France de Champagnole porte « Données non disponibles » sur les jours de
+  neige. Le texte publié dit donc explicitement que ces recommandations visent les
+  chaussées circulées, et s'appuie sur le seul chiffre réellement mesuré : le gel.
+  ⚠️ **Piège évité et à retenir : une recherche sur « zones H1 H2 H3 » renvoie
+  massivement les zones climatiques de la RE2020 et du DPE, qui n'ont AUCUN rapport
+  avec les zones de viabilité hivernale du domaine routier.** Deux
+  classifications, mêmes étiquettes. Ne pas les confondre, et ne pas se fier à un
+  extrait de moteur qui mélange les deux — c'est ce qu'il a fait aujourd'hui.
+- **Aucun lien interne ajouté dans les réponses** : le champ `a` est rendu en texte
+  brut, un lien y demanderait de changer le rendu du composant. Noté comme chantier
+  possible plutôt que bricolé.
+- **Prettier non appliqué.** `npx eslint` signale 61 erreurs de formatage sur
+  `services.$slug.tsx`, dont **58 préexistantes** (vérifié en stashant le
+  changement) : le fichier n'a jamais été conforme, et mes 3 nouvelles lignes
+  longues sont de la même famille que les existantes. Lancer `--fix` reformaterait
+  tout le fichier, c'est-à-dire un refactor que les consignes interdisent.
+  **À savoir pour les prochains runs : ce fichier n'est pas prettier-propre, et les
+  entrées de journal antérieures qui disent « prettier --check passe » ne valent
+  pas pour lui.**
+
+**Point 2 du run — une septième fiche d'annuaire, trouvée par la mesure et non
+par un chantier.** La requête d'indexation nommant le domaine a fait apparaître
+`nosartisansontdutalent.fr/entreprise/hce-hini-cours-enrobes/`, **jamais repérée
+en 25 runs**. Lue intégralement : fiche **commerciale** (même famille que
+PagesJaunes et Mappy), **revendicable en libre-service** (« C'est votre
+entreprise ? Prenez la main sur cette fiche »), **sans aucun lien vers le site**,
+et porteuse de deux erreurs : l'adresse `1 r Baronne Delort 39300 Champagnole` et
+un téléphone mobile `06 50 83 16 86`. **Vérification au registre national le
+02/10/2026** (`recherche-entreprises.api.gouv.fr`, SIREN 521683573) : **3
+établissements dont 1 seul ouvert**, le siège `40 B avenue Etienne Lamy 39300
+Cize` (SIRET 52168357300039) — **l'établissement de Champagnole est fermé.**
+La fiche est donc documentée dans `ACTIONS-SEO-CLIENT.md` avec une consigne
+explicite : **corriger l'adresse et le téléphone AVANT d'y ajouter l'URL**, et
+**ne pas l'ajouter aux `sameAs`** en l'état — même traitement que La Gazette
+France le 12/09, pour la même raison.
 
 ### 01/10/2026 — La bascule de domaine était faite dans le code mais pas dans l'appareil de découverte : `ACTIONS-SEO-CLIENT.md` envoyait le client déclarer une URL qui redirige
 
@@ -3527,6 +3721,66 @@ Lun-Ven 8h-18h / Sam 8h-12h, Mappy Lun-Sam 7h-19h) signalés comme incohérence 
 Par ordre de priorité. **Alterner les angles, ne pas refaire le même deux jours
 de suite.**
 
+> 🆕 **CANDIDAT N°1 DU PROCHAIN RUN (au 02/10/2026) — les six pages
+> `/services/*` sont des culs-de-sac pour le crawl : chacune ne sert QU'UN seul
+> lien interne, vers l'accueil.**
+> **C'est mesuré en production le 02/10, pas supposé.** Le graphe des liens
+> internes servis à Googlebot, relevé page par page sur les 13 URLs du sitemap :
+>
+> | Page | Liens internes servis |
+> |---|---|
+> | accueil | **13** (les 6 services, les 4 dossiers, le hub, `/zone-intervention`, `/signin`) |
+> | `/realisations` | **10** |
+> | les 4 `/realisations/$slug` | **7** chacune |
+> | `/zone-intervention` | **5** |
+> | **les 6 `/services/*`** | **1** — uniquement `/` |
+>
+> Autrement dit : les pages qui portent aujourd'hui le contenu le plus
+> substantiel du site (3 783 à 11 856 caractères de Q/R sourcées) ne redistribuent
+> **rien** — ni vers les dossiers de réalisations qui illustrent précisément leur
+> service, ni vers `/zone-intervention` qui répond à la question du calendrier
+> qu'elles soulèvent toutes, ni entre elles. Toutes les autres pages du site, elles,
+> maillent correctement. **Le trou est localisé et réparable.**
+> **Pourquoi c'est le meilleur chantier maintenant.** Le filon rédactionnel est
+> près de l'épuisement (plus aucune page rédigée sous les 4 400 caractères), et
+> l'angle « renforcer le maillage interne vers les pages stratégiques » figure dans
+> les angles à alterner **sans avoir jamais été traité en 26 runs**. C'est le seul
+> levier de ce type entièrement sous notre contrôle, et il est **mesurable
+> avant/après avec l'outil déjà versionné** (colonne `liensR` de
+> `mesure-texte-servi.mjs`, et le petit relevé de graphe refait au besoin).
+> ⚠️ **Deux réserves à lever avant de rédiger, et elles sont sérieuses :**
+> 1. **Le champ `a` des Q/R est rendu en texte brut** (`{f.a}` dans un `<p>`) :
+>    impossible d'y glisser un lien sans toucher au composant de rendu. Deux
+>    options honnêtes : placer les liens dans les sections de prose existantes, ou
+>    ajouter au type `savoir` un champ optionnel « pour aller plus loin » rendu
+>    **sous** le bloc. La seconde est plus propre et ne réécrit aucun texte
+>    existant.
+> 2. **Ne pas transformer ça en ferme de liens.** Trois à cinq liens contextuels
+>    par page, vers la page réellement pertinente (un service vers le dossier de
+>    réalisation qui l'illustre, et vers `/zone-intervention` pour le calendrier).
+>    Un lien qui n'aide pas le lecteur est du maillage pour les robots, ce que la
+>    consigne proscrit.
+> **Candidat n°2 si le n°1 est écarté** : `/realisations/chantier-en-cours`, seule
+> URL du sitemap encore sous les 400 caractères (373) et sans bloc daté. ⚠️ C'est
+> une page de **galerie** : vérifier d'abord qu'il y a de la matière honnête (la
+> mise en œuvre elle-même, l'enrobé répandu à la main à 150 °C) et **ne rien
+> inventer sur un chantier précis**. C'est aussi la seule URL sans entrée dans
+> `PAGE_UPDATED` — lui en donner une suffirait à lui offrir un `lastmod`.
+
+> ✅ ~~**CANDIDAT N°1 DU PROCHAIN RUN (au 01/10/2026) —
+> `/services/enrobe-a-chaud`, 3 783 caractères.**~~ **Fait le 02/10/2026** : bloc
+> de 5 nouvelles Q/R sourcées sur la mise en œuvre (épaisseurs 5-8 cm et minimum
+> 4-5 cm, classes 0/10 et 0/14 et module de richesse NF P 98-149, conditions de
+> rechargement sur un enrobé existant, origine des dégradations hivernales et
+> entretien des fissures, grade de bitume selon l'altitude), `FAQPage` aligné
+> **10/10**, `lastmod` au 2026-10-02, report dans `llms.txt`. **3 783 → 11 856
+> caractères servis.** L'angle « personnalisation d'enrobé » repéré chez SFCTP n'a
+> **pas** été traité : il recoupe les Q/R médaillons de
+> `/services/maconnerie-generale` (16/09), et aucune source primaire honnête n'a
+> été trouvée sur les pigments et les liants de synthèse. **Plus aucune page
+> rédigée du site n'est sous les 4 400 caractères**, à l'exception de la galerie
+> `/realisations/chantier-en-cours` (373).
+
 > 🆕 **CANDIDAT N°1 DU PROCHAIN RUN (au 01/10/2026) —
 > `/services/enrobe-a-chaud`, 3 783 caractères : la page la plus maigre du site
 > hors galerie, et c'est la page du métier principal.**
@@ -4159,6 +4413,19 @@ de suite.**
 
 ## Hypothèses à vérifier
 
+> 🆕 **02/10/2026 — L'accueil sert à Googlebot un lien vers `/signin`.** Relevé
+> dans le graphe des liens internes du 02/10 : l'accueil expose 13 liens internes,
+> dont `/signin` (la page de connexion de l'espace d'édition). Elle n'est pas dans
+> le sitemap et rien n'indique qu'elle soit indexée. **Impact SEO probable : nul à
+> négligeable** — mais c'est un lien de plus dans le budget de crawl d'un domaine
+> qui n'est pas encore découvert, et une page de connexion n'a rien à gagner d'un
+> passage de robot. **À vérifier avant de toucher à quoi que ce soit** : (a) ce
+> lien est-il visible pour un visiteur ou réservé à un administrateur connecté,
+> (b) la page porte-t-elle déjà un `noindex`. **Rien n'a été modifié** : c'est du
+> rendu, et la consigne demande de ne pas y toucher au doute. Le correctif propre,
+> le jour où il se justifie, est un `noindex` sur `/signin`, pas la suppression du
+> lien.
+
 > 🆕 **01/10/2026 — L'e-mail reste sur l'ancien domaine : question au client.**
 > Quatre références à `hcebtp.com` subsistent dans le code, toutes liées à
 > l'envoi d'e-mail : `SITE_NAME = "hcebtp"`, `SENDER_DOMAIN = "notify.hcebtp.com"`
@@ -4671,6 +4938,86 @@ de suite.**
 ---
 
 ## Techniques apprises
+
+### 02/10/2026 — ⚙️ Cinq acquis : lire un PDF que `WebFetch` refuse, un filon de documents techniques routiers gratuits, deux classifications qui portent les mêmes étiquettes, `npm ci` qui ne peut pas marcher sur ce dépôt, et un trou dans la fiche Météo-France de Champagnole
+
+**1. ⚙️ RECETTE — `WebFetch` ne lit pas un PDF, mais il l'enregistre : le chemin
+est dans sa réponse, et `pdftotext` finit le travail.** C'est l'acquis le plus
+réutilisable du jour, et il débloque un gisement entier de sources primaires.
+Appelé sur un PDF, `WebFetch` répond « le contenu fourni est un fichier PDF
+encodé en binaire qui n'est pas lisible » — ce qui ressemble à un échec. **Mais
+la dernière ligne de sa réponse donne le chemin local du fichier téléchargé**
+(`[Binary content (application/pdf, 980.6KB) also saved to …/tool-results/…pdf]`).
+Il suffit alors de :
+```
+pdftotext -layout <ce chemin> sortie.txt
+```
+`pdftotext` est **déjà installé** sur le runner (`/usr/bin/pdftotext`), et
+l'option `-layout` conserve les colonnes — indispensable pour les tableaux. Deux
+PDF ont été lus intégralement ainsi aujourd'hui (46 ko et 6 ko de texte).
+**Ne plus jamais renoncer à une source parce qu'elle est en PDF.** Rappel utile :
+la recette du 17/09 pour les fiches Météo-France faisait la même chose à la main
+avec `curl` ; celle-ci marche même quand l'URL n'est connue que par `WebSearch`.
+
+**2. ⚙️ FILON — l'IDRRIM et les conseils départementaux publient des documents
+techniques routiers gratuits, datés et verbatim-citables.** Deux sources
+nouvelles, toutes deux exploitées aujourd'hui :
+- **IDRRIM — notes d'information**, `idrrim.com/ressources/documents/…`. La n° 43
+  de **décembre 2020** (« Choix et mise en œuvre des couches de surface dans les
+  zones soumises à des conditions climatiques hivernales rigoureuses ») est une
+  mine pour ce site : elle est **écrite pour les zones à hiver rigoureux**, donc
+  elle chiffre exactement ce que le climat du Jura change à un enrobé. Elle
+  contient des interdits verbatim (« le rechargement n'est pas possible sur… »),
+  des seuils (pontage dès 2 mm, module de richesse K, bornes de macrotexture) et
+  **une règle indexée sur l'altitude** (grade de bitume 50/70 au-dessus de 700 m,
+  70/100 au-dessus de 1 000 m) qu'aucun concurrent ne publie. **Les notes n° 17,
+  n° 35 et n° 43 sont désormais connues ; il y en a d'autres, l'index est sur le
+  site de l'IDRRIM.**
+- **Fiches techniques des conseils départementaux**, par technique de revêtement.
+  Celle de la **Meuse** sur le BBSG donne, sur une page, domaine d'emploi,
+  épaisseurs moyennes et minimales, granularités, conditions météo de pose
+  (« Température ambiante > 5°C », « Pas de pluie »), dosage de couche
+  d'accrochage et moyens de compactage. ⚠️ **Elle n'est pas datée** : la citer
+  comme fiche technique du département, sans inventer de millésime. ⚠️ **Elle
+  publie aussi des prix au m²** — ne jamais les reprendre, ce sont des prix de
+  marché public et le site n'affiche aucun prix.
+
+**3. 📚 PIÈGE — « zones H1/H2/H3/H4 » désigne DEUX classifications sans rapport,
+et le moteur mélange les deux.** La note IDRRIM vise les zones **H3 ou H4** de la
+**viabilité hivernale routière**, définies par `J1+J2+J3 > 30` (jours de neige
+blanchissant la chaussée, jours de verglas sous précipitation, jours de verglas
+hors précipitation). Une recherche sur ces étiquettes renvoie massivement les
+**zones climatiques H1/H2/H3 de la RE2020 et du DPE**, qui sont thermiques,
+découpées autrement, et n'ont rien à voir. L'extrait de `WebSearch` a mélangé les
+deux dans une même réponse et attribué au Jura une zone « H1c » qui appartient à
+la seconde classification. **Rien n'a été publié sur cette base.**
+**Règle : quand deux référentiels partagent une étiquette, n'en citer aucun sans
+avoir identifié le document qui la définit.** Et corollaire pratique : le
+classement Hi n'est pas publié commune par commune — la carte de la note est une
+image, non extractible.
+
+**4. ⚙️ `npm ci` NE PEUT PAS marcher sur ce dépôt, et ce n'est pas un incident.**
+`package-lock.json` est désynchronisé de `package.json` (`Missing: miniflare,
+sharp, workerd, ws from lock file`), ce que le journal note depuis le 09/09 avec
+la consigne « **ne pas régénérer `package-lock.json`** ». La séquence qui marche,
+et qui respecte cette consigne :
+```
+npm install --no-audit --no-fund     # 16 s, et il réécrit package-lock.json
+… travail, build, mesures …
+git checkout -- package-lock.json    # AVANT de commiter
+```
+**Le `git checkout` n'est pas optionnel** : sans lui, le commit emporte 840 lignes
+de churn de lockfile qui n'ont rien à voir avec le chantier. Vérifié aujourd'hui
+avec `git status` avant commit.
+
+**5. ⚙️ Détail à ne pas rechercher deux fois : la fiche climatologique de
+Champagnole n'a PAS les jours de neige.** La rubrique « Nombre moyen de jours avec
+brouillard / orage / grêle / neige » porte « **Données non disponibles** » pour la
+station 39097003. Les lignes exploitables de cette fiche sont le gel (`Tn ≤ 0` :
+111,7 j/an ; `Tn ≤ -5` : 35,2 ; `Tn ≤ -10` : 10,0), les jours sans dégel
+(`Tx ≤ 0` : 9,3), les températures et les précipitations. **Le contrôle de
+cohérence interne du 30/09 a resservi et passe** : (3,6 + 15,2) / 2 = 9,4, soit
+exactement la moyenne annuelle affichée.
 
 ### 01/10/2026 — ⚙️ Trois acquis : le journal ne voit pas ce qui suit sa dernière entrée, le code 202 d'IndexNow est une mesure, et Google avalise le 308
 

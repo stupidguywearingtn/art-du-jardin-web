@@ -300,6 +300,34 @@ Il en faut donc au moins quelques-uns, réels et légitimes :
   portent donc le complément que le site n'affiche pas. Cela renforce la question
   déjà posée plus haut (« Deux points à arbitrer par le client ») sans la
   trancher — le site n'a **pas** été modifié.
+  **Ajout du 02/10/2026 — une septième fiche, repérée dans les résultats de
+  recherche du jour et lue intégralement : `nosartisansontdutalent.fr`.** Elle est
+  la première nouvelle fiche depuis le 13/09, et elle est **commerciale** (donc de
+  la même famille que PagesJaunes et Mappy, pas une fiche légale automatique) —
+  mais elle est aussi la plus fausse des sept, et c'est pour ça qu'elle compte.
+
+  | Fiche | Ce qu'elle publie | À faire |
+  |---|---|---|
+  | `nosartisansontdutalent.fr/entreprise/hce-hini-cours-enrobes/` | « HCE (Hini Cours Enrobés) », adresse **« 1 r Baronne Delort 39300 Champagnole »**, téléphone **06 50 83 16 86**, aucun e-mail, **aucun lien vers le site**, « Pas encore d'avis client », « Dernière vérification : 17 septembre 2026 ». La fiche est revendicable : « C'est votre entreprise ? Prenez la main sur cette fiche », boutons « Compléter ma fiche » et « Corriger une information ». | **revendiquer, puis corriger l'adresse ET le téléphone avant d'ajouter l'URL** |
+
+  **Pourquoi l'adresse de cette fiche est à corriger et pas seulement à compléter.**
+  Le registre national des entreprises, interrogé le 02/10/2026
+  (`recherche-entreprises.api.gouv.fr`, SIREN 521683573), indique **3
+  établissements dont 1 seul ouvert** : le siège, `40 B avenue Etienne Lamy, 39300
+  Cize`, SIRET 52168357300039. L'établissement de Champagnole que cette fiche
+  publie est donc **fermé**. Le téléphone affiché (un mobile) diverge par ailleurs
+  du 03 84 52 61 48 publié par le site, par Mappy et par 118000.
+
+  **Conséquence pratique, et elle est à deux tranchants :**
+  - La fiche est un vrai point d'entrée possible : elle est indexée par Google
+    (c'est ainsi qu'elle a été trouvée), elle est revendicable en libre-service, et
+    elle accepte l'URL du site.
+  - Mais **elle ne doit pas être revendiquée en l'état**, pas plus que La Gazette
+    France : y ajouter l'URL sans corriger l'adresse et le téléphone reviendrait à
+    créer un lien depuis une page qui contredit le NAP du site, ce qui va contre
+    l'objectif de l'action 3. Corriger d'abord, lier ensuite.
+  - Elle n'a **pas** été ajoutée aux `sameAs` du site, pour la même raison.
+
 - Un **compte Facebook / Instagram professionnel** avec le lien du site : ces
   pages sont crawlées très fréquemment.
 - Les **partenaires, fournisseurs ou clients pros** qui ont un site : un lien

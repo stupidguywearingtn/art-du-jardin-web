@@ -119,8 +119,8 @@ const SERVICES: Record<string, ServiceData> = {
     seoDescription:
       "Goudronnage de cour, d'allée ou de parking dans le Jura et l'Ain : HCE pose l'enrobé à chaud à la main à 150°C et le compacte au rouleau. Devis détaillé, garantie décennale.",
     savoir: {
-      heading: "Goudronnage ou enrobé : les questions qu'on nous pose",
-      lead: "« Faire goudronner sa cour » et « poser un enrobé à chaud » désignent aujourd'hui le même chantier. Voici ce que recouvre réellement le mot, ce que disent les normes, et à quelle saison le chantier est possible dans le Jura et l'Ain.",
+      heading: "Goudronnage, épaisseurs et tenue dans le temps : les questions qu'on nous pose",
+      lead: "« Faire goudronner sa cour » et « poser un enrobé à chaud » désignent aujourd'hui le même chantier. Voici ce que recouvre réellement le mot, ce que disent les normes, et à quelle saison le chantier est possible dans le Jura et l'Ain. Puis, chiffres et sources à l'appui, ce qui se décide au devis et qu'on ne voit plus une fois la surface finie : quelle épaisseur se pose réellement, ce que veut dire 0/10 ou 0/14 sur un devis, dans quels cas un enrobé neuf peut être posé sur l'ancien, pourquoi un revêtement se dégrade après un hiver, et ce que l'altitude change au choix du bitume.",
       updated: PAGE_UPDATED["/services/enrobe-a-chaud"],
       qa: [
         {
@@ -143,6 +143,26 @@ const SERVICES: Record<string, ServiceData> = {
           q: "Quelle différence entre enrobé à chaud et enrobé à froid ?",
           a: "L'enrobé à froid se livre prêt à l'emploi et se compacte sans chauffe : c'est une solution de réparation ponctuelle, pour reboucher un nid-de-poule ou une tranchée. L'enrobé à chaud, lui, est fabriqué en centrale, livré chaud et posé à 150°C : c'est celui qui donne une surface homogène sur une cour, une allée ou un parking entier. HCE travaille l'enrobé à chaud, en noir, rouge, saumon ou bordeaux et sous différentes granulations.",
         },
+        {
+          q: "Quelle épaisseur d'enrobé faut-il pour une cour ou une allée ?",
+          a: "Pour une couche de roulement en béton bitumineux semi-grenu, l'épaisseur courante est de 5 à 8 cm selon la granularité, avec un minimum de 4 à 5 cm. En dessous, on change de produit : les couches dites minces ou très minces, d'au plus 4 cm, exigent un support déjà dense, cohésif et imperméabilisé — ce qui est rarement l'état d'une cour qu'on refait. La fiche technique « Béton Bitumineux Semi Grenu » du conseil départemental de la Meuse donne ces valeurs pour la couche de roulement : « Moyenne : 5 à 8 cm selon granularité », « Mini : 4 à 5 cm selon granularité ». Dans sa note d'information n° 43 de décembre 2020 sur les zones à hiver rigoureux, l'IDRRIM — l'Institut des routes, des rues et des infrastructures pour la mobilité — recommande pour les cas les plus sollicités « des couches de roulement d'épaisseur suffisante (type BBSG de 5 à 7 cm) ». Deux choses ne se déduisent donc pas d'un plan : l'épaisseur se décide avec la portance du support et l'usage réel de la surface, et une épaisseur affichée au devis ne vaut que si le support en dessous a été préparé pour la recevoir. C'est ce qu'HCE regarde lors de la visite sur site, avant d'établir le devis détaillé.",
+        },
+        {
+          q: "Sur un devis d'enrobé, que veut dire 0/10 ou 0/14 ?",
+          a: "C'est la classe granulaire du mélange : le plus gros granulat mesure 10 ou 14 millimètres. Ce chiffre n'est pas un détail de fabrication, il commande deux choses visibles — l'épaisseur minimale de la couche, puisqu'on ne pose pas 4 cm d'un 0/14, et la rugosité de la surface finie. Le béton bitumineux semi-grenu se formule précisément dans ces deux classes, 0/10 ou 0/14 (fiche technique du département de la Meuse). La note IDRRIM n° 43 de décembre 2020 chiffre ce que la classe change sur la durabilité en climat rigoureux : elle recommande un module de richesse d'au moins 3,4 pour un BBSG 0/10 et d'au moins 3,2 pour un 0/14. Ce module, défini par la norme NF P 98-149, « traduit l'épaisseur conventionnelle du film de liant enrobant le granulat » : plus il est élevé, mieux le mélange résiste à l'eau dans le temps. La même note fixe aussi des bornes de macrotexture — profondeur moyenne de texture d'au moins 0,4 mm et au plus 1,3 mm pour un BBSG 0/10, 0,5 à 1,4 mm pour un 0/14 — avec une raison qui parle dans le Jura : une surface trop ouverte se déverglace plus difficilement et souffre davantage du passage des lames de déneigement. HCE pose l'enrobé à chaud sous différentes granulations, et le choix se fait au devis selon l'usage de la surface.",
+        },
+        {
+          q: "Peut-on poser un enrobé neuf par-dessus l'ancien, ou faut-il tout enlever ?",
+          a: "Parfois oui, souvent non — et ce qui décide, c'est l'état de la couche existante, pas l'envie d'économiser le rabotage. Un rechargement se fait sur un revêtement épais et sain, après purge des défauts ponctuels et nettoyage du support ; il est à écarter dès que la couche en place est mince, fissurée ou désagrégée. La note IDRRIM n° 43 de décembre 2020 est explicite : le rechargement « n'est pas possible » « sur une couche mince (BBTM ou BBM), quel que soit son état », « sur un BBSG fissuré ou dégradé », ni « sur un ESU vieilli » — l'enduit superficiel d'usure, ce revêtement de gravillons collés qu'on voit sur beaucoup de chemins. Dans ces cas, il faut raboter la couche concernée, nettoyer soigneusement le support en enlevant les fines et les plaques d'enrobé décollées, puis reprofiler. La note proscrit par ailleurs « l'empilement de couches minces », une couche mince neuve posée sur une autre. La fiche technique du département de la Meuse ajoute un seuil mesurable : reprofilage ou fraisage dès que la déformation transversale dépasse 2 cm. Et dans tous les cas, c'est le collage qui tient l'ensemble : une émulsion de bitume dosée à 250 à 300 g/m² de liant résiduel. Voilà pourquoi un devis d'enrobé sérieux se fait après visite : ce qu'on voit en surface ne dit pas si le support porte.",
+        },
+        {
+          q: "Pourquoi un enrobé se dégrade-t-il après un hiver, et qu'est-ce qui l'évite ?",
+          a: "Parce que l'eau entre, puis gèle. Les dégâts qu'on voit au printemps — nids-de-poule, décollements par plaques, faïençage, arrachements de gravillons — viennent d'abord d'un compactage insuffisant et d'un support qui laisse l'eau s'accumuler, pas du froid tout seul. La note IDRRIM n° 43 de décembre 2020, écrite après l'hiver 2009-2010 qui avait dégradé les routes du nord-est de la France, le dit en une phrase : « La résistance d'une couche de roulement aux hivers rigoureux dépend essentiellement de sa capacité à limiter l'infiltration et l'accumulation d'eau », et « la présence d'eau dans le corps de chaussée représente un facteur majeur d'accélération des dégradations ». Elle ajoute que « les dégradations hivernales, et particulièrement la création de nids de poules et d'arrachement ponctuels, dépendent souvent de négligence à l'application et d'un mauvais compactage des enrobés bitumineux », et liste parmi ses points de vigilance le travail manuel au démarrage, les enrobés refroidis et les zones difficiles d'accès. C'est exactement la fenêtre de temps sur laquelle se joue un chantier d'HCE : l'enrobé est répandu à la main à 150 °C puis compacté au rouleau avant qu'il ne refroidisse, et les zones où le rouleau passe mal demandent un matériel adapté plutôt qu'un compactage approximatif. Côté entretien, la même note donne un repère utile à un particulier : en secteur de montagne, il faut ponter une fissure dès qu'elle atteint 2 mm de largeur — une fissure fine se traite à l'émulsion, une fissure de moins d'un centimètre non ramifiée par pontage, et au-delà de 3 cm ou dès qu'elle se ramifie il faut purger. Une fissure traitée tôt coûte sans comparaison moins qu'une surface reprise après trois hivers.",
+        },
+        {
+          q: "Le bitume utilisé est-il le même en altitude qu'en plaine ?",
+          a: "Non, et c'est l'une des rares règles du métier où l'altitude figure noir sur blanc. En zone à hiver rigoureux, la note IDRRIM n° 43 de décembre 2020 écrit que « les grades de bitumes routiers inférieurs à 35/50 sont à proscrire en couche de roulement », et que le liant final doit avoir les caractéristiques d'un bitume 35/50, « voire 50/70 pour les trafics plus faibles ou au-dessus de 700 m, et 70/100 au-dessus de 1 000 m ». Autrement dit : plus on monte, plus le bitume doit rester souple pour ne pas casser au froid. La même note proscrit en couche de surface les bétons bitumineux à module élevé faits avec un bitume de grade 20/30 ou plus dur, parce que leur fragilité à froid provoque une fissuration « par le haut » très difficile à entretenir. Deux précisions honnêtes sur la portée de ces recommandations : elles visent les chaussées circulées des zones où le cumul des jours de neige et de verglas dépasse trente par an, pas une cour de maison, et le classement officiel n'est pas publié commune par commune. Ce qui est mesuré, en revanche, c'est le gel : la station Météo-France de Champagnole, à moins de 5 km de Cize, relève 111,7 jours de gel par an sur les normales 1991-2020. Pour situer les chantiers d'HCE sur cette échelle, Cize est à 549 m et Saint-Claude à 668 m d'altitude. Le liant, lui, est choisi par la centrale qui fabrique l'enrobé : ce qui se décide au devis, c'est le produit demandé et son épaisseur.",
+        },
       ],
       sources: [
         {
@@ -152,6 +172,18 @@ const SERVICES: Record<string, ServiceData> = {
         {
           label: "IDRRIM / CFTR-info n°17 — La normalisation européenne des enrobés (NF EN 13108)",
           url: "https://www.idrrim.com/ressources/publications/1/374,Note17.pdf",
+        },
+        {
+          label: "IDRRIM — Note d'information n°43, « Choix et mise en œuvre des couches de surface dans les zones soumises à des conditions climatiques hivernales rigoureuses », décembre 2020",
+          url: "https://www.idrrim.com/ressources/documents/3/8129-IDRRIM_NOTE_D_INFORMATION_N-43.pdf",
+        },
+        {
+          label: "Conseil départemental de la Meuse — fiche technique « Béton Bitumineux Semi Grenu (BBSG) » : domaine d'emploi, épaisseurs, conditions de mise en œuvre",
+          url: "https://www.meuse.fr/fileadmin/medias/ARBORESCENCE/VOTRE_DEPARTEMENT/AGIT_POUR_VOUS/Routes_et_deplacements/entretien_des_routes_departementales/Technique_BBSG.pdf",
+        },
+        {
+          label: "Météo-France — fiche climatologique de CHAMPAGNOLE (39), indicatif 39097003, altitude 537 m, normales 1991-2020, éditée le 6 juin 2026",
+          url: "https://object.files.data.gouv.fr/meteofrance/data/synchro_ftp/REF_STATION/FICHECLIM_39097003.pdf",
         },
       ],
     },

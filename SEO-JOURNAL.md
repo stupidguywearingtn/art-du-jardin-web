@@ -25,6 +25,11 @@ et à compléter en fin de run.
 >   intégration qui ne reçoit plus l'événement, ou de builds qui échouent.**
 >   Pour mémoire, l'acquis du 25/09 chiffrait le délai normal : production à jour
 >   **moins de 45 secondes** après un push sur `main`.
+> - **Dernière mesure du run : 08:33 UTC, soit 1 h 10 après le premier push, et
+>   cinq pushes au total. Toujours 3 783 caractères et toujours « 30 septembre
+>   2026 » dans `llms.txt`.** La surveillance a été arrêtée là, faute de pouvoir
+>   agir : le run n'a plus rien à mesurer sur ce point. **Le chantier du 02/10
+>   existe dans le dépôt et nulle part ailleurs.**
 > - `x-vercel-cache: MISS`, `age: 0`, `cache-control: must-revalidate` → **ce
 >   n'est pas un cache CDN** : la fonction déployée contient encore l'ancien code.
 > - **La preview `hcebtp.lovable.app` est encore plus en retard** : elle sert

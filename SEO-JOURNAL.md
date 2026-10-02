@@ -38,13 +38,20 @@ et à compléter en fin de run.
 >   l'intégration Git de Vercel.
 > - ❌ **Pas un changement de configuration** : `vite.config.ts` impose toujours
 >   `nitro: { preset: "vercel" }`, et il n'a pas été modifié.
+> ❌ **Et ce n'est PAS le `package-lock.json` désynchronisé**, contrairement à ce
+>   que ce même encadré avançait d'abord. Vérification faite : `package.json` n'a
+>   pas été modifié depuis le **11/09** (`0798ac2`) et le lockfile pas depuis
+>   `a51c917` — **la désynchronisation est donc antérieure aux déploiements qui ont
+>   réussi le 30/09.** Elle ne peut pas expliquer un blocage apparu après. *(Elle
+>   reste un vrai sujet pour le runner, voir « Techniques apprises » du 02/10, mais
+>   ce n'est pas cette piste-ci.)*
 > **Ce qui reste et ne peut pas être fait d'ici :** consulter le tableau de bord
-> Vercel. Les trois causes plausibles, par ordre de vraisemblance : déploiement en
-> échec (le candidat le plus sérieux est **`npm ci`, qui ne peut pas réussir sur
-> ce dépôt** — `package-lock.json` est désynchronisé, voir « Techniques
-> apprises » du 02/10 ; si Vercel est passé de `bun`/`npm install` à `npm ci`, le
-> build échoue sans toucher au code), déploiement en file d'attente, ou
-> intégration GitHub déconnectée du projet Vercel.
+> Vercel. Les causes plausibles, maintenant que le code, la branche, le CI et le
+> lockfile sont écartés : **déploiement en échec pour une raison côté
+> plateforme** (quota, variable d'environnement, changement de commande
+> d'installation), **déploiement en file d'attente**, ou **intégration GitHub
+> déconnectée du projet Vercel**. Les trois se lisent en trente secondes sur le
+> tableau de bord, et aucune ne se diagnostique depuis le dépôt.
 > 🔔 **Le client a été notifié le 02/10/2026**, en dérogation à la cadence
 > hebdomadaire (prochaine routine prévue le 08/10) : la règle du 01/10 prévoyait
 > explicitement la dérogation « si un contrôle casse ». **C'en est un, et c'est le

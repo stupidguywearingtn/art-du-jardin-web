@@ -8,6 +8,39 @@ et à compléter en fin de run.
 
 ## État des lieux
 
+> 🔴 **04/10/2026 — LE BLOCAGE DE DÉPLOIEMENT TIENT DEPUIS 48 HEURES. À LIRE
+> AVANT TOUT CHANTIER.** L'encadré du 02/10 ci-dessous reste valable mot pour
+> mot ; voici seulement ce que la mesure du 04/10 y ajoute.
+> **Mesuré le 04/10/2026 à 07:01 UTC, soit 47 h 38 après le push du chantier :**
+> - `/services/enrobe-a-chaud` sert **3 783 caractères**. La valeur attendue est
+>   11 856. **Inchangé depuis le 02/10 : le chantier n'est toujours pas en ligne.**
+> - `/llms.txt` en production affiche toujours « Dernière mise à jour : **30
+>   septembre 2026** », alors que `public/llms.txt` dans le dépôt dit « **2
+>   octobre 2026** ». Les deux dates encadrent le blocage à elles seules.
+> - `x-vercel-cache: MISS`, `age: 0` → toujours pas un cache CDN.
+> - Le code est toujours sain : `npx tsc --noEmit` en 0 sur `origin/main`
+>   (`dd96784`), et le contenu attendu est bien présent dans
+>   `src/routes/services.$slug.tsx`.
+> - **La production, elle, n'est pas cassée — elle est seulement vieille.**
+>   `verif-faq.mjs` 11/11 et `verif-lastmod.mjs` 13/13 passent en ligne. Rien
+>   n'est à réparer en urgence côté visiteur ; c'est le canal de livraison qui
+>   est mort, pas le site.
+> **Ce que le run du 04/10 en a conclu, et qui vaut pour les suivants :**
+> - **Aucun chantier de code n'a été poussé aujourd'hui**, en application de la
+>   consigne du 02/10 — et pour une raison qui s'est renforcée : si c'est le
+>   *build* qui échoue, chaque commit supplémentaire rend le diagnostic plus
+>   difficile à faire pour qui ouvrira le tableau de bord. Le dépôt doit rester
+>   dans l'état où le blocage est apparu.
+> - **Le client a été relancé le 04/10** (notification), avec la mesure des 48 h
+>   et les trois causes à vérifier sur Vercel.
+> ⚠️ **Consigne inchangée pour le prochain run : mesurer
+> `/services/enrobe-a-chaud` AVANT de choisir un chantier.** S'il rend 11 856
+> caractères, le déploiement est reparti : reprendre alors le cours normal, et le
+> premier chantier qui attend est celui décrit sous « Chantiers en attente » au
+> 04/10 (ajout de PagesJaunes aux `sameAs`). S'il rend encore 3 783, ne pas
+> pousser de code et se limiter à ce qui vit hors du site (annuaires, NAP,
+> fiches), comme le 04/10.
+
 > 🔴 **02/10/2026 — LE DÉPLOIEMENT NE PART PLUS. Le code est sur `main`, la
 > production sert encore la version du 30/09. À LIRE AVANT TOUT CHANTIER.**
 > **Les faits, mesurés :**
@@ -1576,6 +1609,124 @@ JSON-LD, pas de `BreadcrumbList`).
 ---
 
 ## Chantiers faits
+
+### 04/10/2026 — La fiche PagesJaunes enfin lue : le lien manquant est constaté et non plus supposé, et la graphie de l'adresse se tranche à trois sources contre une
+
+**Note de continuité : il n'y a pas d'entrée du 03/10/2026.** Le run précédent
+est celui du 02/10. Je ne sais pas si le run du 03 n'a pas tourné ou s'il n'a
+rien journalisé ; dans le doute, ne rien déduire de ce trou.
+
+**Contexte, et il commande tout le reste.** Le blocage de déploiement ouvert le
+02/10 **tient toujours** : 47 h 38 après le push, `/services/enrobe-a-chaud`
+sert encore 3 783 caractères au lieu de 11 856, et `/llms.txt` en production
+affiche « 30 septembre 2026 » quand le dépôt dit « 2 octobre 2026 ». Détail
+mesuré ci-dessus dans « État des lieux ». **Conséquence : aucun chantier de code
+aujourd'hui.** La consigne du 02/10 l'interdisait déjà ; la raison s'est
+renforcée, voir « ce que j'ai décidé de ne pas faire ».
+
+**Indexation — toujours nulle, et la cause est maintenant adossée à une mesure.**
+
+| Requête | 04/10/2026 | Évolution vs 02/10 |
+|---|---|---|
+| `site:hcetp.com` | **0 résultat du domaine** | inchangé |
+| `"hcetp.com" OR "hcebtp.com" HCE Cize` | **0 page mentionnant l'un ou l'autre domaine, où que ce soit** | nouveau relevé |
+| `HCE enrobé à chaud Cize Jura travaux publics hcetp` | **0 résultat du domaine**, mais 10 résultats sur l'entreprise (PagesJaunes ×4, Mappy, Kompass, Verif, societe.com, manageo) | inchangé |
+
+*Réserve de méthode, à ne pas oublier en relisant ce tableau : l'outil `WebSearch`
+du runner est orienté marché américain. Il ne vaut pas une SERP google.fr. Mais
+le troisième relevé le rend exploitable malgré ça : l'index interrogé **connaît
+bien** l'entreprise sur des pages françaises, puisqu'il en remonte dix. Ce n'est
+donc pas un biais de couverture géographique qui explique l'absence du domaine.*
+
+**Le diagnostic que ces trois lignes verrouillent :** Google connaît HCE par au
+moins sept fiches d'annuaire, et **aucune ne mène au domaine**. Un domaine sans
+un seul lien entrant ne se fait pas découvrir. Ce n'est pas une nouveauté — le
+journal le posait dès le 09/09 — mais c'était jusqu'ici une déduction. Le
+deuxième relevé le mesure : **zéro mention de `hcetp.com` ou de `hcebtp.com` sur
+le web indexé**, et pas seulement zéro lien.
+
+**Chantier choisi : auditer les deux fiches revendicables, et clore la question
+de la graphie de l'adresse.** C'est le seul angle qui avance pendant le blocage,
+puisqu'il ne vit pas dans le code ; c'est aussi la priorité absolue fixée par la
+consigne tant que le site n'est pas indexé (citations externes, cohérence NAP,
+points d'entrée tiers).
+
+**Ce qui a été fait, précisément.**
+
+1. **`pagesjaunes.fr/pros/52322496` a été lue intégralement pour la première
+   fois.** Elle était classée « contenu non vérifiable, HTTP 403 » depuis son
+   repérage le 12/09 : l'action « y ajouter l'URL du site » **supposait** qu'elle
+   n'en portait pas. C'est désormais constaté. Relevé verbatim : téléphone
+   `03 84 52 61 48` (conforme au site), adresse `40 Bis avenue Etienne Lamy
+   39300 Cize` (**adresse actuelle**), horaires présents, **aucun lien vers le
+   site**.
+2. **`fr.mappy.com/poi/50adc51784ae2742a0054bfe` recontrôlée** : `40 Bis av
+   Etienne Lamy, 39300 Cize`, toujours **aucun lien vers le site**. Inchangée
+   depuis le 13/09.
+3. **Le registre national réinterrogé** (`recherche-entreprises.api.gouv.fr`,
+   SIREN 521683573, le 04/10) : 3 établissements, **1 seul ouvert**, siège SIRET
+   `52168357300039`, `40 B AVENUE ETIENNE LAMY 39300 CIZE`, champs `numero_voie`
+   = `40` et `indice_repetition` = `B`, mise à jour INSEE du 07/05/2026.
+4. **`ACTIONS-SEO-CLIENT.md` complété** d'un bloc daté du 04/10 : la ligne de
+   tableau PagesJaunes passe de « non vérifiable » à vérifiée, et la graphie de
+   l'adresse est tranchée (voir ci-dessous).
+
+**Les deux acquis réels de la journée.**
+
+- **PagesJaunes rejoint Mappy comme fiche « propre ».** Elle est la deuxième — et
+  non plus Mappy seule — à porter *à la fois* le bon téléphone et l'adresse
+  actuelle. Ça compte pour l'ordre des actions client : **les deux fiches à
+  revendiquer en premier sont aussi les deux qui n'ont rien à corriger avant
+  d'être liées**, contrairement à `nosartisansontdutalent.fr` (adresse de
+  Champagnole, mobile inconnu), La Gazette France et verif.com, tous trois
+  référencés sur un établissement fermé.
+- **La graphie de l'adresse n'est plus un arbitrage à trois branches.** Registre
+  `40 B`, Mappy `40 Bis`, PagesJaunes `40 Bis` : **trois sources indépendantes
+  portent le complément, et deux l'écrivent en clair.** Le `B` du registre est
+  donc l'abréviation de « Bis ». La forme à employer dans les annuaires et pour
+  la validation postale de la fiche Google est `40 Bis avenue Etienne Lamy,
+  39300 Cize`. Le site, lui, écrit `40 avenue Etienne Lamy` et **est le seul à
+  omettre le complément**.
+
+**Ce que j'ai décidé de NE PAS faire, et pourquoi.**
+
+1. **Ne pas corriger l'adresse du site en « 40 Bis ».** Trois raisons, dont une
+   technique qui est la vraie. (a) C'est du contenu visible, et la consigne dit
+   de ne pas y toucher dans le doute. (b) Le client doit confirmer la forme de
+   son courrier ; il a été relancé là-dessus le 04/10. (c) **La raison
+   déterminante :** le pied de page ne lit pas une constante mais
+   `v("footer", "address", "40 avenue Etienne Lamy, 39300 Cize")`
+   (`src/routes/index.tsx:2142`) — une valeur éditable en base, dont le code ne
+   porte que le défaut. Si la base contient une valeur, **changer le défaut ne
+   changerait rien à l'affichage, mais changerait le JSON-LD** (qui écrit
+   l'adresse en dur dans `__root.tsx:142`, `index.tsx:197` et
+   `services.$slug.tsx:481`). Résultat : un `LocalBusiness` qui contredit le
+   pied de page rendu — exactement le mismatch que la consigne interdit. **Cette
+   correction, le jour où elle sera décidée, devra traiter les quatre points
+   d'un coup (défaut CMS + valeur en base + les trois JSON-LD + les deux
+   occurrences de `public/llms.txt`), et pas le seul défaut.** Noté sous
+   « Hypothèses à vérifier ».
+2. **Ne pas ajouter PagesJaunes aux `sameAs`** aujourd'hui, alors que la fiche
+   remplit maintenant le critère appliqué à Mappy le 13/09 (bon téléphone +
+   adresse actuelle). C'est une modification de code : elle ne se déploierait
+   pas, ne se vérifierait pas en ligne, et empilerait un commit sur un dépôt dont
+   l'état doit rester celui où le blocage est apparu. **C'est le premier chantier
+   à prendre dès que le déploiement repart** — il est petit, fondé et prêt, voir
+   « Chantiers en attente ».
+3. **Ne pas pousser de contenu**, pour la même raison qu'au 02/10.
+4. **Ne pas faire la veille de l'étape 5** : le 04/10/2026 est un **dimanche**, pas
+   un lundi. Prochaine veille le lundi 05/10.
+
+**Ce qui reste.**
+
+- **Le blocage de déploiement, et il n'est pas réparable d'ici.** Il se lit en
+  trente secondes sur le tableau de bord Vercel (build en échec / déploiement en
+  file / intégration GitHub déconnectée) et nulle part depuis le dépôt.
+- Les deux fiches encore « non vérifiables » (Pappers, Verif) : à retenter par
+  `WebFetch`, qui a fonctionné là où `curl` échoue (voir « Techniques apprises »).
+- `/realisations/chantier-en-cours` sert **373 caractères** et reste de loin la
+  page la plus maigre du site. Candidat de contenu évident — mais il attend le
+  déploiement.
 
 ### 02/10/2026 — `/services/enrobe-a-chaud` passe de 3 783 à 11 856 caractères : la page du métier principal sort de la maigreur, sur ce qui se décide au devis et qu'on ne voit plus une fois la cour finie
 
@@ -3792,6 +3943,19 @@ Lun-Ven 8h-18h / Sam 8h-12h, Mappy Lun-Sam 7h-19h) signalés comme incohérence 
 Par ordre de priorité. **Alterner les angles, ne pas refaire le même deux jours
 de suite.**
 
+> 🆕 **PREMIER CHANTIER À PRENDRE DÈS QUE LE DÉPLOIEMENT REPART (posé le
+> 04/10/2026) — ajouter `pagesjaunes.fr/pros/52322496` aux `sameAs`.** La fiche a
+> été lue et vérifiée le 04/10 : téléphone `03 84 52 61 48` et adresse actuelle
+> `40 Bis avenue Etienne Lamy 39300 Cize`. Elle remplit donc **exactement** le
+> critère appliqué à Mappy le 13/09 (bon téléphone + adresse actuelle), et elle
+> est la deuxième fiche à le remplir. Les `sameAs` à compléter sont ceux de
+> `__root.tsx` (~l. 126) et `index.tsx` (~l. 178), qui portent aujourd'hui quatre
+> URLs. **Chantier volontairement non fait le 04/10** : c'est du code, il ne se
+> serait pas déployé ni vérifié en ligne, et le dépôt doit rester dans l'état où
+> le blocage de déploiement est apparu. Petit, fondé, prêt — à faire d'un trait
+> une fois la production repartie, en recontrôlant d'abord que la fiche n'a pas
+> changé.
+
 > 🆕 **CANDIDAT N°1 DU PROCHAIN RUN (au 02/10/2026) — les six pages
 > `/services/*` sont des culs-de-sac pour le crawl : chacune ne sert QU'UN seul
 > lien interne, vers l'accueil.**
@@ -4484,6 +4648,28 @@ de suite.**
 
 ## Hypothèses à vérifier
 
+> 🆕 **04/10/2026 — corriger l'adresse en « 40 Bis » demande quatre changements
+> simultanés, pas un : le pied de page est éditable en base.** Le site écrit
+> `40 avenue Etienne Lamy` et il est **la seule source à omettre le complément**
+> (registre `40 B`, Mappy `40 Bis`, PagesJaunes `40 Bis` — relevés du 04/10).
+> La correction est donc probablement justifiée sur le fond, **mais elle n'a pas
+> été faite**, et pas seulement parce que le client doit confirmer la forme de son
+> courrier.
+> **La raison technique, qui est la vraie, et qu'il ne faut pas redécouvrir :**
+> le pied de page lit `v("footer", "address", "40 avenue Etienne Lamy, 39300
+> Cize")` (`src/routes/index.tsx:2142`) — une valeur **éditable en base**, dont le
+> code ne porte que la valeur par défaut. Les trois JSON-LD, eux, écrivent
+> l'adresse **en dur** (`__root.tsx:142`, `index.tsx:197`,
+> `services.$slug.tsx:481`), et `public/llms.txt` la répète deux fois (l. 23 et
+> l. 537).
+> **Donc : si la base contient une valeur, changer le défaut ne changerait rien à
+> l'affichage mais changerait le JSON-LD** → un `LocalBusiness` qui contredit le
+> pied de page rendu, c'est-à-dire le mismatch que la consigne interdit
+> explicitement. **À vérifier avant toute correction : ce que contient réellement
+> la valeur `footer.address` en base.** Et le jour où la correction se fait, elle
+> traite les quatre endroits d'un coup, puis `verif-faq.mjs` et un contrôle du
+> pied de page rendu.
+
 > 🆕 **02/10/2026 — L'accueil sert à Googlebot un lien vers `/signin`.** Relevé
 > dans le graphe des liens internes du 02/10 : l'accueil expose 13 liens internes,
 > dont `/signin` (la page de connexion de l'espace d'édition). Elle n'est pas dans
@@ -5009,6 +5195,37 @@ de suite.**
 ---
 
 ## Techniques apprises
+
+### 04/10/2026 — ⚙️ Un HTTP 403 au `curl` ne veut pas dire qu'une page est illisible : `WebFetch` passe là où le runner est refusé
+
+**L'acquis, en une phrase : avant de classer une page « contenu non vérifiable »,
+l'essayer par `WebFetch` — c'est un canal différent de `curl` depuis le runner, et
+il n'est pas bloqué par les mêmes protections.**
+
+**Ce qui l'a révélé.** `pagesjaunes.fr/pros/52322496` était marquée « contenu non
+vérifiable depuis nos outils, HTTP 403 » dans `ACTIONS-SEO-CLIENT.md` **depuis le
+12/09/2026**, soit 22 jours. Le 04/10, `WebFetch` l'a lue sans difficulté et en a
+sorti le téléphone, l'adresse et l'absence de lien vers le site. **Rien n'avait
+changé côté PagesJaunes : c'est le canal qui n'avait jamais été essayé.**
+
+**Pourquoi ça marche.** `curl` depuis le runner part avec un `User-Agent` d'outil
+et une IP de datacenter — la signature que les anti-bots de Solocal et consorts
+refusent. `WebFetch` passe par une autre infrastructure, qui se présente
+autrement. Les deux ne tombent donc pas sur les mêmes murs.
+
+**Le coût de ne pas l'avoir su.** L'action client « revendiquer PagesJaunes et y
+ajouter l'URL » — classée priorité n°1 de l'action 4 depuis le 12/09 — reposait
+pendant trois semaines sur une **hypothèse** (« elle ne porte probablement pas le
+lien ») présentée au client comme une tâche. Elle était juste, mais elle aurait pu
+être fausse, et la vérification coûtait un appel d'outil.
+
+**Règle à appliquer.** « Non vérifiable » n'est un statut acceptable qu'après avoir
+essayé **les deux** canaux. Les deux fiches encore dans cet état
+(`pappers.fr/entreprise/hce-hini-cours-enrobe-521683573` et
+`verif.com/societe/H.C.E.---HINI---COURS---ENROBE-521683573/`) sont à retenter par
+`WebFetch` au prochain run qui touche aux annuaires. *(À noter avec la recette du
+02/10 sur les PDF : `WebFetch` est décidément l'outil à essayer en second quand
+`curl` cale, et réciproquement.)*
 
 ### 02/10/2026 — ⚙️ Cinq acquis : lire un PDF que `WebFetch` refuse, un filon de documents techniques routiers gratuits, deux classifications qui portent les mêmes étiquettes, `npm ci` qui ne peut pas marcher sur ce dépôt, et un trou dans la fiche Météo-France de Champagnole
 

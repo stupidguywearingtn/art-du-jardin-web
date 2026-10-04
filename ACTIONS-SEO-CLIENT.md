@@ -328,6 +328,48 @@ Il en faut donc au moins quelques-uns, réels et légitimes :
     l'objectif de l'action 3. Corriger d'abord, lier ensuite.
   - Elle n'a **pas** été ajoutée aux `sameAs` du site, pour la même raison.
 
+  **Ajout du 04/10/2026 — la fiche PagesJaunes a enfin pu être lue, et elle
+  change de statut.** Depuis son repérage le 12/09 elle était classée « contenu
+  non vérifiable, HTTP 403 » : ce qu'elle publiait était **supposé**, et l'action
+  « ajouter l'URL » reposait sur l'hypothèse qu'elle n'en portait pas. Lue
+  intégralement le 04/10/2026, l'hypothèse est confirmée et la fiche se révèle
+  être, avec Mappy, **l'une des deux meilleures fiches des sept**.
+
+  | Fiche | Ce qu'elle publie (vérifié le 04/10/2026) | À faire |
+  |---|---|---|
+  | `pagesjaunes.fr/pros/52322496` | « H.C.E Cize — Travaux publics », **téléphone 03 84 52 61 48 conforme**, **adresse actuelle « 40 Bis avenue Etienne Lamy 39300 Cize »**, horaires. **Aucun lien vers le site.** | **revendiquer en priorité auprès de Solocal et y ajouter l'URL du site** |
+
+  **Ce que cette lecture change, concrètement :**
+
+  1. **Elle fonde l'action au lieu de la supposer.** L'absence de lien vers le
+     site est maintenant constatée, pas déduite. PagesJaunes reste le point
+     d'entrée le plus rapide vers `https://www.hcetp.com`, et pour la raison
+     déjà écrite le 12/09 : fiche commerciale revendicable, sur un domaine que
+     Google recrawle en permanence.
+  2. **PagesJaunes est la deuxième fiche — et non plus la seule Mappy — à porter
+     à la fois le bon téléphone et l'adresse actuelle.** Les deux fiches à
+     revendiquer en premier sont donc aussi les deux qui n'ont rien à corriger
+     avant d'être liées : rien ne retarde l'ajout de l'URL, contrairement à
+     `nosartisansontdutalent.fr`, La Gazette France et verif.com.
+  3. **La forme postale de l'adresse se tranche en grande partie.** Le registre
+     national écrit `40 B` (champ `numero_voie` = 40, `indice_repetition` = B,
+     relevé le 04/10/2026), Mappy écrit `40 Bis`, PagesJaunes écrit `40 Bis`.
+     **Trois sources indépendantes portent le complément, et deux l'écrivent en
+     clair « Bis » — le `B` du registre est donc l'abréviation de « Bis », pas
+     une autre mention.** La forme à utiliser dans les annuaires et pour la
+     validation postale de la fiche Google est **`40 Bis avenue Etienne Lamy,
+     39300 Cize`**. Il reste au client à confirmer que c'est bien la forme de son
+     courrier — mais ce n'est plus un arbitrage entre trois graphies, c'est une
+     confirmation à donner sur une seule. **Le site n'a pas été modifié** (voir
+     « Deux points à arbitrer par le client », point 1, et la raison technique
+     dans SEO-JOURNAL sous « Hypothèses à vérifier » au 04/10).
+
+  **Enseignement de méthode :** un HTTP 403 au `curl` ne veut pas dire qu'une
+  page est illisible. `pagesjaunes.fr` refuse les requêtes directes depuis le
+  runner depuis le 12/09, mais l'outil `WebFetch` l'a lue sans difficulté le
+  04/10. **Les deux fiches encore marquées « non vérifiable » ici (Pappers,
+  Verif) doivent être retentées par ce canal avant d'être laissées en attente.**
+
 - Un **compte Facebook / Instagram professionnel** avec le lien du site : ces
   pages sont crawlées très fréquemment.
 - Les **partenaires, fournisseurs ou clients pros** qui ont un site : un lien

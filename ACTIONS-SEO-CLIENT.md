@@ -367,8 +367,31 @@ Il en faut donc au moins quelques-uns, réels et légitimes :
   **Enseignement de méthode :** un HTTP 403 au `curl` ne veut pas dire qu'une
   page est illisible. `pagesjaunes.fr` refuse les requêtes directes depuis le
   runner depuis le 12/09, mais l'outil `WebFetch` l'a lue sans difficulté le
-  04/10. **Les deux fiches encore marquées « non vérifiable » ici (Pappers,
-  Verif) doivent être retentées par ce canal avant d'être laissées en attente.**
+  04/10. Les deux autres fiches marquées « non vérifiable » ont donc été
+  retentées par ce canal **le même jour** :
+
+  | Fiche | Ce qu'elle publie (vérifié le 04/10/2026) | À faire |
+  |---|---|---|
+  | `pappers.fr/entreprise/hce-hini-cours-enrobe-521683573` | **lue enfin.** « **Site internet : Non disponible** » — le champ existe et il est vide. Adresse `40 B AVENUE ETIENNE LAMY 39300 CIZE`, SIRET `521 683 573 00039` : c'est bien l'**établissement ouvert**, pas l'ancien. Téléphone « réservé aux utilisateurs connectés ». | revendiquer et **renseigner le champ « Site internet »** ; rien d'autre à corriger |
+  | `verif.com/societe/H.C.E.---HINI---COURS---ENROBE-521683573/` | **toujours illisible** : refuse `curl` **et** `WebFetch` (403 aux deux). Reste référencée sous le SIRET …0021, donc sur l'**ancienne adresse** « 36 avenue Etienne Lamy ». | **faire corriger l'adresse en priorité**, et ne pas y ajouter l'URL avant |
+
+  **Bilan de l'audit des fiches au 04/10/2026 — et c'est le vrai résultat du
+  jour.** Sept fiches recensées, **six ont été lues réellement** (PagesJaunes,
+  Mappy, Pappers, 118000, societe.com, nosartisansontdutalent, La Gazette
+  France), une seule résiste (`verif.com`, qui demandera un navigateur).
+  **Aucune des six ne porte de lien vers `https://www.hcetp.com`.** Le « chaînon
+  manquant » identifié le 09/09 n'est donc plus une hypothèse tirée d'un
+  échantillon : c'est le cas de **toutes** les fiches lues, sans exception. Et le
+  relevé du 04/10 le confirme par l'autre bout : une recherche sur
+  `"hcetp.com" OR "hcebtp.com"` ne remonte **aucune page du web indexé**
+  mentionnant l'un ou l'autre domaine, alors que la même recherche sur le nom de
+  l'entreprise en remonte dix.
+
+  **Les deux fiches à traiter en premier, et dans cet ordre :** PagesJaunes
+  (fiche commerciale, domaine recrawlé en permanence, NAP déjà juste) puis
+  Pappers (champ « Site internet » vide à remplir, NAP déjà juste). Ce sont les
+  deux où il n'y a **rien à corriger avant de lier** — le lien peut être ajouté
+  le jour même.
 
 - Un **compte Facebook / Instagram professionnel** avec le lien du site : ces
   pages sont crawlées très fréquemment.

@@ -25,6 +25,18 @@ et à compléter en fin de run.
 >   `verif-faq.mjs` 11/11 et `verif-lastmod.mjs` 13/13 passent en ligne. Rien
 >   n'est à réparer en urgence côté visiteur ; c'est le canal de livraison qui
 >   est mort, pas le site.
+> **Un sixième push mesuré en direct, et il ne change rien non plus.** Le commit
+> de documentation du 04/10 (`2792410`, poussé à 07:08 UTC) a été suivi de **sept
+> mesures sur 3 min 08** (07:09:12 → 07:12:20) : `llms.txt` reste figé sur « 30
+> septembre 2026 » et le HTML de `/services/enrobe-a-chaud` reste à **30 261
+> octets** exactement, inchangé à l'octet près. Pour mémoire, le délai normal
+> mesuré le 25/09 est de **moins de 45 secondes**. **Ce push est une sixième
+> occasion de déclenchement sans effet**, et la première à être mesurée en
+> continu juste après l'envoi plutôt que constatée après coup. *(Ce push ne
+> touchait que des `.md`, donc il ne pouvait pas changer le contenu des pages —
+> mais `public/llms.txt` fait partie du déploiement, et sa date figée à « 30
+> septembre » alors que le dépôt dit « 2 octobre » suffit à prouver qu'aucun
+> déploiement n'a eu lieu.)*
 > **Ce que le run du 04/10 en a conclu, et qui vaut pour les suivants :**
 > - **Aucun chantier de code n'a été poussé aujourd'hui**, en application de la
 >   consigne du 02/10 — et pour une raison qui s'est renforcée : si c'est le
@@ -1667,9 +1679,22 @@ points d'entrée tiers).
    SIREN 521683573, le 04/10) : 3 établissements, **1 seul ouvert**, siège SIRET
    `52168357300039`, `40 B AVENUE ETIENNE LAMY 39300 CIZE`, champs `numero_voie`
    = `40` et `indice_repetition` = `B`, mise à jour INSEE du 07/05/2026.
-4. **`ACTIONS-SEO-CLIENT.md` complété** d'un bloc daté du 04/10 : la ligne de
-   tableau PagesJaunes passe de « non vérifiable » à vérifiée, et la graphie de
-   l'adresse est tranchée (voir ci-dessous).
+4. **Les deux autres fiches « non vérifiables » retentées par le même canal, dans
+   la foulée.** `pappers.fr` **a été lue** : « Site internet : Non disponible »
+   (le champ existe et il est vide), `40 B AVENUE ETIENNE LAMY 39300 CIZE`, SIRET
+   `521 683 573 00039` — donc l'établissement **ouvert**, pas l'ancien.
+   `verif.com` **refuse aussi `WebFetch`** (403) et reste non vérifiable.
+   **Bilan : trois fiches sur quatre sont maintenant lues ; la quatrième
+   demandera un navigateur.**
+5. **Cinquième fiche confirmée sans lien vers le site.** Avec PagesJaunes, Mappy,
+   Pappers, `nosartisansontdutalent.fr` et La Gazette France, **cinq fiches sont
+   désormais vérifiées comme ne portant aucun lien vers le domaine** (et 118000
+   et societe.com l'étaient depuis le 09/09). Le « chaînon manquant » posé le
+   09/09 n'est plus une hypothèse sur un échantillon : c'est le cas de toutes les
+   fiches lues à ce jour, sans exception.
+6. **`ACTIONS-SEO-CLIENT.md` complété** d'un bloc daté du 04/10 : la ligne de
+   tableau PagesJaunes passe de « non vérifiable » à vérifiée, Pappers aussi, et
+   la graphie de l'adresse est tranchée (voir ci-dessous).
 
 **Les deux acquis réels de la journée.**
 
@@ -1722,8 +1747,11 @@ points d'entrée tiers).
 - **Le blocage de déploiement, et il n'est pas réparable d'ici.** Il se lit en
   trente secondes sur le tableau de bord Vercel (build en échec / déploiement en
   file / intégration GitHub déconnectée) et nulle part depuis le dépôt.
-- Les deux fiches encore « non vérifiables » (Pappers, Verif) : à retenter par
-  `WebFetch`, qui a fonctionné là où `curl` échoue (voir « Techniques apprises »).
+- **`verif.com` reste la seule fiche non lue** : elle refuse `curl` **et**
+  `WebFetch` (403 aux deux, mesuré le 04/10). Elle demandera un navigateur. C'est
+  aussi celle qui est référencée sur l'établissement fermé (SIRET …0021, ancienne
+  adresse « 36 avenue Etienne Lamy ») : elle est donc à faire corriger par le
+  client, pas à lire par moi.
 - `/realisations/chantier-en-cours` sert **373 caractères** et reste de loin la
   page la plus maigre du site. Candidat de contenu évident — mais il attend le
   déploiement.
@@ -5220,12 +5248,24 @@ lien ») présentée au client comme une tâche. Elle était juste, mais elle au
 être fausse, et la vérification coûtait un appel d'outil.
 
 **Règle à appliquer.** « Non vérifiable » n'est un statut acceptable qu'après avoir
-essayé **les deux** canaux. Les deux fiches encore dans cet état
-(`pappers.fr/entreprise/hce-hini-cours-enrobe-521683573` et
-`verif.com/societe/H.C.E.---HINI---COURS---ENROBE-521683573/`) sont à retenter par
-`WebFetch` au prochain run qui touche aux annuaires. *(À noter avec la recette du
-02/10 sur les PDF : `WebFetch` est décidément l'outil à essayer en second quand
-`curl` cale, et réciproquement.)*
+essayé **les deux** canaux. *(À noter avec la recette du 02/10 sur les PDF :
+`WebFetch` est décidément l'outil à essayer en second quand `curl` cale, et
+réciproquement.)*
+
+**⚠️ Nuance mesurée le même jour, et elle évite d'en faire une règle trop large :
+`WebFetch` n'est pas un passe-partout.** Les deux autres fiches classées « non
+vérifiable » ont été retentées par ce canal dans le même run :
+
+| Fiche | Résultat au `WebFetch` du 04/10 |
+|---|---|
+| `pappers.fr/entreprise/hce-hini-cours-enrobe-521683573` | **lue** — « Site internet : Non disponible », `40 B AVENUE ETIENNE LAMY 39300 CIZE`, SIRET `521 683 573 00039`, téléphone « Réservé aux utilisateurs connectés » |
+| `verif.com/societe/H.C.E.---HINI---COURS---ENROBE-521683573/` | **toujours HTTP 403**, y compris par `WebFetch` |
+
+Donc : deux fiches débloquées sur trois (PagesJaunes, Pappers), une qui résiste aux
+deux canaux (Verif). **`verif.com` reste légitimement « non vérifiable » et il ne
+sert à rien de la retenter par ces deux outils** — elle demandera un navigateur, ou
+rien. Le statut « non vérifiable » garde donc un sens, mais il se mérite après deux
+essais, pas après un.
 
 ### 02/10/2026 — ⚙️ Cinq acquis : lire un PDF que `WebFetch` refuse, un filon de documents techniques routiers gratuits, deux classifications qui portent les mêmes étiquettes, `npm ci` qui ne peut pas marcher sur ce dépôt, et un trou dans la fiche Météo-France de Champagnole
 

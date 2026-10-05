@@ -8,6 +8,88 @@ et à compléter en fin de run.
 
 ## État des lieux
 
+> 🟢 **05/10/2026 — LE BLOCAGE DE DÉPLOIEMENT EST DIAGNOSTIQUÉ. Les deux
+> encadrés du 02/10 et du 04/10 ci-dessous sont PÉRIMÉS sur un point central :
+> ils concluent « la cause est hors du dépôt et ne se diagnostique pas d'ici ».
+> C'est faux, et ça a coûté trois jours. À lire avant eux.**
+>
+> **Ce qui manquait n'était pas un accès au tableau de bord Vercel : c'était une
+> requête. Vercel publie ses statuts de déploiement sur GitHub, et le runner les
+> lit sans aucun jeton supplémentaire** (recette complète sous « Techniques
+> apprises » du 05/10) :
+>
+> ```
+> GET https://api.github.com/repos/:owner/:repo/commits/:sha/status
+> GET https://api.github.com/repos/:owner/:repo/deployments
+> GET https://api.github.com/repos/:owner/:repo/deployments/:id/statuses
+> ```
+>
+> **Ce qu'ils disent, mesuré le 05/10 :**
+> - **Les builds ÉCHOUENT.** Tous les déploiements depuis `0b4d0cd` (02/10
+>   07:24 UTC) sont en état `failure` : « Deployment has failed — run this Vercel
+>   CLI command: npx vercel inspect dpl_… --logs ».
+> - **L'intégration GitHub → Vercel fonctionne.** Chaque push crée bien un
+>   déploiement, en moins de 20 s (mesuré en direct sur le push du jour : statut
+>   `pending` à t+20 s, `failure` à t+40 s). **Les trois hypothèses laissées
+>   ouvertes le 02/10 — cache CDN, file d'attente, intégration déconnectée — sont
+>   donc toutes les trois écartées.**
+> - **Dernier succès : `84dddba`, 01/10 à 07:12 UTC.** Premier échec : `0b4d0cd`,
+>   02/10 à 07:24 UTC. **La fenêtre de rupture est donc 01/10 07:12 → 02/10
+>   07:24 UTC**, et elle ne contient aucun changement de dépendance ni de config.
+> - **Pourquoi ça ressemblait à un silence :** un déploiement en échec ne
+>   remplace pas le précédent. La production n'est pas cassée, elle est vieille.
+>   C'est exactement ce que le 02/10 avait observé sans pouvoir l'expliquer.
+>
+> **Le dépôt est innocenté par la mesure, et cette fois ce n'est pas une
+> déduction :** sur l'arbre exact de `722b55a`, `npm install`, `npm ci`,
+> `bun install` et `bun install --frozen-lockfile` passent **tous les quatre**,
+> puis `npx tsc --noEmit`, `npm run build` et `npm run check:fige` sortent en 0
+> (Node 22.22.0). L'échec **ne se reproduit pas hors de Vercel**.
+>
+> **La piste principale, et elle n'est PAS confirmée.** Vercel a désactivé
+> Node.js 20 le 01/10/2026 : « On October 1, 2026, Node.js 20 will be disabled in
+> Project Settings […] Existing projects using 20 as the version for Functions
+> will display an error when a new deployment is created »
+> ([changelog Vercel](https://vercel.com/changelog/node-js-20-is-being-deprecated),
+> lu le 05/10). Le dépôt ne déclarait **aucune** version : le build suivait donc
+> le réglage du tableau de bord, invisible d'ici. **Deux faits empêchent de
+> conclure :**
+> 1. **le déploiement du 01/10 à 07:12 a RÉUSSI**, alors que la désactivation
+>    prenait effet à 00:00 ce jour-là et que le changelog ne mentionne aucun
+>    déploiement progressif ;
+> 2. **le build de preview du commit du jour, `engines.node` en place, a échoué
+>    lui aussi** (en moins de 40 s). Or `engines.node` est censé primer sur le
+>    réglage du projet (doc Vercel, « Version overrides in package.json »).
+>
+> **Donc : soit le réglage du projet est refusé avant même que `package.json` soit
+> lu — et seul le tableau de bord peut le corriger —, soit la cause est
+> ailleurs.** Deuxième candidate sérieuse, jamais envisagée jusqu'ici : **une
+> limite d'usage du compte Vercel** (plan Hobby dépassé → nouveaux déploiements
+> bloqués), qui expliquerait aussi une rupture tombant un 1er/2 du mois.
+>
+> ⚠️ **CONSIGNE POUR LE PROCHAIN RUN, et elle remplace celle du 02/10 :**
+> 1. **Relever l'état du dernier déploiement par l'API GitHub, en premier.** Une
+>    requête, trois secondes. Ne plus jamais passer trois jours à mesurer des
+>    octets en production pour deviner ce qu'un statut dit en clair.
+> 2. **La consigne « ne pas pousser de code pendant le blocage » est ANNULÉE.**
+>    Elle était fondée sur une crainte fausse. **Un déploiement en échec ne touche
+>    pas la production** : pousser ne peut donc rien casser en ligne, et
+>    s'interdire de pousser a seulement gelé trois jours de travail. Reprendre le
+>    cours normal des chantiers, en sachant qu'ils n'arriveront en ligne qu'après
+>    le déblocage.
+> 3. **Ce qui reste bloqué côté client est désormais précis** (et non plus « aller
+>    voir le tableau de bord ») : lire l'erreur du build à l'URL exacte, vérifier
+>    le réglage Node.js, regarder les limites du compte. Voir « Action 0 » en tête
+>    de `ACTIONS-SEO-CLIENT.md`, écrite le 05/10.
+> 4. ⚠️ **ATTENTION, POINT DE CONTINUITÉ : le travail du 05/10 n'est PAS sur
+>    `main`.** Le push vers `main` a été refusé par la couche de sécurité du
+>    runner (motif « Production Deploy »), ce qui n'était jamais arrivé aux runs
+>    précédents. Tout est poussé sur la branche
+>    **`claude/upbeat-wozniak-q9cj7x`** (commits `9880840` et suivants). **Si
+>    cette entrée de journal est absente de `main` au prochain run, c'est que la
+>    branche n'a pas été fusionnée : la chercher là-bas avant de refaire le
+>    travail.**
+
 > 🔴 **04/10/2026 — LE BLOCAGE DE DÉPLOIEMENT TIENT DEPUIS 48 HEURES. À LIRE
 > AVANT TOUT CHANTIER.** L'encadré du 02/10 ci-dessous reste valable mot pour
 > mot ; voici seulement ce que la mesure du 04/10 y ajoute.
@@ -702,6 +784,45 @@ Toutes les valeurs de la table du 15/09 sont **retrouvées au caractère près**
 (même script de mesure). Le banc d'essai local a redonné exactement les mêmes
 chiffres que la production avant le chantier : la fidélité du banc est
 re-confirmée pour la deuxième fois.
+
+### Positions mesurées — 05/10/2026
+
+**Indexation : toujours nulle. Quatre mesures, toutes reconduites à
+l'identique du 04/10.**
+
+| Requête | 05/10/2026 | Évolution vs 04/10 |
+|---|---|---|
+| `site:hcetp.com` | **0 résultat du domaine** (9 pages d'acronymes : Wikipédia HCET/HCT/HCPT, Hitkarini College, hrsa.gov, sites.bu.edu) | inchangé — opérateur toujours non honoré par ce canal, ce n'est pas une information |
+| `"hcetp.com" OR "hcebtp.com" HCE Cize` | **0 page mentionnant l'un ou l'autre domaine** | inchangé |
+| `HCE enrobé à chaud Cize Jura travaux publics hcetp` | **0 résultat du domaine**, mais **10 résultats sur l'entreprise** | inchangé sur le fond ; composition : PagesJaunes **×5** (4 pages départementales + la fiche `/pros/52322496`), Mappy, Kompass, Verif, societe.com, manageo. `nosartisansontdutalent.fr` ressort de la liste |
+| `enrobé à chaud Jura entreprise` (requête commerciale) | **HCE absent**, 9 résultats | inchangé. SFCTP tient toujours **4 URLs** sur 9 ; les 2 pages départementales PagesJaunes tiennent les 2 premières places ; entrent daniel-moquet, socorebat, un-max-de-services |
+| **code IndexNow** | **200** | inchangé (13 URLs, fichier clé servi en 200) |
+
+**Le diagnostic du 04/10 tient : zéro mention des deux domaines sur le web
+indexé, et sept fiches d'annuaire qui parlent de l'entreprise sans jamais mener
+au site.** Rien n'a bougé en 24 h, ce qui est normal : aucune action de
+découverte n'est possible depuis le dépôt, et les actions 1 à 4 attendent le
+client.
+
+⚠️ **Réserve de méthode, inchangée :** `WebSearch` est orienté marché américain
+et ne vaut pas une SERP google.fr. Le troisième relevé le rend malgré tout
+exploitable : l'index interrogé **connaît** l'entreprise sur dix pages
+françaises, donc l'absence du domaine n'est pas un biais de couverture.
+
+**Volume de texte servi en production** (`scripts/mesure-texte-servi.mjs` sur
+`https://www.hcetp.com`) : **les 13 URLs rendent exactement les mêmes valeurs
+qu'aux 30/09, 01/10, 02/10 et 04/10, au caractère près** (13 526 / 13 491 /
+8 578 / 8 156 / 7 670 / 7 012 / 6 821 / 6 356 / 5 198 / 5 080 / 4 482 / **3 783**
+/ 373). `/services/enrobe-a-chaud` à **3 783** au lieu des 11 856 attendus : le
+chantier du 02/10 n'est toujours pas en ligne, **quatrième jour**. `/llms.txt` en
+production affiche toujours « 30 septembre 2026 » quand le dépôt dit « 2 octobre
+2026 ».
+
+**Contrôle du dépôt (banc local, pas la production) :** `llms.txt` est **à
+jour et sans dérive** — les 12 routes de `src/lib/lastmod.ts` y sont toutes
+présentes, 0 occurrence de l'ancien domaine `hcebtp`. Rien à corriger. Sa date
+reste au 2 octobre : **volontairement pas touchée**, aucun contenu n'ayant changé
+aujourd'hui.
 
 ### Positions mesurées — 02/10/2026
 
@@ -1621,6 +1742,110 @@ JSON-LD, pas de `BreadcrumbList`).
 ---
 
 ## Chantiers faits
+
+### 05/10/2026 — Le blocage de déploiement avait une cause lisible depuis le runner depuis le premier jour : les builds Vercel échouent, et les statuts GitHub le disent en clair (commit `9880840`)
+
+**Chantier choisi, et pourquoi.** Ni contenu, ni données structurées, ni
+annuaires : **le blocage de déploiement**. Raison simple — depuis le 02/10, tout
+chantier de contenu produit du travail qui n'arrive pas en ligne. Les runs du
+02/10 et du 04/10 avaient conclu « la cause est hors du dépôt, elle se lit en
+trente secondes sur le tableau de bord Vercel et nulle part depuis le dépôt »,
+puis s'étaient interdit de pousser du code. **Cette conclusion était fausse, et
+c'est le vrai sujet de la journée.**
+
+**Ce qui a été fait, précisément.**
+
+1. **Interrogé les statuts de déploiement que Vercel publie sur GitHub.** Trois
+   requêtes `api.github.com`, sans jeton supplémentaire (le proxy du runner
+   injecte l'authentification). Résultat immédiat : **`state: failure`** sur tous
+   les déploiements depuis le 02/10, avec le message « Deployment has failed » et
+   l'identifiant de déploiement Vercel. **C'est la mesure que trois runs ont
+   cherchée sans la trouver.**
+2. **Daté la rupture au quart d'heure.** Dernier succès `84dddba` 01/10 07:12
+   UTC ; premier échec `0b4d0cd` 02/10 07:24 UTC ; **16 déploiements en échec
+   d'affilée** depuis (production et preview confondues).
+3. **Écarté les trois hypothèses du 02/10, par la mesure et non par raisonnement.**
+   L'intégration GitHub → Vercel **fonctionne** (un déploiement créé en moins de
+   20 s à chaque push, vérifié en direct sur le push du jour : `pending` à
+   t+20 s). Donc ni intégration déconnectée, ni file d'attente, ni cache.
+4. **Innocenté le dépôt par quatre installations et trois contrôles.**
+   `npm install`, `npm ci`, `bun install`, `bun install --frozen-lockfile` → tous
+   en 0 ; puis `npx tsc --noEmit`, `npm run build`, `npm run check:fige` → tous en
+   0. **L'échec ne se reproduit pas hors de Vercel.**
+5. **Trouvé la cause la plus probable dans la veille du lundi, pas dans le code.**
+   Vercel a **désactivé Node.js 20 le 01/10/2026** — la date de la rupture, à
+   quelques heures près. Citation et portée exacte sous « Techniques apprises ».
+6. **Tenté la correction depuis le dépôt : `"engines": { "node": "22.x" }` dans
+   `package.json`.** C'est le champ que Vercel lit pour primer sur le réglage du
+   tableau de bord. **Le déploiement de preview a échoué quand même** (moins de
+   40 s après le push). **La piste n'est donc pas confirmée, et c'est écrit comme
+   tel partout** — y compris dans le message de commit, réécrit après la mesure
+   pour ne pas laisser une causalité non prouvée dans l'historique.
+7. **Réécrit l'instruction client.** `ACTIONS-SEO-CLIENT.md` ouvre maintenant sur
+   une **« Action 0 »** qui passe avant les quatre autres : l'URL exacte du
+   déploiement en échec à ouvrir, la commande `npx vercel inspect … --logs`, le
+   chemin exact du réglage Node.js dans l'interface, et la piste « limite d'usage
+   du compte Hobby » si la version de Node est déjà bonne. **On passe de « va
+   voir ton tableau de bord » à trois gestes datés et sourcés.**
+
+**Les acquis réels de la journée.**
+
+- **Un déploiement en échec ne touche pas la production.** C'est ce qui a rendu
+  le blocage invisible pendant trois jours — « la production n'est pas cassée,
+  elle est vieille » — et c'est aussi ce qui rend la consigne « ne pas pousser
+  pendant le blocage » inutile et coûteuse. **Pousser ne peut rien casser en
+  ligne. Cette consigne est annulée.**
+- **Le canal de diagnostic manquait, pas l'accès.** Le runner voit l'état des
+  builds Vercel. Trois jours de mesures d'octets en production ont servi à
+  deviner ce qu'une requête disait en clair.
+- **`npm ci` marche sur ce dépôt.** Le run du 02/10 avait noté le contraire.
+  Mesuré en 0 aujourd'hui, deux fois. Voir « Erreurs commises et corrigées ».
+
+**Ce que j'ai décidé de NE PAS faire, et pourquoi.**
+
+1. **Ne pas pousser de chantier de contenu aujourd'hui** — mais pour une raison
+   neuve, pas celle du 02/10 : la journée entière est passée sur le diagnostic du
+   blocage, qui conditionne la valeur de tout le reste. **Le prochain run peut et
+   doit reprendre les chantiers de contenu**, blocage résolu ou non.
+2. **Ne pas déclarer `24.x` dans `engines`**, alors que c'est le défaut Vercel et
+   la cible de long terme. Le build de cet arbre n'est vérifié ici que sous
+   Node 22.22 ; déclarer une version non testée pendant qu'on cherche la cause
+   d'un échec de build ajouterait une variable. **À faire après essai.**
+3. **Ne pas toucher à la date de `llms.txt` ni aux `lastmod`.** Aucun contenu n'a
+   changé : les dater d'aujourd'hui serait une fausse mise à jour.
+4. **Ne pas ajouter PagesJaunes aux `sameAs`** (chantier en attente depuis le
+   04/10). Ce n'est plus interdit par la consigne annulée, mais ça reste un
+   chantier de contenu, et la journée était prise. **Il est petit, fondé et prêt :
+   c'est le premier à prendre demain.**
+5. **Ne pas insister pour pousser sur `main`** après le refus de la couche de
+   sécurité du runner. Voir ci-dessous.
+6. **Ne pas pousser le `package-lock.json` régénéré.** `npm install` l'a réécrit
+   au passage (**793 insertions**, résolution de la désynchronisation du 11/09 et
+   ajout de variantes optionnelles de `sharp`). **Écarté volontairement :**
+   modifier l'arbre de dépendances que Vercel installe, au milieu d'une enquête
+   sur un échec de build, c'est ajouter la variable qu'on cherche à isoler. Le
+   fichier a été remis à l'identique (`git checkout --`). `bun.lockb`, lui, n'a
+   jamais été touché — et c'est bien avec le `bun.lockb` d'origine que le build a
+   été vérifié après ajout d'`engines`. **Resynchroniser le lockfile npm est un
+   chantier en soi, à faire quand les déploiements remarchent.**
+
+**Ce qui reste.**
+
+- 🔴 **Le push vers `main` a été REFUSÉ** par le classifieur du runner, motif
+  « Production Deploy » — situation nouvelle, les 25 runs précédents poussaient
+  `HEAD:main` sans obstacle. **Tout le travail du 05/10 est sur la branche
+  `claude/upbeat-wozniak-q9cj7x`.** Conséquence pratique : **le déploiement ne
+  peut de toute façon pas repartir aujourd'hui** (il part de `main`), mais surtout
+  **cette entrée de journal n'est pas sur `main`** — donc invisible au prochain
+  run s'il clone `main`. C'est noté dans l'encadré rouge en tête du fichier, et le
+  client en est averti.
+- **La cause exacte de l'échec de build**, qui demande le journal de build : lisible
+  seulement avec le compte propriétaire. Deux candidates, par ordre : réglage
+  Node.js du projet, limite d'usage du compte.
+- `/realisations/chantier-en-cours` sert **373 caractères** et reste de loin la
+  page la plus maigre du site. Candidat de contenu évident pour demain.
+- `verif.com` reste la seule fiche d'annuaire non lue (403 au `curl` **et** à
+  `WebFetch`).
 
 ### 04/10/2026 — La fiche PagesJaunes enfin lue : le lien manquant est constaté et non plus supposé, et la graphie de l'adresse se tranche à trois sources contre une
 
@@ -3971,6 +4196,29 @@ Lun-Ven 8h-18h / Sam 8h-12h, Mappy Lun-Sam 7h-19h) signalés comme incohérence 
 Par ordre de priorité. **Alterner les angles, ne pas refaire le même deux jours
 de suite.**
 
+> ⚠️ **MISE À JOUR DU 05/10/2026 — la condition « dès que le déploiement repart »
+> qui ouvre le chantier ci-dessous est LEVÉE.** Elle supposait qu'il fallait
+> éviter de pousser pendant le blocage ; c'était faux (un déploiement en échec ne
+> touche pas la production). **Le chantier PagesJaunes se fait au prochain run,
+> blocage résolu ou non** — il sera simplement en ligne plus tard. Deux réserves
+> réelles, elles : **(a)** le push vers `main` a été refusé au runner le 05/10
+> (motif « Production Deploy »), donc vérifier d'abord si `main` accepte un push,
+> sinon pousser sur la branche de session et le signaler ; **(b)** la
+> vérification en ligne du résultat restera impossible tant que les builds
+> échouent — contrôler au banc d'essai local (`npm run build` + `verif-faq.mjs`).
+>
+> **Autres chantiers posés le 05/10, par ordre :**
+> 1. **`/realisations/chantier-en-cours` — 373 caractères servis, de loin la page
+>    la plus maigre du site.** Candidat de contenu le plus évident, et le filon
+>    « page maigre » n'est donc pas épuisé contrairement à ce que disait le 29/09.
+> 2. **Maillage interne des six pages `/services/*` : elles ne servent qu'un seul
+>    lien interne chacune** (mesuré le 02/10, re-confirmé le 05/10 : colonne
+>    `liensR` à 0 sur les six, contre 4 sur l'accueil et les `/realisations/*`).
+>    Chantier identifié le 02/10 et jamais fait.
+> 3. **Passer `engines.node` de `22.x` à `24.x`** (défaut Vercel, cible de long
+>    terme), **après avoir essayé le build sous Node 24** — pas avant, et pas
+>    pendant qu'on cherche la cause d'un échec de build.
+
 > 🆕 **PREMIER CHANTIER À PRENDRE DÈS QUE LE DÉPLOIEMENT REPART (posé le
 > 04/10/2026) — ajouter `pagesjaunes.fr/pros/52322496` aux `sameAs`.** La fiche a
 > été lue et vérifiée le 04/10 : téléphone `03 84 52 61 48` et adresse actuelle
@@ -4876,6 +5124,51 @@ de suite.**
 
 ## Erreurs commises et corrigées
 
+- 🔴 **05/10/2026 — L'ERREUR LA PLUS COÛTEUSE DU JOURNAL : avoir déclaré un
+  problème « non diagnosticable d'ici » sans avoir cherché le canal qui le
+  diagnostique.** Les runs du 02/10 et du 04/10 ont écrit, et répété en
+  majuscules, que la cause du blocage de déploiement « se lit en trente secondes
+  sur le tableau de bord Vercel **et nulle part depuis le dépôt** ». **Faux.**
+  Vercel publie l'état de chaque build sur GitHub, et le runner le lit sans jeton
+  supplémentaire. Une requête de trois secondes disait « `failure` » depuis le
+  02/10. **Coût réel : trois jours de blocage non diagnostiqué, dont deux runs
+  entiers passés à mesurer des octets en production pour deviner ce qu'un statut
+  disait en clair, et un client relancé deux fois avec une consigne vague.**
+  **Règle à en tirer, générale et pas limitée au déploiement : avant d'écrire
+  « ça ne se voit pas d'ici », énumérer les canaux qui pourraient le voir et les
+  essayer un par un. Un verdict d'impossibilité est une hypothèse, et elle se
+  teste comme les autres.**
+
+- 🔴 **05/10/2026 — La consigne « ne pas pousser de code pendant le blocage »
+  était fondée sur une crainte fausse, et elle a gelé trois jours de travail.**
+  Elle était justifiée ainsi le 02/10 puis renforcée le 04/10 : « si c'est le
+  *build* qui échoue, chaque commit supplémentaire rend le diagnostic plus
+  difficile », « le dépôt doit rester dans l'état où le blocage est apparu ».
+  **Or un déploiement en échec ne remplace pas la production** : pousser ne
+  pouvait rien casser en ligne, et n'aurait rien gêné du diagnostic, qui se fait
+  par commit (`/commits/:sha/status`) et non par état global du dépôt. Résultat :
+  le chantier du 04/10 a renoncé à une modification « petite, fondée et prête »
+  (PagesJaunes dans les `sameAs`) pour rien. **Consigne annulée le 05/10.**
+
+- **05/10/2026 — « `npm ci` ne peut pas marcher sur ce dépôt » : faux.** Noté
+  comme acquis le 02/10, à partir de la désynchronisation entre `package.json`
+  (modifié le 11/09) et `package-lock.json` (modifié le 02/09). Mesuré deux fois
+  le 05/10, dont une après ajout du champ `engines` : **`npm ci` sort en 0 et
+  installe 688 paquets.** `bun install --frozen-lockfile` aussi (0, 684 installs
+  vérifiés). **La désynchronisation existe peut-être sur le papier, mais elle
+  n'empêche aucune installation reproductible.** Ne pas rouvrir cette piste pour
+  expliquer un échec de build.
+
+- **05/10/2026 — Le piège du `git fetch` qui mentait (acquis du 27/09) s'est
+  représenté, et il peut faire croire à une divergence inexistante.** Au démarrage
+  du run, `git log origin/main` donnait `62421b1` (30/09) alors que la branche
+  locale était à `722b55a` (04/10) : lu vite, ça dit « neuf commits ne sont jamais
+  arrivés sur `main` », ce qui aurait relancé un faux diagnostic (« les runs
+  précédents poussaient sur une branche, pas sur `main` »). **La référence locale
+  `origin/main` était simplement périmée** — `git ls-remote origin refs/heads/main`
+  répondait bien `722b55a`. **Règle : pour l'état réel d'une branche distante,
+  `git ls-remote`, jamais `git log origin/<branche>`.**
+
 - **30/09/2026 — j'ai écrit des caractères d'espace invisibles dans du code, et
   seul ESLint l'a vu.** Pour formater les populations de la table, la première
   version appelait
@@ -5223,6 +5516,110 @@ de suite.**
 ---
 
 ## Techniques apprises
+
+### 05/10/2026 (lundi — veille de l'étape 5) — ⚙️ La recette qui manquait depuis trois jours : lire l'état des builds Vercel depuis le runner, 📚 Vercel a désactivé Node.js 20 le 01/10/2026, et 📚 les AI Overviews sont déployés en France depuis septembre 2026
+
+⚙️ **RECETTE — Voir l'état des déploiements Vercel sans compte Vercel.** À
+utiliser **en premier** dès qu'un doute existe sur la mise en ligne. Vercel écrit
+chaque déploiement et chaque statut dans l'API GitHub du dépôt ; le proxy du
+runner injecte l'authentification, donc un `curl` nu suffit :
+
+```bash
+R=stupidguywearingtn/art-du-jardin-web
+# 1. État du dernier commit : success / failure / pending, + l'URL du build
+curl -sS -H "Accept: application/vnd.github+json" \
+  "https://api.github.com/repos/$R/commits/$(git rev-parse HEAD)/status"
+# 2. Historique des déploiements (sha, environnement Production/Preview, date)
+curl -sS -H "Accept: application/vnd.github+json" \
+  "https://api.github.com/repos/$R/deployments?per_page=30"
+# 3. Statut final d'un déploiement donné (+ target_url, log_url)
+curl -sS -H "Accept: application/vnd.github+json" \
+  "https://api.github.com/repos/$R/deployments/<id>/statuses"
+```
+
+Ce que ça donne et ne donne pas :
+- ✅ **l'état** (`success`/`failure`/`pending`), **la date au quart d'heure**,
+  **l'identifiant de déploiement Vercel** (`dpl_…`) et **l'URL du tableau de
+  bord** ;
+- ✅ de quoi **dater une rupture au commit près** : comparer le dernier `success`
+  et le premier `failure` encadre la cause sans toucher au code ;
+- ✅ de quoi **distinguer « rien ne part » de « tout échoue »**, ce qui était
+  exactement la question ouverte du 02/10 ;
+- ❌ **pas le journal de build** : le contenu de l'erreur demande le compte
+  propriétaire. L'URL de déploiement en échec sert une page Vercel « Deployment
+  has failed » sans détail (vérifié : `initialReadyState: ERROR`, aucun message).
+- ⚠️ **Les délais affichés ne mesurent pas la durée du build** : Vercel poste le
+  déploiement et son statut final au même instant (écart mesuré 0-1 s sur 24
+  déploiements, succès compris). **Pour chronométrer un build, interroger
+  `/commits/:sha/status` en boucle après le push** — c'est ainsi qu'a été mesuré
+  `pending` à t+20 s puis `failure` à t+40 s le 05/10.
+- 🔎 Deux canaux voisins **vides** sur ce dépôt, ne pas y perdre de temps :
+  `/commits/:sha/check-runs` (0) et `/commits/:sha/comments` (0). Vercel passe
+  uniquement par les *statuses* et les *deployments*.
+
+📚 **VERCEL A DÉSACTIVÉ NODE.JS 20 LE 01/10/2026 — applicable ici, et c'est la
+piste principale du blocage.** Verbatim du
+[changelog Vercel « Node.js 20 is being deprecated »](https://vercel.com/changelog/node-js-20-is-being-deprecated)
+(lu le 05/10/2026) : « **On October 1, 2026, Node.js 20 will be disabled in
+Project Settings** […] **Existing projects using 20 as the version for Functions
+will display an error when a new deployment is created** ». Et : « existing
+deployments with Serverless Functions will not be affected » — **ce qui explique
+qu'un site non redéployé continue de tourner normalement**.
+- Versions disponibles aujourd'hui : **24.x (défaut), 22.x, 20.x** — la doc
+  `/docs/functions/runtimes/node-js/node-js-versions` liste encore 20.x, mais
+  elle est datée du 27/02/2026 : **sur ce point précis, c'est le changelog qui
+  fait foi, pas la page de référence.**
+- **Comment imposer une version depuis le dépôt** (verbatim doc Vercel, « Version
+  overrides in `package.json` ») : « You can define the major Node.js version in
+  the `engines#node` section of the `package.json` **to override the one you have
+  selected in the Project Settings** ». Syntaxe acceptée : `22.x`, `^22.0.0`.
+  ⚠️ **Attention au piège : une plage large remonte la version la plus récente** —
+  la table de la doc donne `>=20.0.0` → **24.x**. Pour une version déterministe,
+  écrire `22.x` et rien d'autre.
+- ⚠️ **Ce qui a été mesuré ici et qui tempère tout ce qui précède : ajouter
+  `engines.node` n'a PAS débloqué le déploiement** (preview du 05/10 en échec en
+  moins de 40 s), et **le déploiement du 01/10 à 07:12 a réussi** alors que la
+  désactivation prenait effet à 00:00 ce jour-là. Donc soit le réglage du projet
+  est refusé en amont de la lecture de `package.json`, soit la cause est
+  ailleurs. **Ne pas présenter cette piste comme établie.**
+- 🔧 **Où vérifier la version réellement demandée par le build, et c'est propre
+  aux presets Nitro/Vercel** : après `npm run build`, le fichier
+  `.vercel/output/functions/__server.func/.vc-config.json` porte un champ
+  `runtime`. Ici il vaut **`nodejs22.x`** (vérifié le 05/10). **C'est le build qui
+  déclare le runtime à Vercel** : si un jour ce champ sort à `nodejs20.x`, le
+  déploiement sera refusé quoi que dise `engines`. À regarder avant de pousser un
+  changement de version de Node ou de Nitro.
+
+📚 **LES AI OVERVIEWS SONT DÉPLOYÉS EN FRANCE DEPUIS SEPTEMBRE 2026 — et ça
+change la hiérarchie des chantiers hors-site.** Déploiement en France « au plus
+tard le 23 septembre 2026 », et les AI Overviews apparaissent sur une large part
+des requêtes à intention locale. Deux conséquences **applicables ici** :
+1. **Les annuaires que l'IA cite pèsent plus qu'avant**, parce que la réponse est
+   construite en croisant plusieurs sources et le Knowledge Graph plutôt qu'en
+   listant des liens. **PagesJaunes tient les deux premières places de la requête
+   commerciale mesurée depuis le 02/10** : la fiche `/pros/52322496`, vérifiée
+   propre le 04/10 (bon téléphone, adresse actuelle, mais **aucun lien vers le
+   site**), est donc le point d'entrée le plus rentable du dossier. **Ça confirme
+   l'ordre des actions client, ça ne le change pas.**
+2. **Le classement ne suffit plus** : sur une requête où Google affiche une
+   réponse IA, une position donnée rapporte nettement moins de clics qu'avant.
+   **L'objectif reste « être la source citée », ce que fait déjà le travail de
+   fond (réponse directe en tête de H2, chiffres sourcés, `FAQPage` aligné sur le
+   visible). Rien à changer dans la méthode.**
+⚠️ **Réserve sur la qualité des sources :** cette veille-ci n'a ramené que des
+blogs d'agences, pas de source primaire Google. **Les deux chiffres couramment
+cités (déploiement France, part des requêtes locales concernées) sont à traiter
+comme des ordres de grandeur, pas comme des mesures.** Ne pas les recopier dans
+une page du site.
+
+📚 **GOOGLE NE RECULE PAS SUR LES DONNÉES STRUCTURÉES EN 2026 — vérifié, rien à
+faire.** Les pages de référence `LocalBusiness`, `Organization` et la galerie des
+types supportés sont toujours en place sur developers.google.com, et la mise à
+jour de septembre 2026 **ajoute** du support de requêtes « local business » aux
+unités agrégateur/fournisseur. **Le site est indemne : ses types en place
+(`LocalBusiness`, `Organization`, `Service`, `FAQPage`, `BreadcrumbList`) sont
+tous encore documentés.** Point à ne pas rouvrir avant longtemps — c'est la
+deuxième veille consécutive (avec celle du 28/09) qui conclut pareil.
 
 ### 04/10/2026 — ⚙️ Un HTTP 403 au `curl` ne veut pas dire qu'une page est illisible : `WebFetch` passe là où le runner est refusé
 

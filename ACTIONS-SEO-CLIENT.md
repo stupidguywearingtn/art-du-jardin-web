@@ -1,5 +1,71 @@
 # SEO — les 4 actions que seul le client peut faire
 
+> 🚨 **05/10/2026 — ACTION 0, ET ELLE PASSE AVANT LES QUATRE AUTRES : LES
+> DÉPLOIEMENTS DU SITE ÉCHOUENT DEPUIS LE 02/10. 30 SECONDES SUFFISENT À LIRE
+> POURQUOI.**
+>
+> **Ce qui se passe.** Depuis le 2 octobre, chaque modification du site part bien
+> vers Vercel, mais **le déploiement échoue**. Le site en ligne n'est pas cassé :
+> il est simplement resté dans sa version du 30 septembre, parce qu'un
+> déploiement en échec ne remplace jamais le précédent. C'est pour ça que rien ne
+> se voyait. **Trois jours de travail sont dans le dépôt et nulle part ailleurs**,
+> dont la refonte de la page `/services/enrobe-a-chaud` (3 783 → 11 856
+> caractères, soit la page du métier principal qui sort de la maigreur).
+>
+> **Ce qui est vérifié, et n'est donc plus à chercher :**
+> - l'intégration GitHub → Vercel **fonctionne** : chaque push crée bien un
+>   déploiement, en moins de 20 secondes ;
+> - ce n'est **ni un cache**, ni une file d'attente, ni un déploiement lent ;
+> - **le code du site n'est pas en cause** : sur la version actuelle du dépôt,
+>   les quatre façons d'installer les dépendances (`npm install`, `npm ci`,
+>   `bun install`, `bun install --frozen-lockfile`) passent, puis la compilation
+>   TypeScript, le build de production et le contrôle du contenu figé sortent tous
+>   sans erreur. L'échec ne se reproduit pas hors de Vercel.
+> - dernier déploiement réussi : **1er octobre à 07:12 UTC**. Premier échec :
+>   **2 octobre à 07:24 UTC**.
+>
+> **CE QU'IL FAUT FAIRE — par ordre, ça prend deux minutes.**
+>
+> **1. Ouvrir le déploiement en échec et lire l'erreur.** C'est la seule chose qui
+> manque pour trancher, et elle n'est lisible qu'avec le compte propriétaire :
+>
+> > https://vercel.com/stupidguywearingtns-projects/art-du-jardin-web/DhdY9WfYyCUEquvQjPCZhmNga43V
+>
+> La page affiche le journal de build. **Le message d'erreur en rouge, recopié tel
+> quel, suffit à régler le reste.** (Équivalent en ligne de commande, si besoin :
+> `npx vercel inspect dpl_DhdY9WfYyCUEquvQjPCZhmNga43V --logs`.)
+>
+> **2. Vérifier la version de Node.js du projet.** C'est la cause la plus
+> probable. **Vercel a désactivé Node.js 20 le 1er octobre 2026** : « On October
+> 1, 2026, Node.js 20 will be disabled in Project Settings [...] Existing projects
+> using 20 as the version for Functions will display an error when a new
+> deployment is created »
+> ([changelog Vercel](https://vercel.com/changelog/node-js-20-is-being-deprecated)).
+> La date correspond presque exactement à la rupture.
+>
+> > Vercel → projet `art-du-jardin-web` → **Settings** → **Build and Deployment**
+> > → section **Node.js Version** → si c'est **20.x**, passer à **22.x**, puis
+> > **Redeploy** le dernier déploiement.
+>
+> ⚠️ **À savoir : j'ai déjà tenté de corriger ça depuis le dépôt et ça n'a pas
+> suffi.** Le fichier `package.json` déclare maintenant `"engines": { "node":
+> "22.x" }`, ce qui est censé primer sur le réglage du tableau de bord — le
+> déploiement de test du 05/10 a quand même échoué. Donc : soit le réglage du
+> projet est refusé avant même que `package.json` soit lu (et seul le tableau de
+> bord peut le corriger), soit la cause est le point 3.
+>
+> **3. Si la version de Node est déjà 22.x ou 24.x : regarder les limites du
+> compte.** Un compte Vercel en plan gratuit (Hobby) qui dépasse son usage inclus
+> **bloque les nouveaux déploiements**. La bannière éventuelle en haut du tableau
+> de bord, ou **Settings → Billing / Usage**, le dit en une ligne. Une rupture qui
+> tombe le 1er ou le 2 d'un mois s'explique souvent comme ça.
+>
+> **Tant que ce point n'est pas réglé, aucune modification du site ne peut
+> arriver en ligne** — y compris les corrections d'indexation des actions 1 à 4
+> ci-dessous. C'est l'action la plus rentable de la liste, et de loin.
+
+---
+
 > 🔴 **LE DOMAINE A CHANGÉ LE 30/09/2026 — relire ce fichier avant d'agir.**
 > Le site est désormais servi sur **`https://www.hcetp.com`** (sans le `b`).
 > L'ancien **`hcebtp.com`** n'est pas mort : vérifié le 01/10/2026, `hcebtp.com`,

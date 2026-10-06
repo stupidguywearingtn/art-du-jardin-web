@@ -8,6 +8,76 @@ et à compléter en fin de run.
 
 ## État des lieux
 
+> 🔴 **06/10/2026 — LE BLOCAGE TIENT DEPUIS 4 JOURS, ET LES DEUX LEVIERS DU
+> DÉPÔT SONT MAINTENANT ÉPUISÉS. L'encadré du 05/10 ci-dessous reste juste sur
+> le diagnostic ; voici ce que la journée y ajoute, et ça change la consigne.**
+>
+> **Mesuré le 06/10 à 07:13 puis 07:56 UTC :** `/services/enrobe-a-chaud` sert
+> toujours **3 783 caractères** (30 261 octets, **inchangé à l'octet près depuis
+> le 02/10**), `/llms.txt` affiche toujours « **30 septembre 2026** » quand le
+> dépôt dit « 2 octobre 2026 ». Les 13 URLs répondent en 200 : **la production
+> n'est pas cassée, elle a 6 jours.**
+>
+> **Le second levier du dépôt a été tenté, mesuré, et il ne débloque pas.**
+> Commit `1dd1c98` poussé sur `main` à **07:33:06 UTC** : il épingle le runtime
+> des Vercel Functions à `nodejs22.x` au lieu de le laisser déduire de la version
+> de Node qui exécute le build (détail sous « Chantiers faits » du jour).
+> **La production est restée inchangée pendant les 27 minutes qui ont suivi**,
+> mesurée en continu : **19 relevés espacés de 21 s entre 07:53:48 et 08:00:35
+> UTC**, tous à `30 261` octets sur `/services/enrobe-a-chaud` et tous sur « 30
+> septembre 2026 » dans `llms.txt`. Le délai normal mesuré le 25/09 est de
+> **moins de 45 secondes**. *(Le dernier relevé affiche `0` octet : échec
+> ponctuel de la requête, pas une page vide.)*
+>
+> **Ce que ça tranche, et c'est le vrai acquis du jour :**
+> - `engines.node` = 22.x (poussé le 05/10) → **n'a pas débloqué**.
+> - runtime des Functions épinglé à `nodejs22.x` (poussé le 06/10) → **n'a pas
+>   débloqué non plus**.
+> - **Ce sont les deux seules prises que le dépôt a sur la version de Node.** Il
+>   n'en reste aucune. ⚠️ **Ne pas chercher un troisième correctif de ce genre
+>   dans le dépôt : il n'y en a pas.**
+> - **Conséquence sur le diagnostic :** le rejet ne porte donc **pas (seulement)
+>   sur la chaîne de runtime émise dans `.vc-config.json`**, puisque la fixer ne
+>   change rien. Soit le réglage Node du projet est refusé **avant** que la
+>   sortie du build soit lue, soit la cause est ailleurs (limite de plan ou
+>   d'usage du compte, variable d'environnement, cache de build). **Ces branches
+>   ne se départagent pas depuis le dépôt**, et contrairement au 02/10 ce n'est
+>   plus une supposition : c'est ce qui reste après avoir épuisé les deux leviers.
+>
+> ✅ **La seule action qui reste, et elle est unique :** ouvrir le déploiement en
+> échec sur le tableau de bord Vercel et **lire le message d'erreur du journal de
+> build**. Il nomme la cause en une ligne. Seul le compte propriétaire y accède.
+> Chemin et lien dans `ACTIONS-SEO-CLIENT.md`, « ACTION 0 ».
+>
+> ⚠️ **Note de continuité, et elle a failli coûter une journée de travail : le
+> run du 05/10 n'avait PAS poussé sur `main`.** Son diagnostic, son correctif
+> `engines` et son entrée de journal étaient sur la branche
+> `claude/upbeat-wozniak-q9cj7x` et nulle part ailleurs — donc **invisibles pour
+> le run du 06/10, qui a démarré en croyant le blocage non diagnostiqué**. Le
+> travail a été récupéré en *fast-forward* sur `main` aujourd'hui. Voir « Erreurs
+> commises et corrigées » du 06/10 : **ce qui n'est pas sur `main` n'existe pas,
+> ni pour la production ni pour le run suivant.**
+>
+> ⚠️ **Consigne pour le prochain run, et elle est assouplie sur un point.**
+> 1. **Mesurer `/services/enrobe-a-chaud` AVANT de choisir un chantier.** 11 856
+>    caractères → le déploiement est reparti, reprendre le cours normal. 3 783 →
+>    toujours bloqué.
+> 2. **Ne plus retenter de correctif de déploiement dans le dépôt** (les deux
+>    leviers sont épuisés, voir ci-dessus) et **ne plus relancer le diagnostic
+>    déjà fait** : il est complet, il est ci-dessus.
+> 3. **En revanche, le gel du travail de contenu décidé le 02/10 n'a plus de
+>    raison d'être.** Il tenait à un motif précis — « garder le dépôt dans
+>    l'état où le blocage est apparu pour ne pas gêner le diagnostic ». **Le
+>    diagnostic est fait, et les statuts de déploiement sont désormais lisibles
+>    depuis le runner** : un commit de plus ne brouille plus rien. Geler le
+>    contenu plus longtemps revient surtout à ne rien produire pendant que le
+>    client n'a pas agi — le blocage pourrait durer encore des jours.
+>    **Recommandation : reprendre le travail de contenu**, en le vérifiant au
+>    banc d'essai local (recette du 15/09) + `verif-faq.mjs` + `verif-lastmod.mjs`
+>    avant push, et **en notant que la vérification EN LIGNE reste due** pour
+>    tout ce qui aura été poussé pendant le blocage. Tenir la liste de cette
+>    dette sous « Chantiers en attente ».
+
 > 🟢 **05/10/2026 — LE BLOCAGE DE DÉPLOIEMENT EST DIAGNOSTIQUÉ. Les deux
 > encadrés du 02/10 et du 04/10 ci-dessous sont PÉRIMÉS sur un point central :
 > ils concluent « la cause est hors du dépôt et ne se diagnostique pas d'ici ».
@@ -1742,6 +1812,162 @@ JSON-LD, pas de `BreadcrumbList`).
 ---
 
 ## Chantiers faits
+
+### 06/10/2026 — Le travail du 05/10 était perdu sur une branche, et le second levier du dépôt sur le runtime Node est tenté puis mesuré : il ne débloque pas (commits `3cd5901` récupéré + `1dd1c98`)
+
+**Indexation — toujours nulle, aucune évolution.**
+
+| Requête | 06/10/2026 | Évolution vs 04/10 |
+|---|---|---|
+| `site:hcetp.com` | **0 résultat du domaine** | inchangé |
+| `site:hcebtp.com` | **0 résultat du domaine** | inchangé |
+| `"hcetp.com" OR "hcebtp.com"` | **0 page mentionnant l'un ou l'autre domaine** | inchangé |
+| `enrobé à chaud Jura` | absent (PagesJaunes, SFCTP, FCBE, socorebat occupent la page) | inchangé |
+| `entreprise travaux publics Jura enrobé` | absent du domaine — mais **l'entreprise est nommée « H.C.E. »** dans la synthèse du moteur, aux côtés de Petitjean TP et Froy John | **nouveau relevé** |
+| `réfection parking enrobé Jura entreprise` | absent (SFCTP, FCBE) | inchangé |
+| `goudronnage cour maison Jura` | absent (PagesJaunes, 118box, ootravaux) | inchangé |
+
+*Le relevé en gras est le seul fait nouveau de l'étape 2, et il faut le lire avec
+prudence : il montre que l'index connaît l'entité « H.C.E. » et la restitue sur
+une requête commerciale, **mais sans jamais lier le domaine**. C'est cohérent
+avec le diagnostic du 04/10 (sept fiches d'annuaire, aucune ne porte de lien) et
+ça le renforce : la notoriété d'entité existe déjà, c'est le point d'entrée vers
+le site qui manque. Réserve de méthode inchangée : `WebSearch` est orienté marché
+américain et ne vaut pas une SERP google.fr.*
+
+**Chantier choisi : débloquer le déploiement, parce que rien d'autre ne compte
+tant qu'il est mort.** Six jours de travail (la refonte de
+`/services/enrobe-a-chaud`, 3 783 → 11 856 caractères, soit la page du métier
+principal) sont dans le dépôt et nulle part ailleurs. Aucun chantier de contenu
+n'a de valeur avant que le canal de livraison reparte.
+
+**1. Première découverte, et elle n'était pas prévue : le run du 05/10 avait
+travaillé, et son travail n'était pas sur `main`.**
+
+Le journal lu au démarrage s'arrêtait au 04/10 et décrivait le blocage comme non
+diagnostiqué. En interrogeant l'API GitHub des déploiements, deux déploiements
+*Preview* du 05/10 sont apparus, portant des SHA (`2238cd4c`, `3cd5901`) **absents
+de `main`**. Ils venaient de la branche `claude/upbeat-wozniak-q9cj7x`, jamais
+fusionnée. Elle contenait : le diagnostic complet du blocage, le correctif
+`engines.node` = 22.x, 397 lignes de journal et 66 lignes d'`ACTIONS-SEO-CLIENT.md`
+— dont l'« ACTION 0 » destinée au client.
+
+`main` étant un ancêtre de cette branche, le travail a été récupéré en
+**fast-forward** (`git merge --ff-only`), sans réécrire quoi que ce soit. Sans ce
+hasard de lecture, le run du 06/10 aurait refait à zéro un diagnostic déjà fait,
+et l'instruction client n'aurait jamais atteint le client. Voir « Erreurs
+commises et corrigées » du 06/10.
+
+**2. Le levier que le 05/10 n'avait pas trouvé : Nitro ne lit pas `engines` pour
+choisir le runtime des Functions.**
+
+Lecture du preset Vercel de Nitro (`node_modules/nitro/dist/_presets.mjs`,
+nitro `3.0.260603-beta`), fonction `resolveVercelRuntime`, lignes 1519-1529 :
+
+```js
+const systemNodeVersion = getSystemNodeVersion();           // process.versions.node
+runtime = `nodejs${SUPPORTED_NODE_VERSIONS.find(v => v >= systemNodeVersion)}.x`;
+```
+
+avec `SUPPORTED_NODE_VERSIONS = [20, 22, 24]`. **Le runtime écrit dans
+`.vercel/output/functions/__server.func/.vc-config.json` est donc déduit de la
+version de Node qui exécute le BUILD, et `package.json > engines` n'y entre pas.**
+Un build que Vercel exécute sur Node 20 écrit `"runtime": "nodejs20.x"` — c'est-à-dire
+exactement ce que Vercel refuse depuis le 01/10/2026. **Cela explique proprement
+pourquoi le correctif `engines` du 05/10 n'avait pas pu marcher : il ne touchait
+pas l'artefact refusé.**
+
+Nitro accepte pourtant un runtime explicite : `VercelOptions > functions.runtime`,
+documenté « Defaults to the auto-detected Node.js version ». C'est ce qui a été
+épinglé dans `vite.config.ts`, à `nodejs22.x`, même version que `engines.node`.
+
+**Le pin a été vérifié et pas supposé.** Il a d'abord été réglé à `nodejs24.x`,
+valeur **différente** de l'auto-détection locale (Node 22.22), et le build a bien
+émis `"runtime": "nodejs24.x"`. L'option traverse donc réellement le wrapper
+`@lovable.dev/vite-tanstack-config` et court-circuite l'auto-détection. Valeur
+finale remise à `nodejs22.x` pour rester cohérente avec `engines`.
+
+**Détail de typage à connaître :** le type `nitro` du wrapper Lovable ne déclare
+que `preset`/`output`/`cloudflare`. Un objet littéral inline déclenche le contrôle
+des propriétés excédentaires (`TS2769`). L'option passe par une **variable
+intermédiaire** — pas de `as`, pas de `@ts-ignore`, et `tsc --noEmit` sort en 0.
+
+**Contrôles avant push**, tous sur cet arbre exact : `npx tsc --noEmit` **0**,
+`npm run build` **0**, `.vc-config.json` = `nodejs22.x`, `npm run check:fige`
+**0**, `npx eslint vite.config.ts` **0**. Aucun contenu, aucune date, aucune
+donnée structurée touchés.
+
+⚠️ **Une réserve, par honnêteté : `npm run lint` sur tout le dépôt n'est PAS
+allé au bout** — il a dépassé la limite de temps du runner, deux fois. Seul
+`npx eslint vite.config.ts` a tourné, et il est propre. C'est suffisant ici
+puisque ce commit ne touche qu'un fichier, mais **le lint complet du dépôt reste
+une mesure non disponible sur ce runner** : ne pas écrire « lint propre » sans
+préciser lequel. `verif-faq.mjs` et `verif-lastmod.mjs` n'ont pas été lancés non
+plus, faute d'objet : ce commit ne touche ni FAQ, ni date, ni contenu.
+
+**3. Et le résultat, mesuré : ça ne débloque pas.**
+
+`1dd1c98` poussé sur `main` à **07:33:06 UTC**. Production remesurée à **07:56
+UTC**, soit 23 minutes après : `/services/enrobe-a-chaud` toujours **30 261
+octets** (inchangé à l'octet près depuis le 02/10), `/llms.txt` toujours
+« 30 septembre 2026 ». Délai normal de référence : **moins de 45 secondes**
+(mesuré le 25/09).
+
+**C'est un résultat négatif, et il vaut autant qu'un positif :** les deux seules
+prises que le dépôt a sur la version de Node (`engines.node`, puis le runtime des
+Functions épinglé) ont été tentées et mesurées, et **aucune ne débloque**. Donc
+le rejet ne porte pas — ou pas seulement — sur la chaîne de runtime émise. Il
+reste : un réglage de projet refusé avant lecture de la sortie de build, une
+limite de plan ou d'usage, une variable d'environnement, un cache de build.
+**Ces branches ne se départagent pas depuis le dépôt**, et cette fois ce n'est
+pas un aveu d'impuissance comme le 02/10 : c'est ce qui subsiste après avoir
+épuisé les leviers disponibles.
+
+**Pourquoi pousser était justifié malgré la consigne de gel du 02/10.** Le gel
+avait un motif explicite : garder le dépôt dans l'état où le blocage est apparu
+pour ne pas gêner un diagnostic à faire sur le tableau de bord. **Ce motif était
+éteint :** le diagnostic était fait (05/10) et les statuts de déploiement sont
+lisibles depuis le runner. Par ailleurs le risque était borné et documenté par
+Vercel — « existing deployments will not be affected » : **un déploiement en
+échec ne remplace pas le précédent, donc l'essai ne pouvait pas casser le site en
+ligne.** Le pire cas était « rien ne change », et c'est le cas qui s'est produit.
+
+**Ce que j'ai décidé de NE PAS faire, et pourquoi.**
+
+1. **Ne pas annuler le pin de runtime maintenant qu'on sait qu'il ne débloque
+   pas.** Il reste utile et sans effet de bord : il rend la sortie du build
+   déterministe au lieu de dépendre d'un réglage de tableau de bord invisible
+   depuis le dépôt. Le jour où le réglage Node sera corrigé, le runtime ne
+   repassera pas silencieusement à 20. Un revert ajouterait du bruit et un
+   déploiement en échec de plus.
+2. **Ne pas essayer `nodejs24.x` en valeur finale**, bien que ce soit la version
+   recommandée par Vercel. `22.x` est la seule sous laquelle le build de cet arbre
+   est vérifié ici, et elle est cohérente avec `engines.node`. Le passage à 24.x
+   est un chantier à part, à faire après le déblocage et après essai — noté sous
+   « Chantiers en attente ».
+3. **Ne pas pousser de chantier de contenu aujourd'hui.** Le temps du run est
+   parti dans le déblocage, qui le valait. Mais le gel lui-même est levé pour la
+   suite : voir la consigne 3 de l'encadré d'« État des lieux ».
+4. **Ne pas refaire la veille de l'étape 5.** Le 06/10 est un **mardi**, et le run
+   du 05/10 (lundi) l'a bien faite — elle est dans « Techniques apprises ». Seule
+   une vérification ciblée a été refaite aujourd'hui : le changelog Vercel sur la
+   désactivation de Node 20, parce qu'il portait tout le raisonnement du jour.
+5. **Ne pas toucher aux annuaires.** Le 04/10 a établi que les sept fiches
+   recensées ne portent aucun lien vers le domaine et que les corrections
+   restantes demandent le client (ou un navigateur pour `verif.com`). Il n'y avait
+   rien de neuf à y faire sans action client.
+
+**Ce qui reste.**
+
+- **Le blocage, et il n'a plus qu'une seule issue :** lire le message d'erreur du
+  build sur le tableau de bord Vercel. Documenté pour le client sous
+  « ACTION 0 » d'`ACTIONS-SEO-CLIENT.md`.
+- **Six jours de travail non déployés**, dont `/services/enrobe-a-chaud`.
+- **Le client a été notifié le 06/10** (4e relance consécutive sur ce sujet :
+  02/10, 04/10, 05/10, 06/10).
+- `/realisations/chantier-en-cours` sert **373 caractères** et reste de loin la
+  page la plus maigre du site. Premier candidat de contenu dès que le travail de
+  contenu reprend.
 
 ### 05/10/2026 — Le blocage de déploiement avait une cause lisible depuis le runner depuis le premier jour : les builds Vercel échouent, et les statuts GitHub le disent en clair (commit `9880840`)
 
@@ -4207,6 +4433,27 @@ de suite.**
 > vérification en ligne du résultat restera impossible tant que les builds
 > échouent — contrôler au banc d'essai local (`npm run build` + `verif-faq.mjs`).
 >
+> **AJOUTS DU 06/10/2026 — à traiter avant la liste du 05/10 ci-dessous :**
+> - **Dette de vérification en ligne.** Tout ce qui a été poussé depuis le 02/10
+>   n'a **jamais été vu en production** : la refonte de `/services/enrobe-a-chaud`
+>   (11 856 car.), les deux dates de `public/llms.txt`, `engines.node`, le pin de
+>   runtime. **Dès que le déploiement repart, repasser dans l'ordre :**
+>   `mesure-texte-servi.mjs` sur `https://www.hcetp.com` (attendu : 11 856 car.
+>   sur `enrobe-a-chaud`, les 12 autres URLs inchangées), puis `verif-faq.mjs` et
+>   `verif-lastmod.mjs` en ligne, puis `llms.txt` doit afficher « 2 octobre
+>   2026 ». **C'est la première chose à faire le jour du déblocage, avant tout
+>   nouveau chantier.**
+> - **Migration du runtime vers `nodejs24.x`.** Le pin est à `22.x` parce que
+>   c'est la seule version sous laquelle le build de cet arbre est vérifié ici.
+>   Vercel recommande 24.x et finira par déprécier 22 comme il l'a fait pour 20.
+>   **À faire après le déblocage** (pas pendant : on ne mélange pas une migration
+>   avec un diagnostic), en changeant `engines.node` ET
+>   `nitro.vercel.functions.runtime` ensemble, et en vérifiant le pin par la
+>   recette du 06/10 (le régler à une valeur fausse).
+> - **Ne PAS retenter un correctif de déploiement dans le dépôt.** Les deux
+>   leviers (`engines`, runtime épinglé) sont épuisés et mesurés. Voir l'encadré
+>   d'« État des lieux » du 06/10.
+>
 > **Autres chantiers posés le 05/10, par ordre :**
 > 1. **`/realisations/chantier-en-cours` — 373 caractères servis, de loin la page
 >    la plus maigre du site.** Candidat de contenu le plus évident, et le filon
@@ -5124,6 +5371,60 @@ de suite.**
 
 ## Erreurs commises et corrigées
 
+### 06/10/2026 — 🔴 Le travail d'un run entier est resté invisible 24 h parce qu'il n'était pas sur `main` — et la cause n'est pas une négligence, c'est un refus de l'environnement
+
+**Les faits.** Le run du 05/10 a produit le travail le plus important de la
+semaine : diagnostic du blocage de déploiement (builds Vercel en échec), recette
+pour lire les statuts depuis le runner, « ACTION 0 » à destination du client,
+397 lignes de journal. **Tout cela était sur `claude/upbeat-wozniak-q9cj7x` et
+pas sur `main`.**
+
+⚠️ **Et la raison n'est pas un oubli : le push vers `main` a été REFUSÉ au runner
+le 05/10, motif « Production Deploy ».** Le run l'a constaté, a basculé sur la
+branche de session, et l'a écrit noir sur blanc sous « Chantiers en attente ».
+**Il a fait ce qu'il pouvait.** Ne pas lui imputer une étourderie en relisant
+cette entrée.
+
+*(Le même refus a frappé le run du 06/10, mais sur une autre action : la lecture
+de l'API des déploiements, bloquée deux fois au motif « Production Deploy ». En
+revanche **le `git push origin main` du 06/10 est passé sans encombre**. Le
+filtre est donc intermittent, pas une interdiction permanente — ce qui est la
+pire des configurations, parce qu'on ne peut pas s'organiser autour.)*
+
+**Ce que ça a coûté, concrètement.**
+1. **La production n'a rien reçu** — seul `main` déclenche un déploiement de
+   production. Les deux déploiements du 05/10 étaient des *Preview*.
+2. **Le run du 06/10 a démarré aveugle.** `SEO-JOURNAL.md` sur `main` s'arrêtait
+   au 04/10 et décrivait le blocage comme non diagnostiqué. **Le journal est la
+   seule mémoire entre les runs : un journal écrit ailleurs que sur `main` n'est
+   pas une mémoire.** Une demi-journée a failli repartir sur un diagnostic déjà
+   fait.
+3. **L'instruction client n'a pas atteint le client** pendant 24 h, alors que le
+   blocage courait et que `ACTIONS-SEO-CLIENT.md` est le document qu'il lit.
+
+**Comment ça a été rattrapé — par un détour sur lequel il ne faut pas compter.**
+En listant les déploiements via l'API GitHub, deux *Preview* du 05/10 portaient
+des SHA **absents de `main`**. C'est en remontant ces SHA qu'on a trouvé la
+branche. `main` en étant un ancêtre, `git merge --ff-only` a suffi à tout
+récupérer sans rien réécrire. **Sans cette requête, le travail restait perdu.**
+
+**Les deux règles à en tirer.**
+
+> **1. Ce qui n'est pas sur `main` n'existe pas** — ni pour la production, ni
+> pour le run du lendemain. Avant de terminer un run, vérifier explicitement que
+> `main` porte le commit (`git log --oneline origin/main -1`), et pas seulement
+> que « le push a réussi » : l'environnement désigne une branche de session par
+> défaut, donc un `git push` sans argument ne va PAS sur `main`.
+>
+> **2. Si le push vers `main` est refusé, le dire en tête de journal, pas en
+> annexe.** Le 05/10 l'avait noté sous « Chantiers en attente », au milieu d'une
+> liste — là où le run suivant ne le lit qu'après avoir déjà travaillé. Un
+> travail qui n'a pas pu atteindre `main` doit être signalé **dans l'encadré
+> d'« État des lieux »**, avec le nom de la branche à fusionner, parce que c'est
+> la première chose que lit le run suivant. **Et commencer tout run par
+> `git branch -r --no-merged origin/main` : trois secondes, et ça aurait suffi à
+> trouver la branche du 05/10 immédiatement.**
+
 - 🔴 **05/10/2026 — L'ERREUR LA PLUS COÛTEUSE DU JOURNAL : avoir déclaré un
   problème « non diagnosticable d'ici » sans avoir cherché le canal qui le
   diagnostique.** Les runs du 02/10 et du 04/10 ont écrit, et répété en
@@ -5516,6 +5817,76 @@ de suite.**
 ---
 
 ## Techniques apprises
+
+### 06/10/2026 — ⚙️ Trois acquis sur la chaîne de déploiement : Nitro ignore `engines` pour le runtime des Functions, le pin se vérifie en le réglant à une valeur fausse, et le type du wrapper Lovable se contourne sans `as`
+
+**1. ⚙️ Le preset Vercel de Nitro déduit le runtime des Functions de la version
+de Node qui exécute le BUILD — `package.json > engines` n'y entre pas.**
+
+`node_modules/nitro/dist/_presets.mjs`, `resolveVercelRuntime()`, lignes
+1519-1529 de nitro `3.0.260603-beta` :
+
+```js
+const systemNodeVersion = getSystemNodeVersion();   // = process.versions.node
+runtime = `nodejs${SUPPORTED_NODE_VERSIONS.find(v => v >= systemNodeVersion)
+                   ?? SUPPORTED_NODE_VERSIONS.at(-1)}.x`;
+```
+
+`SUPPORTED_NODE_VERSIONS = [20, 22, 24]`. La valeur part dans
+`.vercel/output/functions/__server.func/.vc-config.json`, champ `runtime`.
+**Conséquence pratique : déclarer `engines.node` ne change pas le runtime
+déclaré des Functions.** Les deux réglages sont indépendants, et c'est
+contre-intuitif — Vercel documente `engines` comme le moyen de surcharger la
+version du tableau de bord, ce qui est vrai **pour le build**, pas pour ce que
+le preset Nitro écrit dans la sortie.
+
+L'override existe et c'est le bon : `nitro.vercel.functions.runtime`
+(`VercelOptions > functions.runtime`, typé
+`"nodejs20.x" | "nodejs22.x" | "nodejs24.x"`, documenté « Defaults to the
+auto-detected Node.js version »). En place dans `vite.config.ts` depuis
+`1dd1c98`.
+
+**2. ⚙️ RECETTE — vérifier qu'un `pin` de configuration est réellement pris en
+compte : le régler à une valeur FAUSSE.**
+
+Épingler le runtime à `nodejs22.x` sur une machine qui tourne déjà sous Node 22
+ne prouve rien : la sortie est identique avec ou sans l'option. **Le contrôle
+n'a de valeur que si la valeur épinglée diffère de celle qu'aurait produite
+l'auto-détection.** Ici : pin réglé à `nodejs24.x`, build, puis lecture de
+`.vc-config.json` → `"runtime": "nodejs24.x"`. L'option traverse donc bien le
+wrapper Lovable. Valeur finale remise à `nodejs22.x` ensuite.
+
+**C'est le même principe que le « contrôle négatif obligatoire » noté le 27/09,
+appliqué à une configuration au lieu d'une mesure.** À réutiliser pour toute
+option dont la valeur par défaut pourrait coïncider avec la valeur voulue.
+
+**3. ⚙️ Passer une option que le type du wrapper ne déclare pas, sans `as` ni
+`@ts-ignore` : une variable intermédiaire.**
+
+Le type `nitro` de `@lovable.dev/vite-tanstack-config` ne déclare que
+`preset`/`output`/`cloudflare`. Un littéral inline déclenche le contrôle des
+propriétés excédentaires de TypeScript (`TS2769`, « 'vercel' does not exist in
+type … »). Or ce contrôle **ne s'applique qu'aux objets littéraux « frais »** :
+
+```ts
+const nitroConfig = {
+  preset: "vercel",
+  vercel: { functions: { runtime: "nodejs22.x" } },
+};
+export default defineConfig({ nitro: nitroConfig });
+```
+
+`tsc --noEmit` sort en **0**, et l'option arrive bien à Nitro (vérifiée par le
+point 2). Préférable à `as never` ou `@ts-ignore` : rien n'est masqué, et le
+jour où le wrapper élargira son type, ce code restera valide tel quel —
+contrairement à `@ts-expect-error`, qui deviendrait lui-même une erreur.
+
+**4. ⚠️ Et le résultat négatif, qui est l'acquis le plus utile : ni `engines`
+ni le runtime épinglé ne débloquent un déploiement Vercel refusé.** Mesuré le
+06/10 (push 07:33:06 UTC, production inchangée à 07:56). Donc **quand les builds
+Vercel échouent, il ne faut pas plus de deux tentatives depuis le dépôt sur ce
+terrain-là.** Au-delà, la cause est côté plateforme et seul le journal de build
+du tableau de bord la nomme. À ne pas réapprendre une troisième fois.
 
 ### 05/10/2026 (lundi — veille de l'étape 5) — ⚙️ La recette qui manquait depuis trois jours : lire l'état des builds Vercel depuis le runner, 📚 Vercel a désactivé Node.js 20 le 01/10/2026, et 📚 les AI Overviews sont déployés en France depuis septembre 2026
 

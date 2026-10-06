@@ -63,6 +63,51 @@
 > **Tant que ce point n'est pas réglé, aucune modification du site ne peut
 > arriver en ligne** — y compris les corrections d'indexation des actions 1 à 4
 > ci-dessous. C'est l'action la plus rentable de la liste, et de loin.
+>
+> ---
+>
+> 🔴 **MISE À JOUR DU 06/10/2026 — 4e JOUR DE BLOCAGE. J'AI ÉPUISÉ TOUT CE QUE
+> JE POUVAIS FAIRE DEPUIS LE CODE. IL NE RESTE QUE LE POINT 1 CI-DESSUS.**
+>
+> **Ce que j'ai tenté aujourd'hui, et le résultat.** J'ai trouvé pourquoi le
+> correctif du 05/10 (`engines`) ne pouvait pas marcher : l'outil qui construit le
+> site (Nitro) ne lit **pas** `engines` pour décider sur quelle version de Node
+> tournent les fonctions du site — il recopie la version de Node qui exécute le
+> build. J'ai donc **épinglé explicitement cette version à Node 22** dans la
+> configuration du build (commit `1dd1c98`, poussé à 07:33 UTC), après avoir
+> vérifié que l'épinglage était bien pris en compte.
+>
+> **Ça n'a pas débloqué.** La production a été mesurée en continu pendant les 27
+> minutes suivantes — **19 relevés entre 07:53 et 08:00 UTC, tous identiques à
+> l'octet près.** Pour mémoire, un déploiement normal met **moins de 45
+> secondes** à être en ligne.
+>
+> **Ce que ce résultat négatif nous apprend, et c'est utile.** Les deux seuls
+> réglages que le code peut toucher sur la version de Node ont maintenant été
+> essayés et mesurés, et **aucun ne débloque**. Donc :
+> - ❌ le problème **n'est pas** dans le code du site (c'était déjà vérifié le
+>   05/10, c'est confirmé) ;
+> - ❌ ce n'est **pas** la version de Node déclarée par le projet lui-même ;
+> - ✅ **la cause est dans les réglages du compte ou du projet Vercel**, et elle
+>   est nommée en une ligne dans le journal de build du déploiement en échec.
+>
+> **➡️ IL N'Y A PLUS QU'UNE SEULE CHOSE À FAIRE, ET ELLE PREND 30 SECONDES :**
+> ouvrir le dernier déploiement en échec sur
+> [vercel.com](https://vercel.com/stupidguywearingtns-projects/art-du-jardin-web)
+> → onglet **Deployments** → cliquer le déploiement du **6 octobre** marqué
+> *Error* → **lire le message en rouge** et me le recopier tel quel.
+>
+> Les deux causes les plus probables restent, par ordre : **(a)** la version de
+> Node réglée sur **20.x** dans *Settings → Build and Deployment → Node.js
+> Version* (Vercel l'a désactivée le 1er octobre 2026, et la panne commence le 2
+> au matin) ; **(b)** une **limite d'usage ou de plan** du compte, qui bloque les
+> nouveaux déploiements — voir *Settings → Billing / Usage*, et la bannière en
+> haut du tableau de bord.
+>
+> ⚠️ **Et il y a maintenant 6 jours de travail en attente**, dont la refonte
+> complète de la page `/services/enrobe-a-chaud` — la page du métier principal,
+> passée de 3 783 à 11 856 caractères. Elle est écrite, vérifiée, et elle ne
+> s'affichera pas avant que ce point soit réglé.
 
 ---
 

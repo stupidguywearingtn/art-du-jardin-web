@@ -8,6 +8,25 @@ et à compléter en fin de run.
 
 ## État des lieux
 
+> ✅ **Addendum du 07/10, mesuré APRÈS le push du jour (commit `23eb831`,
+> poussé sur `main` à 07:43 UTC) — deux faits à retenir.**
+> 1. **Le push vers `main` est passé sans encombre.** Le refus « Production
+>    Deploy » qui avait frappé le run du 05/10 et coûté une journée de travail
+>    invisible **ne s'est pas reproduit**. Le travail du jour est bien sur
+>    `main`, pas sur une branche de session : vérifié par `git push` puis
+>    `git log origin/main`.
+> 2. **Le déploiement de ce commit a échoué lui aussi, et il a été chronométré :**
+>    `pending` à **t+20 s**, `failure` à **t+40 s**
+>    (`dpl_9yaN7EmfLcYhoV5w56joBYqwCpmV`). **Signature identique à celle du
+>    05/10** — l'échec est immédiat et reproductible, ce qui reste cohérent avec
+>    un rejet en amont du build plutôt qu'avec une erreur de compilation (le
+>    build complet prend ~18 s en local, mais l'échec Vercel ne laisse aucun
+>    journal lisible d'ici). **Ne pas en tirer plus : seul le journal de build
+>    tranche, et il demande le compte propriétaire.**
+> 3. `ACTIONS-SEO-CLIENT.md` a reçu une **relance datée du 07/10** en tête, avec
+>    l'identifiant du déploiement en échec du jour et la liste de ce qui attend
+>    en ligne.
+
 > 🟠 **07/10/2026 — LE BLOCAGE DE DÉPLOIEMENT TIENT DEPUIS 5 JOURS, LE CLIENT
 > N'A PAS AGI, ET CE RUN A REPRIS LE TRAVAIL DE CONTENU. À lire avant l'encadré
 > du 06/10 ci-dessous, qu'il confirme sans le contredire.**

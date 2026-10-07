@@ -1,5 +1,37 @@
 # SEO — les 4 actions que seul le client peut faire
 
+> 🔴 **RELANCE DU 07/10/2026 — SIXIÈME JOUR, ET L'ACTION 0 CI-DESSOUS N'A PAS
+> ENCORE ÉTÉ FAITE. Tout le reste de ce fichier reste valable mot pour mot ;
+> voici seulement ce qui a changé depuis le 05/10.**
+>
+> - **Le blocage tient.** Mesuré le 07/10 à 07:20 UTC : le dernier déploiement
+>   (06/10, 08:03 UTC) est en échec, et **le déploiement déclenché par le travail
+>   d'aujourd'hui a échoué lui aussi**, en moins de 40 secondes — `pending` à
+>   t+20 s, `failure` à t+40 s. C'est la même signature depuis le 2 octobre.
+> - **Lien à ouvrir, à jour (celui du 05/10 pointe sur un déploiement plus
+>   ancien, il marche encore mais celui-ci est le dernier) :**
+>
+>   > `npx vercel inspect dpl_9yaN7EmfLcYhoV5w56joBYqwCpmV --logs`
+>   >
+>   > ou le tableau de bord :
+>   > https://vercel.com/stupidguywearingtns-projects/art-du-jardin-web
+>   > → onglet **Deployments** → le premier de la liste (en rouge, « Error »)
+>   > → **Building** / **Build Logs**
+>
+> - **Ce qui s'accumule en attendant.** Le site en ligne a maintenant **7 jours**
+>   et ne contient aucun des travaux suivants : la refonte de
+>   `/services/enrobe-a-chaud` (3 783 → 12 633 caractères), le **maillage interne
+>   des six pages service** fait le 07/10 (chacune passe de 1 à 6-7 liens
+>   internes, ce qui compte directement pour l'exploration par Google), la fiche
+>   PagesJaunes déclarée dans les données structurées, et deux mises à jour de
+>   `llms.txt`. **Rien n'est perdu — tout est dans le dépôt et partira en une
+>   fois dès que le déploiement repartira.**
+> - ⚠️ **Il n'y a plus rien à tenter de mon côté.** Les deux seuls réglages que
+>   le dépôt contrôle sur la version de Node (`engines.node` le 05/10, runtime
+>   des Functions épinglé le 06/10) ont été faits, poussés et mesurés : aucun des
+>   deux ne débloque. **Le message d'erreur du journal de build est la seule
+>   information qui manque, et seul le compte propriétaire peut le lire.**
+
 > 🚨 **05/10/2026 — ACTION 0, ET ELLE PASSE AVANT LES QUATRE AUTRES : LES
 > DÉPLOIEMENTS DU SITE ÉCHOUENT DEPUIS LE 02/10. 30 SECONDES SUFFISENT À LIRE
 > POURQUOI.**

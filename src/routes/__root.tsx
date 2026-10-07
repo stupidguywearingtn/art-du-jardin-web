@@ -132,6 +132,13 @@ export const Route = createRootRoute({
                encore l'ANCIENNE adresse (« 36 av Etienne Lamy ») : c'est la page
                elle-même qui fait foi, pas le snippet. */
             "https://fr.mappy.com/poi/50adc51784ae2742a0054bfe",
+            /* Vérifiée le 04/10/2026 et re-contrôlée le 07/10/2026 avant ajout :
+               la fiche publie le téléphone 03 84 52 61 48 et l'adresse actuelle
+               « 40 Bis avenue Etienne Lamy, 39300 Cize » — mêmes critères que
+               Mappy ci-dessus. Elle ne porte AUCUN lien vers le site : c'est
+               précisément pourquoi la déclarer ici, pour rattacher la fiche à
+               l'entité depuis le seul côté que nous maîtrisons. */
+            "https://www.pagesjaunes.fr/pros/52322496",
           ],
           url: "https://www.hcetp.com",
           logo: "https://www.hcetp.com/favicon-512x512.png",

@@ -8,6 +8,53 @@ et à compléter en fin de run.
 
 ## État des lieux
 
+> 🟠 **07/10/2026 — LE BLOCAGE DE DÉPLOIEMENT TIENT DEPUIS 5 JOURS, LE CLIENT
+> N'A PAS AGI, ET CE RUN A REPRIS LE TRAVAIL DE CONTENU. À lire avant l'encadré
+> du 06/10 ci-dessous, qu'il confirme sans le contredire.**
+>
+> **Le blocage, mesuré en 3 secondes par la recette du 05/10 et plus par des
+> octets :** `GET /repos/:owner/:repo/commits/12f7431/status` → **`failure`**,
+> « Deployment has failed — run this Vercel CLI command: npx vercel inspect
+> `dpl_Bkx8DSZRpgzvTjXesTJonw1JbL6P` --logs ». **Le dernier déploiement date du
+> 06/10 à 08:03:46 UTC et il a échoué ; aucun déploiement n'a eu lieu depuis.**
+> La recette fonctionne : c'est désormais une mesure d'une requête, à faire en
+> premier à chaque run.
+>
+> **Le client n'a pas agi, et c'est le fait du jour.** `git log` sur
+> `origin/main` : **aucun commit d'un autre auteur depuis la bascule de domaine
+> du 30/09**. L'ACTION 0 d'`ACTIONS-SEO-CLIENT.md` (ouvrir le build en échec sur
+> le tableau de bord Vercel et lire l'erreur) **n'a pas été exécutée**. Elle
+> reste la seule action qui débloque, et elle n'est pas de notre côté.
+>
+> **Production cohérente avec ce diagnostic, revérifiée :**
+> `/services/enrobe-a-chaud` sert toujours **30 261 octets / 3 783 caractères**
+> (attendu 11 856), `/llms.txt` affiche toujours « 30 septembre 2026 » quand le
+> dépôt dit « 2 octobre 2026 ». Les 13 URLs répondent en 200 : **la production
+> n'est pas cassée, elle a 7 jours.**
+>
+> ✅ **Ce que ce run a fait, et c'est l'application de la consigne du 06/10 :**
+> le gel du contenu étant levé, **un vrai chantier a été mené et poussé** — le
+> maillage interne des six pages `/services/*`, qui passent de **1 lien interne
+> servi à 6 ou 7**. Détail sous « Chantiers faits » du 07/10. Plus l'ajout de
+> `pagesjaunes.fr/pros/52322496` aux `sameAs`, chantier posé le 04/10 et prêt.
+> **Tout est vérifié au banc d'essai local ; rien n'est vérifié en ligne, et ça
+> s'ajoute à la dette de vérification tenue sous « Chantiers en attente ».**
+>
+> ⚠️ **CONSIGNE POUR LE PROCHAIN RUN — courte, parce que l'essentiel ne change
+> pas.**
+> 1. **Relever l'état du dernier déploiement par l'API GitHub, en premier** (une
+>    requête). `success` → **purger la dette de vérification en ligne AVANT tout
+>    nouveau chantier** (liste sous « Chantiers en attente »). `failure` →
+>    continuer le travail de contenu, il arrivera en ligne plus tard.
+> 2. **Ne PAS retenter un correctif de déploiement dans le dépôt.** Les deux
+>    leviers sont épuisés et mesurés (06/10). Inchangé.
+> 3. **Ne pas relancer le diagnostic de déploiement** : il est complet depuis le
+>    05/10. Le seul geste utile est côté client.
+> 4. **Le chantier de contenu continue normalement.** Le prochain candidat est
+>    `/realisations/chantier-en-cours` (373 caractères servis, seule page du
+>    sitemap sans date et sans entrée `PAGE_UPDATED`) — ⚠️ c'est une galerie, lire
+>    la réserve sous « Chantiers en attente » avant de rédiger.
+
 > 🔴 **06/10/2026 — LE BLOCAGE TIENT DEPUIS 4 JOURS, ET LES DEUX LEVIERS DU
 > DÉPÔT SONT MAINTENANT ÉPUISÉS. L'encadré du 05/10 ci-dessous reste juste sur
 > le diagnostic ; voici ce que la journée y ajoute, et ça change la consigne.**
@@ -374,19 +421,48 @@ Tel que publié dans le pied de page du site, repris à l'identique dans le
 
 ```
 HCE / HCE SARL · 40 avenue Etienne Lamy, 39300 Cize, France
-03 84 52 61 48 · sarl.hce@laposte.net · https://www.hcebtp.com
+03 84 52 61 48 · sarl.hce@laposte.net · https://www.hcetp.com
 Lun-Ven 8h-18h · Sam 8h-12h · Créée en 2012
 SIREN 521683573 · SIRET siège 52168357300039
 ```
 
+> ⚠️ **Corrigé le 07/10/2026 : ce bloc portait encore `https://www.hcebtp.com`.**
+> Le domaine a basculé sur `www.hcetp.com` le 30/09 (commit `f07b19f`) et le
+> run du 01/10 l'a journalisé — mais **personne n'avait corrigé le bloc de
+> référence lui-même**, celui qui porte le titre « ne pas laisser diverger ». Il
+> a donc affiché l'ancien domaine pendant six runs. Vérifié le 07/10 : le dépôt
+> publie bien `https://www.hcetp.com` partout (15 occurrences dans `llms.txt`,
+> 0 occurrence de `hcebtp` dans `public/`), et l'adresse `40 avenue Etienne
+> Lamy` ci-dessus est bien celle que publient `__root.tsx`,
+> `services.$slug.tsx`, `zone-intervention` et `realisations.index`.
+> **Leçon : un bloc de référence ne se vérifie pas tout seul. Le relire contre
+> le code, pas contre le souvenir.**
+>
+> ⚠️ **Ne pas confondre avec le domaine d'envoi d'e-mails, qui est resté
+> `hcebtp.com` et ne doit PAS être aligné à la légère** (constaté le 07/10) :
+> `src/routes/lovable/email/transactional/send.ts` (`SENDER_DOMAIN =
+> "notify.hcebtp.com"`, `FROM_DOMAIN = "hcebtp.com"`) et
+> `src/routes/api/public/devis.ts` (`from: 'HCE BTP <devis@hcebtp.com>'`). Ce
+> sont des domaines vérifiés auprès du fournisseur d'e-mail (SPF/DKIM) : les
+> changer sans que le nouveau domaine soit vérifié **casserait l'envoi des
+> demandes de devis**. Voir « Hypothèses à vérifier ».
+
 Attention : **il existe deux communes nommées Cize**, Cize 01250 dans l'Ain et
 Cize 39300 dans le Jura. HCE est dans le Jura, coordonnées 46.726 / 5.914.
 
-> Note sur l'hébergement : les consignes de maintenance disent « Lovable Cloud,
-> pas Vercel », alors que l'en-tête `server` observé en production dit Vercel.
-> Les deux ne sont pas forcément incompatibles (front déployé sur Vercel, backend
-> Supabase/edge functions côté Lovable). Ne pas trancher sans le client, et ne
-> rien changer au déploiement sur cette base.
+> Note sur l'hébergement — **tranchée par le code le 07/10/2026, la question est
+> close.** Les consignes de maintenance disent « Lovable Cloud, pas Vercel » ;
+> **sur le front, c'est faux, et ce n'est pas une déduction** : `vite.config.ts`
+> porte en commentaire « Détachement de l'hébergement Lovable/Cloudflare →
+> déploiement direct sur Vercel », force `nitro.preset = "vercel"` et épingle
+> `vercel.functions.runtime`. L'en-tête `server: Vercel` en production le
+> confirme, comme les statuts de déploiement Vercel lus dans l'API GitHub depuis
+> le 05/10. **Ce qui reste côté Lovable** : le wrapper de build
+> (`@lovable.dev/vite-tanstack-config`), l'auth et l'e-mail
+> (`@lovable.dev/cloud-auth-js`, `@lovable.dev/email-js`), le backend Supabase,
+> et la preview `hcebtp.lovable.app`. **La consigne est donc périmée sur le
+> front et juste sur le backend.** ⚠️ Cela ne change RIEN à la règle d'action :
+> **ne rien changer au déploiement**, qui reste hors de notre portée.
 
 ### Positions mesurées — 07/09/2026 (métrique erronée, voir 08/09)
 
@@ -854,6 +930,78 @@ Toutes les valeurs de la table du 15/09 sont **retrouvées au caractère près**
 (même script de mesure). Le banc d'essai local a redonné exactement les mêmes
 chiffres que la production avant le chantier : la fidélité du banc est
 re-confirmée pour la deuxième fois.
+
+### Positions mesurées — 07/10/2026
+
+**Indexation : toujours nulle, cinquième semaine. Quatre mesures, toutes
+reconduites.**
+
+| Requête | 07/10/2026 | Évolution vs 05/10 |
+|---|---|---|
+| `site:hcetp.com` | **0 résultat du domaine** (9 pages d'acronymes : HPTN, CEETP Delaware, HPCET Inde, TFETP Taïwan, hug.ch, cetweb.edu, ctep.cancer.gov) | inchangé sur le fond — **opérateur toujours non honoré par ce canal, ce résultat n'est pas une information**. La composition des 9 pages a entièrement changé, ce qui confirme qu'elle est du bruit |
+| phrase exacte du site `"Médaillons et inserts pavés intégrés à l'enrobé"` | **0 résultat du domaine** — et cette fois **9 brevets américains** (USPTO, Google Patents, CIPO) au lieu des 10 sites français d'enrobé relevés les 30/09 → 02/10 | ⚠️ **rupture de composition totale, et c'est un biais d'outil, pas un signal** : voir la réserve ci-dessous |
+| requête nommant le domaine et l'entité | **0 page du domaine** ; 9 résultats sur Cize (Wikipédia, INSEE, jura-tourism) sans rapport avec l'entreprise | inchangé sur le fond |
+| `enrobé à chaud Jura entreprise` (requête commerciale) | **HCE absent du domaine**, 9 résultats. 🆕 **Mais la fiche `118712.fr` de l'entreprise sort en 1ʳᵉ position** | ⚠️ **SFCTP, qui tenait 4 URLs sur 9 depuis le 02/10, est absent du relevé** ; PagesJaunes aussi. Composition méconnaissable — même réserve |
+| **code IndexNow** | **200** (fichier clé servi en 200, 13 URLs soumises) | inchangé depuis le 02/10 |
+
+⚠️ **RÉSERVE DE MÉTHODE, ET ELLE EST PLUS FORTE QUE LES RUNS PRÉCÉDENTS NE LE
+DISAIENT. Ne pas lire les changements de composition de ce tableau comme des
+mouvements de marché.** Deux relevés du jour le prouvent : la phrase exacte du
+site, qui ramenait **dix sites français d'enrobé** les 30/09, 01/10 et 02/10,
+ramène aujourd'hui **neuf brevets américains sur le pavage décoratif** ; et la
+requête commerciale ne contient plus ni SFCTP ni PagesJaunes, qui tenaient
+ensemble 6 places sur 9 il y a deux jours. **Aucun bouleversement de SERP de
+cette ampleur n'est crédible en 48 h sur un marché local français.** C'est
+l'orientation marché américain de `WebSearch`, déjà notée depuis le 05/10, qui
+domine le résultat. **Conséquence pratique à tenir : la seule ligne de ce
+tableau qui vaut comme mesure de progrès est « le domaine apparaît / n'apparaît
+pas », plus le code IndexNow. Les positions des concurrents et l'ordre des
+résultats ne sont pas exploitables par ce canal — ne plus construire de chantier
+sur « ce que fait SFCTP ».**
+
+🆕 **Une huitième fiche d'annuaire découverte, et elle ne porte pas de lien non
+plus.** `https://www.118712.fr/professionnels/WkBSXFVRFAc` — « H.C.E
+Aménagement de Cours en Enrobés », sort **1ʳᵉ sur la requête commerciale**. Lue
+le 07/10 : nom correct, activité correcte (« travaux publics, exploitation de
+carrières, travaux routiers, entreprises de terrassement », « aménagement de
+cours en enrobé »), adresse **« 40 av Etienne Lamy 39300 Cize »**, téléphone
+**masqué derrière un bouton « Afficher le n° »**, et **aucun lien vers un site**.
+⚠️ **Volontairement PAS ajoutée aux `sameAs`**, et la raison est le critère
+appliqué depuis le 13/09 : une fiche n'entre dans les `sameAs` que si **le
+téléphone et l'adresse y sont vérifiés**. Ici le téléphone n'est pas lisible et
+l'adresse ne porte pas le « Bis » tranché le 04/10. **Le critère tient, la fiche
+attend.** Elle porte le compte à **huit fiches d'annuaire qui parlent de
+l'entreprise sans jamais mener au site** — le diagnostic du 04/10 est donc
+renforcé, pas modifié.
+
+⚠️ **Note sur la fiche PagesJaunes, relue le 07/10 avant de l'ajouter aux
+`sameAs` : elle publie deux informations qui contredisent le contenu figé, et
+elles n'ont PAS été reprises.** (a) « SARL established **April 1, 2010** » alors
+que le contenu figé par le client dit **2012** ; (b) « **4.5 stars on Google (16
+reviews)** » alors que la section avis a été supprimée à la demande du client.
+**Rien de tout cela n'a été touché ni recopié** : le contenu figé fait foi, et on
+n'ajoute pas d'`aggregateRating` pour une note qu'on ne maîtrise pas et que le
+client a explicitement retirée du site. Noté ici pour qu'un prochain run ne
+« corrige » pas le site d'après cette fiche.
+
+**Volume de texte servi en production** (`scripts/mesure-texte-servi.mjs` sur
+`https://www.hcetp.com`) : **inchangé au caractère près depuis le 30/09**, soit
+le septième relevé identique (13 526 / 13 491 / 8 578 / 8 156 / 7 670 / 7 012 /
+6 821 / 6 356 / 5 198 / 5 080 / 4 482 / **3 783** / 373).
+`/services/enrobe-a-chaud` toujours à 3 783 au lieu de 11 856 : **cinquième jour
+hors ligne** pour le chantier du 02/10.
+
+**Graphe des liens internes servis — la mesure du chantier du jour**, relevée
+des deux côtés (production = avant, banc local = après) :
+
+| Page | Avant (prod) | Après (banc local) |
+|---|---|---|
+| `/services/preparation-terrain` | **1** | **6** |
+| `/services/enrobe-a-chaud` | **1** | **7** |
+| `/services/maconnerie-generale` | **1** | **6** |
+| `/services/drainage-pentes` | **1** | **6** |
+| `/services/bordures-murets` | **1** | **6** |
+| `/services/finitions-soignees` | **1** | **6** |
 
 ### Positions mesurées — 05/10/2026
 
@@ -1812,6 +1960,137 @@ JSON-LD, pas de `BreadcrumbList`).
 ---
 
 ## Chantiers faits
+
+### 07/10/2026 — Les six pages `/services/*` cessent d'être des culs-de-sac : de 1 à 6-7 liens internes servis, chacun avec sa raison d'être suivi — et la fiche PagesJaunes entre dans les `sameAs`
+
+**Pourquoi ce chantier, et pas un autre.** Il était « candidat n°1 » depuis le
+02/10 sans avoir jamais été pris, et l'angle « renforcer le maillage interne
+vers les pages stratégiques » **n'avait jamais été traité en 27 runs** alors
+qu'il figure dans les angles à alterner. Le choix se justifie aussi par
+élimination : le filon rédactionnel est près de l'épuisement (plus aucune page
+rédigée sous les 4 400 caractères), le diagnostic de déploiement est clos et
+interdit de nouveaux correctifs, et les leviers de découverte sont tous côté
+client. **Le maillage était le seul levier à fort impact entièrement sous notre
+contrôle, et il est mesurable avant/après.**
+
+**Le trou, re-mesuré le 07/10 et pas repris du journal.** Relevé des liens
+internes servis à Googlebot sur la production (`www.hcetp.com`) : les six pages
+`/services/*` ne servaient **qu'un seul** lien interne chacune, celui du logo
+« HCE » vers l'accueil. Elles portent pourtant le contenu le plus substantiel du
+site (3 783 à 11 856 caractères de Q/R sourcées) et **ne redistribuaient rien** :
+ni vers les dossiers de réalisations qui illustrent précisément la prestation, ni
+vers `/zone-intervention` qui répond à la question du calendrier qu'elles
+soulèvent toutes, ni entre elles. Toutes les autres pages maillaient
+correctement (accueil 13, hub 10, dossiers 7, `/zone-intervention` 5).
+
+**Ce qui a été fait, précisément.**
+1. **Un tableau `VOIR_AUSSI` dans `src/routes/services.$slug.tsx`** : pour
+   chacun des six slugs, 1 à 2 dossiers de réalisations et 2 services voisins,
+   **chacun avec une phrase qui dit pourquoi le suivre**. Il est documenté comme
+   l'inverse de `RELATED_SERVICES` (`src/lib/realisations.ts`), qui mappe les
+   dossiers vers leurs services : **les deux doivent rester cohérents**, et le
+   commentaire le dit pour le prochain run.
+2. **Une section « Sur le même chantier »** rendue entre le bloc « Ce qu'il faut
+   savoir » et le CTA, en deux colonnes (« Voir le travail terminé » / « Les
+   prestations qui vont avec »), **plus le hub `/realisations` et
+   `/zone-intervention` servis sur les six pages**. Elle reprend les composants,
+   les classes et l'idiome `Link` du bloc `SeeAlso` déjà en place sur les
+   dossiers : **aucun composant de rendu existant n'a été modifié**, et aucun
+   texte existant n'a été réécrit. La section est conditionnée au slug
+   (`VOIR_AUSSI[slug]`) : un slug inconnu n'affiche rien plutôt qu'un lien
+   inventé.
+3. **`pagesjaunes.fr/pros/52322496` ajouté aux `sameAs`** de `__root.tsx` et
+   `index.tsx` (4 → 5 URLs). **La fiche a été relue le 07/10 avant l'ajout**,
+   comme la consigne du 04/10 le demandait : téléphone `03 84 52 61 48` et
+   adresse `40 Bis avenue Etienne Lamy, 39300 Cize` inchangés, donc le critère
+   du 13/09 (téléphone + adresse vérifiés) est toujours rempli. Elle ne porte
+   **aucun lien vers le site** — c'est précisément pourquoi la déclarer de notre
+   côté, qui est le seul que nous maîtrisons.
+
+**Mesure du résultat, aux deux bouts.** Liens internes servis : **1 → 6** sur
+cinq pages, **1 → 7** sur `/services/enrobe-a-chaud`. Texte servi : **+592 à
++777 caractères** par page (`preparation-terrain` 4 482 → 5 154 ;
+`enrobe-a-chaud` 11 856 → 12 633 ; `maconnerie-generale` 5 080 → 5 706 ;
+`drainage-pentes` 5 198 → 5 832 ; `bordures-murets` 7 012 → 7 634 ;
+`finitions-soignees` 6 821 → 7 413). **Les sept autres URLs du sitemap rendent
+exactement la même valeur qu'avant, au caractère près** — c'est le contrôle
+négatif obligatoire du 27/09, et il passe.
+
+**Volet GEO.** Le gain n'est pas qu'un graphe de liens : **chaque lien porte une
+phrase autonome qui dit ce qu'on trouve derrière** (« Le décaissement, le
+compactage par couches et l'évacuation des terres, en photos de chantier », « Les
+pentes et l'évacuation de l'eau se décident pendant le terrassement, pas après
+la pose »). Un passage de ce genre se cite ; une liste de liens nus, non.
+⚠️ **Et ce qui a été délibérément NON fait côté GEO** : la section ne porte pas
+de H2 formulé en question et n'entre dans aucun JSON-LD. C'est un bloc de
+navigation, pas un bloc de connaissance — **lui coller une fausse question ou un
+`FAQPage` aurait été du balisage qui ne correspond à rien de ce que le visiteur
+vient y chercher.** La règle « H2 en question + réponse directe » s'applique au
+contenu de fond, pas à un « voir aussi ».
+
+**Garde-fou tenu sur le volume de liens.** La réserve du 02/10 disait « trois à
+cinq liens contextuels par page, un lien qui n'aide pas le lecteur est du
+maillage pour les robots ». Le résultat est à **5-6 liens contextuels** par page
+(1-2 dossiers + 2 services + le hub + la zone), soit un cran au-dessus de la
+fourchette : **assumé et justifiable un par un**, le hub et la zone
+d'intervention étant servis par toutes les autres pages du site et répondant à
+deux questions que les pages service posent sans y répondre (à quoi ça
+ressemble, et quand c'est possible). **Ce n'est pas une ferme de liens, mais la
+marge est consommée : ne pas en ajouter d'autres sur ces pages.**
+
+**Contrôles passés avant push** (banc d'essai local, recette du 15/09 —
+`npx vite dev --host 127.0.0.1`, la production ne pouvant rien valider puisque
+les builds échouent) :
+- `npx tsc --noEmit` → **0**
+- `npm run build` → **0**, et le runtime émis dans
+  `.vercel/output/functions/__server.func/.vc-config.json` est bien
+  **`nodejs22.x`** (le pin du 06/10 tient)
+- `npm run check:fige` → **0**
+- `verif-faq.mjs` → **✓ 11/11** questions et 11/11 réponses du `FAQPage`
+  retrouvées dans le texte visible
+- `verif-lastmod.mjs` → **✓ 13 URLs cohérentes**, 12 avec `lastmod` aligné
+- **4 blocs JSON-LD valides** sur une page service (`Organization` avec
+  `sameAs` à 5, `Service`, `BreadcrumbList`, `FAQPage`) — parsés un par un, pas
+  seulement comptés
+- **contenu figé revérifié sur le HTML servi**, 4 pages : `finisseur` 0, `2005`
+  0, `20 ans` 0, `Devis sous 48h` 0, `Garantie & SAV` 0, `180°C` 0 ; `150`,
+  `à la main`, `2012`, `garantie décennale`, `Devis détaillé` tous présents
+- `llms.txt` **vérifié sans dérive** : les 12 routes de `src/lib/lastmod.ts` y
+  sont, 0 occurrence de `hcebtp`, 15 de `hcetp.com`
+
+**Trois décisions de NE PAS faire, et leurs raisons.**
+1. **`PAGE_UPDATED` / « Dernière mise à jour » non touchés.** La date affichée
+   appartient au bloc « Ce qu'il faut savoir », et le `lastmod` du sitemap la lit
+   depuis le 27/09 pour qu'il « ne puisse plus mentir ». **Ajouter de la
+   navigation ne met pas à jour la connaissance** : avancer la date aurait
+   affirmé au crawler que les Q/R avaient changé. Les deux restent liées.
+2. **`public/llms.txt` non modifié.** Il décrit le contenu et les pages, pas la
+   navigation ; aucune catégorie n'a changé. Sa date reste au 2 octobre.
+3. **`package-lock.json` restauré avant le commit.** `npm install` l'a réécrit
+   (796 insertions) comme le piège du 15/09 l'annonçait. Il est **hors du
+   chantier**, et la piste « lockfile désynchronisé » a déjà été écartée du
+   diagnostic de déploiement le 02/10 : le committer aurait mêlé 800 lignes de
+   dépendances à un chantier SEO. Restauré par `git checkout --`.
+
+⚠️ **Dette assumée, à ne pas oublier : rien de tout cela n'est vérifié EN
+LIGNE**, les builds échouant depuis le 02/10. Le chantier s'ajoute à la liste de
+vérification sous « Chantiers en attente ».
+
+⚠️ **Résidu non vérifiable, et c'est le seul :** le **rendu visuel** de la
+nouvelle section (pas de navigateur sur le runner). Le risque est faible — elle
+réutilise les classes, la grille et l'idiome `Link` du bloc `SeeAlso` déjà en
+production sur les dossiers — mais il n'est pas nul. **À regarder à l'œil dès
+que la production repart.**
+
+ℹ️ **Note de mise en forme :** `npx eslint` compte **68 erreurs
+`prettier/prettier`** sur `services.$slug.tsx` contre **61 sur `HEAD`** : 7 sont
+de ce chantier. **Volontairement non corrigées**, et la raison est mesurée : le
+fichier porte déjà 61 écarts avant toute intervention, **le dépôt n'a ni CI ni
+hook de pré-commit** (`.github/` absent), et le style réel du fichier (JSX avec
+styles en ligne sur une seule ligne) est précisément ce que prettier refuse. Un
+`prettier --write` aurait reformaté **tout le fichier** et rendu le diff du
+chantier illisible — c'est exactement le refactor que les règles proscrivent. Le
+bloc ajouté suit le style du code qui l'entoure.
 
 ### 06/10/2026 — Le travail du 05/10 était perdu sur une branche, et le second levier du dépôt sur le runtime Node est tenté puis mesuré : il ne débloque pas (commits `3cd5901` récupéré + `1dd1c98`)
 
@@ -4422,6 +4701,58 @@ Lun-Ven 8h-18h / Sam 8h-12h, Mappy Lun-Sam 7h-19h) signalés comme incohérence 
 Par ordre de priorité. **Alterner les angles, ne pas refaire le même deux jours
 de suite.**
 
+> 🆕 **MISE À JOUR DU 07/10/2026 — à lire avant tout le reste de cette section.**
+>
+> ✅ **Deux chantiers de cette liste sont FAITS aujourd'hui** (détail sous
+> « Chantiers faits » du 07/10) : le **maillage interne des six `/services/*`**
+> (candidat n°1 depuis le 02/10 — 1 → 6-7 liens servis par page) et l'ajout de
+> **`pagesjaunes.fr/pros/52322496` aux `sameAs`** (posé le 04/10). Les encadrés
+> ci-dessous qui les annoncent sont donc périmés : ne pas les refaire.
+>
+> 🔴 **DETTE DE VÉRIFICATION EN LIGNE — elle a grossi, et c'est la première
+> chose à faire le jour du déblocage, avant tout nouveau chantier.** Rien de ce
+> qui a été poussé depuis le 02/10 n'a jamais été vu en production. Repasser
+> **dans cet ordre** :
+> 1. `node scripts/mesure-texte-servi.mjs https://www.hcetp.com` — attendu :
+>    **13 526 / 13 491 / 8 578 / 8 156 / 7 670 / 7 634 / 7 413 / 6 356 / 5 832 /
+>    5 706 / 5 154 / 12 633 / 373**. ⚠️ **Ces valeurs sont celles du banc local du
+>    07/10, pas celles de l'ancienne production** : les six pages service ont
+>    gagné 592 à 777 caractères et `enrobe-a-chaud` doit passer à **12 633** (et
+>    non 11 856, qui était la valeur d'avant le maillage).
+> 2. Graphe des liens internes : les six `/services/*` doivent servir **6 liens**
+>    (7 pour `enrobe-a-chaud`), plus 1. Script jetable, 15 lignes, voir la
+>    recette du 07/10 sous « Techniques apprises ».
+> 3. `verif-faq.mjs` et `verif-lastmod.mjs` en ligne → attendus **11/11** et
+>    **13 URLs cohérentes**.
+> 4. `/llms.txt` doit afficher « **2 octobre 2026** ».
+> 5. `sameAs` doit porter **5 URLs** dont PagesJaunes.
+> 6. **Regarder le rendu visuel de la section « Sur le même chantier »** sur une
+>    page service : c'est le seul contrôle que le runner n'a pas pu faire.
+>
+> **Reste à faire, par ordre, après la dette :**
+> 1. **`/realisations/chantier-en-cours` — 373 caractères servis**, de loin la
+>    page la plus maigre, **seule URL du sitemap sans date affichée et sans
+>    entrée `PAGE_UPDATED`**. C'est le prochain candidat de contenu. ⚠️ **Réserve
+>    sérieuse et inchangée : c'est une page de GALERIE.** Vérifier d'abord qu'il y
+>    a de la matière honnête (la mise en œuvre elle-même, l'enrobé répandu à la
+>    main à 150 °C, ce que montrent réellement les photos) et **ne RIEN inventer
+>    sur un chantier précis** — ni lieu, ni surface, ni date, ni client. Lui
+>    donner une entrée `PAGE_UPDATED` suffirait déjà à lui offrir un `lastmod`.
+> 2. **Migration du runtime vers `nodejs24.x`** — `engines.node` ET
+>    `nitro.vercel.functions.runtime` ensemble, pin vérifié par la recette du
+>    06/10. ⚠️ **Après le déblocage seulement** : on ne mêle pas une migration de
+>    runtime à un diagnostic de build en échec.
+> 3. **Ne PAS retenter un correctif de déploiement dans le dépôt** — les deux
+>    leviers sont épuisés et mesurés (06/10). Inchangé.
+> 4. ⚠️ **Ne plus construire de chantier sur « ce que fait le concurrent ».** Le
+>    relevé du 07/10 montre que `WebSearch` ne rend pas une SERP française
+>    stable : SFCTP tenait 4 URLs sur 9 le 05/10 et disparaît complètement le
+>    07/10. Les positions des concurrents relevées par ce canal ne sont pas
+>    exploitables. Choisir les chantiers pour leur valeur propre.
+> 5. **`118712.fr` : fiche repérée le 07/10, volontairement PAS dans les
+>    `sameAs`** (téléphone masqué, adresse sans le « Bis »). À reconsidérer
+>    seulement si la fiche devient vérifiable, ou si le client la revendique.
+
 > ⚠️ **MISE À JOUR DU 05/10/2026 — la condition « dès que le déploiement repart »
 > qui ouvre le chantier ci-dessous est LEVÉE.** Elle supposait qu'il fallait
 > éviter de pousser pendant le blocage ; c'était faux (un déploiement en échec ne
@@ -5171,6 +5502,43 @@ de suite.**
 
 ## Hypothèses à vérifier
 
+### 07/10/2026 — Le domaine d'envoi des e-mails est resté `hcebtp.com` : intentionnel ou oubli de la bascule ?
+
+**Constaté, pas supposé.** Le dépôt publie `www.hcetp.com` partout côté site
+(15 occurrences dans `llms.txt`, 0 `hcebtp` dans `public/`), **mais trois
+constantes d'envoi d'e-mails portent encore l'ancien domaine** :
+- `src/routes/lovable/email/transactional/send.ts` → `SITE_NAME = "hcebtp"`,
+  `SENDER_DOMAIN = "notify.hcebtp.com"`, `FROM_DOMAIN = "hcebtp.com"`
+- `src/routes/api/public/devis.ts` → `from: 'HCE BTP <devis@hcebtp.com>'`
+
+**Pourquoi ce n'est très probablement PAS un oubli, et pourquoi il ne faut
+surtout pas y toucher.** Un domaine d'expédition doit être **vérifié auprès du
+fournisseur d'e-mail** (SPF, DKIM, enregistrements DNS). `hcebtp.com` l'est sans
+doute depuis l'origine ; `hcetp.com` ne l'est probablement pas, puisqu'il date du
+30/09. **Changer ces constantes sans que le nouveau domaine soit vérifié ferait
+tomber l'envoi des demandes de devis — c'est-à-dire la seule conversion du
+site.** Le risque est totalement disproportionné au gain SEO, qui est nul : une
+adresse d'expéditeur n'est pas indexée.
+
+⚠️ **À NE PAS FAIRE de notre propre initiative.** Ce point ne se tranche qu'avec
+le client, et seulement s'il a vérifié `hcetp.com` auprès du fournisseur. **Noté
+ici pour qu'un prochain run ne « complète la bascule de domaine » par zèle.** La
+cohérence NAP ne concerne pas l'adresse d'expédition des e-mails transactionnels.
+
+### 07/10/2026 — La fiche PagesJaunes affiche « 2010 » et une note Google : deux contradictions avec le contenu figé, laissées intactes
+
+La fiche `pagesjaunes.fr/pros/52322496`, relue le 07/10, publie « SARL
+established **April 1, 2010** » et « **4.5 stars on Google (16 reviews)** ». Le
+contenu figé par le client dit **2012**, et la section avis **a été supprimée à
+sa demande**. **Rien n'a été modifié ni recopié.** Deux lectures possibles, et
+elles ne se départagent pas d'ici : soit 2010 est la date d'immatriculation
+réelle et 2012 celle du début d'activité retenue par le client, soit la fiche se
+trompe. **Dans les deux cas la consigne est la même : le contenu figé fait foi,
+on ne touche pas.** Noté pour qu'un prochain run ne « corrige » pas le site
+d'après un annuaire. ⚠️ **Et surtout : ne pas ajouter d'`aggregateRating` sur la
+base de cette note** — ce serait republier un avis que le client a explicitement
+retiré du site.
+
 > 🆕 **04/10/2026 — corriger l'adresse en « 40 Bis » demande quatre changements
 > simultanés, pas un : le pied de page est éditable en base.** Le site écrit
 > `40 avenue Etienne Lamy` et il est **la seule source à omettre le complément**
@@ -5370,6 +5738,39 @@ de suite.**
 ---
 
 ## Erreurs commises et corrigées
+
+### 07/10/2026 — Le bloc de référence « NAP canonique — ne pas laisser diverger » a porté l'ancien domaine pendant six runs
+
+**L'erreur.** Le domaine a basculé sur `www.hcetp.com` le 30/09 (commit
+`f07b19f`) et le run du 01/10 l'a découvert et journalisé avec un encadré rouge
+« ÉVÉNEMENT MAJEUR ». **Mais le bloc « NAP canonique » en tête du journal, celui
+qui porte explicitement le titre « référence, ne pas laisser diverger », a
+continué d'afficher `https://www.hcebtp.com`** jusqu'au 07/10. Six runs ont lu
+une référence fausse sur le point le plus sensible du dossier.
+
+**Pourquoi personne ne l'a vu, et c'est le vrai enseignement.** Les runs du
+01/10 au 06/10 ont tous **ajouté** leur constat en tête d'« État des lieux » —
+l'endroit où on écrit — sans **relire** la section de référence, qui se trouve
+200 lignes plus bas et qu'on croit stable *parce qu'elle est une référence*.
+**Un bloc de référence est le dernier endroit qu'on relit et le premier qu'on
+cite : c'est exactement ce qui le rend dangereux quand il dérive.**
+
+**Corrigé le 07/10** : l'URL est passée à `https://www.hcetp.com`, vérifiée
+contre le code (15 occurrences dans `llms.txt`, 0 `hcebtp` dans `public/`), avec
+un encadré qui date la correction et distingue explicitement le **domaine du
+site** du **domaine d'envoi des e-mails**, resté `hcebtp.com` à bon droit.
+L'adresse `40 avenue Etienne Lamy` du bloc a été revérifiée au passage contre
+`__root.tsx`, `services.$slug.tsx`, `zone-intervention` et
+`realisations.index` : **elle est correcte**, le « 40 Bis » tranché le 04/10 ne
+concerne que la graphie des fiches d'annuaire, pas ce que publie le site.
+
+**Règle à tenir.** **Quand un run découvre un changement d'identité (domaine,
+adresse, téléphone, raison sociale), il corrige le bloc de référence DANS LE
+MÊME RUN**, avant d'écrire son encadré du jour. Et à chaque run : **relire le
+bloc NAP contre le code**, pas contre le souvenir. Trois lignes de `grep`
+suffisent. La note sur l'hébergement du même bloc a été mise à jour dans la
+même passe, pour la même raison : elle laissait ouverte depuis des semaines une
+question que `vite.config.ts` tranche en une ligne.
 
 ### 06/10/2026 — 🔴 Le travail d'un run entier est resté invisible 24 h parce qu'il n'était pas sur `main` — et la cause n'est pas une négligence, c'est un refus de l'environnement
 
@@ -5817,6 +6218,73 @@ récupérer sans rien réécrire. **Sans cette requête, le travail restait perd
 ---
 
 ## Techniques apprises
+
+### 07/10/2026 — ⚙️ Trois acquis : relever le graphe des liens internes en 15 lignes, le piège du `pkill` qui tue le run, et 📚 `WebSearch` ne rend pas une SERP française exploitable pour juger un concurrent
+
+⚙️ **RECETTE — relever les liens internes servis à Googlebot, page par page.**
+`mesure-texte-servi.mjs` a une colonne `liensR`, mais elle ne compte **que** les
+liens `/realisations/*` : elle ne voit ni les liens entre services, ni
+`/zone-intervention`, ni le hub. Pour mesurer un chantier de maillage il faut le
+graphe complet, et il tient en quelques lignes :
+
+```js
+const UA = "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)";
+const r = await fetch(base + p, { headers: { "User-Agent": UA } });
+const h = await r.text();
+const hrefs = [...h.matchAll(/href="(\/[^"#?]*)/g)].map(m => m[1]);
+const internal = [...new Set(hrefs)].filter(u =>
+  !u.startsWith("/assets") && !u.startsWith("/_") &&
+  !/\.(png|jpg|svg|ico|webp|xml|txt|json|webmanifest|css|js|mjs)$/i.test(u));
+```
+
+- **Filtrer les assets et les `/_…` est indispensable** : sans ça on compte les
+  images et les chunks du build, et le chiffre ne veut plus rien dire.
+- **Dédoublonner** (`new Set`) : on mesure des cibles distinctes, pas des
+  occurrences — un lien présent dans le header et dans le footer est un seul
+  chemin de crawl.
+- ⚠️ **Sur le banc local, vider les variables de proxy dans le script**
+  (`delete process.env.HTTPS_PROXY` etc.), sinon `fetch` envoie la requête vers
+  `127.0.0.1` **dans le proxy sortant** et échoue. C'est l'équivalent du
+  `--noproxy '*'` de la recette `curl` du 15/09, que `fetch` n'a pas.
+- **Se mesure des deux côtés** : production = avant, banc local = après. C'est
+  comme ça que le 1 → 6-7 du jour a été établi.
+
+⚠️ **PIÈGE — `pkill -f "vite dev"` TUE LE RUN LUI-MÊME.** Lancé pour arrêter le
+serveur du banc d'essai, il a terminé la commande avec le code **144** (128+16,
+SIGTERM) : le motif `-f` matche aussi la ligne de commande du shell qui le
+contient. **Ne pas s'en servir pour arrêter le banc.** Le serveur `vite dev`
+lancé en arrière-plan n'a de toute façon pas besoin d'être arrêté : le runner est
+éphémère. Si c'est vraiment nécessaire, viser le PID précis, pas un motif.
+
+⚠️ **RAPPEL VÉRIFIÉ À SES DÉPENS — `npm install` réécrit `package-lock.json`
+dans le dépôt de travail.** Le piège était documenté depuis le 15/09 et il a
+quand même été déclenché aujourd'hui (796 insertions dans le lockfile, repérées
+au `git status` avant le commit, restaurées par `git checkout --`).
+**`node_modules` n'est PAS présent au démarrage du runner : il faut installer
+avant tout contrôle, et donc le piège se présente à chaque run.** La parade la
+plus simple n'est pas la copie de travail du 15/09 mais **un `git status` avant
+chaque commit** : le lockfile modifié y saute aux yeux.
+
+📚 **`WebSearch` NE PERMET PAS DE JUGER UN CONCURRENT, et c'est maintenant
+démontré, plus seulement soupçonné.** La réserve « orienté marché américain »
+traîne dans le journal depuis le 05/10 sans conséquence pratique. Les relevés du
+07/10 la rendent opérationnelle :
+- la **phrase exacte du site**, qui ramenait **dix sites français d'enrobé** les
+  30/09, 01/10 et 02/10 (dont une SERP strictement identique deux jours de
+  suite), ramène le 07/10 **neuf brevets américains** sur le pavage décoratif
+  (USPTO, Google Patents, CIPO) ;
+- la requête commerciale ne contient plus **ni SFCTP ni PagesJaunes**, qui
+  tenaient ensemble **6 places sur 9** deux jours plus tôt.
+
+**Aucun bouleversement de cette ampleur n'est crédible en 48 h sur un marché
+local français : c'est l'outil qui bouge, pas le marché.**
+**Ce qu'on peut encore en tirer, et c'est tout :** « le domaine apparaît / n'y
+est pas » (une absence confirmée sur quatre formulations reste une absence), et
+le code IndexNow. **Ce qu'on doit arrêter d'en tirer :** l'ordre des résultats,
+le nombre d'URLs d'un concurrent, et tout chantier bâti sur « l'angle repéré
+chez SFCTP ». Le chantier du 02/10 avait été partiellement choisi sur ce motif —
+il se justifiait aussi par la maigreur de la page, donc la conclusion reste
+bonne, mais **le motif, lui, n'était pas une mesure.**
 
 ### 06/10/2026 — ⚙️ Trois acquis sur la chaîne de déploiement : Nitro ignore `engines` pour le runtime des Functions, le pin se vérifie en le réglant à une valeur fausse, et le type du wrapper Lovable se contourne sans `as`
 

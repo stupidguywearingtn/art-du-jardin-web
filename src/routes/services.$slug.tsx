@@ -441,6 +441,166 @@ const SERVICES: Record<string, ServiceData> = {
   },
 };
 
+/**
+ * Bloc « Sur le même chantier » : ce que chaque page service redistribue.
+ *
+ * Pourquoi ce tableau existe. Mesuré en production le 02/10/2026 et reconfirmé
+ * le 05/10 : les six pages `/services/*` ne servaient **qu'un seul** lien
+ * interne chacune (vers l'accueil), là où l'accueil en sert 13, le hub
+ * `/realisations` 10 et chaque dossier 7. Ce sont pourtant les pages qui
+ * portent le contenu le plus substantiel du site : elles ne redistribuaient
+ * rien, ni vers les dossiers qui illustrent précisément la prestation, ni vers
+ * `/zone-intervention` qui répond à la question du calendrier qu'elles
+ * soulèvent toutes.
+ *
+ * Règle de remplissage, à tenir. Un lien n'entre ici que s'il aide un lecteur
+ * humain, et il vient avec la raison affichée à côté : **pas de liste de liens
+ * nus**, pas de « voir aussi » exhaustif. Deux à quatre liens contextuels par
+ * page, plus le hub et la zone d'intervention rendus pour toutes.
+ *
+ * `dossiers` est l'inverse de `RELATED_SERVICES` (`src/lib/realisations.ts`),
+ * qui mappe chaque dossier vers ses services : garder les deux cohérents.
+ */
+const VOIR_AUSSI: Record<
+  string,
+  {
+    dossiers: { slug: string; label: string; why: string }[];
+    services: { slug: string; label: string; why: string }[];
+  }
+> = {
+  "preparation-terrain": {
+    dossiers: [
+      {
+        slug: "preparation-terrassement",
+        label: "Préparation et terrassement",
+        why: "Le décaissement, le compactage par couches et l'évacuation des terres, en photos de chantier.",
+      },
+    ],
+    services: [
+      {
+        slug: "drainage-pentes",
+        label: "Drainage & pentes",
+        why: "Les pentes et l'évacuation de l'eau se décident pendant le terrassement, pas après la pose.",
+      },
+      {
+        slug: "enrobe-a-chaud",
+        label: "Enrobé à chaud",
+        why: "Ce que la préparation rend possible : la pose elle-même, à la main à 150 °C.",
+      },
+    ],
+  },
+  "enrobe-a-chaud": {
+    dossiers: [
+      {
+        slug: "cour-allee-privee",
+        label: "Cour et allée privée",
+        why: "Des cours et des allées terminées : bords, raccords et teintes d'enrobé.",
+      },
+      {
+        slug: "parking-voirie-pro",
+        label: "Parking et voirie pro",
+        why: "Les mêmes passes à plus grande échelle, sur de la réfection de parking professionnel.",
+      },
+    ],
+    services: [
+      {
+        slug: "preparation-terrain",
+        label: "Préparation de terrain",
+        why: "Ce qui se joue sous l'enrobé, et qui décide de sa tenue bien plus que la couche visible.",
+      },
+      {
+        slug: "finitions-soignees",
+        label: "Finitions soignées",
+        why: "Les bords, les raccords et la dernière passe — ce qu'on voit une fois la cour finie.",
+      },
+    ],
+  },
+  "maconnerie-generale": {
+    dossiers: [
+      {
+        slug: "cour-allee-privee",
+        label: "Cour et allée privée",
+        why: "Les pavés, dallages et médaillons intégrés à l'enrobé, en photos.",
+      },
+    ],
+    services: [
+      {
+        slug: "enrobe-a-chaud",
+        label: "Enrobé à chaud",
+        why: "L'enrobé dans lequel viennent s'intégrer le pavage, le dallage et les médaillons.",
+      },
+      {
+        slug: "bordures-murets",
+        label: "Bordures & murets",
+        why: "L'autre moitié du travail maçonné : ce qui tient et délimite la périphérie.",
+      },
+    ],
+  },
+  "drainage-pentes": {
+    dossiers: [
+      {
+        slug: "preparation-terrassement",
+        label: "Préparation et terrassement",
+        why: "Le moment du chantier où les pentes se règlent, avant toute pose.",
+      },
+    ],
+    services: [
+      {
+        slug: "preparation-terrain",
+        label: "Préparation de terrain",
+        why: "La lecture du sol et le terrassement qui précèdent toute étude de pente.",
+      },
+      {
+        slug: "bordures-murets",
+        label: "Bordures & murets",
+        why: "Les bordures qui canalisent l'eau en périphérie et les murets de soutènement.",
+      },
+    ],
+  },
+  "bordures-murets": {
+    dossiers: [
+      {
+        slug: "cour-allee-privee",
+        label: "Cour et allée privée",
+        why: "Les limites de cour, les bordures et les raccords sur l'existant, en photos.",
+      },
+    ],
+    services: [
+      {
+        slug: "maconnerie-generale",
+        label: "Maçonnerie générale",
+        why: "Pavage, dallage et médaillons sur mesure : la maçonnerie décorative.",
+      },
+      {
+        slug: "finitions-soignees",
+        label: "Finitions soignées",
+        why: "La finition périphérique et la remise en état en fin de chantier.",
+      },
+    ],
+  },
+  "finitions-soignees": {
+    dossiers: [
+      {
+        slug: "cour-allee-privee",
+        label: "Cour et allée privée",
+        why: "Bords nets et surface homogène sur des cours terminées.",
+      },
+    ],
+    services: [
+      {
+        slug: "enrobe-a-chaud",
+        label: "Enrobé à chaud",
+        why: "La pose et le compactage dont dépend tout ce qui se voit à la fin.",
+      },
+      {
+        slug: "bordures-murets",
+        label: "Bordures & murets",
+        why: "Ce qui tient le bord de l'enrobé et empêche la rive de s'effriter.",
+      },
+    ],
+  },
+};
+
 export const Route = createFileRoute("/services/$slug")({
   loader: ({ params }) => {
     const data = SERVICES[params.slug];
@@ -569,6 +729,9 @@ function ServicePageBody() {
   const adminServices = get<Array<{ slug: string; img: string }>>("services", []);
   const override = adminServices.find((s) => s?.slug === slug)?.img;
   const heroImg = getField("service_images", slug, override && override.length > 0 ? override : data.hero);
+  /* Liens internes de cette page (bloc « Sur le même chantier »). Absent du
+     tableau = section non rendue, aucun lien inventé pour un slug inconnu. */
+  const voirAussi = VOIR_AUSSI[slug];
   const [scrolled, setScrolled] = useState(false);
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 200);
@@ -755,6 +918,90 @@ function ServicePageBody() {
                   </span>
                 ))}
               </p>
+            </div>
+          </section>
+        )}
+
+        {/* SUR LE MÊME CHANTIER — maillage interne.
+            Jusqu'au 07/10/2026 cette page ne servait qu'un seul lien interne
+            (l'accueil, dans le header) : elle recevait du jus de crawl sans
+            jamais en redistribuer. Chaque lien porte la raison de le suivre,
+            pour qu'il serve au lecteur avant de servir au robot. Rendu en clair
+            et toujours monté, comme le bloc « savoir » ci-dessus : afficher aux
+            robots des liens que le visiteur ne verrait pas serait du cloaking. */}
+        {voirAussi && (
+          <section className="px-6 md:px-12 py-16 md:py-20 border-t border-gold/15 bg-surface">
+            <div className="max-w-5xl mx-auto">
+              <h2 className="label text-gold">— Sur le même chantier</h2>
+              <div className="mt-8 grid gap-10 md:grid-cols-2">
+                {voirAussi.dossiers.length > 0 && (
+                  <div>
+                    <h3 className="font-display text-foreground" style={{ fontSize: 20, fontWeight: 400 }}>
+                      Voir le travail terminé
+                    </h3>
+                    <ul className="mt-4 space-y-4">
+                      {voirAussi.dossiers.map((d) => (
+                        <li key={d.slug}>
+                          <Link
+                            to="/realisations/$slug"
+                            params={{ slug: d.slug }}
+                            className="text-gold border-b border-gold/40 pb-0.5 hover:text-foreground transition-colors"
+                            style={{ fontFamily: "var(--font-body)", fontSize: 16 }}
+                          >
+                            {d.label}
+                          </Link>
+                          <p className="mt-2 text-muted" style={{ fontSize: 15, lineHeight: 1.6 }}>{d.why}</p>
+                        </li>
+                      ))}
+                      <li>
+                        <Link
+                          to="/realisations"
+                          className="text-gold border-b border-gold/40 pb-0.5 hover:text-foreground transition-colors"
+                          style={{ fontFamily: "var(--font-body)", fontSize: 16 }}
+                        >
+                          Tous les dossiers de réalisations
+                        </Link>
+                        <p className="mt-2 text-muted" style={{ fontSize: 15, lineHeight: 1.6 }}>
+                          Les quatre types de chantiers, et ce qui encadre un devis : TVA, délais, accès.
+                        </p>
+                      </li>
+                    </ul>
+                  </div>
+                )}
+                <div>
+                  <h3 className="font-display text-foreground" style={{ fontSize: 20, fontWeight: 400 }}>
+                    Les prestations qui vont avec
+                  </h3>
+                  <ul className="mt-4 space-y-4">
+                    {voirAussi.services.map((s) => (
+                      <li key={s.slug}>
+                        <Link
+                          to="/services/$slug"
+                          params={{ slug: s.slug }}
+                          className="text-gold border-b border-gold/40 pb-0.5 hover:text-foreground transition-colors"
+                          style={{ fontFamily: "var(--font-body)", fontSize: 16 }}
+                        >
+                          {s.label}
+                        </Link>
+                        <p className="mt-2 text-muted" style={{ fontSize: 15, lineHeight: 1.6 }}>{s.why}</p>
+                      </li>
+                    ))}
+                    <li>
+                      <Link
+                        to="/zone-intervention"
+                        className="text-gold border-b border-gold/40 pb-0.5 hover:text-foreground transition-colors"
+                        style={{ fontFamily: "var(--font-body)", fontSize: 16 }}
+                      >
+                        Zone d'intervention et saison de pose
+                      </Link>
+                      <p className="mt-2 text-muted" style={{ fontSize: 15, lineHeight: 1.6 }}>
+                        Les communes desservies depuis Cize, et pourquoi l'altitude et le gel décalent
+                        le calendrier d'un chantier dans le Jura.
+                      </p>
+                    </li>
+                  </ul>
+                </div>
+              </div>
             </div>
           </section>
         )}

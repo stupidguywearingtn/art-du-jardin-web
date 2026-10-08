@@ -6645,7 +6645,25 @@ de déploiement Vercel ou un pare-feu applicatif, qui auraient rendu un 401/403
 **uniquement** sur l'UA du robot. **À refaire seulement si l'hébergement ou le
 domaine change.**
 
-**7. ⚙️ Ne pas conclure sur une seule mesure réseau.** Le premier `curl` sur
+**7. ⚙️ `npx eslint .` ne finit PAS sur ce runner — ne jamais le lancer sur tout
+le dépôt.** Lancé aujourd'hui pour vérifier qu'une erreur de lint préexistait,
+il a été **tué au bout de 30 minutes sans avoir rendu de résultat**. C'est le
+même genre de piège que le `pkill` du 07/10 : une commande qui paraît anodine et
+qui mange un run. **Toujours lister les fichiers :**
+`npx eslint src/routes/<fichier>.tsx …` sort en quelques secondes.
+⚠️ `npm run lint` du `package.json` est précisément `eslint .` : **ne pas
+l'ajouter à la recette d'avant-push.** Les contrôles d'avant-push qui marchent
+et qui suffisent sont ceux du 08/10 : `npm run build`, `npx tsc --noEmit`,
+`npm run check:fige`, `npx prettier --check <fichiers>`, `verif-lastmod.mjs`,
+`verif-faq.mjs`.
+**Et la bonne façon de savoir si une erreur de lint préexiste** : la lire dans
+la version commitée du fichier, pas en lintant tout le dépôt —
+`git show HEAD:src/routes/index.tsx | grep -n "@ts-ignore"`. Une ligne, une
+seconde. (Réponse du jour : l'erreur `@typescript-eslint/ban-ts-comment` de
+`src/routes/index.tsx:1561` est **préexistante**, au même numéro de ligne, et
+n'a donc pas été corrigée — règle « ne pas réparer ce qui marche ».)
+
+**8. ⚙️ Ne pas conclure sur une seule mesure réseau.** Le premier `curl` sur
 l'apex `https://hcebtp.com/` a rendu un **code 000** (échec de connexion), ce
 qui aurait pu se journaliser en « l'apex est tombé ». Le second appel, en mode
 verbeux, a montré un **308 propre vers `https://www.hcetp.com/`**. L'aléa était

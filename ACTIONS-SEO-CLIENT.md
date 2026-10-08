@@ -52,6 +52,23 @@
 > si je le passe à 2026, je n'y touche pas sans votre accord.
 
 
+> 🔴 **RELANCE DU 08/10/2026 — SEPTIÈME JOUR. Le déploiement déclenché par le
+> travail d'aujourd'hui a échoué lui aussi, en moins de 20 secondes, et il est
+> resté en échec sur deux minutes de surveillance. Lien à ouvrir, à jour :**
+>
+>   > `npx vercel inspect dpl_Hp5D5w2dzBD92sGRDnXYCwmbBybE --logs`
+>   >
+>   > ou le tableau de bord :
+>   > https://vercel.com/stupidguywearingtns-projects/art-du-jardin-web
+>   > → onglet **Deployments** → le premier de la liste (en rouge, « Error »)
+>   > → **Building** / **Build Logs**
+>
+> **Ce qui attend en ligne, au 08/10 :** la refonte de
+> `/services/enrobe-a-chaud`, le maillage interne des six pages service, la
+> fiche PagesJaunes dans les données structurées, **la nouvelle page de mentions
+> légales**, et trois mises à jour de `llms.txt`. Rien n'est perdu : tout est
+> dans le dépôt et partira en une fois dès que le déploiement repartira.
+
 > 🔴 **RELANCE DU 07/10/2026 — SIXIÈME JOUR, ET L'ACTION 0 CI-DESSOUS N'A PAS
 > ENCORE ÉTÉ FAITE. Tout le reste de ce fichier reste valable mot pour mot ;
 > voici seulement ce qui a changé depuis le 05/10.**

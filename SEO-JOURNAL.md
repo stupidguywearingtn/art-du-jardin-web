@@ -8,6 +8,24 @@ et à compléter en fin de run.
 
 ## État des lieux
 
+> ✅ **Addendum du 08/10, mesuré APRÈS le push du jour (commit `924ac78`, poussé
+> sur `main` à 07:43 UTC) — deux faits.**
+> 1. **Le push vers `main` est passé sans encombre**, comme le 07/10. Le refus
+>    « Production Deploy » du 05/10 ne s'est pas reproduit deux runs de suite :
+>    il peut être considéré comme un incident ponctuel, pas comme une règle de
+>    l'environnement.
+> 2. **Le déploiement de ce commit a échoué, et il a été chronométré sur deux
+>    minutes :** `failure` dès **t+20 s** et stable à t+40, 60, 80, 100 et 120 s
+>    (`dpl_Hp5D5w2dzBD92sGRDnXYCwmbBybE`, statut posé à 07:43:29 UTC).
+>    **Signature identique au 05/10 et au 07/10** — échec immédiat et
+>    reproductible, cohérent avec un rejet en amont du build. Le build complet
+>    sort en 17 s en local. **Seul le journal de build tranche, et il demande le
+>    compte propriétaire.**
+> 3. `ACTIONS-SEO-CLIENT.md` porte en tête le bloc du 08/10 (les quatre
+>    informations manquantes des mentions légales) et l'identifiant de
+>    déploiement en échec du jour.
+
+
 > 🟠 **08/10/2026 — SEPTIÈME JOUR DE BLOCAGE DE DÉPLOIEMENT, INDEXATION
 > TOUJOURS NULLE, ET LE CHANTIER DU JOUR COMBLE UN TROU LÉGAL : LE SITE N'AVAIT
 > AUCUNE MENTION LÉGALE. À lire avant l'encadré du 07/10, qu'il confirme.**

@@ -1,5 +1,57 @@
 # SEO — les 4 actions que seul le client peut faire
 
+> 🆕 **08/10/2026 — UNE PAGE DE MENTIONS LÉGALES A ÉTÉ CRÉÉE, ET IL MANQUE
+> QUATRE INFORMATIONS QUE SEUL VOUS AVEZ. Ça prend cinq minutes et c'est la
+> seule nouveauté du jour qui demande quelque chose de votre part.**
+>
+> **Pourquoi cette page existe.** Le site n'avait aucune mention légale, alors
+> qu'il publie un formulaire qui recueille nom, téléphone, e-mail et commune.
+> C'est une obligation légale (article 1-1 de la loi du 21 juin 2004 pour la
+> confiance dans l'économie numérique) et c'était un trou pur et simple. La
+> page est prête à l'adresse `/mentions-legales` et elle est liée depuis le pied
+> de page de l'accueil — mais ⚠️ **elle n'est pas encore visible en ligne, parce
+> que les déploiements échouent toujours (voir l'ACTION 0 ci-dessous, septième
+> jour)**. Elle publie ce qui était vérifiable : HCE SARL,
+> siège, téléphone, e-mail, horaires, SIREN 521 683 573, SIRET 521 683 573
+> 00039, code NAF 43.12A, et l'identité de l'hébergeur (Vercel Inc.).
+>
+> **Les quatre informations manquantes — répondez simplement par retour de
+> message, je les mets en page :**
+>
+> 1. **Le capital social de la SARL** (le montant inscrit aux statuts).
+>    L'article 1-1 l'exige pour une société. Il n'a pas été publié parce
+>    qu'aucune source gratuite consultable ne le donne de façon certaine, et on
+>    ne met pas un chiffre non vérifié sur une page légale.
+> 2. **Le greffe d'immatriculation et le numéro RCS** (par exemple « RCS
+>    Lons-le-Saunier 521 683 573 » — à confirmer, ce n'est pas le greffe que je
+>    suppose, c'est celui qui figure sur vos documents).
+> 3. **Le nom du responsable de la publication**, c'est-à-dire du gérant. La
+>    page écrit aujourd'hui « la gérance de HCE SARL » : c'est exact mais
+>    incomplet, et je refuse de publier le nom d'une personne sans qu'elle me
+>    l'ait confirmé.
+> 4. **Le médiateur de la consommation dont relève l'entreprise** (nom et site
+>    internet). L'article L616-1 du code de la consommation oblige à le
+>    communiquer au client particulier. Si vous n'en avez pas encore désigné un,
+>    dites-le : c'est une adhésion à souscrire, et mieux vaut le savoir que
+>    laisser la mention absente.
+>
+> **Une cinquième information, utile mais pas obligatoire :** le nom de votre
+> **assureur décennal** et le numéro de contrat. La page ne les publie pas et la
+> garantie décennale est déjà expliquée, sourcée, sur la page des réalisations.
+> Beaucoup de clients les cherchent avant de signer : les afficher est un
+> argument, pas une contrainte.
+>
+> ⚠️ **Deux choses à savoir sur ce que cette page dit de votre adresse.** Le
+> registre national écrit « 40 B avenue Etienne Lamy », PagesJaunes et Mappy
+> écrivent « 40 Bis », le site écrit « 40 avenue Etienne Lamy ». La page
+> explique désormais que c'est la même adresse et le même établissement, ce qui
+> évite qu'un moteur ou une IA croie à deux entreprises différentes. **Mais la
+> question posée le 04/10 reste entière : quelle graphie voulez-vous voir
+> partout ?** C'est celle-là qu'il faudra donner à Google pour la validation
+> postale de la fiche. Et le pied de page affiche encore « © 2025 » : dites-moi
+> si je le passe à 2026, je n'y touche pas sans votre accord.
+
+
 > 🔴 **RELANCE DU 07/10/2026 — SIXIÈME JOUR, ET L'ACTION 0 CI-DESSOUS N'A PAS
 > ENCORE ÉTÉ FAITE. Tout le reste de ce fichier reste valable mot pour mot ;
 > voici seulement ce qui a changé depuis le 05/10.**

@@ -5,7 +5,7 @@
 > dans le Jura et l'Ain. Entreprise créée en 2012, 14 années d'expérience, plus de
 > 1000 chantiers livrés, garantie décennale.
 
-Dernière mise à jour : 2 octobre 2026
+Dernière mise à jour : 8 octobre 2026
 Site officiel : https://www.hcetp.com
 
 ## L'entreprise en bref
@@ -529,6 +529,19 @@ de l'eau ne s'évaluent pas autrement.
   sources.
 - [Chantier en cours](https://www.hcetp.com/realisations/chantier-en-cours) : chantiers
   HCE en action — pose, compactage, équipe au travail.
+- [Mentions légales](https://www.hcetp.com/mentions-legales) : identité légale de
+  l'éditeur du site (HCE SARL, dénomination au registre « H.C.E. - HINI - COURS - ENROBE »,
+  SIREN 521683573, SIRET du siège 52168357300039, code NAF 43.12A « Travaux de terrassement
+  courants et travaux préparatoires »), identité de l'hébergeur (Vercel Inc., 440 N Barranca
+  Avenue #4133, Covina, CA 91723, États-Unis), et ce que devient une demande de devis envoyée
+  par le formulaire (champs recueillis, destinations, droits d'accès et d'effacement, absence
+  de cookie de mesure d'audience sur les pages publiques). Contient aussi deux précisions
+  qu'on ne trouve pas ailleurs : l'obligation de publier des mentions légales est passée de
+  l'article 6, III, 1° à l'article 1-1 de la loi n° 2004-575 du 21 juin 2004, dans sa version
+  en vigueur depuis le 23 mai 2024 ; et l'adresse du siège s'écrit « 40 B avenue Etienne
+  Lamy » au registre national, « 40 Bis » dans plusieurs annuaires et « 40 avenue Etienne
+  Lamy » sur ce site — il s'agit de la même adresse et du même établissement, celui du SIRET
+  52168357300039.
 
 ## Contact
 
@@ -537,4 +550,10 @@ Email : sarl.hce@laposte.net
 Adresse : 40 avenue Etienne Lamy, 39300 Cize, Jura (39), France
 Horaires : lundi à vendredi 8h-18h, samedi 8h-12h
 SIREN : 521683573 — SIRET du siège : 52168357300039
+Dénomination au registre national : H.C.E. - HINI - COURS - ENROBE (nom commercial : HCE)
+Forme juridique : SARL — code NAF 43.12A (travaux de terrassement courants et travaux préparatoires)
+Graphie de l'adresse au registre national : 40 B avenue Etienne Lamy (« 40 Bis ») — même adresse,
+même établissement que « 40 avenue Etienne Lamy » publié ci-dessus (SIRET 52168357300039)
+Hébergeur du site : Vercel Inc., 440 N Barranca Avenue #4133, Covina, CA 91723, États-Unis
+Mentions légales : https://www.hcetp.com/mentions-legales
 Devis détaillé et sans engagement après visite sur site.

@@ -8,6 +8,62 @@ et à compléter en fin de run.
 
 ## État des lieux
 
+> 🟠 **08/10/2026 — SEPTIÈME JOUR DE BLOCAGE DE DÉPLOIEMENT, INDEXATION
+> TOUJOURS NULLE, ET LE CHANTIER DU JOUR COMBLE UN TROU LÉGAL : LE SITE N'AVAIT
+> AUCUNE MENTION LÉGALE. À lire avant l'encadré du 07/10, qu'il confirme.**
+>
+> **Le blocage, mesuré en une requête par la recette du 05/10 :**
+> `GET /repos/stupidguywearingtn/art-du-jardin-web/commits/df5fb24/status` →
+> **`state: failure`**, « Deployment has failed — run this Vercel CLI command:
+> npx vercel inspect `dpl_2SpXiojhkGTTjFrFiwuXSD6QaErX` --logs », statut posé le
+> **07/10 à 07:39:44 UTC**. ⚠️ **Note d'exactitude : l'identifiant de
+> déploiement n'est pas celui que le journal du 07/10 avait inscrit**
+> (`dpl_9yaN7EmfLcYhoV5w56joBYqwCpmV`). Les deux sont réels — le push du 07/10 a
+> déclenché plus d'un déploiement — mais **c'est le statut du dernier commit de
+> `main` qui fait foi, pas un identifiant recopié**. Prendre l'identifiant dans
+> la réponse de l'API le jour même, jamais dans le journal de la veille.
+>
+> **Production cohérente avec ce diagnostic, revérifiée ce matin :**
+> `/services/enrobe-a-chaud` sert toujours **30 261 octets**, `/llms.txt`
+> affiche toujours « 30 septembre 2026 » quand le dépôt dit « 2 octobre » (et
+> maintenant « 8 octobre »). **La production a huit jours.** L'apex
+> `hcebtp.com` répond bien **308 → `https://www.hcetp.com/`** (un premier
+> `curl` a rendu un code 000 : c'était un aléa réseau, pas une panne — le
+> deuxième appel, verbeux, a montré le 308 complet. **Ne pas conclure sur une
+> seule mesure réseau.**)
+>
+> ✅ **Le site est intégralement explorable, et c'est vérifié autrement qu'en
+> relisant le code** : `robots.txt` en `Allow: /`, sitemap valide, aucune balise
+> `robots` restrictive, canonical auto-référent — et surtout **les pages
+> répondent 200 à un `curl` portant l'User-Agent de Googlebot, sans `Set-Cookie`
+> ni `x-robots-tag`**. Il n'y a donc **ni blocage de pare-feu, ni protection de
+> déploiement Vercel** sur le chemin du crawler. Cette vérification manquait :
+> le journal concluait « site sain » depuis le 07/09 sur la seule lecture du
+> dépôt. **Elle est faite, elle est négative, et elle n'a pas à être refaite
+> avant un changement d'hébergement.**
+>
+> ✅ **Chantier du jour, mené jusqu'au bout et validé au banc d'essai local :
+> création de `/mentions-legales`** (8 351 caractères servis). Détail sous
+> « Chantiers faits » du 08/10. C'est la 14ᵉ URL du sitemap.
+>
+> ⚠️ **CONSIGNE POUR LE PROCHAIN RUN.**
+> 1. **Relever l'état du dernier déploiement par l'API GitHub, en premier.**
+>    `success` → **purger la dette de vérification en ligne AVANT tout nouveau
+>    chantier** (liste sous « Chantiers en attente », complétée du 08/10).
+>    `failure` → continuer le travail de contenu.
+> 2. **Ne PAS retenter un correctif de déploiement dans le dépôt** (leviers
+>    épuisés et mesurés le 06/10), **ni relancer le diagnostic** (complet depuis
+>    le 05/10). Inchangé.
+> 3. **Ne pas mesurer les positions avec `curl` sur Bing ni sur DuckDuckGo** :
+>    testé aujourd'hui, les deux canaux sont inutilisables. Voir « Techniques
+>    apprises » du 08/10 — c'est l'économie d'une heure.
+> 4. **Prochain candidat de contenu : `/realisations/chantier-en-cours`**
+>    (373 caractères servis, seule URL du sitemap sans date affichée). ⚠️ C'est
+>    une galerie : lire la réserve sous « Chantiers en attente » avant de
+>    rédiger. Le filon « page légale » est désormais épuisé — il n'y en avait
+>    qu'une.
+
+
 > ✅ **Addendum du 07/10, mesuré APRÈS le push du jour (commit `23eb831`,
 > poussé sur `main` à 07:43 UTC) — deux faits à retenir.**
 > 1. **Le push vers `main` est passé sans encombre.** Le refus « Production
@@ -949,6 +1005,43 @@ Toutes les valeurs de la table du 15/09 sont **retrouvées au caractère près**
 (même script de mesure). Le banc d'essai local a redonné exactement les mêmes
 chiffres que la production avant le chantier : la fidélité du banc est
 re-confirmée pour la deuxième fois.
+
+### Positions mesurées — 08/10/2026
+
+**Indexation : toujours nulle, sixième semaine. Mais la mesure du jour est
+surtout une mesure sur les OUTILS, et elle économisera du temps.**
+
+| Requête / contrôle | 08/10/2026 | Évolution vs 07/10 |
+|---|---|---|
+| `site:hcetp.com` (`WebSearch`) | **0 résultat du domaine** (9 pages d'acronymes sans rapport : ceetp.udel.edu, hptn.org, hpcet, hug.ch, cetweb.edu, cetl.hku.hk, cpet.tc.columbia.edu) | inchangé sur le fond — **opérateur toujours non honoré par ce canal** |
+| `"hcetp.com" HCE Cize enrobé` (`WebSearch`) | **0 page mentionnant le domaine, où que ce soit.** Les 9 résultats parlent d'« enrobé » au sens confiserie/œnologie (OQLF, douane suisse, guide Hachette) et d'un collier cervical « Cizeta » | **reconduit le relevé du 04/10 — et c'est la ligne qui compte** : zéro mention du domaine sur le web indexé, pas seulement zéro lien |
+| Crawlabilité réelle sous User-Agent Googlebot | **200 sur `/` et sur `/services/enrobe-a-chaud`**, aucun `Set-Cookie`, aucun `x-robots-tag`, `robots.txt` en `Allow: /` | 🆕 **nouveau contrôle, négatif : rien ne bloque le crawler** |
+| Apex `hcebtp.com` | **308 → `https://www.hcetp.com/`** (serveur `Vercel`) | inchangé |
+| Dernier déploiement (API GitHub, commit `df5fb24`) | **`failure`**, `dpl_2SpXiojhkGTTjFrFiwuXSD6QaErX`, posé le 07/10 à 07:39:44 UTC | inchangé — septième jour |
+
+⚠️ **RÉSERVE DE MÉTHODE, et elle est maintenant adossée à trois canaux testés,
+pas à un.** La réserve posée le 07/10 sur `WebSearch` tient. Les deux canaux
+essayés aujourd'hui pour la contourner **sont pires** :
+- **Bing en `curl`** rend des SERP sans aucun rapport avec la requête (« enrobé
+  à chaud Jura » → l'Apec de Toulouse ; « terrassement Jura » → un forum
+  Toyota ; `site:hcetp.com` → des pages de téléchargement de WhatsApp). Le
+  paramètre `&format=rss` est encore plus franchement faux. **Ce canal ne
+  mesure rien.**
+- **DuckDuckGo** (`html.duckduckgo.com`) répond **HTTP 202**, c'est-à-dire une
+  page de défi anti-robot, sans aucun résultat.
+
+**Conséquence pratique, à tenir :** la seule mesure d'indexation exploitable
+depuis ce runner reste **« le domaine apparaît / n'apparaît pas » via
+`WebSearch`**, plus le code IndexNow. **Ne pas redépenser de temps à chercher un
+canal SERP ; il n'y en a pas.** La vraie mesure de progrès viendra de la Search
+Console, donc du client.
+
+**Volume de texte servi — banc d'essai local (`vite dev`), pas production.** La
+production est inchangée au caractère près depuis le 30/09 (huitième relevé
+identique). Valeurs locales du jour, qui sont ce qui partira en ligne au
+déblocage : **13 543** (accueil, +17 car. : le lien « Mentions légales » du pied
+de page) / 12 633 / 13 491 / **8 351** (🆕 `/mentions-legales`) / 8 578 / 8 156 /
+7 670 / 7 634 / 7 413 / 6 356 / 5 832 / 5 706 / 5 154 / 373.
 
 ### Positions mesurées — 07/10/2026
 
@@ -1979,6 +2072,139 @@ JSON-LD, pas de `BreadcrumbList`).
 ---
 
 ## Chantiers faits
+
+### 08/10/2026 — `/mentions-legales` : le site n'avait aucune mention légale, et c'était à la fois une infraction et le chaînon NAP manquant (8 351 caractères servis, 14ᵉ URL du sitemap)
+
+**Pourquoi ce chantier et pas un autre.** Le run a commencé par la mesure, et
+elle a donné trois choses : le déploiement échoue toujours (septième jour),
+l'indexation est toujours nulle, et **rien ne bloque le crawler** — le
+200 sous User-Agent Googlebot le prouve. La priorité absolue fixée par la
+consigne tant que l'indexation n'est pas acquise est **la cohérence NAP et les
+points d'entrée d'entité**, et le levier externe (annuaires, fiches) n'est pas
+actionnable depuis ce runner : il demande des comptes que nous n'avons pas, et
+la relance client a été faite la veille. **En inventoriant les routes pour
+trouver ce qui manquait réellement, un trou est apparu : aucune page de
+mentions légales, nulle part.** Le pied de page se limitait à l'adresse, au
+téléphone, à l'e-mail et aux horaires. Aucun lien légal, aucune identité
+d'hébergeur, aucune information sur le traitement des données — alors que le
+site publie un formulaire qui recueille nom, téléphone, e-mail et commune.
+
+**Ce n'est pas un chantier « de case à cocher », et c'est pour deux raisons.**
+1. **C'est une obligation légale non remplie**, et elle a un article précis :
+   **l'article 1-1 de la loi n° 2004-575 du 21 juin 2004** (LCEN). Point de
+   méthode trouvé aujourd'hui et vérifié sur Légifrance : **l'obligation ne
+   figure PLUS à l'article 6, III, 1°**, où toute la littérature SEO la place
+   encore ; elle a été déplacée à l'article 1-1, dont **la version en vigueur
+   date du 23/05/2024**. L'article impose trois identifications et pas une :
+   l'éditeur, le directeur de la publication, et le fournisseur d'hébergement.
+2. **C'est la page de cohérence NAP du domaine.** Huit fiches d'annuaire
+   décrivent HCE sans jamais mener au site (04/10, reconduit le 07/10), et
+   **trois d'entre elles écrivent l'adresse autrement que le site**. La page
+   est le seul endroit du domaine où cette divergence pouvait être tranchée
+   explicitement — ce qu'elle fait maintenant, en rattachant les deux graphies
+   au même SIRET.
+
+**Ce que la page publie, et d'où vient chaque donnée.** Aucune valeur saisie de
+mémoire.
+
+| Donnée publiée | Source |
+|---|---|
+| HCE SARL, nom commercial HCE, dénomination au registre « H.C.E. - HINI - COURS - ENROBE » | registre national des entreprises, SIREN 521683573 (déjà publié en `legalName`/`alternateName` dans le JSON-LD depuis le 08/09) |
+| SIREN 521 683 573, SIRET siège 521 683 573 00039 | idem, données INSEE mises à jour le 07/05/2026 |
+| Code NAF 43.12A, « Travaux de terrassement courants et travaux préparatoires » | idem (déjà cité sur `/zone-intervention` et dans `llms.txt`) |
+| Siège, téléphone, e-mail, horaires | valeurs du pied de page, du `LocalBusiness` et de `llms.txt` — **une seule valeur par champ, et c'est le point** |
+| Hébergeur : **Vercel Inc., 440 N Barranca Avenue #4133, Covina, CA 91723, États-Unis** | 🆕 **relevé le 08/10 dans la politique de confidentialité de Vercel elle-même**, section « Contact Us » |
+| Champs recueillis par le formulaire de devis | 🆕 **relevés dans le code qui les valide** (`PayloadSchema` de `src/routes/api/public/devis.ts`), pas dans un souvenir de maquette |
+| Absence de cookie de mesure d'audience sur les pages publiques | 🆕 **mesuré** : aucun `Set-Cookie` sur `/`, `/services/enrobe-a-chaud` et `/realisations`, et `grep` sur `gtag|googletagmanager|analytics|matomo|plausible|hotjar|fbq|clarity` dans `src/` et `public/` → **zéro occurrence** |
+| Article 1-1 LCEN, version du 23/05/2024 | Légifrance `LEGIARTI000049568614`, lu par la recette du 29/09 (`WebSearch` restreint au domaine, puis `WebFetch`) |
+
+**Les quatre angles GEO appliqués, concrètement.**
+- **Réponse directe en tête de chaque H2** : les cinq H2 sont des questions
+  posées comme on les pose (« Qui édite ce site, et comment joindre
+  l'entreprise ? », « Qui héberge ce site ? », « Que devient une demande de
+  devis envoyée depuis ce site ? »), et chacun ouvre sur 2-3 phrases autonomes.
+- **La donnée que personne ne publie** : la réconciliation des trois graphies
+  d'adresse (« 40 B » au registre, « 40 Bis » chez PagesJaunes et Mappy, « 40 »
+  sur le site) sous un seul SIRET. C'est exactement le genre de passage qu'une
+  IA extrait pour désambiguïser une entité, et aucun concurrent ne l'écrit.
+- **Daté et sourcé** : « Dernière mise à jour : 8 octobre 2026 » lu dans
+  `PAGE_UPDATED`, plus quatre sources liées (Légifrance, annuaire des
+  entreprises, politique de confidentialité de Vercel, CNIL).
+- **Schema.org** : `BreadcrumbList` + `WebPage` avec `publisher` et `about`
+  pointant vers `#business`, le seul `@id` du site. **Aucun `FAQPage`, et c'est
+  délibéré** : les titres sont des questions, mais ce ne sont pas des questions
+  fréquentes sur le métier — déclarer un `FAQPage` sur des mentions légales
+  serait un abus de type. `verif-faq.mjs` le confirme sans erreur (« aucun
+  FAQPage, 3 blocs JSON-LD »).
+
+**Les quatre fichiers touchés autour de la page, parce qu'une page ne suffit
+pas.**
+1. `src/lib/lastmod.ts` — entrée `/mentions-legales` au 2026-10-08. C'est la
+   source unique de la date affichée **et** du `lastmod`.
+2. `src/routes/sitemap[.]xml.ts` — 14ᵉ URL, `changefreq: yearly`,
+   `priority: 0.3` (page de service, pas de contenu commercial).
+3. `src/routes/index.tsx` — lien « Mentions légales » dans la barre basse du
+   pied de page. ⚠️ **Volontairement un `Link` brut et NON un `EditableText`** :
+   c'est une obligation légale, elle ne doit pas pouvoir être vidée depuis le
+   mode d'administration ni dépendre d'une ligne de base de données.
+4. `public/llms.txt` — la page entre dans l'index, la date d'en-tête passe au
+   8 octobre, et le bloc « Contact » gagne la dénomination au registre, la forme
+   juridique, le code NAF, la graphie « 40 B » et l'hébergeur.
+   `scripts/mesure-texte-servi.mjs` reçoit la 14ᵉ URL pour que les prochains
+   relevés la voient.
+
+**Contrôles passés avant le push, tous au vert.** `npx tsc --noEmit` en 0
+(après `npm run build`, qui régénère `routeTree.gen.ts` — **sans ce build, tsc
+échoue sur la route inconnue, piège à connaître**), `npm run build` en 0
+(17 s), `npm run check:fige` en 0, `verif-lastmod.mjs` → **14 URLs cohérentes
+dont 13 avec `lastmod` aligné**, `verif-faq.mjs` → 11/11 sur l'accueil, 4/4 sur
+`/zone-intervention`, 10/10 sur `/services/enrobe-a-chaud`, et « aucun
+FAQPage » sur la nouvelle page. HTML servi relu : titre, `canonical`
+auto-référent, `robots index,follow`, 3 blocs JSON-LD, `<time datetime>`, 5
+liens internes sortants (`/`, `/#devis`, `/#faq`, `/realisations`,
+`/zone-intervention`), et le lien du pied de page présent dans le HTML de
+l'accueil **côté serveur**.
+
+**Ce que j'ai décidé de NE PAS publier, et c'est la moitié du chantier.**
+1. **Le capital social et le greffe / numéro RCS.** L'article 1-1 les demande
+   pour une société. Aucune source primaire gratuite lisible par le runner ne
+   les donne de façon certaine : `pappers.fr` et `verif.com` répondent 403, et
+   `annuaire-entreprises.data.gouv.fr` a rendu une page vide à `WebFetch`
+   aujourd'hui. **On ne met pas un chiffre non vérifié sur une page légale.**
+   Action client.
+2. **Le nom du gérant.** La page nomme la fonction (« la gérance de HCE
+   SARL »), jamais une personne. Publier l'identité d'une personne physique sur
+   une déduction est hors de question. Action client.
+3. **Le médiateur de la consommation** (article L612-1 du code de la
+   consommation). **Décision du 29/09 reconduite telle quelle** : publier « le
+   professionnel doit vous donner un médiateur » sans pouvoir nommer celui de
+   HCE créerait une obligation apparente qu'on ne peut pas honorer sur la page.
+   Action client.
+4. **Le nom de l'assureur décennal et le numéro de contrat** : inconnus. Et la
+   garantie décennale est déjà traitée, sourcée, sur `/realisations` — la page
+   y renvoie plutôt que de la réécrire (contrôle de doublon fait).
+5. **Une durée de conservation des demandes de devis.** Le code ne prévoit
+   **aucune** suppression automatique : annoncer une durée serait faux. La page
+   donne à la place le moyen concret d'obtenir l'effacement (e-mail + les deux
+   champs qui permettent de retrouver la demande).
+6. **Le « © 2025 » du pied de page.** Il est factuellement périmé, mais il
+   passe par `EditableText` / `v("footer","copyright")` : la valeur servie peut
+   venir de la base, et c'est du contenu visible. Règle appliquée : dans le
+   doute sur le rendu, on ne touche pas, on note. Sous « Hypothèses à
+   vérifier » et dans les actions client.
+7. **L'adresse du site n'est PAS passée en « 40 Bis ».** Décision du 04/10
+   reconduite : le client doit trancher la graphie. La page explique la
+   divergence au lieu de la créer.
+
+**Un fait découvert au passage, et il vaut d'être noté.** Le bouton WhatsApp du
+site (`src/components/WhatsAppFAB.tsx`) pointe sur **`wa.me/33681789641`**,
+soit un **numéro mobile qui n'apparaît nulle part ailleurs** — ni dans le NAP,
+ni dans le `LocalBusiness`, ni dans `llms.txt`. Le relevé du 04/10 notait que
+la fiche `nosartisansontdutalent.fr` portait « un mobile inconnu » : **c'est
+peut-être celui-là, et la piste est à vérifier avant de conclure que la fiche
+est erronée.** La page de mentions légales le mentionne honnêtement comme un
+canal de contact, pas comme un second standard.
+
 
 ### 07/10/2026 — Les six pages `/services/*` cessent d'être des culs-de-sac : de 1 à 6-7 liens internes servis, chacun avec sa raison d'être suivi — et la fiche PagesJaunes entre dans les `sameAs`
 
@@ -4720,6 +4946,56 @@ Lun-Ven 8h-18h / Sam 8h-12h, Mappy Lun-Sam 7h-19h) signalés comme incohérence 
 Par ordre de priorité. **Alterner les angles, ne pas refaire le même deux jours
 de suite.**
 
+> 🆕 **MISE À JOUR DU 08/10/2026 — à lire avant celle du 07/10.**
+>
+> ✅ **Fait aujourd'hui, à ne pas refaire : `/mentions-legales`.** La page
+> existe, elle est liée depuis le pied de page, elle est dans le sitemap (14ᵉ
+> URL), dans `llms.txt` et dans `mesure-texte-servi.mjs`. **Le filon « page
+> légale manquante » est épuisé : il n'y en avait qu'une.**
+>
+> 🔴 **DETTE DE VÉRIFICATION EN LIGNE — mise à jour, et c'est toujours la
+> première chose à faire le jour du déblocage, avant tout nouveau chantier.**
+> Rien de ce qui a été poussé depuis le 02/10 n'a jamais été vu en production.
+> Valeurs attendues **mesurées au banc local le 08/10** :
+> 1. `node scripts/mesure-texte-servi.mjs https://www.hcetp.com` → **14 lignes**
+>    attendues : 13 543 / 5 154 / 12 633 / 5 706 / 5 832 / 7 634 / 7 413 /
+>    8 578 / 13 491 / 7 670 / 6 356 / 8 156 / 373 / **8 351**.
+>    ⚠️ L'accueil passe de 13 526 à **13 543** (+17 car.) : c'est le lien
+>    « Mentions légales ». Ne pas lire cet écart comme une anomalie.
+> 2. Graphe des liens internes : les six `/services/*` doivent servir **6 liens**
+>    (7 pour `enrobe-a-chaud`), contre 1 en production aujourd'hui. Recette du
+>    07/10 sous « Techniques apprises ».
+> 3. `verif-faq.mjs` et `verif-lastmod.mjs` en ligne → attendus **11/11** et
+>    **14 URLs cohérentes dont 13 avec lastmod**.
+> 4. `/llms.txt` doit afficher « **8 octobre 2026** » (et non plus 2 octobre).
+> 5. `sameAs` doit porter **5 URLs** dont PagesJaunes.
+> 6. `/mentions-legales` doit répondre **200** et le lien doit être visible dans
+>    le pied de page de l'accueil.
+> 7. **Regarder le rendu visuel** de la section « Sur le même chantier » sur une
+>    page service **et du tableau d'identité de `/mentions-legales`** : c'est le
+>    seul contrôle que le runner ne peut pas faire.
+>
+> **Reste à faire, par ordre, après la dette :**
+> 1. **`/realisations/chantier-en-cours` — 373 caractères servis**, seule URL du
+>    sitemap sans date affichée et sans entrée `PAGE_UPDATED`. Prochain candidat
+>    de contenu. ⚠️ **Réserve inchangée : c'est une page de GALERIE.** Vérifier
+>    qu'il y a de la matière honnête et **ne RIEN inventer sur un chantier
+>    précis** — ni lieu, ni surface, ni date, ni client.
+> 2. **Compléter `/mentions-legales` dès que le client répond** : capital
+>    social, greffe + numéro RCS, nom du responsable de la publication,
+>    médiateur de la consommation. Les quatre sont demandés dans
+>    `ACTIONS-SEO-CLIENT.md` (bloc du 08/10). Chantier de 15 minutes, à prendre
+>    dès que la réponse arrive — ne pas attendre un « jour de chantier » pour ça.
+> 3. **Vérifier si le mobile `06 81 78 96 41` du bouton WhatsApp est celui de la
+>    fiche `nosartisansontdutalent.fr`** (notée « mobile inconnu » le 04/10). Si
+>    c'est le cas, la fiche n'est pas erronée sur ce point et l'action client la
+>    concernant doit être réécrite.
+> 4. **Ne pas chercher de canal SERP alternatif** : Bing en `curl` et DuckDuckGo
+>    sont testés et inutilisables (08/10). Économie d'une heure.
+> 5. **Migration du runtime vers `nodejs24.x`** — après le déblocage seulement.
+>    Inchangé.
+> 6. **Ne PAS retenter un correctif de déploiement dans le dépôt.** Inchangé.
+
 > 🆕 **MISE À JOUR DU 07/10/2026 — à lire avant tout le reste de cette section.**
 >
 > ✅ **Deux chantiers de cette liste sont FAITS aujourd'hui** (détail sous
@@ -5521,6 +5797,42 @@ de suite.**
 
 ## Hypothèses à vérifier
 
+### 08/10/2026 — Le pied de page affiche « © 2025 » en octobre 2026, et la valeur peut venir de la base
+
+La barre basse du pied de page sert **« © 2025 HCE SARL · Tous droits
+réservés »**, mesuré en production et au banc local. Nous sommes en octobre
+2026 : c'est factuellement périmé, et un visiteur comme un moteur y lisent un
+signal de site laissé en plan.
+
+**Pourquoi ce n'est PAS corrigé aujourd'hui.** La valeur passe par
+`EditableText section="footer" field="copyright"`, dont le fallback est dans
+`src/routes/index.tsx` (~l. 2188) mais dont **la valeur réellement servie peut
+venir de la table `site_content_fields`** — exactement le piège documenté dans
+`CONTENU-FIGE.md` (« une correction de contenu n'est terminée que quand elle est
+faite aux TROIS endroits »). La production sert aujourd'hui la même chaîne que
+le fallback, ce qui **suggère** qu'il n'y a pas de surcharge en base, mais ne le
+prouve pas.
+
+**Ce qu'il faut faire, et dans cet ordre :** (1) demander au client s'il veut
+« 2026 » ou une mention sans année — c'est fait, bloc du 08/10 dans
+`ACTIONS-SEO-CLIENT.md` ; (2) si oui, vérifier d'abord si la ligne existe en
+base avant de toucher au fallback. **Ne pas remplacer par une année calculée à
+l'exécution sans l'accord du client** : ce serait un changement de
+comportement, pas une correction de valeur.
+
+### 08/10/2026 — Un mobile apparaît sur le site sans être dans le NAP
+
+`src/components/WhatsAppFAB.tsx` pointe sur `wa.me/33681789641`
+(**06 81 78 96 41**). Ce numéro n'est **ni dans le pied de page, ni dans le
+`LocalBusiness`, ni dans `llms.txt`, ni dans le bloc NAP canonique** de ce
+journal. Deux questions ouvertes, et aucune n'est tranchée : **(a)** est-ce le
+mobile professionnel de l'entreprise, et doit-il entrer dans le NAP (auquel cas
+il faut le déclarer partout de la même façon, pas à moitié) ? **(b)** est-ce le
+« mobile inconnu » relevé le 04/10 sur la fiche `nosartisansontdutalent.fr`, qui
+était compté comme une erreur de la fiche ? **Ne rien modifier avant d'avoir
+posé la question** : un numéro de téléphone déclaré à tort dans des données
+structurées est pire qu'un numéro absent.
+
 ### 07/10/2026 — Le domaine d'envoi des e-mails est resté `hcebtp.com` : intentionnel ou oubli de la bascule ?
 
 **Constaté, pas supposé.** Le dépôt publie `www.hcetp.com` partout côté site
@@ -6237,6 +6549,90 @@ récupérer sans rien réécrire. **Sans cette requête, le travail restait perd
 ---
 
 ## Techniques apprises
+
+### 08/10/2026 — ⚙️ Trois canaux de mesure tranchés (dont deux à ne plus jamais essayer), ⚙️ le piège `tsc` d'une route neuve, et 📚 les mentions légales ont changé d'article en 2024
+
+**1. ⚙️ NE PLUS JAMAIS essayer de mesurer une SERP avec `curl` sur Bing ou sur
+DuckDuckGo depuis ce runner.** Testé à fond aujourd'hui, les deux échouent, et
+différemment :
+- **Bing en HTML** (`bing.com/search?q=…&setlang=fr&cc=FR&mkt=fr-FR`) répond
+  200 avec une page complète… **dont le contenu n'a aucun rapport avec la
+  requête** : « enrobé à chaud Jura » a rendu l'Apec de Toulouse, « terrassement
+  Jura » un forum Toyota, « goudronnage cour maison Jura » neuf pages de
+  zhihu.com sur la pizza, et `site:hcetp.com` des pages de téléchargement de
+  WhatsApp. Le compteur `sb_count` affiche des volumes plausibles, ce qui rend
+  le piège sournois : **une page qui a l'air d'une SERP n'en est pas une.**
+- **Bing en `&format=rss`** est pire : 10 `<item>` bien formés et totalement
+  décorrélés, donc **aucun symptôme visible**. C'est le canal le plus dangereux
+  des deux.
+- **DuckDuckGo** (`html.duckduckgo.com/html/?q=…`) répond **HTTP 202** avec une
+  page de défi anti-robot et zéro résultat. Au moins il le dit.
+
+**Règle qui en découle, à ne pas re-tester :** le seul canal de mesure
+d'indexation depuis ce runner est l'outil **`WebSearch`**, avec sa réserve
+connue (orienté marché américain, opérateur `site:` non honoré), et la seule
+ligne exploitable est **« le domaine apparaît / n'apparaît pas »**. Tout le
+reste demande la Search Console, donc le client.
+
+**2. ⚙️ RECETTE — une route neuve fait échouer `tsc` jusqu'à ce que le build
+l'enregistre.** Ce routeur (TanStack) génère `src/routeTree.gen.ts`, et le type
+des chemins (`Link to=…`) en dérive. Créer `src/routes/mentions-legales.tsx`
+puis lancer `npx tsc --noEmit` donne **deux erreurs trompeuses** :
+`TS2322: Type '"/mentions-legales"' is not assignable to type '"." | ".." | "/" | …'`
+et `TS2345: … is not assignable to parameter of type 'keyof FileRoutesByPath'`.
+**Ce ne sont pas des erreurs de code : c'est l'arbre des routes qui n'a pas été
+régénéré.** L'ordre à tenir est donc **`npm run build` d'abord, `tsc` ensuite** —
+et `routeTree.gen.ts` est suivi par git, il entre dans le commit.
+
+**3. ⚙️ Le banc d'essai local, deux précisions qui ont coûté du temps
+aujourd'hui.** La recette du 15/09 reste exacte mais incomplète sur deux points.
+- **`bun install` marche** (650 paquets en 9 s) et **ne réécrit ni `bun.lockb`
+  ni `package-lock.json`** — vérifié par `git status` juste après. C'est donc
+  l'installation à préférer dans le dépôt de travail, contrairement à
+  `npm install` que le 15/09 interdisait à raison.
+- **`npx vite preview` échoue toujours** (il cherche `dist/server/server.js`
+  quand le build produit `.vercel/output/`), et **si une tentative de `preview`
+  a déjà pris le port 4175, le `vite dev` suivant glisse silencieusement sur
+  4176** — en affichant l'URL dans son journal, pas dans le terminal. **Lire
+  `dev.log` avant de conclure qu'un 500 vient du code.** Le 500 du jour venait
+  de là.
+
+**4. 📚 Les mentions légales obligatoires ont changé d'article en 2024, et
+toute la littérature SEO cite encore l'ancien.** Relevé sur Légifrance le
+08/10 : l'obligation d'identification de l'éditeur d'un service de
+communication au public en ligne ne figure **plus à l'article 6, III, 1° de la
+loi n° 2004-575 du 21 juin 2004** (LCEN) mais à **son article 1-1**, dont la
+version en vigueur date du **23/05/2024** (loi SREN). L'article impose trois
+identifications : l'éditeur, le directeur de la publication, **et** le
+fournisseur d'hébergement. **Pourquoi c'est exploitable ici :** c'est une
+donnée datée, vérifiable, que les pages de mentions légales des concurrents
+n'ont pas mise à jour — exactement le type de passage qu'une IA cite. Et c'est
+la base légale du chantier du jour.
+Source : `legifrance.gouv.fr/loda/article_lc/LEGIARTI000049568614`.
+
+**5. ⚙️ Un hébergeur se cite depuis sa propre politique de confidentialité, pas
+depuis un souvenir.** L'article 1-1 impose de nommer l'hébergeur. `vercel.com/contact`
+ne donne aucune adresse postale ; **`vercel.com/legal/privacy-policy`, section
+« Contact Us », la donne en clair** : « Vercel Inc. », « 440 N Barranca Avenue
+#4133 Covina, CA 91723 United States ». À réutiliser tel quel, et à revérifier
+le jour où l'hébergement change.
+
+**6. ⚙️ Vérifier qu'un crawler n'est pas bloqué se fait avec son User-Agent, pas
+en relisant `robots.txt`.** Le journal concluait « site sain » depuis le 07/09
+sur la lecture du dépôt. Le contrôle qui manquait tient en une ligne et il est
+désormais fait, négatif :
+`curl -s -o /dev/null -D - -A "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)" https://www.hcetp.com/`
+→ **200**, aucun `x-robots-tag`, aucun `Set-Cookie`. Cela écarte une protection
+de déploiement Vercel ou un pare-feu applicatif, qui auraient rendu un 401/403
+**uniquement** sur l'UA du robot. **À refaire seulement si l'hébergement ou le
+domaine change.**
+
+**7. ⚙️ Ne pas conclure sur une seule mesure réseau.** Le premier `curl` sur
+l'apex `https://hcebtp.com/` a rendu un **code 000** (échec de connexion), ce
+qui aurait pu se journaliser en « l'apex est tombé ». Le second appel, en mode
+verbeux, a montré un **308 propre vers `https://www.hcetp.com/`**. L'aléa était
+dans le réseau du runner, pas sur le domaine. **Toute mesure réseau négative se
+confirme par un second appel avant d'être écrite.**
 
 ### 07/10/2026 — ⚙️ Trois acquis : relever le graphe des liens internes en 15 lignes, le piège du `pkill` qui tue le run, et 📚 `WebSearch` ne rend pas une SERP française exploitable pour juger un concurrent
 

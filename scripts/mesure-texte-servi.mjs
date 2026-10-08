@@ -40,6 +40,7 @@ const SITEMAP = [
   "/realisations/parking-voirie-pro",
   "/realisations/preparation-terrassement",
   "/realisations/chantier-en-cours",
+  "/mentions-legales",
 ];
 
 const base = (process.argv[2] ?? "https://www.hcetp.com").replace(/\/$/, "");

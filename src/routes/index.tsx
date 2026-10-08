@@ -2188,6 +2188,13 @@ function Footer() {
           value={v("footer", "copyright", "© 2025 HCE SARL · Tous droits réservés")}
           as="span"
         />
+        {/* Lien vers les mentions légales. Volontairement un `Link` brut et non
+            un `EditableText` : c'est une obligation légale (article 1-1 de la
+            LCEN), elle ne doit pas pouvoir être vidée depuis le mode
+            d'administration, et elle n'a pas à transiter par la base. */}
+        <Link to="/mentions-legales" className="transition-colors hover:text-gold">
+          Mentions légales
+        </Link>
         <EditableText
           section="footer"
           field="meta"

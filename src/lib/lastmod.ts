@@ -42,6 +42,7 @@ export const PAGE_UPDATED = {
   "/realisations/cour-allee-privee": { iso: "2026-09-23", label: "23 septembre 2026" },
   "/realisations/parking-voirie-pro": { iso: "2026-09-22", label: "22 septembre 2026" },
   "/realisations/preparation-terrassement": { iso: "2026-09-25", label: "25 septembre 2026" },
+  "/mentions-legales": { iso: "2026-10-08", label: "8 octobre 2026" },
 } satisfies Record<string, PageUpdate>;
 
 export type UpdatedPath = keyof typeof PAGE_UPDATED;

@@ -43,6 +43,7 @@ export const Route = createFileRoute("/sitemap.xml")({
           { path: "/realisations/parking-voirie-pro", changefreq: "weekly", priority: "0.7" },
           { path: "/realisations/preparation-terrassement", changefreq: "weekly", priority: "0.7" },
           { path: "/realisations/chantier-en-cours", changefreq: "weekly", priority: "0.7" },
+          { path: "/mentions-legales", changefreq: "yearly", priority: "0.3" },
         ];
 
         const urls = entries.map((e) =>

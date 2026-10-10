@@ -9,48 +9,28 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as ZoneInterventionRouteImport } from './routes/zone-intervention'
-import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
-import { Route as SigninRouteImport } from './routes/signin'
-import { Route as ResetPasswordRouteImport } from './routes/reset-password'
-import { Route as MentionsLegalesRouteImport } from './routes/mentions-legales'
-import { Route as DemoRouteImport } from './routes/demo'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as RealisationsIndexRouteImport } from './routes/realisations.index'
-import { Route as ServicesGarantieSavRouteImport } from './routes/services.garantie-sav'
-import { Route as ServicesSlugRouteImport } from './routes/services.$slug'
-import { Route as RealisationsAvantApresRouteImport } from './routes/realisations.avant-apres'
-import { Route as RealisationsSlugRouteImport } from './routes/realisations.$slug'
+import { Route as DemoRouteImport } from './routes/demo'
+import { Route as MentionsLegalesRouteImport } from './routes/mentions-legales'
+import { Route as ResetPasswordRouteImport } from './routes/reset-password'
+import { Route as SigninRouteImport } from './routes/signin'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as ZoneInterventionRouteImport } from './routes/zone-intervention'
 import { Route as EmailUnsubscribeRouteImport } from './routes/email/unsubscribe'
-import { Route as LovableEmailSuppressionRouteImport } from './routes/lovable/email/suppression'
+import { Route as RealisationsIndexRouteImport } from './routes/realisations.index'
+import { Route as RealisationsSlugRouteImport } from './routes/realisations.$slug'
+import { Route as RealisationsAvantApresRouteImport } from './routes/realisations.avant-apres'
+import { Route as ServicesSlugRouteImport } from './routes/services.$slug'
+import { Route as ServicesGarantieSavRouteImport } from './routes/services.garantie-sav'
 import { Route as ApiPublicDevisRouteImport } from './routes/api/public/devis'
-import { Route as LovableEmailTransactionalSendRouteImport } from './routes/lovable/email/transactional/send'
-import { Route as LovableEmailTransactionalPreviewRouteImport } from './routes/lovable/email/transactional/preview'
+import { Route as LovableEmailSuppressionRouteImport } from './routes/lovable/email/suppression'
 import { Route as LovableEmailQueueProcessRouteImport } from './routes/lovable/email/queue/process'
+import { Route as LovableEmailTransactionalPreviewRouteImport } from './routes/lovable/email/transactional/preview'
+import { Route as LovableEmailTransactionalSendRouteImport } from './routes/lovable/email/transactional/send'
 
-const ZoneInterventionRoute = ZoneInterventionRouteImport.update({
-  id: '/zone-intervention',
-  path: '/zone-intervention',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
-  id: '/sitemap.xml',
-  path: '/sitemap.xml',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const SigninRoute = SigninRouteImport.update({
-  id: '/signin',
-  path: '/signin',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ResetPasswordRoute = ResetPasswordRouteImport.update({
-  id: '/reset-password',
-  path: '/reset-password',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const MentionsLegalesRoute = MentionsLegalesRouteImport.update({
-  id: '/mentions-legales',
-  path: '/mentions-legales',
+const IndexRoute = IndexRouteImport.update({
+  id: '/',
+  path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DemoRoute = DemoRouteImport.update({
@@ -58,34 +38,29 @@ const DemoRoute = DemoRouteImport.update({
   path: '/demo',
   getParentRoute: () => rootRouteImport,
 } as any)
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
+const MentionsLegalesRoute = MentionsLegalesRouteImport.update({
+  id: '/mentions-legales',
+  path: '/mentions-legales',
   getParentRoute: () => rootRouteImport,
 } as any)
-const RealisationsIndexRoute = RealisationsIndexRouteImport.update({
-  id: '/realisations/',
-  path: '/realisations/',
+const ResetPasswordRoute = ResetPasswordRouteImport.update({
+  id: '/reset-password',
+  path: '/reset-password',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ServicesGarantieSavRoute = ServicesGarantieSavRouteImport.update({
-  id: '/services/garantie-sav',
-  path: '/services/garantie-sav',
+const SigninRoute = SigninRouteImport.update({
+  id: '/signin',
+  path: '/signin',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ServicesSlugRoute = ServicesSlugRouteImport.update({
-  id: '/services/$slug',
-  path: '/services/$slug',
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
   getParentRoute: () => rootRouteImport,
 } as any)
-const RealisationsAvantApresRoute = RealisationsAvantApresRouteImport.update({
-  id: '/realisations/avant-apres',
-  path: '/realisations/avant-apres',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const RealisationsSlugRoute = RealisationsSlugRouteImport.update({
-  id: '/realisations/$slug',
-  path: '/realisations/$slug',
+const ZoneInterventionRoute = ZoneInterventionRouteImport.update({
+  id: '/zone-intervention',
+  path: '/zone-intervention',
   getParentRoute: () => rootRouteImport,
 } as any)
 const EmailUnsubscribeRoute = EmailUnsubscribeRouteImport.update({
@@ -93,9 +68,29 @@ const EmailUnsubscribeRoute = EmailUnsubscribeRouteImport.update({
   path: '/email/unsubscribe',
   getParentRoute: () => rootRouteImport,
 } as any)
-const LovableEmailSuppressionRoute = LovableEmailSuppressionRouteImport.update({
-  id: '/lovable/email/suppression',
-  path: '/lovable/email/suppression',
+const RealisationsIndexRoute = RealisationsIndexRouteImport.update({
+  id: '/realisations/',
+  path: '/realisations/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RealisationsSlugRoute = RealisationsSlugRouteImport.update({
+  id: '/realisations/$slug',
+  path: '/realisations/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RealisationsAvantApresRoute = RealisationsAvantApresRouteImport.update({
+  id: '/realisations/avant-apres',
+  path: '/realisations/avant-apres',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServicesSlugRoute = ServicesSlugRouteImport.update({
+  id: '/services/$slug',
+  path: '/services/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServicesGarantieSavRoute = ServicesGarantieSavRouteImport.update({
+  id: '/services/garantie-sav',
+  path: '/services/garantie-sav',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ApiPublicDevisRoute = ApiPublicDevisRouteImport.update({
@@ -103,10 +98,15 @@ const ApiPublicDevisRoute = ApiPublicDevisRouteImport.update({
   path: '/api/public/devis',
   getParentRoute: () => rootRouteImport,
 } as any)
-const LovableEmailTransactionalSendRoute =
-  LovableEmailTransactionalSendRouteImport.update({
-    id: '/lovable/email/transactional/send',
-    path: '/lovable/email/transactional/send',
+const LovableEmailSuppressionRoute = LovableEmailSuppressionRouteImport.update({
+  id: '/lovable/email/suppression',
+  path: '/lovable/email/suppression',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LovableEmailQueueProcessRoute =
+  LovableEmailQueueProcessRouteImport.update({
+    id: '/lovable/email/queue/process',
+    path: '/lovable/email/queue/process',
     getParentRoute: () => rootRouteImport,
   } as any)
 const LovableEmailTransactionalPreviewRoute =
@@ -115,10 +115,10 @@ const LovableEmailTransactionalPreviewRoute =
     path: '/lovable/email/transactional/preview',
     getParentRoute: () => rootRouteImport,
   } as any)
-const LovableEmailQueueProcessRoute =
-  LovableEmailQueueProcessRouteImport.update({
-    id: '/lovable/email/queue/process',
-    path: '/lovable/email/queue/process',
+const LovableEmailTransactionalSendRoute =
+  LovableEmailTransactionalSendRouteImport.update({
+    id: '/lovable/email/transactional/send',
+    path: '/lovable/email/transactional/send',
     getParentRoute: () => rootRouteImport,
   } as any)
 
@@ -269,39 +269,11 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/zone-intervention': {
-      id: '/zone-intervention'
-      path: '/zone-intervention'
-      fullPath: '/zone-intervention'
-      preLoaderRoute: typeof ZoneInterventionRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/sitemap.xml': {
-      id: '/sitemap.xml'
-      path: '/sitemap.xml'
-      fullPath: '/sitemap.xml'
-      preLoaderRoute: typeof SitemapDotxmlRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/signin': {
-      id: '/signin'
-      path: '/signin'
-      fullPath: '/signin'
-      preLoaderRoute: typeof SigninRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/reset-password': {
-      id: '/reset-password'
-      path: '/reset-password'
-      fullPath: '/reset-password'
-      preLoaderRoute: typeof ResetPasswordRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/mentions-legales': {
-      id: '/mentions-legales'
-      path: '/mentions-legales'
-      fullPath: '/mentions-legales'
-      preLoaderRoute: typeof MentionsLegalesRouteImport
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/demo': {
@@ -311,46 +283,39 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DemoRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
+    '/mentions-legales': {
+      id: '/mentions-legales'
+      path: '/mentions-legales'
+      fullPath: '/mentions-legales'
+      preLoaderRoute: typeof MentionsLegalesRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/realisations/': {
-      id: '/realisations/'
-      path: '/realisations'
-      fullPath: '/realisations/'
-      preLoaderRoute: typeof RealisationsIndexRouteImport
+    '/reset-password': {
+      id: '/reset-password'
+      path: '/reset-password'
+      fullPath: '/reset-password'
+      preLoaderRoute: typeof ResetPasswordRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/services/garantie-sav': {
-      id: '/services/garantie-sav'
-      path: '/services/garantie-sav'
-      fullPath: '/services/garantie-sav'
-      preLoaderRoute: typeof ServicesGarantieSavRouteImport
+    '/signin': {
+      id: '/signin'
+      path: '/signin'
+      fullPath: '/signin'
+      preLoaderRoute: typeof SigninRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/services/$slug': {
-      id: '/services/$slug'
-      path: '/services/$slug'
-      fullPath: '/services/$slug'
-      preLoaderRoute: typeof ServicesSlugRouteImport
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/realisations/avant-apres': {
-      id: '/realisations/avant-apres'
-      path: '/realisations/avant-apres'
-      fullPath: '/realisations/avant-apres'
-      preLoaderRoute: typeof RealisationsAvantApresRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/realisations/$slug': {
-      id: '/realisations/$slug'
-      path: '/realisations/$slug'
-      fullPath: '/realisations/$slug'
-      preLoaderRoute: typeof RealisationsSlugRouteImport
+    '/zone-intervention': {
+      id: '/zone-intervention'
+      path: '/zone-intervention'
+      fullPath: '/zone-intervention'
+      preLoaderRoute: typeof ZoneInterventionRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/email/unsubscribe': {
@@ -360,11 +325,39 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EmailUnsubscribeRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/lovable/email/suppression': {
-      id: '/lovable/email/suppression'
-      path: '/lovable/email/suppression'
-      fullPath: '/lovable/email/suppression'
-      preLoaderRoute: typeof LovableEmailSuppressionRouteImport
+    '/realisations/': {
+      id: '/realisations/'
+      path: '/realisations'
+      fullPath: '/realisations/'
+      preLoaderRoute: typeof RealisationsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/realisations/$slug': {
+      id: '/realisations/$slug'
+      path: '/realisations/$slug'
+      fullPath: '/realisations/$slug'
+      preLoaderRoute: typeof RealisationsSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/realisations/avant-apres': {
+      id: '/realisations/avant-apres'
+      path: '/realisations/avant-apres'
+      fullPath: '/realisations/avant-apres'
+      preLoaderRoute: typeof RealisationsAvantApresRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/services/$slug': {
+      id: '/services/$slug'
+      path: '/services/$slug'
+      fullPath: '/services/$slug'
+      preLoaderRoute: typeof ServicesSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/services/garantie-sav': {
+      id: '/services/garantie-sav'
+      path: '/services/garantie-sav'
+      fullPath: '/services/garantie-sav'
+      preLoaderRoute: typeof ServicesGarantieSavRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/public/devis': {
@@ -374,11 +367,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiPublicDevisRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/lovable/email/transactional/send': {
-      id: '/lovable/email/transactional/send'
-      path: '/lovable/email/transactional/send'
-      fullPath: '/lovable/email/transactional/send'
-      preLoaderRoute: typeof LovableEmailTransactionalSendRouteImport
+    '/lovable/email/suppression': {
+      id: '/lovable/email/suppression'
+      path: '/lovable/email/suppression'
+      fullPath: '/lovable/email/suppression'
+      preLoaderRoute: typeof LovableEmailSuppressionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/lovable/email/queue/process': {
+      id: '/lovable/email/queue/process'
+      path: '/lovable/email/queue/process'
+      fullPath: '/lovable/email/queue/process'
+      preLoaderRoute: typeof LovableEmailQueueProcessRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/lovable/email/transactional/preview': {
@@ -388,11 +388,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LovableEmailTransactionalPreviewRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/lovable/email/queue/process': {
-      id: '/lovable/email/queue/process'
-      path: '/lovable/email/queue/process'
-      fullPath: '/lovable/email/queue/process'
-      preLoaderRoute: typeof LovableEmailQueueProcessRouteImport
+    '/lovable/email/transactional/send': {
+      id: '/lovable/email/transactional/send'
+      path: '/lovable/email/transactional/send'
+      fullPath: '/lovable/email/transactional/send'
+      preLoaderRoute: typeof LovableEmailTransactionalSendRouteImport
       parentRoute: typeof rootRouteImport
     }
   }

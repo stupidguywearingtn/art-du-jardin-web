@@ -4443,9 +4443,11 @@ de suite.**
 > 🆕 **MISE À JOUR DU 11/10/2026 — prime sur tout ce qui suit.**
 > ✅ Dette de vérification en ligne : **purgée** (prod = dernier commit).
 > ✅ `/arnaque-goudronnage` : **faite**.
-> 1. **Prochain run : vérifier en prod** `/arnaque-goudronnage` (200, ~10 646
->    car., `verif-faq` 6/6, `verif-lastmod` 15 URLs) puis relancer
->    `indexnow-submit.mjs` (15 URLs).
+> 1. ✅ **Vérifié en prod le 11/10 après push** (`41f406e`, `success` en ~60 s) :
+>    `/arnaque-goudronnage` 200, 10 646 car., FAQ 6/6, lastmod 15 URLs, rendu
+>    mobile propre (capture), `llms.txt` « 11 octobre 2026 ». IndexNow : la
+>    liste du script n'avait que 13 URLs (manquaient `/mentions-legales` et la
+>    nouvelle page) → corrigée, **15 URLs soumises, HTTP 200**.
 > 2. **Migration runtime `nodejs24.x`** : désormais possible (déblocage fait),
 >    mais elle touche `package.json` (`engines`) → **hors périmètre de la
 >    routine, à proposer à Yanis**, pas à faire seul.

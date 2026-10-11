@@ -34,6 +34,8 @@ const PATHS = [
   "/realisations/parking-voirie-pro",
   "/realisations/preparation-terrassement",
   "/realisations/chantier-en-cours",
+  "/mentions-legales",
+  "/arnaque-goudronnage",
 ];
 
 async function main() {

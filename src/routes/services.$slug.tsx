@@ -965,6 +965,20 @@ function ServicePageBody() {
                           Les quatre types de chantiers, et ce qui encadre un devis : TVA, délais, accès.
                         </p>
                       </li>
+                      {slug === "enrobe-a-chaud" && (
+                        <li>
+                          <Link
+                            to="/arnaque-goudronnage"
+                            className="text-gold border-b border-gold/40 pb-0.5 hover:text-foreground transition-colors"
+                            style={{ fontFamily: "var(--font-body)", fontSize: 16 }}
+                          >
+                            Arnaque au goudronnage : les signes
+                          </Link>
+                          <p className="mt-2 text-muted" style={{ fontSize: 15, lineHeight: 1.6 }}>
+                            Reconnaître l'offre « avec l'enrobé qui reste » et vérifier une entreprise avant de signer.
+                          </p>
+                        </li>
+                      )}
                     </ul>
                   </div>
                 )}

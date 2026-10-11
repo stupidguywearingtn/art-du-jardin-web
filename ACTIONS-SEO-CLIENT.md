@@ -1,5 +1,17 @@
 # SEO — les 4 actions que seul le client peut faire
 
+> ✅ **11/10/2026 — le site se met de nouveau à jour en ligne** (correctif de
+> déploiement validé le 10/10). Tout le travail des dix derniers jours est
+> visible, dont les mentions légales. Les relances « ACTION 0 / déploiement en
+> échec » ci-dessous sont **closes**. Restent en attente de votre part : les
+> quatre informations des mentions légales (bloc du 08/10) et la graphie de
+> l'adresse. Nouveauté : une page « Arnaque au goudronnage : les signes »
+> (`/arnaque-goudronnage`) qui renvoie vers vos preuves de sérieux (SIRET,
+> adresse, devis détaillé, garantie décennale) — si vous avez une attestation
+> d'assurance décennale à jour, la tenir prête pour la joindre aux devis la
+> rend encore plus forte.
+
+
 > 🆕 **08/10/2026 — UNE PAGE DE MENTIONS LÉGALES A ÉTÉ CRÉÉE, ET IL MANQUE
 > QUATRE INFORMATIONS QUE SEUL VOUS AVEZ. Ça prend cinq minutes et c'est la
 > seule nouveauté du jour qui demande quelque chose de votre part.**

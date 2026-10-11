@@ -1,0 +1,596 @@
+# Archive du SEO-JOURNAL — entrées de plus de 30 jours
+
+Déplacées hors de `SEO-JOURNAL.md` le 11/10/2026 pour alléger la lecture de début de run.
+Contenu inchangé. Les « Techniques apprises » sont restées dans le journal (ce sont des règles, pas un historique).
+
+<!-- section d'origine : Positions mesurées -->
+### Positions mesurées — 07/09/2026 (métrique erronée, voir 08/09)
+
+| Requête | Bing FR (07/09/2026) | Google |
+|---|---|---|
+| `enrobé à chaud Jura` | absent | non mesuré |
+| `enrobé à chaud Ain` | absent | non mesuré |
+| `entreprise travaux publics Jura` | absent | non mesuré |
+| `réfection parking enrobé Jura` | absent | non mesuré |
+| `terrassement Jura` | absent | non mesuré |
+| `goudronnage cour maison Jura` | absent | non mesuré |
+| marque `hcebtp` | absent | non mesuré |
+| `site:hcebtp.com` | **0 résultat** | non mesuré |
+
+<!-- section d'origine : Positions mesurées -->
+### Positions mesurées — 08/09/2026
+
+| Requête | Bing FR (08/09/2026) | Évolution vs 07/09 |
+|---|---|---|
+| `enrobé à chaud Jura` | absent | inchangé |
+| `enrobé à chaud Ain` | absent | inchangé |
+| `entreprise travaux publics Jura` | absent | inchangé |
+| `réfection parking enrobé Jura` | absent | inchangé |
+| `terrassement Jura` | absent | inchangé |
+| `goudronnage cour maison Jura` | absent | inchangé |
+| marque `hcebtp` | absent (SERP renvoie du spam sans rapport) | inchangé |
+| `site:hcebtp.com` | **0 résultat** | inchangé |
+
+**Toujours aucune indexation au 08/09/2026**, 1 jour après la première
+soumission IndexNow. Normal : le délai usuel se compte en jours à semaines, et
+IndexNow ne concerne pas Google.
+
+> ⚠️ **Correction de méthode de mesure — important, ne pas retomber dedans.**
+> Le journal du 07/09 définissait « absent » comme « zéro occurrence de la chaîne
+> `hcebtp` dans le HTML de la SERP ». **Cette métrique est fausse** : la requête
+> elle-même est réinjectée par Bing dans le `<title>`, l'`og:url`, le champ de
+> recherche et la pagination. Mesuré aujourd'hui, `site:hcebtp.com` donne
+> **22 occurrences de `hcebtp` pour zéro résultat réel**, et la requête de marque
+> 23 occurrences pour zéro résultat. Le comptage d'occurrences ne dit donc rien
+> dès que la requête contient le mot cherché.
+> **La bonne métrique : compter les liens de résultat**, c'est-à-dire les
+> `href="…hcebtp.com…"` présents dans la SERP. Vérifier en plus que les `<h2>`
+> de la page sont bien des résultats pertinents — sur la requête de marque, Bing
+> a renvoyé des pages « Kalyan Chart » sans aucun rapport, ce qui est la signature
+> d'un index qui ne connaît rien sur le sujet.
+
+« Absent » = zéro lien `hcebtp.com` dans la page de résultats.
+
+<!-- section d'origine : Positions mesurées -->
+### Positions mesurées — 09/09/2026
+
+**Lire d'abord l'encadré ci-dessous : le canal de mesure de Bing a cassé
+aujourd'hui.** Aucune valeur par requête n'est fiable ce jour. Les noter « absent »
+serait inventer une continuité qui n'existe pas — c'est précisément l'erreur du
+07/09 sous une autre forme.
+
+| Requête | Bing (09/09/2026) | Évolution vs 08/09 |
+|---|---|---|
+| `enrobé à chaud Jura` | **non mesurable** (canal invalide) | indéterminé |
+| `enrobé à chaud Ain` | **non mesurable** | indéterminé |
+| `entreprise travaux publics Jura` | **non mesurable** | indéterminé |
+| `réfection parking enrobé Jura` | **non mesurable** | indéterminé |
+| `terrassement Jura` | **non mesurable** | indéterminé |
+| `goudronnage cour maison Jura` | **non mesurable** | indéterminé |
+| marque `hcebtp` | **non mesurable** | indéterminé |
+| `site:hcebtp.com` | **non mesurable** | indéterminé |
+
+**Ce qui est établi aujourd'hui malgré tout : le site n'est toujours pas indexé.**
+La preuve ne vient pas de Bing mais de `WebSearch`, dont le résultat est
+exploitable : sur `hcebtp.com HCE enrobé Cize Jura`, **aucune page du domaine ne
+ressort**, alors que la requête nomme explicitement le domaine et que quatre
+fiches d'entreprise décrivant HCE, elles, remontent. Un domaine indexé serait
+sorti en tête sur une requête pareille.
+
+Nous sommes à 2 jours de la première soumission IndexNow : toujours dans le délai
+normal, rien à en conclure.
+
+Constat qui oriente tout le reste : **le domaine est inconnu des moteurs, mais
+l'entreprise, elle, est déjà connue** — quatre annuaires la décrivent. Le problème
+est bien le rattachement des deux, pas la notoriété.
+
+> ⚠️ **La méthode de mesure du 08/09 est morte aujourd'hui — lire ceci avant de
+> mesurer quoi que ce soit.**
+> Le SERP HTML de Bing est désormais protégé par un **challenge de preuve de
+> travail JavaScript** (`PoWConfig` dans la page). En curl, on reçoit une coquille
+> sans aucun résultat : zéro domaine externe, y compris **sur des requêtes de
+> contrôle qui ont forcément des résultats** (`colas enrobé`). Les quelques titres
+> présents sont des suggestions sans rapport (Outlook, Recycle Bin…), ce qui donne
+> l'illusion d'un SERP réel. **Compter les liens de résultat dans ce HTML produit
+> donc « absent » pour tout, y compris pour des sites parfaitement indexés.**
+> **Le contournement qui marche : `&format=rss`.** `https://www.bing.com/search?q=…&format=rss`
+> renvoie du XML propre, sans JavaScript et sans challenge. Vérifié aujourd'hui sur
+> `colas enrobé` → colas.com, Wikipédia, colasquebec.ca : de vrais résultats.
+> **Deux précautions obligatoires :**
+> 1. **Une requête à la fois, espacées.** Enchaînées rapidement, les réponses RSS
+>    dérivent vers des résultats sans aucun rapport avec la requête (sites médicaux
+>    japonais pour « enrobé à chaud Jura », zhihu.com pour `site:hcebtp.com`).
+>    Toujours regarder si les domaines renvoyés sont plausibles pour la requête ; si
+>    non, **la mesure est invalide, ce n'est pas un « absent »**.
+> 2. **Exclure les liens de Bing lui-même** avant de compter : le flux RSS répète la
+>    requête dans deux balises `<link>` de tête, donc `site:hcebtp.com` fait
+>    apparaître « 2 liens hcebtp.com » qui ne sont pas des résultats. C'est la même
+>    erreur qu'au 07/09, sous une autre forme.
+
+**Limite de mesure à connaître** (à ne pas re-découvrir demain) :
+- L'outil `WebSearch` est un moteur généraliste US qui **ignore l'opérateur
+  `site:`** — il renvoie des pages Wikipédia sans rapport. Ne pas s'en servir
+  pour tester l'indexation, ça donne un faux négatif inexploitable.
+  **Nuance ajoutée le 09/09/2026 : il reste inutile pour `site:`, mais c'est le
+  meilleur outil disponible pour trouver les mentions externes de l'entreprise.**
+  C'est lui qui a fait apparaître aujourd'hui les quatre fiches d'annuaire
+  (societe.com, pappers, verif, 118000) que trois runs de scraping Bing n'avaient
+  jamais vues. À utiliser à chaque run avec des requêtes de type
+  `HCE enrobé Cize Jura`, `H.C.E. HINI COURS ENROBE`, `521683573`.
+- **Google est inatteignable depuis le runner** (pas de SERP brute), et
+  DuckDuckGo renvoie un captcha.
+- **Bing en curl fonctionne** et accepte `&setlang=fr&cc=FR` : c'est la seule
+  mesure fiable disponible aujourd'hui. Comme Bing alimente Copilot et la
+  recherche web de ChatGPT, c'est aussi la mesure la plus utile côté GEO.
+- Le parseur de SERP dans `bingq.py` (scratchpad, non commité) n'a **pas** réussi
+  à extraire les domaines concurrents : le sélecteur `li.b_algo` ne correspond
+  plus au markup actuel. Le comptage d'occurrences de `hcebtp`, lui, est fiable.
+  À refaire proprement pour pouvoir suivre les concurrents.
+
+<!-- section d'origine : Positions mesurées -->
+### Positions mesurées — 10/09/2026
+
+**Indexation : toujours nulle.** Établi par `WebSearch` (le seul canal exploitable
+aujourd'hui) : sur `hcebtp.com HCE Hini Cours Enrobé Cize`, **aucune page du domaine
+ne ressort**, alors que huit fiches d'entreprise décrivant HCE remontent (pappers,
+verif, kompass, societe, 118000, manageo, batiment.cc…). Un domaine indexé serait
+sorti en tête sur une requête qui le nomme. Même constat qu'au 09/09 : entreprise
+connue, domaine inconnu. Nous sommes à 3 jours de la 1re soumission IndexNow — délai
+encore normal.
+
+| Requête | Mesure (10/09/2026) |
+|---|---|
+| `site:hcebtp.com` (indexation) | **absent** (via WebSearch nommant le domaine) |
+| requêtes commerciales | **non mesurables ce jour** (voir encadré) |
+
+> ⚠️ **Aucun canal de SERP brut n'a fonctionné aujourd'hui — ne pas noter « absent »
+> par requête, ce serait inventer une continuité (erreur du 07/09).**
+> - **Bing RSS (`&format=rss`)** : dérive totale. Requête témoin `colas enrobe` →
+>   annonces immobilières allemandes ; `enrobe a chaud Jura` → sites d'université
+>   mexicaine (buap.mx). Le témoin prouve que le canal est mort, pas le site absent.
+>   La précaution du 09/09 (requête témoin obligatoire) a encore payé.
+> - **Mojeek** : HTTP 403. **DuckDuckGo lite/html** : `anomaly` (captcha) / code 000.
+>   **Ecosia** : 403. **Marginalia** : 302. Aucun exploitable en curl aujourd'hui.
+> - **`WebSearch`** reste utile pour l'indexation (nommer le domaine) et les
+>   mentions externes, mais ignore toujours `site:`.
+
+**Fiche externe découverte et vérifiée : manageo.fr.** `WebSearch` sur
+`hcebtp.com HCE Hini Cours Enrobé Cize` a fait remonter plusieurs annuaires. Une
+seule était lisible depuis le runner **et** porte l'adresse actuelle :
+`manageo.fr/entreprises/521683573.html` (HTTP 200, 86 Ko), qui affiche
+« ENTREPRISE H.C.E. - HINI - COURS - ENROBE », SIRET siège **52168357300039** et
+adresse **« 40 AVENUE ETIENNE LAMY 39300 CIZE »** — l'actuelle, pas l'ancienne
+« 36 » ni Champagnole. Ajoutée en `sameAs` (voir chantier du jour).
+
+Les autres restent invérifiables ou périmées depuis le runner :
+- **kompass.fr** (405), **verif.com** (403), **pappers.fr** (403),
+  **batiment.cc** (403) : contenu non lisible. verif/kompass affichent d'ailleurs
+  l'**ancienne** adresse (« 36 avenue Etienne Lamy » / Champagnole) d'après les
+  extraits de recherche — périmées, à ne pas citer.
+- **nosartisansontdutalent.fr** : bloqué par la politique réseau du runner
+  (`connect_rejected`). Non vérifiable ici.
+
+<!-- section d'origine : Chantiers faits -->
+### 07/09/2026 — Découvrabilité du domaine (commit `11aa697`)
+
+Chantier choisi parce que **tout le reste est inutile tant que rien n'est
+indexé** : améliorer un contenu que personne ne crawle ne rapporte rien.
+
+1. **Cohérence d'hôte.** L'apex répond 308 vers `www`, mais `canonical`,
+   `og:url`, le sitemap, `robots.txt` et les `url` des données structurées
+   pointaient tous vers l'apex. Le crawler recevait donc une URL canonique qui
+   redirige ailleurs — signal de canonicalisation contradictoire. Tout aligné sur
+   `https://www.hcebtp.com`.
+2. **Canonical ajouté** sur `/realisations/$slug` et `/realisations/avant-apres`,
+   qui n'en avaient aucun alors que les 5 URLs sont dans le sitemap.
+3. **IndexNow activé.** Clé publique `public/051b2d7c5dec4c46e59a45f33361b9ff.txt`
+   + `scripts/indexnow-submit.mjs` (soumet les 12 URLs du sitemap). Notifie Bing,
+   Yandex, Seznam, Naver. Google ne participe pas au protocole.
+   **Soumission effectuée le 07/09/2026 après déploiement : les 12 URLs sont
+   parties, réponse HTTP 202** (= reçu, clé en cours de vérification — c'est la
+   réponse attendue pour un domaine encore inconnu des moteurs). Fichier clé
+   vérifié en ligne en 200 avant l'envoi. **C'est le premier signal jamais
+   envoyé à un moteur pour ce domaine.** Le relancer après chaque modification
+   de contenu : `node scripts/indexnow-submit.mjs`.
+4. **`llms.txt` réécrit.** Il contenait trois affirmations en contradiction
+   directe avec le site et avec les consignes du client : « depuis 2005 »,
+   « devis gratuit sous 48h », « 160°C ». C'est le fichier que lisent les IA :
+   il leur servait de fausses informations. Réécrit en mode GEO — réponse directe
+   et autonome sous chaque question, questions formulées comme on les pose à voix
+   haute, date de mise à jour visible, chiffres du client uniquement, URLs
+   absolues.
+5. **`ACTIONS-SEO-CLIENT.md`** créé : les 4 leviers de découverte côté Google qui
+   ne peuvent pas être actionnés depuis le repo (Search Console, fiche
+   d'établissement, cohérence NAP, premiers liens entrants).
+
+**Vérifié en ligne après déploiement** : `canonical` et `og:url` en
+`https://www.hcebtp.com/` sur l'accueil, canonical présent sur
+`/realisations/cour-allee-privee`, sitemap servi avec 12 URLs en `www`,
+`robots.txt` pointant vers le sitemap `www`, fichier clé IndexNow en 200.
+
+**Ce que j'ai décidé de NE PAS faire, et pourquoi :**
+- **Ne pas toucher `src/lib/optimizeImage.ts`** malgré son `https://hcebtp.com`
+  sans `www` : ce chemin sert les images via wsrv.nl et fonctionne. Gain SEO nul,
+  risque d'affichage réel.
+- **Ne pas ajouter de `lastmod`** au sitemap : je n'ai pas de date de
+  modification honnête par page, et une date inventée ou générée au build est un
+  signal faux que les moteurs apprennent à ignorer.
+- **Ne pas réécrire les titres des pages `/realisations/*`** aujourd'hui, bien
+  que le défaut soit réel : un seul chantier mené à fond vaut mieux que deux à
+  moitié. Mis en tête des chantiers en attente.
+- **Ne pas ajouter de crawlers IA nommés dans `robots.txt`** : `User-agent: *`
+  + `Allow: /` les autorise déjà tous. Les lister n'ajoute rien et crée une
+  liste à maintenir.
+
+<!-- section d'origine : Chantiers faits -->
+### 07/09/2026 (2e run) — NAP complet et consolidation de l'entité
+
+**Contexte à connaître avant tout : deux runs ont tourné le même jour.** Le
+premier (`11aa697`, 13h23 UTC) a traité la découvrabilité. Ce second run a
+démarré en parallèle sans voir son travail, et a d'abord reproduit une partie du
+même chantier (réécriture de `llms.txt`, document client sur les citations)
+avant de trouver `origin/main` en avance au moment du push. **Le travail
+dupliqué a été jeté, pas forcé** : la version `llms.txt` du premier run est
+meilleure côté GEO (questions posées à voix haute, réponse autonome sous chaque
+titre) et elle a été conservée telle quelle ; le document `CITATIONS-NAP.md` qui
+faisait doublon avec `ACTIONS-SEO-CLIENT.md` n'a jamais été commité. Seul ce qui
+était réellement nouveau a été gardé.
+
+**Chantier retenu : le NAP**, parce que c'est le point que le premier run avait
+explicitement laissé ouvert (chantier en attente n°7, et action 3 du fichier
+client) — et parce que son blocage n'existait pas.
+
+1. **L'adresse postale complète était déjà publiée sur le site.**
+   `ACTIONS-SEO-CLIENT.md` la donnait comme « non publiée, à confirmer par le
+   client ». C'est faux : le pied de page de l'accueil affiche
+   `40 avenue Etienne Lamy, 39300 Cize`, ainsi que l'email `sarl.hce@laposte.net`
+   et les horaires `Lun-Ven 8h-18h · Sam 8h-12h` (`src/routes/index.tsx`, section
+   Footer). Il n'y avait donc rien à demander au client : l'information était sous
+   la main. Fichier client corrigé en conséquence.
+2. **`LocalBusiness` complété.** Il ne portait que la ville. Ajout de
+   `streetAddress`, `postalCode`, `geo`, `email`, `legalName`, `logo`,
+   `foundingDate` (2012) et `openingHoursSpecification`. Chaque valeur est reprise
+   à l'identique du pied de page visible : pas de mismatch possible entre le
+   JSON-LD et le rendu. C'est le signal local fort qui manquait.
+3. **Entité consolidée par `@id`.** Le site émettait trois nœuds schema.org
+   décrivant « HCE » sans lien entre eux : `Organization` dans `__root.tsx` (sur
+   toutes les pages), `LocalBusiness` sur l'accueil, et le `provider` des pages
+   `/services/*`. Ils portent maintenant tous
+   `@id: https://www.hcebtp.com/#business` — une entité au lieu de trois
+   concurrentes. L'`Organization` et le `provider` ont aussi reçu l'adresse
+   complète.
+4. **Bug corrigé, visible par le visiteur.** `src/components/InteractiveMap.tsx`
+   plaçait le marqueur « Cize · Siège » en **46.244/5.464**, qui sont les
+   coordonnées de **Cize (01250), dans l'Ain**. Le siège réel est **Cize (39300),
+   Jura**, en **46.726/5.914** (sources : cartesfrance.fr, communes.com), soit
+   ~55 km plus au nord. Sur une section intitulée « Zone d'intervention », d'un
+   site qui se positionne sur « enrobé Jura », le siège était affiché dans le
+   mauvais département. Corrigé, avec un commentaire pour éviter la rechute.
+5. **`llms.txt` : NAP complété** (raison sociale, adresse complète, email,
+   horaires) dans « L'entreprise en bref » et dans « Contact ». Le reste du
+   fichier, écrit par le premier run, n'a pas été touché.
+
+**Vérifié en ligne après déploiement** : le `LocalBusiness` servi sur
+`https://www.hcebtp.com/` contient bien l'adresse complète, `geo`, `email`,
+`legalName`, `foundingDate` et les horaires ; `llms.txt` servi en 200 avec le NAP
+complet aux deux endroits.
+
+**IndexNow relancé après déploiement : 12 URLs soumises → HTTP 200.** À noter
+pour demain : le premier run de la journée avait reçu **202** (« reçu, clé en
+cours de vérification »). Le passage à **200** signifie que la clé est désormais
+vérifiée et la soumission acceptée telle quelle. Le canal IndexNow est donc
+opérationnel — ce qui déplace la question : si Bing n'indexe toujours rien dans
+les jours qui viennent alors que les soumissions passent en 200, le blocage n'est
+plus la découverte mais l'absence de liens entrants (action 4 du fichier client).
+
+**Ce que j'ai décidé de NE PAS faire, et pourquoi :**
+- **Ne pas toucher au rendu de la carte** malgré un effet de bord connu de la
+  correction : Cize (46.726/5.914) et Champagnole (46.747/5.911) ne sont qu'à
+  ~2,4 km, donc au zoom 8 les deux pastilles se superposent presque. C'est
+  géographiquement exact. Fusionner les points, décaler un label ou retirer
+  Champagnole est une décision de design, pas de SEO — noté en hypothèse à
+  vérifier plutôt qu'improvisé.
+- **Ne pas ajouter `aggregateRating` ni `priceRange`** au `LocalBusiness` : aucune
+  source, et la section avis a été supprimée à la demande du client. Un
+  `aggregateRating` fabriqué serait un faux avis structuré.
+- **Ne pas ajouter `sameAs`** : aucun profil externe vérifié n'existe à ce jour
+  — c'est précisément le problème que traite l'action 4 du fichier client. À
+  ajouter dès que les premières fiches existeront.
+- **Ne pas re-réécrire `llms.txt`** ni créer un second document client : le
+  premier run avait déjà fait les deux, mieux ou aussi bien.
+- **Ne pas régénérer `package-lock.json`** bien qu'il soit désynchronisé de
+  `package.json` (`npm ci` échoue : miniflare, sharp, workerd, ws manquants). Le
+  projet installe avec Bun. Hors périmètre SEO et risqué.
+
+<!-- section d'origine : Chantiers faits -->
+### 08/09/2026 — Rattachement du site à l'entité légale HCE (SIREN/SIRET)
+
+**Contexte.** Indexation toujours nulle. La priorité reste donc la découverte et
+le rattachement externe, pas le contenu. Angle choisi différent des deux runs du
+07/09 (hôte canonique, puis NAP interne) : cette fois **relier le domaine à une
+entreprise que les moteurs connaissent déjà**.
+
+**Le raisonnement.** Le site décrivait une entreprise nommée « HCE » à « Cize »
+sans le moindre identifiant vérifiable. Or « HCE » est un sigle très répandu et
+il existe deux communes nommées Cize : rien ne permettait à un moteur, ni à une
+IA, de rapprocher `hcebtp.com` d'une entreprise réelle. Pendant ce temps des
+fiches d'entreprise décrivant HCE existent déjà en ligne et sont crawlées. Le
+chaînon manquant était l'identifiant qui relie les deux.
+
+**Ce qui a été trouvé** (source : registre national des entreprises via
+`recherche-entreprises.api.gouv.fr`, consulté le 08/09/2026) :
+
+```
+SIREN 521683573 · SIRET siège 52168357300039
+H.C.E. - HINI - COURS - ENROBE (sigle H.C.E.) · SARL (nature juridique 5499)
+NAF 43.12A — travaux de terrassement courants et travaux préparatoires
+40 B avenue Etienne Lamy, 39300 Cize · géocodage INSEE 46.7234009 / 5.9185757
+Entreprise active · date de création au registre : 2010-04-01
+```
+
+**Ce qui a été fait :**
+
+1. **Identifiants légaux dans les données structurées.** `identifier`
+   (`PropertyValue` SIREN + SIRET), `alternateName` avec la dénomination du
+   registre, ajoutés à l'`Organization` du root (présente sur **toutes** les
+   pages) et au `LocalBusiness` de l'accueil. C'est la donnée qui désigne
+   l'entreprise sans ambiguïté possible.
+2. **Premier `sameAs` du site** — chantier en attente n°9, débloqué. Il pointe
+   vers `societe.com/societe/h-c-e-hini-cours-enrobe-521683573.html`, **fiche
+   vérifiée en ligne avant d'être citée** (HTTP 200, même SIREN, même adresse que
+   le registre). C'est la première fois que le site se relie à une page externe
+   existante.
+3. **`geo` remplacé par le géocodage officiel INSEE de l'établissement**
+   (46.7234 / 5.9186) au lieu du centre de la commune (46.726 / 5.914) utilisé
+   depuis hier : ~300 m plus précis, et l'autorité de la source change tout.
+4. **`llms.txt`** : bloc d'identité légale complet (dénomination au registre,
+   SIREN, SIRET, forme juridique, code NAF) + nouvelle Q/R **« HCE est-elle une
+   entreprise réellement déclarée ? »**. C'est une question que les particuliers
+   posent vraiment avant de confier un chantier de plusieurs milliers d'euros à
+   un artisan, et la réponse est autonome et vérifiable — exactement le profil
+   d'un passage citable par une IA. Date de mise à jour passée au 8 septembre.
+5. **`ACTIONS-SEO-CLIENT.md`** : bloc d'identité légale à recopier tel quel dans
+   les annuaires, et surtout — **la fiche societe.com existe déjà et ne porte pas
+   l'adresse du site**. La revendiquer pour y ajouter l'URL est le lien entrant le
+   plus rapide à obtenir aujourd'hui, depuis une page que Google crawle déjà.
+   C'est passé en tête de l'action 4.
+
+**Vérifications faites avant de pousser :**
+- Les deux blocs JSON-LD modifiés ont été **évalués et sérialisés en JSON réel**
+  (722 et 1180 octets, `identifier`/`sameAs`/`geo`/`alternateName` conformes).
+- Le site est **rendu côté serveur** : en se présentant comme Googlebot, la page
+  d'accueil renvoie 4 640 caractères de texte visible et tous les `<h1>`/`<h2>`
+  dans le HTML brut. **Le blocage d'indexation n'est donc pas un problème de
+  rendu JavaScript** — question tranchée, ne pas la rouvrir.
+- Aucun changement visible par le visiteur.
+
+**Vérifié en ligne après déploiement (commit `8a18f38`) :**
+- `llms.txt` servi avec le bloc SIREN/SIRET/NAF et la nouvelle Q/R, date au
+  8 septembre.
+- JSON-LD de l'accueil récupéré **en se présentant comme Googlebot** et parsé :
+  `Organization` et `LocalBusiness` portent bien `identifier` (SIREN + SIRET),
+  `sameAs` et `alternateName` ; le `geo` du `LocalBusiness` est bien en
+  46.7234 / 5.9186.
+- **Contrôle de non-régression du `FAQPage`** : les 6 questions balisées sont
+  toutes présentes dans le texte visible de la page. Aucun mismatch. (À refaire
+  à chaque run, c'est le risque signalé en « Hypothèses à vérifier ».)
+- `robots.txt`, `sitemap.xml` (12 URLs) et le fichier clé IndexNow toujours en 200.
+- **IndexNow relancé après vérification : 12 URLs → HTTP 200.**
+
+**Ce que j'ai décidé de NE PAS faire, et pourquoi :**
+- **Ne pas corriger l'adresse en « 40 B avenue Etienne Lamy »** malgré le
+  registre. Le pied de page affiche `40`, et le JSON-LD doit refléter le contenu
+  visible. Changer l'un sans l'autre crée un mismatch, changer les deux touche au
+  rendu sur une donnée dont seul le client sait si le `B` est utilisé au courrier.
+  Reporté au client dans `ACTIONS-SEO-CLIENT.md`, à trancher **avant** la
+  validation postale de la fiche Google.
+- **Ne pas toucher `foundingDate: 2012`** alors que le registre dit 2010 : 2012
+  est figé par le client, et les deux dates peuvent coexister légitimement
+  (immatriculation 2010, activité 2012). Signalé, pas modifié.
+- **Ne pas remplacer `legalName: "HCE SARL"`** par la dénomination du registre :
+  « HCE SARL » est cohérent avec le `© HCE SARL` du pied de page et l'entreprise
+  est bien une SARL. La dénomination officielle est ajoutée en `alternateName`,
+  ce qui apporte le bénéfice de rapprochement sans contredire l'affichage. Une
+  fois le SIREN présent, la chaîne de caractères du nom compte de toute façon peu.
+- **Ne pas publier de numéro de TVA intracommunautaire.** Il se calcule bien à
+  partir du SIREN (clé déterministe), mais rien ne prouve que l'entreprise est
+  assujettie ni qu'elle publie ce numéro. Un identifiant calculé n'est pas un
+  identifiant vérifié.
+- **Ne pas citer `annuaire-entreprises.data.gouv.fr` en `sameAs`** alors que
+  c'est la source officielle, donc le meilleur candidat : la page est une coquille
+  JavaScript qui renvoie **957 octets et HTTP 200 pour n'importe quel slug**, y
+  compris inventé. Impossible de vérifier depuis le runner qu'une URL donnée
+  décrit bien HCE — et on ne cite pas ce qu'on n'a pas vérifié. À reprendre si un
+  moyen de contrôle apparaît.
+- **Ne pas déplacer le marqueur de la carte** sur les nouvelles coordonnées : 300 m
+  au zoom 8 sont invisibles, le gain est nul et c'est du rendu.
+- **Ne pas relancer IndexNow avant d'avoir vérifié le déploiement en ligne** :
+  soumettre des URLs dont le serveur renvoie encore l'ancienne version ne sert à
+  rien. Relancé après contrôle (résultat noté plus bas).
+
+<!-- section d'origine : Chantiers faits -->
+### 09/09/2026 — Les six réponses de la FAQ rendues lisibles par les crawlers (commit `5b77328`)
+
+**Chantier choisi : un défaut réel trouvé à l'étape 2**, pas un des chantiers
+prévus. Le contrôle de non-régression du `FAQPage` — celui que le journal demande
+de refaire à chaque run — a cette fois été poussé jusqu'aux **réponses** et pas
+seulement aux questions. Il a révélé un vrai problème.
+
+**Le constat.** Dans le HTML servi de l'accueil, **une seule des six réponses de
+la FAQ était présente**. Les cinq autres n'existaient nulle part dans la page :
+uniquement dans le JSON-LD `FAQPage`. Cause : `src/components/sections.tsx`
+montait la réponse conditionnellement (`{isOpen && <motion.div>…}`), donc seul
+l'item ouvert par défaut (index 0) était rendu côté serveur.
+
+Deux conséquences, toutes deux traitées :
+1. **Mismatch structurel sanctionnable.** Le `FAQPage` déclarait six questions et
+   six réponses ; la page n'en montrait qu'une. C'est exactement le cas que la
+   consigne interdit (« le JSON-LD FAQPage doit TOUJOURS correspondre à une FAQ
+   réellement visible »). Le journal avait bien noté ce risque en hypothèse, mais
+   pour une autre cause (surcharge CMS) ; la cause réelle était plus immédiate.
+2. **Perte GEO directe, et c'est le plus coûteux.** La FAQ est le contenu le plus
+   citable du site : six questions autonomes avec des chiffres métier (20-30 ans
+   de durée de vie, 2-4 jours de chantier, pose au-dessus de 5 °C, mars à
+   novembre). Les crawlers qui n'exécutent pas de JavaScript — ceux des IA au
+   premier chef — n'en lisaient **aucune**, sauf la première.
+
+**Le correctif.** Le repli passe désormais par une transition CSS sur
+`grid-template-rows` (`1fr` ↔ `0fr`, avec `min-height: 0` sur l'enfant) au lieu
+d'un montage conditionnel. La réponse est toujours dans le DOM ; fermée, elle est
+repliée à hauteur nulle. `aria-expanded` ajouté sur le bouton.
+
+**Pourquoi pas framer-motion en montage permanent**, qui aurait été le réflexe :
+- Passer un `style` qui change à un composant `motion` laisse React écrire
+  directement la propriété animée au re-render — l'animation serait *sautée*, le
+  panneau s'ouvrirait d'un coup.
+- Sans `style` explicite, il fallait parier sur ce que framer-motion émet côté
+  serveur avec `initial={false}`. **Invérifiable ici : le runner ne peut pas
+  construire le projet.** Si le pari était faux, les six réponses s'affichaient
+  dépliées jusqu'à l'hydratation. La transition CSS, elle, est rendue telle quelle
+  par React : le HTML serveur sort déjà `0fr`, comportement certain.
+
+**Vérifications faites (avant et après déploiement) :**
+- Transpilation des trois fichiers modifiés (`bun build --no-bundle`) : aucune
+  erreur. `AnimatePresence` reste importé et utilisé ailleurs dans le fichier.
+- **Rendu réellement contrôlé dans un navigateur** : Chromium est présent sur le
+  runner (`/opt/pw-browsers/chromium-*/chrome-linux/chrome`). Une reproduction du
+  repli exact, ouverte en `file://` et capturée en PNG, confirme que l'item fermé
+  est invisible **et n'occupe aucune hauteur** (les deux bordures se touchent).
+- **En ligne après déploiement, vu comme Googlebot : les 6 réponses balisées sont
+  toutes présentes dans le corps HTML.** Plus aucun mismatch. (Comparaison faite
+  en normalisant accents et apostrophes — une comparaison naïve donne 5 faux
+  « absents ».)
+- **Texte visible de l'accueil : 4 640 → 5 160 caractères (+11 %)**, mesuré avec
+  la même méthode qu'au 08/09. C'est du contenu à forte valeur de citation.
+- Contenu figé par le client intact après déploiement : 2012, 14 ans, 150 °C,
+  « posé à la main », « Devis détaillé », garantie décennale, pas de section avis.
+- **IndexNow relancé après vérification : 12 URLs → HTTP 200.**
+
+**Volet citations externes (priorité absolue tant que rien n'est indexé) :**
+
+`WebSearch` a fait apparaître **quatre fiches d'entreprise déjà en ligne**, dont
+trois que le journal ne connaissait pas. Aucune ne porte l'adresse du site.
+
+- **`118000.fr/e_C0092984566` ajoutée en `sameAs`** (2e référence externe du
+  site). Vérifiée en lisant la page : elle décrit bien « HCE Hini Cours Enrobé à
+  CIZE 39300 » et publie en microdonnées `itemprop="telephone" 0384526148`,
+  exactement le numéro du site. Aucune adresse chez eux, donc aucun conflit NAP.
+- **`pappers.fr` et `verif.com` NON ajoutées** : elles répondent **HTTP 403** à nos
+  requêtes. Leur existence est certaine (résultats de recherche), leur contenu
+  invérifiable depuis le runner. La règle du 08/09 s'applique : on ne cite pas ce
+  qu'on n'a pas lu.
+
+**Découverte qui règle deux questions ouvertes du journal — l'entreprise a
+déménagé deux fois.** Relevé sur les annonces légales reprises par societe.com :
+
+```
+SIRET …0013  Champagnole (39300), 1 rue Baronne Delort   jusqu'en avril 2025
+SIRET …0021  36 avenue Etienne Lamy, 39300 Cize          à compter du 22/04/2025
+             (délibération d'AGE du 22 avril 2025, annonce JAL puis BODACC 04/05/2025)
+SIRET …0039  40 B avenue Etienne Lamy, 39300 Cize        siège actuel, BODACC 29/04/2026
+```
+
+Ce que ça résout :
+1. **La date de création du SIRET siège au 01/04/2026** intriguait depuis le 08/09 :
+   c'est simplement le second déménagement, à l'intérieur de Cize.
+2. **L'adresse du site est la bonne**, à la lettre `B` près. On peut cesser de
+   soupçonner le pied de page d'être périmé. En revanche **toute fiche affichant
+   encore « 36 avenue Etienne Lamy » ou Champagnole est périmée** — c'est le cas de
+   verif.com, référencée sous le SIRET …0021. Une ancienne adresse qui circule sur
+   plusieurs annuaires empêche Google de consolider l'entreprise en une entité.
+
+`ACTIONS-SEO-CLIENT.md` : tableau des quatre fiches (ce que chacune publie, quoi
+en faire) et historique des établissements ajoutés à l'action 4.
+
+**Ce que j'ai décidé de NE PAS faire, et pourquoi :**
+- **Ne pas prendre les chantiers de contenu que le run précédent avait mis en tête**
+  (titres `/realisations/*`, page « goudronnage »). Un défaut qui rend cinq
+  passages sur six illisibles pour les IA passe avant l'optimisation de contenus
+  qui, eux, sont déjà lisibles. Les deux restent en attente, intacts.
+- **Ne pas corriger le mismatch CMS du `FAQPage`** (JSON-LD construit depuis la
+  constante `FAQS`, affichage depuis `get("faqs", FAQS)`). Aujourd'hui les deux
+  coïncident et le correctif propre demande de générer le JSON-LD côté serveur
+  depuis la base : ça touche le chargement de la page. Reste en hypothèse.
+- **Ne pas toucher `llms.txt` ni sa date de mise à jour.** Son contenu n'a pas
+  changé aujourd'hui. La consigne dit d'actualiser la date seulement en cas de
+  modification réelle : une date qui bouge sans raison est un faux signal.
+- **Ne pas modifier l'adresse affichée** (`40` vs `40 B`) malgré la confirmation
+  qu'il s'agit bien du siège actuel : c'est du rendu, et seul le client sait quelle
+  forme il utilise au courrier. Question déjà posée dans le fichier client.
+- **Ne pas conclure à une panne sur le `robots.txt`.** Un premier appel a renvoyé
+  un code `000` ce matin, ce qui ressemblait à une explication de la
+  non-indexation (un `robots.txt` injoignable fait différer le crawl par Google).
+  **12 requêtes de suite ensuite : 12 × HTTP 200**, contenu conforme, apex et UA
+  navigateur également. C'était le runner, comme pour le sitemap le 07/09.
+
+<!-- section d'origine : Chantiers faits -->
+### 10/09/2026 — Titres et meta descriptions des `/realisations/*` + fiche manageo (commit `68f9fa2`)
+
+**Bascule sur le contenu, comme le journal le demandait depuis trois runs.** Le
+chantier en attente n°3 (titres `/realisations/*`) avait été reporté les 07, 08 et
+09/09 au profit du travail d'entité et de la FAQ. La consigne était explicite : ne
+pas le repousser une quatrième fois sans raison aussi forte. Aucune n'est apparue,
+donc il est traité.
+
+**Le défaut, confirmé à l'étape 2 (pas seulement lu dans le journal).** Dans
+`realisations.$slug.tsx`, le `<title>` était généré par
+`params.slug.replace(/-/g, " ")` → « Réalisations · cour allee privee — HCE » : sans
+accents, sans majuscules. Et les **5 URLs `/realisations/*` partageaient une meta
+description identique** (« Découvrez nos réalisations en enrobé… »). Sur 12 URLs au
+sitemap, 5 étaient donc mal titrées et non différenciées.
+
+**Ce qui a été fait :**
+1. **Tableau statique `REAL_META` (slug → titre + description)** dans
+   `realisations.$slug.tsx`, repris à l'identique des titres/descriptions des
+   catégories (`FALLBACK_CATS` de `useGallery.tsx`) — le `head()` n'a que le slug
+   car la catégorie se charge en asynchrone côté client. Chaque page a désormais un
+   `<title>` unique, accentué et géolocalisé (Jura/Ain), une meta description propre,
+   plus `og:title`/`og:description`. Repli en title-case pour un slug inconnu (au
+   lieu du slug brut).
+2. **`realisations.avant-apres.tsx`** : titre et description enrichis et géolocalisés
+   sur le même modèle (c'était la 5e URL qui partageait la description générique).
+3. **Angle GEO respecté sans rien inventer** : ces pages sont des galeries photo, les
+   descriptions décrivent ce qu'on y voit réellement ; chiffres client honorés
+   (150 °C, « posé à la main »). Pas de FAQ ni de JSON-LD ajouté ici → aucun risque
+   de mismatch.
+4. **Volet découverte (priorité tant que non indexé)** : `manageo.fr` ajoutée en
+   `sameAs` de l'`Organization` (`__root.tsx`) et du `LocalBusiness` (`index.tsx`),
+   3e référence externe corroborant l'entité. Vérifiée ce jour (adresse actuelle,
+   SIRET siège). Un commentaire daté explique la vérif dans chaque fichier.
+
+**Vérifications avant push :** les 4 fichiers transpilent sans erreur
+(`bun build --no-bundle`, méthode validée le 08/09 ; l'ENOENT d'outdir n'est pas une
+erreur de syntaxe).
+
+**Vérifié en ligne après déploiement (vu comme Googlebot) :**
+- Les **5 URLs `/realisations/*`** servent chacune un `<title>` et une meta
+  description **uniques, accentués, géolocalisés** (cour-allee-privee,
+  parking-voirie-pro, preparation-terrassement, chantier-en-cours, avant-apres —
+  tous distincts, contrôlés un par un).
+- **`sameAs` = 3 références** (societe.com, 118000.fr, manageo.fr) sur
+  l'`Organization` **et** le `LocalBusiness` (2 occurrences chacune). Aucune
+  régression.
+- **Non-régression FAQ** : les 6 réponses balisées sont toujours dans le HTML visible
+  (attention : « supérieure**s** à 5°C », sans espace → une comparaison naïve donne un
+  faux « absent », cf. leçon du 09/09).
+- **Contenu figé client intact** : 2012, 14 ans, 150 °C, « posé à la main »,
+  « Devis détaillé », garantie décennale. Aucun « 2005 ». Les 21 « 180 » du HTML sont
+  tous du CSS/icône (`sizes="180x180"`, `clamp(180px)`, `width:180px`), aucun
+  « 180 °C ». Les 2 « 48h » sont « réponse sous 24 à 48h » (délai de réponse à un
+  contact, pas le devis) et un tracé SVG WhatsApp — pas le « Devis sous 48h »
+  interdit. Pré-existants, non touchés.
+- **IndexNow relancé : 12 URLs → HTTP 200.**
+
+**Ce que j'ai décidé de NE PAS faire, et pourquoi :**
+- **Ne pas ajouter de `BreadcrumbList`** aux pages réalisations aujourd'hui (chantier
+  en attente n°6) : un seul chantier mené à fond. Reste en attente, naturel à coupler
+  avec ces pages un prochain jour.
+- **Ne pas ajouter kompass/verif/pappers/batiment.cc en `sameAs`** : soit
+  invérifiables depuis le runner (403/405), soit affichant l'ancienne adresse
+  (« 36 » / Champagnole) — on ne cite pas ce qu'on n'a pas lu, et surtout pas une
+  fiche périmée qui empêcherait Google de consolider l'entité.
+- **Ne pas toucher `llms.txt` ni sa date** : aucune catégorie ni aucun chiffre n'a
+  changé aujourd'hui ; bouger la date sans modification réelle serait un faux signal.
+- **Ne pas générer de `lastmod` au sitemap** (n°4) : toujours pas de date de
+  modification honnête par page.
+

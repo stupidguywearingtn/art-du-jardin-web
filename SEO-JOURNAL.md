@@ -1939,8 +1939,15 @@ JSON-LD, pas de `BreadcrumbList`).
   2026-10-12 (**15/15 URLs avec lastmod**), `llms.txt` 12 octobre 2026,
   commentaires `lastmod.ts`/`sitemap` mis à jour. Build OK, `check:fige` OK.
 - Archivage : Positions + Chantier du 11/09 → `docs/seo-journal-archive.md`.
-- ⚠️ Rendu visuel de la nouvelle section à regarder en prod (même gabarit que
-  les 3 autres dossiers, risque faible).
+- ✅ Vérifié en prod (`f80869e`, `success` ~80 s) : 5 604 car., FAQ 4/4,
+  lastmod 15/15, `llms.txt` 12 octobre, IndexNow 15 URLs → 200, rendu mobile
+  propre (capture Playwright).
+- 🔴 **Découverte : la galerie de ce dossier est VIDE en prod** (« Aucune
+  photo dans cette catégorie pour le moment », 0 image ; `cour-allee-privee`
+  en a 23). Le lead disait « les photos de cette page montrent… » → corrigé
+  dans un 2ᵉ commit, ainsi que la meta description qui promettait des photos.
+  **Action client : ajouter des photos de pose dans « Chantier en cours » via
+  l'admin** (ou retirer la carte de la galerie). Pas touché à la base.
 
 ### 11/10/2026 — `/arnaque-goudronnage` : nouvelle page (10 646 car. servis au banc local), 15ᵉ URL du sitemap
 
@@ -4360,6 +4367,8 @@ de suite.**
 >    pas de page ville sans contenu propre et vrai ; la matière existe pour
 >    Champagnole (station Météo-France déjà citée) — à étudier, sans doorway.
 > 4. Migration `nodejs24.x` (touche `package.json`) → à proposer à Yanis.
+> 4 bis. Galerie « Chantier en cours » **vide en prod** → photos à ajouter par
+>    le client (admin). Ne rien faire côté base.
 > 5. `/mentions-legales` dès que le client fournit capital, RCS, gérant,
 >    médiateur.
 

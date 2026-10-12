@@ -6,6 +6,11 @@
 > le site y est signalé par IndexNow mais n'y a jamais été déclaré. Profiter de
 > la connexion GSC pour relever : nombre de pages indexées, pages « explorées,
 > non indexées », et les requêtes qui ont déjà des impressions.
+>
+> 🆕 **12/10/2026 — pour Naofal : la galerie « Chantier en cours » est vide en
+> ligne** (« Aucune photo pour le moment »). Quelques photos de pose (enrobé
+> répandu à la main, rouleau, équipe) ajoutées depuis l'espace admin suffisent ;
+> le texte de la page est prêt.
 
 > ✅ **11/10/2026 — le site se met de nouveau à jour en ligne** (correctif de
 > déploiement validé le 10/10). Tout le travail des dix derniers jours est

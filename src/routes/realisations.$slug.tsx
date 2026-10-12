@@ -50,7 +50,7 @@ const REAL_META: Record<string, { title: string; description: string }> = {
   "chantier-en-cours": {
     title: "Chantiers d'enrobé en cours — HCE, Cize (Jura)",
     description:
-      "HCE à l'œuvre dans le Jura et l'Ain : photos de chantiers d'enrobé en cours — pose à la main à 150 °C, compactage, équipe en action.",
+      "Le jour de la pose d'un enrobé à chaud par HCE dans le Jura et l'Ain : pose à la main à 150 °C, compactage, fumées, quand rouler sur l'enrobé neuf.",
   },
 };
 
@@ -243,7 +243,7 @@ const REAL_SAVOIR: Record<
      jour de la pose, avec des sources publiques. */
   "chantier-en-cours": {
     heading: "Le jour de la pose d'enrobé : les questions qu'on se pose quand l'équipe est devant chez soi",
-    lead: "Les photos de cette page montrent HCE au travail, pendant la pose. C'est le moment où un client découvre un chantier qu'il n'avait vu que sur un devis : une équipe qui ne s'arrête pas, une odeur de bitume, une cour qu'on ne peut pas utiliser tout de suite. Voici quatre questions qui reviennent ce jour-là, avec les sources publiques qui y répondent.",
+    lead: "Ce dossier est consacré à HCE au travail, pendant la pose. C'est le moment où un client découvre un chantier qu'il n'avait vu que sur un devis : une équipe qui ne s'arrête pas, une odeur de bitume, une cour qu'on ne peut pas utiliser tout de suite. Voici quatre questions qui reviennent ce jour-là, avec les sources publiques qui y répondent.",
     updated: PAGE_UPDATED["/realisations/chantier-en-cours"],
     qa: [
       {

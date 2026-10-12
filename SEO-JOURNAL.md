@@ -11,7 +11,7 @@ et à compléter en fin de run.
 > ✅ **12/10/2026 — Déploiement OK** (`9e2e07e` : Vercel `success`). Prod =
 > dernier commit (15/15 URLs identiques au banc du 11/10, FAQ 11/11, lastmod
 > 15 cohérentes). Chantier du jour : **`/realisations/chantier-en-cours`
-> sort de la maigreur (373 → 5 604 car.)** — la dernière page maigre du site.
+> sort de la maigreur (373 → 5 596 car. en prod)** — la dernière page maigre du site.
 > Toutes les URLs du sitemap ont désormais un `lastmod`.
 
 > ✅ **11/10/2026 — LA PRODUCTION SE DÉPLOIE À NOUVEAU. Le blocage du 01/10 est
@@ -4358,7 +4358,7 @@ de suite.**
 
 > 🆕 **MISE À JOUR DU 12/10/2026 — prime sur tout ce qui suit.**
 > ✅ `/realisations/chantier-en-cours` : **fait** (plus aucune page maigre).
-> 1. Vérifier en prod après déploiement : chantier-en-cours **5 604 car.**,
+> 1. Vérifier en prod après déploiement : chantier-en-cours **5 596 car.** (vérifié),
 >    FAQ 4/4, lastmod 15/15 ; relancer `indexnow-submit.mjs`.
 > 2. **Bing Webmaster Tools** (action Yanis, voir Techniques apprises 12/10) :
 >    ChatGPT search et Copilot s'appuient sur l'index Bing — import depuis la

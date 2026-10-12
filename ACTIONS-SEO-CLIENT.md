@@ -1,5 +1,12 @@
 # SEO — les 4 actions que seul le client peut faire
 
+> 🆕 **12/10/2026 — action agence (Yanis), 2 minutes : inscrire le site dans
+> Bing Webmaster Tools** (bing.com/webmasters → « Importer depuis Google Search
+> Console »). ChatGPT (recherche web) et Copilot s'appuient sur l'index de Bing ;
+> le site y est signalé par IndexNow mais n'y a jamais été déclaré. Profiter de
+> la connexion GSC pour relever : nombre de pages indexées, pages « explorées,
+> non indexées », et les requêtes qui ont déjà des impressions.
+
 > ✅ **11/10/2026 — le site se met de nouveau à jour en ligne** (correctif de
 > déploiement validé le 10/10). Tout le travail des dix derniers jours est
 > visible, dont les mentions légales. Les relances « ACTION 0 / déploiement en

@@ -19,13 +19,10 @@
  * `label` est écrit en toutes lettres plutôt que dérivé de `iso` : c'est du
  * texte visible, il n'a pas à dépendre d'un formateur d'exécution.
  *
- * Une seule URL du sitemap n'a volontairement PAS d'entrée ici —
- * `/realisations/chantier-en-cours` — parce qu'aucune date de mise à jour
- * éditoriale n'y est publiée. Elle sort donc du sitemap sans `lastmod`, ce que
- * la spécification autorise (l'élément est facultatif par URL). Le jour où
- * elle reçoit un bloc daté, ajouter sa clé ici suffit — c'est ce qui a été
- * fait pour l'accueil le 29/09/2026, quand il a reçu son bloc « Avant de
- * signer ».
+ * Depuis le 12/10/2026, toutes les URLs du sitemap ont une entrée :
+ * `/realisations/chantier-en-cours`, la dernière qui n'en avait pas, a reçu
+ * son bloc daté ce jour-là. Une future URL sans date publiée peut sortir du
+ * sitemap sans `lastmod` (l'élément est facultatif par URL).
  */
 export type PageUpdate = { iso: string; label: string };
 
@@ -44,6 +41,7 @@ export const PAGE_UPDATED = {
   "/realisations/preparation-terrassement": { iso: "2026-09-25", label: "25 septembre 2026" },
   "/mentions-legales": { iso: "2026-10-08", label: "8 octobre 2026" },
   "/arnaque-goudronnage": { iso: "2026-10-11", label: "11 octobre 2026" },
+  "/realisations/chantier-en-cours": { iso: "2026-10-12", label: "12 octobre 2026" },
 } satisfies Record<string, PageUpdate>;
 
 export type UpdatedPath = keyof typeof PAGE_UPDATED;

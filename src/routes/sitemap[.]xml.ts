@@ -19,9 +19,8 @@ interface SitemapEntry {
 // peuvent donc pas diverger — et c'est la condition pour que Google accorde
 // du crédit au `lastmod` : il compare la valeur annoncée à ce que voit
 // l'utilisateur, et ignore le `lastmod` de tout le sitemap s'il le juge peu
-// fiable. Les URLs absentes de la table (l'accueil et
-// `/realisations/chantier-en-cours`, qui ne publient aucune date de mise à
-// jour) sortent simplement sans `lastmod` : l'élément est facultatif par URL.
+// fiable. Une URL absente de la table sortirait simplement sans `lastmod`
+// (l'élément est facultatif par URL) ; depuis le 12/10/2026 toutes en ont un.
 const lastmodOf = (path: string): string | undefined =>
   (PAGE_UPDATED as Record<string, { iso: string }>)[path]?.iso;
 

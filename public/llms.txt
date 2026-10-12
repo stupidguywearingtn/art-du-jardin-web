@@ -5,7 +5,7 @@
 > dans le Jura et l'Ain. Entreprise créée en 2012, 14 années d'expérience, plus de
 > 1000 chantiers livrés, garantie décennale.
 
-Dernière mise à jour : 11 octobre 2026
+Dernière mise à jour : 12 octobre 2026
 Site officiel : https://www.hcetp.com
 
 ## L'entreprise en bref
@@ -528,7 +528,14 @@ de l'eau ne s'évaluent pas autrement.
   cinq critères cumulatifs, contrat de cession et interdiction des mélanges) — avec leurs
   sources.
 - [Chantier en cours](https://www.hcetp.com/realisations/chantier-en-cours) : chantiers
-  HCE en action — pose, compactage, équipe au travail.
+  HCE en action — pose, compactage, équipe au travail — et les questions du jour de la pose :
+  pourquoi l'équipe ne s'interrompt pas (enrobé posé à la main à 150 °C ; selon le guide
+  technique 2009 du ministère des Transports du Québec, compactage impossible sous 85 °C et
+  insuffisant en moins de dix minutes), ce que valent les fumées de bitume (exposition
+  professionnelle classée 2B par le CIRC en 2011, fumées irritantes et plus abondantes quand
+  la température monte selon l'INRS), ce qu'il faut préparer chez soi, et quand marcher ou
+  rouler sur l'enrobé neuf (bitume thermoplastique : pas tant qu'il est chaud, éviter les
+  roues braquées à l'arrêt et les appuis étroits les premières semaines) — avec leurs sources.
 - [Arnaque au goudronnage : les signes](https://www.hcetp.com/arnaque-goudronnage) :
   comment reconnaître l'offre de goudronnage faite sans rendez-vous « avec l'enrobé qui reste
   d'un chantier voisin » (prix bas, paiement immédiat, pas de devis écrit), comment vérifier

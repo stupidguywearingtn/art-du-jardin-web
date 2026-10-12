@@ -66,9 +66,8 @@ const REAL_META: Record<string, { title: string; description: string }> = {
  * la requête « réfection parking enrobé Jura ».
  *
  * Le même tableau alimente la section visible ET le JSON-LD FAQPage de la
- * page : aucun mismatch possible. Au 25/09/2026, trois dossiers sur quatre ont
- * leur entrée ; `chantier-en-cours` n'en a pas encore — la section et le
- * FAQPage ne sont alors tout simplement pas émis.
+ * page : aucun mismatch possible. Depuis le 12/10/2026 les quatre dossiers ont
+ * leur entrée ; un slug sans entrée n'émettrait ni la section ni le FAQPage.
  */
 const REAL_SAVOIR: Record<
   string,
@@ -236,6 +235,48 @@ const REAL_SAVOIR: Record<
         label:
           "Arrêté du 4 juin 2021 — sortie du statut de déchet des terres excavées et sédiments (Légifrance)",
         url: "https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000043704475",
+      },
+    ],
+  },
+  /* Ajouté le 12/10/2026. Page de galerie : aucune information sur un chantier
+     précis (lieu, surface, date, client) — uniquement ce que vit un client le
+     jour de la pose, avec des sources publiques. */
+  "chantier-en-cours": {
+    heading: "Le jour de la pose d'enrobé : les questions qu'on se pose quand l'équipe est devant chez soi",
+    lead: "Les photos de cette page montrent HCE au travail, pendant la pose. C'est le moment où un client découvre un chantier qu'il n'avait vu que sur un devis : une équipe qui ne s'arrête pas, une odeur de bitume, une cour qu'on ne peut pas utiliser tout de suite. Voici quatre questions qui reviennent ce jour-là, avec les sources publiques qui y répondent.",
+    updated: PAGE_UPDATED["/realisations/chantier-en-cours"],
+    qa: [
+      {
+        q: "Pourquoi l'équipe ne s'arrête-t-elle pas une fois la pose d'enrobé commencée ?",
+        a: "Parce qu'un enrobé à chaud ne se travaille que pendant une fenêtre de température courte, et qu'elle se referme pendant la pose. HCE le pose à la main à 150 °C, et il doit être réglé puis compacté avant d'avoir trop refroidi : une bande commencée se finit d'un trait. Le Guide technique sur la mise en place des enrobés bitumineux du ministère des Transports du Québec (édition 2009) donne les ordres de grandeur : « le compactage ne peut être mené à bien lorsque la température du mélange est inférieure à 85 °C », la plage propice se situant entre 85 °C et 150 °C en surface, et une période de compactage inférieure à dix minutes est jugée insuffisante pour atteindre la compacité visée. Ces valeurs dépendent de la classe de bitume et de la météo du jour — le vent et le froid raccourcissent la fenêtre — mais elles expliquent ce qu'on observe depuis la fenêtre : les camions qui se suivent, le rouleau qui passe juste derrière la pose, et une équipe qui ne fait pas de pause au milieu d'une bande. Une interruption ne se rattrape pas : un enrobé compacté trop froid reste poreux, et c'est par là que l'eau puis le gel l'attaquent.",
+      },
+      {
+        q: "Les fumées d'un chantier d'enrobé sont-elles dangereuses ?",
+        a: "Elles sont irritantes, et c'est pour les ouvriers, exposés tous les jours, que le risque est étudié et encadré. En 2011, le Centre international de recherche sur le cancer (CIRC) a classé les expositions professionnelles aux bitumes et à leurs émissions lors de la pose de routes dans le groupe 2B, « peut-être cancérogène pour l'homme » — un classement qui porte sur l'exposition au travail, répétée sur des années, et non sur le passage d'un chantier devant une maison. L'INRS, l'institut de prévention des risques professionnels, rappelle que « plusieurs études ont montré le caractère irritant de ces fumées pour les voies respiratoires » et que « plus la température est élevée, plus la quantité de fumées émises est importante » : la première mesure qu'il recommande est de respecter les consignes de température des enrobés. C'est une raison de plus de ne pas surchauffer le matériau au-delà de sa température de pose. Pour les occupants et les voisins, les précautions de bon sens suffisent : fermer les fenêtres côté chantier le temps de la pose, et tenir enfants et animaux à l'écart des engins et de l'enrobé encore chaud, qui brûle.",
+      },
+      {
+        q: "Que faut-il prévoir chez soi avant le jour de la pose ?",
+        a: "Libérer la surface à enrober et l'accès des camions, et organiser l'usage de la cour pour les heures qui suivent. Concrètement : sortir les véhicules de l'emprise et les garer là où ils pourront repartir sans traverser l'enrobé neuf ; dégager l'entrée pour que les camions de livraison et le rouleau passent sans manœuvre hasardeuse ; prévenir les voisins quand l'accès est partagé, puisque le passage sera fermé pendant la pose — et, s'il s'agit d'un chemin grevé d'une servitude, savoir qui l'a commandé et qui le paie (voir le dossier « Cour et allée privée »). Les points propres à votre terrain — hauteur sous un portail, branche basse, regard à rehausser, seuil de garage à raccorder — se repèrent à la visite qui précède le devis, pas le matin de la pose : c'est à ce moment qu'ils se chiffrent et s'intègrent au planning.",
+      },
+      {
+        q: "Quand peut-on marcher et rouler sur une cour en enrobé neuve ?",
+        a: "Pas tant qu'elle est chaude : un enrobé reste plus mou tant qu'il n'est pas revenu à la température ambiante, et le délai dépend de l'épaisseur posée et de la météo du jour — demandez-le à l'équipe en fin de chantier plutôt que de vous fier à un chiffre général. La raison est physique : le bitume qui lie les granulats est un matériau thermoplastique, qui ramollit quand il chauffe et durcit en refroidissant. D'où les marques typiques d'une surface sollicitée trop tôt ou par forte chaleur : roues braquées à l'arrêt, béquille de moto, pied de remorque ou de chaise, qui poinçonnent ou arrachent la surface au lieu de simplement s'y poser. Les premières semaines, et plus encore lors des journées chaudes de l'été, on évite donc de tourner le volant véhicule arrêté et on pose une planche sous tout appui étroit et lourd. Ces marques d'usage ne sont pas un défaut de pose. Un vrai désordre apparu après la réception relève, pendant un an, de la garantie de parfait achèvement de l'article 1792-6 du code civil, détaillée sur la page « Réalisations ».",
+      },
+    ],
+    sources: [
+      {
+        label:
+          "Guide technique sur la mise en place des enrobés bitumineux, édition 2009 — ministère des Transports du Québec",
+        url: "https://www.transports.gouv.qc.ca/fr/entreprises-partenaires/entreprises-reseaux-routier/chaussees/Documents/guide-tech-enrobes-bitumineux.pdf",
+      },
+      {
+        label:
+          "IARC Monographs — Occupational exposures to bitumens and their emissions (CIRC, volume 103)",
+        url: "https://www.iarc.who.int/news-events/iarc-monographs-occupational-exposures-to-bitumens-and-their-emissions",
+      },
+      {
+        label: "Prévention des risques liés au bitume sur les chantiers de construction routière (INRS)",
+        url: "https://www.inrs.fr/header/presse/cp-bitume.html",
       },
     ],
   },

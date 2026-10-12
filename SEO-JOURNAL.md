@@ -8,6 +8,12 @@ et à compléter en fin de run.
 
 ## État des lieux
 
+> ✅ **12/10/2026 — Déploiement OK** (`9e2e07e` : Vercel `success`). Prod =
+> dernier commit (15/15 URLs identiques au banc du 11/10, FAQ 11/11, lastmod
+> 15 cohérentes). Chantier du jour : **`/realisations/chantier-en-cours`
+> sort de la maigreur (373 → 5 604 car.)** — la dernière page maigre du site.
+> Toutes les URLs du sitemap ont désormais un `lastmod`.
+
 > ✅ **11/10/2026 — LA PRODUCTION SE DÉPLOIE À NOUVEAU. Le blocage du 01/10 est
 > levé.** Yanis a mergé `fix/tanstack-cve-deploy` (PR #1, commit `e3a860e`, le
 > 10/10 à 22:30) : statut Vercel **`success`** sur `main`. **La dette de
@@ -569,58 +575,6 @@ Cize 39300 dans le Jura. HCE est dans le Jura, coordonnées 46.726 / 5.914.
 > front et juste sur le backend.** ⚠️ Cela ne change RIEN à la règle d'action :
 > **ne rien changer au déploiement**, qui reste hors de notre portée.
 
-### Positions mesurées — 11/09/2026
-
-**Indexation : toujours nulle, 4 jours après la 1re soumission IndexNow.** Deux
-mesures concordantes aujourd'hui, toutes deux via `WebSearch` (seul canal
-exploitable) :
-1. `hcebtp.com HCE Hini Cours Enrobé Cize` → **aucune page du domaine**, mais
-   **huit fiches d'annuaire** décrivant HCE (kompass, verif, pappers, societe,
-   118000, lagazettefrance, nosartisansontdutalent, manageo).
-2. **Test nouveau et plus probant que le précédent : recherche d'une phrase
-   exacte du site.** `"Médaillons et inserts pavés intégrés à l'enrobé"` (texte
-   unique de l'accueil, entre guillemets) → **zéro résultat hcebtp.com**, neuf
-   pages de concurrents sans rapport. Une page indexée ressort toujours sur une
-   citation exacte de son propre texte. **À refaire à chaque run : c'est le test
-   d'indexation le plus net dont on dispose ici, et il ne dépend pas de
-   l'opérateur `site:` que `WebSearch` ignore.**
-
-| Requête | Mesure (11/09/2026) | Évolution vs 10/09 |
-|---|---|---|
-| indexation (phrase exacte du site) | **absent** | inchangé |
-| indexation (requête nommant le domaine) | **absent** | inchangé |
-| requêtes commerciales | **non mesurables ce jour** (voir encadré) | indéterminé |
-
-**Ce que la SERP apprend quand même sur le marché** (requête
-`enrobé à chaud Jura entreprise` via `WebSearch`) : les positions sont tenues par
-**pagesjaunes.fr** (pages départementales « enrobé à chaud » et « travaux
-d'enrobés de goudron »), **socorebat-france.fr** (qui publie une page
-**« Enrobés goudron à Cize 39300 »**, soit la commune même du siège d'HCE),
-daniel-moquet.com et franc-comtoise-tp.fr. **Deux enseignements :** le vocabulaire
-« goudron / goudronnage » est bien celui des pages qui rankent, et un annuaire
-occupe déjà la requête sur la commune d'HCE. C'est ce constat qui a fait choisir
-le chantier du jour.
-
-> ⚠️ **Canaux de SERP brute : toujours aucun exploitable. Ne pas les re-tester un
-> par un demain, la liste est à jour.**
-> - **Bing RSS (`&format=rss`)** : toujours mort. Requête témoin `colas enrobe` →
->   résultats sur le **Taj Mahal**. Le témoin obligatoire (leçon du 09/09) a encore
->   évité une fausse mesure « absent ».
-> - **Mojeek** 403 · **DuckDuckGo** lite et html : HTTP 202 avec page d'anomalie ·
->   **Brave** 429 · **Marginalia** 302 · **Ecosia** 403.
-> - **Startpage** : HTTP 200 et 22 Ko, **mais zéro lien de résultat** dans le HTML
->   (page de challenge). **Piège** : c'est le seul canal qui répond 200 sans rien
->   servir — un comptage naïf de liens y produirait « absent » pour tout. Vérifié
->   et écarté le 11/09.
-> - **`WebSearch`** : le seul utilisable. Ignore `site:`, mais **respecte les
->   guillemets de phrase exacte** — c'est ce qui rend le test n°2 ci-dessus fiable.
-
-**Contrôles techniques du jour** : accueil 200 (102 Ko), `robots.txt` 200,
-`llms.txt` 200, `/services/enrobe-a-chaud` 200. `sitemap.xml` a renvoyé **une fois
-`000` (connexion coupée) puis 200 trois fois de suite** — 2e occurrence du même
-incident après le 07/09. Toujours traité comme un aléa réseau du runner, mais
-**c'est la deuxième fois : si un 3e run le revoit, creuser sérieusement.**
-
 ### Positions mesurées — 12/09/2026
 
 **Indexation : toujours nulle, 5 jours après la 1re soumission IndexNow.** Deux
@@ -872,6 +826,21 @@ Toutes les valeurs de la table du 15/09 sont **retrouvées au caractère près**
 (même script de mesure). Le banc d'essai local a redonné exactement les mêmes
 chiffres que la production avant le chantier : la fidélité du banc est
 re-confirmée pour la deuxième fois.
+
+### Positions mesurées — 12/10/2026
+
+| Contrôle | 12/10/2026 | vs 11/10 |
+|---|---|---|
+| Déploiement `main` (`9e2e07e`) | **`success`** | = |
+| Prod vs code (`mesure-texte-servi`) | 15/15 URLs = banc du 11/10 (`/arnaque-goudronnage` 10 646) | = |
+| « enrobé à chaud Jura entreprise cour » | domaine **absent** ; fiche `118712.fr` de HCE 1ʳᵉ | = |
+| « goudronnage cour Jura » | **absent** (Wikipédia anglais, météo) | = |
+| « enrobé Champagnole entreprise » | **absent** (bruit : Champagne-au-Mont-d'Or) | 🆕 relevé |
+| « réfection parking enrobé Jura Lons-le-Saunier » | **absent** (PDF Mijoux, annonces parking) | 🆕 relevé |
+
+Canal `WebSearch` = US, non représentatif. Pas d'accès Search Console depuis le
+runner (aucun outil GSC chargeable). **À relever par Yanis dans la GSC** :
+pages indexées / « Explorée, non indexée », et requêtes avec impressions.
 
 ### Positions mesurées — 11/10/2026
 
@@ -1952,6 +1921,26 @@ JSON-LD, pas de `BreadcrumbList`).
 ---
 
 ## Chantiers faits
+
+### 12/10/2026 — `/realisations/chantier-en-cours` : 373 → 5 604 car. servis (banc local), bloc « le jour de la pose »
+
+- **Pourquoi** : dernière page maigre du site, seule URL sans date ni FAQ.
+  Angle sans rien inventer sur un chantier précis : les 4 questions d'un
+  client le jour de la pose (aucune n'était couverte ailleurs — vérifié par
+  la liste des `q:` du dépôt).
+- **Q/R** : (1) pourquoi l'équipe ne s'arrête pas — 150 °C posé à la main ;
+  guide MTQ Québec 2009 : compactage impossible < 85 °C, < 10 min insuffisant ;
+  (2) fumées de bitume — CIRC 2011 groupe 2B (exposition **professionnelle**),
+  INRS : irritantes, plus de fumées quand la température monte ; (3) quoi
+  préparer chez soi (conseils, aucune promesse au nom de HCE) ; (4) quand
+  marcher/rouler sur l'enrobé neuf — pas de chiffre (aucune source primaire
+  FR trouvée), explication thermoplastique + renvoi GPA art. 1792-6.
+- `REAL_SAVOIR` (section + `FAQPage` 4/4), `PAGE_UPDATED` → lastmod
+  2026-10-12 (**15/15 URLs avec lastmod**), `llms.txt` 12 octobre 2026,
+  commentaires `lastmod.ts`/`sitemap` mis à jour. Build OK, `check:fige` OK.
+- Archivage : Positions + Chantier du 11/09 → `docs/seo-journal-archive.md`.
+- ⚠️ Rendu visuel de la nouvelle section à regarder en prod (même gabarit que
+  les 3 autres dossiers, risque faible).
 
 ### 11/10/2026 — `/arnaque-goudronnage` : nouvelle page (10 646 car. servis au banc local), 15ᵉ URL du sitemap
 
@@ -4156,86 +4145,6 @@ descriptions uniques sur ces 5 URLs) ne pouvait donc rien rapporter.
 
 ---
 
-### 11/09/2026 — La requête « goudronnage » enfin couverte, avec sources (commit `47499e2`)
-
-**Chantier choisi : le n°5 des chantiers en attente**, le seul angle de contenu
-jamais pris, explicitement désigné par le run du 10/09 comme le meilleur candidat.
-Le mot « goudronnage » n'apparaissait **nulle part** sur le site, alors que c'est
-le mot que tapent les particuliers. La mesure du jour l'a confirmé côté marché :
-sur `enrobé à chaud Jura entreprise`, les pages qui rankent s'appellent « travaux
-d'enrobés de goudron dans le Jura » (pagesjaunes) et **« Enrobés goudron à Cize
-39300 »** (socorebat) — un annuaire occupe la requête sur la commune du siège.
-
-**Pourquoi ce chantier malgré la priorité « découverte »** : les leviers de
-découverte actionnables depuis le repo sont épuisés (hôte canonique, sitemap,
-IndexNow, entité `@id`, identifiants légaux, 3 `sameAs` vérifiés). Ce qui reste
-est **côté client** (Search Console, fiche d'établissement Google, premiers liens
-entrants) et figure dans `ACTIONS-SEO-CLIENT.md`. Continuer à empiler du `sameAs`
-aurait été le 5e run sur 6 sur le même angle, pour un gain nul.
-
-**Ce qui a été fait, sur `/services/enrobe-a-chaud` :**
-1. **Section visible « Ce qu'il faut savoir »**, cinq questions formulées comme on
-   les pose à voix haute, chaque réponse autonome en 2-3 phrases (60-80 mots, la
-   taille des passages qu'extraient les LLM) : goudronnage vs enrobé · ce qu'est un
-   BBSG et ce que dit la norme · pourquoi 150 °C · pose en hiver dans le Jura ·
-   chaud contre froid.
-2. **Contenu toujours monté, sans accordéon** — application directe de la leçon du
-   09/09 : un contenu replié en JS n'existe pas pour les crawlers d'IA.
-3. **`FAQPage` construit depuis le même tableau que la section rendue** (champ
-   `savoir.qa` de `ServiceData`) : le mismatch balisage/contenu est structurellement
-   impossible, il ne dépend pas d'une vigilance humaine.
-4. **`BreadcrumbList` ajouté aux six pages `/services/*`** (chantier en attente n°6,
-   moitié traitée) : JSON-LD pur, aucun changement de rendu.
-5. **`seoDescription` optionnelle** : la meta description de l'enrobé porte
-   maintenant le mot « goudronnage ». **La phrase d'intro affichée dans le héros n'a
-   pas été touchée** — pas de réécriture de contenu client.
-6. **Données métier sourcées, rien d'inventé.** Les seuls chiffres nouveaux
-   proviennent de deux sources **citées visiblement dans la page** : TotalEnergies
-   (le goudron vient du charbon, abandonné dans les constructions routières au
-   milieu des années 1980, cancérigène ; le bitume vient du pétrole) et
-   IDRRIM/CFTR-info n°17 (série NF EN 13108, BBSG = partie 1, marquage CE
-   obligatoire depuis le 1er mars 2008, retrait des NF P 98-1xx à cette date —
-   recoupé par une 2e recherche). Tout le reste (150 °C, pose à la main, > 5 °C et
-   sol sec, mars à novembre) est repris du contenu déjà publié par le client.
-7. **« Dernière mise à jour : 11 septembre 2026 »** visible, en `<time datetime>`.
-8. **`llms.txt`** : les quatre réponses correspondantes ajoutées, date du fichier
-   passée au 11/09 (modification réelle, donc date légitime).
-
-**Vérifié en ligne après déploiement (vu comme Googlebot) :**
-- `/services/enrobe-a-chaud` sert **4 blocs JSON-LD** : `Organization`, `Service`,
-  `BreadcrumbList` (2 items), `FAQPage` (5 items).
-- **Les 5 questions ET les 5 réponses du `FAQPage` sont présentes mot pour mot dans
-  le texte visible** (comparaison automatique après suppression des `<script>` et
-  des balises) — zéro mismatch.
-- Date, sources (TotalEnergies, IDRRIM), « NF EN 13108 », « BBSG » présents dans le
-  rendu ; meta description avec « Goudronnage ».
-- **Non-régression** : `/services/drainage-pentes` garde sa description d'origine,
-  a gagné le `BreadcrumbList`, et **n'a pas de `FAQPage`** ; les 6 réponses de la
-  FAQ de l'accueil sont toujours dans le HTML servi.
-- **Contenu figé client intact** sur la page : 2012, 150 °C, « Devis détaillé »,
-  garantie décennale. Aucun « 2005 », aucun « 180 °C », aucun « finisseur », aucun
-  « Devis sous 48h ».
-- **IndexNow relancé : 12 URLs → HTTP 200.**
-
-**Ce que j'ai décidé de NE PAS faire, et pourquoi :**
-- **Ne pas publier d'épaisseurs ni de granulométries chiffrées** (4-5 cm, 0/6,
-  0/10…), alors que c'est exactement le genre de données métier qui se fait citer.
-  Les seules sources trouvées sont des blogs d'agences qui se recopient, et la
-  norme NF P 98-130 est payante : **je n'ai pas pu lire la valeur, donc je ne la
-  publie pas.** À reprendre si une source primaire lisible apparaît (guide Cerema
-  en accès libre, CCTP départemental).
-- **Ne pas créer de page dédiée `/goudronnage`** : le routeur est en file-based
-  routing avec un `routeTree.gen.ts` généré au build, et **le runner ne peut pas
-  construire le projet** (ni `bun install` ni `npm ci` n'aboutissent). Ajouter une
-  route sans pouvoir la compiler, c'est risquer de casser le déploiement entier
-  pour une page. Enrichir une page existante donne le même bénéfice sans ce risque.
-- **Ne pas toucher la phrase d'intro du héros** ni aucun texte client existant.
-- **Ne pas ajouter de `BreadcrumbList` aux pages `/realisations/*`** aujourd'hui :
-  la moitié restante du n°6, à faire un autre jour.
-- **Ne pas ajouter `lagazettefrance.fr` en `sameAs`** alors que la fiche est
-  apparue aujourd'hui dans les résultats : je ne l'ai pas ouverte et lue depuis le
-  runner. Règle inchangée — on ne cite pas ce qu'on n'a pas vérifié.
-
 ### 12/09/2026 — La requête « terrassement » couverte sur `/services/preparation-terrain` (commit `eaef5d4`)
 
 **Chantier choisi : le candidat n°1 désigné par le run du 11/09**, et pour la
@@ -4439,6 +4348,20 @@ Lun-Ven 8h-18h / Sam 8h-12h, Mappy Lun-Sam 7h-19h) signalés comme incohérence 
 
 Par ordre de priorité. **Alterner les angles, ne pas refaire le même deux jours
 de suite.**
+
+> 🆕 **MISE À JOUR DU 12/10/2026 — prime sur tout ce qui suit.**
+> ✅ `/realisations/chantier-en-cours` : **fait** (plus aucune page maigre).
+> 1. Vérifier en prod après déploiement : chantier-en-cours **5 604 car.**,
+>    FAQ 4/4, lastmod 15/15 ; relancer `indexnow-submit.mjs`.
+> 2. **Bing Webmaster Tools** (action Yanis, voir Techniques apprises 12/10) :
+>    ChatGPT search et Copilot s'appuient sur l'index Bing — import depuis la
+>    GSC en 2 min. Puis Bing Places si la fiche Google est revendiquée.
+> 3. Requêtes villes (« enrobé Champagnole », « enrobé Lons-le-Saunier ») :
+>    pas de page ville sans contenu propre et vrai ; la matière existe pour
+>    Champagnole (station Météo-France déjà citée) — à étudier, sans doorway.
+> 4. Migration `nodejs24.x` (touche `package.json`) → à proposer à Yanis.
+> 5. `/mentions-legales` dès que le client fournit capital, RCS, gérant,
+>    médiateur.
 
 > 🆕 **MISE À JOUR DU 11/10/2026 — prime sur tout ce qui suit.**
 > ✅ Dette de vérification en ligne : **purgée** (prod = dernier commit).
@@ -6060,6 +5983,24 @@ récupérer sans rien réécrire. **Sans cette requête, le travail restait perd
 ---
 
 ## Techniques apprises
+
+### 12/10/2026 (lundi) — 📚 ChatGPT search en local : le site de l'entreprise pèse 58 % des sources, via l'index Bing
+Source : BrightLocal, *Uncovering ChatGPT Search Sources* (12/12/2024, 800
+recherches locales US, données nov. 2024) — brightlocal.com/research/uncovering-chatgpt-search-sources.
+- Sources citées : **sites d'entreprise 58 %**, mentions (médias, Wikipédia)
+  27 %, annuaires 15 % ; Reddit/Quora 0. ChatGPT Search s'appuie surtout sur
+  l'**index Bing** et lit aussi les avis Google.
+- **Applicable ici** : le contenu propre du site est bien le premier levier
+  GEO local (ce qu'on fait), mais il faut être **indexé par Bing**. IndexNow
+  est fait ; **Bing Webmaster Tools n'a jamais été demandé** (absent de
+  `ACTIONS-SEO-CLIENT.md`) → action Yanis : importer le site depuis la GSC.
+- Limite : étude US de 2024, pas de mesure française équivalente trouvée.
+- ⚙️ Aucun outil Search Console n'est chargeable depuis le runner (ToolSearch
+  « search console » → rien) : ne pas re-chercher, demander les chiffres à Yanis.
+- ⚙️ `vite dev` doit être lancé avec `--host 127.0.0.1` (sinon EAFNOSUPPORT
+  sur `::`) ; `verif-faq.mjs` accepte une URL de page précise.
+- ⚙️ Guide MTQ Québec 2009 (*mise en place des enrobés bitumineux*) : source
+  publique, en français, chiffrée sur la fenêtre de compactage — réutilisable.
 
 ### 08/10/2026 — ⚙️ Trois canaux de mesure tranchés (dont deux à ne plus jamais essayer), ⚙️ le piège `tsc` d'une route neuve, et 📚 les mentions légales ont changé d'article en 2024
 

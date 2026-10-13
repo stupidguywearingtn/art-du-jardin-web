@@ -14,6 +14,8 @@ et à compléter en fin de run.
 > chaud — HCE · Jura & Ain ») et celle de `finitions-soignees` portait une
 > accroche (« Vous avez un projet d'aménagement… »). Désormais champ
 > `seoTitle` dédié (requête + zone), H1 et contenu visibles inchangés.
+> ✅ Vérifié en prod (`175e08a`, `success` ~80 s) : 6/6 titres servis,
+> IndexNow 15 URLs → 200.
 
 > ✅ **12/10/2026 — Déploiement OK** (`9e2e07e` : Vercel `success`). Prod =
 > dernier commit (15/15 URLs identiques au banc du 11/10, FAQ 11/11, lastmod
@@ -4262,8 +4264,7 @@ Par ordre de priorité. **Alterner les angles, ne pas refaire le même deux jour
 de suite.**
 
 > 🆕 **MISE À JOUR DU 13/10/2026 — prime sur tout ce qui suit.**
-> ✅ `<title>` des six services : **fait**. Vérifier en prod après déploiement
-> (6 titres) puis relancer `indexnow-submit.mjs`.
+> ✅ `<title>` des six services : **fait et vérifié en prod** (6/6), IndexNow 200.
 > 1. H1 de l'accueil « HCE » → proposer à Yanis un H1 métier visible.
 > 2. Bing Webmaster Tools (action Yanis, inchangée).
 > 3. Requête « enrobé Champagnole » : page ville seulement avec contenu propre

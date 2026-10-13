@@ -8,6 +8,13 @@ et à compléter en fin de run.
 
 ## État des lieux
 
+> ✅ **13/10/2026 — Déploiement OK** (`5de9cb1` : Vercel `success`). Prod =
+> dernier commit (15/15 URLs = banc du 12/10). Chantier du jour : **balises
+> `<title>` des six `/services/*`** — elles étaient génériques (« Enrobé à
+> chaud — HCE · Jura & Ain ») et celle de `finitions-soignees` portait une
+> accroche (« Vous avez un projet d'aménagement… »). Désormais champ
+> `seoTitle` dédié (requête + zone), H1 et contenu visibles inchangés.
+
 > ✅ **12/10/2026 — Déploiement OK** (`9e2e07e` : Vercel `success`). Prod =
 > dernier commit (15/15 URLs identiques au banc du 11/10, FAQ 11/11, lastmod
 > 15 cohérentes). Chantier du jour : **`/realisations/chantier-en-cours`
@@ -575,57 +582,6 @@ Cize 39300 dans le Jura. HCE est dans le Jura, coordonnées 46.726 / 5.914.
 > front et juste sur le backend.** ⚠️ Cela ne change RIEN à la règle d'action :
 > **ne rien changer au déploiement**, qui reste hors de notre portée.
 
-### Positions mesurées — 12/09/2026
-
-**Indexation : toujours nulle, 5 jours après la 1re soumission IndexNow.** Deux
-mesures concordantes, toutes deux via `WebSearch` (toujours le seul canal
-exploitable) :
-1. **Phrase exacte du site** (le test le plus net, institué le 11/09) :
-   `"Médaillons et inserts pavés intégrés à l'enrobé"` entre guillemets →
-   **dix résultats, zéro hcebtp.com**, rien que des concurrents et deux brevets
-   américains. Une page indexée ressort toujours sur une citation exacte de son
-   propre texte.
-2. **Requête nommant le domaine** : `hcebtp.com HCE Hini Cours Enrobé Cize 39300`
-   → **aucune page du domaine**, mais **neuf fiches d'annuaire** décrivant HCE.
-
-| Requête | Mesure (12/09/2026) | Évolution vs 11/09 |
-|---|---|---|
-| indexation (phrase exacte du site) | **absent** | inchangé |
-| indexation (requête nommant le domaine) | **absent** | inchangé |
-| requêtes commerciales | **non mesurables ce jour** (aucun canal de SERP brute) | indéterminé |
-
-Les canaux de SERP brute n'ont **pas** été re-testés un par un : la liste du
-11/09 est à jour et tous étaient morts (Bing RSS, Mojeek, DuckDuckGo, Brave,
-Marginalia, Ecosia, Startpage). Ne pas y perdre de temps demain non plus.
-
-**Découverte du jour, et c'est la plus utile depuis plusieurs runs : une fiche
-PagesJaunes existe.** `pagesjaunes.fr/pros/52322496`, « H.C.E Cize - Travaux
-publics (adresse, horaires) ». Aucun des cinq runs précédents ne l'avait vue.
-C'est la **seule fiche commerciale** parmi les cinq connues (les autres sont des
-fiches légales automatiques), donc la seule qui se revendique auprès de Solocal
-et accepte un lien vers le site — et PagesJaunes est déjà le domaine qui tient
-les positions sur les requêtes visées (constat du 11/09). Passée en tête de
-l'action 4 du fichier client. **Non ajoutée en `sameAs` : HTTP 403 depuis le
-runner, donc contenu non lu** — règle inchangée.
-
-**Question ouverte n°12 tranchée : `lagazettefrance.fr` est écartée.** Elle, se
-lit très bien (HTTP 200, 130 Ko) et le journal demandait depuis le 11/09 de la
-lire pour en faire « un `sameAs` gratuit ». Lue aujourd'hui : elle est
-référencée sous le **SIRET …0021**, affiche **« 36 avenue Etienne Lamy »** et
-mentionne Champagnole — l'**ancienne** adresse. Elle n'a donc pas été ajoutée :
-une fiche périmée de plus empêche Google de consolider l'entité. `doctrine.fr`,
-également apparue, affiche aussi Champagnole → même sort. **Ne pas rouvrir ces
-deux-là.**
-
-**Contrôles techniques** : accueil, `robots.txt`, `sitemap.xml`, `llms.txt`,
-`/services/enrobe-a-chaud` tous en 200 du premier coup.
-`/services/preparation-terrain` a renvoyé **une fois `000` puis 200 cinq fois de
-suite**. C'est la 3e fois qu'un `000` isolé apparaît (07/09 et 11/09 sur le
-sitemap), mais **cette fois sur une autre URL, alors que le sitemap répondait
-200 du premier coup** : ça confirme l'hypothèse « aléa réseau du runner » et
-disqualifie l'hypothèse « sitemap intermittent ». Le point peut être considéré
-comme clos, sauf si un jour plusieurs URLs échouent ensemble.
-
 ### Positions mesurées — 13/09/2026
 
 **Indexation : toujours nulle, 6 jours après la 1re soumission IndexNow.** Deux
@@ -826,6 +782,19 @@ Toutes les valeurs de la table du 15/09 sont **retrouvées au caractère près**
 (même script de mesure). Le banc d'essai local a redonné exactement les mêmes
 chiffres que la production avant le chantier : la fidélité du banc est
 re-confirmée pour la deuxième fois.
+
+### Positions mesurées — 13/10/2026
+
+| Contrôle | 13/10/2026 | vs 12/10 |
+|---|---|---|
+| Déploiement `main` (`5de9cb1`) | **`success`** | = |
+| Prod vs code (`mesure-texte-servi`) | 15/15 URLs = banc du 12/10 | = |
+| « enrobé à chaud Jura entreprise cour » | domaine **absent** ; fiche `118712.fr` de HCE 1ʳᵉ | = |
+| « terrassement Jura entreprise Champagnole » | **absent** (obat.fr, cylex, annonces) | 🆕 relevé |
+
+Pas d'accès Search Console depuis le runner. **À relever par Yanis** : pages
+indexées, et — dans 2-3 semaines — le CTR des six `/services/*` (nouveaux
+`<title>`), requêtes « goudronnage » / « terrassement ».
 
 ### Positions mesurées — 12/10/2026
 
@@ -1921,6 +1890,30 @@ JSON-LD, pas de `BreadcrumbList`).
 ---
 
 ## Chantiers faits
+
+### 13/10/2026 — Balises `<title>` des six `/services/*` : de génériques à ciblées (requête + zone)
+
+- **Constat (mesure prod)** : les 6 services servaient `<title>{H1} — HCE · Jura
+  & Ain` ; « goudronnage », « terrassement », « bordures béton » absents des
+  titres ; `finitions-soignees` avait pour `<title>` (et nom JSON-LD `Service` /
+  `BreadcrumbList`) l'accroche « Vous avez un projet d'aménagement de cour en
+  enrobé ». Le `<title>` est le signal on-page le plus fort et ce que Google
+  affiche dans la SERP.
+- **Fait** : champ obligatoire `seoTitle` (+ `og:title`), et `schemaName`
+  optionnel pour le JSON-LD de `finitions-soignees` (« Finition soignée
+  d'enrobé », formule validée par le client). Titres : « Terrassement et
+  préparation de terrain — Jura & Ain | HCE », « Enrobé à chaud, goudronnage de
+  cour — Jura & Ain | HCE », « Pavage, dallage et médaillons dans l'enrobé —
+  Jura | HCE », « Drainage et pentes d'une cour en enrobé — Jura & Ain | HCE »,
+  « Bordures béton et murets de soutènement — Jura & Ain | HCE », « Finition
+  soignée d'une cour en enrobé — Jura & Ain | HCE » (54-58 car.).
+- **Non touché** : H1 visibles (dont l'accroche de `finitions-soignees`, à
+  soumettre au client — voir 21/09), contenu, `PAGE_UPDATED` (pas de « mise à
+  jour » affichée pour un simple titre), `llms.txt` (couvrait déjà goudronnage).
+- Banc local : build OK, `check:fige` OK, FAQ 11/11, 6 titres servis vérifiés.
+- Archivage : Positions + Chantier du 12/09 → `docs/seo-journal-archive.md`.
+- **Non fait, à proposer** : H1 de l'accueil = « HCE » seul (aucun mot métier).
+  Le changer touche le visuel du héros → à valider par Yanis, pas de texte caché.
 
 ### 12/10/2026 — `/realisations/chantier-en-cours` : 373 → 5 604 car. servis (banc local), bloc « le jour de la pose »
 
@@ -4152,94 +4145,6 @@ descriptions uniques sur ces 5 URLs) ne pouvait donc rien rapporter.
 
 ---
 
-### 12/09/2026 — La requête « terrassement » couverte sur `/services/preparation-terrain` (commit `eaef5d4`)
-
-**Chantier choisi : le candidat n°1 désigné par le run du 11/09**, et pour la
-raison qu'il donnait : `/services/preparation-terrain` existait avec **ni bloc de
-questions, ni donnée métier, ni source**, alors que `terrassement Jura` est une
-des six requêtes visées et que le site y est absent. Le mécanisme (`savoir` dans
-`ServiceData`, `FAQPage` généré depuis le même tableau) était déjà en place
-depuis le 11/09 : il suffisait de le remplir. Angle différent de la veille
-(contenu enrobé) et surtout différent des quatre runs d'entité/`sameAs`.
-
-**Ce qui a été fait :**
-1. **Cinq Q/R sur `/services/preparation-terrain`**, questions posées à voix
-   haute, réponse autonome en 2-3 phrases en tête, contenu **toujours monté**
-   (leçon du 09/09) : déclaration avant de creuser · délai avant démarrage ·
-   devenir des terres excavées · ce qu'est le terrassement VRD · pourquoi
-   compacter par couches.
-2. **`FAQPage` construit depuis le même tableau que la section visible** — le
-   mismatch est structurellement impossible, comme sur l'enrobé.
-3. **Données métier sourcées, lues directement, rien d'inventé** :
-   - **DT-DICT** (lu sur `entreprendre.service-public.gouv.fr/vosdroits/F23491`) :
-     le responsable de projet dépose la **DT**, chaque entreprise intervenante
-     **et chaque sous-traitant** déposent leur **DICT** ; délais de réponse
-     **9 jours calendaires** (DT par internet) et **7 jours calendaires** (DICT) ;
-     **validité 3 mois** ; téléservice « Réseaux et canalisations ».
-   - **Terres excavées** (lu sur `ecologie.gouv.fr`) : registre chronologique
-     obligatoire depuis le **1er janvier 2022** (**décret n° 2021-321 du 25 mars
-     2021**, **arrêté du 31 mai 2021**), registre national, et **bascule sur
-     Trackdéchets au 5 mai 2025** après fusion avec le RNTDS.
-   Les deux sources sont **citées visiblement** en bas de la page.
-   C'est exactement le profil « ce que personne d'autre ne publie » : aucun site
-   de TP local n'explique le délai réglementaire qui retarde un chantier, ni la
-   traçabilité des terres — et la bascule Trackdéchets de mai 2025 est récente.
-4. **`seoDescription`** portant « terrassement », « VRD » et « viabilisation »
-   (la phrase d'intro du héros n'a **pas** été touchée).
-5. **`llms.txt`** : les cinq réponses ajoutées, date passée au 12 septembre
-   (modification réelle, donc date légitime).
-6. **Petit déplacement de code nécessaire** : le titre et le chapeau de la
-   section étaient écrits **en dur** dans le rendu et parlaient de goudronnage.
-   Ils passent en champs `heading`/`lead` de `savoir`. Texte de l'enrobé recopié
-   à l'identique → **aucun changement visible sur `/services/enrobe-a-chaud`**
-   (vérifié en ligne).
-
-**Vérifié en ligne après déploiement (vu comme Googlebot) :**
-- `/services/preparation-terrain` sert **4 blocs JSON-LD** : `Organization`,
-  `Service`, `BreadcrumbList`, `FAQPage`.
-- **Les 5 questions ET les 5 réponses sont présentes mot pour mot dans le texte
-  visible** (comparaison après suppression des `<script>` *et* `<style>`, accents
-  et apostrophes normalisés) — **zéro mismatch**.
-- Rendu contenant bien : DT-DICT, Trackdéchets, décret 2021-321, arrêté du
-  31 mai 2021, 5 mai 2025, VRD, portance, « 12 septembre 2026 », les deux liens
-  de sources. Meta description avec « Terrassement, VRD et viabilisation ».
-- **Non-régression, le vrai risque du jour** : `/services/enrobe-a-chaud` rend
-  toujours le même titre et le même chapeau, garde sa date du **11 septembre**,
-  ses 5 Q/R **sans mismatch**, BBSG / NF EN 13108 / TotalEnergies intacts ;
-  l'**accueil** garde ses **6 Q/R sans mismatch** ; `/services/drainage-pentes`
-  est inchangée et toujours sans `FAQPage`.
-- **Contenu figé client intact** : 150 °C, « posé à la main », « Devis détaillé ».
-  Aucun « 2005 », « 180 °C », « finisseur », « Devis sous 48h ».
-  *(« 2012 » est absent de cette page-là, et l'était déjà : seule la phrase
-  d'intro de l'enrobé porte « depuis 2012 ». Ce n'est pas une régression — ne pas
-  s'en alarmer demain.)*
-- **IndexNow relancé : 12 URLs → HTTP 200.**
-
-**Ce que j'ai décidé de NE PAS faire, et pourquoi :**
-- ✅ ~~**Ne pas publier les seuils d'urbanisme des affouillements** (déclaration
-  préalable au-delà de 2 m de profondeur et 100 m²)~~ **RÉSOLU le 25/09/2026 :
-  Légifrance est lisible depuis le 23/09, l'article R\*421-23 f a été lu et cité
-  mot pour mot sur `/realisations/preparation-terrassement`, avec l'article
-  R\*421-19 k pour le permis d'aménager. Thread refermé, ne pas le rouvrir.**
-  *Constat d'origine du 12/09 conservé :* c'était la
-  question la plus demandée du lot et quatre sources concordaient.
-  **Légifrance répond 403** au runner (WebFetch et curl), le PDF de la
-  préfecture de l'Ain n'a pas pu être décodé de façon fiable, et il ne reste que
-  des cabinets d'avocats. Règle du 08/09 : on ne cite pas ce qu'on n'a pas lu.
-  **À reprendre le jour où une source primaire lisible apparaît** — c'est une
-  vraie question de particulier, elle mérite d'être couverte correctement.
-- **Ne pas ajouter `pagesjaunes.fr` en `sameAs`** malgré tout son intérêt :
-  HTTP 403, contenu non lu. Elle vaut surtout comme **action client** (lien
-  entrant), pas comme `sameAs`.
-- **Ne pas ajouter `lagazettefrance.fr` ni `doctrine.fr`** : lues, elles portent
-  l'ancienne adresse. Question close.
-- **Ne pas toucher la phrase d'intro du héros** de `preparation-terrain`, ni
-  aucun texte client existant.
-- **Ne pas ajouter de `BreadcrumbList` aux `/realisations/*`** (reliquat du n°6) :
-  un seul chantier mené à fond.
-- **Ne pas faire la veille de l'étape 5** : elle est prévue le lundi, on est
-  samedi.
-
 ### 13/09/2026 — L'eau et les eaux pluviales couvertes sur `/services/drainage-pentes` (commit `3f080f2`)
 
 **Chantier choisi : le candidat n°1 désigné par le run du 12/09**, et pour sa
@@ -4355,6 +4260,16 @@ Lun-Ven 8h-18h / Sam 8h-12h, Mappy Lun-Sam 7h-19h) signalés comme incohérence 
 
 Par ordre de priorité. **Alterner les angles, ne pas refaire le même deux jours
 de suite.**
+
+> 🆕 **MISE À JOUR DU 13/10/2026 — prime sur tout ce qui suit.**
+> ✅ `<title>` des six services : **fait**. Vérifier en prod après déploiement
+> (6 titres) puis relancer `indexnow-submit.mjs`.
+> 1. H1 de l'accueil « HCE » → proposer à Yanis un H1 métier visible.
+> 2. Bing Webmaster Tools (action Yanis, inchangée).
+> 3. Requête « enrobé Champagnole » : page ville seulement avec contenu propre
+>    (Champagnole à ~2,4 km de Cize, station Météo-France 39097003) — à étudier.
+> 4. Galerie « Chantier en cours » vide (client), mentions légales (client),
+>    `nodejs24.x` (Yanis) : inchangés.
 
 > 🆕 **MISE À JOUR DU 12/10/2026 — prime sur tout ce qui suit.**
 > ✅ `/realisations/chantier-en-cours` : **fait** (plus aucune page maigre).

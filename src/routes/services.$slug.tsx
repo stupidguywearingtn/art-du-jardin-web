@@ -24,6 +24,15 @@ type ServiceData = {
      affichée dans le héros ne contient pas le vocabulaire réellement tapé par
      les internautes. Aucun effet sur le rendu. */
   seoDescription?: string;
+  /* <title> et og:title dédiés (13/10/2026) : le titre affiché (H1) reste le
+     nom court du service, mais la balise <title> porte la requête réellement
+     tapée (« goudronnage », « terrassement »…) et la zone. Aucun effet sur le
+     rendu visible. */
+  seoTitle: string;
+  /* Nom du service dans le JSON-LD Service et BreadcrumbList, quand le titre
+     affiché n'est pas un nom de service (cas de finitions-soignees, dont le H1
+     est une accroche laissée telle quelle — voir journal 21/09). */
+  schemaName?: string;
   /* Bloc « ce qu'il faut savoir » : questions posées telles qu'on les pose à
      voix haute, réponse autonome de 2-3 phrases en tête. Rendu visible en clair
      (jamais replié, jamais monté conditionnellement) ET repris tel quel dans le
@@ -45,6 +54,7 @@ type ServiceData = {
 
 const SERVICES: Record<string, ServiceData> = {
   "preparation-terrain": {
+    seoTitle: "Terrassement et préparation de terrain — Jura & Ain | HCE",
     n: "01",
     title: "Préparation de terrain",
     hero: "/assets/preparation-terrain-1.png",
@@ -101,6 +111,7 @@ const SERVICES: Record<string, ServiceData> = {
     },
   },
   "enrobe-a-chaud": {
+    seoTitle: "Enrobé à chaud, goudronnage de cour — Jura & Ain | HCE",
     n: "02",
     title: "Enrobé à chaud",
     hero: "/assets/enrobe-1.png",
@@ -189,6 +200,7 @@ const SERVICES: Record<string, ServiceData> = {
     },
   },
   "maconnerie-generale": {
+    seoTitle: "Pavage, dallage et médaillons dans l'enrobé — Jura | HCE",
     n: "03",
     title: "Maçonnerie générale",
     hero: "/assets/maconnerie-1.png",
@@ -250,6 +262,7 @@ const SERVICES: Record<string, ServiceData> = {
     },
   },
   "drainage-pentes": {
+    seoTitle: "Drainage et pentes d'une cour en enrobé — Jura & Ain | HCE",
     n: "04",
     title: "Drainage & pentes",
     hero: "/assets/drainage-1.jpeg",
@@ -306,6 +319,7 @@ const SERVICES: Record<string, ServiceData> = {
     },
   },
   "bordures-murets": {
+    seoTitle: "Bordures béton et murets de soutènement — Jura & Ain | HCE",
     n: "05",
     title: "Bordures & murets",
     hero: "/assets/bordures-1.png",
@@ -373,6 +387,8 @@ const SERVICES: Record<string, ServiceData> = {
     },
   },
   "finitions-soignees": {
+    seoTitle: "Finition soignée d'une cour en enrobé — Jura & Ain | HCE",
+    schemaName: "Finition soignée d'enrobé",
     n: "06",
     title: "Vous avez un projet d'aménagement de cour en enrobé",
     hero: "/assets/finitions-1.jpeg",
@@ -610,9 +626,9 @@ export const Route = createFileRoute("/services/$slug")({
   head: ({ params, loaderData }) => ({
     meta: loaderData
       ? [
-          { title: `${loaderData.title} — HCE · Jura & Ain` },
+          { title: loaderData.seoTitle },
           { name: "description", content: loaderData.seoDescription ?? loaderData.intro },
-          { property: "og:title", content: `${loaderData.title} — HCE` },
+          { property: "og:title", content: loaderData.seoTitle },
           { property: "og:description", content: loaderData.seoDescription ?? loaderData.intro },
           { property: "og:image", content: `https://www.hcetp.com${loaderData.hero}` },
           { property: "og:url", content: `https://www.hcetp.com/services/${params.slug}` },
@@ -628,7 +644,7 @@ export const Route = createFileRoute("/services/$slug")({
             children: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "Service",
-              name: loaderData.title,
+              name: loaderData.schemaName ?? loaderData.title,
               description: loaderData.intro,
               provider: {
                 "@type": "LocalBusiness",
@@ -667,7 +683,7 @@ export const Route = createFileRoute("/services/$slug")({
                 {
                   "@type": "ListItem",
                   position: 2,
-                  name: loaderData.title,
+                  name: loaderData.schemaName ?? loaderData.title,
                   item: `https://www.hcetp.com/services/${params.slug}`,
                 },
               ],

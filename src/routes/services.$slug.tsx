@@ -647,7 +647,7 @@ export const Route = createFileRoute("/services/$slug")({
               name: loaderData.schemaName ?? loaderData.title,
               description: loaderData.intro,
               provider: {
-                "@type": "LocalBusiness",
+                "@type": "HomeAndConstructionBusiness",
                 "@id": "https://www.hcetp.com/#business",
                 name: "HCE",
                 url: "https://www.hcetp.com",

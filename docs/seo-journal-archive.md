@@ -875,3 +875,139 @@ depuis le 11/09 : il suffisait de le remplir. Angle différent de la veille
 - **Ne pas faire la veille de l'étape 5** : elle est prévue le lundi, on est
   samedi.
 
+<!-- section d'origine : Positions mesurées (archivé le 14/10/2026) -->
+### Positions mesurées — 13/09/2026
+
+**Indexation : toujours nulle, 6 jours après la 1re soumission IndexNow.** Deux
+mesures concordantes, via `WebSearch` (toujours le seul canal exploitable) :
+1. **Phrase exacte du site** (le test institué le 11/09) :
+   `"Médaillons et inserts pavés intégrés à l'enrobé"` → **dix résultats, zéro
+   hcebtp.com** (concurrents + deux brevets américains, exactement comme au 12/09).
+2. **Requête nommant le domaine** : `hcebtp.com HCE Hini Cours Enrobé Cize 39300
+   travaux publics` → **aucune page du domaine**, mais **neuf fiches d'annuaire**.
+
+| Requête | Mesure (13/09/2026) | Évolution vs 12/09 |
+|---|---|---|
+| indexation (phrase exacte du site) | **absent** | inchangé |
+| indexation (requête nommant le domaine) | **absent** | inchangé |
+| requêtes commerciales | **non mesurables ce jour** (aucun canal de SERP brute) | indéterminé |
+
+Les canaux de SERP brute n'ont **pas** été re-testés : la liste du 11/09 est à jour
+(Bing RSS, Mojeek, DuckDuckGo, Brave, Marginalia, Ecosia, Startpage — tous morts).
+Ne pas y perdre de temps demain non plus.
+
+**Contrôles techniques** : accueil, `robots.txt`, `sitemap.xml`, `llms.txt`,
+`/services/drainage-pentes` tous en **200 du premier coup**. Aucun `000` cette fois
+— cohérent avec la conclusion du 12/09 (aléa réseau du runner, point clos).
+
+<!-- section d'origine : Chantiers faits (archivé le 14/10/2026) -->
+### 13/09/2026 — L'eau et les eaux pluviales couvertes sur `/services/drainage-pentes` (commit `3f080f2`)
+
+**Chantier choisi : le candidat n°1 désigné par le run du 12/09**, et pour sa
+raison : `drainage-pentes` était la page service la plus pauvre du site — aucun
+texte hors la liste des prestations, ni question, ni source — alors que « où part
+l'eau » est la question qui précède tout projet de goudronnage. Le mécanisme
+(`savoir` dans `ServiceData`, `FAQPage` généré depuis le même tableau) était rodé
+depuis le 11/09 : il suffisait de le remplir. **Changement purement de données,
+aucun code de rendu touché.**
+
+**Ce qui a été fait :**
+1. **Cinq Q/R sur `/services/drainage-pentes`**, questions posées à voix haute,
+   réponse autonome de 88 à 123 mots en tête, contenu **toujours monté** (leçon du
+   09/09) : l'eau chez le voisin · la pente minimum · l'origine des flaques ·
+   les obligations des parkings de plus de 500 m² · drain ou pente.
+2. **`FAQPage` construit depuis le même tableau que la section visible** — mismatch
+   structurellement impossible.
+3. **Données réglementaires lues directement, rien d'inventé**, et **citées
+   visiblement** en bas de page :
+   - **`service-public.gouv.fr/particuliers/vosdroits/F2443`** (page « vérifiée le
+     29 mai 2026 ») : servitude naturelle d'écoulement, **articles 640 et 641 du
+     Code civil** ; l'obligation du fonds inférieur ne vaut que pour un écoulement
+     **naturel, sans intervention humaine** ; elle **tombe si le fonds supérieur
+     aggrave** l'écoulement ; elle ne couvre que **eaux de pluie, de source et de
+     fonte des neiges**, pas les eaux usées.
+   - **`entreprendre.service-public.gouv.fr/vosdroits/F38106`** (mise à jour du
+     22 juillet 2025) : parcs de stationnement extérieurs **de plus de 500 m²**,
+     neufs ouverts au public **ou faisant l'objet d'une rénovation lourde** →
+     sur **au moins 50 % de la surface**, revêtements, aménagements hydrauliques
+     ou dispositifs végétalisés favorisant **la perméabilité et l'infiltration
+     des eaux pluviales ou leur évaporation** ; **article L111-19-1 du Code de
+     l'urbanisme** ; projets soumis à autorisation d'urbanisme.
+   **Pourquoi c'est le meilleur contenu publié jusqu'ici côté GEO** : le mot
+   « rénovation lourde » d'un parking de plus de 500 m² couvre directement la
+   requête visée **`réfection parking enrobé Jura`**, et aucun site de TP local
+   ne publie cette obligation. Le volet « eau chez le voisin » est, lui, la
+   question que les particuliers posent vraiment avant de goudronner.
+4. **`seoDescription`** portant « drainage », « pente » et « eaux pluviales »
+   (la phrase d'intro du héros n'a **pas** été touchée).
+5. **`llms.txt`** : les cinq réponses ajoutées, date au 13 septembre, **et une
+   dérive corrigée** — la section « Pages » ne mentionnait pas les Q/R ajoutées à
+   `preparation-terrain` le 12/09. Les deux entrées sont désormais à jour.
+
+**Volet découverte — 4e `sameAs`, et il est de meilleure qualité que les trois
+autres.** `fr.mappy.com/poi/50adc51784ae2742a0054bfe`, **lue et vérifiée** :
+elle publie le téléphone `03 84 52 61 48` **et** l'adresse actuelle
+« 40 Bis av Etienne Lamy, 39300 Cize ». C'est la **seule fiche connue à porter les
+deux à la fois** (118000 n'a pas d'adresse, societe.com et manageo n'ont pas le
+téléphone). Ajoutée à l'`Organization` et au `LocalBusiness`, avec un commentaire
+daté expliquant le piège de l'extrait périmé. Voir l'encadré de méthode plus haut.
+
+`ACTIONS-SEO-CLIENT.md` : fiche Mappy documentée — **aucun lien vers le site**,
+donc lien retour à créer en la revendiquant ; **horaires divergents** (site
+Lun-Ven 8h-18h / Sam 8h-12h, Mappy Lun-Sam 7h-19h) signalés comme incohérence NAP
+à corriger ; nom commercial différent (« H.C.E Aménagement de Cours en Enrobés »).
+
+**Vérifié en ligne après déploiement (vu comme Googlebot) :**
+- `/services/drainage-pentes` sert **4 blocs JSON-LD** : `Organization`, `Service`,
+  `BreadcrumbList`, `FAQPage`.
+- **Les 5 questions ET les 5 réponses sont présentes mot pour mot dans le texte
+  visible** (comparaison après suppression des `<script>` *et* `<style>`, accents
+  et apostrophes normalisés) — **zéro mismatch**.
+- Rendu contenant : articles 640 et 641, L111-19-1, « 500 m² », « 1,5 % »,
+  « puits perdu », « 13 septembre 2026 », les deux liens de sources. Meta
+  description et `<title>` conformes.
+- **Non-régression, le vrai risque du jour** : l'**accueil** garde ses **6 Q/R sans
+  mismatch** ; `/services/enrobe-a-chaud` et `/services/preparation-terrain`
+  gardent chacune leurs **5 Q/R sans mismatch** et leurs blocs JSON-LD.
+  **`sameAs` = 4 partout** (Organization et LocalBusiness), mappy inclus.
+- **Contenu figé client intact** : 2012, 150 °C, « posé à la main », « Devis
+  détaillé », garantie décennale. Aucun « 2005 », « 180 °C », « finisseur »,
+  « Devis sous 48h », ni dans les pages ni dans `llms.txt`.
+  *(Rappel du 12/09 confirmé ce jour : « 2012 » est absent de
+  `/services/preparation-terrain` et l'a toujours été — le contrôle automatique le
+  signale comme « disparu », **ce n'est pas une régression**. Ne pas s'en alarmer.)*
+- `llms.txt` servi en 200, 13 688 o, 220 lignes, sans aucun terme interdit.
+- **IndexNow relancé après vérification : 12 URLs → HTTP 200.**
+
+**Ce que j'ai décidé de NE PAS faire, et pourquoi :**
+- **Ne pas publier de chiffre sur le gel**, alors que c'était l'angle « contrainte
+  saisonnière du Jura » que la consigne réclame et que j'avais commencé à le
+  documenter. Les sources primaires sont inaccessibles : **HAL est protégé par un
+  challenge Anubis**, la fiche climatologique Météo-France n'existe qu'en **PDF**
+  (piège documenté le 12/09), et le miroir HTML `meteo.bzh` sert un tableau
+  **entièrement vide** (« -- » partout). Le chiffre « 53 jours de gel à
+  Lons-le-Saunier » n'apparaît que dans un extrait d'agrégateur : **non lu à la
+  source, donc non publié.** La Q/R sur les flaques mentionne le gel de façon
+  purement qualitative (l'eau augmente de volume en gelant), ce qui n'exige aucune
+  source. **À reprendre si une normale climatique lisible en HTML apparaît** —
+  ce serait une vraie donnée locale citable.
+- **Ne pas citer `doc.cerema.fr`** bien que la page se lise : le document trouvé
+  est une étude de dimensionnement au gel sur deux routes des Alpes-Maritimes,
+  sans rapport avec une cour privée du Jura. Une source lisible mais hors sujet
+  ne vaut pas mieux qu'une source absente.
+- **Ne pas ajouter `pagesjaunes.fr` en `sameAs`** : toujours HTTP 403, contenu
+  non lu. Elle reste le meilleur levier **côté client** (action 4), pas un `sameAs`.
+- **Ne pas « corriger » l'adresse du site en « 40 Bis »** alors que Mappy est la
+  **deuxième source indépendante** (avec le registre national) à porter le
+  complément que le pied de page n'affiche pas. C'est du rendu, et la question est
+  déjà posée au client depuis le 08/09. Renforcée dans le fichier client, **pas
+  tranchée**.
+- **Ne pas rouvrir `kompass.fr` / `verif.com` aujourd'hui** : leur statut
+  « périmée » est fragile (voir l'encadré), mais elles répondent 403 et le run
+  avait un chantier. Passé en chantier en attente n°13.
+- **Ne pas ajouter de `BreadcrumbList` aux `/realisations/*`** (reliquat du n°6) :
+  un seul chantier mené à fond.
+- **Ne pas faire la veille de l'étape 5** : elle est prévue le lundi, on est
+  dimanche. **Elle tombe demain 14/09 — la faire avant de choisir le chantier.**
+
+---

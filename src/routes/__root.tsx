@@ -50,26 +50,18 @@ export const Route = createRootRoute({
         content:
           "HCE — Enrobé à chaud, cours, parkings, terrassement dans le Jura et l'Ain depuis 2012. Pose à la main, devis détaillé, garantie décennale.",
       },
-      { name: "twitter:card", content: "summary" },
-      {
-        name: "twitter:title",
-        content: "Enrobé · Cours · Parkings · Terrassement — HCE Jura & Ain",
-      },
-      {
-        name: "twitter:description",
-        content:
-          "HCE — Enrobé à chaud, cours, parkings, terrassement dans le Jura et l'Ain depuis 2012. Pose à la main, devis détaillé, garantie décennale.",
-      },
-      {
-        property: "og:image",
-        content:
-          "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/683b4530-b407-4cce-9cb0-7607d76ebb7c/id-preview-eb5e1275--27ec4cea-624d-4276-b609-fd4afffcfb65.lovable.app-1783340447523.png",
-      },
-      {
-        name: "twitter:image",
-        content:
-          "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/683b4530-b407-4cce-9cb0-7607d76ebb7c/id-preview-eb5e1275--27ec4cea-624d-4276-b609-fd4afffcfb65.lovable.app-1783340447523.png",
-      },
+      /* 14/10/2026 — Aperçu de partage (WhatsApp, Facebook, LinkedIn, X) et
+         image candidate des moteurs. Avant : une capture d'écran d'une ancienne
+         preview Lovable, hébergée sur un bucket tiers (r2.dev) hors de notre
+         contrôle, montrant un finisseur — contradictoire avec « posé à la
+         main ». Désormais : vraie photo d'allée en enrobé du dépôt
+         (public/assets/enrobe-a-chaud-allee.jpg) recadrée en 1200×630, servie
+         depuis le domaine. Les pages /services/* gardent leur propre image.
+         twitter:title / twitter:description / twitter:image retirés : ils
+         répétaient l'accueil sur toutes les pages ; X se rabat sur les og:*
+         de chaque page. */
+      { name: "twitter:card", content: "summary_large_image" },
+      { property: "og:image", content: "https://www.hcetp.com/og-hce.jpg" },
     ],
     links: [
       { rel: "icon", href: "/favicon.ico", sizes: "any" },

@@ -156,7 +156,10 @@ export const Route = createFileRoute("/")({
         type: "application/ld+json",
         children: JSON.stringify({
           "@context": "https://schema.org",
-          "@type": "LocalBusiness",
+          // 14/10/2026 : type le plus précis de schema.org pour une
+          // entreprise de travaux extérieurs (sous-type de LocalBusiness : rien
+          // n'est perdu pour les moteurs qui lisent LocalBusiness).
+          "@type": "HomeAndConstructionBusiness",
           // @id partagé avec l'Organization du root et le provider des pages
           // /services/* : sans lui, les moteurs voient trois entités « HCE »
           // concurrentes au lieu d'une seule.
@@ -190,6 +193,9 @@ export const Route = createFileRoute("/")({
           ],
           url: "https://www.hcetp.com",
           logo: "https://www.hcetp.com/favicon-512x512.png",
+          // Propriété recommandée par Google pour un établissement local :
+          // vraie photo d'une allée en enrobé (même fichier que l'og:image).
+          image: "https://www.hcetp.com/og-hce.jpg",
           telephone: "+33 3 84 52 61 48",
           email: "sarl.hce@laposte.net",
           foundingDate: "2012",
@@ -231,6 +237,29 @@ export const Route = createFileRoute("/")({
             { "@type": "AdministrativeArea", name: "Jura" },
             { "@type": "AdministrativeArea", name: "Ain" },
           ],
+          // 14/10/2026 : les six prestations, chacune reliée à sa page. Relie
+          // l'entité « HCE » à ses métiers (enrobé, terrassement…) pour les
+          // moteurs et les IA. AUCUN prix (contenu figé) : pas de `price`,
+          // pas de `priceSpecification`.
+          hasOfferCatalog: {
+            "@type": "OfferCatalog",
+            name: "Prestations HCE",
+            itemListElement: [
+              ["Préparation de terrain et terrassement", "preparation-terrain"],
+              ["Enrobé à chaud", "enrobe-a-chaud"],
+              ["Maçonnerie générale : pavage, dallage, médaillons", "maconnerie-generale"],
+              ["Drainage et pentes", "drainage-pentes"],
+              ["Bordures béton et murets", "bordures-murets"],
+              ["Finition soignée d'enrobé", "finitions-soignees"],
+            ].map(([name, slug]) => ({
+              "@type": "Offer",
+              itemOffered: {
+                "@type": "Service",
+                name,
+                url: `https://www.hcetp.com/services/${slug}`,
+              },
+            })),
+          },
         }),
       },
       {

@@ -17,6 +17,9 @@ et à compléter en fin de run.
 > d'allée du dépôt, 1200×630, servie par le domaine). `LocalBusiness` →
 > `HomeAndConstructionBusiness` + `image` + `hasOfferCatalog` (6 services, sans
 > prix). `/services/garantie-sav` : 307 → **301**.
+> ✅ Vérifié en prod (`3e40ab4`, `success` < 100 s) : `og-hce.jpg` servi (200),
+> `HomeAndConstructionBusiness` en ligne, `garantie-sav` → 301, textes inchangés,
+> IndexNow 15 URLs → 200.
 
 > ✅ **13/10/2026 — Déploiement OK** (`5de9cb1` : Vercel `success`). Prod =
 > dernier commit (15/15 URLs = banc du 12/10). Chantier du jour : **balises
@@ -4177,9 +4180,8 @@ Par ordre de priorité. **Alterner les angles, ne pas refaire le même deux jour
 de suite.**
 
 > 🆕 **MISE À JOUR DU 14/10/2026 — prime sur tout ce qui suit.**
-> ✅ og:image / `HomeAndConstructionBusiness` / 301 : **faits** (vérifier en
-> prod au prochain run : `curl -s https://www.hcetp.com/ | grep og:image` →
-> `og-hce.jpg` ; `/services/garantie-sav` → 301 ; relancer IndexNow).
+> ✅ og:image / `HomeAndConstructionBusiness` / 301 : **faits et vérifiés en
+> prod le 14/10**, IndexNow 200. Rien à revérifier.
 > 1. H1 de l'accueil « HCE » → proposer à Yanis un H1 métier visible.
 > 2. Bing Webmaster Tools (action Yanis, inchangée).
 > 3. Prochain contenu : prestations listées mais jamais expliquées sur

@@ -28,7 +28,7 @@ export type PageUpdate = { iso: string; label: string };
 
 export const PAGE_UPDATED = {
   "/": { iso: "2026-09-29", label: "29 septembre 2026" },
-  "/services/preparation-terrain": { iso: "2026-09-12", label: "12 septembre 2026" },
+  "/services/preparation-terrain": { iso: "2026-10-15", label: "15 octobre 2026" },
   "/services/enrobe-a-chaud": { iso: "2026-10-02", label: "2 octobre 2026" },
   "/services/maconnerie-generale": { iso: "2026-09-16", label: "16 septembre 2026" },
   "/services/drainage-pentes": { iso: "2026-09-13", label: "13 septembre 2026" },

@@ -1011,3 +1011,162 @@ Lun-Ven 8h-18h / Sam 8h-12h, Mappy Lun-Sam 7h-19h) signalés comme incohérence 
   dimanche. **Elle tombe demain 14/09 — la faire avant de choisir le chantier.**
 
 ---
+
+---
+
+## Archivé le 15/10/2026
+
+### Positions mesurées — 14/09/2026
+
+**Indexation : toujours nulle, 7 jours après la 1re soumission IndexNow.** Deux
+mesures concordantes, via `WebSearch` (toujours le seul canal exploitable) :
+1. **Phrase exacte du site** (test institué le 11/09) :
+   `"Médaillons et inserts pavés intégrés à l'enrobé"` → **huit résultats, zéro
+   hcebtp.com** (concurrents uniquement ; les deux brevets américains vus les
+   12 et 13/09 ont disparu du jeu de résultats, sans effet sur la conclusion).
+2. **Requête nommant le domaine** : `hcebtp.com HCE Hini Cours Enrobé Cize 39300
+   travaux publics` → **aucune page du domaine**, mais **neuf fiches d'annuaire**
+   (kompass, verif, pagesjaunes, pappers, societe, mappy, 118000, lagazette,
+   manageo) — exactement la même liste qu'au 12 et 13/09.
+3. `site:hcebtp.com` → **zéro résultat du domaine** (le moteur renvoie des pages
+   Wikipédia sans rapport, signature d'un index qui ne connaît rien sur le sujet).
+
+| Requête | Mesure (14/09/2026) | Évolution vs 13/09 |
+|---|---|---|
+| indexation (phrase exacte du site) | **absent** | inchangé |
+| indexation (requête nommant le domaine) | **absent** | inchangé |
+| `site:hcebtp.com` | **absent** | inchangé |
+| requêtes commerciales | **non mesurables** (aucun canal de SERP brute) | indéterminé |
+
+> ⚠️ **Piège de mesure rencontré aujourd'hui, à connaître.** La requête
+> commerciale `entreprise enrobé à chaud Jura goudronnage cour` a renvoyé une
+> synthèse décrivant **« HCE – Travaux Publics (Cize, 39) »** avec un vocabulaire
+> très proche de celui du site (« intervient dans le Jura ainsi que le secteur
+> d'Oyonnax »). **Ce n'est pas une preuve d'indexation** : aucun lien
+> `hcebtp.com` dans les résultats, et la description vient des fiches
+> d'annuaire (PagesJaunes tient les 2 premières places). **La règle du 08/09
+> tient : on compte les liens de résultat, jamais les mentions dans un texte
+> de synthèse.** C'est la même famille d'erreur que le comptage d'occurrences.
+
+**Contrôles techniques** : accueil, `robots.txt`, `llms.txt` en 200 du premier
+coup. `sitemap.xml` et `/services/maconnerie-generale` ont renvoyé `000` puis
+200 à la relance — et sur 10 appels de contrôle, 2 `000` isolés répartis sur les
+deux URLs. **Conforme à la conclusion du 12/09 (aléa réseau du runner, point
+clos)** : ne pas rouvrir le sujet tant que plusieurs URLs n'échouent pas ensemble
+de façon durable.
+
+
+### 14/09/2026 — Les 4 pages `/realisations/*` étaient vides sans JavaScript (commit `352c250`)
+
+**Chantier choisi : un problème technique découvert à l'étape 2**, et non le
+candidat prévu par le run du 13/09. Le journal proposait en n°1 le chantier
+n°11 (vérifier les contenus dépliables). **Il a été fait, et il est négatif** —
+voir plus bas. C'est en mesurant le volume de texte réellement servi page par
+page, dans la foulée, que le vrai défaut est apparu.
+
+**Le constat, mesuré sur le site en ligne vu comme Googlebot :**
+
+| URL | Texte servi | `<h1>` | Liens internes |
+|---|---|---|---|
+| `/realisations/cour-allee-privee` | **62 car.** | **aucun** | **0** |
+| `/realisations/parking-voirie-pro` | **62 car.** | **aucun** | **0** |
+| `/realisations/preparation-terrassement` | **62 car.** | **aucun** | **0** |
+| `/realisations/chantier-en-cours` | **62 car.** | **aucun** | **0** |
+| `/realisations/avant-apres` | 188 car. | présent | 1 |
+| `/services/*` | 3 784 à 5 207 car. | présent | 1 |
+| accueil | 5 160 car. | présent | 7 |
+
+Les 62 caractères étaient le mot « Chargement… ». **Quatre des douze URLs du
+sitemap ne contenaient donc aucun contenu** pour Google et pour tout crawler
+d'IA — qui, eux, n'exécutent pas de JavaScript du tout.
+
+**Cause, identique en nature au défaut de la FAQ corrigé le 09/09 :** tout le
+contenu de la page était derrière un `if (loading) return <Chargement…>`, et
+`useGalleryByCategorySlug` démarre à `loading: true` en ne chargeant ses données
+que dans un `useEffect` — **qui ne s'exécute jamais au rendu serveur**. L'état de
+chargement était donc *le seul état jamais rendu côté serveur*. `avant-apres`,
+qui rend son enveloppe et ne diffère que les photos, servait déjà de modèle
+correct dans le même dossier.
+
+**Deuxième constat, découvert dans la foulée : ces URLs étaient orphelines.**
+Aucune page du site ne les liait dans le HTML servi — l'accueil a bien un
+`<h2>` « Nos réalisations. », mais **les cartes de la galerie sont elles aussi
+rendues côté client**, donc aucun `href` vers `/realisations/*`. Ces pages
+n'étaient atteignables que par le sitemap. Le travail du 10/09 (titres et meta
+descriptions uniques sur ces 5 URLs) ne pouvait donc rien rapporter.
+
+**Ce qui a été fait :**
+1. **`fallbackCategoryBySlug` exportée depuis `useGallery.tsx`** : résolution
+   **synchrone** du titre et de la description depuis le slug. Source unique —
+   le même `FALLBACK_CATS` que le repli asynchrone — donc le texte servi ne peut
+   pas diverger du texte affiché. (Principe anti-dérive appliqué partout
+   ailleurs : `llms.txt` le 07/09, `FAQPage` le 09/09.)
+2. **La branche `loading` rend désormais** l'en-tête, le `<h1>` de la catégorie,
+   sa description et le maillage — au lieu du seul mot « Chargement… ».
+3. **Bloc « Voir aussi »** : les 3 autres dossiers + `avant-apres` + les services
+   réellement mis en œuvre par ce type de chantier (une cour privée → enrobé et
+   finitions ; un parking → enrobé et préparation de terrain ; un terrassement →
+   préparation et drainage). **Rendu dans l'état de chargement ET dans la page
+   complète** : servir aux robots des liens que le visiteur ne verrait pas serait
+   du cloaking. C'est le point le plus important de la conception.
+4. **`BreadcrumbList`** sur les catégories connues — **le reliquat du chantier en
+   attente n°6 est donc traité pour les `/realisations/*`**. Deux niveaux, comme
+   sur `/services/*` : **pas de niveau intermédiaire « Réalisations »**, car
+   `/realisations` **n'est pas une route du site et répond bien 404** (vérifié) —
+   un fil d'ariane ne doit pointer que vers des URLs réelles.
+5. **En-tête extrait en composant `CategoryHeader`** : les trois états de la page
+   ne peuvent plus diverger.
+6. **Garde-fou anti-soft-404** : pour un slug inconnu, le shell minimal d'origine
+   est conservé et **aucun `BreadcrumbList` n'est émis**. Sans cette garde, ma
+   première version fabriquait un `<h1>` à partir de n'importe quel slug, ce qui
+   aurait transformé `/realisations/<n'importe quoi>` en soft 404 crédible, donc
+   en espace de crawl infini. **Défaut introduit puis corrigé avant le commit.**
+
+**Vérifié en ligne après déploiement (vu comme Googlebot) :**
+- Les 4 pages servent **357 à 386 caractères** (contre 62), un `<h1>` réel
+  (`Cour & allée privée`, `Parking, grand espace et voirie pro`,
+  `Préparation & terrassement`, `Chantier en cours`) et **7 liens internes**
+  chacune (contre 0).
+- **`BreadcrumbList` présent sur les 4, et son `name` de niveau 2 est
+  strictement égal au `<h1>` visible** — comparaison automatique, zéro écart.
+- **Slug inventé (`/realisations/slug-invente-xyz`) : 47 caractères, aucun
+  `BreadcrumbList`.** Le garde-fou fonctionne.
+- **Non-régression, le vrai risque du jour** : accueil **5 160 car.** (chiffre
+  identique au 09/09 et au 13/09) avec `Organization` + `LocalBusiness` +
+  `FAQPage` ; `/services/enrobe-a-chaud` **3 784**, `/services/preparation-terrain`
+  **4 483**, `/services/drainage-pentes` **5 207**, chacune avec ses **4 blocs
+  JSON-LD** intacts ; `avant-apres` **188 car.**, inchangée. **`sameAs` = 4
+  partout.**
+- **Contenu figé client intact** : 2012, 150 °C, « posé à la main », « Devis
+  détaillé », garantie décennale présents ; **aucun terme interdit** (2005, 180,
+  finisseur, « Devis sous 48h », « Garantie & SAV ») sur aucune des pages
+  contrôlées.
+- **IndexNow relancé après vérification : 12 URLs → HTTP 200.**
+
+**Ce que j'ai décidé de NE PAS faire, et pourquoi :**
+- **Ne pas rendre la galerie de l'accueil côté serveur**, alors que c'est la
+  cause de l'orphelinat. C'est une section visuelle qui marche, au cœur de la
+  page la plus importante du site, et **le runner ne peut pas construire le
+  projet** (`bun install` n'aboutit pas) : impossible de tester un changement de
+  rendu sur l'accueil avant de pousser. **C'est le chantier n°1 pour un prochain
+  run**, avec la méthode ci-dessous.
+- **Ne pas créer de page `/realisations`.** Elle manque (l'URL répond 404 et rien
+  ne fait hub), mais créer une route est un chantier à part entière et la règle
+  est « un seul chantier mené à fond ». Noté en attente n°14.
+- **Ne pas toucher à `llms.txt`** : il liste déjà les 5 pages avec exactement les
+  titres servis (vérifié), et **le contenu rédactionnel de ces pages n'a pas
+  changé** — seule son accessibilité aux robots a changé. Bumper la date de mise
+  à jour sans modification réelle serait précisément la dérive que la consigne
+  interdit. **Aucune dérive constatée aujourd'hui.**
+- **Ne pas ajouter de « Dernière mise à jour »** sur ces 4 pages : ce sont des
+  galeries photo, pas des pages de fond. Une date y serait du bruit, et elle
+  mentirait dès que le client ajoute une photo depuis l'admin.
+- **Ne pas remplir le bloc `savoir` de `maconnerie-generale`** (candidat n°2 du
+  13/09) : c'eût été un 4e run d'affilée sur le même mécanisme, ce que le journal
+  d'hier déconseillait explicitement. **Il reste le meilleur candidat contenu.**
+- **Ne pas corriger le HTTP 200 sur `/realisations/<slug inconnu>`** : c'est un
+  comportement pré-existant du routeur, non aggravé par ce commit (le shell servi
+  est quasi vide et sans balisage). Noté en attente n°15.
+
+---
+

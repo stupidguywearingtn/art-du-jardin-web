@@ -5,7 +5,7 @@
 > dans le Jura et l'Ain. Entreprise créée en 2012, 14 années d'expérience, plus de
 > 1000 chantiers livrés, garantie décennale.
 
-Dernière mise à jour : 12 octobre 2026
+Dernière mise à jour : 15 octobre 2026
 Site officiel : https://www.hcetp.com
 
 ## L'entreprise en bref
@@ -439,7 +439,9 @@ de l'eau ne s'évaluent pas autrement.
 - [Préparation de terrain](https://www.hcetp.com/services/preparation-terrain) :
   terrassement, VRD, viabilisation, drainage, enrochement. Contient aussi les réponses
   détaillées sur le terrassement (déclarations DT-DICT et leurs délais, devenir des
-  terres excavées et registre Trackdéchets, compactage par couches), avec leurs sources.
+  terres excavées et registre Trackdéchets, compactage par couches), sur le puits perdu
+  (eaux pluviales seulement : rejet d'eaux usées interdit, article 13 de l'arrêté du
+  7 septembre 2009) et sur l'enrochement comparé au muret de soutènement, avec leurs sources.
 - [Maçonnerie générale](https://www.hcetp.com/services/maconnerie-generale) : pavage,
   dallage, bordures, médaillons sur mesure. Contient aussi les réponses détaillées sur
   l'intégration de pavés et de médaillons dans un enrobé, les normes des pavés, dalles et

@@ -97,6 +97,14 @@ const SERVICES: Record<string, ServiceData> = {
           q: "Pourquoi faut-il compacter le sol par couches avant de poser un enrobé ?",
           a: "Parce qu'un enrobé ne rattrape jamais un support qui bouge. Une terre remise en place d'un seul tenant conserve des vides : sous le poids des véhicules, elle se tasse de façon irrégulière, et la surface finit par se fissurer ou par retenir des flaques. Le compactage se fait donc par couches successives, à la plaque vibrante puis au rouleau, avec contrôle de la portance — c'est ce support-là qui porte les véhicules, l'enrobé posé à la main à 150°C n'étant que la couche de finition.",
         },
+        {
+          q: "Un puits perdu, à quoi sert-il, et peut-on y envoyer ses eaux usées ?",
+          a: "Un puits perdu sert à infiltrer dans le sol les eaux de pluie d'une cour ou d'une toiture quand aucun réseau ni fossé n'est à portée — et seulement elles. L'arrêté du 7 septembre 2009 sur l'assainissement non collectif l'écrit à son article 13 : les rejets d'eaux usées domestiques, même traitées, sont interdits dans un puisard, un puits perdu, un puits désaffecté ou une cavité profonde. Le seul ouvrage prévu pour des eaux usées est le puits d'infiltration, réservé à des eaux ayant subi un traitement complet et autorisé par la commune sur la base d'une étude hydrogéologique. Pour les eaux pluviales, le puits ne vaut que si le sol en dessous absorbe l'eau : c'est le diagnostic d'écoulement qui le dit, avant de creuser. Les règles locales — plan local d'urbanisme, périmètre de protection d'un captage d'eau potable — peuvent encadrer ou exclure l'infiltration ; la mairie le précise avant le chantier.",
+        },
+        {
+          q: "Un enrochement, c'est quoi, et quand le préférer à un muret ?",
+          a: "Un enrochement est un ouvrage de gros blocs de roche posés et calés un à un à la pelle mécanique pour retenir un talus, le plus souvent sans mortier. Là où un muret de soutènement doit être coffré, ferraillé et coulé, l'enrochement tient par le poids des blocs et par leur imbrication. Comme l'eau passe entre les blocs, il ne retient pas derrière lui une terre gorgée d'eau, ce qui compte sur les terrains en pente. En contrepartie, il prend plus de place qu'un mur vertical, puisque l'ouvrage s'incline contre le talus. Les risques à vérifier sont les mêmes que pour un mur : la tenue du sol sous la première rangée de blocs, le glissement et le basculement de l'ensemble sous la poussée des terres. Pour un talus haut, ou un passage de véhicules juste au-dessus, le dimensionnement relève d'un bureau d'études.",
+        },
       ],
       sources: [
         {
@@ -106,6 +114,10 @@ const SERVICES: Record<string, ServiceData> = {
         {
           label: "Ministère de la Transition écologique — Traçabilité des déchets, terres excavées et sédiments",
           url: "https://www.ecologie.gouv.fr/politiques-publiques/tracabilite-dechets-terres-excavees-sediments",
+        },
+        {
+          label: "Préfecture du Doubs — Arrêté du 7 septembre 2009 (assainissement non collectif), version consolidée, article 13",
+          url: "https://www.doubs.gouv.fr/index.php/contenu/telechargement/22817/152536/file/Arr_t__du_7_septembre_2009_version_consolidee_au_20150427.pdf",
         },
       ],
     },

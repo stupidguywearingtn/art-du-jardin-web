@@ -15,6 +15,8 @@ et à compléter en fin de run.
 > seulement ; rejet d'eaux usées interdit, art. 13 de l'arrêté du 7/09/2009,
 > source préfecture du Doubs) et **enrochement** (vs muret). FAQ 5 → 7,
 > `PAGE_UPDATED` 15/10, `llms.txt` 15/10. Banc local OK, build OK, `check:fige` OK.
+> ✅ Vérifié en prod (`ebb0310`, `success` < 80 s) : 2 Q/R servies, « 15 octobre
+> 2026 » affiché, `llms.txt` à jour, IndexNow 15 URLs → 200.
 
 > ✅ **14/10/2026 — Déploiement OK** (`68466b3` : Vercel `success`). Prod =
 > dernier commit (15/15 URLs = valeurs du 13/10). Chantier du jour (technique) :
@@ -4062,8 +4064,7 @@ Par ordre de priorité. **Alterner les angles, ne pas refaire le même deux jour
 de suite.**
 
 > 🆕 **MISE À JOUR DU 15/10/2026 — prime sur tout ce qui suit.**
-> ✅ Q/R puits perdu / enrochement : **faits** (vérifier en prod : FAQ 7/7 sur
-> `preparation-terrain`, puis `indexnow-submit.mjs`).
+> ✅ Q/R puits perdu / enrochement : **faits et vérifiés en prod**, IndexNow 200.
 > 1. H1 de l'accueil « HCE » → proposer à Yanis un H1 métier visible.
 > 2. Bing Webmaster Tools (action Yanis, inchangée).
 > 3. Page ville Champagnole : seulement avec contenu propre (à étudier).

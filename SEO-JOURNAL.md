@@ -17,6 +17,9 @@ et à compléter en fin de run.
 > gazole/huile** (solvants du bitume, bulletin MTQ 2004). FAQ 5 → 7,
 > `PAGE_UPDATED` 16/10, `llms.txt` 16/10 (+2 Q/R). Banc local OK, build OK,
 > `check:fige` OK. Accès robots IA vérifié pour la 1ʳᵉ fois : tout en 200.
+> ✅ Vérifié en prod (`627143e`, `success` < 60 s) : 2 Q/R servies,
+> `finitions-soignees` 7 399 → 10 891 car., « 16 octobre 2026 » affiché, lastmod
+> 2026-10-16, `llms.txt` à jour, IndexNow 15 URLs → 200.
 
 > ✅ **15/10/2026 — Déploiement OK** (`295ca4f` : Vercel `success`). Prod =
 > dernier commit (15/15 URLs servies, valeurs du 14/10). Chantier du jour
@@ -3967,7 +3970,7 @@ Par ordre de priorité. **Alterner les angles, ne pas refaire le même deux jour
 de suite.**
 
 > 🆕 **MISE À JOUR DU 16/10/2026 — prime sur tout ce qui suit.**
-> ✅ Q/R sel / gazole : faits (à vérifier en prod après déploiement, IndexNow).
+> ✅ Q/R sel / gazole : faits et vérifiés en prod, IndexNow 200.
 > 1. H1 de l'accueil « HCE » → proposer à Yanis un H1 métier visible.
 > 2. Bing Webmaster Tools (action Yanis, inchangée) — ChatGPT/Copilot lisent Bing.
 > 3. Page ville Champagnole : seulement avec contenu propre (à étudier).

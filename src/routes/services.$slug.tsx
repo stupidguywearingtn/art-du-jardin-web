@@ -425,7 +425,7 @@ const SERVICES: Record<string, ServiceData> = {
       "Finitions d'enrobé dans le Jura et l'Ain : bords nets, raccords entre bandes, surface plane sans flaque, chantier rendu propre et gravats évacués. Devis détaillé après visite sur site.",
     savoir: {
       heading: "Finitions et fin de chantier : les questions qu'on nous pose",
-      lead: "La finition est la partie du chantier que le client voit vraiment : les bords, les raccords entre bandes, la planéité, et l'état dans lequel le chantier est rendu. Voici à quoi se reconnaît un enrobé bien posé, pourquoi une ligne apparaît parfois entre deux bandes, où partent les gravats d'une cour refaite, et ce qu'un devis doit obligatoirement dire à ce sujet.",
+      lead: "La finition est la partie du chantier que le client voit vraiment : les bords, les raccords entre bandes, la planéité, et l'état dans lequel le chantier est rendu. Voici à quoi se reconnaît un enrobé bien posé, pourquoi une ligne apparaît parfois entre deux bandes, où partent les gravats d'une cour refaite, ce qu'un devis doit obligatoirement dire à ce sujet — et, une fois la cour livrée, ce qui l'abîme vraiment : le sel de déneigement, ou les taches de gazole et d'huile.",
       updated: PAGE_UPDATED["/services/finitions-soignees"],
       qa: [
         {
@@ -448,6 +448,14 @@ const SERVICES: Record<string, ServiceData> = {
           q: "Comment la finition se valide-t-elle avant la fin du chantier ?",
           a: "Étape par étape avec le client, et pas seulement au moment de partir : chaque étape est validée avant de passer à la suivante, et un contrôle visuel et de planéité est fait avant de quitter le chantier. La raison est simple : sur un enrobé, presque tout ce qui détermine la surface finale se décide avant la dernière passe. Les niveaux du support, l'emplacement des exutoires, le tracé des bordures, la position des raccords et le calepinage d'un éventuel motif se jouent pendant la préparation et la pose. Une fois l'enrobé posé et refroidi, ces choix ne se reprennent plus sans toucher au revêtement lui-même. D'où l'intérêt de valider en cours de chantier plutôt que de tout découvrir à la fin. Les travaux d'HCE sont par ailleurs couverts par une garantie décennale.",
         },
+        {
+          q: "Le sel de déneigement abîme-t-il une cour en enrobé ?",
+          a: "Pas l'enrobé lui-même, d'après la seule mesure publique que nous ayons trouvée : ce qui abîme une cour en hiver, c'est l'eau qui s'infiltre puis gèle, bien plus que le sel. En février 2015, le Cerema (laboratoire d'Aix-en-Provence) a présenté un essai comparatif : des éprouvettes d'enrobé (BBTM 0/10, avec un bitume 50/70 ou 20/30) conservées sept jours à 18 °C à l'air, dans l'eau douce, ou dans une solution saturée de fondant routier à 400 g de sel par litre. Sa conclusion : « L'effet d'une eau saturée en sel sur la résistance à la compression à 18°C d'un enrobé est moins nocif que l'effet de l'eau douce ». Les éprouvettes gardaient environ 91 % de leur résistance dans l'eau salée, contre 75 % dans l'eau douce. Trois limites, pour être honnête sur la portée de ce résultat : c'est un essai de laboratoire sans aucun cycle de gel, et ses auteurs écrivent eux-mêmes que le mode d'altération « doit prendre en compte l'effet du gel et de l'exposition à des températures négatives » ; l'enrobé y absorbait davantage l'eau salée que l'eau douce ; et l'essai ne dit rien des bordures en béton ni des pavés. Dans le Jura, où la station Météo-France de Champagnole relève 111,7 jours de gel par an, le sel n'est donc pas l'ennemi d'une cour bien compactée et bien drainée. Les points à surveiller en hiver sont ailleurs : une lame de déneigement réglée trop bas, qui accroche les rives et les joints entre bandes, et la neige repoussée en tas à un endroit où l'eau de fonte n'a pas d'exutoire.",
+        },
+        {
+          q: "Une tache de gazole ou d'huile sur l'enrobé, est-ce grave ?",
+          a: "Oui, si elle se répète au même endroit : le gazole, le fioul, les huiles moteur et les fluides hydrauliques dissolvent le bitume qui tient les gravillons de l'enrobé. Une goutte isolée laisse une tache ; une fuite qui revient sous un véhicule garé toujours à la même place, sous une machine ou près d'une cuve ramollit la surface, qui finit par se désagréger. Le ministère des Transports du Québec l'a documenté dans un bulletin technique de décembre 2004 consacré à la contamination des enrobés : « Ces hydrocarbures sont de puissants solvants pour le bitume », et « une faible quantité d'hydrocarbures légers suffit donc pour diminuer grandement la capacité de l'enrobé à résister aux déformations ». Ce bulletin vise d'abord le moment de la pose, où l'enrobé encore très chaud est le plus vulnérable, et sa consigne est nette : un enrobé contaminé pendant les travaux « doit être remplacé immédiatement ». Sur une cour en service, l'effet est plus lent, mais le mécanisme est le même. Trois réflexes : absorber tout de suite avec un absorbant sec (sable, sciure ou absorbant de garage) puis balayer ; ne pas étaler la tache au jet d'eau ; et ne jamais la « nettoyer » au gazole ou au solvant, ce qui reviendrait à ajouter un solvant du bitume sur le bitume. Une zone déjà ramollie ne se rattrape pas en surface : elle se découpe et se reprend localement.",
+        },
       ],
       sources: [
         {
@@ -463,6 +471,20 @@ const SERVICES: Record<string, ServiceData> = {
         {
           label: "Tri à la source des déchets d'entreprise (service-public.gouv.fr)",
           url: "https://entreprendre.service-public.gouv.fr/vosdroits/F37782",
+        },
+        {
+          label:
+            "Cerema (M.-S. Ginoux) — « Effets des sels de déverglaçage sur les enrobés bitumineux », séminaire CCLEAR, Université Gustave Eiffel, 3 février 2015",
+          url: "https://mit.univ-gustave-eiffel.fr/fileadmin/redaction/MIT/evenements/S%C3%A9minaires/7b-Ginoux-Sels-Deverglacage.pdf",
+        },
+        {
+          label:
+            "Ministère des Transports du Québec — Info DGLC vol. 9 n° 12, « Contamination des enrobés par des hydrocarbures légers pendant les travaux routiers », décembre 2004",
+          url: "https://www.transports.gouv.qc.ca/fr/entreprises-partenaires/entreprises-reseaux-routier/bulletin-technique-dglc/Documents/2004/04-12.pdf",
+        },
+        {
+          label: "Météo-France — fiche climatologique de CHAMPAGNOLE (39), indicatif 39097003, normales 1991-2020",
+          url: "https://object.files.data.gouv.fr/meteofrance/data/synchro_ftp/REF_STATION/FICHECLIM_39097003.pdf",
         },
       ],
     },

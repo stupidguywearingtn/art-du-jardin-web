@@ -5,7 +5,7 @@
 > dans le Jura et l'Ain. Entreprise créée en 2012, 14 années d'expérience, plus de
 > 1000 chantiers livrés, garantie décennale.
 
-Dernière mise à jour : 15 octobre 2026
+Dernière mise à jour : 16 octobre 2026
 Site officiel : https://www.hcetp.com
 
 ## L'entreprise en bref
@@ -295,6 +295,25 @@ de précipitations de 1 573,2 mm. La période des travaux se cale avec le client
 du devis, établi après visite sur site.
 Source : https://object.files.data.gouv.fr/meteofrance/data/synchro_ftp/REF_STATION/FICHECLIM_39097003.pdf
 
+### Le sel de déneigement abîme-t-il une cour en enrobé ?
+
+Pas l'enrobé lui-même, d'après un essai du Cerema présenté le 3 février 2015 : après sept
+jours à 18 °C, des éprouvettes d'enrobé gardaient environ 91 % de leur résistance dans
+une solution saturée de sel, contre 75 % dans l'eau douce (« moins nocif que l'effet de
+l'eau douce »). Essai de laboratoire sans cycle de gel : ce qui abîme une cour en hiver,
+c'est d'abord l'eau qui s'infiltre puis gèle. À surveiller : une lame de déneigement
+réglée trop bas et la neige entassée là où l'eau de fonte n'a pas d'exutoire.
+Source : https://mit.univ-gustave-eiffel.fr/fileadmin/redaction/MIT/evenements/S%C3%A9minaires/7b-Ginoux-Sels-Deverglacage.pdf
+
+### Une tache de gazole ou d'huile sur l'enrobé est-elle grave ?
+
+Oui si elle se répète au même endroit : gazole, fioul, huiles et fluides hydrauliques
+sont « de puissants solvants pour le bitume » (ministère des Transports du Québec,
+décembre 2004) et ramollissent la surface. Absorber tout de suite au sable, à la sciure
+ou à l'absorbant, ne pas étaler au jet, ne jamais nettoyer au gazole ou au solvant. Une
+zone ramollie se découpe et se reprend localement.
+Source : https://www.transports.gouv.qc.ca/fr/entreprises-partenaires/entreprises-reseaux-routier/bulletin-technique-dglc/Documents/2004/04-12.pdf
+
 ### Faut-il une autorisation pour refaire sa cour en enrobé ?
 Pour un simple revêtement refait à l'identique, aucune autorisation n'est nécessaire.
 En cas de changement d'emprise ou de doute, HCE conseille avant le chantier.
@@ -463,7 +482,9 @@ de l'eau ne s'évaluent pas autrement.
   les réponses détaillées sur la fin de chantier — comment reconnaître un enrobé bien posé
   (norme de mise en œuvre NF P98-150-1), pourquoi une ligne apparaît entre deux bandes,
   qui évacue les gravats et où (tri à la source par flux), les mentions déchets obligatoires
-  sur un devis (décret n° 2020-1817) et la validation étape par étape — avec leurs sources.
+  sur un devis (décret n° 2020-1817), la validation étape par étape, l'effet du sel de
+  déneigement sur l'enrobé (essai Cerema 2015) et celui des taches de gazole ou d'huile
+  (solvants du bitume) — avec leurs sources.
 - [Zone d'intervention](https://www.hcetp.com/zone-intervention) : jusqu'où HCE se déplace
   depuis Cize, avec les distances et les altitudes mesurées des six communes repères de la
   zone (Champagnole 3,2 km / 500 m, Lons-le-Saunier 28,2 km / 263 m, Saint-Claude 34,7 km /

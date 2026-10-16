@@ -8,6 +8,16 @@ et à compléter en fin de run.
 
 ## État des lieux
 
+> ✅ **16/10/2026 — Déploiement OK** (`0c777ee` : Vercel `success`). Prod =
+> dernier commit (15/15 URLs en 200, `preparation-terrain` 7 138 car. = Q/R du
+> 15/10 en ligne). Chantier du jour (contenu, saisonnier) :
+> **`/services/finitions-soignees`** — 2 Q/R d'entretien avant l'hiver :
+> **sel de déneigement** (essai Cerema 2015 : enrobé ~91 % de résistance en eau
+> salée vs ~75 % en eau douce, limites de l'essai dites) et **taches de
+> gazole/huile** (solvants du bitume, bulletin MTQ 2004). FAQ 5 → 7,
+> `PAGE_UPDATED` 16/10, `llms.txt` 16/10 (+2 Q/R). Banc local OK, build OK,
+> `check:fige` OK. Accès robots IA vérifié pour la 1ʳᵉ fois : tout en 200.
+
 > ✅ **15/10/2026 — Déploiement OK** (`295ca4f` : Vercel `success`). Prod =
 > dernier commit (15/15 URLs servies, valeurs du 14/10). Chantier du jour
 > (contenu) : **`/services/preparation-terrain`** — deux prestations listées mais
@@ -633,57 +643,6 @@ un extrait de SERP ne prouve pas ce que la page contient.
 > (403 au runner, contenu jamais lu). Leur statut « périmée » n'est donc pas
 > établi. Noté en chantier en attente.
 
-### Positions mesurées — 15/09/2026
-
-**Indexation : toujours nulle, 8 jours après la 1re soumission IndexNow.** Deux
-mesures concordantes, via `WebSearch` (toujours le seul canal exploitable) :
-1. **Phrase exacte du site** (test institué le 11/09) :
-   `"Médaillons et inserts pavés intégrés à l'enrobé"` → **huit résultats, zéro
-   hcebtp.com** (concurrents du secteur uniquement : mavrotp, esprit-veranda,
-   aravis-enrobage, pajot-tp, europavage68, abers-amenagement, perenia, cuinet).
-2. **Requête nommant le domaine** : `hcebtp.com HCE Hini Cours Enrobé Cize 39300
-   travaux publics` → **aucune page du domaine**, mais **neuf fiches d'annuaire**
-   (kompass, pappers, verif, doctrine, societe, pagesjaunes, 118000, lagazette,
-   manageo) — même liste qu'aux 12, 13 et 14/09.
-
-| Requête | Mesure (15/09/2026) | Évolution vs 14/09 |
-|---|---|---|
-| indexation (phrase exacte du site) | **absent** | inchangé |
-| indexation (requête nommant le domaine) | **absent** | inchangé |
-| requêtes commerciales | **non mesurables** (aucun canal de SERP brute) | indéterminé |
-
-Les canaux de SERP brute n'ont **pas** été re-testés : la liste du 11/09 est à
-jour (Bing RSS, Mojeek, DuckDuckGo, Brave, Marginalia, Ecosia, Startpage — tous
-morts). Ne pas y perdre de temps demain non plus.
-
-**Contrôles techniques** : accueil, `/services/enrobe-a-chaud`,
-`/services/maconnerie-generale`, `/realisations/cour-allee-privee`,
-`robots.txt`, `sitemap.xml`, `llms.txt` — **tous en 200 du premier coup**, aucun
-`000`. `robots.txt` relu intégralement : `User-agent: *`, `Allow: /` et la
-directive `Sitemap: https://www.hcebtp.com/sitemap.xml` sont bien là. Rien ne
-bloque la découverte côté serveur, la cause reste l'absence de liens entrants.
-
-> ⚠️ **Nouvelle table de référence du volume de texte servi — ne pas la comparer
-> à celle du 14/09.** Mon extracteur d'aujourd'hui donne des valeurs
-> systématiquement un peu plus hautes que celui du 14/09 (accueil 5 340 contre
-> 5 160 pour le *même* HTML : vérifié, le code n'avait pas bougé entre-temps).
-> Les deux mesurent « texte hors `<script>`/`<style>` », mais ne normalisent pas
-> les espaces de la même façon. **Un écart de 2-4 % entre deux runs ne prouve
-> donc rien** : ne comparer que des chiffres produits par le même script, ou
-> refaire la mesure des deux états comme aujourd'hui.
-
-Valeurs mesurées **avant** le chantier du jour, vues comme Googlebot :
-
-| URL | Texte servi (15/09) | JSON-LD | Liens `/realisations/*` |
-|---|---|---|---|
-| accueil | 5 340 car. | 3 | **0** |
-| `/services/drainage-pentes` | 5 502 car. | 4 | 0 |
-| `/services/preparation-terrain` | 4 632 car. | 4 | 0 |
-| `/services/enrobe-a-chaud` | 3 938 car. | 4 | 0 |
-| `/services/maconnerie-generale` | **904 car.** | 3 | 0 |
-| `/realisations/cour-allee-privee` | 391 car. | 2 | 4 |
-| `/realisations/avant-apres` | 193 car. | 1 | 0 |
-
 ### Positions mesurées — 16/09/2026
 
 **Indexation : toujours nulle, 9 jours après la 1re soumission IndexNow.** Deux
@@ -744,6 +703,19 @@ Toutes les valeurs de la table du 15/09 sont **retrouvées au caractère près**
 (même script de mesure). Le banc d'essai local a redonné exactement les mêmes
 chiffres que la production avant le chantier : la fidélité du banc est
 re-confirmée pour la deuxième fois.
+
+### Positions mesurées — 16/10/2026
+
+| Contrôle | 16/10/2026 | vs 15/10 |
+|---|---|---|
+| Déploiement `main` (`0c777ee`) | **`success`** | = |
+| Prod vs code (`mesure-texte-servi`) | 15/15 en 200 ; `preparation-terrain` 7 138 (Q/R 15/10 servies) | 🆕 |
+| Robots IA (`robots.txt` `Allow: /` ; GPTBot, OAI-SearchBot, ChatGPT-User, PerplexityBot, ClaudeBot, Google-Extended, Bingbot, CCBot → 200) | OK | 🆕 1ʳᵉ mesure |
+| « enrobé à chaud Jura entreprise cour » / « goudronnage cour Jura entreprise » | domaine **absent** ; fiche `118712.fr` de HCE 1ʳᵉ | = |
+| « enrobé Champagnole entreprise goudron » | **absent** (bruit Géorisques, Champagne-au-Mont-d'Or) | = |
+
+Canal `WebSearch` = US, non représentatif. Pas d'accès Search Console. **À relever
+par Yanis** : pages indexées / « Explorée, non indexée », requêtes à impressions.
 
 ### Positions mesurées — 15/10/2026
 
@@ -1875,6 +1847,23 @@ JSON-LD, pas de `BreadcrumbList`).
 ---
 
 ## Chantiers faits
+
+### 16/10/2026 — `/services/finitions-soignees` : Q/R « sel de déneigement » et « tache de gazole / huile »
+
+- **Pourquoi** : avant l'hiver, requêtes réelles d'entretien jamais traitées
+  (aucune occurrence de « déneig », « sel », « huile » dans les Q/R du site).
+- **Fait** : 2 Q/R, réponse directe en tête. Sel : essai Cerema (Ginoux,
+  séminaire CCLEAR, 3/02/2015) — BBTM 0/10, 7 j à 18 °C, eau saturée 400 g/L ;
+  rs/R ≈ 0,91 vs r/R ≈ 0,75 ; 3 limites dites (pas de gel, imbibition plus
+  forte, rien sur béton/pavés) ; renvoi aux vrais risques (lame trop basse, neige
+  entassée sans exutoire). Gazole/huile : MTQ Info DGLC vol. 9 n° 12 (déc. 2004),
+  citations verbatim vérifiées, portée (moment de la pose) dite ; 3 réflexes.
+  Aucun chiffre non sourcé. 3 sources ajoutées (dont fiche Météo-France
+  Champagnole, 111,7 j de gel déjà cité ailleurs).
+- `PAGE_UPDATED` → 16/10 (lastmod sitemap 2026-10-16 vérifié), `llms.txt` → 16/10
+  (+2 Q/R sourcées, description de la page complétée).
+- Banc local (handler Nitro) : 200, 2 Q/R visibles, FAQPage 7 = 7 Q/R visibles.
+- Archivage : Positions + Chantier du 15/09 → `docs/seo-journal-archive.md`.
 
 ### 15/10/2026 — `/services/preparation-terrain` : Q/R « puits perdu » et « enrochement »
 
@@ -3972,96 +3961,19 @@ n'y figure** — c'est précisément la règle qui les rend publiables.
 
 ---
 
-### 15/09/2026 — La galerie de l'accueil rend enfin ses liens côté serveur (commit `4ab0962`)
-
-**Chantier choisi : le candidat n°1 laissé par le run du 14/09**, re-vérifié et
-toujours vrai à l'étape 2 (l'accueil servait **zéro** `href` vers
-`/realisations/*`). C'est la moitié manquante du chantier d'hier : les quatre
-pages catégories avaient été rendues lisibles, mais restaient orphelines de la
-page la plus forte du site.
-
-> 🔓 **Le verrou qui bloquait ce chantier hier a sauté, et c'est la découverte la
-> plus réutilisable du run : le projet SE CONSTRUIT et SE TESTE en local.**
-> Le 14/09 avait renoncé à toucher l'accueil parce que « le runner ne peut pas
-> construire le projet (`bun install` n'aboutit pas) » — donc impossible de
-> tester un changement de rendu avant de pousser. **C'est faux avec npm.** Voir
-> la recette complète dans « Techniques apprises ».
-
-**Cause, exactement la même famille que le défaut du 09/09 (FAQ) et du 14/09
-(`/realisations/$slug`) :** `useGalleryCategories()` renvoyait
-`categories: cats ?? []`, et `cats` démarre à `null` tant que `loadAll()` n'a pas
-répondu. Or `loadAll()` n'est appelé que depuis un `useEffect`, **qui ne
-s'exécute jamais au rendu serveur**. La grille servie était donc vide, alors
-qu'un repli statique (`fallbackCategoriesWithCount()`) existait déjà dans le
-même fichier et n'était utilisé que par le chemin asynchrone.
-
-**Ce qui a été fait — une seule ligne de comportement changée :**
-`categories: cats ?? []` devient `categories: cats ?? fallbackCategoriesWithCount()`
-dans `src/hooks/useGallery.tsx`, avec le commentaire qui explique pourquoi.
-**Même source que le repli asynchrone**, donc le visiteur voit exactement les
-mêmes liens que les robots — pas de cloaking. C'est le patron appliqué le 14/09
-à `realisations.$slug.tsx` et le 07/09 à `llms.txt` : une source unique.
-`useGalleryCategories` n'a **qu'un seul consommateur** (`src/routes/index.tsx:703`)
-et celui-ci ignore `loading` : le changement est contenu, vérifié par `grep`.
-
-**Vérifié EN LOCAL avant de pousser (nouveau, et c'est ce qui rend ce run sûr) :**
-- Serveur de rendu local, vu comme Googlebot, **état d'origine** : accueil
-  **5 340 car., 0 lien `/realisations/*`** — *chiffre strictement identique à la
-  production du jour*, donc le local reproduit fidèlement le serveur.
-- **État corrigé** : accueil **5 681 car., 4 liens `/realisations/*`**
-  (`cour-allee-privee`, `parking-voirie-pro`, `preparation-terrassement`,
-  `avant-apres`), 3 blocs JSON-LD et 6 liens `/services/*` intacts.
-- Non-régression locale sur `/services/enrobe-a-chaud` (3 938),
-  `/services/maconnerie-generale` (904), `/realisations/cour-allee-privee` (391),
-  `/realisations/avant-apres` (193) : **aucun écart**.
-- `npx tsc --noEmit`, `npx eslint`, `npx prettier --check` : **tous OK**.
-
-**Vérifié EN LIGNE après déploiement (vu comme Googlebot) :**
-- Accueil **5 681 car.** et **4 liens `/realisations/*`** — la valeur locale, au
-  caractère près.
-- **Non-régression complète** : `drainage-pentes` 5 502, `preparation-terrain`
-  4 632, `enrobe-a-chaud` 3 938, `maconnerie-generale` 904,
-  `cour-allee-privee` 391, `avant-apres` 193 — **identiques aux valeurs mesurées
-  avant le chantier**. `sameAs` = 4 partout, JSON-LD au complet.
-- **Contenu figé client intact** : 2012, 150, « posé à la main », « Devis
-  détaillé », garantie décennale présents ; **aucun terme interdit** (2005, 180,
-  finisseur, « Devis sous 48h », « Garantie & SAV ») sur aucune page contrôlée.
-- **IndexNow relancé après vérification : 12 URLs → HTTP 200.**
-
-**Point à connaître : `/realisations/chantier-en-cours` n'est toujours pas liée
-depuis l'accueil.** Ce n'est pas un oubli — la grille remplace délibérément cette
-carte par le bloc « Avant / Après » (`index.tsx`, `isChantier`). La page reste
-atteignable par le sitemap et par le bloc « Voir aussi » des trois autres
-dossiers. **Ne pas « corriger » ça sans décision produit : ce serait ajouter une
-5e carte visible sur l'accueil.**
-
-**Ce que j'ai décidé de NE PAS faire, et pourquoi :**
-- **Ne pas afficher les `description` des catégories sur les cartes.** Le texte
-  existe dans `FALLBACK_CATS` et serait du contenu servi en plus, mais c'est un
-  changement visuel sur la page la plus importante du site, sans rapport avec le
-  défaut du jour. Règle « en cas de doute sur le rendu, ne pas le faire ».
-- **Ne pas remplir le bloc `savoir` de `maconnerie-generale`** (904 car., la page
-  la plus maigre du site). **Ça reste le meilleur candidat contenu**, mais c'eût
-  été un deuxième chantier dans la même journée.
-- **Ne pas toucher à `llms.txt`.** Vérifié ligne à ligne : les 5 entrées
-  `/realisations/*` portent exactement les titres de `FALLBACK_CATS`, **aucune
-  dérive**. Le contenu rédactionnel n'a pas changé aujourd'hui — seule son
-  accessibilité aux robots — donc bumper « Dernière mise à jour : 13 septembre
-  2026 » serait la dérive que la consigne interdit.
-- **Ne pas créer la page `/realisations`** (n°14) ni le `BreadcrumbList` de
-  `avant-apres` (n°6) : chantiers distincts, et leur valeur est nulle tant que
-  rien n'est indexé.
-- **Ne rien changer au déploiement**, bien que le build local produise un dossier
-  `.vercel/output/` — 3e indice concordant que l'hébergement est Vercel alors que
-  la consigne dit Lovable Cloud. **Constat, pas action** : à ne trancher qu'avec
-  le client.
-
----
-
 ## Chantiers en attente
 
 Par ordre de priorité. **Alterner les angles, ne pas refaire le même deux jours
 de suite.**
+
+> 🆕 **MISE À JOUR DU 16/10/2026 — prime sur tout ce qui suit.**
+> ✅ Q/R sel / gazole : faits (à vérifier en prod après déploiement, IndexNow).
+> 1. H1 de l'accueil « HCE » → proposer à Yanis un H1 métier visible.
+> 2. Bing Webmaster Tools (action Yanis, inchangée) — ChatGPT/Copilot lisent Bing.
+> 3. Page ville Champagnole : seulement avec contenu propre (à étudier).
+> 4. FAQ accueil : chiffres non sourcés → confirmation client (Hypothèses).
+> 5. Prix au m² : `CONTENU-FIGE.md` interdit tout prix en ligne → ne pas en publier,
+>    même en fourchette, sans accord écrit du client.
 
 > 🆕 **MISE À JOUR DU 15/10/2026 — prime sur tout ce qui suit.**
 > ✅ Q/R puits perdu / enrochement : **faits et vérifiés en prod**, IndexNow 200.

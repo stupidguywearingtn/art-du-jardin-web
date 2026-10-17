@@ -19,6 +19,8 @@ et à compléter en fin de run.
 > repères d'usage Hauraton A15/B125/C250/D400). FAQ 5 → 7, 5 856 → 9 557 car.
 > (banc local), `PAGE_UPDATED` + lastmod 17/10, `llms.txt` 17/10 (+2 Q/R).
 > Build OK, `check:fige` OK.
+> ✅ Vérifié en prod (`fbc84e5`, `success` < 90 s) : `drainage-pentes` 9 557 car.,
+> lastmod 2026-10-17, `llms.txt` à jour, IndexNow 15 URLs → 200.
 
 > ✅ **16/10/2026 — Déploiement OK** (`0c777ee` : Vercel `success`). Prod =
 > dernier commit (15/15 URLs en 200, `preparation-terrain` 7 138 car. = Q/R du
@@ -3854,8 +3856,8 @@ Par ordre de priorité. **Alterner les angles, ne pas refaire le même deux jour
 de suite.**
 
 > 🆕 **MISE À JOUR DU 17/10/2026 — prime sur tout ce qui suit.**
-> ✅ Q/R eau / caniveau sur `drainage-pentes` : faites (à vérifier en prod au run suivant + IndexNow).
-> 1. Vérifier en prod : `drainage-pentes` ≈ 9 557 car., FAQ 7, lastmod 17/10 ; lancer `indexnow-submit.mjs`.
+> ✅ Q/R eau / caniveau sur `drainage-pentes` : faites et vérifiées en prod, IndexNow 200.
+> 1. Rien à revérifier.
 > 2. Prochain angle **technique ou local** (3 jours de contenu Q/R d'affilée) ; contenu :
 >    `maconnerie-generale` (5 726 car.) devient la page la plus maigre.
 > 3. H1 de l'accueil « HCE » → proposition à Yanis (inchangé, rendu à valider).

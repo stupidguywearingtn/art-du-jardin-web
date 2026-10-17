@@ -294,7 +294,7 @@ const SERVICES: Record<string, ServiceData> = {
       "Drainage et pentes avant pose d'enrobé dans le Jura et l'Ain : étude des écoulements, pente minimum 1,5 % vers les exutoires, drains périphériques et évacuation des eaux pluviales. Devis détaillé.",
     savoir: {
       heading: "Drainage, pentes et eaux pluviales : les questions qu'on nous pose",
-      lead: "Poser un enrobé sur une cour, une allée ou un parking imperméabilise une surface qui absorbait jusque-là une partie de la pluie : cette eau doit désormais aller quelque part. Voici où elle part, ce que dit la réglementation, et pourquoi la pente se calcule avant la pose et non après, dans le Jura et l'Ain.",
+      lead: "Poser un enrobé sur une cour, une allée ou un parking imperméabilise une surface qui absorbait jusque-là une partie de la pluie : cette eau doit désormais aller quelque part. Voici où elle part — chez soi, dans la rue ou dans un réseau —, ce que dit la réglementation, quel caniveau poser devant un garage, et pourquoi la pente se calcule avant la pose et non après, dans le Jura et l'Ain.",
       updated: PAGE_UPDATED["/services/drainage-pentes"],
       qa: [
         {
@@ -317,6 +317,14 @@ const SERVICES: Record<string, ServiceData> = {
           q: "Faut-il un drain, ou la pente suffit-elle ?",
           a: "Les deux ne traitent pas la même eau, et l'une ne remplace pas l'autre. La pente évacue l'eau de surface, celle qui tombe sur la cour et doit rejoindre un exutoire. Le drain périphérique traite l'eau présente dans le sol : venues d'eau d'un terrain en pente, remontées, ruissellement collecté en amont par la parcelle. Un support gorgé d'eau perd sa portance, et un enrobé posé dessus finit par se déformer quelle que soit la qualité de la pose. HCE commence donc par un diagnostic d'écoulement, puis pose drains et regards là où l'eau arrive réellement ; lorsqu'aucun exutoire n'existe à proximité, l'évacuation peut passer par un puits perdu.",
         },
+        {
+          q: "Où envoyer l'eau d'une cour goudronnée : dans la rue, dans un réseau ou dans son terrain ?",
+          a: "Dans son propre terrain d'abord, et vers la rue ou un réseau seulement si la commune l'accepte : aucune règle nationale n'oblige une commune à recueillir l'eau de pluie d'une cour privée. C'est le zonage pluvial, le PLU ou le règlement d'assainissement de la commune qui disent ce qui est admis à l'adresse du chantier. Le Code civil pose le cadre de départ. L'article 641 donne à tout propriétaire le droit « d'user et de disposer des eaux pluviales qui tombent sur son fonds ». L'article 681, écrit pour les toits, impose que les eaux pluviales s'écoulent « sur son terrain ou sur la voie publique » et interdit de « les faire verser sur le fonds de son voisin ». Côté commune, le ministère de l'Intérieur a répondu le 2 juin 2016, au Journal officiel du Sénat, que la mise en place d'un réseau de collecte des eaux de pluie « ne constitue pas une obligation pour les communes ». Et l'article L2224-10 du Code général des collectivités territoriales charge les communes ou leurs intercommunalités de délimiter, après enquête publique, « les zones où des mesures doivent être prises pour limiter l'imperméabilisation des sols » : dans ces zones, une cour refaite en enrobé peut devoir garder son eau sur la parcelle — par infiltration, tranchée drainante ou puits perdu réservé aux seules eaux pluviales. Le réflexe utile avant de goudronner : demander en mairie le zonage pluvial et le règlement qui s'appliquent à l'adresse. HCE choisit les exutoires en conséquence, et ce choix figure au devis détaillé.",
+        },
+        {
+          q: "Quel caniveau à grille poser devant un garage ou en bas d'une descente ?",
+          a: "Un caniveau dont la classe de résistance correspond au véhicule le plus lourd qui roulera dessus, posé au point bas et raccordé à un exutoire. La classe est gravée sur la grille : la norme européenne NF EN 1433 classe les caniveaux de A 15 à F 900, et le nombre est la charge d'essai en kilonewtons. Le tableau d'usage du fabricant Hauraton donne les repères des quatre premières classes : A 15 pour les surfaces à usage piéton léger, B 125 pour les zones où circulent des voitures à faible vitesse, par exemple les parkings résidentiels, C 250 pour les petits parkings et les véhicules utilitaires légers, D 400 pour les voies publiques et les parkings ouverts à tous les véhicules. Le même fabricant cite les allées domestiques parmi les usages possibles de la classe A 15, mais dès qu'une voiture roule ou stationne sur la grille, c'est B 125 qu'il associe aux parkings résidentiels ; et il précise que la classe seule ne suffit pas à choisir : les efforts dynamiques, l'intensité du trafic et la position du caniveau, au bord d'un virage ou d'une zone de freinage, comptent aussi. Deux points que la classe ne règle jamais. Un caniveau sans exutoire ne fait que déplacer la flaque : il doit rejoindre un regard, un puits perdu ou un réseau autorisé. Et en bas d'une descente de garage, il recueille toute l'eau de la rampe : c'est l'endroit où un raccordement sous-dimensionné se voit le premier, devant la porte. Le caniveau se pose avant l'enrobé, et la surface finie doit arriver au niveau de la grille, jamais en dessous, sinon l'eau la contourne.",
+        },
       ],
       sources: [
         {
@@ -326,6 +334,18 @@ const SERVICES: Record<string, ServiceData> = {
         {
           label: "entreprendre.service-public.gouv.fr — Ombrage et gestion des eaux pluviales des parcs de stationnement (article L111-19-1 du Code de l'urbanisme)",
           url: "https://entreprendre.service-public.gouv.fr/vosdroits/F38106",
+        },
+        {
+          label: "Sénat — Question écrite de M. Jean Louis Masson et réponse du ministère de l'Intérieur, JO Sénat du 2 juin 2016 : collecte des eaux de pluie et article L2224-10 du CGCT",
+          url: "https://www.senat.fr/questions/base/2015/qSEQ150416001.html",
+        },
+        {
+          label: "CAUE des Bouches-du-Rhône — Fiche pratique « La servitude d'écoulement des eaux » (articles 640, 641 et 681 du Code civil)",
+          url: "https://www.caue13.fr/sites/default/files/2021-11/02_FICHE-PRATIQUE_VOISINS_La%20servitude%20d%27e%CC%81coulement%20des%20eaux_0.pdf",
+        },
+        {
+          label: "Hauraton — Classes de charge des caniveaux selon la norme EN 1433 (A 15 à D 400, usages types)",
+          url: "https://www.hauraton.com/en/load-classes-for-drainage/",
         },
       ],
     },

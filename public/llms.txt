@@ -5,7 +5,7 @@
 > dans le Jura et l'Ain. Entreprise créée en 2012, 14 années d'expérience, plus de
 > 1000 chantiers livrés, garantie décennale.
 
-Dernière mise à jour : 16 octobre 2026
+Dernière mise à jour : 17 octobre 2026
 Site officiel : https://www.hcetp.com
 
 ## L'entreprise en bref
@@ -202,6 +202,27 @@ sol : venues d'eau d'un terrain en pente, remontées, ruissellement collecté en
 support gorgé d'eau perd sa portance et l'enrobé posé dessus finit par se déformer. HCE
 pose drains et regards après diagnostic d'écoulement ; sans exutoire à proximité,
 l'évacuation peut passer par un puits perdu.
+
+### Où envoyer l'eau d'une cour goudronnée : dans la rue, dans un réseau ou dans son terrain ?
+Dans son propre terrain d'abord ; vers la rue ou un réseau seulement si la commune
+l'accepte. Aucune règle nationale n'oblige une commune à recueillir l'eau de pluie d'une
+cour privée : la mise en place d'un réseau de collecte « ne constitue pas une obligation
+pour les communes » (ministère de l'Intérieur, JO Sénat du 2 juin 2016). Le Code civil
+(art. 681) veut que les eaux pluviales des toits s'écoulent « sur son terrain ou sur la
+voie publique », jamais sur le fonds du voisin, et l'article L2224-10 du CGCT fait
+délimiter par les communes « les zones où des mesures doivent être prises pour limiter
+l'imperméabilisation des sols ». Avant de goudronner : demander en mairie le zonage
+pluvial et le règlement applicables à l'adresse.
+Source : https://www.senat.fr/questions/base/2015/qSEQ150416001.html
+
+### Quel caniveau à grille poser devant un garage ou en bas d'une descente ?
+Un caniveau de classe adaptée au véhicule le plus lourd, posé au point bas et raccordé à
+un exutoire. La norme NF EN 1433 classe les caniveaux de A 15 à F 900 (charge d'essai en
+kilonewtons). Repères du fabricant Hauraton : A 15 usage piéton léger, B 125 voitures à
+faible vitesse (parkings résidentiels), C 250 petits parkings et utilitaires légers,
+D 400 voies publiques et parkings tous véhicules. Où une voiture roule ou stationne :
+pas en dessous de B 125. Sans exutoire, un caniveau ne fait que déplacer la flaque.
+Source : https://www.hauraton.com/en/load-classes-for-drainage/
 
 ### Peut-on intégrer des pavés ou un médaillon dans une cour en enrobé ?
 Oui : les deux techniques se posent sur le même chantier et sur le même support. Le motif
@@ -470,7 +491,8 @@ de l'eau ne s'évaluent pas autrement.
   drainage périphérique, évacuation des eaux pluviales. Contient aussi les réponses
   détaillées sur l'eau (écoulement vers le terrain voisin et Code civil, pente minimum
   de 1,5 %, origine des flaques, obligations d'infiltration des parkings de plus de
-  500 m², drain ou pente), avec leurs sources.
+  500 m², drain ou pente, rejet vers la rue ou un réseau et zonage pluvial, classe de
+  caniveau à grille devant un garage selon NF EN 1433), avec leurs sources.
 - [Bordures & murets](https://www.hcetp.com/services/bordures-murets) : bordures béton
   coulées sur place, bordures pavées, petits murets de soutènement. Contient aussi les
   réponses détaillées sur le rôle d'un muret de soutènement et sa norme de justification

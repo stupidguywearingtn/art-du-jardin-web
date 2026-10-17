@@ -1308,3 +1308,164 @@ dossiers. **Ne pas « corriger » ça sans décision produit : ce serait ajouter
   le client.
 
 ---
+
+## Archivé le 17/10/2026
+
+### Positions mesurées — 16/09/2026
+
+**Indexation : toujours nulle, 9 jours après la 1re soumission IndexNow.** Deux
+mesures concordantes, via `WebSearch` (toujours le seul canal exploitable) :
+1. **Phrase exacte du site** (test institué le 11/09) :
+   `"Médaillons et inserts pavés intégrés à l'enrobé"` → **dix résultats, zéro
+   hcebtp.com** (mavrotp, aravis-enrobage, pajot-tp, europavage68,
+   abers-amenagement, perenia, cuinet + trois brevets américains).
+2. **Requête nommant le domaine** : `hcebtp.com HCE Hini Cours Enrobé Cize 39300
+   travaux publics` → **aucune page du domaine**, mais **neuf fiches d'annuaire**
+   (kompass, verif, pagesjaunes, pappers, societe, mappy, 118000, lagazette,
+   manageo) — même liste qu'aux 12, 13, 14 et 15/09.
+
+| Requête | Mesure (16/09/2026) | Évolution vs 15/09 |
+|---|---|---|
+| indexation (phrase exacte du site) | **absent** | inchangé |
+| indexation (requête nommant le domaine) | **absent** | inchangé |
+| requêtes commerciales | **non mesurables** (aucun canal de SERP brute) | indéterminé |
+
+Les canaux de SERP brute n'ont **pas** été re-testés : la liste du 11/09 est à
+jour (Bing RSS, Mojeek, DuckDuckGo, Brave, Marginalia, Ecosia, Startpage — tous
+morts). Ne pas y perdre de temps demain non plus.
+
+> ⚠️ **Piège de mesure rencontré aujourd'hui, variante de celui du 14/09.** Sur
+> la recherche de phrase exacte, le moteur a renvoyé une **synthèse décrivant
+> très précisément la technique du médaillon intégré à l'enrobé**, dans un
+> vocabulaire proche de celui de l'accueil. **Ce n'est toujours pas une preuve
+> d'indexation** : les dix liens de résultat sont des concurrents, la synthèse
+> est construite à partir de leurs pages. **On compte les liens, jamais le texte
+> de synthèse.** Ce piège se représentera d'autant plus que le site publie des
+> contenus proches de ceux des concurrents.
+
+**Contrôles techniques** : accueil, les six `/services/*`, `robots.txt`,
+`sitemap.xml`, `llms.txt`, `/realisations/cour-allee-privee` et
+`/realisations/avant-apres` — tous en 200. Deux `000` isolés
+(`/services/preparation-terrain` puis `/services/finitions-soignees`), suivis
+d'un 200 à la relance immédiate, sur environ 25 appels. **Conforme à la
+conclusion du 12/09 (aléa réseau du runner, point clos)** : ne pas rouvrir.
+
+**Trois pages service n'avaient jamais été mesurées — c'est fait.** Le journal
+du 15/09 demandait de relever `bordures-murets` et `finitions-soignees` avant de
+les traiter, en soupçonnant qu'elles soient aussi maigres que
+`maconnerie-generale`. **Le soupçon est confirmé** :
+
+| URL | Texte servi (16/09, avant chantier) | JSON-LD |
+|---|---|---|
+| `/services/drainage-pentes` | 5 502 car. | 4 |
+| accueil | 5 681 car. | 3 |
+| `/services/preparation-terrain` | 4 632 car. | 4 |
+| `/services/enrobe-a-chaud` | 3 938 car. | 4 |
+| `/services/finitions-soignees` | **1 115 car.** | 3 |
+| `/services/bordures-murets` | **913 car.** | 3 |
+| `/services/maconnerie-generale` | **904 car.** | 3 |
+| `/realisations/cour-allee-privee` | 391 car. | 2 |
+| `/realisations/avant-apres` | 193 car. | 1 |
+
+Toutes les valeurs de la table du 15/09 sont **retrouvées au caractère près**
+(même script de mesure). Le banc d'essai local a redonné exactement les mêmes
+chiffres que la production avant le chantier : la fidélité du banc est
+re-confirmée pour la deuxième fois.
+
+### 16/09/2026 — `maconnerie-generale`, la page la plus maigre du site, passe de 904 à 5 300 caractères (commit `47eaa16`)
+
+**Chantier choisi : le candidat n°1 encadré en tête des chantiers en attente**,
+re-vérifié à l'étape 2 et toujours vrai (904 caractères servis, aucun `FAQPage`,
+aucune `seoDescription`). C'était aussi le bon angle du jour pour une autre
+raison notée par le run du 15/09 : **les 14 et 15/09 avaient été deux runs
+techniques d'affilée, il fallait un run de CONTENU.**
+
+**Pourquoi cette page et pas une autre** : elle porte le seul vocabulaire
+décoratif du site (pavage, dallage, médaillons et inserts sur mesure), qui n'est
+couvert nulle part ailleurs, et la phrase de l'accueil qui sert de test
+d'indexation depuis le 11/09 vient précisément de ce champ lexical.
+
+**Ce qui a été publié — 5 questions/réponses sourcées**, sur le patron des 11,
+12 et 13/09 (réponse autonome en tête de chaque H3, question formulée telle
+qu'on la pose à voix haute, date de mise à jour visible, sources cliquables) :
+1. Peut-on intégrer des pavés ou un médaillon dans une cour en enrobé ?
+2. Pavés en béton ou pavés en pierre naturelle : qu'est-ce qui change ?
+3. À quoi sert vraiment une bordure au bord d'un enrobé ?
+4. Faut-il une autorisation d'urbanisme pour créer des places de stationnement ?
+5. Joints sablés ou joints cimentés : lequel choisir ?
+
+**Les sources, toutes lues et vérifiées en 200 avant citation :**
+- **AFNOR Norm'Info** — `NF EN 1338` (pavés en béton, **homologuée le 5 février
+  2004**, réexamen systématique prévu au 1er février 2029, en cours de révision)
+  et `NF EN 1342` (pavés de pierre naturelle, **publiée le 16 février 2013**,
+  réexamen prévu au 16 février 2028). Les deux « définissent le marquage du
+  produit et l'évaluation de sa conformité ».
+- **AFNOR Norm'Info** — `NF EN 1340` (bordures et caniveaux béton) et `NF EN
+  1339` (dalles béton). **La trouvaille la plus utile** : la norme 1340 énumère
+  elle-même les fonctions d'une bordure, dont la **« butée de zones dallées ou
+  d'autres revêtements »** — c'est la justification sourcée du rôle structurel
+  d'une bordure en rive d'enrobé, un argument que les concurrents ne publient pas.
+- **service-public.gouv.fr** `F17665` (permis d'aménager) et `F17578`
+  (déclaration préalable), **toutes deux vérifiées le 13 février 2026** :
+  permis d'aménager dès **50 unités** pour une aire de stationnement ouverte au
+  public, déclaration préalable en dessous.
+
+**Deux Q/R sont volontairement non normatives** (la n°1 sur l'intégration d'un
+médaillon dans l'enrobé, la n°5 sur le choix des joints) : elles expliquent ce
+que la page affirmait déjà sans le justifier (« conception sur mesure », « pose
+au cordeau », « joints sablés ou cimentés selon l'usage prévu »). **Aucun chiffre
+n'y figure** — c'est précisément la règle qui les rend publiables.
+
+**Ajouts connexes du même commit :**
+- `seoDescription` dédiée pour la page, qui n'en avait pas (le `<title>` et la
+  meta retombaient sur la phrase d'intro du héros).
+- Les cinq Q/R reportées dans `llms.txt`, avec leurs sources, plus l'entrée
+  « Maçonnerie générale » de la section *Pages* enrichie et la date du fichier
+  passée au 16 septembre 2026. **La date n'a été bumpée que parce que le contenu
+  a réellement changé** — c'est la condition posée par la consigne.
+
+**Mesuré EN LOCAL avant de pousser** (banc d'essai du 15/09) :
+- État d'origine : `maconnerie-generale` **904 car., 3 JSON-LD, 3 H2, 3 H3** —
+  *identique au caractère près à la production du jour*.
+- État corrigé : **5 300 car., 4 JSON-LD** (le `FAQPage` s'ajoute), 4 H2, 8 H3.
+- Non-régression locale : accueil 5 681, `drainage-pentes` 5 502,
+  `preparation-terrain` 4 632, `enrobe-a-chaud` 3 938, `finitions-soignees`
+  1 115, `bordures-murets` 913, `cour-allee-privee` 391 — **aucun écart**.
+- `npx tsc --noEmit` : OK. `npm run build` : sortie 0. `npx eslint` : **58
+  erreurs `prettier/prettier`, soit exactement le compte de HEAD avant le
+  chantier** — voir « Techniques apprises », ce fichier n'a jamais été formaté.
+
+**Vérifié EN LIGNE après déploiement** (80 s après le push) :
+- `maconnerie-generale` **5 300 car., 4 JSON-LD** — la valeur locale exacte.
+- **`FAQPage` : les 5 questions ET les 5 réponses sont présentes dans le HTML
+  servi**, comparées chaîne par chaîne au JSON-LD. Zéro mismatch.
+- « Dernière mise à jour : 16 septembre 2026 » et les 4 liens de source visibles.
+- **Non-régression complète** sur les 8 autres URLs mesurées : valeurs identiques
+  à l'avant-chantier.
+- **Aucun terme interdit** (2005, 180, finisseur, « Devis sous 48h »,
+  « Garantie & SAV ») et **aucun prix** dans le diff ni dans les pages servies.
+- `llms.txt` en ligne porte bien les nouvelles Q/R.
+- **IndexNow relancé après vérification : 12 URLs → HTTP 200.**
+
+**Ce que j'ai décidé de NE PAS faire, et pourquoi :**
+- **Ne pas traiter `bordures-murets` (913 car.) ni `finitions-soignees`
+  (1 115 car.) dans la foulée.** Les deux sont désormais mesurées et sont les
+  prochains candidats évidents, mais c'eût été trois chantiers le même jour.
+- **Ne pas reformater le fichier avec Prettier.** Il porte 58 erreurs
+  `prettier/prettier` **antérieures à ce run** (vérifié en comparant avec la
+  version de HEAD) : un `--write` produirait un diff massif sans rapport avec le
+  SEO, exactement le refactoring que les règles interdisent. Seule la ligne que
+  *mon* ajout rendait non conforme a été corrigée, pour ne pas dégrader le compte.
+- **Ne pas publier d'épaisseur de lit de pose ni de classe de résistance au
+  gel/dégel.** Le référentiel de certification NF du CERIB les contient très
+  probablement, mais son PDF est illisible depuis le runner (voir « Techniques
+  apprises »). **Règle du 11/09 appliquée : une donnée non vérifiable ne vaut pas
+  mieux qu'une donnée inventée.** C'est la matière qui manque encore pour un
+  contenu « gel dans le Jura » vraiment différenciant.
+- **Ne pas toucher au `sitemap.xml`** : aucune URL créée.
+- **Ne pas reprendre l'angle réglementaire d'un jour précédent.** La Q/R
+  urbanisme du jour porte sur le **seuil des aires de stationnement**, distinct
+  des DT-DICT (12/09) et de l'article L111-19-1 sur les eaux pluviales (13/09) ;
+  vérifié pour éviter le doublon.
+
+---

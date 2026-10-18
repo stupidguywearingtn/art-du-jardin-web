@@ -8,6 +8,21 @@ et à compléter en fin de run.
 
 ## État des lieux
 
+> ✅ **18/10/2026 — Déploiement OK** (`e99d634` : Vercel `READY`, lu via l'API
+> Vercel). Prod = dernier commit (15/15 URLs en 200, valeurs du 17/10 ; FAQ 11/11 ;
+> lastmod 15/15 alignés). Chantier du jour (**technique**, après 3 jours de Q/R) :
+> **poids des images**. Audit on-page des 15 URLs (title, canonical, og:url, H1
+> unique, alt : tout OK) ; en revanche l'accueil chargeait **~12 Mo d'images**
+> brutes depuis `/photos/` : 5 PNG de 2,5 à 3,3 Mo (`geste-enrobe-a-chaud`,
+> `matiere-bordure-nette`, `process-controle-finitions`, `1.png` bandeau
+> « Finitions soignées », `2.png` galerie maçonnerie) + un JPEG de 1 Mo. Copies
+> **.webp** créées à côté des originaux (originaux conservés), code pointé dessus :
+> 3,3 Mo → 355 Ko, 3,2 Mo → 359 Ko, 3,1 Mo → 260 Ko, 2,5 Mo → 154 Ko, 3,1 Mo →
+> 282 Ko, 1,06 Mo → 314 Ko (**~16,4 Mo → ~1,7 Mo**). Rendu contrôlé à l'œil.
+> Build OK, `check:fige` OK. Les valeurs servies par la base (`site_content_fields`,
+> admin) priment sur ces défauts : à l'accueil, aucune n'était surchargée (URLs
+> servies = défauts du code).
+
 > ✅ **17/10/2026 — Déploiement OK** (`979e485` : Vercel `success`). Prod =
 > dernier commit (15/15 URLs en 200, `finitions-soignees` 10 891 car. = Q/R du
 > 16/10 en ligne). Chantier du jour (contenu, page la plus maigre après
@@ -659,6 +674,21 @@ un extrait de SERP ne prouve pas ce que la page contient.
 > `verif.com` ont été jugées périmées **sur la seule foi d'extraits de recherche**
 > (403 au runner, contenu jamais lu). Leur statut « périmée » n'est donc pas
 > établi. Noté en chantier en attente.
+
+### Positions mesurées — 18/10/2026
+
+| Contrôle | 18/10/2026 | vs 17/10 |
+|---|---|---|
+| Déploiement `main` (`e99d634`) | **`READY`** (API Vercel) | = |
+| Prod vs code (`mesure-texte-servi`) | 15/15 en 200 ; `drainage-pentes` 9 557 (Q/R 17/10 servies) | = |
+| `verif-faq` / `verif-lastmod` en ligne | 11/11 ; 15/15 alignés | = |
+| On-page 15 URLs (title 47-78 car., canonical = og:url = URL, 1 H1, 0 img sans alt, 404 réel) | OK | 🆕 1ʳᵉ mesure groupée |
+| Meta descriptions > 160 car. | 12/15 (troncature d'extrait seulement, pas un facteur de classement) | 🆕 noté, non traité |
+| Poids images accueil | ~12 Mo → corrigé ce run (voir État des lieux) | 🆕 |
+| SERP | non remesurée (dimanche, canal `WebSearch` US non représentatif) | — |
+
+Pas d'accès Search Console. **À relever par Yanis** : rapport « Signaux Web
+essentiels » (LCP mobile) avant/après cette correction.
 
 ### Positions mesurées — 17/10/2026
 
@@ -1737,85 +1767,19 @@ plus maigre du site est désormais, sans concurrence, **`/services/finitions-soi
 
 ---
 
-### Positions mesurées — 17/09/2026
-
-**Indexation : toujours nulle, 10 jours après la 1re soumission IndexNow.** Trois
-mesures, via `WebSearch` (toujours le seul canal exploitable) :
-1. **Phrase exacte du site** (test institué le 11/09) :
-   `"Médaillons et inserts pavés intégrés à l'enrobé"` → **dix résultats, zéro
-   hcebtp.com**. Nouveauté : cette fois **aucun concurrent non plus**, uniquement
-   des brevets (Google Patents, USPTO, OPIC, EPO). Le moteur n'a donc pas
-   d'appariement français sur cette phrase aujourd'hui.
-2. **Requête nommant le domaine** : `hcebtp.com HCE Cize 39300 enrobé travaux
-   publics` → **aucune page du domaine**, et cette fois **aucune fiche
-   d'annuaire non plus** : dix pages Wikipédia de communes homonymes. ⚠️ La
-   formulation de la requête a été raccourcie par rapport aux runs précédents
-   (« HCE Hini Cours Enrobé » retiré) parce que la version longue a échoué en
-   « search unavailable ». **Ce résultat n'est donc PAS comparable à celui des
-   12→16/09 : c'est un changement de requête, pas une disparition des fiches.**
-   Reprendre la formulation longue demain.
-3. **`site:hcebtp.com`** → dix pages Wikipédia d'acronymes (CEB, CBP, HBD…),
-   **zéro résultat du domaine**. L'opérateur `site:` n'est visiblement pas honoré
-   par ce canal : il ne prouve rien de plus que les deux autres mesures, mais il
-   ne les contredit pas.
-
-| Requête | Mesure (17/09/2026) | Évolution vs 16/09 |
-|---|---|---|
-| indexation (phrase exacte du site) | **absent** | inchangé |
-| indexation (requête nommant le domaine) | **absent** | inchangé (requête modifiée) |
-| `site:hcebtp.com` | **absent** | inchangé |
-| requêtes commerciales | **non mesurables** (aucun canal de SERP brute) | indéterminé |
-
-⚠️ **`WebSearch` a échoué trois fois sur huit appels aujourd'hui** (« Web search
-error: unavailable »), avec succès à la relance immédiate à chaque fois. Même
-famille d'aléa que les `000` du runner sur `curl` : **relancer avant de
-conclure, et ne jamais changer la formulation d'une requête de suivi pour
-contourner un échec** — c'est exactement ce qui a cassé la comparabilité de la
-mesure n°2 ci-dessus.
-
-**Contrôles techniques** : accueil, les six `/services/*`, les cinq
-`/realisations/*`, `robots.txt`, `sitemap.xml`, `llms.txt` — **tous en 200 du
-premier coup**, aucun `000`. `sitemap.xml` relu intégralement : 12 URLs, et
-**`/realisations` n'y figure pas** — le 404 de cette URL n'est donc pas exposé
-aux robots, point à ne pas rouvrir en urgence.
-
-> ⚠️ **Nouvelle échelle de mesure, et cette fois elle est figée dans le dépôt.**
-> Le problème signalé le 15/09 (deux extracteurs, deux séries de chiffres) est
-> réglé : `scripts/mesure-texte-servi.mjs` est désormais versionné et **c'est lui
-> la référence à partir d'aujourd'hui**. Il normalise en plus les entités
-> hexadécimales (`&#x27;`), ce que les extracteurs jetables des runs précédents
-> ne faisaient pas : ses valeurs sont donc **systématiquement un peu plus basses**
-> (bordures-murets 879 au lieu de 884, maçonnerie 5 080 au lieu de 5 295).
-> **Ne pas lire ça comme une régression.** Toutes les valeurs ci-dessous sont
-> produites par ce script ; les tables des 14, 15 et 16/09 ne leur sont pas
-> comparables au caractère près.
-
-Les douze URLs du sitemap, mesurées **avant** le chantier du jour :
-
-| URL | Texte servi (17/09) | JSON-LD | Liens `/realisations/*` |
-|---|---|---|---|
-| accueil | 5 455 car. | 3 | 4 |
-| `/services/drainage-pentes` | 5 198 car. | 4 | 0 |
-| `/services/maconnerie-generale` | 5 080 car. | 4 | 0 |
-| `/services/preparation-terrain` | 4 482 car. | 4 | 0 |
-| `/services/enrobe-a-chaud` | 3 783 car. | 4 | 0 |
-| `/services/finitions-soignees` | **1 080 car.** | 3 | 0 |
-| `/services/bordures-murets` | **879 car.** | 3 | 0 |
-| `/realisations/parking-voirie-pro` | 381 car. | 2 | 5 |
-| `/realisations/preparation-terrassement` | 380 car. | 2 | 5 |
-| `/realisations/cour-allee-privee` | 379 car. | 2 | 5 |
-| `/realisations/chantier-en-cours` | 353 car. | 2 | 5 |
-| `/realisations/avant-apres` | **188 car.** | 1 | 1 |
-
-C'est la première fois que **les douze URLs** sont mesurées d'un coup — les
-quatre `/realisations/$slug` se tiennent bien (353 à 381 car., 2 JSON-LD,
-5 liens internes chacune), le 14/09 a donc tenu. La page la plus maigre du site
-après le chantier du jour sera `/realisations/avant-apres` (188 car., 1 seul
-JSON-LD, pas de `BreadcrumbList`).
-
----
-
 ## Chantiers faits
+
+### 18/10/2026 — Images de l'accueil : ~16 Mo de PNG bruts → WebP (~1,7 Mo)
+
+- Constat : `optimizeImage.ts` disait « /photos déjà léger » — faux pour 5 PNG
+  (2,5-3,3 Mo) et un JPEG (1 Mo) servis bruts sur l'accueil et `maconnerie-generale`.
+- Fait : `convert -strip -resize 1600x1600> -quality 78 -define webp:method=6`
+  (cartes « matière » à 900 px de large), originaux gardés, 6 défauts de code
+  pointés vers `.webp` (`index.tsx`, `services.$slug.tsx`), commentaire corrigé.
+- Non fait (volontairement) : `width`/`height` sur les `<img>` — elles sont toutes
+  dans des conteneurs dimensionnés (`absolute inset-0` / `aspect-*`), pas de CLS
+  attendu ; pas de passage par `wsrv.nl` (garde les images sur le domaine).
+- À vérifier au prochain run : les 6 `.webp` en 200 en prod et référencés dans le HTML.
 
 ### 17/10/2026 — `/services/drainage-pentes` : Q/R « où envoyer l'eau » et « caniveau à grille »
 
@@ -3738,122 +3702,19 @@ re-valide la fidélité du banc d'essai.
 internes, il ne crée aucun lien entrant — et c'est ce qui manque. Voir la note
 d'alerte en tête des chantiers en attente.
 
-### 17/09/2026 — `bordures-murets` passe de 879 à 7 012 caractères, avec les normales climatiques de la station Météo-France voisine
-
-**Chantier choisi** : le bloc « Ce qu'il faut savoir » de
-`/services/bordures-murets`, désigné candidat n°1 par le run du 16/09. C'était la
-page la plus maigre du site (879 caractères servis contre 3 783 à 5 455 pour les
-autres pages service) et la dernière, avec `finitions-soignees`, à n'avoir aucun
-contenu de fond.
-
-**Pourquoi cet angle plutôt qu'un autre.** Le 16/09 était déjà un run de contenu,
-et la règle est d'alterner. Deux raisons de ne pas alterner aujourd'hui : la page
-était mesurée, chiffrée et documentée depuis la veille (matière déjà repérée, donc
-chantier menable jusqu'au bout dans un seul run), et surtout la matière trouvée
-en cours de route s'est révélée bien meilleure que prévu — les normales
-climatiques de la station Météo-France de **Champagnole, à 2 km de Cize**. C'est
-la donnée locale la plus différenciante publiée sur ce site à ce jour, et elle
-n'a de sens que sur une page qui parle de béton. **Le prochain run doit changer
-d'angle : trois runs de contenu d'affilée, c'est assez.**
-
-**Ce qui a été fait, précisément** (fichier `src/routes/services.$slug.tsx`,
-entrée `bordures-murets`) :
-- Un `savoir` de **5 questions**, sur le patron des 11, 12, 13 et 16/09 : réponse
-  autonome de 2-3 phrases en tête, H3 formulés comme des questions posées à voix
-  haute, développement ensuite.
-  1. *À quoi sert un muret de soutènement dans une cour ?* — les **trois
-     états-limites** que vérifie la norme de justification (portance sous la
-     semelle, glissement sur la base, excentrement/basculement), et la limite
-     honnête du métier : au-delà du petit muret, c'est un calcul géotechnique et
-     un bureau d'études, pas une finition de maçonnerie.
-  2. *Faut-il une autorisation pour construire un mur chez soi ?* — déclaration
-     préalable dès **2 m**, plus les trois cas indépendants de la hauteur
-     (secteur protégé, zone du PLU, commune ayant soumis les clôtures à
-     déclaration), article **R*421-12** du Code de l'urbanisme. Nuance qui fait
-     la valeur de la réponse : **un mur de soutènement n'est pas une clôture**,
-     son régime dépend du PLU.
-  3. *Le mur entre chez moi et chez le voisin est-il mitoyen ?* — présomption de
-     mitoyenneté, **marques de non-mitoyenneté** (sommet à une seule pente,
-     tuiles ou bordures d'un seul côté), partage des frais au prorata,
-     articles **653 à 673** du Code civil.
-  4. *Bordure coulée sur place ou bordure préfabriquée ?* — la préfabriquée est
-     un produit couvert par **NF EN 1340**, la coulée sur place **sort du champ
-     de cette norme produit** : sa tenue dépend du coffrage et du béton. Angle
-     volontairement différent de la Q/R n°3 du 16/09, qui utilisait la même norme
-     pour le rôle de butée ; la réponse renvoie d'ailleurs le lecteur vers la
-     page maçonnerie pour ce point.
-  5. *Peut-on couler des bordures et des murets toute l'année dans le Jura ?* —
-     **111,7 jours de gel par an**, dont 21,8 en janvier, 20,9 en février et
-     20,4 en décembre ; **35,2 jours/an à -5 °C ou moins** ; température moyenne
-     annuelle **9,4 °C** ; **1 573,2 mm** de précipitations par an. Toutes ces
-     valeurs sont les normales 1991-2020 de la station Météo-France de
-     Champagnole (indicatif 39097003, alt. 537 m), à 2 km de Cize.
-- **5 sources** liées et visibles en pied de bloc : les deux fiches
-  service-public.gouv.fr (F3131 vérifiée le 05/12/2025, F2415 vérifiée le
-  14/09/2026), deux fiches AFNOR Norm'Info (NF P94-281, NF EN 1340) et la fiche
-  climatologique Météo-France.
-- `seoDescription` propre à la page (la phrase d'intro affichée ne contient aucun
-  des mots réellement tapés : « autorisation », « mitoyen », « gel »).
-- Report intégral des 5 Q/R dans `public/llms.txt`, avec leurs sources, plus
-  l'entrée « Bordures & murets » de la liste des pages enrichie et la date de
-  mise à jour passée au 17 septembre 2026.
-
-**Mesure avant / après, au banc d'essai local, même script pour les deux côtés** :
-
-| URL | Avant | Après | JSON-LD |
-|---|---|---|---|
-| `/services/bordures-murets` | 879 car. | **7 012 car.** | 3 → **4** (`FAQPage`) |
-| `/services/maconnerie-generale` | 5 080 car. | 5 080 car. | 4 → 4 |
-| `/services/finitions-soignees` | 1 080 car. | 1 080 car. | 3 → 3 |
-| accueil | 5 455 car. | 5 455 car. | 3 → 3 |
-
-Le banc local a redonné **exactement** les valeurs de la production avant
-modification (879, 5 080, 1 080, 5 455) : fidélité re-confirmée pour la
-**troisième** fois. Et les trois autres pages sont inchangées au caractère près —
-le chantier n'a rien débordé.
-
-**Contrôles passés avant de pousser** :
-- `npm run build` sort en 0.
-- `npx tsc --noEmit` : aucune erreur.
-- **`FAQPage` vérifié par script** : les 5 questions ET les 5 réponses du JSON-LD
-  sont retrouvées mot pour mot dans le texte visible du HTML servi, et les
-  4 blocs JSON-LD de la page parsent (`Organization`, `Service`,
-  `BreadcrumbList`, `FAQPage`). **Aucun mismatch possible.**
-- `node scripts/check-contenu-fige.mjs` : aucune régression.
-- ⚠️ `npx prettier --check` **échoue sur ce fichier — mais il échouait déjà sur
-  `HEAD`**, avant toute modification : **58 erreurs `prettier/prettier` avant,
-  58 après**, comptées des deux côtés. Mes ajouts n'en introduisent aucune.
-  **Ne pas reformater ce fichier** : ce serait un diff de plusieurs centaines de
-  lignes sans aucun gain SEO, exactement le refactor que les consignes
-  interdisent. Corriger le contrôle du 15/09 au journal : « prettier --check
-  passe » n'est plus vrai depuis les gros littéraux de données.
-
-**Décidé de NE PAS faire aujourd'hui, et pourquoi :**
-- **`/services/finitions-soignees`** (1 080 car.), l'autre page maigre : un seul
-  chantier mené à fond vaut mieux que deux à moitié. Elle reste candidate, mais
-  son `title` anormal (voir « Hypothèses à vérifier ») doit être tranché avec le
-  client **avant ou pendant** son chantier.
-- **Citer Wikipédia comme source du climat.** C'est par l'article « Cize (Jura) »
-  que la station de Champagnole a été identifiée, et j'ai d'abord envisagé de le
-  mettre en source faute de pouvoir lire le PDF Météo-France. Le détour par la
-  source primaire a finalement réussi (voir « Techniques apprises ») **et a donné
-  quatre chiffres de plus que Wikipédia n'en reprend** — dont les jours de gel,
-  qui sont le cœur de la réponse. Règle : **ne jamais se rabattre sur le
-  secondaire avant d'avoir vraiment essayé le primaire.**
-- **Publier le nombre de jours sans dégel (Tx ≤ 0 °C).** La ligne du PDF est
-  entrelacée avec celle des rafales de vent et mon recoupement par la somme des
-  mois ne tombe pas juste (8,3 contre 9,3). Les quatre autres valeurs, elles,
-  se recoupent exactement. **Un chiffre dont je ne suis pas sûr ne se publie
-  pas** — celui-là est écarté, pas « arrondi ».
-- **Toucher au `title` de la page** (« Bordures & murets — HCE · Jura & Ain ») :
-  il suit le patron des cinq autres pages service, il n'y a rien à corriger.
-
----
-
 ## Chantiers en attente
 
 Par ordre de priorité. **Alterner les angles, ne pas refaire le même deux jours
 de suite.**
+
+> 🆕 **MISE À JOUR DU 18/10/2026 — prime sur tout ce qui suit.**
+> ✅ Images lourdes → WebP (accueil + maçonnerie). À vérifier en prod au prochain
+> run (6 `.webp` en 200, plus aucune URL `/photos/*.png` dans le HTML de l'accueil).
+> 1. Prochain contenu : `maconnerie-generale` (5 726 car.), la page la plus maigre.
+> 2. Lundi 19/10 : veille (étape 6).
+> 3. Meta descriptions de 12 pages > 160 car. : raccourcir un jour « technique »
+>    (gain = extrait lisible, pas de position).
+> 4. H1 accueil « HCE », Bing Webmaster Tools : inchangés (Yanis).
 
 > 🆕 **MISE À JOUR DU 17/10/2026 — prime sur tout ce qui suit.**
 > ✅ Q/R eau / caniveau sur `drainage-pentes` : faites et vérifiées en prod, IndexNow 200.
@@ -4786,6 +4647,14 @@ de suite.**
 ---
 
 ## Hypothèses à vérifier
+
+### 18/10/2026 — Le texte alternatif de la photo « geste » ne décrit pas la photo
+
+Alt servi : « HCE posant l'enrobé à chaud à la main à 150°C, vapeur visible au
+coucher de soleil ». La photo (`geste-enrobe-a-chaud`) montre une cour fraîchement
+posée en plein jour, rouleau compacteur devant un garage, sans vapeur ni coucher
+de soleil. Un alt fidèle aide Google Images et l'accessibilité. Non modifié
+(texte éditable en admin, `geste.image_alt`) : à valider par Yanis avant de changer.
 
 ### 14/10/2026 — FAQ de l'accueil : deux chiffres sans source
 « Un enrobé bien préparé et compacté tient 20 à 30 ans » et « Une cour

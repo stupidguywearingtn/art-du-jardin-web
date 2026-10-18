@@ -5,8 +5,12 @@
  * va chercher l'original et sert une version WebP compressée — réduction
  * constatée d'environ 90 %.
  *
- * Les images déjà locales et légères (/photos/..., déjà commitées et
- * compressées) ou déjà des URLs absolues externes ne sont pas touchées.
+ * Les images de /photos/... et les URLs absolues externes ne sont pas
+ * touchées. ⚠️ /photos/ n'était PAS entièrement léger : cinq PNG de 2,5 à
+ * 3,3 Mo y étaient servis bruts (constaté le 18/10/2026). Ils ont désormais
+ * une copie .webp (≤ 1600 px, q≈78) à côté de l'original, et le code pointe
+ * vers le .webp. Toute nouvelle photo ajoutée dans /photos doit être
+ * compressée avant commit.
  */
 // wsrv.nl doit pouvoir joindre l'original depuis l'extérieur pour le
 // redimensionner — un window.location.origin en local (localhost) n'est

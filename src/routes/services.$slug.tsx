@@ -225,7 +225,7 @@ const SERVICES: Record<string, ServiceData> = {
     ],
     gallery: [
       "/assets/maconnerie-1.png",
-      "/photos/2.png",
+      "/photos/2.webp",
       "/assets/maconnerie-3.png",
     ],
     seoDescription:

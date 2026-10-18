@@ -44,7 +44,7 @@ const service02 = "/assets/enrobe-1.png";
 const service03 = "/assets/maconnerie-1.png";
 const service04 = "/assets/drainage-1.jpeg";
 const service05 = "/assets/bordures-1.png";
-const service06 = "/photos/1.png";
+const service06 = "/photos/1.webp";
 const ctaCourtyard = "/photos/27-parking-enrobe-montagne.jpg";
 
 if (typeof window !== "undefined") {
@@ -565,7 +565,7 @@ function SiteHeader() {
 /* ============ GESTE & MATIÈRE ============ */
 function GesteMatiere() {
   const v = useV();
-  const img = v("geste", "image", "/photos/geste-enrobe-a-chaud.png");
+  const img = v("geste", "image", "/photos/geste-enrobe-a-chaud.webp");
   return (
     <section className="relative w-full bg-depth-d overflow-hidden">
       <div className="grid grid-cols-1 md:grid-cols-5 md:min-h-[80vh]">
@@ -679,12 +679,12 @@ function MatiereFinitions() {
   }, [editEnabled]);
   const defaults = [
     {
-      img: "/photos/matiere-paves-sur-mesure.jpeg",
+      img: "/photos/matiere-paves-sur-mesure.webp",
       t: "Pavés sur mesure",
       d: "Médaillons et inserts pavés intégrés à l'enrobé pour personnaliser votre cour.",
     },
     {
-      img: "/photos/matiere-bordure-nette.png",
+      img: "/photos/matiere-bordure-nette.webp",
       t: "Bordures nettes",
       d: "Tranches précises et finitions au millimètre, pour un rendu durable et propre.",
     },
@@ -1690,7 +1690,7 @@ const PROCESS = [
     n: "04",
     t: "Contrôle & Finitions",
     d: "Vérification de la planéité, des pentes d'évacuation et des finitions de bordure. On ne quitte le chantier qu'une fois le rendu impeccable.",
-    img: "/photos/process-controle-finitions.png",
+    img: "/photos/process-controle-finitions.webp",
   },
 ];
 

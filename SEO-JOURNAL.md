@@ -22,6 +22,9 @@ et à compléter en fin de run.
 > Build OK, `check:fige` OK. Les valeurs servies par la base (`site_content_fields`,
 > admin) priment sur ces défauts : à l'accueil, aucune n'était surchargée (URLs
 > servies = défauts du code).
+> ✅ Vérifié en prod (`a341c1e`, < 120 s) : 6 `.webp` en 200, plus aucun
+> `/photos/*.png` dans le HTML de l'accueil ni de `maconnerie-generale`, textes
+> inchangés (accueil 13 579), IndexNow 15 URLs → 200.
 
 > ✅ **17/10/2026 — Déploiement OK** (`979e485` : Vercel `success`). Prod =
 > dernier commit (15/15 URLs en 200, `finitions-soignees` 10 891 car. = Q/R du
@@ -1779,7 +1782,7 @@ plus maigre du site est désormais, sans concurrence, **`/services/finitions-soi
 - Non fait (volontairement) : `width`/`height` sur les `<img>` — elles sont toutes
   dans des conteneurs dimensionnés (`absolute inset-0` / `aspect-*`), pas de CLS
   attendu ; pas de passage par `wsrv.nl` (garde les images sur le domaine).
-- À vérifier au prochain run : les 6 `.webp` en 200 en prod et référencés dans le HTML.
+- ✅ Vérifié en prod le 18/10 : 6 `.webp` en 200 et référencés dans le HTML.
 
 ### 17/10/2026 — `/services/drainage-pentes` : Q/R « où envoyer l'eau » et « caniveau à grille »
 
@@ -3708,8 +3711,7 @@ Par ordre de priorité. **Alterner les angles, ne pas refaire le même deux jour
 de suite.**
 
 > 🆕 **MISE À JOUR DU 18/10/2026 — prime sur tout ce qui suit.**
-> ✅ Images lourdes → WebP (accueil + maçonnerie). À vérifier en prod au prochain
-> run (6 `.webp` en 200, plus aucune URL `/photos/*.png` dans le HTML de l'accueil).
+> ✅ Images lourdes → WebP (accueil + maçonnerie) : faites et vérifiées en prod, IndexNow 200.
 > 1. Prochain contenu : `maconnerie-generale` (5 726 car.), la page la plus maigre.
 > 2. Lundi 19/10 : veille (étape 6).
 > 3. Meta descriptions de 12 pages > 160 car. : raccourcir un jour « technique »

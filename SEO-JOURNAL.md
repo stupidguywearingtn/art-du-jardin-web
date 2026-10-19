@@ -8,6 +8,13 @@ et à compléter en fin de run.
 
 ## État des lieux
 
+> ✅ **19/10/2026 — Déploiement OK** (`9b956ab` : Vercel `READY`). Prod = dernier
+> commit (15/15 en 200, valeurs du 18/10). Lundi : veille (Google met en avant les
+> liens dans les réponses IA ; rapports IA de la Search Console depuis le 03/06).
+> Chantier (contenu) : **`/services/maconnerie-generale`** +2 Q/R pose des pavés /
+> dalles (guide CERIB 2017), 5 726 → 8 013 car. au banc local, FAQ 7/7, lastmod +
+> `llms.txt` 19/10. Build OK, `check:fige` OK.
+
 > ✅ **18/10/2026 — Déploiement OK** (`e99d634` : Vercel `READY`, lu via l'API
 > Vercel). Prod = dernier commit (15/15 URLs en 200, valeurs du 17/10 ; FAQ 11/11 ;
 > lastmod 15/15 alignés). Chantier du jour (**technique**, après 3 jours de Q/R) :
@@ -677,6 +684,19 @@ un extrait de SERP ne prouve pas ce que la page contient.
 > `verif.com` ont été jugées périmées **sur la seule foi d'extraits de recherche**
 > (403 au runner, contenu jamais lu). Leur statut « périmée » n'est donc pas
 > établi. Noté en chantier en attente.
+
+### Positions mesurées — 19/10/2026
+
+| Contrôle | 19/10/2026 | vs 18/10 |
+|---|---|---|
+| Déploiement `main` (`9b956ab`) | **`READY`** (API Vercel) | = |
+| Prod vs code (`mesure-texte-servi`) | 15/15 en 200, valeurs identiques au 18/10 | = |
+| « enrobé à chaud Jura entreprise cour » | domaine **absent** ; fiche `118712.fr` de HCE 1ʳᵉ | = |
+| « terrassement Jura entreprise » | **absent** (obat.fr, cylex, offres d'emploi) | 🆕 relevé |
+
+Canal `WebSearch` = US, non représentatif. Pas d'accès Search Console. **À relever
+par Yanis** : rapport « Performances IA » (nouveau, cf. Techniques 19/10), pages
+indexées, requêtes à impressions.
 
 ### Positions mesurées — 18/10/2026
 
@@ -1771,6 +1791,16 @@ plus maigre du site est désormais, sans concurrence, **`/services/finitions-soi
 ---
 
 ## Chantiers faits
+
+### 19/10/2026 — `/services/maconnerie-generale` : Q/R pose des pavés sous voiture, et pavés vs dalles
+Page la plus maigre du site (5 726 car.). Deux Q/R ajoutées, sourcées sur le
+guide de pose CERIB/FIB (juillet 2017) : **lit de sable 3 cm ± 1, sable 0/4 ou
+0/6,3, joints 2-4 mm, damage plaque vibrante, butée obligatoire, sable stabilisé
+75-100 kg/m³** ; **dalles non damées, joints ≥ 5 mm, pose sur mortier limitée au
+trafic T5**. Rien n'est affirmé sur la pratique propre d'HCE au-delà de l'existant.
+FAQ 5 → 7 (FAQPage = visible, `verif-faq` 7/7), lead mis à jour, source ajoutée,
+`PAGE_UPDATED` + lastmod 19/10, `llms.txt` 19/10 (+2 Q/R). Banc local : 5 726 →
+**8 013 car.** Build OK, `check:fige` OK.
 
 ### 18/10/2026 — Images de l'accueil : ~16 Mo de PNG bruts → WebP (~1,7 Mo)
 
@@ -3710,6 +3740,12 @@ d'alerte en tête des chantiers en attente.
 Par ordre de priorité. **Alterner les angles, ne pas refaire le même deux jours
 de suite.**
 
+> 🆕 **MISE À JOUR DU 19/10/2026 — prime sur tout ce qui suit.**
+> ✅ `maconnerie-generale` : 2 Q/R pose des pavés / dalles (guide CERIB 2017) — à vérifier en prod au prochain run si pas fait ce run.
+> 1. Prochain jour technique : meta descriptions > 160 car. (12 pages) **ou** URL/ancre contact stable (veille 19/10).
+> 2. Prochain contenu : `realisations/chantier-en-cours` (5 596) ou `parking-voirie-pro` (6 356), les plus maigres.
+> 3. Yanis : rapport « Performances IA » de la Search Console (impressions AI Overviews / Mode IA).
+
 > 🆕 **MISE À JOUR DU 18/10/2026 — prime sur tout ce qui suit.**
 > ✅ Images lourdes → WebP (accueil + maçonnerie) : faites et vérifiées en prod, IndexNow 200.
 > 1. Prochain contenu : `maconnerie-generale` (5 726 car.), la page la plus maigre.
@@ -5416,6 +5452,26 @@ récupérer sans rien réécrire. **Sans cette requête, le travail restait perd
 ---
 
 ## Techniques apprises
+
+### 19/10/2026 (lundi) — 📚 Google met en avant les liens dans AI Overviews / Mode IA, et la Search Console compte les impressions IA
+Sources : billet Google de Hema Budaraju du 15/10/2026, repris par BetaNews
+(betanews.com/article/google-ai-mode-inline-links-higher-click-data/, 16/10) et
+Europa Press/Infobae (16/10).
+- **Liens intégrés** au texte des réponses IA, nettement plus fréquents ; liens de
+  fin de réponse avec miniatures.
+- **Test** : un bloc en tête de réponse pour les requêtes dont la réponse est sur
+  un ou deux sites officiels (exemple cité : **la page contact d'une entreprise**).
+  → Applicable : HCE n'a pas d'URL `/contact` dédiée (contact = section de
+  l'accueil). Candidat pour un jour technique : vérifier qu'une ancre/URL de
+  contact stable et crawlable porte le NAP complet. Ne rien créer sans contenu propre.
+- **Search Console : rapports de performance IA depuis le 03/06/2026**
+  (impressions dans AI Overviews et Mode IA, pas encore de clics). → C'est la
+  seule vraie mesure GEO côté Google : **Yanis doit la relever**.
+- ⚙️ Pas de nouvelle version des skills claude-seo / geo-seo-claude trouvée par
+  `WebSearch` (résultats hors sujet) ; ne pas re-chercher chaque lundi par ce canal.
+- ⚙️ Le dépôt cloné n'a pas `node_modules` : `npm ci` (18 s) avant `npm run build`.
+- ⚙️ Source réutilisable : guide CERIB/FIB *pose des pavés, dalles et bordures*
+  (juillet 2017, réf. 152E_V4), copie Alkern lisible par `WebFetch`.
 
 ### 12/10/2026 (lundi) — 📚 ChatGPT search en local : le site de l'entreprise pèse 58 % des sources, via l'index Bing
 Source : BrightLocal, *Uncovering ChatGPT Search Sources* (12/12/2024, 800

@@ -232,7 +232,7 @@ const SERVICES: Record<string, ServiceData> = {
       "Pavage, dallage, bordures et médaillons intégrés à l'enrobé dans le Jura et l'Ain : motif dessiné avec vous, pose au cordeau, joints sablés ou cimentés. Devis détaillé.",
     savoir: {
       heading: "Pavage, dallage et médaillons : les questions qu'on nous pose",
-      lead: "Le pavage, le dallage et les médaillons ne remplacent pas l'enrobé : ils s'y intègrent. Voici comment les deux techniques se posent sur un même chantier, ce que disent les normes des pavés, des dalles et des bordures, et à partir de quand une autorisation d'urbanisme entre en jeu, dans le Jura et l'Ain.",
+      lead: "Le pavage, le dallage et les médaillons ne remplacent pas l'enrobé : ils s'y intègrent. Voici comment les deux techniques se posent sur un même chantier, ce que disent les normes des pavés, des dalles et des bordures, sur quoi l'on pose des pavés qui doivent porter des voitures, et à partir de quand une autorisation d'urbanisme entre en jeu, dans le Jura et l'Ain.",
       updated: PAGE_UPDATED["/services/maconnerie-generale"],
       qa: [
         {
@@ -246,6 +246,14 @@ const SERVICES: Record<string, ServiceData> = {
         {
           q: "À quoi sert vraiment une bordure au bord d'un enrobé ?",
           a: "À tenir la rive, et pas seulement à faire joli. La norme NF EN 1340, qui couvre les éléments de bordure et de caniveau préfabriqués en béton, énumère leurs fonctions : séparation, délimitation physique ou visuelle, drainage, et butée des zones dallées ou des autres revêtements. C'est ce dernier rôle qu'on oublie le plus souvent : sans butée, le bord d'une cour finit par s'effriter sous les roues, parce que rien ne retient le matériau latéralement. Les dalles en béton ont de la même façon leur norme, la NF EN 1339. HCE pose des bordures béton coulées sur place ou des bordures pavées, selon la forme à suivre.",
+        },
+        {
+          q: "Sur quoi pose-t-on des pavés pour qu'ils tiennent sous les voitures ?",
+          a: "Sur un lit de sable mince et régulier, au-dessus d'une fondation compactée, et jamais sans butée sur les bords. Le guide de pose des pavés, dalles et bordures préfabriqués en béton, publié par le CERIB et la Fédération de l'industrie du béton (édition de juillet 2017), fixe un lit de pose de 3 cm, à plus ou moins 1 cm près une fois les pavés en place, en sable 0/4 ou 0/6,3 ; des joints de 2 à 4 mm entre pavés, garnis d'un sable plus fin, 0/2 ou 0/4 ; puis un damage à la plaque vibrante, semelle protégée par un élastomère. Il pose aussi une règle qu'on oublie souvent : chaque zone pavée doit être butée, par une bordure scellée ou encastrée, des pavés scellés ou une longrine en béton. Dans une cour en enrobé, la jonction entre le pavage et l'enrobé se décide donc dès le calepinage. La pose scellée au mortier reste l'exception pour les pavés : en forte pente, en présence d'eau ou face à des nettoyages agressifs, le guide préconise plutôt un sable stabilisé, dosé à 75 à 100 kg de ciment par mètre cube.",
+        },
+        {
+          q: "Pavés ou dalles pour une entrée où l'on roule : qu'est-ce qui change à la pose ?",
+          a: "Les dalles ne se posent pas comme des pavés, et c'est ce qui les rend plus délicates sous les roues. D'après le même guide du CERIB, les pavés sont damés à la plaque vibrante après la pose, avec des joints serrés de 2 à 4 mm ; les dalles, elles, ne sont pas soumises au damage, et leurs joints doivent mesurer au moins 5 mm. Les deux reposent sur un lit de sable d'environ 3 cm. Lorsque des dalles sont posées sur mortier, le guide réserve cette pose aux trafics de classe T5 au plus, la plus faible de la classification des trafics de poids lourds. Pavés et dalles en béton relèvent d'ailleurs de deux normes distinctes, la NF EN 1338 pour les premiers et la NF EN 1339 pour les secondes. Pour une entrée de garage ou une place de stationnement, la question se tranche au moment du choix du matériau, en partant du véhicule le plus lourd qui passera ; pour une terrasse ou un chemin piéton, la dalle garde tout son intérêt.",
         },
         {
           q: "Faut-il une autorisation d'urbanisme pour créer des places de stationnement ?",
@@ -264,6 +272,11 @@ const SERVICES: Record<string, ServiceData> = {
         {
           label: "AFNOR Norm'Info — NF EN 1340, Éléments pour bordures de trottoir en béton",
           url: "https://norminfo.afnor.org/norme/nf-en-1340/elements-pour-bordures-de-trottoir-en-beton-prescriptions-et-methodes-dessai/69403",
+        },
+        {
+          label:
+            "CERIB / FIB — Guide de pose des pavés, dalles et bordures préfabriqués en béton, juillet 2017 (réf. 152E_V4), copie publiée par Alkern",
+          url: "https://www.alkern.fr/wp-content/uploads/documents/Guide-de-pose-dalles-et-paves-Cerib.pdf",
         },
         {
           label:

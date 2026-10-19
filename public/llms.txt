@@ -5,7 +5,7 @@
 > dans le Jura et l'Ain. Entreprise créée en 2012, 14 années d'expérience, plus de
 > 1000 chantiers livrés, garantie décennale.
 
-Dernière mise à jour : 17 octobre 2026
+Dernière mise à jour : 19 octobre 2026
 Site officiel : https://www.hcetp.com
 
 ## L'entreprise en bref
@@ -250,6 +250,26 @@ bord d'une cour s'effrite sous les roues faute de retenue latérale. Les dalles 
 relèvent de leur côté de la NF EN 1339.
 Source : https://norminfo.afnor.org/norme/nf-en-1340/elements-pour-bordures-de-trottoir-en-beton-prescriptions-et-methodes-dessai/69403
 
+### Sur quoi pose-t-on des pavés pour qu'ils tiennent sous les voitures ?
+Sur un lit de sable mince et régulier, au-dessus d'une fondation compactée, et jamais
+sans butée sur les bords. Le guide de pose du CERIB et de la Fédération de l'industrie du
+béton (juillet 2017) fixe un lit de pose de 3 cm ± 1 cm une fois les pavés en place, en
+sable 0/4 ou 0/6,3 ; des joints de 2 à 4 mm garnis de sable 0/2 ou 0/4 ; puis un damage à
+la plaque vibrante. Chaque zone pavée doit être butée (bordure scellée ou encastrée,
+pavés scellés ou longrine en béton). La pose scellée au mortier reste l'exception pour les
+pavés ; en forte pente ou en présence d'eau, le guide préconise un sable stabilisé dosé à
+75 à 100 kg de ciment par m³.
+Source : https://www.alkern.fr/wp-content/uploads/documents/Guide-de-pose-dalles-et-paves-Cerib.pdf
+
+### Pavés ou dalles pour une entrée où l'on roule : qu'est-ce qui change à la pose ?
+Les pavés sont damés à la plaque vibrante après la pose, avec des joints de 2 à 4 mm ; les
+dalles ne sont pas soumises au damage et leurs joints doivent mesurer au moins 5 mm. Les
+deux reposent sur un lit de sable d'environ 3 cm. La pose de dalles sur mortier est
+réservée aux trafics de classe T5 au plus. Pavés et dalles en béton relèvent de deux
+normes distinctes (NF EN 1338 et NF EN 1339). Pour une entrée de garage, le choix part du
+véhicule le plus lourd qui passera.
+Source : https://www.alkern.fr/wp-content/uploads/documents/Guide-de-pose-dalles-et-paves-Cerib.pdf
+
 ### Faut-il une autorisation d'urbanisme pour créer des places de stationnement ?
 Cela dépend de la capacité de l'aire et de son ouverture au public, pas du revêtement
 choisi. Un permis d'aménager est exigé pour une aire de stationnement ouverte au public
@@ -485,8 +505,10 @@ de l'eau ne s'évaluent pas autrement.
 - [Maçonnerie générale](https://www.hcetp.com/services/maconnerie-generale) : pavage,
   dallage, bordures, médaillons sur mesure. Contient aussi les réponses détaillées sur
   l'intégration de pavés et de médaillons dans un enrobé, les normes des pavés, dalles et
-  bordures (NF EN 1338, 1339, 1340 et 1342), les autorisations d'urbanisme des aires de
-  stationnement et le choix entre joints sablés et joints cimentés, avec leurs sources.
+  bordures (NF EN 1338, 1339, 1340 et 1342), la pose des pavés sous circulation (lit de
+  sable de 3 cm, joints, damage, butée, guide CERIB 2017), la différence de pose entre
+  pavés et dalles, les autorisations d'urbanisme des aires de stationnement et le choix
+  entre joints sablés et joints cimentés, avec leurs sources.
 - [Drainage & pentes](https://www.hcetp.com/services/drainage-pentes) : études de pente,
   drainage périphérique, évacuation des eaux pluviales. Contient aussi les réponses
   détaillées sur l'eau (écoulement vers le terrain voisin et Code civil, pente minimum

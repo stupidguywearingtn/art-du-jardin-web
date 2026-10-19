@@ -14,6 +14,8 @@ et à compléter en fin de run.
 > Chantier (contenu) : **`/services/maconnerie-generale`** +2 Q/R pose des pavés /
 > dalles (guide CERIB 2017), 5 726 → 8 013 car. au banc local, FAQ 7/7, lastmod +
 > `llms.txt` 19/10. Build OK, `check:fige` OK.
+> ✅ Vérifié en prod (`87313a3`, < 100 s) : `maconnerie-generale` 8 013 car., lastmod
+> 2026-10-19, `llms.txt` 19/10, IndexNow 15 URLs → 200.
 
 > ✅ **18/10/2026 — Déploiement OK** (`e99d634` : Vercel `READY`, lu via l'API
 > Vercel). Prod = dernier commit (15/15 URLs en 200, valeurs du 17/10 ; FAQ 11/11 ;
@@ -3741,7 +3743,7 @@ Par ordre de priorité. **Alterner les angles, ne pas refaire le même deux jour
 de suite.**
 
 > 🆕 **MISE À JOUR DU 19/10/2026 — prime sur tout ce qui suit.**
-> ✅ `maconnerie-generale` : 2 Q/R pose des pavés / dalles (guide CERIB 2017) — à vérifier en prod au prochain run si pas fait ce run.
+> ✅ `maconnerie-generale` : 2 Q/R pose des pavés / dalles (guide CERIB 2017) — vérifiées en prod, IndexNow 200.
 > 1. Prochain jour technique : meta descriptions > 160 car. (12 pages) **ou** URL/ancre contact stable (veille 19/10).
 > 2. Prochain contenu : `realisations/chantier-en-cours` (5 596) ou `parking-voirie-pro` (6 356), les plus maigres.
 > 3. Yanis : rapport « Performances IA » de la Search Console (impressions AI Overviews / Mode IA).

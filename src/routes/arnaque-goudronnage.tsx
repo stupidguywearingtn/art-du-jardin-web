@@ -39,7 +39,7 @@ const URL_PAGE = "https://www.hcetp.com/arnaque-goudronnage";
 
 const TITRE = "Arnaque au goudronnage : les signes qui doivent alerter — Jura & Ain | HCE";
 const DESCRIPTION =
-  "« Il nous reste de l'enrobé d'un chantier à côté » : comment reconnaître l'arnaque au goudronnage, vérifier une entreprise en cinq minutes (SIRET, attestation décennale jointe au devis), et que faire si vous avez déjà signé ou payé.";
+  "Arnaque au goudronnage (« il nous reste de l'enrobé ») : les signes, vérifier l'entreprise (SIRET, décennale) et que faire si vous avez déjà payé.";
 
 /**
  * Les sections. `q` = H2 visible, `r` = réponse directe visible (reprise telle

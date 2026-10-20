@@ -45,7 +45,7 @@ const REAL_META: Record<string, { title: string; description: string }> = {
   "preparation-terrassement": {
     title: "Préparation de terrain et terrassement dans le Jura — HCE",
     description:
-      "Chantiers HCE de préparation de terrain et de terrassement dans le Jura : décaissement, nivellement, drainage et plateformes avant pose d'enrobé. Devis détaillé.",
+      "Chantiers HCE de préparation de terrain et terrassement dans le Jura : décaissement, nivellement, drainage, plateformes avant enrobé. Devis détaillé.",
   },
   "chantier-en-cours": {
     title: "Chantiers d'enrobé en cours — HCE, Cize (Jura)",

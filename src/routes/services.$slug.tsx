@@ -140,7 +140,7 @@ const SERVICES: Record<string, ServiceData> = {
       "/assets/enrobe-3.png",
     ],
     seoDescription:
-      "Goudronnage de cour, d'allée ou de parking dans le Jura et l'Ain : HCE pose l'enrobé à chaud à la main à 150°C et le compacte au rouleau. Devis détaillé, garantie décennale.",
+      "Goudronnage de cour, d'allée ou de parking (Jura, Ain) : enrobé à chaud posé à la main à 150°C, compacté au rouleau. Devis détaillé, garantie décennale.",
     savoir: {
       heading: "Goudronnage, épaisseurs et tenue dans le temps : les questions qu'on nous pose",
       lead: "« Faire goudronner sa cour » et « poser un enrobé à chaud » désignent aujourd'hui le même chantier. Voici ce que recouvre réellement le mot, ce que disent les normes, et à quelle saison le chantier est possible dans le Jura et l'Ain. Puis, chiffres et sources à l'appui, ce qui se décide au devis et qu'on ne voit plus une fois la surface finie : quelle épaisseur se pose réellement, ce que veut dire 0/10 ou 0/14 sur un devis, dans quels cas un enrobé neuf peut être posé sur l'ancien, pourquoi un revêtement se dégrade après un hiver, et ce que l'altitude change au choix du bitume.",
@@ -229,7 +229,7 @@ const SERVICES: Record<string, ServiceData> = {
       "/assets/maconnerie-3.png",
     ],
     seoDescription:
-      "Pavage, dallage, bordures et médaillons intégrés à l'enrobé dans le Jura et l'Ain : motif dessiné avec vous, pose au cordeau, joints sablés ou cimentés. Devis détaillé.",
+      "Pavage, dallage, bordures et médaillons dans l'enrobé, Jura et Ain : motif dessiné avec vous, pose au cordeau, joints sablés ou cimentés. Devis détaillé.",
     savoir: {
       heading: "Pavage, dallage et médaillons : les questions qu'on nous pose",
       lead: "Le pavage, le dallage et les médaillons ne remplacent pas l'enrobé : ils s'y intègrent. Voici comment les deux techniques se posent sur un même chantier, ce que disent les normes des pavés, des dalles et des bordures, sur quoi l'on pose des pavés qui doivent porter des voitures, et à partir de quand une autorisation d'urbanisme entre en jeu, dans le Jura et l'Ain.",
@@ -304,7 +304,7 @@ const SERVICES: Record<string, ServiceData> = {
       "/assets/drainage-4.jpeg",
     ],
     seoDescription:
-      "Drainage et pentes avant pose d'enrobé dans le Jura et l'Ain : étude des écoulements, pente minimum 1,5 % vers les exutoires, drains périphériques et évacuation des eaux pluviales. Devis détaillé.",
+      "Drainage et pentes avant enrobé dans le Jura et l'Ain : pente d'au moins 1,5 % vers les exutoires, drains, caniveaux, eaux pluviales. Devis détaillé.",
     savoir: {
       heading: "Drainage, pentes et eaux pluviales : les questions qu'on nous pose",
       lead: "Poser un enrobé sur une cour, une allée ou un parking imperméabilise une surface qui absorbait jusque-là une partie de la pluie : cette eau doit désormais aller quelque part. Voici où elle part — chez soi, dans la rue ou dans un réseau —, ce que dit la réglementation, quel caniveau poser devant un garage, et pourquoi la pente se calcule avant la pose et non après, dans le Jura et l'Ain.",
@@ -377,7 +377,7 @@ const SERVICES: Record<string, ServiceData> = {
     ],
     gallery: ["/assets/bordures-1.png", "/assets/bordures-2.png", "/assets/bordures-3.png"],
     seoDescription:
-      "Bordures béton coulées sur place, bordures pavées et petits murets de soutènement dans le Jura et l'Ain : autorisation d'urbanisme, mur mitoyen, tenue au gel. Devis détaillé.",
+      "Bordures béton coulées sur place, bordures pavées et petits murets de soutènement dans le Jura et l'Ain : urbanisme, mur mitoyen, gel. Devis détaillé.",
     savoir: {
       heading: "Bordures et murets : les questions qu'on nous pose",
       lead: "Une bordure tient la rive d'une cour, un muret retient la terre : ce sont deux ouvrages différents, avec chacun leurs règles. Voici quand une autorisation d'urbanisme entre en jeu, à qui appartient le mur qui sépare deux terrains, ce qui distingue une bordure coulée sur place d'une bordure préfabriquée, et ce que l'hiver jurassien impose au béton.",
@@ -455,7 +455,7 @@ const SERVICES: Record<string, ServiceData> = {
       "/assets/finitions-4.jpeg",
     ],
     seoDescription:
-      "Finitions d'enrobé dans le Jura et l'Ain : bords nets, raccords entre bandes, surface plane sans flaque, chantier rendu propre et gravats évacués. Devis détaillé après visite sur site.",
+      "Finitions d'enrobé dans le Jura et l'Ain : bords nets, raccords entre bandes, surface sans flaque, gravats évacués. Devis détaillé après visite sur site.",
     savoir: {
       heading: "Finitions et fin de chantier : les questions qu'on nous pose",
       lead: "La finition est la partie du chantier que le client voit vraiment : les bords, les raccords entre bandes, la planéité, et l'état dans lequel le chantier est rendu. Voici à quoi se reconnaît un enrobé bien posé, pourquoi une ligne apparaît parfois entre deux bandes, où partent les gravats d'une cour refaite, ce qu'un devis doit obligatoirement dire à ce sujet — et, une fois la cour livrée, ce qui l'abîme vraiment : le sel de déneigement, ou les taches de gazole et d'huile.",

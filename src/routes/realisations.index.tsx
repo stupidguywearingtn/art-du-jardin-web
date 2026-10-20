@@ -27,7 +27,7 @@ const URL_HUB = "https://www.hcetp.com/realisations";
 
 const TITRE = "Réalisations HCE — enrobé, cours et parkings dans le Jura";
 const DESCRIPTION =
-  "Les chantiers HCE en photos : cours et allées privées, parkings et voiries pro, préparation et terrassement, chantiers en cours dans le Jura et l'Ain. Devis détaillé après visite.";
+  "Les chantiers HCE en photos dans le Jura et l'Ain : cours et allées privées, parkings et voiries pro, terrassement, chantiers en cours. Devis détaillé.";
 
 /**
  * Ce que montre chaque dossier. Descriptions de ce qu'on voit réellement sur

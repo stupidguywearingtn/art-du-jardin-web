@@ -57,7 +57,7 @@ const URL_ML = "https://www.hcetp.com/mentions-legales";
 
 const TITRE = "Mentions légales — HCE SARL, Cize (39300), Jura";
 const DESCRIPTION =
-  "Éditeur, identité légale, hébergeur et traitement des données de ce site : HCE SARL, 40 avenue Etienne Lamy, 39300 Cize, SIREN 521683573, SIRET 52168357300039, code NAF 43.12A. Ce que devient une demande de devis et comment en obtenir l'effacement.";
+  "Mentions légales de HCE SARL, 40 avenue Etienne Lamy, 39300 Cize : SIRET 52168357300039, hébergeur, données des demandes de devis et droit à l'effacement.";
 
 /**
  * Identité légale. CHAQUE LIGNE A UNE SOURCE, et aucune n'est saisie de

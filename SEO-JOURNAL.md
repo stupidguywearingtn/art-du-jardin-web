@@ -8,6 +8,14 @@ et à compléter en fin de run.
 
 ## État des lieux
 
+> ✅ **20/10/2026 — Déploiement OK** (`2d8f086` : Vercel `success`). Prod = dernier
+> commit (15/15 en 200, valeurs du 19/10). Chantier (**technique**) : **meta
+> descriptions** — 10 pages dépassaient 160 car. (173 à 248) → toutes ≤ 159 au banc
+> local (`vite dev`), `og:description` suit (même constante). Texte visible
+> inchangé (15/15 identiques), FAQ 11/11, build OK, `check:fige` OK. Pas de
+> `lastmod` ni « mise à jour » touchés (contenu inchangé). `llms.txt` : rien à
+> modifier (ne cite pas ces descriptions).
+
 > ✅ **19/10/2026 — Déploiement OK** (`9b956ab` : Vercel `READY`). Prod = dernier
 > commit (15/15 en 200, valeurs du 18/10). Lundi : veille (Google met en avant les
 > liens dans les réponses IA ; rapports IA de la Search Console depuis le 03/06).
@@ -686,6 +694,19 @@ un extrait de SERP ne prouve pas ce que la page contient.
 > `verif.com` ont été jugées périmées **sur la seule foi d'extraits de recherche**
 > (403 au runner, contenu jamais lu). Leur statut « périmée » n'est donc pas
 > établi. Noté en chantier en attente.
+
+### Positions mesurées — 20/10/2026
+
+| Contrôle | 20/10/2026 | vs 19/10 |
+|---|---|---|
+| Déploiement `main` (`2d8f086`) | **`success`** | = |
+| Prod vs code (`mesure-texte-servi`) | 15/15 en 200, valeurs identiques au 19/10 | = |
+| Meta descriptions > 160 car. (prod, avant push) | 10/15 (accueil 138 OK) — corrigé ce run | 🆕 recompté (12 annoncé le 18/10 : comptage HTML encodé) |
+| « goudronnage cour Jura entreprise » | domaine **absent** ; fiche `118712.fr` de HCE 1ʳᵉ | = |
+| « enrobé Ain entreprise cour » | **absent** (marchés publics, annuaires hors zone) | 🆕 relevé |
+
+Canal `WebSearch` = US, non représentatif. Pas d'accès Search Console. **À relever
+par Yanis** : rapport « Performances IA » + requêtes à impressions.
 
 ### Positions mesurées — 19/10/2026
 
@@ -1793,6 +1814,17 @@ plus maigre du site est désormais, sans concurrence, **`/services/finitions-soi
 ---
 
 ## Chantiers faits
+
+### 20/10/2026 — Meta descriptions : 10 pages ramenées sous 160 caractères
+
+Avant (prod) → après (banc local) : `enrobe-a-chaud` 173→152, `maconnerie-generale`
+168→153, `drainage-pentes` 196→149, `bordures-murets` 174→150,
+`finitions-soignees` 184→153, `zone-intervention` 239→140, `realisations` 179→151,
+`realisations/preparation-terrassement` 161→149, `mentions-legales` 248→154,
+`arnaque-goudronnage` 232→146 (mot-clé « Arnaque au goudronnage » mis en tête).
+Mot-clé + zone gardés en début de phrase, aucune promesse nouvelle, `150°C` /
+« posé à la main » / « devis détaillé » / « garantie décennale » conservés. Gain
+attendu : extrait non tronqué (pas un facteur de position). Les 5 autres déjà ≤ 159.
 
 ### 19/10/2026 — `/services/maconnerie-generale` : Q/R pose des pavés sous voiture, et pavés vs dalles
 Page la plus maigre du site (5 726 car.). Deux Q/R ajoutées, sourcées sur le
@@ -3741,6 +3773,12 @@ d'alerte en tête des chantiers en attente.
 
 Par ordre de priorité. **Alterner les angles, ne pas refaire le même deux jours
 de suite.**
+
+> 🆕 **MISE À JOUR DU 20/10/2026 — prime sur tout ce qui suit.**
+> ✅ Meta descriptions ≤ 160 car. sur les 15 URLs (à vérifier en prod après push).
+> 1. Prochain contenu (mercredi) : `realisations/parking-voirie-pro` (6 356) ou `chantier-en-cours` (5 596).
+> 2. Prochain technique : URL/ancre contact stable portant le NAP (veille 19/10).
+> 3. Yanis : rapport « Performances IA » de la Search Console.
 
 > 🆕 **MISE À JOUR DU 19/10/2026 — prime sur tout ce qui suit.**
 > ✅ `maconnerie-generale` : 2 Q/R pose des pavés / dalles (guide CERIB 2017) — vérifiées en prod, IndexNow 200.

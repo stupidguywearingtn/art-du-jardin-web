@@ -36,7 +36,7 @@ const URL_ZONE = "https://www.hcetp.com/zone-intervention";
 
 const TITRE = "Zone d'intervention HCE — Jura et Ain, depuis Cize (39300)";
 const DESCRIPTION =
-  "Jusqu'où HCE se déplace depuis Cize : distances et altitudes mesurées de Champagnole, Lons-le-Saunier, Saint-Claude, Oyonnax et Bourg-en-Bresse, et ce que l'altitude change au calendrier d'un chantier d'enrobé. Devis détaillé après visite.";
+  "Jusqu'où HCE se déplace depuis Cize (Jura) : distances et altitudes de Champagnole, Lons-le-Saunier, Saint-Claude, Oyonnax, Bourg-en-Bresse.";
 
 /**
  * Les six communes repères de la zone, dans l'ordre de distance croissante.

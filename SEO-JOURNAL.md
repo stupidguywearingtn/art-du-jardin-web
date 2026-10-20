@@ -15,6 +15,8 @@ et à compléter en fin de run.
 > inchangé (15/15 identiques), FAQ 11/11, build OK, `check:fige` OK. Pas de
 > `lastmod` ni « mise à jour » touchés (contenu inchangé). `llms.txt` : rien à
 > modifier (ne cite pas ces descriptions).
+> ✅ Vérifié en prod (`b3a57d3`, `success` < 4 min) : descriptions ≤ 159 servies,
+> textes 15/15 inchangés, IndexNow 15 URLs → 200.
 
 > ✅ **19/10/2026 — Déploiement OK** (`9b956ab` : Vercel `READY`). Prod = dernier
 > commit (15/15 en 200, valeurs du 18/10). Lundi : veille (Google met en avant les

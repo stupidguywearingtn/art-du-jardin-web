@@ -1661,3 +1661,185 @@ après le chantier du jour sera `/realisations/avant-apres` (188 car., 1 seul
 JSON-LD, pas de `BreadcrumbList`).
 
 ---
+
+---
+
+## Archivé le 21/10/2026 (entrées du 20/09/2026)
+
+### Positions mesurées — 20/09/2026
+
+> ⚠️ **Trou de trois jours : aucun run les 18 et 19/09.** Le journal passe
+> directement du 17 au 20/09. Ce n'est pas un oubli de journalisation — il n'y
+> a aucun commit à ces dates. À garder en tête pour lire les évolutions
+> ci-dessous : elles couvrent trois jours, pas un.
+
+**Indexation : toujours nulle, 13 jours après la 1re soumission IndexNow.**
+Trois mesures, via `WebSearch` :
+1. **Phrase exacte du site** (test institué le 11/09) :
+   `"Médaillons et inserts pavés intégrés à l'enrobé"` → **dix résultats, zéro
+   hcebtp.com**. Cette fois ce sont des concurrents français qui sortent
+   (mavrotp, aravis-enrobage, pajot-tp, perenia, abers-amenagement,
+   europavage68, cuinet) plus deux brevets USPTO. **Le moteur a donc bien un
+   appariement français sur cette phrase aujourd'hui — et le site n'en fait pas
+   partie.** C'est une mesure plus informative que celle du 17/09, où aucun
+   concurrent ne sortait non plus.
+2. **Requête nommant le domaine, formulation longue restaurée** (le 17/09 l'avait
+   raccourcie pour contourner un échec de `WebSearch`, ce qui avait cassé la
+   comparabilité) : `hcebtp.com HCE Hini Cours Enrobé Cize 39300 enrobé travaux
+   publics` → **aucune page du domaine**, mais **neuf fiches d'annuaire**
+   décrivant HCE (kompass, pappers, verif, doctrine, societe, pagesjaunes,
+   118000, lagazettefrance, manageo). **Retour exact au résultat des 12→16/09 :
+   la « disparition » des fiches le 17/09 était bien un artefact de requête, pas
+   un événement. Point clos.**
+3. **`site:hcebtp.com`** → dix pages sans rapport (Wikipédia d'acronymes,
+   chnbtp.com, h-btp.com, hbtp.site), **zéro résultat du domaine**. L'opérateur
+   `site:` n'est toujours pas honoré par ce canal.
+
+| Requête | Mesure (20/09/2026) | Évolution vs 17/09 |
+|---|---|---|
+| indexation (phrase exacte du site) | **absent** | inchangé (mais concurrents FR de retour dans la SERP) |
+| indexation (requête nommant le domaine) | **absent** | inchangé — 9 fiches d'annuaire, comme les 12→16/09 |
+| `site:hcebtp.com` | **absent** | inchangé |
+| requêtes commerciales | **non mesurables** (aucun canal de SERP brute) | indéterminé |
+
+✅ **`WebSearch` n'a échoué aucune fois aujourd'hui** (4 appels), contrairement
+au 17/09. Rien à en conclure sur la cause, mais la relance-avant-de-conclure
+reste la règle.
+
+**Contrôles techniques** : les 12 URLs du sitemap en 200, `robots.txt`,
+`sitemap.xml` (12 `<loc>`, `/realisations` inclus après le chantier du jour) et
+`llms.txt` servis. Un seul `000` de la journée, sur le polling de déploiement —
+aléa réseau connu du runner, disparu à la relance.
+
+**Identité légale re-vérifiée le 20/09/2026** à l'API officielle
+`recherche-entreprises.api.gouv.fr` (SIREN 521683573) : `H.C.E. - HINI - COURS -
+ENROBE`, SIRET siège `52168357300039`, `40 B AVENUE ETIENNE LAMY 39300 CIZE`,
+NAF `43.12A`, création au registre `2010-04-01`. **Identique à la relevé du
+08/09 — rien n'a bougé, ne pas la re-vérifier avant plusieurs semaines.**
+
+Les URLs du sitemap, mesurées **en production après déploiement** avec
+`scripts/mesure-texte-servi.mjs` (comparables aux valeurs du 17/09) :
+
+| URL | Texte servi (20/09) | vs 17/09 | JSON-LD | Liens `/realisations/*` |
+|---|---|---|---|---|
+| accueil | 5 499 car. | +36 | 3 | 4 |
+| **`/realisations`** | **6 258 car.** | **était 404** | **4** | **4** |
+| `/services/bordures-murets` | 7 012 car. | = | 4 | 0 |
+| `/services/drainage-pentes` | 5 198 car. | = | 4 | 0 |
+| `/services/maconnerie-generale` | 5 080 car. | = | 4 | 0 |
+| `/services/preparation-terrain` | 4 482 car. | = | 4 | 0 |
+| `/services/enrobe-a-chaud` | 3 783 car. | = | 4 | 0 |
+| `/services/finitions-soignees` | **1 080 car.** | = | 3 | 0 |
+| `/realisations/parking-voirie-pro` | 401 car. | +34 | 2 | 4 |
+| `/realisations/preparation-terrassement` | 400 car. | +34 | 2 | 4 |
+| `/realisations/cour-allee-privee` | 399 car. | +34 | 2 | 4 |
+| `/realisations/chantier-en-cours` | 373 car. | +34 | 2 | 4 |
+
+Les `liensR` des pages dossier passent de 5 à 4 : c'est le retrait de
+« Avant / après » du 17/09, pas une régression du chantier du jour. La page la
+plus maigre du site est désormais, sans concurrence, **`/services/finitions-soignees`
+(1 080 car.)**.
+
+---
+
+### 20/09/2026 — `/realisations` existait dans les têtes mais pas sur le serveur : le hub passe de 404 à 6 258 caractères (commit `5debf51`)
+
+**Chantier choisi** : créer la page `/realisations`, candidat n°14 des chantiers
+en attente, désigné « meilleur candidat » par le run du 17/09.
+
+**Pourquoi celui-là et pas un autre.** Trois raisons, dans cet ordre.
+1. **Le run du 17/09 était le troisième run de contenu d'affilée** (13, 16,
+   17/09) et le journal exigeait explicitement un changement d'angle. Celui-ci
+   est un chantier d'architecture, pas de rédaction.
+2. **L'URL répondait 404** depuis l'ouverture du journal. Les quatre dossiers de
+   réalisations n'avaient aucune page mère : ni hub, ni niveau intermédiaire
+   dans les fils d'ariane (le `BreadcrumbList` des `/realisations/$slug` sautait
+   d'« Accueil » à la catégorie, faute d'URL réelle à citer au milieu).
+3. **C'est une page de destination naturelle** pour « réalisations enrobé Jura »,
+   une requête que le site ne couvrait par aucune URL.
+
+**Ce qui a été fait, précisément.**
+
+- **Nouvelle route statique `src/routes/realisations.index.tsx`** → `/realisations`,
+  HTTP 200. **Aucun `useEffect`, aucun appel Supabase, aucun état de
+  chargement** : c'est la leçon des 14 et 15/09 appliquée d'emblée, tout le
+  texte sort côté serveur. Mesuré : **6 258 caractères servis, 4 blocs JSON-LD,
+  4 liens vers les dossiers**, identiques au banc d'essai local et en production.
+- **Contenu** : réponse directe en tête (les quatre dossiers nommés dès le
+  premier paragraphe), un H2 formulé en question (« Quels types de chantiers HCE
+  réalise-t-elle ? »), puis un paragraphe par dossier décrivant **ce que montrent
+  réellement les photos** et les prestations mises en œuvre, chacune liée à sa
+  page service. Aucun chantier nommé, aucun chiffre, aucune référence client :
+  il n'y avait rien de vérifiable à publier de ce côté-là.
+- **Bloc « Ce qu'il faut savoir » — 4 Q/R sourcées sur l'après-chantier**, un
+  angle que personne ne traite sur un site d'enrobé :
+  - **La garantie décennale couvre explicitement une cour ou un parking.** La
+    fiche `service-public.gouv.fr` F2034, vérifiée le 10 avril 2026, liste parmi
+    les ouvrages couverts la **voirie (chemin d'accès)** et les **ouvrages de
+    viabilité (réseaux, assainissement)**. C'est la trouvaille du jour : le site
+    affichait « garantie décennale » depuis toujours sans jamais dire ce qu'elle
+    couvre ni qu'elle s'applique bien à ce métier.
+  - **Le délai part le lendemain de la signature du procès-verbal de réception**,
+    pas du devis ni de la facture, et court dix ans. Au-delà, plus aucune action
+    en justice n'est possible sur ce fondement.
+  - **L'attestation d'assurance décennale doit être remise avant l'ouverture du
+    chantier et jointe au devis et à la facture.** Deux points rarement écrits :
+    seuls les travaux déclarés au contrat sont couverts, et l'ouverture du
+    chantier doit tomber dans la période de validité. Sanction de l'absence de
+    garantie : 6 mois d'emprisonnement et 75 000 € d'amende (article L243-3 du
+    Code des assurances).
+  - **Zone d'intervention + levée de l'homonymie `Cize 01250` / `Cize 39300`**,
+    avec SIREN, SIRET et code NAF 43.12A re-vérifiés le jour même à l'API
+    officielle. C'est du signal d'entité pur, sur une page qui en manquait.
+  - **Sources citées et visibles** : la fiche F2034 et l'API Recherche
+    d'entreprises. `Dernière mise à jour : 20 septembre 2026` visible.
+- **JSON-LD (4 blocs, tous alignés sur le visible)** : `Organization` (racine),
+  `BreadcrumbList` à 2 niveaux, `CollectionPage` + `ItemList` reprenant
+  **exactement** les quatre liens visibles dans le même ordre, et `FAQPage`
+  construit depuis le **même tableau** que la section affichée. Vérifié par
+  extraction : les 4 questions et les 4 réponses du `FAQPage` sont bien dans le
+  texte servi. `CollectionPage.publisher` pointe sur `#business`, le nœud qui
+  existe réellement — pas sur un `#website` inventé (première rédaction corrigée
+  avant commit).
+- **Fil d'ariane des `/realisations/$slug` passé à trois niveaux** : Accueil →
+  Réalisations → catégorie. Le niveau intermédiaire pointe enfin vers une URL
+  réelle. C'était le reliquat n°6 des chantiers en attente.
+- **Maillage interne** : lien « Tous les dossiers de réalisations » depuis la
+  galerie de l'accueil (sans lui le hub ne serait atteignable que par le
+  sitemap) et depuis le bloc « Voir aussi » des quatre pages dossier.
+- **`src/lib/realisations.ts` créé** : `REAL_CAT_SLUGS`, `RELATED_SERVICES` et
+  `titleCaseSlug` y sont désormais la source unique, lue par le hub **et** par
+  `realisations.$slug.tsx`. Les recopier aurait garanti la divergence au premier
+  renommage. Les libellés, eux, continuent de venir de
+  `fallbackCategoryBySlug`, la même constante que les `<h1>`.
+- **Report partout** : sitemap (12 URLs), `llms.txt`, `indexnow-submit.mjs`,
+  `mesure-texte-servi.mjs`. **IndexNow relancé après vérification du déploiement
+  en ligne** — 12 URLs soumises, HTTP 200.
+
+**Contrôles avant push** : `npm run build`, `npx tsc --noEmit`, `npx eslint`,
+`npx prettier --check` et `npm run check:fige` passent tous. Mesure avant/après
+au banc d'essai local **avec le même script des deux côtés**, puis re-mesure en
+production après déploiement : **valeurs identiques au caractère près**, ce qui
+re-valide la fidélité du banc d'essai.
+
+**Ce que j'ai décidé de NE PAS faire, et pourquoi.**
+- **Ne pas afficher de photos sur le hub.** Elles viennent de Supabase via un
+  hook asynchrone : les charger aurait ramené le défaut des 14/15/09 (contenu
+  derrière un état de chargement, invisible aux robots) sur une page neuve. Le
+  hub est volontairement textuel ; les photos sont à un clic.
+- **Ne pas toucher à `/services/finitions-soignees`** (1 080 car.), pourtant la
+  page la plus maigre du site. Ç'aurait été un quatrième run de contenu de
+  suite, et le `title` anormal de cette page doit être tranché avec le client
+  d'abord. **C'est le candidat n°1 du prochain run.**
+- **Ne pas ajouter `lastmod` au sitemap** dans la foulée : ça mérite d'être fait
+  proprement depuis les dates de commit, pas bricolé au passage.
+- **Ne pas créer de vraie 404 pour `/realisations/<slug inconnu>`** (n°15) : le
+  chantier du jour ne l'aggrave pas, et toucher au routeur le même jour qu'on y
+  ajoute une route double le risque pour un gain nul tant que rien ne lie ces
+  URLs.
+- **Ne pas re-tenter les fiches `kompass`/`verif`/`pappers`** (403 au runner) :
+  statut inchangé, rien de nouveau à tenter aujourd'hui.
+
+**Ce qui reste ouvert** : l'indexation. Ce chantier ajoute une URL et des liens
+internes, il ne crée aucun lien entrant — et c'est ce qui manque. Voir la note
+d'alerte en tête des chantiers en attente.

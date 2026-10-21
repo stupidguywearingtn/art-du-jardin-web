@@ -37,7 +37,7 @@ export const PAGE_UPDATED = {
   "/realisations": { iso: "2026-09-28", label: "28 septembre 2026" },
   "/zone-intervention": { iso: "2026-09-30", label: "30 septembre 2026" },
   "/realisations/cour-allee-privee": { iso: "2026-09-23", label: "23 septembre 2026" },
-  "/realisations/parking-voirie-pro": { iso: "2026-09-22", label: "22 septembre 2026" },
+  "/realisations/parking-voirie-pro": { iso: "2026-10-21", label: "21 octobre 2026" },
   "/realisations/preparation-terrassement": { iso: "2026-09-25", label: "25 septembre 2026" },
   "/mentions-legales": { iso: "2026-10-08", label: "8 octobre 2026" },
   "/arnaque-goudronnage": { iso: "2026-10-11", label: "11 octobre 2026" },

@@ -136,7 +136,7 @@ const REAL_SAVOIR: Record<
   },
   "parking-voirie-pro": {
     heading: "Refaire un parking professionnel : ce qui se décide avant la première tonne d'enrobé",
-    lead: "Un parking d'entreprise ne se traite pas comme une cour de maison : ce sont le trafic poids lourds, l'accessibilité des places et, depuis 2023, l'ombrage qui commandent le projet — pas la surface à couvrir. Voici cinq questions qui se posent avant un chantier de réfection, avec les textes qui s'appliquent.",
+    lead: "Un parking d'entreprise ne se traite pas comme une cour de maison : ce sont le trafic poids lourds, l'accessibilité des places et, depuis 2023, l'ombrage qui commandent le projet — pas la surface à couvrir. Voici six questions qui se posent avant un chantier de réfection, avec les textes qui s'appliquent.",
     updated: PAGE_UPDATED["/realisations/parking-voirie-pro"],
     qa: [
       {
@@ -159,6 +159,10 @@ const REAL_SAVOIR: Record<
         q: "Faut-il ombrager un parking que l'on refait ?",
         a: "Oui, au-delà d'un seuil de surface, et c'est devenu l'un des premiers points à trancher. Les parcs de stationnement extérieurs de plus de 500 m² faisant l'objet d'une construction ou d'une rénovation lourde doivent comporter des dispositifs d'ombrage — arbres à canopée large ou ombrières — sur au moins 50 % de leur surface, au titre de l'article L111-19-1 du code de l'urbanisme ; pour la solution arborée, le ratio retenu est d'un arbre pour trois emplacements de stationnement. Les parcs déjà existants de plus de 1 500 m² sont concernés à partir de juillet 2026, échéance désormais passée. Des exemptions sont prévues, notamment en cas d'impossibilité technique, de contraintes de sécurité ou de contraintes patrimoniales. Ce volet ne relève pas de la pose d'enrobé elle-même, mais il change l'emprise, le calepinage et parfois les fondations du parking : il vaut mieux l'avoir tranché avant le décaissement qu'après la pose.",
       },
+      {
+        q: "Faut-il prévoir des bornes de recharge quand on refait le parking d'une entreprise ?",
+        a: "Pas toujours des bornes, mais souvent des fourreaux — et c'est avant l'enrobé qu'ils se posent. Quand un bâtiment non résidentiel fait l'objet d'une rénovation importante, c'est-à-dire d'un montant d'au moins 25 % de la valeur du bâtiment hors foncier, et que les travaux touchent le parc de stationnement ou son installation électrique, un parc de plus de 10 places doit être pré-équipé sur au moins 20 % de ses places, dont 2 % dimensionnées pour les personnes à mobilité réduite, et au moins une place accessible doit être équipée d'un point de recharge (articles L113-12 et R113-6 du code de la construction et de l'habitation). Pré-équiper, c'est poser les conduits des câbles — dimensionnés pour un passage de section carrée d'au moins 100 mm de côté — ainsi que les dispositifs d'alimentation et de sécurité nécessaires pour installer les bornes plus tard. Indépendamment de tout chantier, les bâtiments non résidentiels existants dotés de plus de 20 places doivent compter, depuis le 1er janvier 2025, au moins un point de recharge sur une place accessible, puis un point par tranche de 20 places supplémentaires — soit quatre pour 95 places (article L113-13). Deux exclusions changent souvent la réponse : les bâtiments possédés et occupés par une petite ou moyenne entreprise sont exclus du pré-équipement, et celui-ci n'est pas exigé quand le coût des installations de recharge et de raccordement dépasse 7 % du coût total de la rénovation (article L113-14). Pour l'enrobé, la conséquence est pratique : une tranchée ouverte après coup dans un parking neuf pour passer des fourreaux laisse une reprise visible et un point faible. Le tracé se décide au plan, avec l'électricien, avant le décaissement.",
+      },
     ],
     sources: [
       {
@@ -177,6 +181,11 @@ const REAL_SAVOIR: Record<
         label:
           "Ombrage des parcs de stationnement extérieurs (entreprendre.service-public.gouv.fr)",
         url: "https://entreprendre.service-public.gouv.fr/vosdroits/F38106",
+      },
+      {
+        label:
+          "Bornes de recharge obligatoires dans les parkings (entreprendre.service-public.gouv.fr, vérifié le 12 juin 2026)",
+        url: "https://entreprendre.service-public.gouv.fr/vosdroits/F38491",
       },
     ],
   },

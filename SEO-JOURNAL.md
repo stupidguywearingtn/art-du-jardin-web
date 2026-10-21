@@ -16,6 +16,8 @@ et à compléter en fin de run.
 > → pas dupliqué. Banc local : 6 356 → **8 265 car.**, FAQ 6/6, lastmod + `llms.txt`
 > 21/10 (+1 Q/R autonome). Build OK, `check:fige` OK. Archive : entrées du 20/09 → 
 > `docs/seo-journal-archive.md`.
+> ✅ Vérifié en prod (`ec730c6`, `success`) : `parking-voirie-pro` 8 265 car., lastmod
+> 2026-10-21, `llms.txt` 21/10, IndexNow 15 URLs → 200.
 
 > ✅ **20/10/2026 — Déploiement OK** (`2d8f086` : Vercel `success`). Prod = dernier
 > commit (15/15 en 200, valeurs du 19/10). Chantier (**technique**) : **meta

@@ -58,6 +58,10 @@ const RULES = [
     msg: "section « Avant / Après » — supprimée à la demande du client (17/09/2026)" },
   { re: /Reprise\s*imm[ée]diate/gi,
     msg: "« Reprise immédiate » — remplacé par « Demande de validation »" },
+  { re: /Avant de signer|id="avant-signature"|AVANT_SIGNATURE/g,
+    msg: "section « Avant de signer » (loi devis/acompte/délais) — supprimée à la demande du client (22/10/2026)" },
+  { re: /enrob[ée]\s*(à chaud\s*)?peut-il [êe]tre pos[ée] toute l['’]ann[ée]e/gi,
+    msg: "Q/R « L'enrobé peut-il être posé toute l'année ? » — supprimée à la demande du client (22/10/2026)" },
 ];
 
 function walk(dir, out = []) {

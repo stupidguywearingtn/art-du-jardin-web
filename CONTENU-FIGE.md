@@ -21,6 +21,8 @@ Le script `npm run check:fige` échoue si une de ces valeurs revient dans le rep
 | `Reprise immédiate` | `Demande de validation` |
 | Section avis / témoignages | Supprimée (demande client) |
 | Section / carte « Avant / Après » dans la galerie, page `/realisations/avant-apres` | Supprimée (demande client, 17/09/2026) — l'URL redirige en 301 vers `/#galerie`, la carte « Chantier en cours » reprend sa place |
+| Section « Avant de signer : ce que dit la loi sur le devis, l'acompte et les délais » sur l'accueil (et son bloc dans `llms.txt`) | Supprimée (demande client, 22/10/2026) — ne pas recréer de bloc juridique devis/arrhes/acompte/délais |
+| Q/R « L'enrobé peut-il être posé toute l'année ? » (FAQ accueil + `llms.txt`) | Supprimée (demande client, 22/10/2026) |
 
 ## Pourquoi ces valeurs sont déjà revenues une fois
 

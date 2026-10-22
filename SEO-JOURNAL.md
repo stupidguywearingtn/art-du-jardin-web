@@ -19,6 +19,8 @@ et à compléter en fin de run.
 > plus de date visible sur l'accueil), `/mentions-legales` → 22/10, `llms.txt` daté
 > 22/10 (modifié le 22/10 sans changer sa date). Ancres internes restantes : `#devis`,
 > `#galerie` → existent. Build OK, `check:fige` OK. Archive : entrées du 21/09.
+> ✅ Vérifié en prod (`ecb7fe7`, `success`) : `lastmod` `/` et `/mentions-legales`
+> 2026-10-22, plus de renvoi « arrhes » sur `/mentions-legales`, `llms.txt` 22/10, IndexNow 15 URLs → 200.
 
 > ✅ **21/10/2026 — Déploiement OK** (`0f8cdeb` : statut GitHub `success`). Prod =
 > dernier commit (15/15 en 200, valeurs du 20/10). Chantier (**contenu**) :

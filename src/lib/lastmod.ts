@@ -26,8 +26,11 @@
  */
 export type PageUpdate = { iso: string; label: string };
 
+/* `/` : depuis la suppression du bloc juridique daté de l'accueil (demande client du
+   22/10/2026), l'accueil n'affiche plus de date visible ; la valeur reste la date
+   réelle du dernier changement de contenu, pour le seul `<lastmod>` du sitemap. */
 export const PAGE_UPDATED = {
-  "/": { iso: "2026-09-29", label: "29 septembre 2026" },
+  "/": { iso: "2026-10-22", label: "22 octobre 2026" },
   "/services/preparation-terrain": { iso: "2026-10-15", label: "15 octobre 2026" },
   "/services/enrobe-a-chaud": { iso: "2026-10-02", label: "2 octobre 2026" },
   "/services/maconnerie-generale": { iso: "2026-10-19", label: "19 octobre 2026" },
@@ -39,7 +42,7 @@ export const PAGE_UPDATED = {
   "/realisations/cour-allee-privee": { iso: "2026-09-23", label: "23 septembre 2026" },
   "/realisations/parking-voirie-pro": { iso: "2026-10-21", label: "21 octobre 2026" },
   "/realisations/preparation-terrassement": { iso: "2026-09-25", label: "25 septembre 2026" },
-  "/mentions-legales": { iso: "2026-10-08", label: "8 octobre 2026" },
+  "/mentions-legales": { iso: "2026-10-22", label: "22 octobre 2026" },
   "/arnaque-goudronnage": { iso: "2026-10-11", label: "11 octobre 2026" },
   "/realisations/chantier-en-cours": { iso: "2026-10-12", label: "12 octobre 2026" },
 } satisfies Record<string, PageUpdate>;

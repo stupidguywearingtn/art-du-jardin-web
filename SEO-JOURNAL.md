@@ -8,6 +8,18 @@ et à compléter en fin de run.
 
 ## État des lieux
 
+> ✅ **22/10/2026 — Déploiement OK** (`87af34d` : Vercel `success`). Prod = dernier
+> commit : la suppression demandée par le client (section juridique de l'accueil + Q/R
+> « posé toute l'année ») est **en ligne** (0 occurrence en prod, FAQPage 5/5 = FAQ
+> visible). Effet : **accueil 13 579 → 5 529 car.**, page la plus maigre du site.
+> Chantier (**technique — cohérence après suppression**) : `/mentions-legales`
+> renvoyait vers « les conditions d'un devis, les arrhes et l'acompte, et le délai
+> d'exécution […] sur l'accueil » via `#faq` — texte devenu faux **et** ancre morte
+> (aucun `id="faq"`) → phrase retirée. `lastmod` `/` 29/09 → 22/10 (contenu changé,
+> plus de date visible sur l'accueil), `/mentions-legales` → 22/10, `llms.txt` daté
+> 22/10 (modifié le 22/10 sans changer sa date). Ancres internes restantes : `#devis`,
+> `#galerie` → existent. Build OK, `check:fige` OK. Archive : entrées du 21/09.
+
 > ✅ **21/10/2026 — Déploiement OK** (`0f8cdeb` : statut GitHub `success`). Prod =
 > dernier commit (15/15 en 200, valeurs du 20/10). Chantier (**contenu**) :
 > **`/realisations/parking-voirie-pro`** +1 Q/R **bornes de recharge / fourreaux avant
@@ -707,6 +719,18 @@ un extrait de SERP ne prouve pas ce que la page contient.
 > `verif.com` ont été jugées périmées **sur la seule foi d'extraits de recherche**
 > (403 au runner, contenu jamais lu). Leur statut « périmée » n'est donc pas
 > établi. Noté en chantier en attente.
+
+### Positions mesurées — 22/10/2026
+
+| Contrôle | 22/10/2026 | vs 21/10 |
+|---|---|---|
+| Déploiement `main` (`87af34d`) | **`success`** | = |
+| Prod vs code (`mesure-texte-servi`) | 15/15 en 200 ; accueil **5 529** (13 579 la veille) | 🔻 suppression client |
+| FAQPage accueil vs FAQ visible (`verif-faq`) | 5/5 | 🆕 (6 → 5) |
+| SERP | non relevée (canal `WebSearch` US, non représentatif) | — |
+
+Pas d'accès Search Console. **À relever par Yanis** : « Performances IA » + requêtes à
+impressions, et surveiller l'accueil après la baisse de contenu.
 
 ### Positions mesurées — 21/10/2026
 
@@ -1720,48 +1744,15 @@ inchangés au caractère près** — le chantier du jour n'a rien débordé.
 > devient nécessaire ; en attendant, ne pas confondre l'échec de l'outil avec un
 > problème du site.
 
-### Positions mesurées — 21/09/2026
-
-**Indexation : toujours nulle, 14 jours après la 1re soumission IndexNow.** Trois
-mesures via `WebSearch`, mêmes protocoles que les runs précédents :
-1. **Phrase exacte du site** `"Médaillons et inserts pavés intégrés à l'enrobé"`
-   → dix résultats, **zéro hcebtp.com**. Ce sont les mêmes concurrents français
-   qu'au 20/09 (mavrotp, aravis-enrobage, pajot-tp, perenia, abers-amenagement,
-   europavage68, cuinet) + deux brevets USPTO. Appariement français présent sur
-   la phrase, le site n'en fait toujours pas partie. **Inchangé vs 20/09.**
-2. **Requête nommant le domaine** `hcebtp.com HCE Hini Cours Enrobé Cize 39300
-   enrobé travaux publics` → **aucune page du domaine**, neuf fiches d'annuaire
-   (kompass, pappers, verif, societe, pagesjaunes, 118000, lagazettefrance,
-   nosartisansontdutalent, manageo). **Inchangé vs 20/09.**
-3. **`site:hcebtp.com`** → dix pages sans rapport (Wikipédia d'acronymes, chnbtp,
-   Facebook HBTP), **zéro résultat du domaine**. L'opérateur `site:` n'est
-   toujours pas honoré par ce canal. **Inchangé.**
-
-| Requête | Mesure (21/09/2026) | Évolution vs 20/09 |
-|---|---|---|
-| indexation (phrase exacte du site) | **absent** | inchangé |
-| indexation (requête nommant le domaine) | **absent** | inchangé — 9 fiches d'annuaire |
-| `site:hcebtp.com` | **absent** | inchangé |
-| requêtes commerciales | **non mesurables** (pas de SERP brute via ce canal) | indéterminé |
-
-✅ **`WebSearch` n'a échoué aucune fois aujourd'hui.**
-
-**Volume de texte servi en production** (`scripts/mesure-texte-servi.mjs`, vu comme
-Googlebot) : **identique au 20/09 au caractère près sur les douze URLs** — accueil
-5 499, `/realisations` 6 258, bordures-murets 7 012, maconnerie 5 080, drainage
-5 198, preparation-terrain 4 482, enrobe-a-chaud 3 783, **finitions-soignees
-1 080** (avant le chantier du jour), les quatre dossiers 373-401. Les 12 URLs du
-sitemap répondent 200. Rien n'a bougé côté prod depuis le 20/09 (aucun commit
-entre les deux).
-
-> 🔎 **Découverte de veille du 21/09 (voir « Techniques apprises ») : une fiche
-> Google existe déjà pour HCE et accumule des avis (4,5/5, 16 avis), visible sur
-> l'annuaire PagesJaunes « enrobé à chaud – Jura ».** Cela corrige l'hypothèse
-> tenue depuis le 07/09 selon laquelle « il n'existe pas de fiche Google » :
-> `ACTIONS-SEO-CLIENT.md` (Action 2) a été mis à jour — la revendiquer et y
-> déclarer le site, au lieu d'en créer une nouvelle.
-
 ## Chantiers faits
+
+### 22/10/2026 — Cohérence après la suppression client du 22/10 : renvoi mort sur `/mentions-legales`, `lastmod`
+`/mentions-legales` (section « Réutilisation ») annonçait que devis, arrhes, acompte et
+délai d'exécution étaient traités sur l'accueil, lien `hash="faq"` : faux depuis la
+suppression et ancre inexistante → phrase retirée (pas de nouveau renvoi : le client ne
+veut pas de bloc juridique devis/acompte/délais). Banc local : 8 351 → 8 247 car.
+`PAGE_UPDATED` `/` et `/mentions-legales` → 22/10 ; `llms.txt` daté 22/10. Aucune
+autre référence au bloc supprimé (`avant-signature` : 0 ; `llms.txt` propre).
 
 ### 21/10/2026 — `/realisations/parking-voirie-pro` : Q/R bornes de recharge
 Requête réelle d'un gérant qui refait son parking, non couverte. Réponse directe en
@@ -3562,72 +3553,19 @@ régression.
 - **Toucher au `title` de `finitions-soignees`** : inchangé, toujours en attente
   d'arbitrage client (voir « Hypothèses à vérifier »).
 
-### 21/09/2026 — `/services/finitions-soignees` passe de 1 080 à 6 821 caractères : la dernière page service sans bloc `savoir` en a un, sur la finition et la fin de chantier
-
-**Chantier choisi** : enrichir `/services/finitions-soignees`, désignée « candidat
-n°1 du prochain run » par le run du 20/09 — la dernière des six pages service sans
-bloc « ce qu'il faut savoir », et la page la plus maigre du site (1 080 car.) une
-fois le hub `/realisations` créé. La série de trois runs de contenu (13, 16,
-17/09) avait été rompue par le chantier d'architecture du 20/09 : reprendre du
-contenu aujourd'hui n'était donc plus un quatrième run de suite.
-
-**Ce qui a été fait**, sur le patron des blocs `savoir` des pages service (réponse
-autonome de 2-3 phrases en tête de chaque H3, questions posées comme à voix haute,
-chiffres et sources primaires, `FAQPage` construit depuis le **même** tableau que
-la section visible → aucun mismatch possible) :
-- **5 Q/R sourcées**, sur un angle inédit (la finition et la fin de chantier, pas
-  la technique de pose déjà couverte ailleurs) :
-  1. *Comment reconnaît-on un enrobé bien posé ?* — bords francs, raccords qu'on ne
-     sent pas, pas de rétention d'eau ; norme de mise en œuvre **NF P98-150-1**
-     (homologuée le 26/06/2010, en vigueur, réexamen au 01/06/2030), dont le
-     domaine d'application couvre explicitement « revêtements d'accotements, de
-     trottoirs et parties annexes » — donc les cours et allées.
-  2. *Pourquoi voit-on parfois une ligne entre deux bandes ?* — le joint est le
-     point fragile ; raison thermique ; intérêt de la pose à la main à 150 °C.
-  3. *Qui évacue les gravats, et où vont-ils ?* — tri à la source par flux (bois,
-     fractions minérales, métal, verre, plastique, plâtre), dispenses des petits
-     chantiers (< 40 m² de stockage ou < 10 m³).
-  4. *Qu'est-ce qu'un devis doit indiquer sur les déchets ?* — les 4 mentions du
-     **décret n° 2020-1817** obligatoires depuis le 01/07/2021, + bordereau de
-     dépôt gratuit.
-  5. *Comment la finition se valide-t-elle avant la fin du chantier ?* —
-     validation étape par étape, contrôle de planéité, garantie décennale.
-- `seoDescription` géolocalisée (Jura & Ain, gravats, chantier rendu propre).
-- 3 sources primaires vérifiées ce jour : **NF P98-150-1** (norminfo.afnor.org,
-  lue), **décret n° 2020-1817** (Légifrance, lu), **tri à la source** (fiche
-  entreprendre.service-public.gouv.fr F37782, lue).
-- Report du contenu dans `public/llms.txt` (entrée de page + « Dernière mise à
-  jour » passée au 21/09) — le fichier avait dérivé, il disait encore 17/09 alors
-  que le hub `/realisations` y avait été ajouté le 20/09.
-
-**Mesuré au banc d'essai local** (recette du 15/09, même script des deux côtés) :
-avant **1 080 car. / 3 blocs JSON-LD**, après **6 821 car. / 4 blocs**. Le banc
-reproduisait la prod au caractère près avant modification (1 080). **FAQPage
-vérifié strictement aligné sur le texte visible** (script `verif-faq.mjs` : 5/5
-Q et 5/5 R retrouvées dans le HTML servi). `npx tsc --noEmit` propre ; **eslint à
-parité exacte avec HEAD (60 = 60), zéro nouvelle violation** — le repo porte 60
-erreurs prettier pré-existantes, non introduites par ce chantier, et non
-corrigées ici pour ne pas noyer le diff de contenu dans un reformatage global.
-
-**Ce que je n'ai PAS fait, et pourquoi** :
-- **Le `title` anormal de la page** (« Vous avez un projet d'aménagement de cour en
-  enrobé », une accroche là où les cinq autres services ont un nom court) : le run
-  du 20/09 demandait de le trancher « avant ou pendant » ce chantier. **Non touché** :
-  c'est du contenu visible, et le client a figé la formule « Finition soignée /
-  Travail de qualité ». Le corriger de ma propre initiative risquait d'écraser un
-  libellé validé. **Reste à soumettre au client** (voir « Hypothèses à vérifier »).
-- **Le volet *ombrage* des parkings > 1 500 m²** (fiche F38106, repéré le 13/09) :
-  écarté ici, il relève du drainage/urbanisme déjà traité sur `/drainage-pentes`
-  et `/maconnerie-generale` (parkings > 500 m², seuil des 50 unités) ; le remettre
-  ici aurait fait doublon. L'angle finition/fin de chantier était plus propre à la
-  page et non couvert ailleurs.
-- **Reformater les 60 erreurs prettier du fichier** : hors périmètre, aurait mêlé
-  du bruit de formatage au diff de contenu.
-
 ## Chantiers en attente
 
 Par ordre de priorité. **Alterner les angles, ne pas refaire le même deux jours
 de suite.**
+
+> 🆕 **MISE À JOUR DU 22/10/2026 — prime sur tout ce qui suit.**
+> ✅ Renvoi mort `/mentions-legales` → accueil retiré, `lastmod` alignés (à vérifier en prod).
+> 1. Prochain contenu : `chantier-en-cours` (5 596) ; l'accueil (5 529) est désormais le
+>    plus maigre, mais **ne rien y ajouter sans accord** (suppression client récente).
+> 2. Prochain technique : page `/contact` (NAP, horaires, accès depuis Champagnole,
+>    `ContactPage`) — idée de la veille du 19/10, toujours ouverte.
+> 3. Lundi 26/10 : veille (étape 6).
+> 4. Yanis : rapport « Performances IA » de la Search Console.
 
 > 🆕 **MISE À JOUR DU 21/10/2026 — prime sur tout ce qui suit.**
 > ✅ `parking-voirie-pro` : Q/R bornes de recharge (à vérifier en prod après push).
@@ -4587,6 +4525,15 @@ de suite.**
 ---
 
 ## Hypothèses à vérifier
+
+### 22/10/2026 — La demande client du 22/10 vaut-elle pour les autres blocs juridiques du site ?
+Le client a fait retirer de l'accueil le bloc loi devis/acompte/délais et la Q/R « posé
+toute l'année » (mars-novembre, > 5 °C). Restent ailleurs, non touchés : règles du
+démarchage (L221-10, 7 jours, rétractation 14 jours) sur `/arnaque-goudronnage` et
+`/realisations/cour-allee-privee` ; TVA / 1799-1 sur `/realisations` ; saison de pose
+(> 5 °C, hiver) sur `/services/enrobe-a-chaud`, `bordures-murets`, `zone-intervention`.
+→ **Yanis : demander à Naofal si l'objection porte sur l'accueil seulement** ou aussi sur
+ces pages (notamment la saison de pose). Ne rien supprimer avant réponse.
 
 ### 18/10/2026 — Le texte alternatif de la photo « geste » ne décrit pas la photo
 

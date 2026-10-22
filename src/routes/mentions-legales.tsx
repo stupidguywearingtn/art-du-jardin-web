@@ -410,12 +410,7 @@ function MentionsLegales() {
             <Link to="/realisations" className={LIEN}>
               la page des réalisations
             </Link>
-            , avec les articles du code civil correspondants. Les conditions d'un devis, les arrhes
-            et l'acompte, et le délai d'exécution sont traités sur{" "}
-            <Link to="/" hash="faq" className={LIEN}>
-              l'accueil
-            </Link>
-            .
+            , avec les articles du code civil correspondants.
           </p>
 
           {/* DATE + SOURCES */}

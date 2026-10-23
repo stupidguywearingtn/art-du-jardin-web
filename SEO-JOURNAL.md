@@ -18,6 +18,8 @@ et à compléter en fin de run.
 > (« dépend du support, à préciser au devis détaillé »). Banc local : 5 596 → **7 445
 > car.**, FAQ 5/5, lead « quatre » → « cinq », lastmod + `llms.txt` 23/10. Build OK,
 > `check:fige` OK. Archive : entrées du 22/09.
+> ✅ Vérifié en prod (`079dfdf`, `success`) : `chantier-en-cours` 7 445 car., FAQ 5/5,
+> `llms.txt` 23/10, IndexNow 15 URLs → 200.
 
 > ✅ **22/10/2026 — Déploiement OK** (`87af34d` : Vercel `success`). Prod = dernier
 > commit : la suppression demandée par le client (section juridique de l'accueil + Q/R
@@ -3436,7 +3438,7 @@ Par ordre de priorité. **Alterner les angles, ne pas refaire le même deux jour
 de suite.**
 
 > 🆕 **MISE À JOUR DU 23/10/2026 — prime sur tout ce qui suit.**
-> ✅ `chantier-en-cours` : Q/R couche d'accrochage (à vérifier en prod après push).
+> ✅ `chantier-en-cours` : Q/R couche d'accrochage — vérifiée en prod, IndexNow 200.
 > 1. Prochain technique : page `/contact` (NAP, horaires, accès, `ContactPage`) — ouverte depuis le 19/10.
 > 2. Prochain contenu : `preparation-terrain` (7 138) ou `bordures-murets` (7 658) ; accueil
 >    (5 529) : **rien sans accord client**.

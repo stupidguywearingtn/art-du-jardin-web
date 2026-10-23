@@ -252,12 +252,16 @@ const REAL_SAVOIR: Record<
      jour de la pose, avec des sources publiques. */
   "chantier-en-cours": {
     heading: "Le jour de la pose d'enrobé : les questions qu'on se pose quand l'équipe est devant chez soi",
-    lead: "Ce dossier est consacré à HCE au travail, pendant la pose. C'est le moment où un client découvre un chantier qu'il n'avait vu que sur un devis : une équipe qui ne s'arrête pas, une odeur de bitume, une cour qu'on ne peut pas utiliser tout de suite. Voici quatre questions qui reviennent ce jour-là, avec les sources publiques qui y répondent.",
+    lead: "Ce dossier est consacré à HCE au travail, pendant la pose. C'est le moment où un client découvre un chantier qu'il n'avait vu que sur un devis : une équipe qui ne s'arrête pas, une odeur de bitume, une cour qu'on ne peut pas utiliser tout de suite. Voici cinq questions qui reviennent ce jour-là, avec les sources publiques qui y répondent.",
     updated: PAGE_UPDATED["/realisations/chantier-en-cours"],
     qa: [
       {
         q: "Pourquoi l'équipe ne s'arrête-t-elle pas une fois la pose d'enrobé commencée ?",
         a: "Parce qu'un enrobé à chaud ne se travaille que pendant une fenêtre de température courte, et qu'elle se referme pendant la pose. HCE le pose à la main à 150 °C, et il doit être réglé puis compacté avant d'avoir trop refroidi : une bande commencée se finit d'un trait. Le Guide technique sur la mise en place des enrobés bitumineux du ministère des Transports du Québec (édition 2009) donne les ordres de grandeur : « le compactage ne peut être mené à bien lorsque la température du mélange est inférieure à 85 °C », la plage propice se situant entre 85 °C et 150 °C en surface, et une période de compactage inférieure à dix minutes est jugée insuffisante pour atteindre la compacité visée. Ces valeurs dépendent de la classe de bitume et de la météo du jour — le vent et le froid raccourcissent la fenêtre — mais elles expliquent ce qu'on observe depuis la fenêtre : les camions qui se suivent, le rouleau qui passe juste derrière la pose, et une équipe qui ne fait pas de pause au milieu d'une bande. Une interruption ne se rattrape pas : un enrobé compacté trop froid reste poreux, et c'est par là que l'eau puis le gel l'attaquent.",
+      },
+      {
+        q: "Quel est ce liquide noir répandu au sol juste avant l'enrobé ?",
+        a: "Le plus souvent, une couche d'accrochage : une émulsion de bitume — du bitume dispersé dans de l'eau — pulvérisée en film mince sur le support pour que l'enrobé neuf y colle. Elle ne sert pas à « goudronner » mais à coller : sans elle, la couche posée peut glisser sur celle du dessous au lieu de travailler avec elle. Le bulletin technique du ministère des Transports du Québec consacré aux émulsions bitumineuses (vol. 7, n° 12, décembre 2002) résume son rôle en une ligne — « coller ensemble deux couches d'enrobé » — et cite un taux de pose de l'ordre de 0,25 kg/m² de bitume résiduel, appliqué « sur une surface propre et sèche », en précisant que « les conditions météorologiques et l'état de la surface conditionnent la réussite de l'accrochage ». Le même bulletin range le pelage et le décollement par plaque parmi les conséquences possibles d'une mauvaise liaison entre couches. Au colloque Bitume Québec de novembre 2008 sur la mise en œuvre des enrobés, la présentation « Le collage des couches » recommande de prévoir un délai entre la couche d'accrochage et l'enrobé, et rappelle qu'un défaut de collage réduit « la tenue à la fatigue de la couche de roulement ». Ce que cela change pour vous le jour de la pose : on ne marche pas et on ne roule pas sur ce film, qui colle aux semelles et aux pneus, et le court temps d'attente entre la pulvérisation et l'arrivée de l'enrobé est normal. Qu'une couche d'accrochage soit nécessaire ou non dépend du support sur lequel on pose : c'est un point à faire préciser sur le devis détaillé.",
       },
       {
         q: "Les fumées d'un chantier d'enrobé sont-elles dangereuses ?",
@@ -286,6 +290,15 @@ const REAL_SAVOIR: Record<
       {
         label: "Prévention des risques liés au bitume sur les chantiers de construction routière (INRS)",
         url: "https://www.inrs.fr/header/presse/cp-bitume.html",
+      },
+      {
+        label:
+          "Caractéristiques et usages des émulsions bitumineuses — bulletin technique vol. 7, n° 12, décembre 2002, ministère des Transports du Québec",
+        url: "https://www.transports.gouv.qc.ca/fr/entreprises-partenaires/entreprises-reseaux-routier/bulletin-technique-dglc/Documents/2002/02-12.pdf",
+      },
+      {
+        label: "Le collage des couches — colloque Bitume Québec « La mise en œuvre des enrobés », 26 novembre 2008",
+        url: "https://archive.bitumequebec.ca/wp-content/uploads/2015/06/collagedescouches.pdf",
       },
     ],
   },

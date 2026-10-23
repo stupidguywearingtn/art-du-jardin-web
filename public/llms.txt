@@ -5,7 +5,7 @@
 > dans le Jura et l'Ain. Entreprise créée en 2012, 14 années d'expérience, plus de
 > 1000 chantiers livrés, garantie décennale.
 
-Dernière mise à jour : 22 octobre 2026
+Dernière mise à jour : 23 octobre 2026
 Site officiel : https://www.hcetp.com
 
 ## L'entreprise en bref
@@ -552,7 +552,10 @@ de l'eau ne s'évaluent pas autrement.
   technique 2009 du ministère des Transports du Québec, compactage impossible sous 85 °C et
   insuffisant en moins de dix minutes), ce que valent les fumées de bitume (exposition
   professionnelle classée 2B par le CIRC en 2011, fumées irritantes et plus abondantes quand
-  la température monte selon l'INRS), ce qu'il faut préparer chez soi, et quand marcher ou
+  la température monte selon l'INRS), ce qu'est le liquide noir pulvérisé avant l'enrobé
+  (couche d'accrochage : émulsion de bitume qui colle les couches, ~0,25 kg/m² de bitume
+  résiduel sur surface propre et sèche selon le MTQ 2002 ; on n'y marche pas), ce qu'il faut
+  préparer chez soi, et quand marcher ou
   rouler sur l'enrobé neuf (bitume thermoplastique : pas tant qu'il est chaud, éviter les
   roues braquées à l'arrêt et les appuis étroits les premières semaines) — avec leurs sources.
 - [Arnaque au goudronnage : les signes](https://www.hcetp.com/arnaque-goudronnage) :

@@ -8,6 +8,17 @@ et à compléter en fin de run.
 
 ## État des lieux
 
+> ✅ **23/10/2026 — Déploiement OK** (`5c3e56c` : statut GitHub `success`). Prod =
+> dernier commit (15/15 en 200, valeurs du 22/10). Chantier (**contenu**, après un jour
+> technique) : **`/realisations/chantier-en-cours`** (5 596, la plus maigre hors accueil)
+> +1 Q/R **« Quel est ce liquide noir répandu au sol juste avant l'enrobé ? »** (couche
+> d'accrochage : bulletin MTQ vol. 7 n° 12, déc. 2002 — « coller ensemble deux couches
+> d'enrobé », ~0,25 kg/m² de bitume résiduel, surface propre et sèche ; Bitume Québec
+> 26/11/2008 « Le collage des couches »). Rien d'affirmé sur la pratique propre d'HCE
+> (« dépend du support, à préciser au devis détaillé »). Banc local : 5 596 → **7 445
+> car.**, FAQ 5/5, lead « quatre » → « cinq », lastmod + `llms.txt` 23/10. Build OK,
+> `check:fige` OK. Archive : entrées du 22/09.
+
 > ✅ **22/10/2026 — Déploiement OK** (`87af34d` : Vercel `success`). Prod = dernier
 > commit : la suppression demandée par le client (section juridique de l'accueil + Q/R
 > « posé toute l'année ») est **en ligne** (0 occurrence en prod, FAQPage 5/5 = FAQ
@@ -721,6 +732,16 @@ un extrait de SERP ne prouve pas ce que la page contient.
 > `verif.com` ont été jugées périmées **sur la seule foi d'extraits de recherche**
 > (403 au runner, contenu jamais lu). Leur statut « périmée » n'est donc pas
 > établi. Noté en chantier en attente.
+
+### Positions mesurées — 23/10/2026
+
+| Contrôle | 23/10/2026 | vs 22/10 |
+|---|---|---|
+| Déploiement `main` (`5c3e56c`) | **`success`** | = |
+| Prod vs code (`mesure-texte-servi`) | 15/15 en 200, valeurs identiques au 22/10 | = |
+| SERP | non relevée (canal `WebSearch` US, non représentatif) | — |
+
+Pas d'accès Search Console. **À relever par Yanis** : « Performances IA » + requêtes à impressions.
 
 ### Positions mesurées — 22/10/2026
 
@@ -1689,64 +1710,15 @@ inchangées au caractère près.** `scripts/verif-faq.mjs` (nouveau, versionné 
 jour) passe en **✓ sur les sept FAQPage du site**, en local comme en production.
 Soumission IndexNow des 12 URLs après déploiement : **HTTP 200**.
 
-### Positions mesurées — 22/09/2026
-
-**Indexation : toujours nulle, 15 jours après la 1re soumission IndexNow.** Les
-trois mesures habituelles via `WebSearch`, toutes reconduites à l'identique :
-1. **Phrase exacte du site** `"Médaillons et inserts pavés intégrés à l'enrobé"`
-   → dix résultats, **zéro hcebtp.com**. Exactement les mêmes concurrents
-   français qu'aux 20 et 21/09 (mavrotp, aravis-enrobage, pajot-tp, perenia,
-   abers-amenagement, europavage68, cuinet) + deux brevets USPTO + Pinterest.
-   **Inchangé.**
-2. **Requête nommant le domaine** `hcebtp.com HCE Hini Cours Enrobé Cize 39300
-   enrobé travaux publics` → **aucune page du domaine**, neuf fiches d'annuaire
-   (kompass, pappers, verif, societe, pagesjaunes, 118000, lagazettefrance,
-   nosartisansontdutalent, manageo). **Inchangé.**
-3. **`site:hcebtp.com`** → dix pages sans rapport (Wikipédia d'acronymes,
-   chnbtp.com, Facebook HBTP), **zéro résultat du domaine**. L'opérateur `site:`
-   n'est toujours pas honoré par ce canal. **Inchangé.**
-
-| Requête | Mesure (22/09/2026) | Évolution vs 21/09 |
-|---|---|---|
-| indexation (phrase exacte du site) | **absent** | inchangé |
-| indexation (requête nommant le domaine) | **absent** | inchangé — 9 fiches d'annuaire |
-| `site:hcebtp.com` | **absent** | inchangé |
-| requêtes commerciales | **non mesurables** (pas de SERP brute via ce canal) | indéterminé |
-
-✅ **`WebSearch` n'a échoué aucune fois aujourd'hui.**
-
-**Volume de texte servi en production** (`scripts/mesure-texte-servi.mjs`, vu
-comme Googlebot), avant le chantier du jour : **identique au 21/09 au caractère
-près sur les douze URLs**. Après déploiement, une seule valeur a bougé :
-
-| URL | Texte servi (22/09) | vs 21/09 | JSON-LD |
-|---|---|---|---|
-| accueil | 5 499 car. | = | 3 |
-| `/realisations` | 6 258 car. | = | 4 |
-| `/services/bordures-murets` | 7 012 car. | = | 4 |
-| `/services/finitions-soignees` | 6 821 car. | = | 4 |
-| `/services/drainage-pentes` | 5 198 car. | = | 4 |
-| `/services/maconnerie-generale` | 5 080 car. | = | 4 |
-| `/services/preparation-terrain` | 4 482 car. | = | 4 |
-| `/services/enrobe-a-chaud` | 3 783 car. | = | 4 |
-| **`/realisations/parking-voirie-pro`** | **6 356 car.** | **+5 955** | **2 → 3** |
-| `/realisations/preparation-terrassement` | 400 car. | = | 2 |
-| `/realisations/cour-allee-privee` | 399 car. | = | 2 |
-| `/realisations/chantier-en-cours` | 373 car. | = | 2 |
-
-Les 12 URLs du sitemap répondent 200. **Les trois dossiers non touchés sont
-inchangés au caractère près** — le chantier du jour n'a rien débordé.
-
-> ⚠️ **`scripts/check-contenu-fige-prod.mjs` ne tourne plus depuis le runner** :
-> il s'arrête sur « SUPABASE_PUBLISHABLE_KEY manquante (clé anon publique) ». Ce
-> n'est pas une régression du site — la variable n'est simplement pas dans
-> l'environnement du runner. **`check-contenu-fige.mjs` (version repo), lui,
-> tourne et sort « aucune régression »** : c'est lui qu'il faut utiliser comme
-> garde-fou avant de pousser. À creuser un jour si le contrôle *en production*
-> devient nécessaire ; en attendant, ne pas confondre l'échec de l'outil avec un
-> problème du site.
-
 ## Chantiers faits
+
+### 23/10/2026 — `/realisations/chantier-en-cours` : Q/R « liquide noir avant l'enrobé » (couche d'accrochage)
+Question réelle du jour de la pose, absente du site (0 occurrence « accrochage »). Réponse
+directe en tête, puis rôle (coller les couches), ~0,25 kg/m² de bitume résiduel, surface
+propre et sèche, météo, pelage / décollement par plaque si mauvaise liaison (MTQ 2002),
+délai entre accrochage et enrobé, tenue à la fatigue (Bitume Québec 2008), consigne
+pratique (ne pas marcher dessus). Placée en 2ᵉ position (après « pourquoi l'équipe ne
+s'arrête pas »). FAQ 4 → 5, 2 sources ajoutées. Banc local 5 596 → 7 445 car.
 
 ### 22/10/2026 — Cohérence après la suppression client du 22/10 : renvoi mort sur `/mentions-legales`, `lastmod`
 `/mentions-legales` (section « Réutilisation ») annonçait que devis, arrhes, acompte et
@@ -3458,107 +3430,19 @@ signale aussi un bloc JSON-LD illisible.
 - **`/realisations/preparation-terrassement` et `chantier-en-cours` non
   traités.** Un seul chantier par jour, mené à fond.
 
-### 22/09/2026 — `/realisations/parking-voirie-pro` passe de 401 à 6 356 caractères : le premier des quatre dossiers de réalisations sort de la maigreur, sur la réfection d'un parking professionnel
-
-**Chantier choisi** : enrichir `/realisations/parking-voirie-pro`. Le run du
-21/09 avait acté que « le filon page service maigre est épuisé » et laissait
-trois candidats : le `lastmod` du sitemap, un second bloc de Q/R sur le hub
-`/realisations`, ou l'un des quatre dossiers à ~400 caractères.
-
-**Pourquoi celui-là.** Trois raisons dans cet ordre.
-1. **C'est la seule URL du site qui vise « réfection parking enrobé Jura »**,
-   l'une des six requêtes commerciales suivies depuis le 07/09 — et elle ne
-   servait que 401 caractères, donc aucune chance d'y ressortir un jour.
-2. **Les quatre dossiers sont désormais les pages les plus maigres du site**
-   (373 à 401 car. contre 3 783 à 7 012 pour les services). Le déséquilibre est
-   le plus grand du sitemap.
-3. **La matière existait, sourcée et non couverte ailleurs** : le volet ombrage
-   des parkings, repéré le 13/09 et jamais exploité (écarté à juste titre de
-   `/services/finitions-soignees` le 21/09 comme hors sujet), trouve ici sa page
-   naturelle. Le `lastmod` du sitemap, lui, reste un chantier court et sûr —
-   bon repli pour un jour chargé, mais faible impact.
-
-**Ce qui a été fait**, sur le patron exact des blocs `savoir` des pages service
-(réponse autonome de 2-3 phrases en tête de chaque H3, questions formulées comme
-on les pose à voix haute, chiffres et sources primaires, `FAQPage` construit
-depuis le **même** tableau que la section visible) :
-- **Nouveau tableau `REAL_SAVOIR`** dans `realisations.$slug.tsx`, à côté de
-  `REAL_META` et sur le même modèle. **Seul `parking-voirie-pro` a une entrée** :
-  pour les trois autres dossiers, la section et le `FAQPage` ne sont tout
-  simplement pas émis. C'est l'extension propre pour les prochains runs.
-- **Nouveau composant `CategorySavoir`**, rendu **dans les deux états servis**
-  (branche `loading` et page complète), exactement comme `SeeAlso`. C'est la
-  leçon des 14 et 15/09 appliquée d'emblée : la branche `loading` **est** le
-  seul état rendu côté serveur sur ces pages, donc tout ce qui n'y figure pas
-  est invisible aux robots.
-- **5 Q/R sourcées**, sur un angle qu'aucune autre page du site ne couvre (les
-  Q/R existantes sur le stationnement, l'urbanisme, les eaux pluviales et le
-  BBSG ont été relues une par une avant rédaction pour éviter le doublon) :
-  1. *Faut-il refaire tout un parking, ou seulement la couche de surface ?* —
-     les signes qui distinguent une couche de roulement en fin de vie d'un corps
-     de chaussée qui travaille ; **NF P98-086**, homologuée le 17/05/2019, en
-     vigueur (réexamen systématique au 17/05/2029), qui « détaille la démarche
-     de vérification des épaisseurs des couches » et couvre six familles de
-     structures.
-  2. *Quelle épaisseur d'enrobé pour un parking qui reçoit des camions ?* — il
-     n'y a pas d'épaisseur standard : c'est le trafic poids lourds, la portance
-     du sol et la durée de service qui commandent, pas la surface. La norme
-     exclut de son domaine les matériaux à l'émulsion et les matériaux
-     modulaires.
-  3. *Pourquoi un parking s'ornière-t-il là où les véhicules manœuvrent et
-     stationnent ?* — charge lente, répétée, parfois immobile + viscosité du
-     liant ; **essai d'orniérage NF EN 12697-22+A1** (décembre 2023, en
-     vigueur), charge roulante à température constante, mélanges de Dmax ≤ 32 mm,
-     applicable aussi à des éprouvettes prélevées dans une chaussée existante
-     (donc utilisable en expertise d'un parking déjà posé).
-  4. *Combien de places accessibles faut-il prévoir, et de quelle taille ?* —
-     **2 % minimum du total, 3,30 m × 5 m, dévers ≤ 2 %, raccordement sans
-     ressaut de plus de 2 cm, 1,40 m horizontal depuis la place** ; **arrêté du
-     20 avril 2017, article 3**, lu sur Légifrance. Relié explicitement à la
-     pente de 1,5 % qu'annonce déjà `/services/drainage-pentes` : les deux
-     contraintes sont compatibles (1,5 % < 2 %) mais se vérifient au plan.
-  5. *Faut-il ombrager un parking que l'on refait ?* — **plus de 500 m² en
-     construction ou rénovation lourde, 50 % de la surface, un arbre pour trois
-     emplacements ; parcs existants de plus de 1 500 m² concernés depuis juillet
-     2026** (échéance désormais passée) ; **article L111-19-1 du code de
-     l'urbanisme**, fiche `entreprendre.service-public.gouv.fr/vosdroits/F38106`
-     (mise à jour affichée : 22/07/2025), lue ce jour.
-- **4 sources primaires vérifiées ce jour** et liées dans la page : Norm'Info
-  AFNOR pour NF P98-086, boutique AFNOR pour NF EN 12697-22+A1, Légifrance pour
-  l'article 3 de l'arrêté du 20/04/2017, service-public entreprendre pour
-  l'ombrage. « Dernière mise à jour : 22 septembre 2026 » visible.
-- **Report dans `public/llms.txt`** (entrée du dossier enrichie + date passée au
-  22/09).
-- **Soumission IndexNow** des 12 URLs après déploiement → HTTP 200.
-
-**Mesures.** Banc d'essai local monté selon la recette du 15/09 ; **il
-reproduisait la production au caractère près avant modification** (401 / 399 /
-5 499). Après : **401 → 6 356 caractères, 2 → 3 blocs JSON-LD**, re-mesuré
-identique en production après déploiement. `verif-faq.mjs` : **5/5 questions et
-5/5 réponses retrouvées dans le HTML visible**, en local comme en production.
-`npx tsc --noEmit` propre, `npm run build` en 0, **`npx eslint` à 0 problème sur
-le fichier** (voir l'erreur corrigée du jour), `check-contenu-fige.mjs` sans
-régression.
-
-**Ce que je n'ai PAS fait, et pourquoi** :
-- **Les trois autres dossiers** (`cour-allee-privee`, `preparation-terrassement`,
-  `chantier-en-cours`, toujours à 373-400 car.) : un chantier mené à fond vaut
-  mieux que quatre bâclés, et chacun demande sa propre recherche de sources sous
-  peine de recycler les mêmes Q/R. `REAL_SAVOIR` les attend, il suffit d'ajouter
-  une entrée. **Ce sont les meilleurs candidats du prochain run.**
-- **Donner une épaisseur ou une granulométrie chiffrée** : toujours aucune source
-  primaire lisible depuis le runner (thread ouvert depuis le 11/09). La page dit
-  explicitement *pourquoi* il n'y a pas de chiffre standard plutôt que d'en
-  inventer un — ce qui est d'ailleurs plus distinctif que le contraire.
-- **Le `lastmod` du sitemap** : reporté, faible impact comparé à 6 000
-  caractères sur une requête cible.
-- **Toucher au `title` de `finitions-soignees`** : inchangé, toujours en attente
-  d'arbitrage client (voir « Hypothèses à vérifier »).
-
 ## Chantiers en attente
 
 Par ordre de priorité. **Alterner les angles, ne pas refaire le même deux jours
 de suite.**
+
+> 🆕 **MISE À JOUR DU 23/10/2026 — prime sur tout ce qui suit.**
+> ✅ `chantier-en-cours` : Q/R couche d'accrochage (à vérifier en prod après push).
+> 1. Prochain technique : page `/contact` (NAP, horaires, accès, `ContactPage`) — ouverte depuis le 19/10.
+> 2. Prochain contenu : `preparation-terrain` (7 138) ou `bordures-murets` (7 658) ; accueil
+>    (5 529) : **rien sans accord client**.
+> 3. Lundi 26/10 : veille (étape 6).
+> 4. Yanis : rapport « Performances IA » de la Search Console ; réponse de Naofal sur la
+>    portée de sa demande du 22/10 (voir Hypothèses).
 
 > 🆕 **MISE À JOUR DU 22/10/2026 — prime sur tout ce qui suit.**
 > ✅ Renvoi mort `/mentions-legales` → accueil retiré, `lastmod` alignés (à vérifier en prod).

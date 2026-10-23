@@ -44,7 +44,7 @@ export const PAGE_UPDATED = {
   "/realisations/preparation-terrassement": { iso: "2026-09-25", label: "25 septembre 2026" },
   "/mentions-legales": { iso: "2026-10-22", label: "22 octobre 2026" },
   "/arnaque-goudronnage": { iso: "2026-10-11", label: "11 octobre 2026" },
-  "/realisations/chantier-en-cours": { iso: "2026-10-12", label: "12 octobre 2026" },
+  "/realisations/chantier-en-cours": { iso: "2026-10-23", label: "23 octobre 2026" },
 } satisfies Record<string, PageUpdate>;
 
 export type UpdatedPath = keyof typeof PAGE_UPDATED;

@@ -22,6 +22,8 @@ et à compléter en fin de run.
 > car.**, 4 JSON-LD, pas de défilement horizontal à 390 px (rendu SSR contrôlé à l'œil).
 > Build OK, `check:fige` OK. `verif-lastmod` : seul écart = `/` sans date visible
 > (connu depuis le 22/10, suppression client). Archive : entrées du 23/09.
+> ✅ Vérifié en prod (`85cec14`, `success`) : `/contact` 200, 5 694 car., FAQ 4/4, sitemap
+> 16 URLs, `llms.txt` à jour, IndexNow 16 URLs → 200.
 
 > ✅ **23/10/2026 — Déploiement OK** (`5c3e56c` : statut GitHub `success`). Prod =
 > dernier commit (15/15 en 200, valeurs du 22/10). Chantier (**contenu**, après un jour

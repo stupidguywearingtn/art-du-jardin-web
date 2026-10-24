@@ -42,6 +42,7 @@ const SITEMAP = [
   "/realisations/chantier-en-cours",
   "/mentions-legales",
   "/arnaque-goudronnage",
+  "/contact",
 ];
 
 const base = (process.argv[2] ?? "https://www.hcetp.com").replace(/\/$/, "");

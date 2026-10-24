@@ -2064,6 +2064,9 @@ function Footer() {
         <Link to="/mentions-legales" className="transition-colors hover:text-gold">
           Mentions légales
         </Link>
+        <Link to="/contact" className="transition-colors hover:text-gold">
+          Contact
+        </Link>
         <Link to="/arnaque-goudronnage" className="transition-colors hover:text-gold">
           Arnaque au goudronnage : les signes
         </Link>

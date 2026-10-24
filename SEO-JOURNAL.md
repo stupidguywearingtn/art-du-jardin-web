@@ -8,6 +8,21 @@ et à compléter en fin de run.
 
 ## État des lieux
 
+> ✅ **24/10/2026 — Déploiement OK** (`fa4ce52` : statut GitHub `success`). Prod =
+> dernier commit (15/15 en 200, valeurs du 23/10). Chantier (**technique / local**) :
+> nouvelle page **`/contact`** (16ᵉ URL du sitemap) — NAP complet en clair (identique au
+> bloc canonique), GPS INSEE 46.7234 / 5.9186 + lien carte OSM, `ContactPage`
+> (`mainEntity` → `#business`, pas de NAP redéclaré), `BreadcrumbList`, FAQPage 4/4 =
+> FAQ visible : joindre HCE, trouver la bonne Cize (Cize 01106 à 68,1 km, calculé),
+> préparer une demande de devis (champs réels du formulaire, ni prix ni date ferme),
+> vérifier qu'on parle à HCE (rappel du fixe, SIREN sur annuaire-entreprises). Mobile
+> WhatsApp **non repris** (hypothèse ouverte). Aucune alerte « Jura » inventée. Lien
+> « Contact » ajouté au pied de page de l'accueil ; sitemap, `lastmod` 24/10,
+> `llms.txt`, scripts IndexNow / mesure mis à jour. Banc local : `/contact` **5 694
+> car.**, 4 JSON-LD, pas de défilement horizontal à 390 px (rendu SSR contrôlé à l'œil).
+> Build OK, `check:fige` OK. `verif-lastmod` : seul écart = `/` sans date visible
+> (connu depuis le 22/10, suppression client). Archive : entrées du 23/09.
+
 > ✅ **23/10/2026 — Déploiement OK** (`5c3e56c` : statut GitHub `success`). Prod =
 > dernier commit (15/15 en 200, valeurs du 22/10). Chantier (**contenu**, après un jour
 > technique) : **`/realisations/chantier-en-cours`** (5 596, la plus maigre hors accueil)
@@ -734,6 +749,17 @@ un extrait de SERP ne prouve pas ce que la page contient.
 > `verif.com` ont été jugées périmées **sur la seule foi d'extraits de recherche**
 > (403 au runner, contenu jamais lu). Leur statut « périmée » n'est donc pas
 > établi. Noté en chantier en attente.
+
+### Positions mesurées — 24/10/2026
+
+| Contrôle | 24/10/2026 | vs 23/10 |
+|---|---|---|
+| Déploiement `main` (`fa4ce52`) | **`success`** | = |
+| Prod vs code (`mesure-texte-servi`) | 15/15 en 200, valeurs identiques au 23/10 (`chantier-en-cours` 7 445) | = |
+| SERP | non relevée (canal `WebSearch` US, non représentatif) | — |
+
+Pas d'accès Search Console. **À relever par Yanis** : « Performances IA » + requêtes à impressions ;
+demander l'indexation de `/contact` (Inspection d'URL).
 
 ### Positions mesurées — 23/10/2026
 
@@ -1642,77 +1668,15 @@ URLs non touchées sont inchangées au caractère près**, `scripts/verif-faq.mj
 passe en **✓ sur les huit FAQPage du site** en local comme en production, et la
 soumission IndexNow des 12 URLs après déploiement sort en **HTTP 200**.
 
-### Positions mesurées — 23/09/2026
-
-**Indexation : toujours nulle, 16 jours après la 1re soumission IndexNow.** Les
-trois mesures habituelles via `WebSearch`, reconduites à l'identique :
-1. **Phrase exacte du site** `"Médaillons et inserts pavés intégrés à l'enrobé"`
-   → dix résultats, **zéro hcebtp.com**. Exactement les mêmes concurrents
-   français qu'aux 20, 21 et 22/09 (mavrotp, aravis-enrobage, pajot-tp, perenia,
-   abers-amenagement, europavage68, cuinet) + deux brevets USPTO + Pinterest.
-   **Inchangé.**
-2. **Requête nommant le domaine** `hcebtp.com HCE Hini Cours Enrobé Cize 39300
-   enrobé travaux publics` → **aucune page du domaine**, les mêmes neuf fiches
-   d'annuaire (kompass, pappers, verif, societe, pagesjaunes, 118000,
-   lagazettefrance, nosartisansontdutalent, manageo). **Inchangé.**
-3. **`site:hcebtp.com`** → dix pages sans rapport (Wikipédia d'acronymes,
-   chnbtp.com, h-btp.com, hsabati.com), **zéro résultat du domaine**. L'opérateur
-   `site:` n'est toujours pas honoré par ce canal. **Inchangé.**
-
-| Requête | Mesure (23/09/2026) | Évolution vs 22/09 |
-|---|---|---|
-| indexation (phrase exacte du site) | **absent** | inchangé |
-| indexation (requête nommant le domaine) | **absent** | inchangé — 9 fiches d'annuaire |
-| `site:hcebtp.com` | **absent** | inchangé |
-| requêtes commerciales | **non mesurables** (pas de SERP brute via ce canal) | indéterminé |
-
-✅ **`WebSearch` n'a échoué aucune fois aujourd'hui.**
-
-> 🔔 **Notification envoyée au client le 23/09/2026, et cadence à respecter.**
-> Le run du jour a **notifié** que l'indexation est nulle depuis 16 jours et que
-> les trois leviers restants (revendiquer la fiche PagesJaunes
-> `pagesjaunes.fr/pros/52322496`, revendiquer la fiche Google Business Profile
-> existante, ajouter `www.hcebtp.com` à la Search Console) demandent **ses
-> accès**, pas du code. **Ne pas re-notifier ce même blocage tous les jours :**
-> une alerte quotidienne sur un fait inchangé perd son sens le jour où quelque
-> chose bougera vraiment. **Règle posée ici : re-notifier au plus tôt le
-> 30/09/2026** (une fois par semaine), ou immédiatement si l'indexation arrive,
-> si une position mesurable apparaît, ou si un contrôle casse. Les runs
-> intermédiaires journalisent, ils n'alertent pas.
-
-> 📉 **Constat de fond, seizième jour : l'extrait kompass renvoyé par la
-> recherche du jour affiche encore « 36 Avenue Etienne Lamy », l'ANCIENNE
-> adresse.** C'est cohérent avec ce que le journal sait depuis le 09/09 (36 =
-> ancien siège, avril 2025 → avril 2026). Cela ne tranche toujours PAS le
-> statut de la fiche elle-même — voir le point 13 des chantiers en attente,
-> et la nouvelle tentative de lecture ci-dessous.
-
-**Volume de texte servi en production** (`scripts/mesure-texte-servi.mjs`, vu
-comme Googlebot), **avant** le chantier du jour : identique au 22/09 au
-caractère près sur les douze URLs. **Après** déploiement, une seule valeur a
-bougé :
-
-| URL | Texte servi (23/09) | vs 22/09 | JSON-LD |
-|---|---|---|---|
-| accueil | 5 499 car. | = | 3 |
-| `/realisations` | 6 258 car. | = | 4 |
-| `/services/bordures-murets` | 7 012 car. | = | 4 |
-| `/services/finitions-soignees` | 6 821 car. | = | 4 |
-| `/services/drainage-pentes` | 5 198 car. | = | 4 |
-| `/services/maconnerie-generale` | 5 080 car. | = | 4 |
-| `/services/preparation-terrain` | 4 482 car. | = | 4 |
-| `/services/enrobe-a-chaud` | 3 783 car. | = | 4 |
-| `/realisations/parking-voirie-pro` | 6 356 car. | = | 3 |
-| **`/realisations/cour-allee-privee`** | **7 670 car.** | **+7 271** | **2 → 3** |
-| `/realisations/preparation-terrassement` | 400 car. | = | 2 |
-| `/realisations/chantier-en-cours` | 373 car. | = | 2 |
-
-Les 12 URLs du sitemap répondent 200. **Les onze URLs non touchées sont
-inchangées au caractère près.** `scripts/verif-faq.mjs` (nouveau, versionné ce
-jour) passe en **✓ sur les sept FAQPage du site**, en local comme en production.
-Soumission IndexNow des 12 URLs après déploiement : **HTTP 200**.
-
 ## Chantiers faits
+
+### 24/10/2026 — `/contact` : une URL officielle et stable pour le NAP
+Idée de la veille du 19/10 (bloc de réponse Google « page contact d'une entreprise »).
+Fichier `src/routes/contact.tsx`, modèle `zone-intervention`. Contenu propre, pas une
+copie du pied de page : homonymie Cize avec distance calculée, graphie « 40 B » du
+registre, informations à préparer (alignées sur les 3 étapes réelles du formulaire),
+vérification d'identité. Sources : annuaire-entreprises, recherche-entreprises (geo
+INSEE 08/09), geo.api.gouv.fr.
 
 ### 23/10/2026 — `/realisations/chantier-en-cours` : Q/R « liquide noir avant l'enrobé » (couche d'accrochage)
 Question réelle du jour de la pose, absente du site (0 occurrence « accrochage »). Réponse
@@ -3336,106 +3300,20 @@ régression.
 - **Ne pas notifier le client** : la cadence hebdomadaire posée le 23/09
   s'applique, prochaine échéance le 30/09.
 
-### 23/09/2026 — `/realisations/cour-allee-privee` passe de 399 à 7 670 caractères : le deuxième dossier sort de la maigreur, sur tout ce qui se joue à la limite de la propriété (commit `eafd0a3`)
-
-**Pourquoi cette page, et pourquoi cet angle.** C'était le candidat n°1 laissé
-par le run du 22/09 : 399 caractères servis, et la seule URL du site qui vise
-« goudronnage cour maison Jura », une des six requêtes suivies. Le run du 22/09
-avait posé une réserve explicite — **risque de doublon** avec
-`/services/enrobe-a-chaud` (goudronnage, BBSG, 150 °C, hiver dans le Jura,
-médaillons) et `/services/drainage-pentes` (pente de 1,5 %, flaques, eau chez le
-voisin). Les deux blocs ont été relus avant d'écrire une ligne, et l'angle
-retenu est celui qu'il suggérait : **tout ce qui se passe à la limite de la
-propriété**, sujet jamais abordé nulle part sur le site. Aucune des cinq
-questions ne recoupe une question déjà publiée (vérifié sur les 30 `q:` de
-`services.$slug.tsx`).
-
-**Ce qui a été fait.** Une entrée `cour-allee-privee` ajoutée à `REAL_SAVOIR`
-dans `src/routes/realisations.$slug.tsx`. L'infrastructure posée le 22/09 a
-tenu sa promesse : **aucune autre ligne de code n'a été nécessaire** — le
-composant `CategorySavoir` et le `FAQPage` de `head()` se branchent sur la seule
-présence de la clé. Cinq Q/R, chacune ouverte par une réponse autonome de deux à
-trois phrases, chacune adossée à un texte primaire relu mot pour mot sur
-Légifrance ou service-public.gouv.fr :
-
-1. **« Faut-il une autorisation pour raccorder une allée privée à la route ? »**
-   — art. **L113-2 du code de la voirie routière** (en vigueur depuis le
-   28/12/2007), cité in extenso : permission de voirie s'il y a emprise, permis
-   de stationnement sinon, autorisations « délivrées à titre précaire et
-   révocable ». Complété par **L111-1** (le domaine public routier est celui de
-   l'État, des départements **et** des communes), qui répond à la vraie question
-   pratique : à quel guichet s'adresser.
-2. **« Peut-on buser le fossé qui longe la route pour élargir son entrée ? »**
-   — le fossé est une dépendance du domaine public routier ; le buser est une
-   emprise. Sans autorisation : **art. R\*116-2** (en vigueur depuis le
-   01/03/1994), alinéas 1° et 6° cités mot pour mot, contravention de 5e classe
-   → **1 500 € au plus, 3 000 € en récidive** (**art. 131-13 du code pénal**).
-3. **« Une entreprise sonne et propose du goudronnage “avec l'enrobé qui
-   reste” : que dit la loi ? »** — **art. L221-10 du code de la consommation**
-   (en vigueur depuis le 01/07/2016), premier alinéa cité in extenso : aucun
-   paiement avant sept jours. Plus les quatorze jours de rétractation
-   (**L221-18**, prolongés de douze mois si l'information n'a pas été donnée) et
-   l'obligation de contrat écrit, daté, signé, avec formulaire de rétractation
-   (fiche **F23224** de `entreprendre.service-public.gouv.fr`, qui donne aussi
-   la sanction de l'encaissement anticipé : 2 ans et 150 000 €).
-4. **« Qui paie le goudronnage d'un chemin d'accès partagé ? »** — **art. 697 et
-   698 du code civil**, cités mot pour mot : les ouvrages sont à la charge du
-   bénéficiaire de la servitude, pas du propriétaire du fonds assujetti, sauf
-   titre contraire. Et **art. 682** pour le cas de l'enclave.
-5. **« L'eau d'une cour goudronnée peut-elle être renvoyée vers la route ? »**
-   — **art. R\*116-2, 4°**, cité mot pour mot (substances laissées écouler sur
-   les voies publiques). Facette du drainage jamais traitée : `drainage-pentes`
-   couvre le **voisin** (Code civil 640/641) et les flaques, pas la **voie
-   publique**.
-
-`public/llms.txt` a été mis à jour dans la foulée (la ligne du dossier résumait
-la galerie, elle décrit maintenant aussi les cinq réponses et leurs textes).
-
-**Outillage : `scripts/verif-faq.mjs` est enfin versionné.** Le journal le
-citait comme un outil existant depuis le 11/09 — **il ne l'était pas** : chaque
-run le réécrivait en jetable, et c'est exactement ce qui a produit le faux
-mismatch du 22/09. La version versionnée fige la règle apprise ce jour-là :
-**décodage des entités HTML des DEUX côtés avant comparaison**, plus la
-normalisation des apostrophes typographiques et des espaces insécables. Elle
-sort en code 1 dès qu'une Q ou une R du JSON-LD manque au visible, et elle
-signale aussi un bloc JSON-LD illisible.
-
-**Contrôles avant push, tous au banc d'essai local (recette du 15/09) :**
-- Banc d'essai **fidèle à la production au caractère près sur les douze URLs**
-  avant modification — la mesure avant/après est donc comparable.
-- `/realisations/cour-allee-privee` : **399 → 7 670 caractères**, JSON-LD
-  **2 → 3**. **Les onze autres URLs : identiques au caractère près.**
-- `verif-faq.mjs` : **5/5 questions et 5/5 réponses** sur la nouvelle page, et
-  **aucune régression** sur les six autres FAQPage du site (accueil 6/6,
-  `/realisations` 4/4, `parking-voirie-pro` 5/5, trois pages service 5/5).
-- `npx tsc --noEmit`, `npx eslint`, `npx prettier --check` : propres.
-- `node scripts/check-contenu-fige.mjs` : « aucune régression ».
-- Diff vs `HEAD` : **purement additif** sur le `.tsx` (54 lignes ajoutées, 0
-  retirée), une ligne remplacée dans `llms.txt`.
-
-**Vérifié en production après déploiement** : 7 670 caractères, `verif-faq.mjs`
-✓, les onze autres URLs inchangées, IndexNow HTTP 200 sur les 12 URLs.
-
-**Ce qui a été volontairement PAS fait aujourd'hui, et pourquoi :**
-- **Aucune promesse commerciale inventée.** Une première rédaction disait
-  « aucune somme demandée le jour même : c'est ainsi qu'HCE travaille ».
-  C'était un engagement que le client n'a jamais formulé. Réécrit en « ces trois
-  règles s'imposent à toute entreprise qui vient chez vous, HCE comprise », qui
-  est juridiquement exact et n'invente rien. La formule figée **« devis
-  détaillé »** a été reprise telle quelle.
-- **Aucune épaisseur ni granulométrie d'enrobé.** Le thread ouvert le 11/09
-  reste ouvert : pas de source primaire lisible et gratuite. Le blocage est
-  contourné, pas résolu.
-- **Rien touché au technique pour l'indexation.** Conformément au verdict du
-  20/09 : ce chantier a été choisi pour sa valeur propre, pas parce qu'il
-  « aiderait l'indexation ». Il ne l'aidera pas.
-- **`/realisations/preparation-terrassement` et `chantier-en-cours` non
-  traités.** Un seul chantier par jour, mené à fond.
-
 ## Chantiers en attente
 
 Par ordre de priorité. **Alterner les angles, ne pas refaire le même deux jours
 de suite.**
+
+> 🆕 **MISE À JOUR DU 24/10/2026 — prime sur tout ce qui suit.**
+> ✅ `/contact` créée (à vérifier en prod : 16 URLs, FAQ 4/4, IndexNow).
+> 1. Prochain contenu : `preparation-terrain` (7 138) ou `bordures-murets` (7 658) ; accueil :
+>    **rien sans accord client**.
+> 2. Lundi 26/10 : veille (étape 6).
+> 3. Maillage `/contact` : lien depuis `/mentions-legales` et les pieds de page simplifiés
+>    (zone, services, réalisations) — petit jour technique.
+> 4. Yanis : Search Console (Performances IA + indexation `/contact`) ; statut du mobile
+>    WhatsApp 06 81 78 96 41 (à mettre dans le NAP partout, ou nulle part).
 
 > 🆕 **MISE À JOUR DU 23/10/2026 — prime sur tout ce qui suit.**
 > ✅ `chantier-en-cours` : Q/R couche d'accrochage — vérifiée en prod, IndexNow 200.

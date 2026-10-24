@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ArnaqueGoudronnageRouteImport } from './routes/arnaque-goudronnage'
+import { Route as ContactRouteImport } from './routes/contact'
 import { Route as DemoRouteImport } from './routes/demo'
 import { Route as MentionsLegalesRouteImport } from './routes/mentions-legales'
 import { Route as ResetPasswordRouteImport } from './routes/reset-password'
@@ -37,6 +38,11 @@ const IndexRoute = IndexRouteImport.update({
 const ArnaqueGoudronnageRoute = ArnaqueGoudronnageRouteImport.update({
   id: '/arnaque-goudronnage',
   path: '/arnaque-goudronnage',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DemoRoute = DemoRouteImport.update({
@@ -131,6 +137,7 @@ const LovableEmailTransactionalSendRoute =
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/arnaque-goudronnage': typeof ArnaqueGoudronnageRoute
+  '/contact': typeof ContactRoute
   '/demo': typeof DemoRoute
   '/mentions-legales': typeof MentionsLegalesRoute
   '/reset-password': typeof ResetPasswordRoute
@@ -152,6 +159,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/arnaque-goudronnage': typeof ArnaqueGoudronnageRoute
+  '/contact': typeof ContactRoute
   '/demo': typeof DemoRoute
   '/mentions-legales': typeof MentionsLegalesRoute
   '/reset-password': typeof ResetPasswordRoute
@@ -174,6 +182,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/arnaque-goudronnage': typeof ArnaqueGoudronnageRoute
+  '/contact': typeof ContactRoute
   '/demo': typeof DemoRoute
   '/mentions-legales': typeof MentionsLegalesRoute
   '/reset-password': typeof ResetPasswordRoute
@@ -197,6 +206,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/arnaque-goudronnage'
+    | '/contact'
     | '/demo'
     | '/mentions-legales'
     | '/reset-password'
@@ -218,6 +228,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/arnaque-goudronnage'
+    | '/contact'
     | '/demo'
     | '/mentions-legales'
     | '/reset-password'
@@ -239,6 +250,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/arnaque-goudronnage'
+    | '/contact'
     | '/demo'
     | '/mentions-legales'
     | '/reset-password'
@@ -261,6 +273,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ArnaqueGoudronnageRoute: typeof ArnaqueGoudronnageRoute
+  ContactRoute: typeof ContactRoute
   DemoRoute: typeof DemoRoute
   MentionsLegalesRoute: typeof MentionsLegalesRoute
   ResetPasswordRoute: typeof ResetPasswordRoute
@@ -294,6 +307,13 @@ declare module '@tanstack/react-router' {
       path: '/arnaque-goudronnage'
       fullPath: '/arnaque-goudronnage'
       preLoaderRoute: typeof ArnaqueGoudronnageRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/demo': {
@@ -421,6 +441,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ArnaqueGoudronnageRoute: ArnaqueGoudronnageRoute,
+  ContactRoute: ContactRoute,
   DemoRoute: DemoRoute,
   MentionsLegalesRoute: MentionsLegalesRoute,
   ResetPasswordRoute: ResetPasswordRoute,

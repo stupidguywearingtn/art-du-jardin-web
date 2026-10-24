@@ -36,6 +36,7 @@ const PATHS = [
   "/realisations/chantier-en-cours",
   "/mentions-legales",
   "/arnaque-goudronnage",
+  "/contact",
 ];
 
 async function main() {

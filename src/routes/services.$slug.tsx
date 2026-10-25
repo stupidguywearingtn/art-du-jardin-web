@@ -380,12 +380,16 @@ const SERVICES: Record<string, ServiceData> = {
       "Bordures béton coulées sur place, bordures pavées et petits murets de soutènement dans le Jura et l'Ain : urbanisme, mur mitoyen, gel. Devis détaillé.",
     savoir: {
       heading: "Bordures et murets : les questions qu'on nous pose",
-      lead: "Une bordure tient la rive d'une cour, un muret retient la terre : ce sont deux ouvrages différents, avec chacun leurs règles. Voici quand une autorisation d'urbanisme entre en jeu, à qui appartient le mur qui sépare deux terrains, ce qui distingue une bordure coulée sur place d'une bordure préfabriquée, et ce que l'hiver jurassien impose au béton.",
+      lead: "Une bordure tient la rive d'une cour, un muret retient la terre : ce sont deux ouvrages différents, avec chacun leurs règles. Voici pourquoi un muret doit être drainé, quand une autorisation d'urbanisme entre en jeu, à qui appartient le mur qui sépare deux terrains, ce qui distingue une bordure coulée sur place d'une bordure préfabriquée, et ce que l'hiver jurassien impose au béton.",
       updated: PAGE_UPDATED["/services/bordures-murets"],
       qa: [
         {
           q: "À quoi sert un muret de soutènement dans une cour ?",
           a: "À retenir la terre là où le terrain change de niveau, pour que la surface au-dessus reste plane et utilisable. Dès qu'une cour est terrassée dans une pente — le cas courant dans le Jura — il faut soit adoucir le talus, ce qui consomme de la place, soit le retenir par un ouvrage, ce qui n'en consomme pas. Un mur de soutènement peut céder de trois façons, et ce sont exactement les trois vérifications que demande la norme de justification de ces ouvrages, la NF P94-281, document d'application nationale de l'Eurocode 7 : la portance du sol sous la semelle, le glissement du mur sur sa base, et l'excentrement, c'est-à-dire le basculement sous la poussée des terres. HCE réalise de petits murets de soutènement en accompagnement d'un chantier de cour ou d'allée ; au-delà, quand la hauteur retenue devient importante ou qu'un véhicule circule juste derrière, le dimensionnement relève d'un calcul géotechnique et d'un bureau d'études, pas d'une finition de maçonnerie. Cette norme est elle-même en cours de révision : le projet est passé en enquête publique jusqu'au 16 mars 2026, pour une publication attendue fin 2026.",
+        },
+        {
+          q: "Faut-il un drainage derrière un muret de soutènement ?",
+          a: "Oui : l'eau qui s'accumule derrière un mur s'ajoute à la poussée des terres, et un mur qui ne l'évacue pas travaille au-delà de ce pour quoi il a été prévu. L'Agence Qualité Construction, dans sa plaquette « Murs de soutènement — risques réels » (février 2011), range parmi les causes de sinistres l'« absence ou inefficacité du système de drainage qui ne permet pas d'évacuer l'eau en pied et derrière le mur », ainsi que les barbacanes bouchées faute d'entretien, et cite les pluies importantes et répétées comme facteur aggravant. Sa plaquette de bonnes pratiques de novembre 2022, consacrée aux murs de moins de 3 mètres, décrit le dispositif complet : un massif drainant exempt de fines, dont la granulométrie augmente dans le sens d'écoulement de l'eau ; un géotextile propre et non percé, aux recouvrements contrôlés ; un drain en pied d'au moins 100 mm de diamètre, posé au-dessus du niveau de la fondation avec une pente de 3 à 10 mm par mètre ; un exutoire raccordé au réseau d'eaux pluviales, et des regards pour vérifier que l'eau s'écoule. Les barbacanes — les trous d'évacuation qui traversent le mur — ne suffisent pas seules : selon l'AQC, une barbacane doit être associée à un massif drainant, elle se place plus haut que le drain pour signaler qu'il ne fonctionne plus, et si elle rejette l'eau chez le voisin, l'accord du propriétaire en aval est nécessaire. Dans le Jura, où la station de Champagnole relève 1 573,2 mm de pluie par an, ce point se règle au devis détaillé, après la visite sur site : où part l'eau fait partie de l'ouvrage.",
         },
         {
           q: "Faut-il une autorisation pour construire un mur chez soi ?",
@@ -418,6 +422,15 @@ const SERVICES: Record<string, ServiceData> = {
           label:
             "AFNOR Norm'Info — NF P94-281, Justification des ouvrages géotechniques : ouvrages de soutènement, murs",
           url: "https://norminfo.afnor.org/norme/prnf-p94-281/justification-des-ouvrages-geotechniques-normes-dapplication-nationale-de-leurocode-7-ouvrages-de-soutenement-murs/210865",
+        },
+        {
+          label:
+            "Agence Qualité Construction — Murs de soutènement : bonnes pratiques de conception et d'exécution (novembre 2022)",
+          url: "https://qualiteconstruction.com/wp-content/uploads/2024/05/Plaquette-Murs-Soutenement-Bonnes-Pratiques-Conception-Execution-AQC.pdf",
+        },
+        {
+          label: "Agence Qualité Construction — Murs de soutènement : risques réels (février 2011)",
+          url: "https://qualiteconstruction.com/wp-content/uploads/2024/05/Plaquette-Murs-Soutenement-Risques-Reels-AQC.pdf",
         },
         {
           label: "AFNOR Norm'Info — NF EN 1340, Éléments pour bordures de trottoir en béton",

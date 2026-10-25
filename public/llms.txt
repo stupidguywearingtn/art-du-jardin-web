@@ -5,7 +5,7 @@
 > dans le Jura et l'Ain. Entreprise créée en 2012, 14 années d'expérience, plus de
 > 1000 chantiers livrés, garantie décennale.
 
-Dernière mise à jour : 24 octobre 2026
+Dernière mise à jour : 25 octobre 2026
 Site officiel : https://www.hcetp.com
 
 ## L'entreprise en bref
@@ -307,6 +307,20 @@ soutènement en accompagnement d'un chantier de cour ou d'allée ; au-delà, le
 dimensionnement relève d'un calcul géotechnique et d'un bureau d'études.
 Source : https://norminfo.afnor.org/norme/prnf-p94-281/justification-des-ouvrages-geotechniques-normes-dapplication-nationale-de-leurocode-7-ouvrages-de-soutenement-murs/210865
 
+### Faut-il un drainage derrière un muret de soutènement ?
+Oui : l'eau accumulée derrière un mur s'ajoute à la poussée des terres. L'Agence Qualité
+Construction (plaquette « risques réels », février 2011) range parmi les causes de
+sinistres l'absence ou l'inefficacité du drainage en pied et derrière le mur, et les
+barbacanes bouchées faute d'entretien. Sa plaquette de bonnes pratiques (novembre 2022,
+murs de moins de 3 m) décrit le dispositif : massif drainant sans fines, géotextile propre
+et non percé, drain en pied d'au moins 100 mm posé au-dessus de la fondation avec une pente
+de 3 à 10 mm/m, exutoire raccordé au réseau d'eaux pluviales, regards de contrôle. Une
+barbacane seule ne suffit pas : elle doit être associée à un massif drainant, se place
+plus haut que le drain, et un rejet chez le voisin suppose l'accord du propriétaire en
+aval. À Champagnole (1 573,2 mm de pluie par an), ce point se règle au devis détaillé.
+Source : https://qualiteconstruction.com/wp-content/uploads/2024/05/Plaquette-Murs-Soutenement-Bonnes-Pratiques-Conception-Execution-AQC.pdf
+Source : https://qualiteconstruction.com/wp-content/uploads/2024/05/Plaquette-Murs-Soutenement-Risques-Reels-AQC.pdf
+
 ### Faut-il une autorisation pour construire un mur chez soi ?
 Une déclaration préalable de travaux est obligatoire dès que le mur atteint 2 mètres de
 hauteur, mais aussi, quelle que soit sa hauteur, si le terrain est en secteur protégé,
@@ -466,7 +480,7 @@ de l'eau ne s'évaluent pas autrement.
 - [Bordures & murets](https://www.hcetp.com/services/bordures-murets) : bordures béton
   coulées sur place, bordures pavées, petits murets de soutènement. Contient aussi les
   réponses détaillées sur le rôle d'un muret de soutènement et sa norme de justification
-  (NF P94-281), l'autorisation d'urbanisme d'un mur, la mitoyenneté, le choix entre
+  (NF P94-281), son drainage (massif drainant, drain, barbacanes — AQC), l'autorisation d'urbanisme d'un mur, la mitoyenneté, le choix entre
   bordure coulée et bordure préfabriquée, et la tenue au gel dans le Jura (normales
   Météo-France de Champagnole), avec leurs sources.
 - [Finitions soignées](https://www.hcetp.com/services/finitions-soignees) : bords nets,

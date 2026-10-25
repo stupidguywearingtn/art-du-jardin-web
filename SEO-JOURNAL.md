@@ -21,6 +21,8 @@ et à compléter en fin de run.
 > d'HCE (« se règle au devis détaillé »). Banc local (`vite dev`) : 7 658 → **9 506
 > car.**, FAQ 6/6, lead mis à jour, lastmod + `llms.txt` 25/10. Build OK, `check:fige` OK.
 > Archive : entrées du 25/09.
+> ✅ Vérifié en prod (`0064f38`, `success`) : `bordures-murets` 9 506 car., FAQ 6/6,
+> lastmod sitemap 2026-10-25, `llms.txt` à jour, IndexNow 16 URLs → 200.
 
 > ✅ **24/10/2026 — Déploiement OK** (`fa4ce52` : statut GitHub `success`). Prod =
 > dernier commit (15/15 en 200, valeurs du 23/10). Chantier (**technique / local**) :
@@ -3177,7 +3179,7 @@ Par ordre de priorité. **Alterner les angles, ne pas refaire le même deux jour
 de suite.**
 
 > 🆕 **MISE À JOUR DU 25/10/2026 — prime sur tout ce qui suit.**
-> ✅ `bordures-murets` : Q/R drainage (à vérifier en prod : 9 506 car., FAQ 6/6, IndexNow).
+> ✅ `bordures-murets` : Q/R drainage — vérifiée en prod (9 506 car., FAQ 6/6), IndexNow 200.
 > 1. Lundi 26/10 : veille (étape 6).
 > 2. Prochain technique : maillage `/contact` depuis `/mentions-legales` et les pieds de page
 >    simplifiés (zone, services, réalisations).

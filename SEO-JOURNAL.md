@@ -20,6 +20,8 @@ et à compléter en fin de run.
 > pas de contenu). Les 4 `/realisations/*` n'ont pas de pied de page → pas touchées.
 > Build OK (`npm ci` puis `npm run build`), `check:fige` OK. Veille du lundi faite
 > (Techniques apprises). Archive : rien à archiver (pas de run le 26/09).
+> ✅ Vérifié en prod (`adcf0ba`, `success`) : `href="/contact"` servi sur `/services/enrobe-a-chaud`
+> et `/zone-intervention`, IndexNow 16 URLs → 200.
 
 > ✅ **25/10/2026 — Déploiement OK** (`f53cb90` : statut GitHub `success`). Prod =
 > dernier commit (16/16 en 200, valeurs du 24/10). Chantier (**contenu**, après un jour

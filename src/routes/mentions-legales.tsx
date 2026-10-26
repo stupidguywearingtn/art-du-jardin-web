@@ -504,6 +504,11 @@ function MentionsLegales() {
           <p className="mt-3 text-muted text-sm">
             HCE SARL · 40 avenue Etienne Lamy, 39300 Cize · 03 84 52 61 48
           </p>
+          <p className="mt-2 text-muted text-sm">
+            <Link to="/contact" className="transition-colors hover:text-gold">
+              Contact
+            </Link>
+          </p>
         </footer>
         <MobileFloatingCTA href="/#devis" />
       </main>

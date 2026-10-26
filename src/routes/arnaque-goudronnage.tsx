@@ -445,6 +445,10 @@ function ArnaqueGoudronnage() {
             HCE SARL · 40 avenue Etienne Lamy, 39300 Cize · 03 84 52 61 48
           </p>
           <p className="mt-2 text-muted text-sm">
+            <Link to="/contact" className="transition-colors hover:text-gold">
+              Contact
+            </Link>
+            {" · "}
             <Link to="/mentions-legales" className="transition-colors hover:text-gold">
               Mentions légales
             </Link>

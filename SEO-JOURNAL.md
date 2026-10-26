@@ -8,6 +8,19 @@ et à compléter en fin de run.
 
 ## État des lieux
 
+> ✅ **26/10/2026 (lundi) — Déploiement OK** (`e0b4e35` : statut GitHub `success`). Prod =
+> dernier commit (16/16 en 200, valeurs du 25/10). Chantier (**technique — maillage**,
+> après un jour contenu) : `/contact` n'était lié que depuis le pied de page de l'accueil
+> (0 lien entrant servi sur les 15 autres URLs). Ajout d'une ligne « Contact · Mentions
+> légales » dans les pieds de page simplifiés : 6 `/services/*`, `/zone-intervention`,
+> `/realisations` ; « Contact » ajouté sur `/mentions-legales` et `/arnaque-goudronnage` ;
+> « Mentions légales » ajouté sur `/contact`. Banc local (`vite dev --host 127.0.0.1`) :
+> `/contact` lié depuis **11 pages** (+ accueil) ; +27 car. par page touchée, rien d'autre
+> ne bouge. `lastmod` / « Dernière mise à jour » **non modifiés** (pied de page seulement,
+> pas de contenu). Les 4 `/realisations/*` n'ont pas de pied de page → pas touchées.
+> Build OK (`npm ci` puis `npm run build`), `check:fige` OK. Veille du lundi faite
+> (Techniques apprises). Archive : rien à archiver (pas de run le 26/09).
+
 > ✅ **25/10/2026 — Déploiement OK** (`f53cb90` : statut GitHub `success`). Prod =
 > dernier commit (16/16 en 200, valeurs du 24/10). Chantier (**contenu**, après un jour
 > technique) : **`/services/bordures-murets`** (7 658, inchangée depuis le 17/09) +1 Q/R
@@ -767,6 +780,17 @@ un extrait de SERP ne prouve pas ce que la page contient.
 > `verif.com` ont été jugées périmées **sur la seule foi d'extraits de recherche**
 > (403 au runner, contenu jamais lu). Leur statut « périmée » n'est donc pas
 > établi. Noté en chantier en attente.
+
+### Positions mesurées — 26/10/2026
+
+| Contrôle | 26/10/2026 | vs 25/10 |
+|---|---|---|
+| Déploiement `main` (`e0b4e35`) | **`success`** | = |
+| Prod vs code (`mesure-texte-servi`) | 16/16 en 200, valeurs identiques au 25/10 (`bordures-murets` 9 506) | = |
+| SERP | non relevée (canal `WebSearch` US, non représentatif) | — |
+
+Pas d'accès Search Console. **À relever par Yanis** : « Performances IA » + requêtes à
+impressions ; indexation de `/contact`.
 
 ### Positions mesurées — 25/10/2026
 
@@ -1631,6 +1655,16 @@ les onze FAQPage** en local comme en production, le nouveau
 soumission IndexNow des 12 URLs après déploiement sort en **HTTP 200**.
 
 ## Chantiers faits
+
+### 26/10/2026 — Maillage : `/contact` et `/mentions-legales` liés depuis les pieds de page simplifiés
+
+Avant : `/contact` (page NAP officielle créée le 24/10) n'avait qu'un lien entrant (pied de
+page de l'accueil). Après : liée depuis 11 pages (6 services, zone, hub réalisations,
+mentions légales, arnaque, + accueil). `/mentions-legales` gagne aussi un lien depuis les
+6 services, la zone, le hub et `/contact`. Fichiers : `services.$slug.tsx`,
+`zone-intervention.tsx`, `realisations.index.tsx`, `mentions-legales.tsx`,
+`arnaque-goudronnage.tsx`, `contact.tsx`. Reste : les 4 `/realisations/*` n'ont pas de pied
+de page (ne pas en inventer un sans valider le rendu).
 
 ### 25/10/2026 — `/services/bordures-murets` : Q/R drainage d'un muret de soutènement
 Question réelle (mur qui pousse / bombe après la pluie), absente du site. Réponse directe,
@@ -3177,6 +3211,17 @@ rien.
 
 Par ordre de priorité. **Alterner les angles, ne pas refaire le même deux jours
 de suite.**
+
+> 🆕 **MISE À JOUR DU 26/10/2026 — prime sur tout ce qui suit.**
+> ✅ Maillage `/contact` depuis les pieds de page simplifiés (à vérifier en prod : `href="/contact"` sur `/services/enrobe-a-chaud`).
+> 1. Prochain contenu : `preparation-terrain` (7 138, la plus maigre des services) ;
+>    accueil : **rien sans accord client**.
+> 2. Prochain technique : lien `/contact` sur les 4 `/realisations/*` (pas de pied de page :
+>    à placer près du bloc d'appel final, rendu à vérifier).
+> 3. GEO hors site (veille 26/10) : GBP et annuaires pèsent plus que le site dans les
+>    citations IA locales → fiche Google Business Profile complète = action Yanis/Naofal.
+> 4. Yanis : Search Console (Performances IA + indexation `/contact`) ; statut du mobile
+>    WhatsApp.
 
 > 🆕 **MISE À JOUR DU 25/10/2026 — prime sur tout ce qui suit.**
 > ✅ `bordures-murets` : Q/R drainage — vérifiée en prod (9 506 car., FAQ 6/6), IndexNow 200.
@@ -4950,6 +4995,25 @@ récupérer sans rien réécrire. **Sans cette requête, le travail restait perd
 ---
 
 ## Techniques apprises
+
+### 26/10/2026 (lundi) — 📚 Google renforce les liens dans AI Overviews (15/10) ; 📚 en local, la fiche Google pèse plus que le site dans les citations IA
+
+- **Google, 15/10/2026** (blog.google, « AI Mode and AI Overviews updates to explore the
+  web ») : liens intégrés plus nombreux et plus tôt dans les réponses ; test d'une section
+  « pages officielles » en tête de réponse pour une tâche précise ; carrousels
+  d'actualités étendus. **Applicable** : une page officielle claire par tâche (`/contact`
+  pour « joindre HCE », `/arnaque-goudronnage` pour « vérifier une entreprise ») — d'où le
+  maillage du jour. Source :
+  https://blog.google/products-and-platforms/products/search/updates-ai-mode-overviews-explore-web/
+- **BrightLocal, 26/08/2026 (MAJ 16/09)**, 60 970 vérifications US/UK/AU : la fiche Google
+  Business Profile ≈ 28,6 % des citations (≈ 67 % de celles des AI Overviews, calcul sur
+  leurs tableaux) ; ChatGPT cite surtout Yelp (marché US, Yelp peu pertinent en France —
+  l'équivalent local est PagesJaunes). Les sites d'entreprise = ~93 % des **domaines**
+  cités mais pas des citations. **Applicable** : la fiche GBP d'HCE (catégories, horaires,
+  photos, description, lien `/contact`) est le levier GEO local n° 1 — hors de portée du
+  dépôt, action client. Chiffres internes de l'étude parfois incohérents (28,5 vs 28,63 %).
+  Source : https://www.brightlocal.com/resources/ai-directory-sources/
+- Skills claude-seo / geo-seo-claude : pas vérifié de nouvelle version ce run.
 
 ### 19/10/2026 (lundi) — 📚 Google met en avant les liens dans AI Overviews / Mode IA, et la Search Console compte les impressions IA
 Sources : billet Google de Hema Budaraju du 15/10/2026, repris par BetaNews

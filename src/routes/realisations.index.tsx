@@ -458,6 +458,15 @@ function HubRealisations() {
             HCE
           </Link>
           <p className="mt-3 text-muted text-sm">Cize, Jura · 03 84 52 61 48</p>
+          <p className="mt-2 text-muted text-sm">
+            <Link to="/contact" className="transition-colors hover:text-gold">
+              Contact
+            </Link>
+            {" · "}
+            <Link to="/mentions-legales" className="transition-colors hover:text-gold">
+              Mentions légales
+            </Link>
+          </p>
         </footer>
         <MobileFloatingCTA href="/#devis" />
       </main>

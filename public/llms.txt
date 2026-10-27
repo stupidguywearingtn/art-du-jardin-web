@@ -5,7 +5,7 @@
 > dans le Jura et l'Ain. Entreprise créée en 2012, 14 années d'expérience, plus de
 > 1000 chantiers livrés, garantie décennale.
 
-Dernière mise à jour : 25 octobre 2026
+Dernière mise à jour : 27 octobre 2026
 Site officiel : https://www.hcetp.com
 
 ## L'entreprise en bref
@@ -156,6 +156,18 @@ seul tenant garde des vides et se tasse de façon irrégulière sous le poids de
 Le compactage se fait par couches successives, à la plaque vibrante puis au rouleau, avec
 contrôle de la portance : c'est ce support qui porte les véhicules, l'enrobé posé à la
 main à 150 °C étant la couche de finition.
+
+### Le gel peut-il soulever ou casser une cour en enrobé dans le Jura ?
+Oui, si le sol sous la cour est gélif et reçoit de l'eau : c'est le sol qui gonfle (lentilles
+de glace) puis perd sa portance au dégel, quand l'eau libérée détrempe la fondation. Il faut
+trois conditions : un sol gélif, un froid durable, de l'eau qui atteint la zone gelée. Un sol
+est gélif dès 3 % d'éléments inférieurs à 0,02 mm ; les sables limoneux sont les plus
+sensibles. Ordre de grandeur publié : 80 à 140 cm de pénétration du gel dans le Jura et les
+Préalpes suisses (hiver rigoureux, selon altitude). Remèdes : remplacer le sol gélif par des
+matériaux non gélifs sur une épaisseur suffisante, et empêcher l'eau d'atteindre la zone gelée
+(drainage, pentes). C'est le mécanisme des barrières de dégel (code de la route, art. R411-20
+et R411-21). Épaisseur et matériaux se règlent au devis détaillé de HCE.
+Source : https://geotechnikschweiz.ch/wp-content/uploads/2017/04/Heft14.pdf (Bonnard et Recordon, 1958)
 
 ### Une cour goudronnée peut-elle envoyer l'eau chez le voisin ?
 Le terrain situé en contrebas doit recevoir les eaux qui s'écoulent naturellement du
@@ -461,7 +473,7 @@ de l'eau ne s'évaluent pas autrement.
 - [Préparation de terrain](https://www.hcetp.com/services/preparation-terrain) :
   terrassement, VRD, viabilisation, drainage, enrochement. Contient aussi les réponses
   détaillées sur le terrassement (déclarations DT-DICT et leurs délais, devenir des
-  terres excavées et registre Trackdéchets, compactage par couches), sur le puits perdu
+  terres excavées et registre Trackdéchets, compactage par couches, gel et dégel du sol sous une cour), sur le puits perdu
   (eaux pluviales seulement : rejet d'eaux usées interdit, article 13 de l'arrêté du
   7 septembre 2009) et sur l'enrochement comparé au muret de soutènement, avec leurs sources.
 - [Maçonnerie générale](https://www.hcetp.com/services/maconnerie-generale) : pavage,

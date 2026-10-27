@@ -74,7 +74,7 @@ const SERVICES: Record<string, ServiceData> = {
       "Terrassement, VRD et viabilisation dans le Jura et l'Ain : décaissement contrôlé, drainage et compactage par couches avant toute pose d'enrobé. Devis détaillé.",
     savoir: {
       heading: "Terrassement : les questions qu'on nous pose avant d'ouvrir le sol",
-      lead: "Avant de goudronner une cour ou de viabiliser un terrain, il y a le terrassement : des déclarations obligatoires, des délais réglementaires, des terres à évacuer et un sol à compacter. Voici ce que cela implique concrètement dans le Jura et l'Ain.",
+      lead: "Avant de goudronner une cour ou de viabiliser un terrain, il y a le terrassement : des déclarations obligatoires, des délais réglementaires, des terres à évacuer, un sol à compacter et, dans le Jura, un gel qui se prépare dès le terrassement. Voici ce que cela implique concrètement dans le Jura et l'Ain.",
       updated: PAGE_UPDATED["/services/preparation-terrain"],
       qa: [
         {
@@ -98,6 +98,10 @@ const SERVICES: Record<string, ServiceData> = {
           a: "Parce qu'un enrobé ne rattrape jamais un support qui bouge. Une terre remise en place d'un seul tenant conserve des vides : sous le poids des véhicules, elle se tasse de façon irrégulière, et la surface finit par se fissurer ou par retenir des flaques. Le compactage se fait donc par couches successives, à la plaque vibrante puis au rouleau, avec contrôle de la portance — c'est ce support-là qui porte les véhicules, l'enrobé posé à la main à 150°C n'étant que la couche de finition.",
         },
         {
+          q: "Le gel peut-il soulever ou casser une cour en enrobé dans le Jura ?",
+          a: "Oui, si le sol sous la cour est gélif et qu'il a de l'eau à sa disposition : ce n'est pas l'enrobé qui gèle et casse, c'est le sol en dessous qui gonfle puis s'affaisse. En hiver, l'eau aspirée vers la limite du gel forme des lentilles de glace qui soulèvent la surface ; au dégel, l'eau libérée par ces lentilles détrempe la fondation, qui perd sa portance et se déforme sous les roues. La parade se décide donc au terrassement, pas à la pose. Trois conditions doivent être réunies : un sol gélif, un froid assez long pour que le gel pénètre et se maintienne, et de l'eau qui parvient jusqu'à la zone gelée. Selon l'étude de référence de Bonnard et Recordon (1958), un sol devient gélif dès qu'il contient 3 % ou plus d'éléments inférieurs à 0,02 mm, et les plus sensibles sont les sables limoneux ; la même étude donnait 80 à 140 cm de pénétration du gel dans le Jura et les Préalpes suisses — un ordre de grandeur pour un hiver rigoureux, qui varie avec l'altitude et l'exposition. Les remèdes qu'elle décrit sont de remplacer le sol gélif par des matériaux non gélifs sur une épaisseur suffisante et d'empêcher l'eau d'atteindre la zone gelée — d'où le lien direct avec le drainage et les pentes. C'est le même mécanisme qui justifie les barrières de dégel que les gestionnaires de routes posent en fin d'hiver (articles R411-20 et R411-21 du code de la route) : au dégel, la chaussée est à son plus faible, pas au cœur du froid. L'épaisseur de la couche de fondation et le choix des matériaux se règlent au devis détaillé, après lecture du terrain.",
+        },
+        {
           q: "Un puits perdu, à quoi sert-il, et peut-on y envoyer ses eaux usées ?",
           a: "Un puits perdu sert à infiltrer dans le sol les eaux de pluie d'une cour ou d'une toiture quand aucun réseau ni fossé n'est à portée — et seulement elles. L'arrêté du 7 septembre 2009 sur l'assainissement non collectif l'écrit à son article 13 : les rejets d'eaux usées domestiques, même traitées, sont interdits dans un puisard, un puits perdu, un puits désaffecté ou une cavité profonde. Le seul ouvrage prévu pour des eaux usées est le puits d'infiltration, réservé à des eaux ayant subi un traitement complet et autorisé par la commune sur la base d'une étude hydrogéologique. Pour les eaux pluviales, le puits ne vaut que si le sol en dessous absorbe l'eau : c'est le diagnostic d'écoulement qui le dit, avant de creuser. Les règles locales — plan local d'urbanisme, périmètre de protection d'un captage d'eau potable — peuvent encadrer ou exclure l'infiltration ; la mairie le précise avant le chantier.",
         },
@@ -118,6 +122,14 @@ const SERVICES: Record<string, ServiceData> = {
         {
           label: "Préfecture du Doubs — Arrêté du 7 septembre 2009 (assainissement non collectif), version consolidée, article 13",
           url: "https://www.doubs.gouv.fr/index.php/contenu/telechargement/22817/152536/file/Arr_t__du_7_septembre_2009_version_consolidee_au_20150427.pdf",
+        },
+        {
+          label: "D. Bonnard et E. Recordon — « Les fondations des chaussées. Les problèmes de la portance et de la résistance au gel » (1958), réédité par la Société suisse de géotechnique",
+          url: "https://geotechnikschweiz.ch/wp-content/uploads/2017/04/Heft14.pdf",
+        },
+        {
+          label: "Wikipédia — Barrière de dégel (mécanisme du dégel, articles R411-20 et R411-21 du code de la route)",
+          url: "https://fr.wikipedia.org/wiki/Barri%C3%A8re_de_d%C3%A9gel",
         },
       ],
     },

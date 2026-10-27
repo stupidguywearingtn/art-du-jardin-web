@@ -2441,3 +2441,182 @@ régression.
   un chantier par jour, et c'est le plus difficile à sourcer honnêtement.
 - **Ne pas notifier le client** : la cadence hebdomadaire posée le 23/09
   s'applique, prochaine échéance le 30/09.
+
+## Archivé le 27/10/2026 (entrées du 27/09/2026)
+
+<!-- section d'origine : Positions mesurées -->
+### Positions mesurées — 27/09/2026
+
+**Indexation : toujours nulle, 20 jours après la 1re soumission IndexNow.** Les
+trois mesures habituelles via `WebSearch`, reconduites à l'identique :
+1. **Phrase exacte du site** `"Médaillons et inserts pavés intégrés à l'enrobé"`
+   → dix résultats, **zéro hcebtp.com**. Les mêmes concurrents français qu'aux
+   20, 21, 22, 23 et 25/09 (mavrotp, pajot-tp, aravis-enrobage,
+   abers-amenagement, europavage68, perenia, cuinet) + deux brevets USPTO +
+   Pinterest. `lizetp.com`, apparu le 25/09, est ressorti du jeu — simple
+   rotation. **Inchangé sur le fond.**
+2. **Requête nommant le domaine** `hcebtp.com HCE Hini Cours Enrobé Cize 39300
+   enrobé travaux publics` → **aucune page du domaine**, neuf fiches d'annuaire
+   (kompass, pappers, verif, doctrine, societe, pagesjaunes, 118000,
+   lagazettefrance, manageo) — **exactement les mêmes qu'au 25/09**. Le résumé
+   du moteur dit lui-même « the website hcebtp.com mentioned in your query did
+   not appear in the search results ». **Inchangé.**
+3. **`site:hcebtp.com`** → neuf pages sans rapport (Wikipédia d'acronymes HTP /
+   HCB / HBD, chnbtp.com, Facebook HBTP), **zéro résultat du domaine**.
+   L'opérateur `site:` n'est toujours pas honoré par ce canal. **Inchangé.**
+
+| Requête | Mesure (27/09/2026) | Évolution vs 25/09 |
+|---|---|---|
+| indexation (phrase exacte du site) | **absent** | inchangé |
+| indexation (requête nommant le domaine) | **absent** | inchangé — 9 fiches d'annuaire |
+| `site:hcebtp.com` | **absent** | inchangé |
+| requêtes commerciales | **non mesurables** (pas de SERP brute via ce canal) | indéterminé |
+
+✅ **`WebSearch` n'a échoué aucune fois aujourd'hui** (3 requêtes, 3 réponses
+exploitables). Les canaux de SERP brute n'ont **pas** été re-testés : la liste
+du 11/09 est à jour et tous étaient morts. Ne pas y perdre de temps demain.
+
+> 🔕 **Pas de notification client aujourd'hui, et c'est volontaire.** La règle du
+> 23/09 tient : re-notifier au plus tôt le **30/09/2026**, ou immédiatement si
+> l'indexation arrive, si une position mesurable apparaît, ou si un contrôle
+> casse. Rien de tout cela n'est survenu. **Le 30/09 reste la prochaine
+> échéance d'alerte — c'est dans trois jours, et c'est le run du 30 qui doit
+> la déclencher.**
+
+> ⚠️ **Il n'y a pas eu de run SEO le 26/09/2026.** Aucun commit, aucune entrée
+> de journal à cette date : le dernier run est celui du 25/09. Ne pas chercher
+> une entrée manquante. Conséquence pratique : le candidat n°1 désigné « pour le
+> 26/09 » (le `lastmod`) a été repris aujourd'hui, tel quel.
+
+**Volume de texte servi en production** (`scripts/mesure-texte-servi.mjs`, vu
+comme Googlebot), **avant** le chantier du jour : identique au 25/09 **au
+caractère près sur les douze URLs**. **Après** déploiement : **identique
+également, sur les douze URLs** — le chantier du jour ne touche pas au rendu,
+et c'est mesuré, pas supposé (voir « Chantiers faits »).
+
+| URL | Texte servi (27/09) | vs 25/09 | JSON-LD | lastmod |
+|---|---|---|---|---|
+| accueil | 5 499 car. | = | 3 | *(aucun, volontaire)* |
+| `/realisations` | 6 258 car. | = | 4 | 2026-09-20 |
+| `/services/bordures-murets` | 7 012 car. | = | 4 | 2026-09-17 |
+| `/services/finitions-soignees` | 6 821 car. | = | 4 | 2026-09-21 |
+| `/services/drainage-pentes` | 5 198 car. | = | 4 | 2026-09-13 |
+| `/services/maconnerie-generale` | 5 080 car. | = | 4 | 2026-09-16 |
+| `/services/preparation-terrain` | 4 482 car. | = | 4 | 2026-09-12 |
+| `/services/enrobe-a-chaud` | 3 783 car. | = | 4 | 2026-09-11 |
+| `/realisations/cour-allee-privee` | 7 670 car. | = | 3 | 2026-09-23 |
+| `/realisations/parking-voirie-pro` | 6 356 car. | = | 3 | 2026-09-22 |
+| `/realisations/preparation-terrassement` | 8 156 car. | = | 3 | 2026-09-25 |
+| `/realisations/chantier-en-cours` | 373 car. | = | 2 | *(aucun, volontaire)* |
+
+Les 12 URLs du sitemap répondent 200, `scripts/verif-faq.mjs` passe en **✓ sur
+les onze FAQPage** en local comme en production, le nouveau
+`scripts/verif-lastmod.mjs` passe en **✓ sur les 12 URLs** en production, et la
+soumission IndexNow des 12 URLs après déploiement sort en **HTTP 200**.
+
+<!-- section d'origine : Chantiers faits -->
+### 27/09/2026 — Le sitemap a enfin un `lastmod`, et il ne peut plus mentir : il lit la date que la page affiche (commit `51d45aa`)
+
+**Chantier choisi, et pourquoi.** Le `lastmod` était le candidat n°1 désigné par
+le run du 25/09 pour le 26/09 — qui n'a pas eu lieu. Il était en attente depuis
+le 09/09 (point n°4 des chantiers en attente), soit **dix runs**, toujours repoussé
+parce qu'il fallait « des dates honnêtes » et qu'on ne savait pas où les prendre.
+L'indexation reste nulle, et le corollaire posé le 20/09 s'applique : **ne plus
+ouvrir un chantier au motif qu'il aiderait l'indexation** — celui-ci est pris pour
+sa valeur propre, le jour où le site sera crawlé.
+
+**Ce qui a rendu le chantier faisable, et qui n'était écrit nulle part : les dates
+honnêtes existaient déjà dans le code.** Chaque page de fond affiche depuis son
+enrichissement une mention « Dernière mise à jour : <date> », alimentée par deux
+champs `updated` / `updatedLabel` posés à côté du contenu qu'ils datent. Dix des
+douze URLs du sitemap en ont une. **Il n'y avait donc rien à inventer ni à
+calculer : il fallait relier les deux bouts.**
+
+**Vérification de ces dates avant de s'en servir — ne pas refaire, c'est fait.**
+Chacune a été recoupée avec la date du commit qui a réellement modifié le bloc de
+contenu concerné, via `git log -L <début>,<fin>:<fichier>` (voir « Techniques
+apprises » : c'est l'outil juste pour dater un bloc dans un fichier qui porte
+plusieurs pages). **Dix sur dix concordent**, à une nuance près, traitée plus bas.
+
+**Ce qui a été fait :**
+
+1. **`src/lib/lastmod.ts`, nouvelle source unique.** Une table `PAGE_UPDATED`
+   qui associe à chaque URL son `{ iso, label }`. Le `label` est écrit en toutes
+   lettres et non dérivé de l'`iso` : c'est du texte visible, il n'a pas à dépendre
+   d'un formateur d'exécution — et ça garantit que le rendu ne bouge pas d'un
+   caractère.
+2. **Les trois fichiers de route lisent cette table** au lieu de porter la date
+   en dur : `services.$slug.tsx` (6 pages), `realisations.$slug.tsx` (3 dossiers),
+   `realisations.index.tsx` (le hub). Le champ `updatedLabel` disparaît, `updated`
+   devient un `PageUpdate`. **La ligne reste physiquement à côté du contenu
+   qu'elle date** — c'est délibéré : un futur run qui enrichit un bloc voit la
+   clé et sait quoi modifier.
+3. **Le sitemap émet `<lastmod>` depuis la même table.** 10 URLs en ont un ; les
+   deux qui n'affichent aucune date — l'accueil et `/realisations/chantier-en-cours`
+   — **sortent volontairement sans `lastmod`**, ce que la spécification autorise
+   (l'élément est facultatif par URL).
+4. **`scripts/verif-lastmod.mjs`, versionné.** Il lit le sitemap servi, puis
+   chaque page servie, et vérifie trois choses par URL : une page qui affiche une
+   date a un `lastmod` et réciproquement ; le `lastmod` égale le `datetime` de la
+   balise `<time>` ; le libellé en toutes lettres désigne bien le même jour.
+   Sortie en code 1 à la première incohérence.
+
+**Pourquoi la source unique, plutôt qu'une table de dates recopiée dans le
+sitemap.** Google n'accorde de crédit au `lastmod` que s'il le juge fiable, et il
+en juge **en le comparant à ce que voit l'utilisateur**. Un `lastmod` qui
+contredit la page fait ignorer le `lastmod` de **tout** le sitemap — on perdrait
+alors le signal sur les pages honnêtes aussi. Deux valeurs recopiées à la main
+finissent toujours par diverger : `llms.txt` est dans ce journal depuis le
+premier jour comme l'exemple de ce que devient une donnée statique dupliquée.
+
+**Le contrôle négatif, et c'est ce qui rend le script crédible.** Un vérificateur
+qui n'a jamais échoué ne prouve rien. Celui-ci a été lancé sur la **production
+d'avant le déploiement**, qui affichait les dates mais n'avait pas de `lastmod` :
+il est sorti en **✗ 10 incohérences sur 12 URLs, code 1**, en nommant chaque page.
+Puis en **✓ 12/12** sur le banc d'essai local, puis en **✓ 12/12** en production
+après déploiement. **À refaire pour tout nouveau script de contrôle : le faire
+échouer une fois exprès avant de lui faire confiance.**
+
+**Preuve que le rendu n'a pas bougé — mesurée, pas supposée.** C'est le seul vrai
+risque d'un chantier qui touche trois fichiers de rendu. Banc d'essai local monté
+selon la recette du 15/09 : `npm run build` en 0, `npx tsc --noEmit` en 0,
+`mesure-texte-servi.mjs` sur le local donnant **exactement les douze valeurs de la
+production**, `verif-faq.mjs` en ✓ sur les onze FAQPage. Après déploiement (visible
+en production **~60 s** après le `git push origin HEAD:main`), les douze valeurs
+sont **à nouveau identiques au caractère près**, et `verif-faq.mjs` repasse en ✓
+sur les onze FAQPage en production.
+
+**Sur `eslint` : compté, pas supposé** (méthode du 22/09). `services.$slug.tsx`
+sortait déjà 60 erreurs `prettier/prettier` à HEAD et en sort 60 après — **le
+fichier n'a pas été reformaté**, ça aurait noyé le diff. `realisations.index.tsx`
+était propre et mon `<time>` allongé y a créé **une** erreur de formatage :
+corrigée par `prettier --write` sur ce seul fichier, diff de 4 lignes, l'espace
+préservé par `{" "}`. Les deux fichiers neufs passent `eslint` et `prettier` sans
+rien.
+
+**Ce que j'ai décidé de NE PAS faire, et pourquoi :**
+
+- **Ne pas dater `/` ni `/realisations/chantier-en-cours`.** Ces deux pages ne
+  publient aucune date de mise à jour. Leur en fabriquer une pour « remplir » le
+  sitemap est exactement ce qui fait déclasser un `lastmod` entier. Elles sortent
+  sans. **Le jour où l'une reçoit un bloc daté, ajouter sa clé dans
+  `src/lib/lastmod.ts` suffit** — le sitemap suivra seul.
+- **Ne pas passer `/services/maconnerie-generale` au 24/09.** `git log -L` la
+  date du **24/09** parce que le commit `503e6ab` y a changé un chemin d'image
+  (`/assets/maconnerie-2.png` → `/photos/2.png`), tandis que la page affiche
+  **16/09**, date de son bloc Q/R. J'ai gardé le 16/09 : la date visible est une
+  date **éditoriale**, elle annonce au lecteur quand le contenu qu'il lit a été
+  revu. Un changement de visuel demandé par le client n'est pas une révision du
+  contenu, et le `lastmod` doit dire la même chose que la page — c'est toute la
+  logique du chantier. Même raisonnement pour l'accueil, daté 24/09 par le même
+  commit d'images. **Ne pas « corriger » ces deux dates.**
+- **Ne pas toucher au `dateTime` camelCase** rendu par React (`<time dateTime="…">`
+  en production au lieu de `datetime`). Les noms d'attributs HTML sont insensibles
+  à la casse : c'est valide, les analyseurs le lisent, et `verif-lastmod.mjs` le
+  cherche sans tenir compte de la casse. Rien à réparer.
+- **Ne pas reformater `services.$slug.tsx`.** 60 erreurs `prettier` préexistantes :
+  les corriger aujourd'hui ferait un diff illisible et masquerait le chantier réel.
+  Noté comme dette, pas comme urgence.
+- **Ne pas toucher à `llms.txt`.** Vérifié en entier ce run : il est daté du
+  25/09, et sa section « Pages » couvre bien les douze URLs, hub `/realisations`
+  et trois dossiers enrichis compris. **Aucune dérive, rien à faire.**

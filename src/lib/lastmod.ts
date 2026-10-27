@@ -31,7 +31,7 @@ export type PageUpdate = { iso: string; label: string };
    réelle du dernier changement de contenu, pour le seul `<lastmod>` du sitemap. */
 export const PAGE_UPDATED = {
   "/": { iso: "2026-10-22", label: "22 octobre 2026" },
-  "/services/preparation-terrain": { iso: "2026-10-15", label: "15 octobre 2026" },
+  "/services/preparation-terrain": { iso: "2026-10-27", label: "27 octobre 2026" },
   "/services/enrobe-a-chaud": { iso: "2026-10-02", label: "2 octobre 2026" },
   "/services/maconnerie-generale": { iso: "2026-10-19", label: "19 octobre 2026" },
   "/services/drainage-pentes": { iso: "2026-10-17", label: "17 octobre 2026" },

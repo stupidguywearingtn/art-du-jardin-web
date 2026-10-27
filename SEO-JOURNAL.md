@@ -22,6 +22,8 @@ et à compléter en fin de run.
 > 7 165 → **9 121 car.**, FAQ 8/8, lead mis à jour, lastmod + `llms.txt` 27/10. Build OK,
 > `check:fige` OK, `verif-lastmod` : seul écart connu `/` (depuis 22/10). Archive : entrées
 > du 27/09.
+> ✅ Vérifié en prod (`a1c3c96`, `success`) : `preparation-terrain` 9 121 car., FAQ 8/8,
+> lastmod sitemap 2026-10-27, `llms.txt` à jour, IndexNow 16 URLs → 200.
 
 > ✅ **26/10/2026 (lundi) — Déploiement OK** (`e0b4e35` : statut GitHub `success`). Prod =
 > dernier commit (16/16 en 200, valeurs du 25/10). Chantier (**technique — maillage**,

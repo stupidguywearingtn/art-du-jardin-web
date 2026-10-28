@@ -19,6 +19,8 @@ et à compléter en fin de run.
 > `href="/mentions-legales"`, +63 car. par page, rendu sans JS vérifié à 390 px (pas de
 > défilement horizontal). `lastmod` non modifié (maillage, pas de contenu). Build OK,
 > `check:fige` OK. Archive : entrées du 28/09.
+> ✅ Vérifié en prod (`0dc0b32`, `success`) : `href="/contact"` servi sur les 4
+> `/realisations/*`, IndexNow 16 URLs → 200.
 
 > ✅ **27/10/2026 — Déploiement OK** (`192d0dd` : statut GitHub `success`). Prod =
 > dernier commit (16/16 en 200 ; +27 car. du maillage du 26/10 visibles, ex.

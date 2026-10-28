@@ -8,6 +8,18 @@ et à compléter en fin de run.
 
 ## État des lieux
 
+> ✅ **28/10/2026 — Déploiement OK** (`4acdaf3` : statut GitHub `success`). Prod =
+> dernier commit (16/16 en 200, valeurs du 27/10 : `preparation-terrain` 9 121). Chantier
+> (**technique — maillage**, après un jour contenu) : les 4 `/realisations/*` n'avaient
+> aucun lien vers `/contact` ni `/mentions-legales`. ⚠️ Piège évité : le CTA bas de ces
+> pages n'est rendu **qu'après chargement client** (état serveur = état de chargement) —
+> un premier ajout là n'apparaissait pas dans le HTML servi (0 lien au banc local). Ligne
+> « HCE · Cize, Jura · 03 84 52 61 48 · Contact · Mentions légales » placée dans `SeeAlso`
+> (rendu dans les deux états). Banc local : 4/4 pages servent `href="/contact"` et
+> `href="/mentions-legales"`, +63 car. par page, rendu sans JS vérifié à 390 px (pas de
+> défilement horizontal). `lastmod` non modifié (maillage, pas de contenu). Build OK,
+> `check:fige` OK. Archive : entrées du 28/09.
+
 > ✅ **27/10/2026 — Déploiement OK** (`192d0dd` : statut GitHub `success`). Prod =
 > dernier commit (16/16 en 200 ; +27 car. du maillage du 26/10 visibles, ex.
 > `enrobe-a-chaud` 12 809). Chantier (**contenu**, après un jour technique) :
@@ -800,6 +812,17 @@ un extrait de SERP ne prouve pas ce que la page contient.
 > (403 au runner, contenu jamais lu). Leur statut « périmée » n'est donc pas
 > établi. Noté en chantier en attente.
 
+### Positions mesurées — 28/10/2026
+
+| Contrôle | 28/10/2026 | vs 27/10 |
+|---|---|---|
+| Déploiement `main` (`4acdaf3`) | **`success`** | = |
+| Prod vs code (`mesure-texte-servi`) | 16/16 en 200, valeurs identiques au 27/10 | = |
+| SERP | non relevée (canal `WebSearch` US, non représentatif) | — |
+
+Pas d'accès Search Console. **À relever par Yanis** : « Performances IA » + requêtes à
+impressions ; indexation de `/contact`.
+
 ### Positions mesurées — 27/10/2026
 
 | Contrôle | 27/10/2026 | vs 26/10 |
@@ -1544,78 +1567,12 @@ nouveau contenu (3 essais espacés de 30 s, le 3e concluant). Du même ordre que
 les 2 min 30 du 28/09. Méthode de contrôle inchangée : un `curl` sur la seule
 page modifiée, jamais `mesure-texte-servi.mjs` qui interroge les 12 URLs.
 
-### Positions mesurées — 28/09/2026
-
-**Indexation : toujours nulle, 21 jours après la 1re soumission IndexNow.** Les
-trois mesures habituelles via `WebSearch`, reconduites à l'identique :
-1. **Phrase exacte du site** `"Médaillons et inserts pavés intégrés à l'enrobé"`
-   → dix résultats, **zéro hcebtp.com**. Les mêmes concurrents français qu'aux
-   20, 21, 22, 23, 25 et 27/09 (mavrotp, pajot-tp, aravis-enrobage,
-   abers-amenagement, europavage68, perenia, cuinet) + deux brevets USPTO +
-   Pinterest. **Inchangé, y compris dans l'ordre.**
-2. **Requête nommant le domaine** `hcebtp.com HCE Hini Cours Enrobé Cize 39300
-   enrobé travaux publics` → **aucune page du domaine**, neuf fiches d'annuaire
-   (kompass, pappers, verif, doctrine, societe, pagesjaunes, 118000,
-   lagazettefrance, manageo) — **exactement les mêmes qu'aux 25 et 27/09**.
-   **Inchangé.**
-3. **`site:hcebtp.com`** → neuf pages sans rapport (Wikipédia d'acronymes HTP /
-   HCB / HBD, chnbtp.com, Facebook HBTP), **zéro résultat du domaine**.
-   L'opérateur `site:` n'est toujours pas honoré par ce canal. **Inchangé.**
-
-| Requête | Mesure (28/09/2026) | Évolution vs 27/09 |
-|---|---|---|
-| indexation (phrase exacte du site) | **absent** | inchangé |
-| indexation (requête nommant le domaine) | **absent** | inchangé — 9 fiches d'annuaire |
-| `site:hcebtp.com` | **absent** | inchangé |
-| requêtes commerciales | **non mesurables** (pas de SERP brute via ce canal) | indéterminé |
-
-✅ **`WebSearch` n'a échoué aucune fois aujourd'hui** (3 requêtes d'indexation +
-5 requêtes de veille et de sourçage, 8 réponses exploitables). Les canaux de
-SERP brute n'ont **pas** été re-testés : la liste du 11/09 est à jour, tous
-étaient morts. Ne pas y perdre de temps demain.
-
-> 🔕 **Pas de notification client aujourd'hui, et c'est volontaire.** La règle du
-> 23/09 tient : la prochaine échéance d'alerte est le **30/09/2026**, soit dans
-> deux jours — **c'est le run du 30 qui doit la déclencher**, ou n'importe quel
-> run si l'indexation arrive, si une position mesurable apparaît, ou si un
-> contrôle casse. Rien de tout cela n'est survenu aujourd'hui.
-
-**Volume de texte servi en production** (`scripts/mesure-texte-servi.mjs`, vu
-comme Googlebot). **Avant** le chantier du jour : identique au 27/09 **au
-caractère près sur les douze URLs**. **Après** déploiement : seule
-`/realisations` bouge, de 6 258 à **13 260** caractères ; les onze autres sont
-inchangées au caractère près — mesuré, pas supposé.
-
-| URL | Texte servi (28/09) | vs 27/09 | JSON-LD | lastmod |
-|---|---|---|---|---|
-| accueil | 5 499 car. | = | 3 | *(aucun, volontaire)* |
-| `/realisations` | **13 260 car.** | **+7 002** | 4 | **2026-09-28** |
-| `/services/bordures-murets` | 7 012 car. | = | 4 | 2026-09-17 |
-| `/services/finitions-soignees` | 6 821 car. | = | 4 | 2026-09-21 |
-| `/services/drainage-pentes` | 5 198 car. | = | 4 | 2026-09-13 |
-| `/services/maconnerie-generale` | 5 080 car. | = | 4 | 2026-09-16 |
-| `/services/preparation-terrain` | 4 482 car. | = | 4 | 2026-09-12 |
-| `/services/enrobe-a-chaud` | 3 783 car. | = | 4 | 2026-09-11 |
-| `/realisations/cour-allee-privee` | 7 670 car. | = | 3 | 2026-09-23 |
-| `/realisations/parking-voirie-pro` | 6 356 car. | = | 3 | 2026-09-22 |
-| `/realisations/preparation-terrassement` | 8 156 car. | = | 3 | 2026-09-25 |
-| `/realisations/chantier-en-cours` | 373 car. | = | 2 | *(aucun, volontaire)* |
-
-Les 12 URLs du sitemap répondent 200. `scripts/verif-faq.mjs` passe en **✓ sur
-les onze FAQPage** en production, dont **8/8 sur `/realisations`** (contre 4/4
-hier) — attention, **lancé sans argument il ne contrôle que l'accueil** : lui
-passer la liste des URLs pour couvrir tout le site. `scripts/verif-lastmod.mjs`
-passe en **✓ sur les 12 URLs**, et la soumission IndexNow des 12 URLs après
-déploiement sort en **HTTP 200**.
-
-**Délai de déploiement observé** : ~2 min 30 entre le `git push origin HEAD:main`
-et la première réponse de production servant le nouveau contenu (deux essais
-espacés de 25 s). Plus lent que les 45 s du 25/09, mais du même ordre : ne pas
-s'alarmer avant 5 minutes, et **ne pas juger le déploiement sur
-`mesure-texte-servi.mjs`, qui interroge les 12 URLs à chaque essai** — un
-`curl` sur la seule page modifiée suffit et va vingt fois plus vite.
-
 ## Chantiers faits
+
+### 28/10/2026 — Maillage : `/contact` et `/mentions-legales` liés depuis les 4 `/realisations/*`
+Fichier `realisations.$slug.tsx`, composant `SeeAlso` (servi dans l'état de chargement **et**
+la page complète). Ne rien ajouter au CTA bas pour les robots : il est client seul. Après ce
+run, `/contact` est lié depuis les 15 autres URLs indexables.
 
 ### 27/10/2026 — `/services/preparation-terrain` : Q/R gel et dégel du sol sous une cour
 Question saisonnière réelle (cour qui se soulève / se fissure après l'hiver), absente du
@@ -2965,115 +2922,20 @@ périmètre.
   ça touche le chargement de la page, c'est exactement ce que l'hypothèse dit de
   ne pas improviser.
 
-### 28/09/2026 — Le hub `/realisations` passe de 6 258 à 13 260 caractères : quatre questions sur ce qui encadre un chantier, dont le taux de TVA que personne ne publie honnêtement (commit `79dca13`)
-
-**Chantier choisi** : le candidat n°1 désigné le 27/09, sans hésitation. Le hub
-était la seule page « de fond » du site à ne porter que **4** Q/R quand les
-quatre dossiers et les six services en ont 5, et c'est la destination naturelle
-d'une requête « réalisations enrobé Jura ». Angle retenu : **ce qui encadre un
-chantier d'enrobé une fois les photos prises** — exactement les questions qu'un
-client se pose avant de signer, et que les concurrents vus dans les SERP de la
-phrase-test ne traitent jamais (ils décrivent leurs prestations, pas le droit ni
-la fiscalité qui s'y appliquent).
-
-**Les quatre questions ajoutées** (le bloc passe de 4 à 8 Q/R), toutes sourcées
-sur des textes primaires lus verbatim aujourd'hui :
-
-1. **« Comment se passe la réception des travaux d'une cour ou d'un parking ? »**
-   — article **1792-6 alinéa 1 du code civil** (en vigueur depuis le 1er janvier
-   1979, loi n° 78-12 du 4 janvier 1978), cité mot pour mot : la réception est
-   « l'acte par lequel le maître de l'ouvrage déclare accepter l'ouvrage avec ou
-   sans réserves », elle intervient « à la demande de la partie la plus
-   diligente » et est « en tout état de cause, prononcée contradictoirement ».
-   **Le journal du 20/09 citait déjà le PV comme point de départ de la décennale
-   sans jamais expliquer l'acte lui-même** : le trou est comblé.
-2. **« Un défaut apparaît trois mois après la fin du chantier : qui le
-   reprend ? »** — **garantie de parfait achèvement**, article 1792-6 alinéas 2
-   à 6. Un an à compter de la réception, **tous** les désordres signalés quelle
-   que soit leur gravité, réserves au PV ou « voie de notification écrite » pour
-   ceux révélés après ; délais de reprise « fixés d'un commun accord » ; à
-   défaut, travaux « aux frais et risques de l'entrepreneur défaillant » après
-   mise en demeure infructueuse ; et la limite, verbatim : la garantie « ne
-   s'étend pas aux travaux nécessaires pour remédier aux effets de l'usure
-   normale ou de l'usage ». La différence de nature avec la décennale (un an
-   mais sans tri des désordres / dix ans mais solidité et impropriété seules)
-   est posée noir sur blanc.
-3. **« Une allée ou une cour en enrobé peut-elle bénéficier de la TVA à 10 % ? »**
-   — **la trouvaille du jour, et la plus rentable.** La doctrine fiscale admet
-   que « les travaux portant sur les voies d'accès principales à la maison
-   d'habitation (allée privative, voie d'accès au garage, etc.) » relèvent du
-   taux réduit de l'**article 279-0 bis du CGI**, et l'annexe **BOI-ANNX-000208
-   (version du 31/07/2024)** cite **nommément « travaux de revêtement :
-   enrobage, dallage et pavage »**, l'abaissement de bordure de trottoir donnant
-   accès au garage, et la pose de bordures et caniveaux le long de ces voies.
-   Exclus et donc à 20 % : les éléments d'agrément d'espaces verts (piscines,
-   bassins d'ornement, éclairage des végétaux) et tout ce qui porte sur un local
-   professionnel ou une voirie d'activité, le taux réduit ne visant que les
-   locaux à usage d'habitation achevés depuis plus de deux ans. Point pratique
-   rarement publié : **c'est le client qui certifie les conditions**, et
-   **BOI-TVA-LIQ-30-20-90-30 (version du 22/10/2025)** dit que « le prestataire
-   devra conserver à l'appui de sa comptabilité le devis ou la facture sur lequel
-   figurent les informations certifiées par le client permettant de bénéficier du
-   taux réduit ». **Aucun prix n'est écrit nulle part** — c'est un taux légal,
-   pas un tarif, et la règle du simulateur n'est pas touchée.
-4. **« Le client doit-il garantir le paiement des travaux avant qu'ils
-   commencent ? »** — **article 1799-1 du code civil** (en vigueur depuis le
-   1er janvier 2014) et **article 1er du décret n° 99-658 du 30 juillet 1999**
-   (rédaction en vigueur depuis le 6 novembre 2014) : seuil de **12 000 € HT**,
-   sommes dues entendues du prix convenu « déduction faite des arrhes et
-   acomptes versés lors de la conclusion » ; crédit spécifique affecté ou
-   cautionnement solidaire ; sursis d'exécution possible « après mise en demeure
-   restée sans effet à l'issue d'un délai de quinze jours ». **Et la nuance que
-   les blogs juridiques écrasent : le texte écarte expressément l'obligation
-   « lorsque le maître de l'ouvrage conclut un marché de travaux pour son propre
-   compte et pour la satisfaction de besoins ne ressortissant pas à une activité
-   professionnelle en rapport avec ce marché »** — donc un particulier qui fait
-   refaire sa cour n'a aucun cautionnement à fournir. Dit comme ça, le passage
-   répond à la vraie question posée, dans les deux sens.
-
-**Ce qui a été touché, et rien d'autre** : le tableau `SAVOIR` de
-`src/routes/realisations.index.tsx` (4 Q/R → 8, et 2 sources → 7), la date de
-`/realisations` dans `src/lib/lastmod.ts` (20/09 → 28/09, source unique de la
-date visible **et** du `lastmod` du sitemap), et l'entrée `/realisations` de
-`public/llms.txt` + son en-tête « Dernière mise à jour ». **Zéro ligne de code
-hors données** : le composant visible et le `FAQPage` lisent le même tableau, ils
-se sont branchés seuls — troisième confirmation après les 22, 23 et 25/09 que
-cette infrastructure tient.
-
-**Contrôles avant push, tous verts** : banc d'essai local (recette du 15/09,
-`npm install` puis `npx vite dev`) mesuré **avant** (6 258 car., exactement la
-valeur de production le même jour → banc fidèle) et **après** (13 260 car.) avec
-le **même** script ; `verif-faq.mjs` **8/8 questions et 8/8 réponses** ;
-`verif-lastmod.mjs` 12 URLs cohérentes ; `tsc --noEmit`, `eslint`,
-`prettier --check` et `npm run check:fige` en code 0. **Après déploiement**, les
-mêmes contrôles refaits en production : 13 260 car. sur le hub, **onze autres
-URLs inchangées au caractère près**, 11 FAQPage ✓, 12 `lastmod` ✓, IndexNow en
-HTTP 200.
-
-**Ce que j'ai décidé de NE PAS faire, et pourquoi :**
-- **Ne pas ouvrir `/realisations/chantier-en-cours` (373 car.)**, le dernier
-  contenu maigre du site. Toujours aucun angle sourçable honnêtement : c'est une
-  galerie de chantiers en action, et les deux pistes évoquées depuis le 25/09
-  (compactage en cours de pose, fenêtre de mise en œuvre à 150 °C) supposent une
-  source primaire chiffrée qui n'existe pas en accès libre — c'est le thread
-  ouvert depuis le 11/09 sur les épaisseurs et granulométries. Rien changé à ce
-  constat aujourd'hui.
-- **Ne pas reporter la Q/R TVA sur `/services/enrobe-a-chaud`**, où elle aurait
-  aussi du sens. Un contenu dupliqué entre deux pages du même site se cannibalise,
-  et le hub est le bon porteur : il couvre les deux publics (particulier et pro),
-  ce que la réponse distingue justement. **Si un jour la page service doit en
-  parler, l'angle doit être différent, pas recopié.**
-- **Ne pas toucher à l'accueil** le même jour : un chantier par jour, mené au
-  bout. L'accueil reste le candidat n°1 du prochain run.
-- **Ne pas ajouter de `HowTo`** malgré la consigne de maintenance qui le
-  mentionne : aucune page du site n'est procédurale aujourd'hui, et un `HowTo`
-  posé sur un contenu qui n'en est pas un est un mismatch. Constat à réévaluer le
-  jour où une page décrit vraiment une procédure étape par étape.
-
 ## Chantiers en attente
 
 Par ordre de priorité. **Alterner les angles, ne pas refaire le même deux jours
 de suite.**
+
+> 🆕 **MISE À JOUR DU 28/10/2026 — prime sur tout ce qui suit.**
+> ✅ Lien `/contact` + `/mentions-legales` sur les 4 `/realisations/*` (à vérifier en prod :
+> `href="/contact"` sur `/realisations/cour-allee-privee`, +63 car.).
+> 1. Prochain contenu : `realisations/chantier-en-cours` (7 445+63) ou `cour-allee-privee`
+>    (7 670+63) ; accueil : **rien sans accord client**. Piste : source départementale Jura
+>    sur les barrières de dégel.
+> 2. Lundi 02/11 : veille (étape 6).
+> 3. Yanis : Search Console (Performances IA + indexation `/contact`) ; fiche Google Business
+>    Profile complète ; statut du mobile WhatsApp.
 
 > 🆕 **MISE À JOUR DU 27/10/2026 — prime sur tout ce qui suit.**
 > ✅ `preparation-terrain` : Q/R gel/dégel (à vérifier en prod : 9 121 car., FAQ 8/8, IndexNow).

@@ -398,6 +398,18 @@ function SeeAlso({ slug }: { slug: string }) {
           </ul>
         </div>
       </div>
+      {/* Lien NAP officiel : rendu ici (et non dans le CTA bas, client seul)
+          pour être servi dans le HTML de l'état de chargement. 28/10/2026. */}
+      <p className="max-w-5xl mx-auto mt-10 text-muted text-sm">
+        HCE · Cize, Jura · 03 84 52 61 48 ·{" "}
+        <Link to="/contact" className="transition-colors hover:text-gold">
+          Contact
+        </Link>
+        {" · "}
+        <Link to="/mentions-legales" className="transition-colors hover:text-gold">
+          Mentions légales
+        </Link>
+      </p>
     </section>
   );
 }

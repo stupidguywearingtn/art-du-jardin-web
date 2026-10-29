@@ -22,6 +22,8 @@ et à compléter en fin de run.
 > « signaler les arbres à la visite, devis détaillé ». Banc local : **10 081 car.**, FAQ
 > 6/6, lead « cinq » → « six », lastmod + `llms.txt` 29/10. Build OK, `check:fige` OK,
 > `verif-lastmod` : seul écart connu `/`. Archive : entrées du 29/09.
+> ✅ Vérifié en prod (`338be6b`, `success`) : `cour-allee-privee` 10 081 car., FAQ 6/6,
+> lastmod sitemap 2026-10-29, `llms.txt` à jour, IndexNow 16 URLs → 200.
 
 > ✅ **28/10/2026 — Déploiement OK** (`4acdaf3` : statut GitHub `success`). Prod =
 > dernier commit (16/16 en 200, valeurs du 27/10 : `preparation-terrain` 9 121). Chantier

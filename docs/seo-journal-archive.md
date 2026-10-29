@@ -2799,3 +2799,218 @@ HTTP 200.
   posé sur un contenu qui n'en est pas un est un mismatch. Constat à réévaluer le
   jour où une page décrit vraiment une procédure étape par étape.
 
+## Archivé le 29/10/2026 (entrées du 29/09/2026)
+
+### Positions mesurées — 29/09/2026
+
+**Indexation : toujours nulle, 22 jours après la 1re soumission IndexNow.** Les
+trois mesures habituelles via `WebSearch`, reconduites à l'identique :
+1. **Phrase exacte du site** `"Médaillons et inserts pavés intégrés à l'enrobé"`
+   → dix résultats, **zéro hcebtp.com**. Les mêmes concurrents français qu'aux
+   20, 21, 22, 23, 25, 27 et 28/09 (mavrotp, pajot-tp, aravis-enrobage,
+   abers-amenagement, europavage68, perenia, cuinet) + deux brevets USPTO +
+   Pinterest. **Inchangé, y compris dans l'ordre.**
+2. **`site:hcebtp.com`** → neuf pages sans rapport (Wikipédia d'acronymes HTP /
+   HCB / HBD / HCET, chnbtp.com, Facebook HBTP, hbtp.site), **zéro résultat du
+   domaine**. L'opérateur `site:` n'est toujours pas honoré par ce canal.
+   **Inchangé.**
+3. **Requête nommant le domaine** `hcebtp.com HCE Hini Cours Enrobé Cize 39300
+   enrobé travaux publics` → **aucune page du domaine**, neuf fiches d'annuaire
+   (kompass, pappers, verif, doctrine, societe, pagesjaunes, 118000,
+   lagazettefrance, manageo) — **exactement les mêmes qu'aux 25, 27 et 28/09, et
+   dans le même ordre. Inchangé.**
+
+| Requête | Mesure (29/09/2026) | Évolution vs 28/09 |
+|---|---|---|
+| indexation (phrase exacte du site) | **absent** | inchangé |
+| indexation (requête nommant le domaine) | **absent** | inchangé — 9 fiches d'annuaire |
+| `site:hcebtp.com` | **absent** | inchangé |
+| requêtes commerciales | **non mesurables** (pas de SERP brute via ce canal) | indéterminé |
+
+✅ **`WebSearch` n'a échoué aucune fois aujourd'hui** (3 requêtes d'indexation +
+2 requêtes de sourçage, 5 réponses exploitables). Les canaux de SERP brute
+n'ont **pas** été re-testés : la liste du 11/09 est à jour, tous étaient morts.
+
+> 🔕 **Pas de notification client aujourd'hui, et c'est volontaire.**
+> L'indexation n'a pas bougé, aucune position mesurable n'est apparue, aucun
+> contrôle n'a cassé. **⚠️ MAIS : l'échéance d'alerte hebdomadaire au client
+> tombe DEMAIN, le 30/09/2026 — c'est le run du 30 qui doit la déclencher.** Ne
+> pas la sauter : elle porte les trois actions hors-dépôt (revendiquer la fiche
+> PagesJaunes `pros/52322496`, revendiquer la fiche Google Business Profile
+> existante, ajouter la propriété dans Search Console), qui restent le seul
+> levier connu sur l'indexation.
+
+**Volume de texte servi en production** (`scripts/mesure-texte-servi.mjs`, vu
+comme Googlebot). **Avant** le chantier du jour : identique au 28/09 **au
+caractère près sur les douze URLs**. **Après** déploiement : seul l'accueil
+bouge, de 5 499 à **13 378** caractères ; les onze autres sont inchangées au
+caractère près — mesuré, pas supposé.
+
+| URL | Texte servi (29/09) | vs 28/09 | JSON-LD | lastmod |
+|---|---|---|---|---|
+| accueil | **13 378 car.** | **+7 879** | 3 | **2026-09-29** *(première date)* |
+| `/realisations` | 13 260 car. | = | 4 | 2026-09-28 |
+| `/realisations/preparation-terrassement` | 8 156 car. | = | 3 | 2026-09-25 |
+| `/realisations/cour-allee-privee` | 7 670 car. | = | 3 | 2026-09-23 |
+| `/services/bordures-murets` | 7 012 car. | = | 4 | 2026-09-17 |
+| `/services/finitions-soignees` | 6 821 car. | = | 4 | 2026-09-21 |
+| `/realisations/parking-voirie-pro` | 6 356 car. | = | 3 | 2026-09-22 |
+| `/services/drainage-pentes` | 5 198 car. | = | 4 | 2026-09-13 |
+| `/services/maconnerie-generale` | 5 080 car. | = | 4 | 2026-09-16 |
+| `/services/preparation-terrain` | 4 482 car. | = | 4 | 2026-09-12 |
+| `/services/enrobe-a-chaud` | 3 783 car. | = | 4 | 2026-09-11 |
+| `/realisations/chantier-en-cours` | 373 car. | = | 2 | *(aucun, volontaire)* |
+
+Les 12 URLs du sitemap répondent 200. `scripts/verif-faq.mjs` passe en **✓ sur
+les onze `FAQPage`** en production, dont **11/11 sur l'accueil** (contre 6/6
+hier). `scripts/verif-lastmod.mjs` passe en **✓ sur les 12 URLs, dont 11 avec
+`lastmod`** (contre 10 hier — l'accueil entre dans la table). La soumission
+IndexNow des 12 URLs après déploiement sort en **HTTP 200**.
+
+⚠️ **`scripts/check-contenu-fige-prod.mjs` ne tourne pas depuis le runner** :
+il sort sur `SUPABASE_PUBLISHABLE_KEY manquante (clé anon publique)`. Ce n'est
+pas une régression du jour, c'est une variable d'environnement absente du
+runner. **Contournement utilisé, à reprendre tel quel** :
+`check-contenu-fige.mjs` (version dépôt, sans clé) qui passe, **plus** un
+`grep` direct sur le HTML servi de la page modifiée. Les six marqueurs figés
+sont présents sur l'accueil servi (2012 ×3, « 14 an » ×2, 150 ×3, « à la
+main » ×4, « Devis détaillé » ×3, « décennale » ×3) et les sept interdits sont
+à zéro. **Piège à ne pas re-découvrir : `grep -c "180"` et `grep -c "48h"`
+renvoient des faux positifs** — `sizes="180x180"` de l'apple-touch-icon, des
+valeurs CSS, des coordonnées SVG, et `1.448h.005` dans le `path` de l'icône
+WhatsApp. Toujours regarder le contexte (`grep -o '.\{30\}180.\{20\}'`)
+avant de conclure à une régression.
+
+**Délai de déploiement observé** : entre 1 et 2 minutes entre le
+`git push origin HEAD:main` et la première réponse de production servant le
+nouveau contenu (3 essais espacés de 30 s, le 3e concluant). Du même ordre que
+les 2 min 30 du 28/09. Méthode de contrôle inchangée : un `curl` sur la seule
+page modifiée, jamais `mesure-texte-servi.mjs` qui interroge les 12 URLs.
+
+### 29/09/2026 — L'accueil passe de 5 499 à 13 378 caractères : le seul sujet qu'aucune des dix autres pages ne couvrait, le contrat lui-même (commit `6a11554`)
+
+**Chantier choisi** : le candidat n°1 désigné le 28/09. L'accueil était la page
+de fond la **moins travaillée depuis le 15/09** (où seul le rendu des liens de
+galerie avait été corrigé, jamais le contenu), la **plus visitée**, et la
+**seule sans « Dernière mise à jour »** visible. Elle ne portait que la FAQ
+courte de 6 réponses héritée du site d'origine.
+
+**Le sujet, et pourquoi celui-là.** Les 53 Q/R déjà publiées ont été relues
+avant de rédiger (`grep '      q: "' src/routes/*.tsx`, la commande à
+reprendre). Constat : les six pages service et les quatre dossiers couvrent la
+technique, l'urbanisme, la voirie, l'eau et les garanties **d'après-chantier**
+— réception, parfait achèvement, décennale, TVA, garantie de paiement. **Le
+contrat lui-même, en amont, n'était nulle part** : le devis, sa signature,
+l'argent versé d'avance, le délai d'exécution. C'est aussi, littéralement, le
+sujet de la section qui suit sur la page (le simulateur de devis), d'où le
+placement du bloc entre la FAQ et `QuoteForm`.
+
+**Les cinq Q/R, toutes sourcées sur des textes lus ce jour :**
+1. *« Une entreprise de travaux est-elle obligée de me remettre un devis ? »* —
+   fiche service-public.gouv.fr **F31144**, « Devis obligatoire : activités
+   concernées », **vérifiée le 09/09/2022** : liste des corps d'état concernés
+   (maçonnerie, isolation, menuiserie, couverture, étanchéité, plomberie,
+   plâtrerie, peinture, vitrerie, revêtements, électricité, évacuation des eaux
+   pluviales), amende administrative **jusqu'à 3 000 € (personne physique) et
+   15 000 € (société)**, et les treize mentions obligatoires du devis.
+   **Nuance honnête écrite noir sur blanc dans la réponse** : cette obligation
+   vise les prestations de **dépannage, réparation et entretien** — donc, en
+   extérieur, la *réfection* d'une cour ou d'un parking existants. Ne pas la
+   supprimer dans un futur run pour « simplifier » : c'est elle qui rend la
+   réponse exacte.
+2. *« Le devis peut-il m'être facturé, et combien de temps reste-t-il
+   valable ? »* — même fiche, citation exacte « le devis peut être fait
+   gratuitement ou être payant », d'où l'obligation de mentionner ce caractère
+   et son coût, et la durée de validité de l'offre.
+3. *« Que se passe-t-il exactement quand je signe le devis ? »* — fiche
+   service-public.gouv.fr **F2533**, « Quel contrat conclure avec une entreprise
+   pour des travaux dans le logement ? », **vérifiée le 28/03/2024** : l'écrit
+   n'est pas obligatoire mais sert de preuve, un devis accepté vaut contrat,
+   chaque partie garde un original, validité du contrat électronique, et la
+   liste de ce qu'il faut y faire figurer.
+4. *« L'acompte que je verse, je le perds si j'annule ? »* — **article L214-1
+   du code de la consommation**, relevé verbatim, en vigueur depuis le
+   **01/07/2016**. C'est la trouvaille du jour : par défaut « les sommes versées
+   d'avance sont des **arrhes** », chacun peut se dédire, et **le professionnel
+   qui renonce les restitue au double**. Les trois premiers mots, « sauf
+   stipulation contraire », inversent tout si le devis écrit « acompte ».
+   **Personne dans ce secteur ne publie cette distinction.**
+5. *« Le devis ne donne aucune date : dans quel délai les travaux doivent-ils
+   être faits ? »* — **articles L216-1 et L216-6 du code de la consommation**,
+   relevés verbatim, en vigueur depuis le **01/10/2021**, applicables aux
+   contrats conclus à compter du 01/01/2022 : **trente jours** à défaut
+   d'indication, puis suspension du paiement (articles 1219 et 1220 du code
+   civil) ou résolution après mise en demeure, résolution immédiate si
+   l'entreprise refuse d'exécuter ou si la date était une condition essentielle.
+   La réponse relie la règle au métier — enrobé à chaud, support sec, plus de
+   5 °C — pour conclure qu'il vaut mieux une date écrite au devis que la règle
+   supplétive. **Aucune promesse de délai n'est faite au nom de HCE** : le
+   contenu figé interdit « Devis sous 48h », et rien de tel n'a été ajouté.
+
+**Le `FAQPage` de l'accueil passe de 6 à 11 questions.** Il était construit sur
+la seule constante `FAQS` ; il l'est désormais sur `[...FAQS,
+...AVANT_SIGNATURE.qa]`, c'est-à-dire sur **les deux sections de questions
+réellement rendues par la page, dans leur ordre d'apparition**. Un seul
+`FAQPage` par page, pas deux. `verif-faq.mjs` : **11/11 en production**.
+⚠️ **La réserve du 28/09 sur `FAQS` tient et n'a PAS été levée** : `FAQS` reste
+surchargeable par le CMS (`get("faqs", FAQS)`), donc le jour où le client
+éditera une question depuis l'admin, la moitié `FAQS` du JSON-LD ne suivra pas.
+Le nouveau tableau, lui, est statique et ne peut pas diverger. **Le chantier du
+jour n'a donc pas aggravé le risque, mais ne l'a pas réglé non plus** — il
+reste dans « Hypothèses à vérifier ».
+
+**L'accueil reçoit sa première date de mise à jour visible**, donc sa première
+clé dans `src/lib/lastmod.ts` (`"/" : 2026-09-29`). Le sitemap passe de 10 à
+**11 URLs avec `lastmod`**, sans qu'aucune date soit recopiée nulle part : le
+mécanisme du 27/09 a fonctionné exactement comme prévu, **une seule ligne
+ajoutée dans `lastmod.ts` a suffi**, le sitemap et la page ont suivi seuls, et
+`verif-lastmod.mjs` passe en ✓ sur les 12 URLs. Le commentaire d'en-tête du
+fichier, qui disait « deux URLs n'ont volontairement pas d'entrée ici », a été
+corrigé : il n'en reste qu'une, `chantier-en-cours`.
+
+**Maillage interne** : deux liens ajoutés sous le bloc, vers
+`/services/finitions-soignees` et `/realisations`, **hors du tableau `qa`** donc
+sans effet sur le JSON-LD. C'est la raison pour laquelle la mention des déchets
+du chantier, dans la réponse 1, renvoie en texte simple « notre page consacrée
+aux finitions et à la fin de chantier » plutôt qu'en lien : **un lien à
+l'intérieur d'une réponse ferait diverger le texte visible du texte du
+JSON-LD**. Règle à réutiliser : les liens vont autour du bloc, jamais dedans.
+
+**`llms.txt` à jour** : cinq Q/R ajoutées à la suite de « Comment obtenir un
+devis ? », ligne « Accueil » de la section *Pages* enrichie, date d'en-tête
+avancée au 29 septembre 2026.
+
+**Mesure, pas supposition.** Banc d'essai local monté selon la recette du
+15/09 (il a redonné **5 499 caractères** pour l'accueil d'origine, exactement la
+valeur de production du jour — fidélité re-confirmée une fois de plus), puis
+HMR sur le fichier modifié : **5 499 → 13 378**, les onze autres URLs
+inchangées au caractère près. `npx tsc --noEmit` en 0, `npx prettier --check`
+propre, `npx eslint` ne laisse que **l'erreur `@ts-ignore` de la ligne 1557,
+qui existait déjà sur `HEAD`** (vérifié par `git show HEAD:src/routes/index.tsx
+| grep -n ts-ignore` → ligne 1478 avant l'insertion). **Ne pas la « corriger »
+dans un run SEO** : c'est un commentaire iOS Safari, hors sujet et hors
+périmètre.
+
+**Ce que j'ai décidé de NE PAS faire, et pourquoi :**
+- **Ne pas m'appuyer sur l'arrêté du 24 janvier 2017** alors que je l'avais lu
+  et que ses articles 1 à 4 étaient en main. Son champ (« dépannage, réparation
+  et entretien ») et son annexe de métiers ne nomment ni l'enrobé ni la voirie ;
+  l'affirmer applicable aux chantiers de HCE aurait été une extrapolation. La
+  fiche F31144 dit la même chose en restant du côté de ce qui est vérifiable,
+  et c'est elle qui a été citée. **Ne pas rouvrir cette piste sans un texte qui
+  nomme le revêtement extérieur.**
+- **Ne pas écrire une Q/R sur la médiation de la consommation** (article L612-1
+  du code de la consommation), pourtant un angle neuf et bien sourçable :
+  publier « le professionnel doit vous donner un médiateur » sur le site du
+  professionnel **sans pouvoir nommer le médiateur de HCE** créerait une
+  obligation apparente qu'on ne peut pas honorer sur la page. À proposer au
+  client, pas à improviser.
+- **Ne pas toucher au `<h2>` « réponse sous 24 à 48h »** de la section devis :
+  il est dans « Hypothèses à vérifier » depuis le 14/09 et il n'appartient pas à
+  ce chantier. Vérifié au passage : le `grep` de contrôle sur `48h` ne le
+  trouve pas dans le HTML servi (seul un `path` SVG matche), donc **la formule
+  servie n'est pas littéralement « 48h »** — à re-regarder le jour où la
+  question sera posée au client, ne pas en conclure qu'elle a disparu.
+- **Ne pas générer le `FAQPage` depuis la base** pour régler le risque `FAQS` :
+  ça touche le chargement de la page, c'est exactement ce que l'hypothèse dit de
+  ne pas improviser.

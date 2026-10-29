@@ -5,7 +5,7 @@
 > dans le Jura et l'Ain. Entreprise créée en 2012, 14 années d'expérience, plus de
 > 1000 chantiers livrés, garantie décennale.
 
-Dernière mise à jour : 27 octobre 2026
+Dernière mise à jour : 29 octobre 2026
 Site officiel : https://www.hcetp.com
 
 ## L'entreprise en bref
@@ -178,6 +178,19 @@ par exemple en installant un drainage qui dirige les eaux vers la parcelle voisi
 ne concerne que les eaux de pluie, de source et de fonte des neiges, pas les eaux usées.
 HCE identifie donc les points bas et les exutoires avant de goudronner.
 Source : https://www.service-public.gouv.fr/particuliers/vosdroits/F2443
+
+### Les racines d'un arbre peuvent-elles soulever une allée en enrobé ?
+Oui : une racine qui passe sous le revêtement grossit et finit par le bomber puis le
+fissurer, là où elle est en contact avec lui. Un essai publié en 2008 (E. T. Smiley,
+Arboriculture & Urban Forestry 34(3), sur trottoirs en béton, aux États-Unis) relie la
+poussée à la surface de racine en contact ; une barrière verticale rigide de 45 cm le
+long du bord a empêché le passage, un film polyéthylène souple non. Code civil : arbre de
+plus de 2 m planté à au moins 2 m de la limite, autres plantations à 50 cm (art. 671) ;
+les racines du voisin qui avancent se coupent soi-même à la limite (art. 673). Une racine
+se traite au décaissement, avant l'enrobé : les arbres proches se signalent à la visite.
+Sources : https://auf.isa-arbor.com/content/34/3/179.full.pdf ·
+https://www.inc-conso.fr/content/les-regles-applicables-aux-arbres-aux-arbustes-et-aux-arbrisseaux
+Page : https://www.hcetp.com/realisations/cour-allee-privee
 
 ### Quelle pente faut-il pour qu'une cour en enrobé évacue l'eau ?
 HCE applique une pente minimum de 1,5 % vers les exutoires, vérifiée au laser, soit

@@ -84,7 +84,7 @@ const REAL_SAVOIR: Record<
   "cour-allee-privee": {
     heading:
       "Goudronner une cour ou une allée de maison : les questions qui se posent avant le devis",
-    lead: "Une cour privée s'arrête rarement à la limite de la propriété : elle se raccorde à une route, traverse parfois un fossé, et dessert quelquefois plusieurs maisons. Ces trois points relèvent de textes précis, et ce sont eux qui décident du calendrier du chantier bien plus que la météo. Voici cinq questions à trancher avant de signer, avec les textes applicables.",
+    lead: "Une cour privée s'arrête rarement à la limite de la propriété : elle se raccorde à une route, traverse parfois un fossé, et dessert quelquefois plusieurs maisons. Ces trois points relèvent de textes précis, et ce sont eux qui décident du calendrier du chantier bien plus que la météo. Voici six questions à trancher avant de signer, avec les textes applicables — la dernière porte sur les arbres qui bordent l'allée.",
     updated: PAGE_UPDATED["/realisations/cour-allee-privee"],
     qa: [
       {
@@ -106,6 +106,10 @@ const REAL_SAVOIR: Record<
       {
         q: "L'eau d'une cour goudronnée peut-elle être renvoyée vers la route ?",
         a: "C'est la pente à éviter, et le motif est d'abord réglementaire. Le même article R*116-2 du code de la voirie routière punit d'une amende de cinquième classe ceux qui « auront laissé écouler ou auront répandu ou jeté sur les voies publiques des substances susceptibles de nuire à la salubrité et à la sécurité publiques ou d'incommoder le public » (4°). Une cour imperméabilisée qui déverse son ruissellement sur la chaussée relève de cette logique — et dans le Jura, le risque n'est pas théorique : ce qui s'écoule sur la route en novembre y gèle en décembre, à l'endroit précis où les véhicules freinent pour tourner. La règle de conception qui en découle est simple : une cour se pente vers un exutoire situé sur la propriété — caniveau, grille, noue, puits d'infiltration — et jamais vers la voie publique par défaut. C'est un point à arrêter au plan, avant le décaissement : une fois l'enrobé posé et compacté, une pente ne se corrige pas, elle se refait.",
+      },
+      {
+        q: "Les racines d'un arbre peuvent-elles soulever une allée en enrobé, et que faire avant de goudronner ?",
+        a: "Oui : une racine qui passe sous le revêtement grossit année après année et finit par le bomber puis le fissurer, souvent en ligne depuis l'arbre. Elle ne pousse pas l'enrobé à distance : elle le soulève là où elle est en contact avec lui, et plus ce contact est étendu, plus la poussée est forte. C'est la conclusion d'un essai comparatif publié en 2008 dans la revue Arboriculture & Urban Forestry (E. T. Smiley, vol. 34, n° 3, p. 179-183) : sur les trottoirs testés, la force verticale exercée sur le revêtement était directement liée à la surface de racine en contact avec sa face inférieure. Le même essai, conduit aux États-Unis sur un sol argilo-limoneux et des dalles en béton — à lire comme une indication, pas comme une règle pour le Jura —, a comparé plusieurs parades : une barrière verticale rigide de 45 cm de profondeur posée le long du bord a empêché les racines de passer, alors qu'un simple film polyéthylène de 0,15 mm, trop souple, a été franchi par le dessus dans trois cas sur cinq ; une couche de 10 cm de gravier ou un bloc de mousse isolante sous le revêtement ont aussi limité les dégâts. Côté voisinage, le code civil fixe deux règles utiles avant un chantier. Sauf règlement ou usage local, un arbre de plus de deux mètres de haut doit être planté à au moins deux mètres de la limite, et les autres plantations à au moins 50 cm (article 671). Et si les racines d'un arbre voisin avancent sous votre terrain, vous avez le droit de les couper vous-même à la limite séparative, droit qui ne se perd pas avec le temps (article 673), alors que pour les branches vous ne pouvez qu'obliger le voisin à les couper. En pratique, le moment d'agir est le décaissement : une racine se traite quand la cour est ouverte, pas une fois l'enrobé compacté par-dessus. Les arbres proches de l'emprise, chez vous comme chez le voisin, se signalent donc à la visite, pour être pris en compte dans le devis détaillé.",
       },
     ],
     sources: [
@@ -131,6 +135,16 @@ const REAL_SAVOIR: Record<
       {
         label: "Articles 697 et 698 du code civil — ouvrages et frais d'une servitude (Légifrance)",
         url: "https://www.legifrance.gouv.fr/codes/section_lc/LEGITEXT000006070721/LEGISCTA000006150128/",
+      },
+      {
+        label:
+          "E. T. Smiley, « Comparison of Methods to Reduce Sidewalk Damage from Tree Roots », Arboriculture & Urban Forestry 34(3), 2008, p. 179-183",
+        url: "https://auf.isa-arbor.com/content/34/3/179.full.pdf",
+      },
+      {
+        label:
+          "Les règles applicables aux arbres, arbustes et arbrisseaux — articles 671 et 673 du code civil (Institut national de la consommation)",
+        url: "https://www.inc-conso.fr/content/les-regles-applicables-aux-arbres-aux-arbustes-et-aux-arbrisseaux",
       },
     ],
   },

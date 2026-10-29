@@ -39,7 +39,7 @@ export const PAGE_UPDATED = {
   "/services/finitions-soignees": { iso: "2026-10-16", label: "16 octobre 2026" },
   "/realisations": { iso: "2026-09-28", label: "28 septembre 2026" },
   "/zone-intervention": { iso: "2026-09-30", label: "30 septembre 2026" },
-  "/realisations/cour-allee-privee": { iso: "2026-09-23", label: "23 septembre 2026" },
+  "/realisations/cour-allee-privee": { iso: "2026-10-29", label: "29 octobre 2026" },
   "/realisations/parking-voirie-pro": { iso: "2026-10-21", label: "21 octobre 2026" },
   "/realisations/preparation-terrassement": { iso: "2026-09-25", label: "25 septembre 2026" },
   "/mentions-legales": { iso: "2026-10-22", label: "22 octobre 2026" },

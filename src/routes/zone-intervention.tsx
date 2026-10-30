@@ -345,7 +345,14 @@ function ZoneIntervention() {
             >
               réalisations
             </Link>
-            .
+            . Si une équipe se présente à la porte pour goudronner votre cour, la page{" "}
+            <Link
+              to="/arnaque-goudronnage"
+              className="underline decoration-gold/40 underline-offset-2 hover:text-gold"
+            >
+              arnaque au goudronnage
+            </Link>{" "}
+            liste les signes à reconnaître et les vérifications à faire.
           </p>
         </section>
 

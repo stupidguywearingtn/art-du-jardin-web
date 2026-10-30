@@ -1073,7 +1073,7 @@ function ServicePageBody() {
                           Les quatre types de chantiers, et ce qui encadre un devis : TVA, délais, accès.
                         </p>
                       </li>
-                      {slug === "enrobe-a-chaud" && (
+                      {(slug === "enrobe-a-chaud" || slug === "preparation-terrain") && (
                         <li>
                           <Link
                             to="/arnaque-goudronnage"
@@ -1083,7 +1083,9 @@ function ServicePageBody() {
                             Arnaque au goudronnage : les signes
                           </Link>
                           <p className="mt-2 text-muted" style={{ fontSize: 15, lineHeight: 1.6 }}>
-                            Reconnaître l'offre « avec l'enrobé qui reste » et vérifier une entreprise avant de signer.
+                            {slug === "preparation-terrain"
+                              ? "Une cour « goudronnée » sans décaissement ni fondation est l'un des signes à reconnaître avant de signer."
+                              : "Reconnaître l'offre « avec l'enrobé qui reste » et vérifier une entreprise avant de signer."}
                           </p>
                         </li>
                       )}

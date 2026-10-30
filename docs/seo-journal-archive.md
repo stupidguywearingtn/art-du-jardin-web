@@ -3014,3 +3014,201 @@ périmètre.
 - **Ne pas générer le `FAQPage` depuis la base** pour régler le risque `FAQS` :
   ça touche le chargement de la page, c'est exactement ce que l'hypothèse dit de
   ne pas improviser.
+
+## Archivé le 30/10/2026 (entrées du 30/09/2026)
+
+### Positions mesurées — 30/09/2026
+
+**Indexation : toujours nulle, 23 jours après la 1re soumission IndexNow.** Les
+trois mesures habituelles via `WebSearch`, reconduites à l'identique :
+1. **Phrase exacte du site** `"Médaillons et inserts pavés intégrés à l'enrobé"`
+   → dix résultats, **zéro hcebtp.com**. ⚠️ **Nouveauté de méthode à connaître :
+   la liste des concurrents a nettement bougé aujourd'hui** (apparus :
+   daniel-moquet, galerie-creation, lemoniteur, forumconstruire, esprit-veranda,
+   gonord ; disparus : abers-amenagement, europavage68, cuinet, les deux brevets
+   USPTO, Pinterest ; maintenus : mavrotp, pajot-tp, aravis-enrobage, perenia).
+   **C'est la première fois depuis le 20/09 que cette SERP n'est pas identique
+   au caractère près.** Ne pas en tirer de conclusion sur hcebtp.com : le
+   domaine reste absent. Mais **l'argument « SERP inchangée = canal stable » ne
+   tient plus** : ce canal se réordonne, donc son immobilité passée n'était pas
+   une garantie de fiabilité.
+2. **`site:hcebtp.com`** → neuf pages sans rapport (Wikipédia d'acronymes HTP /
+   HCB / HBD, Hitkarini College, Cebu IT Park, Hassania School of Public Works,
+   gumroad, lawinsider, community.hpe.com), **zéro résultat du domaine**.
+   L'opérateur `site:` n'est toujours pas honoré par ce canal. **Inchangé.**
+3. **Requête nommant le domaine** `hcebtp.com HCE Hini Cours Enrobé Cize 39300
+   enrobé travaux publics` → **aucune page du domaine**, dix fiches d'annuaire.
+   **Changement notable dans la composition** : `doctrine.fr` a disparu de la
+   liste, et **deux pages d'annuaire départemental PagesJaunes sont apparues** —
+   `pagesjaunes.fr/annuaire/departement/jura-39/enrobe-a-chaud` et
+   `pagesjaunes.fr/annuaire/departement/ain-01/entreprise-de-btp`. Les huit
+   autres sont les habituelles (kompass, pappers, verif, societe, 118000, mappy,
+   lagazettefrance, manageo). **Ces deux pages départementales confirment par
+   l'observation le levier PagesJaunes identifié le 12/09** : l'annuaire est
+   indexé sur exactement les requêtes que le site vise, et il porte déjà une
+   fiche HCE.
+
+| Requête | Mesure (30/09/2026) | Évolution vs 29/09 |
+|---|---|---|
+| indexation (phrase exacte du site) | **absent** | inchangé (mais SERP réordonnée) |
+| indexation (requête nommant le domaine) | **absent** | inchangé — 10 fiches d'annuaire |
+| `site:hcebtp.com` | **absent** | inchangé |
+| requêtes commerciales | **non mesurables** (pas de SERP brute via ce canal) | indéterminé |
+
+✅ **`WebSearch` n'a échoué aucune fois aujourd'hui** (3 requêtes d'indexation +
+2 requêtes de sourçage, 5 réponses exploitables). Les canaux de SERP brute
+n'ont **pas** été re-testés : la liste du 11/09 est à jour, tous étaient morts.
+
+> 🔔 **Notification client ENVOYÉE le 30/09/2026 — l'échéance hebdomadaire
+> annoncée par le run du 29/09 a bien été tenue.** Contenu : indexation nulle à
+> 23 jours, site sain (12 URLs en 200, contrôles verts), l'entreprise connue de
+> 10 annuaires mais rien qui relie ces fiches au site, puis les **trois actions
+> hors-dépôt** (Search Console, revendiquer la fiche Google Business Profile
+> existante, revendiquer `pagesjaunes.fr/pros/52322496`) et **le `title`
+> anormal de `/services/finitions-soignees` à arbitrer**, comme le run du 29/09
+> l'avait demandé.
+> **Règle de cadence reconduite : ne pas re-notifier avant le 07/10/2026**, sauf
+> si l'indexation arrive ou si un contrôle casse. Le blocage est inchangé depuis
+> le 20/09 et le répéter tous les jours le rendrait inaudible.
+
+**Volume de texte servi en production** (`scripts/mesure-texte-servi.mjs`, vu
+comme Googlebot). **Avant** le chantier du jour : identique au 29/09 **au
+caractère près sur les douze URLs**. **Après** déploiement : la page neuve
+apparaît, et seules les deux pages qui reçoivent un lien entrant bougent — les
+neuf autres sont inchangées au caractère près, mesuré et non supposé.
+
+| URL | Texte servi (30/09) | vs 29/09 | JSON-LD | lastmod |
+|---|---|---|---|---|
+| accueil | **13 526 car.** | **+148** *(lien ajouté)* | 3 | 2026-09-29 |
+| `/realisations` | **13 491 car.** | **+231** *(lien ajouté)* | 4 | 2026-09-28 |
+| `/realisations/preparation-terrassement` | 8 156 car. | = | 3 | 2026-09-25 |
+| **`/zone-intervention`** | **8 578 car.** | **page créée** | **4** | **2026-09-30** |
+| `/realisations/cour-allee-privee` | 7 670 car. | = | 3 | 2026-09-23 |
+| `/services/bordures-murets` | 7 012 car. | = | 4 | 2026-09-17 |
+| `/services/finitions-soignees` | 6 821 car. | = | 4 | 2026-09-21 |
+| `/realisations/parking-voirie-pro` | 6 356 car. | = | 3 | 2026-09-22 |
+| `/services/drainage-pentes` | 5 198 car. | = | 4 | 2026-09-13 |
+| `/services/maconnerie-generale` | 5 080 car. | = | 4 | 2026-09-16 |
+| `/services/preparation-terrain` | 4 482 car. | = | 4 | 2026-09-12 |
+| `/services/enrobe-a-chaud` | 3 783 car. | = | 4 | 2026-09-11 |
+| `/realisations/chantier-en-cours` | 373 car. | = | 2 | *(aucun, volontaire)* |
+
+**Le sitemap passe de 12 à 13 URLs**, toutes en 200. `scripts/verif-faq.mjs`
+passe en **✓ sur les douze `FAQPage`** en production, dont **4/4 sur la page
+neuve**. `scripts/verif-lastmod.mjs` passe en **✓ sur les 13 URLs, dont 12 avec
+`lastmod`** (contre 11 hier). La soumission IndexNow des **13** URLs sort en
+**HTTP 200**.
+
+⚠️ **Le banc d'essai local est fidèle au caractère près, vérifié une fois de
+plus** : les 13 valeurs mesurées sur `http://127.0.0.1:4176` avant push sont
+**identiques aux 13 valeurs de production** après déploiement. C'est le
+troisième contrôle concordant (15/09, 29/09, 30/09) — **le banc peut servir de
+preuve avant push, ce n'est plus une approximation.**
+
+**Délai de déploiement observé** : entre 40 et 120 secondes entre le
+`git push origin HEAD:main` et la première réponse servant la page neuve (3
+essais espacés de 40 s ; le 1er a renvoyé **404**, le 3e un 200 complet).
+⚠️ **Piège propre à une ROUTE NEUVE, à ne pas re-découvrir : pendant le
+déploiement, l'URL répond 404, pas 503.** Un 404 sur une route qu'on vient de
+créer ne veut donc pas dire que la route est ratée — il faut réessayer avant de
+conclure. Le 2e essai a par ailleurs renvoyé `HTTP 000` au `curl` tout en
+servant déjà le contenu : **contrôler le contenu, pas seulement le code**.
+
+### 30/09/2026 — `/zone-intervention` : la première page du site consacrée à la géographie, avec des distances et des altitudes mesurées (commit `6cc006e`)
+
+**Pourquoi ce chantier.** Le run du 29/09 a déclaré le filon « page maigre »
+épuisé et posé que le prochain chantier se choisirait **sur la requête**. Son
+candidat n°1 était une page de zone d'intervention, sous une condition
+explicite : *« À trancher avant de rédiger : y a-t-il de la matière honnête, ou
+non ? Si non, ne pas le faire. »* **La condition a été tranchée par l'affirmative
+avant d'écrire une ligne**, et c'est ce qui a rendu le chantier possible : trois
+référentiels publics répondent depuis le runner et donnent de la donnée que
+personne dans le secteur ne publie (voir « Techniques apprises » du jour).
+
+Le manque était réel et vérifié : les six requêtes suivies nomment toutes un
+département, le `LocalBusiness` de l'accueil déclare bien
+`areaServed: [Jura, Ain]`, et pourtant **aucune page ne traitait la géographie
+elle-même** — le hub `/realisations` la mentionnait en une phrase, c'était tout.
+
+**Ce qui a été publié.** Route statique `src/routes/zone-intervention.tsx`,
+**8 578 caractères servis**, 4 blocs JSON-LD (`BreadcrumbList`, `WebPage`,
+`FAQPage`), une table visible et un bloc de 4 Q/R. Toutes les valeurs sont
+relevées le 30/09/2026 sur des sources primaires, aucune saisie de seconde main :
+
+- **Table des six communes repères**, avec distance orthodromique depuis le
+  point central de Cize et altitude IGN RGE ALTI au même point : Champagnole
+  3,2 km / 500 m, Lons-le-Saunier 28,2 km / 263 m, Saint-Claude 34,7 km / 668 m,
+  Oyonnax 55,3 km / 538 m, Bourg-en-Bresse 77,4 km / 227 m, depuis Cize à 549 m.
+  Populations INSEE dans la même table.
+- **L'effet chiffré de l'altitude sur le calendrier**, établi en comparant deux
+  stations Météo-France distantes de 29 km et séparées de 239 m de dénivelé :
+  Lons-le-Saunier (indicatif **39362001**, 298 m) → 51,9 jours de gel/an,
+  11,8 °C, 1 147,4 mm ; Champagnole (39097003, 537 m) → 111,7 jours, 9,4 °C,
+  1 573,2 mm. Soit **2,15 fois plus de jours de gel et 426 mm d'eau en plus**,
+  la même année et dans le même département. **C'est le passage le plus citable
+  de la page** : un rapport chiffré, local, daté, qu'aucun concurrent ne publie.
+- **Le détail mensuel qui fait de mars le mois de bascule** : 17,9 jours de gel
+  en mars à 537 m contre 5,6 à 298 m. Plus les deux chiffres qui empêchent de
+  conclure que la plaine est sans contrainte (10,3 jours sans dégel et 1,5 jour
+  à -10 °C ou moins à Lons-le-Saunier).
+- **Une Q/R de cadrage honnête** (« HCE intervient-elle dans ma commune si elle
+  n'est pas dans cette liste ? ») qui dit que les six villes sont des repères et
+  non une liste fermée, et renvoie l'estimation à la visite sur site.
+
+**Contrôle de doublon fait AVANT rédaction, sur les 57 Q/R déjà publiées**, et
+c'est lui qui a façonné la page :
+- `/services/bordures-murets` publiait déjà les normales **annuelles** de
+  Champagnole. Elles ne sont donc **pas le sujet** ici : elles ne servent que de
+  terme de comparaison à la station de Lons-le-Saunier, **entièrement nouvelle
+  sur le site**. C'est ce qui sauve le bloc de la redite.
+- `/realisations/preparation-terrassement` publiait déjà le détail mensuel des
+  **précipitations** de Champagnole → **non repris du tout**.
+- Le hub `/realisations` répond déjà « Où HCE réalise-t-elle ces chantiers ? » et
+  y traite l'homonymie Cize (39) / Cize (01). **Cet angle a été délibérément
+  laissé au hub**, alors qu'il était prévu au départ comme un bloc entier : c'est
+  la découverte de cette Q/R existante qui l'a fait retirer.
+
+**Ce que la page ne dit PAS, volontairement** : aucun prix, aucun délai, aucun
+frais de déplacement — rien de tout cela n'est connu. Et **aucune commune que
+l'entreprise n'a pas elle-même déclarée n'a été ajoutée** : les six sont
+exactement celles de `src/components/InteractiveMap.tsx`. La consigne du 29/09
+(« ne pas fabriquer de pages de villes vides et interchangeables ») est tenue
+non pas en s'abstenant, mais en publiant **une** page réellement informée.
+
+**Câblage complet** (rien d'oublié, vérifié un par un) : `routeTree.gen.ts`
+régénéré par le build et recopié dans le dépôt, clé dans `src/lib/lastmod.ts`,
+entrée dans `sitemap[.]xml.ts` (13 URLs), `public/llms.txt` (4 Q/R + fiche de
+page + date d'en-tête), `scripts/mesure-texte-servi.mjs`,
+`scripts/indexnow-submit.mjs`, et **deux liens entrants** — depuis la section
+zone de l'accueil et depuis le hub `/realisations`, tous deux vérifiés présents
+dans le HTML servi.
+
+**Contrôles passés avant push, au banc d'essai local** : `npm run build` en 0,
+`npx tsc --noEmit` en 0, `npx eslint` propre sur la page neuve, `verif-faq`
+4/4 sur la page neuve et 12/12 pages alignées, `verif-lastmod` 13 URLs
+cohérentes, contenu figé intact, et **les neuf URLs non touchées inchangées au
+caractère près**. Puis les mêmes contrôles rejoués en production après
+déploiement, avec des valeurs identiques.
+
+**Ce que j'ai décidé de NE PAS faire aujourd'hui, et pourquoi.**
+- **Pas de bloc sur « l'enrobé chaud supporte-t-il le trajet jusqu'au
+  chantier ? »**, alors que c'est la question la plus naturelle sur une page de
+  zone et la plus proche de la requête « enrobé à chaud ». Raison : elle demande
+  une fenêtre de température de mise en œuvre sourcée, et **la fiche Norm'Info
+  de la NF P98-150-1 a répondu 404** sur l'URL essayée. Sans source primaire,
+  ç'aurait été du raisonnement présenté comme du fait. **Angle à garder en tête
+  pour un prochain run, à condition de trouver la source** — c'est le meilleur
+  angle non couvert du site avec les épaisseurs.
+- **Pas de nœud `Service` avec `areaServed` dans le JSON-LD.** L'accueil déclare
+  déjà `areaServed: [AdministrativeArea Jura, Ain]` sur son `LocalBusiness`, et
+  six `Service` existent sur les pages service. Une septième déclaration
+  concurrente vaut moins qu'une seule cohérente. La page porte donc `WebPage` +
+  `BreadcrumbList` + `FAQPage`, et `publisher` pointe vers `#business`, **le
+  seul `@id` publié par ce site** (règle du 20/09 : ne jamais inventer de nœud).
+- **Pas de liste des 33 communes du code postal 39300**, pourtant récupérée en un
+  appel. C'aurait été du remplissage géographique et une revendication de
+  couverture que le client n'a pas faite — exactement le piège annoncé.
+- **Pas de correction du « à 2 km de Cize »** écrit sur deux pages existantes
+  (voir « Hypothèses à vérifier » du jour) : c'est du contenu en ligne qui
+  fonctionne, et la nouvelle page dit « moins de 5 km », qui est la valeur
+  mesurée. On ne réécrit pas l'existant sur cette base.

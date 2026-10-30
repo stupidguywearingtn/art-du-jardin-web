@@ -412,6 +412,25 @@ function SeeAlso({ slug }: { slug: string }) {
           </ul>
         </div>
       </div>
+      {/* Pages repères : zone (calendrier, altitude) et vérification d'une
+          entreprise avant de signer. Même contrainte de rendu que la ligne NAP
+          ci-dessous (servi dans l'état de chargement). 30/10/2026. */}
+      <p className="max-w-5xl mx-auto mt-10 text-muted" style={{ fontSize: 15, lineHeight: 1.7 }}>
+        À lire aussi :{" "}
+        <Link
+          to="/zone-intervention"
+          className="underline decoration-gold/40 underline-offset-2 hover:text-gold"
+        >
+          zone d'intervention et saison de pose dans le Jura
+        </Link>
+        {" · "}
+        <Link
+          to="/arnaque-goudronnage"
+          className="underline decoration-gold/40 underline-offset-2 hover:text-gold"
+        >
+          arnaque au goudronnage : les signes, et comment vérifier une entreprise
+        </Link>
+      </p>
       {/* Lien NAP officiel : rendu ici (et non dans le CTA bas, client seul)
           pour être servi dans le HTML de l'état de chargement. 28/10/2026. */}
       <p className="max-w-5xl mx-auto mt-10 text-muted text-sm">

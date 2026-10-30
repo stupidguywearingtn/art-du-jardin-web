@@ -23,6 +23,8 @@ et à compléter en fin de run.
 > `/realisations/*` +140 car. ; rendu sans JS à 390 px OK (pas de défilement horizontal ;
 > le rendu client local plante faute de variables Supabase, normal hors Vercel). `lastmod`
 > non modifié (maillage). Build OK, `check:fige` OK. Archive : entrées du 30/09.
+> ✅ Vérifié en prod (`f487f71`, `success`) : arnaque 9 entrantes, zone 15, valeurs de car.
+> identiques au banc local, IndexNow 16 URLs → 200.
 
 > ✅ **29/10/2026 — Déploiement OK** (`445c79c` : statut GitHub `success`). Prod =
 > dernier commit (16/16 en 200 ; +63 car. du 28/10 visibles sur les 4 `/realisations/*`,

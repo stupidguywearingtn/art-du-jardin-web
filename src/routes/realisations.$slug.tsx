@@ -266,7 +266,7 @@ const REAL_SAVOIR: Record<
      jour de la pose, avec des sources publiques. */
   "chantier-en-cours": {
     heading: "Le jour de la pose d'enrobé : les questions qu'on se pose quand l'équipe est devant chez soi",
-    lead: "Ce dossier est consacré à HCE au travail, pendant la pose. C'est le moment où un client découvre un chantier qu'il n'avait vu que sur un devis : une équipe qui ne s'arrête pas, une odeur de bitume, une cour qu'on ne peut pas utiliser tout de suite. Voici cinq questions qui reviennent ce jour-là, avec les sources publiques qui y répondent.",
+    lead: "Ce dossier est consacré à HCE au travail, pendant la pose. C'est le moment où un client découvre un chantier qu'il n'avait vu que sur un devis : une équipe qui ne s'arrête pas, une odeur de bitume, une cour qu'on ne peut pas utiliser tout de suite, puis, une fois la cour finie, une ligne visible entre deux bandes. Voici six questions qui reviennent ce jour-là, avec les sources publiques qui y répondent.",
     updated: PAGE_UPDATED["/realisations/chantier-en-cours"],
     qa: [
       {
@@ -288,6 +288,10 @@ const REAL_SAVOIR: Record<
       {
         q: "Quand peut-on marcher et rouler sur une cour en enrobé neuve ?",
         a: "Pas tant qu'elle est chaude : un enrobé reste plus mou tant qu'il n'est pas revenu à la température ambiante, et le délai dépend de l'épaisseur posée et de la météo du jour — demandez-le à l'équipe en fin de chantier plutôt que de vous fier à un chiffre général. La raison est physique : le bitume qui lie les granulats est un matériau thermoplastique, qui ramollit quand il chauffe et durcit en refroidissant. D'où les marques typiques d'une surface sollicitée trop tôt ou par forte chaleur : roues braquées à l'arrêt, béquille de moto, pied de remorque ou de chaise, qui poinçonnent ou arrachent la surface au lieu de simplement s'y poser. Les premières semaines, et plus encore lors des journées chaudes de l'été, on évite donc de tourner le volant véhicule arrêté et on pose une planche sous tout appui étroit et lourd. Ces marques d'usage ne sont pas un défaut de pose. Un vrai désordre apparu après la réception relève, pendant un an, de la garantie de parfait achèvement de l'article 1792-6 du code civil, détaillée sur la page « Réalisations ».",
+      },
+      {
+        q: "Pourquoi voit-on une ligne entre deux bandes d'enrobé, et est-ce un défaut ?",
+        a: "Non, pas en soi : cette ligne est un joint, l'endroit où une bande d'enrobé frais rejoint une bande déjà posée, et une cour plus large qu'une bande de pose en compte forcément. Ce qui distingue un bon joint d'un mauvais n'est pas qu'on le voie, mais qu'il soit fermé, à niveau et aussi bien compacté que le reste. C'est un point de vigilance connu des chaussées, parce qu'il est naturellement plus faible : une présentation de Pierre Langlois, ingénieur au Laboratoire des chaussées, sur la confection des joints longitudinaux et transversaux (archive de Bitume Québec), chiffre la compacité d'un joint « de l'ordre de 4 à 10 % plus faible que le revêtement adjacent », et range parmi ses conséquences les dommages causés par l'eau et les fissures longitudinales. Les remèdes qu'elle décrit sont des gestes de pose : faire chevaucher les bandes de 25 à 50 mm, appliquer du liant d'accrochage sur le joint, compacter d'abord sur la bande chaude à 150 mm du joint puis repasser en chevauchant le joint de 150 mm, avec pour objectif une compacité à 1 à 2 % au plus de celle du revêtement voisin. Le bulletin technique du ministère des Transports du Québec consacré aux joints transversaux (vol. 7, n° 8, août 2002) ajoute qu'un joint transversal se forme dès un arrêt « d'une quinzaine de minutes ou plus » et qu'à la reprise « on épand du liant d'accrochage » avant de poser à nouveau — une raison de plus pour laquelle l'équipe évite de s'interrompre au milieu d'une bande. Ces documents visent les routes posées au finisseur ; sur une cour posée à la main, à 150 °C chez HCE, le principe est le même : moins il y a de reprises, mieux c'est, et celles qui restent se soignent. Ce qu'il faut regarder à la fin du chantier : un joint qui s'ouvre, une petite marche entre deux bandes, ou une ligne où l'eau stagne méritent d'être signalés au moment de la réception plutôt que découverts au premier hiver.",
       },
     ],
     sources: [
@@ -313,6 +317,16 @@ const REAL_SAVOIR: Record<
       {
         label: "Le collage des couches — colloque Bitume Québec « La mise en œuvre des enrobés », 26 novembre 2008",
         url: "https://archive.bitumequebec.ca/wp-content/uploads/2015/06/collagedescouches.pdf",
+      },
+      {
+        label:
+          "Confection des joints longitudinaux et joints transversaux — Pierre Langlois, Laboratoire des chaussées (archive Bitume Québec)",
+        url: "https://archive.bitumequebec.ca/wp-content/uploads/2015/06/confections-des-joints-longitudinaux-et-transversaux-p-langlois.pdf",
+      },
+      {
+        label:
+          "Les joints transversaux des revêtements bitumineux — bulletin technique vol. 7, n° 8, août 2002, ministère des Transports du Québec",
+        url: "https://www.transports.gouv.qc.ca/fr/entreprises-partenaires/entreprises-reseaux-routier/bulletin-technique-dglc/Documents/2002/02-08.pdf",
       },
     ],
   },

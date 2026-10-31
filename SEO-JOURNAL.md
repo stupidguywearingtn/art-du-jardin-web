@@ -23,6 +23,8 @@ et à compléter en fin de run.
 > Build OK, `check:fige` OK, `verif-lastmod` : seul écart connu `/`. Archive : entrées du 01/10.
 > ⚠️ WebFetch d'une URL non issue d'une recherche (PDF MTQ 2009 déjà cité) = refusée en run
 > automatique ; passer par WebSearch puis WebFetch des URL renvoyées.
+> ✅ Vérifié en prod (`a4550c0`) : `chantier-en-cours` 9 956 car., FAQ 6/6, `llms.txt` à
+> jour, IndexNow 16 URLs → 200.
 
 > ✅ **30/10/2026 — Déploiement OK** (`4e062af` : statut GitHub `success`). Prod =
 > dernier commit (16/16 en 200, valeurs du 29/10 : `cour-allee-privee` 10 081). Chantier

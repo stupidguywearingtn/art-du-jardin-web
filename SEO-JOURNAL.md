@@ -2222,8 +2222,8 @@ Par ordre de priorité. **Alterner les angles, ne pas refaire le même deux jour
 de suite.**
 
 > 🆕 **MISE À JOUR DU 01/11/2026 — prime sur tout ce qui suit.**
-> ✅ Maillage maçonnerie (à vérifier en prod : `href="/services/maconnerie-generale"` sur
-> `/contact`, `/zone-intervention`, `/services/enrobe-a-chaud`, `/services/finitions-soignees`).
+> ✅ Maillage maçonnerie — **vérifié en prod** (`dda5244`, 1 lien sur chacune des 4 pages),
+> IndexNow 16 URLs 200.
 > 1. Lundi 02/11 : veille (étape 6).
 > 2. Prochain contenu : `parking-voirie-pro` (8 468) ou `preparation-terrassement` (8 359) ;
 >    accueil : **rien sans accord client**.

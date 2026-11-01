@@ -329,14 +329,22 @@ function ZoneIntervention() {
               className="underline decoration-gold/40 underline-offset-2 hover:text-gold"
             >
               Préparation de terrain
-            </Link>{" "}
-            et{" "}
+            </Link>
+            ,{" "}
             <Link
               to="/services/$slug"
               params={{ slug: "drainage-pentes" }}
               className="underline decoration-gold/40 underline-offset-2 hover:text-gold"
             >
               Drainage &amp; pentes
+            </Link>{" "}
+            et{" "}
+            <Link
+              to="/services/$slug"
+              params={{ slug: "maconnerie-generale" }}
+              className="underline decoration-gold/40 underline-offset-2 hover:text-gold"
+            >
+              Maçonnerie générale
             </Link>
             , et les chantiers réalisés dans cette zone sont regroupés dans les{" "}
             <Link

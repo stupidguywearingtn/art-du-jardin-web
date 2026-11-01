@@ -867,6 +867,18 @@ un extrait de SERP ne prouve pas ce que la page contient.
 > (403 au runner, contenu jamais lu). Leur statut « périmée » n'est donc pas
 > établi. Noté en chantier en attente.
 
+### Positions mesurées — 01/11/2026
+
+| Contrôle | 01/11/2026 | vs 31/10 |
+|---|---|---|
+| Déploiement `main` (`93549fe`) | **`success`** (Vercel) | = |
+| Prod vs code (`mesure-texte-servi`) | 16/16 en 200 ; `chantier-en-cours` 9 956 (Q/R joints du 31/10 en ligne) | = |
+| Liens entrants vers `/services/maconnerie-generale` (prod, avant run) | 2 pages (accueil ×2, `bordures-murets`) | — |
+| SERP | non relevée (canal `WebSearch` US, non représentatif) | — |
+
+Pas d'accès Search Console. **À relever par Yanis** : « Performances IA » + requêtes à
+impressions ; indexation de `/contact` et `/arnaque-goudronnage`.
+
 ### Positions mesurées — 31/10/2026
 
 | Contrôle | 31/10/2026 | vs 30/10 |
@@ -1267,78 +1279,16 @@ présentes, 0 occurrence de l'ancien domaine `hcebtp`. Rien à corriger. Sa date
 reste au 2 octobre : **volontairement pas touchée**, aucun contenu n'ayant changé
 aujourd'hui.
 
-### Positions mesurées — 02/10/2026
-
-**Indexation : toujours nulle — mais le premier signe de vie côté moteur est
-arrivé, et il était prévu par le run précédent.**
-
-🟢 **IndexNow passe de 202 à 200.** Le run du 01/10 avait posé cet indicateur
-noir sur blanc : « un passage de 202 à 200 signifierait que Bing a lu le fichier
-clé — premier signe de vie côté moteur ». C'est arrivé aujourd'hui, à la deuxième
-soumission du nouveau domaine : fichier clé servi en 200, 13 URLs soumises →
-**HTTP 200** (hier : 202, « accepté, clé en cours de vérification »). **Ce que ça
-prouve et ce que ça ne prouve pas** : Bing a vérifié la propriété de
-`www.hcetp.com` et accepte désormais les soumissions sans réserve — ce n'est
-**pas** une indexation, et ça ne dit rien de Google, qui ne participe pas au
-protocole. Mais c'est le premier retour positif d'un moteur depuis la bascule de
-domaine, et il a été obtenu par une mesure gratuite. **Continuer à relever ce
-code à chaque run.**
-
-**Les trois mesures d'indexation, inchangées :**
-1. **Phrase exacte du site** `"Médaillons et inserts pavés intégrés à l'enrobé"`
-   → dix résultats, **zéro hcetp.com**. ⚠️ **La SERP est cette fois STRICTEMENT
-   identique à celle du 01/10** (daniel-moquet, galerie-creation, mavrotp,
-   aravis-enrobage, gonord, perenia, lizetp, ligerio, amenagement-mineral,
-   fredtoma) — après deux réordonnancements consécutifs les 30/09 et 01/10. À
-   noter pour ne pas surinterpréter : l'immobilité d'un jour ne vaut pas garantie,
-   la leçon du 30/09 reste valable.
-2. **`site:hcetp.com`** → neuf résultats sans rapport, identiques à ceux du 01/10
-   (Wikipédia d'acronymes, Hitkarini College, hrsa.gov, sites.bu.edu). **Opérateur
-   toujours non honoré par ce canal : ce résultat n'est pas une information.**
-3. **Requête nommant le domaine et l'entité** → **aucune page du domaine**, neuf
-   fiches d'annuaire. ⚠️ **La composition a changé : PagesJaunes départemental
-   sort, `nosartisansontdutalent.fr` entre** — une fiche jamais repérée par les 25
-   runs précédents. Voir le chantier du jour, point 2.
-
-**Requête commerciale** `enrobé à chaud Jura entreprise` → neuf résultats, **HCE
-absent**, inchangé vs 01/10. SFCTP (`franc-comtoise-tp.fr`, Commenailles 39)
-place désormais **quatre URLs** dans les neuf (accueil, fabrication/pose,
-personnalisation d'enrobé, aménagements extérieurs) contre trois hier. Les deux
-pages départementales PagesJaunes tiennent les deux premières places.
-
-| Requête | Mesure (02/10/2026) | Évolution vs 01/10 |
-|---|---|---|
-| indexation (phrase exacte du site) | **absent** | inchangé (SERP identique, 1re fois) |
-| indexation (requête nommant le domaine) | **absent** | inchangé — 9 fiches, dont 1 nouvelle |
-| `site:hcetp.com` | **absent** | inchangé (opérateur non honoré) |
-| `enrobé à chaud Jura entreprise` | **absent** | inchangé — SFCTP passe de 3 à 4 URLs |
-| **code IndexNow** | **200** | 🟢 **202 → 200** (Bing a lu le fichier clé) |
-
-**Volume de texte servi en production** (`scripts/mesure-texte-servi.mjs`, vu
-comme Googlebot, sur `https://www.hcetp.com`), relevé **avant** le chantier du
-jour : **les 13 URLs rendent exactement les mêmes valeurs qu'au 01/10 et au
-30/09, au caractère près** (13 526 / 13 491 / 8 578 / 8 156 / 7 670 / 7 012 /
-6 821 / 6 356 / 5 198 / 5 080 / 4 482 / 3 783 / 373).
-
-**Après le chantier du jour**, `/services/enrobe-a-chaud` passe de **3 783 à
-11 856 caractères** — mesuré au banc d'essai local, et le banc est fidèle : les
-deux pages de contrôle (accueil 13 526, `/services/finitions-soignees` 6 821) y
-rendent exactement la valeur de production.
-
-🔴 **Et le chantier du jour N'EST PAS EN LIGNE : le déploiement ne part plus.**
-Voir l'encadré rouge en tête d'« État des lieux » — le code est sur `main`, la
-production sert encore la version du 30/09, et la cause est hors du dépôt.
-
-**Contrôles passés avant push** : `npx tsc --noEmit` en 0, `npm run build` en 0,
-`npm run check:fige` en 0, `verif-faq.mjs` **✓ 10/10** sur la page modifiée,
-`verif-lastmod.mjs` **✓ 13 URLs cohérentes** dont `/services/enrobe-a-chaud` au
-`2026-10-02`. Contenu figé revérifié sur le HTML servi : `finisseur` 0, `2005` 0,
-`20 ans` 0, `Devis sous 48h` 0, `Garantie & SAV` 0 ; `150°C` 17, `à la main` 17,
-`2012` 4, `garantie décennale` 7. *(Les 4 occurrences de « 180 » sont le
-`sizes="180x180"` de l'apple-touch-icon, un numéro dans l'URL 118000 des `sameAs`
-et un `linear-gradient(180deg…)` — contrôlées une par une, aucune température.)*
-
 ## Chantiers faits
+
+### 01/11/2026 — Maillage : `/services/maconnerie-generale` passe de 2 à 6 pages entrantes
+Ajouts (avec raison affichée, règle `VOIR_AUSSI`) : `enrobe-a-chaud` et `finitions-soignees`
+(« Les prestations qui vont avec ») ; phrases de renvoi de `/zone-intervention` et `/contact`.
+Banc local (`vite dev`) : 1 lien sur chacune, `enrobe-a-chaud` 12 809 → 12 937, `finitions`
+10 918 → 11 039, `zone` 8 762 → 8 784, `contact` 5 711 → 5 733. Pas de `lastmod` touché
+(liens seuls). **Non fait** : `RELATED_SERVICES["cour-allee-privee"]` ne liste pas la
+maçonnerie alors que `maconnerie-generale` renvoie vers ce dossier pour ses photos de
+pavés — voir Hypothèses.
 
 ### 31/10/2026 — `/realisations/chantier-en-cours` : Q/R joint entre deux bandes d'enrobé
 Question réelle de fin de chantier (ligne visible entre deux bandes), absente du site.
@@ -2266,137 +2216,19 @@ points d'entrée tiers).
   page la plus maigre du site. Candidat de contenu évident — mais il attend le
   déploiement.
 
-### 02/10/2026 — `/services/enrobe-a-chaud` passe de 3 783 à 11 856 caractères : la page du métier principal sort de la maigreur, sur ce qui se décide au devis et qu'on ne voit plus une fois la cour finie
-
-**Pourquoi ce chantier.** C'était le candidat n°1 posé par le run du 01/10, et
-rien n'avait changé entre-temps : avec 3 783 caractères servis, cette page était
-**la dernière du site sous les 4 000** (les onze autres pages rédigées tiennent
-entre 4 482 et 13 526), alors qu'elle porte **le service qui donne son nom à
-l'entreprise** et la requête commerciale mesurée depuis le 01/10
-(« enrobé à chaud Jura entreprise »), sur laquelle le site est absent. Son bloc de
-Q/R du 11/09 était le plus ancien et le plus court des six. Le run précédent étant
-un chantier documentaire (migration de domaine), l'angle alterne bien.
-
-**L'angle, et pourquoi il ne double rien.** Les 5 Q/R du 11/09 traitent du
-**vocabulaire** (goudron contre bitume, BBSG, 150 °C, saison, chaud contre froid).
-Les 5 nouvelles traitent de la **mise en œuvre** : épaisseur, classe granulaire,
-rechargement sur l'ancien, origine des dégradations hivernales, grade de bitume
-selon l'altitude. **Les 30 Q/R des autres pages ont été relues avant de rédiger**,
-et deux sujets ont été écartés pour doublon :
-- **la saison de pose chiffrée** — `/zone-intervention` (30/09) la traite déjà en
-  détail avec les normales mensuelles de Champagnole et de Lons-le-Saunier. La
-  rouvrir ici aurait répété la même donnée sur deux pages.
-- **les joints entre bandes et le contrôle de finition** — déjà traités sur
-  `/services/finitions-soignees` (21/09).
-
-**Les cinq questions ajoutées, et la source de chaque chiffre.**
-1. **« Quelle épaisseur d'enrobé faut-il pour une cour ou une allée ? »** — 5 à
-   8 cm en moyenne, 4 à 5 cm au minimum selon la granularité (fiche technique
-   « Béton Bitumineux Semi Grenu » du **conseil départemental de la Meuse**,
-   verbatim « Moyenne : 5 à 8 cm selon granularité », « Mini : 4 à 5 cm selon
-   granularité ») ; et « des couches de roulement d'épaisseur suffisante (type BBSG
-   de 5 à 7 cm) » pour les cas les plus sollicités (**IDRRIM, note d'information
-   n° 43, décembre 2020**). Plus le fait que les couches minces ou très minces
-   (≤ 4 cm) exigent un support déjà dense et imperméabilisé.
-2. **« Sur un devis d'enrobé, que veut dire 0/10 ou 0/14 ? »** — classe granulaire,
-   module de richesse **K ≥ 3,4 (0/10) et K ≥ 3,2 (0/14)** en climat hivernal
-   rigoureux, norme **NF P 98-149** citée par l'IDRRIM pour sa définition, et les
-   bornes de macrotexture du tableau 2 de la note (PMT 0,4 à 1,3 mm pour un BBSG
-   0/10 ; 0,5 à 1,4 mm pour un 0/14) **avec leur raison hivernale** : une surface
-   trop ouverte se déverglace mal et souffre des lames de déneigement.
-3. **« Peut-on poser un enrobé neuf par-dessus l'ancien ? »** — la réponse la plus
-   utile du lot, parce qu'elle est contre-intuitive et verbatim : le rechargement
-   « n'est pas possible » « sur une couche mince (BBTM ou BBM), quel que soit son
-   état », « sur un BBSG fissuré ou dégradé », ni « sur un ESU vieilli » (IDRRIM
-   n° 43). Plus l'interdiction d'« empilement de couches minces », le seuil
-   mesurable de la fiche Meuse (reprofilage ou fraisage dès 2 cm de déformation
-   transversale) et le dosage de la couche d'accrochage (250 à 300 g/m² de liant
-   résiduel).
-4. **« Pourquoi un enrobé se dégrade-t-il après un hiver ? »** — l'eau, pas le
-   froid : « La résistance d'une couche de roulement aux hivers rigoureux dépend
-   essentiellement de sa capacité à limiter l'infiltration et l'accumulation
-   d'eau » ; les nids-de-poule et arrachements « dépendent souvent de négligence à
-   l'application et d'un mauvais compactage des enrobés bitumineux » (IDRRIM
-   n° 43, note écrite après l'hiver 2009-2010 qui avait dégradé les routes du
-   nord-est). Repère d'entretien donné au lecteur : ponter une fissure dès 2 mm en
-   secteur de montagne, émulsion sous 1 cm non ramifiée, purge au-delà de 3 cm.
-5. **« Le bitume est-il le même en altitude qu'en plaine ? »** — la trouvaille du
-   run : une règle de métier où **l'altitude figure noir sur blanc**. Grades
-   inférieurs à 35/50 « à proscrire en couche de roulement », liant final visant un
-   35/50, « voire 50/70 pour les trafics plus faibles ou au-dessus de 700 m, et
-   70/100 au-dessus de 1 000 m » (IDRRIM n° 43). Recoupé avec les altitudes IGN
-   déjà relevées le 30/09 (Cize 549 m, Saint-Claude 668 m) et les 111,7 jours de
-   gel de la station Météo-France de Champagnole.
-
-**Ce qui a été fait au-delà du texte.**
-- `PAGE_UPDATED["/services/enrobe-a-chaud"]` passe au **2026-10-02** — donc la
-  date visible et le `lastmod` du sitemap bougent ensemble, par construction.
-- **`llms.txt` mis à jour** : les 5 nouvelles Q/R y sont reportées en version
-  condensée, la description de la page dans la section « Pages » décrit le nouveau
-  contenu, et l'en-tête « Dernière mise à jour » passe au 2 octobre 2026.
-- `heading` et `lead` du bloc réécrits pour couvrir les deux moitiés du bloc (le
-  vocabulaire puis la mise en œuvre). **Aucun contenu figé client touché** :
-  `prestations`, `methode`, `intro` et `seoDescription` sont inchangés.
-
-**Ce qui a été décidé de NE PAS faire, et pourquoi.**
-- **Aucune question sur le tonnage** (« combien de tonnes pour 100 m² ? »), pourtant
-  très demandée. Elle exige une masse volumique, et **aucune source primaire lue
-  aujourd'hui n'en donne une** : les seuls chiffres trouvés venaient de blogs
-  commerciaux. Question laissée ouverte plutôt que publiée sans source.
-- **Aucune mention du finisseur**, alors que la note IDRRIM en parle beaucoup
-  (finisseur pleine largeur recommandé sur voies circulées, « finisseur non
-  préchauffé » parmi les points de vigilance). Le contenu figé par le client dit
-  « posé à la main » et proscrit « posé au finisseur » : les passages concernés ont
-  été volontairement écartés, et seuls les points de vigilance compatibles ont été
-  cités (travail manuel au démarrage, enrobés refroidis, zones d'accès difficile).
-  Vérifié après coup : **0 occurrence de « finisseur » dans le HTML servi.**
-- **Aucun prix**, alors que la fiche de la Meuse en publie (12 à 18 €/m² pour la
-  couche de roulement seule, jusqu'à 50 €/m² avec reconstitution du corps de
-  chaussée). Ce sont des prix de marché public routier, sans rapport avec un devis
-  de particulier, et la règle du site interdit d'afficher un prix au visiteur.
-- **Aucune affirmation sur la classe hivernale du Jura.** La note IDRRIM vise les
-  zones H3/H4, définies par un cumul de jours de neige et de verglas supérieur à
-  30 par an. **Le classement n'est pas publié commune par commune**, et la fiche
-  Météo-France de Champagnole porte « Données non disponibles » sur les jours de
-  neige. Le texte publié dit donc explicitement que ces recommandations visent les
-  chaussées circulées, et s'appuie sur le seul chiffre réellement mesuré : le gel.
-  ⚠️ **Piège évité et à retenir : une recherche sur « zones H1 H2 H3 » renvoie
-  massivement les zones climatiques de la RE2020 et du DPE, qui n'ont AUCUN rapport
-  avec les zones de viabilité hivernale du domaine routier.** Deux
-  classifications, mêmes étiquettes. Ne pas les confondre, et ne pas se fier à un
-  extrait de moteur qui mélange les deux — c'est ce qu'il a fait aujourd'hui.
-- **Aucun lien interne ajouté dans les réponses** : le champ `a` est rendu en texte
-  brut, un lien y demanderait de changer le rendu du composant. Noté comme chantier
-  possible plutôt que bricolé.
-- **Prettier non appliqué.** `npx eslint` signale 61 erreurs de formatage sur
-  `services.$slug.tsx`, dont **58 préexistantes** (vérifié en stashant le
-  changement) : le fichier n'a jamais été conforme, et mes 3 nouvelles lignes
-  longues sont de la même famille que les existantes. Lancer `--fix` reformaterait
-  tout le fichier, c'est-à-dire un refactor que les consignes interdisent.
-  **À savoir pour les prochains runs : ce fichier n'est pas prettier-propre, et les
-  entrées de journal antérieures qui disent « prettier --check passe » ne valent
-  pas pour lui.**
-
-**Point 2 du run — une septième fiche d'annuaire, trouvée par la mesure et non
-par un chantier.** La requête d'indexation nommant le domaine a fait apparaître
-`nosartisansontdutalent.fr/entreprise/hce-hini-cours-enrobes/`, **jamais repérée
-en 25 runs**. Lue intégralement : fiche **commerciale** (même famille que
-PagesJaunes et Mappy), **revendicable en libre-service** (« C'est votre
-entreprise ? Prenez la main sur cette fiche »), **sans aucun lien vers le site**,
-et porteuse de deux erreurs : l'adresse `1 r Baronne Delort 39300 Champagnole` et
-un téléphone mobile `06 50 83 16 86`. **Vérification au registre national le
-02/10/2026** (`recherche-entreprises.api.gouv.fr`, SIREN 521683573) : **3
-établissements dont 1 seul ouvert**, le siège `40 B avenue Etienne Lamy 39300
-Cize` (SIRET 52168357300039) — **l'établissement de Champagnole est fermé.**
-La fiche est donc documentée dans `ACTIONS-SEO-CLIENT.md` avec une consigne
-explicite : **corriger l'adresse et le téléphone AVANT d'y ajouter l'URL**, et
-**ne pas l'ajouter aux `sameAs`** en l'état — même traitement que La Gazette
-France le 12/09, pour la même raison.
-
 ## Chantiers en attente
 
 Par ordre de priorité. **Alterner les angles, ne pas refaire le même deux jours
 de suite.**
+
+> 🆕 **MISE À JOUR DU 01/11/2026 — prime sur tout ce qui suit.**
+> ✅ Maillage maçonnerie (à vérifier en prod : `href="/services/maconnerie-generale"` sur
+> `/contact`, `/zone-intervention`, `/services/enrobe-a-chaud`, `/services/finitions-soignees`).
+> 1. Lundi 02/11 : veille (étape 6).
+> 2. Prochain contenu : `parking-voirie-pro` (8 468) ou `preparation-terrassement` (8 359) ;
+>    accueil : **rien sans accord client**.
+> 3. Yanis : Search Console (Performances IA + indexation `/contact`) ; fiche Google Business
+>    Profile complète ; statut du mobile WhatsApp.
 
 > 🆕 **MISE À JOUR DU 31/10/2026 — prime sur tout ce qui suit.**
 > ✅ `chantier-en-cours` : Q/R joints (à vérifier en prod : ~9 956 car., FAQ 6/6, lastmod
@@ -3460,6 +3292,11 @@ de suite.**
 ---
 
 ## Hypothèses à vérifier
+
+### 01/11/2026 — Le dossier « Cour et allée privée » montre-t-il vraiment des pavés ?
+`/services/maconnerie-generale` y renvoie (« pavés, dallages et médaillons… en photos »),
+mais le dossier ne liste pas la maçonnerie dans ses prestations (`RELATED_SERVICES`). Les
+photos sont en base : à regarder avant d'ajouter le lien retour, ou de corriger la phrase.
 
 ### 22/10/2026 — La demande client du 22/10 vaut-elle pour les autres blocs juridiques du site ?
 Le client a fait retirer de l'accueil le bloc loi devis/acompte/délais et la Q/R « posé

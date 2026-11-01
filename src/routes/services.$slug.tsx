@@ -621,6 +621,11 @@ const VOIR_AUSSI: Record<
         label: "Finitions soignées",
         why: "Les bords, les raccords et la dernière passe — ce qu'on voit une fois la cour finie.",
       },
+      {
+        slug: "maconnerie-generale",
+        label: "Maçonnerie générale",
+        why: "Pavés, dallage ou médaillon posés au cordeau avant l'enrobé, qui vient ensuite occuper le reste de la cour.",
+      },
     ],
   },
   "maconnerie-generale": {
@@ -704,6 +709,11 @@ const VOIR_AUSSI: Record<
         slug: "bordures-murets",
         label: "Bordures & murets",
         why: "Ce qui tient le bord de l'enrobé et empêche la rive de s'effriter.",
+      },
+      {
+        slug: "maconnerie-generale",
+        label: "Maçonnerie générale",
+        why: "Les jonctions entre pavés et enrobé, jointoyées selon l'usage : l'autre finition visible d'une cour.",
       },
     ],
   },

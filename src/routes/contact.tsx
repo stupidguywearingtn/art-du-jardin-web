@@ -257,10 +257,14 @@ function Contact() {
             . Les prestations sont décrites sur les pages{" "}
             <Link to="/services/$slug" params={{ slug: "enrobe-a-chaud" }} className={LIEN}>
               Enrobé à chaud
-            </Link>{" "}
-            et{" "}
+            </Link>
+            ,{" "}
             <Link to="/services/$slug" params={{ slug: "preparation-terrain" }} className={LIEN}>
               Préparation de terrain
+            </Link>{" "}
+            et{" "}
+            <Link to="/services/$slug" params={{ slug: "maconnerie-generale" }} className={LIEN}>
+              Maçonnerie générale
             </Link>
             , et les chantiers dans les{" "}
             <Link to="/realisations" className={LIEN}>

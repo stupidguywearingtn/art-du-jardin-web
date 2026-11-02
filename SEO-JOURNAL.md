@@ -8,6 +8,22 @@ et à compléter en fin de run.
 
 ## État des lieux
 
+> ✅ **02/11/2026 — Déploiement OK** (`d754824` : statut GitHub `success`). Prod = dernier
+> commit (16/16 en 200, valeurs identiques au 01/11 ; maillage maçonnerie en ligne).
+> Lundi : veille (voir « Techniques apprises »). Chantier (**contenu**, après un jour
+> maillage) : **`/realisations/preparation-terrassement`** (la plus maigre des réalisations,
+> 8 359 car., inchangée depuis le 25/09) +1 Q/R **« Le fond du terrassement est argileux et
+> détrempé : que fait-on avant de remblayer ? »** (« chaux » absente du site ; question de
+> saison : novembre-décembre = mois les plus pluvieux à Champagnole). Trois issues (attendre /
+> purger-substituer sur géotextile / traiter à la chaux). Sources : guide FRTP Normandie
+> sept. 2019 (chaux vive : baisse de la teneur en eau, floculation, IPI en hausse ; « pas de
+> mise en œuvre sous 5 °C » ; renvoie au GTS SETRA/LCPC 2000 et à NF P94-100) ; Chambre
+> d'agriculture nov. 2016 (analyse préalable obligatoire, terre végétale exclue). **Rien
+> d'affirmé sur la pratique d'HCE** (pas dit qu'HCE traite à la chaux) : renvoi au devis
+> détaillé. Banc local : **10 703 car.**, FAQ 6/6, lead « cinq » → « six », lastmod +
+> `llms.txt` 02/11. Build OK, `check:fige` OK, `verif-lastmod` : seul écart connu `/`.
+> Archive : bloc d'état du 02/10.
+
 > ✅ **31/10/2026 — Déploiement OK** (`573396f` : Vercel `READY`, production). Prod =
 > dernier commit (16/16 en 200, valeurs identiques au 30/10). Chantier (**contenu**, après
 > un jour technique) : **`/realisations/chantier-en-cours`** (la plus maigre des
@@ -629,73 +645,6 @@ et à compléter en fin de run.
 > pousser de code et se limiter à ce qui vit hors du site (annuaires, NAP,
 > fiches), comme le 04/10.
 
-> 🔴 **02/10/2026 — LE DÉPLOIEMENT NE PART PLUS. Le code est sur `main`, la
-> production sert encore la version du 30/09. À LIRE AVANT TOUT CHANTIER.**
-> **Les faits, mesurés :**
-> - `origin/main` est à `0b4d0cd`, poussé le **02/10/2026 à 07:23 UTC** (chantier
->   du jour). Le push est confirmé (`84dddba..0b4d0cd HEAD -> main`).
-> - **46 minutes plus tard** (dernier relevé à 08:09 UTC, après une vingtaine de
->   mesures espacées de 30 à 45 s), `https://www.hcetp.com/services/enrobe-a-chaud`
->   sert toujours **3 783 caractères** au lieu des 11 856 mesurés au banc d'essai
->   local, et `https://www.hcetp.com/llms.txt` affiche encore « Dernière mise à
->   jour : 30 septembre 2026 ».
-> - ⚠️ **Et ce ne sont pas un, mais QUATRE pushes sur `main` qui sont restés sans
->   effet** (`0b4d0cd`, `46987cd`, `9a1014b`, `6220bb5`, entre 07:23 et 08:05 UTC).
->   Chacun est une occasion de déclenchement distincte. **Cela affaiblit nettement
->   l'hypothèse « déploiement lent ou en file d'attente » et renforce celle d'une
->   intégration qui ne reçoit plus l'événement, ou de builds qui échouent.**
->   Pour mémoire, l'acquis du 25/09 chiffrait le délai normal : production à jour
->   **moins de 45 secondes** après un push sur `main`.
-> - **Dernière mesure du run : 08:33 UTC, soit 1 h 10 après le premier push, et
->   cinq pushes au total. Toujours 3 783 caractères et toujours « 30 septembre
->   2026 » dans `llms.txt`.** La surveillance a été arrêtée là, faute de pouvoir
->   agir : le run n'a plus rien à mesurer sur ce point. **Le chantier du 02/10
->   existe dans le dépôt et nulle part ailleurs.**
-> - `x-vercel-cache: MISS`, `age: 0`, `cache-control: must-revalidate` → **ce
->   n'est pas un cache CDN** : la fonction déployée contient encore l'ancien code.
-> - **La preview `hcebtp.lovable.app` est encore plus en retard** : elle sert
->   **11 occurrences de `hcebtp.com`**, donc une version **antérieure à la bascule
->   de domaine du 30/09**.
-> - **Le dernier déploiement réellement visible en production date du 30/09**
->   (bascule de domaine `f07b19f` + `/zone-intervention` `6cc006e`, tous deux en
->   ligne). Le commit du 01/10 (`84dddba`) ne touchait qu'un `.md` : **son
->   non-déploiement était invisible**. Le chantier du 02/10 est le premier
->   changement de code depuis le 30/09, et c'est lui qui révèle le blocage.
-> **Ce qui a été écarté, vérifié et pas supposé :**
-> - ❌ **Pas un problème de code** : `npx tsc --noEmit` en 0, `npm run build` en 0
->   (14 s), `npm run check:fige` en 0, `verif-faq.mjs` 10/10, `verif-lastmod.mjs`
->   13/13 — tous **avant** le push.
-> - ❌ **Pas un problème de branche** : le push est allé sur `main` (`git push
->   origin HEAD:main`), et c'est `main` qui déploie (acquis du 25/09).
-> - ❌ **Pas un workflow CI en échec** : le dépôt n'a **aucun** workflow
->   (`.github/workflows` absent). Le déploiement passe uniquement par
->   l'intégration Git de Vercel.
-> - ❌ **Pas un changement de configuration** : `vite.config.ts` impose toujours
->   `nitro: { preset: "vercel" }`, et il n'a pas été modifié.
-> ❌ **Et ce n'est PAS le `package-lock.json` désynchronisé**, contrairement à ce
->   que ce même encadré avançait d'abord. Vérification faite : `package.json` n'a
->   pas été modifié depuis le **11/09** (`0798ac2`) et le lockfile pas depuis
->   `a51c917` — **la désynchronisation est donc antérieure aux déploiements qui ont
->   réussi le 30/09.** Elle ne peut pas expliquer un blocage apparu après. *(Elle
->   reste un vrai sujet pour le runner, voir « Techniques apprises » du 02/10, mais
->   ce n'est pas cette piste-ci.)*
-> **Ce qui reste et ne peut pas être fait d'ici :** consulter le tableau de bord
-> Vercel. Les causes plausibles, maintenant que le code, la branche, le CI et le
-> lockfile sont écartés : **déploiement en échec pour une raison côté
-> plateforme** (quota, variable d'environnement, changement de commande
-> d'installation), **déploiement en file d'attente**, ou **intégration GitHub
-> déconnectée du projet Vercel**. Les trois se lisent en trente secondes sur le
-> tableau de bord, et aucune ne se diagnostique depuis le dépôt.
-> 🔔 **Le client a été notifié le 02/10/2026**, en dérogation à la cadence
-> hebdomadaire (prochaine routine prévue le 08/10) : la règle du 01/10 prévoyait
-> explicitement la dérogation « si un contrôle casse ». **C'en est un, et c'est le
-> plus grave possible : le travail quotidien ne parvient plus au site.**
-> ⚠️ **Consigne pour le prochain run : VÉRIFIER CE POINT EN PREMIER, avant de
-> choisir un chantier.** Mesurer `/services/enrobe-a-chaud` en production — s'il
-> rend 11 856 caractères, le déploiement est reparti et le chantier du 02/10 est
-> effectivement en ligne ; s'il rend encore 3 783, **ne pas empiler un nouveau
-> chantier de contenu par-dessus un chantier non déployé**, et relancer l'alerte.
-
 > 🔴 **DOMAINE — À LIRE AVANT TOUT (mis à jour le 01/10/2026).**
 > **Le site est servi sur `https://www.hcetp.com`** (sans le `b`), depuis la
 > bascule du 30/09/2026 (commit `f07b19f`). `hcebtp.com`, `www.hcebtp.com` et
@@ -866,6 +815,17 @@ un extrait de SERP ne prouve pas ce que la page contient.
 > `verif.com` ont été jugées périmées **sur la seule foi d'extraits de recherche**
 > (403 au runner, contenu jamais lu). Leur statut « périmée » n'est donc pas
 > établi. Noté en chantier en attente.
+
+### Positions mesurées — 02/11/2026
+
+| Contrôle | 02/11/2026 | vs 01/11 |
+|---|---|---|
+| Déploiement `main` (`d754824`) | **`success`** (Vercel) | = |
+| Prod vs code (`mesure-texte-servi`) | 16/16 en 200 ; `maconnerie-generale` 8 040, `enrobe-a-chaud` 12 937 (maillage du 01/11 en ligne) | = |
+| SERP | non relevée (canal `WebSearch` US, non représentatif) | — |
+
+Pas d'accès Search Console. **À relever par Yanis** : « Performances IA » + requêtes à
+impressions ; indexation de `/contact` et `/arnaque-goudronnage`.
 
 ### Positions mesurées — 01/11/2026
 
@@ -1280,6 +1240,12 @@ reste au 2 octobre : **volontairement pas touchée**, aucun contenu n'ayant chan
 aujourd'hui.
 
 ## Chantiers faits
+
+### 02/11/2026 — `/realisations/preparation-terrassement` : Q/R fond de forme argileux et détrempé
+Question de saison (terrassement en automne jurassien), absente du site. Réponse directe (on
+ne remblaie pas dessus), trois issues, limites vérifiables du traitement à la chaux (essai
+NF P94-100, pas sur terre végétale, pas sous 5 °C), renvoi au devis détaillé. FAQ 5 → 6,
+2 sources ajoutées. 8 359 → 10 703 car. (banc local).
 
 ### 01/11/2026 — Maillage : `/services/maconnerie-generale` passe de 2 à 6 pages entrantes
 Ajouts (avec raison affichée, règle `VOIR_AUSSI`) : `enrobe-a-chaud` et `finitions-soignees`
@@ -2220,6 +2186,16 @@ points d'entrée tiers).
 
 Par ordre de priorité. **Alterner les angles, ne pas refaire le même deux jours
 de suite.**
+
+> 🆕 **MISE À JOUR DU 02/11/2026 — prime sur tout ce qui suit.**
+> ✅ `preparation-terrassement` : Q/R fond argileux (à vérifier en prod : ~10 703 car., FAQ
+> 6/6, lastmod 02/11, `llms.txt`, puis IndexNow).
+> 1. Prochain technique : relecture `seo-schema` des JSON-LD des `/realisations/*` (3 blocs
+>    contre 4 ailleurs : manque-t-il un `BreadcrumbList` ?) ; ou `RELATED_SERVICES` de
+>    `cour-allee-privee` → maçonnerie (voir Hypothèses 01/11).
+> 2. Prochain contenu : `parking-voirie-pro` (8 468) ; accueil : **rien sans accord client**.
+> 3. Yanis : Search Console (Performances IA + indexation `/contact`) ; fiche Google Business
+>    Profile complète ; statut du mobile WhatsApp.
 
 > 🆕 **MISE À JOUR DU 01/11/2026 — prime sur tout ce qui suit.**
 > ✅ Maillage maçonnerie — **vérifié en prod** (`dda5244`, 1 lien sur chacune des 4 pages),
@@ -4073,6 +4049,24 @@ récupérer sans rien réécrire. **Sans cette requête, le travail restait perd
 ---
 
 ## Techniques apprises
+
+### 02/11/2026 (lundi) — 📚 Gemini local : 60 % des citations vont aux sites d'entreprise, mais une mesure ponctuelle ne vaut rien
+- **Steady Demand, 20/08/2026** (repris par Optimixed / MarTech / Search Engine Land),
+  14 472 citations sur 1 487 requêtes locales (US) : ~**60 %** des citations de Gemini en
+  local pointent vers le **site de l'entreprise** (plus qu'annuaires + avis réunis) ; mêmes
+  sources sur deux recherches identiques **40 %** du temps seulement ; même entreprise en
+  tête **7 %** ; Gemini et ChatGPT citent les mêmes sources **8 %** du temps (pack local
+  Google : ~90 % de constance). Source :
+  https://optimixed.com/article/business-sites-lead-gemini-local-ai-citations-but-results-vary-fdfe02
+- **Applicable** : (1) confirme le pari « contenu propre sur le site » (cf. BrightLocal
+  26/10 pour la part GBP) ; (2) **ne jamais conclure sur une seule interrogation d'une IA** :
+  si Yanis teste ChatGPT/Gemini à la main, répéter 3-5 fois et noter la fréquence de
+  citation, pas un oui/non. La mesure stable reste le pack local et la Search Console.
+- Rien de nouveau côté Google depuis la note du 26/10 (mise à jour liens AI Overviews du
+  15/10) ; Search Engine Land refusé au `WebFetch`. Skills : pas re-vérifié (canal inutile,
+  cf. 19/10).
+- ⚙️ `vite dev` doit être lancé avec `--host 127.0.0.1` dans ce runner (sinon
+  `EAFNOSUPPORT ::`).
 
 ### 26/10/2026 (lundi) — 📚 Google renforce les liens dans AI Overviews (15/10) ; 📚 en local, la fiche Google pèse plus que le site dans les citations IA
 

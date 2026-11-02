@@ -205,7 +205,7 @@ const REAL_SAVOIR: Record<
   },
   "preparation-terrassement": {
     heading: "Terrassement : les questions qu'on se pose devant un terrain décaissé",
-    lead: "Un terrassement se juge mal en photo : ce qui décide de la tenue d'une cour ou d'un parking est ce qui se passe sous la surface, et se vérifie avec des essais normalisés. Trois choses se tranchent avant le premier godet — l'autorisation d'urbanisme, la nature du sol en place et le sort des terres sorties — et une quatrième, la saison, décide du planning dans le Jura. Voici cinq questions avec les textes et les normes applicables.",
+    lead: "Un terrassement se juge mal en photo : ce qui décide de la tenue d'une cour ou d'un parking est ce qui se passe sous la surface, et se vérifie avec des essais normalisés. Trois choses se tranchent avant le premier godet — l'autorisation d'urbanisme, la nature du sol en place et le sort des terres sorties — et une quatrième, la saison, décide du planning dans le Jura. Voici six questions avec les textes et les normes applicables.",
     updated: PAGE_UPDATED["/realisations/preparation-terrassement"],
     qa: [
       {
@@ -227,6 +227,10 @@ const REAL_SAVOIR: Record<
       {
         q: "Peut-on réutiliser la terre sortie du chantier au lieu de la faire évacuer ?",
         a: "Pas librement : des terres excavées sont juridiquement des déchets, et elles ne cessent de l'être qu'à des conditions précises. L'arrêté du 4 juin 2021 fixe les critères de sortie du statut de déchet pour les terres excavées et sédiments préparés en vue d'une utilisation en génie civil ou en aménagement, et son article 2 pose cinq conditions cumulatives : conformité des terres entrantes puis des terres préparées aux critères de son annexe I, existence d'un contrat de cession avec l'aménageur, application d'un système de gestion de la qualité, et respect des exigences de ses articles 3 à 6. Le contrat de cession n'est pas une formalité vague : il mentionne la localisation géographique d'origine, la période d'excavation, le volume, le site receveur, l'engagement sur l'usage prévu et les opérations de préparation effectuées. Un point mérite d'être connu des maîtres d'ouvrage, parce qu'il est contre-intuitif : l'arrêté interdit les opérations de mélange ayant pour objectif d'atteindre les critères de qualité. On ne dilue pas un lot médiocre dans un lot propre pour le faire passer. C'est aussi pour cela qu'un terrassement sérieux raisonne par lot homogène, issu d'une même zone d'excavation, et sait dire d'où vient chaque volume.",
+      },
+      {
+        q: "Le fond du terrassement est argileux et détrempé : que fait-on avant de remblayer ?",
+        a: "On ne remblaie pas dessus en l'état : un fond de forme argileux gorgé d'eau ne se compacte pas, il se déforme sous l'engin, et ce défaut remonte plus tard sous la cour en ornières ou en affaissements. Trois issues existent, et c'est l'état du sol, pas une habitude d'entreprise, qui fait choisir. La première est d'attendre qu'il s'égoutte : par temps sec, le guide technique des terrassements (GTR, SETRA/LCPC, 2000) admet qu'on aère le sol et qu'on le travaille en couches minces — mais dans le Jura, novembre et décembre sont les mois les plus arrosés de l'année (voir la question sur la saison ci-dessus), et attendre peut vouloir dire attendre le printemps. La deuxième est de retirer la couche molle et de la remplacer par un matériau granulaire sain, souvent sur un géotextile qui empêche l'argile de remonter dans les cailloux ; les terres sorties suivent alors les règles de la question précédente. La troisième est de traiter le sol en place à la chaux. La chaux vive réagit avec l'eau du sol en dégageant de la chaleur, ce qui en abaisse la teneur en eau, et elle fait floculer les argiles : le sol collant devient manipulable et sa portance immédiate (IPI) augmente. C'est le guide de la Fédération régionale des travaux publics de Normandie (septembre 2019) qui résume ces effets, en renvoyant au guide de référence, le GTS (« Traitement des sols à la chaux et/ou aux liants hydrauliques », SETRA/LCPC, janvier 2000). Ce traitement a trois limites qu'un client peut vérifier lui-même : il suppose un essai préalable d'aptitude du sol au traitement (norme NF P94-100), il ne s'applique pas à la terre végétale, et les sols traités ne se mettent pas en œuvre en dessous de 5 °C — ce qui, en hiver jurassien, le rend souvent impossible. Le bon réflexe est donc le même que pour le reste du terrassement : demander que le devis détaillé dise ce qui est prévu si le fond de forme se révèle mouillé, plutôt que de le découvrir le jour du décaissement.",
       },
     ],
     sources: [
@@ -258,6 +262,16 @@ const REAL_SAVOIR: Record<
         label:
           "Arrêté du 4 juin 2021 — sortie du statut de déchet des terres excavées et sédiments (Légifrance)",
         url: "https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000043704475",
+      },
+      {
+        label:
+          "Matériaux alternatifs en infrastructures — sols limoneux et craies, manuel 1 (FRTP Normandie, septembre 2019) : traitement à la chaux, effets et limites",
+        url: "https://frtpnormandie.fntp.fr/wp-content/uploads/sites/5/2024/07/guides_materiaux_1_sols_et_craies.pdf",
+      },
+      {
+        label:
+          "La stabilisation des sols à la chaux dans les ouvrages agricoles (Chambre d'agriculture, novembre 2016) : analyse préalable, terre végétale exclue",
+        url: "https://extranet-ain.chambres-agriculture.fr/fileadmin/user_upload/National/FAL_commun/publications/Auvergne-Rhone-Alpes/Stabilisation_des_sols_a_la_chaux_dans_les_ouvrages_agricoles_-_Novembre_2016.pdf",
       },
     ],
   },

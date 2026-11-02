@@ -3637,3 +3637,72 @@ La fiche est donc documentée dans `ACTIONS-SEO-CLIENT.md` avec une consigne
 explicite : **corriger l'adresse et le téléphone AVANT d'y ajouter l'URL**, et
 **ne pas l'ajouter aux `sameAs`** en l'état — même traitement que La Gazette
 France le 12/09, pour la même raison.
+
+<!-- section d'origine : État des lieux (archivé le 02/11/2026) -->
+> 🔴 **02/10/2026 — LE DÉPLOIEMENT NE PART PLUS. Le code est sur `main`, la
+> production sert encore la version du 30/09. À LIRE AVANT TOUT CHANTIER.**
+> **Les faits, mesurés :**
+> - `origin/main` est à `0b4d0cd`, poussé le **02/10/2026 à 07:23 UTC** (chantier
+>   du jour). Le push est confirmé (`84dddba..0b4d0cd HEAD -> main`).
+> - **46 minutes plus tard** (dernier relevé à 08:09 UTC, après une vingtaine de
+>   mesures espacées de 30 à 45 s), `https://www.hcetp.com/services/enrobe-a-chaud`
+>   sert toujours **3 783 caractères** au lieu des 11 856 mesurés au banc d'essai
+>   local, et `https://www.hcetp.com/llms.txt` affiche encore « Dernière mise à
+>   jour : 30 septembre 2026 ».
+> - ⚠️ **Et ce ne sont pas un, mais QUATRE pushes sur `main` qui sont restés sans
+>   effet** (`0b4d0cd`, `46987cd`, `9a1014b`, `6220bb5`, entre 07:23 et 08:05 UTC).
+>   Chacun est une occasion de déclenchement distincte. **Cela affaiblit nettement
+>   l'hypothèse « déploiement lent ou en file d'attente » et renforce celle d'une
+>   intégration qui ne reçoit plus l'événement, ou de builds qui échouent.**
+>   Pour mémoire, l'acquis du 25/09 chiffrait le délai normal : production à jour
+>   **moins de 45 secondes** après un push sur `main`.
+> - **Dernière mesure du run : 08:33 UTC, soit 1 h 10 après le premier push, et
+>   cinq pushes au total. Toujours 3 783 caractères et toujours « 30 septembre
+>   2026 » dans `llms.txt`.** La surveillance a été arrêtée là, faute de pouvoir
+>   agir : le run n'a plus rien à mesurer sur ce point. **Le chantier du 02/10
+>   existe dans le dépôt et nulle part ailleurs.**
+> - `x-vercel-cache: MISS`, `age: 0`, `cache-control: must-revalidate` → **ce
+>   n'est pas un cache CDN** : la fonction déployée contient encore l'ancien code.
+> - **La preview `hcebtp.lovable.app` est encore plus en retard** : elle sert
+>   **11 occurrences de `hcebtp.com`**, donc une version **antérieure à la bascule
+>   de domaine du 30/09**.
+> - **Le dernier déploiement réellement visible en production date du 30/09**
+>   (bascule de domaine `f07b19f` + `/zone-intervention` `6cc006e`, tous deux en
+>   ligne). Le commit du 01/10 (`84dddba`) ne touchait qu'un `.md` : **son
+>   non-déploiement était invisible**. Le chantier du 02/10 est le premier
+>   changement de code depuis le 30/09, et c'est lui qui révèle le blocage.
+> **Ce qui a été écarté, vérifié et pas supposé :**
+> - ❌ **Pas un problème de code** : `npx tsc --noEmit` en 0, `npm run build` en 0
+>   (14 s), `npm run check:fige` en 0, `verif-faq.mjs` 10/10, `verif-lastmod.mjs`
+>   13/13 — tous **avant** le push.
+> - ❌ **Pas un problème de branche** : le push est allé sur `main` (`git push
+>   origin HEAD:main`), et c'est `main` qui déploie (acquis du 25/09).
+> - ❌ **Pas un workflow CI en échec** : le dépôt n'a **aucun** workflow
+>   (`.github/workflows` absent). Le déploiement passe uniquement par
+>   l'intégration Git de Vercel.
+> - ❌ **Pas un changement de configuration** : `vite.config.ts` impose toujours
+>   `nitro: { preset: "vercel" }`, et il n'a pas été modifié.
+> ❌ **Et ce n'est PAS le `package-lock.json` désynchronisé**, contrairement à ce
+>   que ce même encadré avançait d'abord. Vérification faite : `package.json` n'a
+>   pas été modifié depuis le **11/09** (`0798ac2`) et le lockfile pas depuis
+>   `a51c917` — **la désynchronisation est donc antérieure aux déploiements qui ont
+>   réussi le 30/09.** Elle ne peut pas expliquer un blocage apparu après. *(Elle
+>   reste un vrai sujet pour le runner, voir « Techniques apprises » du 02/10, mais
+>   ce n'est pas cette piste-ci.)*
+> **Ce qui reste et ne peut pas être fait d'ici :** consulter le tableau de bord
+> Vercel. Les causes plausibles, maintenant que le code, la branche, le CI et le
+> lockfile sont écartés : **déploiement en échec pour une raison côté
+> plateforme** (quota, variable d'environnement, changement de commande
+> d'installation), **déploiement en file d'attente**, ou **intégration GitHub
+> déconnectée du projet Vercel**. Les trois se lisent en trente secondes sur le
+> tableau de bord, et aucune ne se diagnostique depuis le dépôt.
+> 🔔 **Le client a été notifié le 02/10/2026**, en dérogation à la cadence
+> hebdomadaire (prochaine routine prévue le 08/10) : la règle du 01/10 prévoyait
+> explicitement la dérogation « si un contrôle casse ». **C'en est un, et c'est le
+> plus grave possible : le travail quotidien ne parvient plus au site.**
+> ⚠️ **Consigne pour le prochain run : VÉRIFIER CE POINT EN PREMIER, avant de
+> choisir un chantier.** Mesurer `/services/enrobe-a-chaud` en production — s'il
+> rend 11 856 caractères, le déploiement est reparti et le chantier du 02/10 est
+> effectivement en ligne ; s'il rend encore 3 783, **ne pas empiler un nouveau
+> chantier de contenu par-dessus un chantier non déployé**, et relancer l'alerte.
+

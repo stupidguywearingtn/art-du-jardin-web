@@ -23,6 +23,8 @@ et à compléter en fin de run.
 > détaillé. Banc local : **10 703 car.**, FAQ 6/6, lead « cinq » → « six », lastmod +
 > `llms.txt` 02/11. Build OK, `check:fige` OK, `verif-lastmod` : seul écart connu `/`.
 > Archive : bloc d'état du 02/10.
+> ✅ Vérifié en prod (`e5e2f98`, `success`) : `preparation-terrassement` 10 703 car., FAQ 6/6,
+> `llms.txt` 02/11, IndexNow 16 URLs → 200.
 
 > ✅ **31/10/2026 — Déploiement OK** (`573396f` : Vercel `READY`, production). Prod =
 > dernier commit (16/16 en 200, valeurs identiques au 30/10). Chantier (**contenu**, après

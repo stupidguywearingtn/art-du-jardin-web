@@ -8,6 +8,20 @@ et à compléter en fin de run.
 
 ## État des lieux
 
+> ✅ **03/11/2026 — Déploiement OK** (`9899c8f` : statut GitHub `success`). Prod = dernier
+> commit (16/16 en 200 ; `preparation-terrassement` 10 703, valeurs identiques au 02/11).
+> Chantier (**technique — données structurées**, après un jour contenu) : relecture
+> `seo-schema` des JSON-LD servis sur les 16 URLs. Réponse à la question ouverte depuis le
+> 29/10 : les 4 `/realisations/*` ont **déjà** un `BreadcrumbList` ; le bloc manquant était
+> un **nœud de page** (toutes les autres URLs portent WebPage / CollectionPage / ContactPage /
+> Article / Service). Ajout d'un `WebPage` (`@id` = URL, `name`/`description` = meta,
+> `inLanguage`, `isPartOf` → `@id` du CollectionPage `/realisations`, `publisher` →
+> `#business`, `dateModified` lu dans `PAGE_UPDATED` = date visible, émis seulement si le bloc
+> daté est rendu ; rien pour un slug inconnu). Pas d'`about` vers les services : leurs blocs
+> `Service` n'ont pas d'`@id` (pointeur mort). Banc local : 4/4 pages **3 → 4 JSON-LD**,
+> texte servi inchangé, slug inconnu = Organization seul. `lastmod` non modifié (pas de
+> contenu). Build OK, `check:fige` OK. Archive : rien (pas d'entrée du 03/10).
+
 > ✅ **02/11/2026 — Déploiement OK** (`d754824` : statut GitHub `success`). Prod = dernier
 > commit (16/16 en 200, valeurs identiques au 01/11 ; maillage maçonnerie en ligne).
 > Lundi : veille (voir « Techniques apprises »). Chantier (**contenu**, après un jour
@@ -817,6 +831,18 @@ un extrait de SERP ne prouve pas ce que la page contient.
 > `verif.com` ont été jugées périmées **sur la seule foi d'extraits de recherche**
 > (403 au runner, contenu jamais lu). Leur statut « périmée » n'est donc pas
 > établi. Noté en chantier en attente.
+
+### Positions mesurées — 03/11/2026
+
+| Contrôle | 03/11/2026 | vs 02/11 |
+|---|---|---|
+| Déploiement `main` (`9899c8f`) | **`success`** (Vercel) | = |
+| Prod vs code (`mesure-texte-servi`) | 16/16 en 200 ; `preparation-terrassement` 10 703 (Q/R du 02/11 en ligne) | = |
+| JSON-LD `/realisations/*` (prod, avant run) | 3 blocs (Organization, BreadcrumbList, FAQPage) | = |
+| SERP | non relevée (canal `WebSearch` US, non représentatif) | — |
+
+Pas d'accès Search Console. **À relever par Yanis** : « Performances IA » + requêtes à
+impressions ; indexation de `/contact` et `/arnaque-goudronnage`.
 
 ### Positions mesurées — 02/11/2026
 
@@ -2188,6 +2214,16 @@ points d'entrée tiers).
 
 Par ordre de priorité. **Alterner les angles, ne pas refaire le même deux jours
 de suite.**
+
+> 🆕 **MISE À JOUR DU 03/11/2026 — prime sur tout ce qui suit.**
+> ✅ `WebPage` sur les 4 `/realisations/*` (à vérifier en prod : 4 JSON-LD par page,
+> `isPartOf` → `/realisations`, `dateModified` = date visible ; puis IndexNow).
+> 1. Prochain contenu : `parking-voirie-pro` (8 468, la plus maigre des réalisations) ;
+>    accueil : **rien sans accord client**.
+> 2. Prochain technique : `RELATED_SERVICES` de `cour-allee-privee` → maçonnerie (Hypothèses
+>    01/11) ; ou `@id` sur les blocs `Service` pour permettre un `about` depuis les réalisations.
+> 3. Yanis : Search Console (Performances IA + indexation `/contact`) ; fiche Google Business
+>    Profile complète ; statut du mobile WhatsApp.
 
 > 🆕 **MISE À JOUR DU 02/11/2026 — prime sur tout ce qui suit.**
 > ✅ `preparation-terrassement` : Q/R fond argileux (à vérifier en prod : ~10 703 car., FAQ

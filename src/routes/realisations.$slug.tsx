@@ -600,6 +600,34 @@ export const Route = createFileRoute("/realisations/$slug")({
               },
             ]
           : []),
+        /* WebPage (ajouté le 03/11/2026) : ces quatre dossiers étaient les seules
+           pages du sitemap sans nœud de page (les autres portent WebPage,
+           CollectionPage, ContactPage, Article ou Service). `isPartOf` pointe vers
+           le CollectionPage du hub (`@id` réellement publié sur /realisations),
+           `publisher` vers `#business`. `dateModified` est lu dans la même source
+           que la date VISIBLE (« Dernière mise à jour », rendue avec le bloc
+           `REAL_SAVOIR`) : émis seulement quand cette date est affichée. */
+        ...(cat
+          ? [
+              {
+                type: "application/ld+json",
+                children: JSON.stringify({
+                  "@context": "https://schema.org",
+                  "@type": "WebPage",
+                  "@id": `https://www.hcetp.com/realisations/${params.slug}`,
+                  url: `https://www.hcetp.com/realisations/${params.slug}`,
+                  name: meta.title,
+                  description: meta.description,
+                  inLanguage: "fr-FR",
+                  isPartOf: { "@id": "https://www.hcetp.com/realisations" },
+                  publisher: { "@id": "https://www.hcetp.com/#business" },
+                  ...(REAL_SAVOIR[params.slug]
+                    ? { dateModified: REAL_SAVOIR[params.slug].updated.iso }
+                    : {}),
+                }),
+              },
+            ]
+          : []),
         /* FAQPage construit depuis le MÊME tableau que la section visible
            (`REAL_SAVOIR`), rendue par `CategorySavoir` dans les deux états
            servis : le JSON-LD ne peut donc pas décrire une FAQ absente de la

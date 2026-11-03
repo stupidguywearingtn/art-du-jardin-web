@@ -21,6 +21,8 @@ et à compléter en fin de run.
 > `Service` n'ont pas d'`@id` (pointeur mort). Banc local : 4/4 pages **3 → 4 JSON-LD**,
 > texte servi inchangé, slug inconnu = Organization seul. `lastmod` non modifié (pas de
 > contenu). Build OK, `check:fige` OK. Archive : rien (pas d'entrée du 03/10).
+> ✅ Vérifié en prod (`1faa4a7`, `success`) : 4/4 `/realisations/*` servent 4 JSON-LD, texte
+> inchangé, IndexNow 16 URLs → 200.
 
 > ✅ **02/11/2026 — Déploiement OK** (`d754824` : statut GitHub `success`). Prod = dernier
 > commit (16/16 en 200, valeurs identiques au 01/11 ; maillage maçonnerie en ligne).

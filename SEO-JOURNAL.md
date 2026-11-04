@@ -8,6 +8,22 @@ et à compléter en fin de run.
 
 ## État des lieux
 
+> ✅ **04/11/2026 — Déploiement OK** (`34d4a0c` : statut GitHub `success`). Prod = dernier
+> commit (16/16 en 200 ; les 4 `/realisations/*` servent bien 4 JSON-LD : WebPage du 03/11 en
+> ligne). Chantier (**contenu**, après un jour technique) : **`/realisations/parking-voirie-pro`**
+> (la plus maigre des réalisations, 8 468 car.) +1 Q/R **« Un parking en enrobé doit-il avoir
+> un séparateur d'hydrocarbures et un dossier « loi sur l'eau » ? »** (« hydrocarbure » n'était
+> sur le site que pour les taches sur cour ; « 2.1.5.0 » absent). Sources : doctrine 2.1.5.0 de
+> la préfecture du Var / DDTM (libellé de la rubrique cité verbatim : déclaration > 1 ha projet
+> + bassin amont intercepté, autorisation ≥ 20 ha ; attention particulière > 30 places ;
+> parking non revêtu compté) — présentée comme exemple départemental, pas comme règle du Jura ;
+> GRAIE, rendez-vous du 08/12/2004 à Annemasse (ruissellement < 5 mg/l, souvent < 1 mg/l
+> Grand Lyon ; pollution « essentiellement particulaire » ; séparateurs Vénissieux 1995 :
+> +14 % à -71 % sur gazole ; séparateur réservé aux zones à risque accidentel). **Rien
+> d'affirmé sur la pratique d'HCE.** Banc local (`vite dev --host 127.0.0.1`) : **11 212 car.**,
+> FAQ 7/7, lead « six » → « sept », lastmod + `llms.txt` 04/11. Build OK, `check:fige` OK,
+> `verif-lastmod` : seul écart connu `/`. Archive : bloc d'état du 04/10.
+
 > ✅ **03/11/2026 — Déploiement OK** (`9899c8f` : statut GitHub `success`). Prod = dernier
 > commit (16/16 en 200 ; `preparation-terrassement` 10 703, valeurs identiques au 02/11).
 > Chantier (**technique — données structurées**, après un jour contenu) : relecture
@@ -618,51 +634,6 @@ et à compléter en fin de run.
 >    branche n'a pas été fusionnée : la chercher là-bas avant de refaire le
 >    travail.**
 
-> 🔴 **04/10/2026 — LE BLOCAGE DE DÉPLOIEMENT TIENT DEPUIS 48 HEURES. À LIRE
-> AVANT TOUT CHANTIER.** L'encadré du 02/10 ci-dessous reste valable mot pour
-> mot ; voici seulement ce que la mesure du 04/10 y ajoute.
-> **Mesuré le 04/10/2026 à 07:01 UTC, soit 47 h 38 après le push du chantier :**
-> - `/services/enrobe-a-chaud` sert **3 783 caractères**. La valeur attendue est
->   11 856. **Inchangé depuis le 02/10 : le chantier n'est toujours pas en ligne.**
-> - `/llms.txt` en production affiche toujours « Dernière mise à jour : **30
->   septembre 2026** », alors que `public/llms.txt` dans le dépôt dit « **2
->   octobre 2026** ». Les deux dates encadrent le blocage à elles seules.
-> - `x-vercel-cache: MISS`, `age: 0` → toujours pas un cache CDN.
-> - Le code est toujours sain : `npx tsc --noEmit` en 0 sur `origin/main`
->   (`dd96784`), et le contenu attendu est bien présent dans
->   `src/routes/services.$slug.tsx`.
-> - **La production, elle, n'est pas cassée — elle est seulement vieille.**
->   `verif-faq.mjs` 11/11 et `verif-lastmod.mjs` 13/13 passent en ligne. Rien
->   n'est à réparer en urgence côté visiteur ; c'est le canal de livraison qui
->   est mort, pas le site.
-> **Un sixième push mesuré en direct, et il ne change rien non plus.** Le commit
-> de documentation du 04/10 (`2792410`, poussé à 07:08 UTC) a été suivi de **sept
-> mesures sur 3 min 08** (07:09:12 → 07:12:20) : `llms.txt` reste figé sur « 30
-> septembre 2026 » et le HTML de `/services/enrobe-a-chaud` reste à **30 261
-> octets** exactement, inchangé à l'octet près. Pour mémoire, le délai normal
-> mesuré le 25/09 est de **moins de 45 secondes**. **Ce push est une sixième
-> occasion de déclenchement sans effet**, et la première à être mesurée en
-> continu juste après l'envoi plutôt que constatée après coup. *(Ce push ne
-> touchait que des `.md`, donc il ne pouvait pas changer le contenu des pages —
-> mais `public/llms.txt` fait partie du déploiement, et sa date figée à « 30
-> septembre » alors que le dépôt dit « 2 octobre » suffit à prouver qu'aucun
-> déploiement n'a eu lieu.)*
-> **Ce que le run du 04/10 en a conclu, et qui vaut pour les suivants :**
-> - **Aucun chantier de code n'a été poussé aujourd'hui**, en application de la
->   consigne du 02/10 — et pour une raison qui s'est renforcée : si c'est le
->   *build* qui échoue, chaque commit supplémentaire rend le diagnostic plus
->   difficile à faire pour qui ouvrira le tableau de bord. Le dépôt doit rester
->   dans l'état où le blocage est apparu.
-> - **Le client a été relancé le 04/10** (notification), avec la mesure des 48 h
->   et les trois causes à vérifier sur Vercel.
-> ⚠️ **Consigne inchangée pour le prochain run : mesurer
-> `/services/enrobe-a-chaud` AVANT de choisir un chantier.** S'il rend 11 856
-> caractères, le déploiement est reparti : reprendre alors le cours normal, et le
-> premier chantier qui attend est celui décrit sous « Chantiers en attente » au
-> 04/10 (ajout de PagesJaunes aux `sameAs`). S'il rend encore 3 783, ne pas
-> pousser de code et se limiter à ce qui vit hors du site (annuaires, NAP,
-> fiches), comme le 04/10.
-
 > 🔴 **DOMAINE — À LIRE AVANT TOUT (mis à jour le 01/10/2026).**
 > **Le site est servi sur `https://www.hcetp.com`** (sans le `b`), depuis la
 > bascule du 30/09/2026 (commit `f07b19f`). `hcebtp.com`, `www.hcebtp.com` et
@@ -833,6 +804,17 @@ un extrait de SERP ne prouve pas ce que la page contient.
 > `verif.com` ont été jugées périmées **sur la seule foi d'extraits de recherche**
 > (403 au runner, contenu jamais lu). Leur statut « périmée » n'est donc pas
 > établi. Noté en chantier en attente.
+
+### Positions mesurées — 04/11/2026
+
+| Contrôle | 04/11/2026 | vs 03/11 |
+|---|---|---|
+| Déploiement `main` (`34d4a0c`) | **`success`** (Vercel) | = |
+| Prod vs code (`mesure-texte-servi`) | 16/16 en 200 ; `/realisations/*` 4 JSON-LD (WebPage du 03/11 en ligne) | +1 bloc ×4 |
+| SERP | non relevée (canal `WebSearch` US, non représentatif) | — |
+
+Pas d'accès Search Console. **À relever par Yanis** : « Performances IA » + requêtes à
+impressions ; indexation de `/contact` et `/arnaque-goudronnage`.
 
 ### Positions mesurées — 03/11/2026
 
@@ -1270,6 +1252,11 @@ reste au 2 octobre : **volontairement pas touchée**, aucun contenu n'ayant chan
 aujourd'hui.
 
 ## Chantiers faits
+
+### 04/11/2026 — `/realisations/parking-voirie-pro` : Q/R eaux pluviales et séparateur d'hydrocarbures
+
+8 468 → 11 212 car. (banc local), FAQ 7/7. Rubrique 2.1.5.0 (doctrine préfecture du Var) +
+GRAIE 2004 (efficacité des séparateurs). Lastmod et `llms.txt` au 04/11.
 
 ### 02/11/2026 — `/realisations/preparation-terrassement` : Q/R fond de forme argileux et détrempé
 Question de saison (terrassement en automne jurassien), absente du site. Réponse directe (on
@@ -2216,6 +2203,17 @@ points d'entrée tiers).
 
 Par ordre de priorité. **Alterner les angles, ne pas refaire le même deux jours
 de suite.**
+
+> 🆕 **MISE À JOUR DU 04/11/2026 — prime sur tout ce qui suit.**
+> ✅ `parking-voirie-pro` : Q/R eaux pluviales / séparateur (à vérifier en prod : ~11 212 car.,
+> FAQ 7/7, lastmod 04/11, `llms.txt` 04/11, puis IndexNow).
+> 1. Prochain technique : `RELATED_SERVICES` de `cour-allee-privee` → maçonnerie (Hypothèses
+>    01/11) ; ou `@id` sur les blocs `Service` pour un `about` depuis les réalisations.
+> 2. Prochain contenu : `/contact` (5 733) ou `/services/maconnerie-generale` (8 040) ;
+>    accueil : **rien sans accord client**. Piste : doctrine eaux pluviales de la DDT du Jura
+>    (si trouvée, l'ajouter à la Q/R du 04/11 à la place ou à côté de celle du Var).
+> 3. Yanis : Search Console (Performances IA + indexation `/contact`) ; fiche Google Business
+>    Profile complète ; statut du mobile WhatsApp.
 
 > 🆕 **MISE À JOUR DU 03/11/2026 — prime sur tout ce qui suit.**
 > ✅ `WebPage` sur les 4 `/realisations/*` (à vérifier en prod : 4 JSON-LD par page,

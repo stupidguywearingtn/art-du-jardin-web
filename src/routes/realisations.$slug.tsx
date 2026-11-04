@@ -150,7 +150,7 @@ const REAL_SAVOIR: Record<
   },
   "parking-voirie-pro": {
     heading: "Refaire un parking professionnel : ce qui se décide avant la première tonne d'enrobé",
-    lead: "Un parking d'entreprise ne se traite pas comme une cour de maison : ce sont le trafic poids lourds, l'accessibilité des places et, depuis 2023, l'ombrage qui commandent le projet — pas la surface à couvrir. Voici six questions qui se posent avant un chantier de réfection, avec les textes qui s'appliquent.",
+    lead: "Un parking d'entreprise ne se traite pas comme une cour de maison : ce sont le trafic poids lourds, l'accessibilité des places et, depuis 2023, l'ombrage qui commandent le projet — pas la surface à couvrir. Voici sept questions qui se posent avant un chantier de réfection, avec les textes qui s'appliquent — la dernière porte sur l'eau de pluie qui ruisselle sur l'enrobé.",
     updated: PAGE_UPDATED["/realisations/parking-voirie-pro"],
     qa: [
       {
@@ -177,6 +177,10 @@ const REAL_SAVOIR: Record<
         q: "Faut-il prévoir des bornes de recharge quand on refait le parking d'une entreprise ?",
         a: "Pas toujours des bornes, mais souvent des fourreaux — et c'est avant l'enrobé qu'ils se posent. Quand un bâtiment non résidentiel fait l'objet d'une rénovation importante, c'est-à-dire d'un montant d'au moins 25 % de la valeur du bâtiment hors foncier, et que les travaux touchent le parc de stationnement ou son installation électrique, un parc de plus de 10 places doit être pré-équipé sur au moins 20 % de ses places, dont 2 % dimensionnées pour les personnes à mobilité réduite, et au moins une place accessible doit être équipée d'un point de recharge (articles L113-12 et R113-6 du code de la construction et de l'habitation). Pré-équiper, c'est poser les conduits des câbles — dimensionnés pour un passage de section carrée d'au moins 100 mm de côté — ainsi que les dispositifs d'alimentation et de sécurité nécessaires pour installer les bornes plus tard. Indépendamment de tout chantier, les bâtiments non résidentiels existants dotés de plus de 20 places doivent compter, depuis le 1er janvier 2025, au moins un point de recharge sur une place accessible, puis un point par tranche de 20 places supplémentaires — soit quatre pour 95 places (article L113-13). Deux exclusions changent souvent la réponse : les bâtiments possédés et occupés par une petite ou moyenne entreprise sont exclus du pré-équipement, et celui-ci n'est pas exigé quand le coût des installations de recharge et de raccordement dépasse 7 % du coût total de la rénovation (article L113-14). Pour l'enrobé, la conséquence est pratique : une tranchée ouverte après coup dans un parking neuf pour passer des fourreaux laisse une reprise visible et un point faible. Le tracé se décide au plan, avec l'électricien, avant le décaissement.",
       },
+      {
+        q: "Un parking en enrobé doit-il avoir un séparateur d'hydrocarbures et un dossier « loi sur l'eau » ?",
+        a: "Le dossier dépend de la surface, le séparateur dépend du risque — et ni l'un ni l'autre n'est automatique. Côté procédure, l'eau de pluie qui ruisselle sur un parking puis rejoint un cours d'eau, le sol ou le sous-sol relève de la rubrique 2.1.5.0 de la nomenclature de l'article R214-1 du code de l'environnement, qui vise les « rejets d'eaux pluviales dans les eaux douces superficielles ou sur le sol ou dans le sous-sol » : déclaration quand la surface totale du projet, « augmentée de la surface correspondant à la partie du bassin naturel dont les écoulements sont interceptés par le projet », est supérieure à 1 hectare, autorisation à partir de 20 hectares. Le seuil ne se lit donc pas sur la seule surface d'enrobé : un parking de 8 000 m² qui reçoit en plus l'eau d'un champ situé au-dessus peut le franchir. Les services de l'État précisent ensuite leurs attentes par département ; la doctrine publiée par la préfecture du Var sur cette rubrique, par exemple, demande une attention particulière au traitement des eaux au-delà de 30 places et précise que même un parking non revêtu, en simple couche de forme, entre dans le calcul. Côté traitement, le séparateur d'hydrocarbures n'est pas la réponse par défaut. Lors d'une journée technique du GRAIE (groupe de recherche Rhône-Alpes sur les infrastructures et l'eau) tenue à Annemasse le 8 décembre 2004, les mesures présentées montraient des eaux de ruissellement à moins de 5 mg/l d'hydrocarbures, le plus souvent moins de 1 mg/l sur le Grand Lyon, et une pollution « essentiellement particulaire, y compris pour les hydrocarbures qui sont majoritairement fixés aux particules » ; des séparateurs suivis à Vénissieux en 1995 affichaient des rendements de +14 % à -71 % sur le gazole. Les participants recommandaient de réserver le séparateur aux zones exposées à une pollution accidentelle — aire de distribution de carburant, de lavage, d'entretien de véhicules — et de traiter le reste par décantation, bandes végétalisées ou infiltration à travers un massif filtrant, qui retiennent les particules et ce qui y est fixé. Pour l'enrobé, la conséquence se joue au plan : la pente du parking doit conduire l'eau vers l'ouvrage retenu, et cet ouvrage se décide avant le décaissement, avec le bureau d'études ou la collectivité quand un dossier est nécessaire.",
+      },
     ],
     sources: [
       {
@@ -200,6 +204,16 @@ const REAL_SAVOIR: Record<
         label:
           "Bornes de recharge obligatoires dans les parkings (entreprendre.service-public.gouv.fr, vérifié le 12 juin 2026)",
         url: "https://entreprendre.service-public.gouv.fr/vosdroits/F38491",
+      },
+      {
+        label:
+          "Doctrine de la rubrique 2.1.5.0 « rejets d'eaux pluviales » (préfecture du Var, DDTM, service eau et biodiversité)",
+        url: "https://www.var.gouv.fr/index.php/contenu/telechargement/28955/195280/file/20220429_doctrine_2150_vdiffusion.odt-1.pdf",
+      },
+      {
+        label:
+          "GRAIE — « Les hydrocarbures dans les eaux pluviales : solutions de traitement et perspectives », rendez-vous du 8 décembre 2004, Annemasse",
+        url: "https://www.graie.org/graie/graiedoc/doc_telech/actesyntheses/RDV/RDV11hydrocarburessupports.pdf",
       },
     ],
   },

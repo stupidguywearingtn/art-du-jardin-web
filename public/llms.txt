@@ -5,7 +5,7 @@
 > dans le Jura et l'Ain. Entreprise créée en 2012, 14 années d'expérience, plus de
 > 1000 chantiers livrés, garantie décennale.
 
-Dernière mise à jour : 2 novembre 2026
+Dernière mise à jour : 4 novembre 2026
 Site officiel : https://www.hcetp.com
 
 ## L'entreprise en bref
@@ -568,7 +568,12 @@ de l'eau ne s'évaluent pas autrement.
   100 mm) lors d'une rénovation importante d'un bâtiment non résidentiel avec parc de plus
   de 10 places, un point de recharge par tranche de 20 places dans les parcs existants de
   plus de 20 places depuis le 1er janvier 2025 (articles L113-12 à L113-14 du code de la
-  construction et de l'habitation), fourreaux à poser avant l'enrobé — avec leurs sources.
+  construction et de l'habitation), fourreaux à poser avant l'enrobé, et les eaux de pluie
+  du parking : déclaration « loi sur l'eau » au-delà de 1 ha (projet + bassin amont
+  intercepté), autorisation à partir de 20 ha (rubrique 2.1.5.0, article R214-1 du code de
+  l'environnement), séparateur d'hydrocarbures réservé aux zones à risque de pollution
+  accidentelle, les hydrocarbures du ruissellement étant surtout fixés aux particules
+  (GRAIE, 2004) — avec leurs sources.
 - [Préparation & terrassement](https://www.hcetp.com/realisations/preparation-terrassement) :
   décaissement, nivellement, drainage, préparation de plateformes. Contient aussi les
   réponses détaillées sur ce qui se joue sous la surface d'un terrassement — quand un

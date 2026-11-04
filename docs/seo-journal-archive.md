@@ -3706,3 +3706,49 @@ France le 12/09, pour la même raison.
 > effectivement en ligne ; s'il rend encore 3 783, **ne pas empiler un nouveau
 > chantier de contenu par-dessus un chantier non déployé**, et relancer l'alerte.
 
+<!-- Archivé le 04/11/2026 depuis « État des lieux » -->
+
+> 🔴 **04/10/2026 — LE BLOCAGE DE DÉPLOIEMENT TIENT DEPUIS 48 HEURES. À LIRE
+> AVANT TOUT CHANTIER.** L'encadré du 02/10 ci-dessous reste valable mot pour
+> mot ; voici seulement ce que la mesure du 04/10 y ajoute.
+> **Mesuré le 04/10/2026 à 07:01 UTC, soit 47 h 38 après le push du chantier :**
+> - `/services/enrobe-a-chaud` sert **3 783 caractères**. La valeur attendue est
+>   11 856. **Inchangé depuis le 02/10 : le chantier n'est toujours pas en ligne.**
+> - `/llms.txt` en production affiche toujours « Dernière mise à jour : **30
+>   septembre 2026** », alors que `public/llms.txt` dans le dépôt dit « **2
+>   octobre 2026** ». Les deux dates encadrent le blocage à elles seules.
+> - `x-vercel-cache: MISS`, `age: 0` → toujours pas un cache CDN.
+> - Le code est toujours sain : `npx tsc --noEmit` en 0 sur `origin/main`
+>   (`dd96784`), et le contenu attendu est bien présent dans
+>   `src/routes/services.$slug.tsx`.
+> - **La production, elle, n'est pas cassée — elle est seulement vieille.**
+>   `verif-faq.mjs` 11/11 et `verif-lastmod.mjs` 13/13 passent en ligne. Rien
+>   n'est à réparer en urgence côté visiteur ; c'est le canal de livraison qui
+>   est mort, pas le site.
+> **Un sixième push mesuré en direct, et il ne change rien non plus.** Le commit
+> de documentation du 04/10 (`2792410`, poussé à 07:08 UTC) a été suivi de **sept
+> mesures sur 3 min 08** (07:09:12 → 07:12:20) : `llms.txt` reste figé sur « 30
+> septembre 2026 » et le HTML de `/services/enrobe-a-chaud` reste à **30 261
+> octets** exactement, inchangé à l'octet près. Pour mémoire, le délai normal
+> mesuré le 25/09 est de **moins de 45 secondes**. **Ce push est une sixième
+> occasion de déclenchement sans effet**, et la première à être mesurée en
+> continu juste après l'envoi plutôt que constatée après coup. *(Ce push ne
+> touchait que des `.md`, donc il ne pouvait pas changer le contenu des pages —
+> mais `public/llms.txt` fait partie du déploiement, et sa date figée à « 30
+> septembre » alors que le dépôt dit « 2 octobre » suffit à prouver qu'aucun
+> déploiement n'a eu lieu.)*
+> **Ce que le run du 04/10 en a conclu, et qui vaut pour les suivants :**
+> - **Aucun chantier de code n'a été poussé aujourd'hui**, en application de la
+>   consigne du 02/10 — et pour une raison qui s'est renforcée : si c'est le
+>   *build* qui échoue, chaque commit supplémentaire rend le diagnostic plus
+>   difficile à faire pour qui ouvrira le tableau de bord. Le dépôt doit rester
+>   dans l'état où le blocage est apparu.
+> - **Le client a été relancé le 04/10** (notification), avec la mesure des 48 h
+>   et les trois causes à vérifier sur Vercel.
+> ⚠️ **Consigne inchangée pour le prochain run : mesurer
+> `/services/enrobe-a-chaud` AVANT de choisir un chantier.** S'il rend 11 856
+> caractères, le déploiement est reparti : reprendre alors le cours normal, et le
+> premier chantier qui attend est celui décrit sous « Chantiers en attente » au
+> 04/10 (ajout de PagesJaunes aux `sameAs`). S'il rend encore 3 783, ne pas
+> pousser de code et se limiter à ce qui vit hors du site (annuaires, NAP,
+> fiches), comme le 04/10.

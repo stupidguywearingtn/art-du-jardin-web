@@ -23,6 +23,8 @@ et à compléter en fin de run.
 > d'affirmé sur la pratique d'HCE.** Banc local (`vite dev --host 127.0.0.1`) : **11 212 car.**,
 > FAQ 7/7, lead « six » → « sept », lastmod + `llms.txt` 04/11. Build OK, `check:fige` OK,
 > `verif-lastmod` : seul écart connu `/`. Archive : bloc d'état du 04/10.
+> ✅ Vérifié en prod (`086ca80`, `success`) : `parking-voirie-pro` 11 212 car., FAQ 7/7,
+> `llms.txt` 04/11, IndexNow 16 URLs → 200.
 
 > ✅ **03/11/2026 — Déploiement OK** (`9899c8f` : statut GitHub `success`). Prod = dernier
 > commit (16/16 en 200 ; `preparation-terrassement` 10 703, valeurs identiques au 02/11).

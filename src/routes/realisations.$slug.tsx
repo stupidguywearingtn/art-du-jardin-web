@@ -635,6 +635,20 @@ export const Route = createFileRoute("/realisations/$slug")({
                   inLanguage: "fr-FR",
                   isPartOf: { "@id": "https://www.hcetp.com/realisations" },
                   publisher: { "@id": "https://www.hcetp.com/#business" },
+                  /* `about` (06/11/2026) : les services réellement mis en œuvre
+                     sur ce type de chantier — même tableau que les liens visibles
+                     « Les prestations mises en œuvre » (RELATED_SERVICES), pointeurs vers les
+                     `@id` publiés sur chaque /services/*. Pas de `name` ici :
+                     le nom fait foi sur la page du service. */
+                  ...(RELATED_SERVICES[params.slug]
+                    ? {
+                        about: RELATED_SERVICES[params.slug].map((s) => ({
+                          "@type": "Service",
+                          "@id": `https://www.hcetp.com/services/${s.slug}#service`,
+                          url: `https://www.hcetp.com/services/${s.slug}`,
+                        })),
+                      }
+                    : {}),
                   ...(REAL_SAVOIR[params.slug]
                     ? { dateModified: REAL_SAVOIR[params.slug].updated.iso }
                     : {}),

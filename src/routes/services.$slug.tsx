@@ -746,6 +746,9 @@ export const Route = createFileRoute("/services/$slug")({
             children: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "Service",
+              /* `@id` stable (06/11/2026) : permet aux pages /realisations/*
+                 de désigner ce service (`about`) sans le redéclarer. */
+              "@id": `https://www.hcetp.com/services/${params.slug}#service`,
               name: loaderData.schemaName ?? loaderData.title,
               description: loaderData.intro,
               provider: {

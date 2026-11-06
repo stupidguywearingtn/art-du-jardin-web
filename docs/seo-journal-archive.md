@@ -3752,3 +3752,157 @@ France le 12/09, pour la même raison.
 > 04/10 (ajout de PagesJaunes aux `sameAs`). S'il rend encore 3 783, ne pas
 > pousser de code et se limiter à ce qui vit hors du site (annuaires, NAP,
 > fiches), comme le 04/10.
+
+## Archivé le 06/11/2026 (blocs d'état du 06/10 et du 05/10/2026)
+
+> 🔴 **06/10/2026 — LE BLOCAGE TIENT DEPUIS 4 JOURS, ET LES DEUX LEVIERS DU
+> DÉPÔT SONT MAINTENANT ÉPUISÉS. L'encadré du 05/10 ci-dessous reste juste sur
+> le diagnostic ; voici ce que la journée y ajoute, et ça change la consigne.**
+>
+> **Mesuré le 06/10 à 07:13 puis 07:56 UTC :** `/services/enrobe-a-chaud` sert
+> toujours **3 783 caractères** (30 261 octets, **inchangé à l'octet près depuis
+> le 02/10**), `/llms.txt` affiche toujours « **30 septembre 2026** » quand le
+> dépôt dit « 2 octobre 2026 ». Les 13 URLs répondent en 200 : **la production
+> n'est pas cassée, elle a 6 jours.**
+>
+> **Le second levier du dépôt a été tenté, mesuré, et il ne débloque pas.**
+> Commit `1dd1c98` poussé sur `main` à **07:33:06 UTC** : il épingle le runtime
+> des Vercel Functions à `nodejs22.x` au lieu de le laisser déduire de la version
+> de Node qui exécute le build (détail sous « Chantiers faits » du jour).
+> **La production est restée inchangée pendant les 27 minutes qui ont suivi**,
+> mesurée en continu : **19 relevés espacés de 21 s entre 07:53:48 et 08:00:35
+> UTC**, tous à `30 261` octets sur `/services/enrobe-a-chaud` et tous sur « 30
+> septembre 2026 » dans `llms.txt`. Le délai normal mesuré le 25/09 est de
+> **moins de 45 secondes**. *(Le dernier relevé affiche `0` octet : échec
+> ponctuel de la requête, pas une page vide.)*
+>
+> **Ce que ça tranche, et c'est le vrai acquis du jour :**
+> - `engines.node` = 22.x (poussé le 05/10) → **n'a pas débloqué**.
+> - runtime des Functions épinglé à `nodejs22.x` (poussé le 06/10) → **n'a pas
+>   débloqué non plus**.
+> - **Ce sont les deux seules prises que le dépôt a sur la version de Node.** Il
+>   n'en reste aucune. ⚠️ **Ne pas chercher un troisième correctif de ce genre
+>   dans le dépôt : il n'y en a pas.**
+> - **Conséquence sur le diagnostic :** le rejet ne porte donc **pas (seulement)
+>   sur la chaîne de runtime émise dans `.vc-config.json`**, puisque la fixer ne
+>   change rien. Soit le réglage Node du projet est refusé **avant** que la
+>   sortie du build soit lue, soit la cause est ailleurs (limite de plan ou
+>   d'usage du compte, variable d'environnement, cache de build). **Ces branches
+>   ne se départagent pas depuis le dépôt**, et contrairement au 02/10 ce n'est
+>   plus une supposition : c'est ce qui reste après avoir épuisé les deux leviers.
+>
+> ✅ **La seule action qui reste, et elle est unique :** ouvrir le déploiement en
+> échec sur le tableau de bord Vercel et **lire le message d'erreur du journal de
+> build**. Il nomme la cause en une ligne. Seul le compte propriétaire y accède.
+> Chemin et lien dans `ACTIONS-SEO-CLIENT.md`, « ACTION 0 ».
+>
+> ⚠️ **Note de continuité, et elle a failli coûter une journée de travail : le
+> run du 05/10 n'avait PAS poussé sur `main`.** Son diagnostic, son correctif
+> `engines` et son entrée de journal étaient sur la branche
+> `claude/upbeat-wozniak-q9cj7x` et nulle part ailleurs — donc **invisibles pour
+> le run du 06/10, qui a démarré en croyant le blocage non diagnostiqué**. Le
+> travail a été récupéré en *fast-forward* sur `main` aujourd'hui. Voir « Erreurs
+> commises et corrigées » du 06/10 : **ce qui n'est pas sur `main` n'existe pas,
+> ni pour la production ni pour le run suivant.**
+>
+> ⚠️ **Consigne pour le prochain run, et elle est assouplie sur un point.**
+> 1. **Mesurer `/services/enrobe-a-chaud` AVANT de choisir un chantier.** 11 856
+>    caractères → le déploiement est reparti, reprendre le cours normal. 3 783 →
+>    toujours bloqué.
+> 2. **Ne plus retenter de correctif de déploiement dans le dépôt** (les deux
+>    leviers sont épuisés, voir ci-dessus) et **ne plus relancer le diagnostic
+>    déjà fait** : il est complet, il est ci-dessus.
+> 3. **En revanche, le gel du travail de contenu décidé le 02/10 n'a plus de
+>    raison d'être.** Il tenait à un motif précis — « garder le dépôt dans
+>    l'état où le blocage est apparu pour ne pas gêner le diagnostic ». **Le
+>    diagnostic est fait, et les statuts de déploiement sont désormais lisibles
+>    depuis le runner** : un commit de plus ne brouille plus rien. Geler le
+>    contenu plus longtemps revient surtout à ne rien produire pendant que le
+>    client n'a pas agi — le blocage pourrait durer encore des jours.
+>    **Recommandation : reprendre le travail de contenu**, en le vérifiant au
+>    banc d'essai local (recette du 15/09) + `verif-faq.mjs` + `verif-lastmod.mjs`
+>    avant push, et **en notant que la vérification EN LIGNE reste due** pour
+>    tout ce qui aura été poussé pendant le blocage. Tenir la liste de cette
+>    dette sous « Chantiers en attente ».
+
+> 🟢 **05/10/2026 — LE BLOCAGE DE DÉPLOIEMENT EST DIAGNOSTIQUÉ. Les deux
+> encadrés du 02/10 et du 04/10 ci-dessous sont PÉRIMÉS sur un point central :
+> ils concluent « la cause est hors du dépôt et ne se diagnostique pas d'ici ».
+> C'est faux, et ça a coûté trois jours. À lire avant eux.**
+>
+> **Ce qui manquait n'était pas un accès au tableau de bord Vercel : c'était une
+> requête. Vercel publie ses statuts de déploiement sur GitHub, et le runner les
+> lit sans aucun jeton supplémentaire** (recette complète sous « Techniques
+> apprises » du 05/10) :
+>
+> ```
+> GET https://api.github.com/repos/:owner/:repo/commits/:sha/status
+> GET https://api.github.com/repos/:owner/:repo/deployments
+> GET https://api.github.com/repos/:owner/:repo/deployments/:id/statuses
+> ```
+>
+> **Ce qu'ils disent, mesuré le 05/10 :**
+> - **Les builds ÉCHOUENT.** Tous les déploiements depuis `0b4d0cd` (02/10
+>   07:24 UTC) sont en état `failure` : « Deployment has failed — run this Vercel
+>   CLI command: npx vercel inspect dpl_… --logs ».
+> - **L'intégration GitHub → Vercel fonctionne.** Chaque push crée bien un
+>   déploiement, en moins de 20 s (mesuré en direct sur le push du jour : statut
+>   `pending` à t+20 s, `failure` à t+40 s). **Les trois hypothèses laissées
+>   ouvertes le 02/10 — cache CDN, file d'attente, intégration déconnectée — sont
+>   donc toutes les trois écartées.**
+> - **Dernier succès : `84dddba`, 01/10 à 07:12 UTC.** Premier échec : `0b4d0cd`,
+>   02/10 à 07:24 UTC. **La fenêtre de rupture est donc 01/10 07:12 → 02/10
+>   07:24 UTC**, et elle ne contient aucun changement de dépendance ni de config.
+> - **Pourquoi ça ressemblait à un silence :** un déploiement en échec ne
+>   remplace pas le précédent. La production n'est pas cassée, elle est vieille.
+>   C'est exactement ce que le 02/10 avait observé sans pouvoir l'expliquer.
+>
+> **Le dépôt est innocenté par la mesure, et cette fois ce n'est pas une
+> déduction :** sur l'arbre exact de `722b55a`, `npm install`, `npm ci`,
+> `bun install` et `bun install --frozen-lockfile` passent **tous les quatre**,
+> puis `npx tsc --noEmit`, `npm run build` et `npm run check:fige` sortent en 0
+> (Node 22.22.0). L'échec **ne se reproduit pas hors de Vercel**.
+>
+> **La piste principale, et elle n'est PAS confirmée.** Vercel a désactivé
+> Node.js 20 le 01/10/2026 : « On October 1, 2026, Node.js 20 will be disabled in
+> Project Settings […] Existing projects using 20 as the version for Functions
+> will display an error when a new deployment is created »
+> ([changelog Vercel](https://vercel.com/changelog/node-js-20-is-being-deprecated),
+> lu le 05/10). Le dépôt ne déclarait **aucune** version : le build suivait donc
+> le réglage du tableau de bord, invisible d'ici. **Deux faits empêchent de
+> conclure :**
+> 1. **le déploiement du 01/10 à 07:12 a RÉUSSI**, alors que la désactivation
+>    prenait effet à 00:00 ce jour-là et que le changelog ne mentionne aucun
+>    déploiement progressif ;
+> 2. **le build de preview du commit du jour, `engines.node` en place, a échoué
+>    lui aussi** (en moins de 40 s). Or `engines.node` est censé primer sur le
+>    réglage du projet (doc Vercel, « Version overrides in package.json »).
+>
+> **Donc : soit le réglage du projet est refusé avant même que `package.json` soit
+> lu — et seul le tableau de bord peut le corriger —, soit la cause est
+> ailleurs.** Deuxième candidate sérieuse, jamais envisagée jusqu'ici : **une
+> limite d'usage du compte Vercel** (plan Hobby dépassé → nouveaux déploiements
+> bloqués), qui expliquerait aussi une rupture tombant un 1er/2 du mois.
+>
+> ⚠️ **CONSIGNE POUR LE PROCHAIN RUN, et elle remplace celle du 02/10 :**
+> 1. **Relever l'état du dernier déploiement par l'API GitHub, en premier.** Une
+>    requête, trois secondes. Ne plus jamais passer trois jours à mesurer des
+>    octets en production pour deviner ce qu'un statut dit en clair.
+> 2. **La consigne « ne pas pousser de code pendant le blocage » est ANNULÉE.**
+>    Elle était fondée sur une crainte fausse. **Un déploiement en échec ne touche
+>    pas la production** : pousser ne peut donc rien casser en ligne, et
+>    s'interdire de pousser a seulement gelé trois jours de travail. Reprendre le
+>    cours normal des chantiers, en sachant qu'ils n'arriveront en ligne qu'après
+>    le déblocage.
+> 3. **Ce qui reste bloqué côté client est désormais précis** (et non plus « aller
+>    voir le tableau de bord ») : lire l'erreur du build à l'URL exacte, vérifier
+>    le réglage Node.js, regarder les limites du compte. Voir « Action 0 » en tête
+>    de `ACTIONS-SEO-CLIENT.md`, écrite le 05/10.
+> 4. ⚠️ **ATTENTION, POINT DE CONTINUITÉ : le travail du 05/10 n'est PAS sur
+>    `main`.** Le push vers `main` a été refusé par la couche de sécurité du
+>    runner (motif « Production Deploy »), ce qui n'était jamais arrivé aux runs
+>    précédents. Tout est poussé sur la branche
+>    **`claude/upbeat-wozniak-q9cj7x`** (commits `9880840` et suivants). **Si
+>    cette entrée de journal est absente de `main` au prochain run, c'est que la
+>    branche n'a pas été fusionnée : la chercher là-bas avant de refaire le
+>    travail.**

@@ -21,6 +21,8 @@ et à compléter en fin de run.
 > 16/16 identique à la prod, nombre de blocs inchangé, slug inconnu = Organization seul.
 > `lastmod` non modifié (pas de contenu). Build OK, `check:fige` OK. Archive : blocs d'état
 > du 05/10 et du 06/10.
+> ✅ Vérifié en prod (`e5dba9c`, `success`) : `@id` servi sur `/services/enrobe-a-chaud`,
+> `about` (2 services) sur `/realisations/parking-voirie-pro`, 16/16 en 200, IndexNow 16 URLs → 200.
 
 > ✅ **04/11/2026 — Déploiement OK** (`34d4a0c` : statut GitHub `success`). Prod = dernier
 > commit (16/16 en 200 ; les 4 `/realisations/*` servent bien 4 JSON-LD : WebPage du 03/11 en

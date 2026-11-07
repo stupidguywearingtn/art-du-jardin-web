@@ -8,6 +8,19 @@ et à compléter en fin de run.
 
 ## État des lieux
 
+> ✅ **07/11/2026 — Déploiement OK** (`5928665` : statut GitHub `success`). Prod = dernier
+> commit (16/16 en 200, mêmes valeurs qu'au 06/11). Chantier (**contenu**, après un jour
+> technique) : **`/services/maconnerie-generale`** (8 040, la plus maigre des services) +1 Q/R
+> **« Des pavés en béton tiennent-ils au gel et au sel de déneigement dans le Jura ? »**
+> (« déverglaçage » / option « D » absents de la page). Sources : référentiel NF 072 « Pavés
+> de voirie en béton » (CERIB / AFNOR Certification, rév. 2, juin 2016 : option « + D »,
+> annexe D de NF EN 1338, perte moyenne ≤ 1,0 kg/m², aucun individuel > 1,5 ; marquage
+> « T5 + D » ; option au choix du fabricant, non liée au climat) ; Météo-France Champagnole
+> (111,7 j de gel, déjà cité ailleurs) ; guide CERIB 2017 (pose sur mortier +5 à +30 °C).
+> **Rien d'affirmé sur les produits posés par HCE.** Banc local : **9 583 car.**, FAQ 8/8,
+> lastmod + `llms.txt` 07/11. Build OK, `check:fige` OK, `verif-lastmod` : seul écart connu
+> `/`. Archive : bloc d'état du 07/10.
+
 > ✅ **06/11/2026 — Déploiement OK** (`074ed2b` : statut GitHub `success`). Prod = dernier
 > commit (16/16 en 200, valeurs identiques au 04/11 ; pas de run le 05/11). Chantier
 > (**technique — données structurées**, après un jour contenu) : les 6 blocs `Service` de
@@ -453,53 +466,6 @@ et à compléter en fin de run.
 >    l'identifiant du déploiement en échec du jour et la liste de ce qui attend
 >    en ligne.
 
-> 🟠 **07/10/2026 — LE BLOCAGE DE DÉPLOIEMENT TIENT DEPUIS 5 JOURS, LE CLIENT
-> N'A PAS AGI, ET CE RUN A REPRIS LE TRAVAIL DE CONTENU. À lire avant l'encadré
-> du 06/10 ci-dessous, qu'il confirme sans le contredire.**
->
-> **Le blocage, mesuré en 3 secondes par la recette du 05/10 et plus par des
-> octets :** `GET /repos/:owner/:repo/commits/12f7431/status` → **`failure`**,
-> « Deployment has failed — run this Vercel CLI command: npx vercel inspect
-> `dpl_Bkx8DSZRpgzvTjXesTJonw1JbL6P` --logs ». **Le dernier déploiement date du
-> 06/10 à 08:03:46 UTC et il a échoué ; aucun déploiement n'a eu lieu depuis.**
-> La recette fonctionne : c'est désormais une mesure d'une requête, à faire en
-> premier à chaque run.
->
-> **Le client n'a pas agi, et c'est le fait du jour.** `git log` sur
-> `origin/main` : **aucun commit d'un autre auteur depuis la bascule de domaine
-> du 30/09**. L'ACTION 0 d'`ACTIONS-SEO-CLIENT.md` (ouvrir le build en échec sur
-> le tableau de bord Vercel et lire l'erreur) **n'a pas été exécutée**. Elle
-> reste la seule action qui débloque, et elle n'est pas de notre côté.
->
-> **Production cohérente avec ce diagnostic, revérifiée :**
-> `/services/enrobe-a-chaud` sert toujours **30 261 octets / 3 783 caractères**
-> (attendu 11 856), `/llms.txt` affiche toujours « 30 septembre 2026 » quand le
-> dépôt dit « 2 octobre 2026 ». Les 13 URLs répondent en 200 : **la production
-> n'est pas cassée, elle a 7 jours.**
->
-> ✅ **Ce que ce run a fait, et c'est l'application de la consigne du 06/10 :**
-> le gel du contenu étant levé, **un vrai chantier a été mené et poussé** — le
-> maillage interne des six pages `/services/*`, qui passent de **1 lien interne
-> servi à 6 ou 7**. Détail sous « Chantiers faits » du 07/10. Plus l'ajout de
-> `pagesjaunes.fr/pros/52322496` aux `sameAs`, chantier posé le 04/10 et prêt.
-> **Tout est vérifié au banc d'essai local ; rien n'est vérifié en ligne, et ça
-> s'ajoute à la dette de vérification tenue sous « Chantiers en attente ».**
->
-> ⚠️ **CONSIGNE POUR LE PROCHAIN RUN — courte, parce que l'essentiel ne change
-> pas.**
-> 1. **Relever l'état du dernier déploiement par l'API GitHub, en premier** (une
->    requête). `success` → **purger la dette de vérification en ligne AVANT tout
->    nouveau chantier** (liste sous « Chantiers en attente »). `failure` →
->    continuer le travail de contenu, il arrivera en ligne plus tard.
-> 2. **Ne PAS retenter un correctif de déploiement dans le dépôt.** Les deux
->    leviers sont épuisés et mesurés (06/10). Inchangé.
-> 3. **Ne pas relancer le diagnostic de déploiement** : il est complet depuis le
->    05/10. Le seul geste utile est côté client.
-> 4. **Le chantier de contenu continue normalement.** Le prochain candidat est
->    `/realisations/chantier-en-cours` (373 caractères servis, seule page du
->    sitemap sans date et sans entrée `PAGE_UPDATED`) — ⚠️ c'est une galerie, lire
->    la réserve sous « Chantiers en attente » avant de rédiger.
-
 > 🔴 **DOMAINE — À LIRE AVANT TOUT (mis à jour le 01/10/2026).**
 > **Le site est servi sur `https://www.hcetp.com`** (sans le `b`), depuis la
 > bascule du 30/09/2026 (commit `f07b19f`). `hcebtp.com`, `www.hcebtp.com` et
@@ -670,6 +636,17 @@ un extrait de SERP ne prouve pas ce que la page contient.
 > `verif.com` ont été jugées périmées **sur la seule foi d'extraits de recherche**
 > (403 au runner, contenu jamais lu). Leur statut « périmée » n'est donc pas
 > établi. Noté en chantier en attente.
+
+### Positions mesurées — 07/11/2026
+
+| Contrôle | 07/11/2026 | vs 06/11 |
+|---|---|---|
+| Déploiement `main` (`5928665`) | **`success`** (Vercel) | = |
+| Prod vs code (`mesure-texte-servi`) | 16/16 en 200, mêmes valeurs (maçonnerie 8 040, contact 5 733) | = |
+| SERP | non relevée (canal `WebSearch` US, non représentatif) | — |
+
+Pas d'accès Search Console. **À relever par Yanis** : « Performances IA » + requêtes à
+impressions ; indexation de `/contact` et `/arnaque-goudronnage`.
 
 ### Positions mesurées — 06/11/2026
 
@@ -1129,6 +1106,10 @@ reste au 2 octobre : **volontairement pas touchée**, aucun contenu n'ayant chan
 aujourd'hui.
 
 ## Chantiers faits
+
+### 07/11/2026 — `/services/maconnerie-generale` : Q/R pavés, gel et sel (option « D »)
+8 040 → 9 583 car. (banc local), FAQ 7 → 8. Référentiel NF 072 (CERIB, 2016) + Météo-France
+Champagnole + guide CERIB 2017. Lead, lastmod et `llms.txt` au 07/11.
 
 ### 06/11/2026 — JSON-LD : `@id` sur les `Service`, `about` sur les `/realisations/*`
 `services.$slug.tsx` : `"@id": …/services/<slug>#service`. `realisations.$slug.tsx` : `about`
@@ -2084,6 +2065,17 @@ points d'entrée tiers).
 
 Par ordre de priorité. **Alterner les angles, ne pas refaire le même deux jours
 de suite.**
+
+> 🆕 **MISE À JOUR DU 07/11/2026 — prime sur tout ce qui suit.**
+> ✅ `maconnerie-generale` : Q/R gel/sel (à vérifier en prod : ~9 583 car., FAQ 8/8, lastmod
+> 07/11, `llms.txt` 07/11, puis IndexNow).
+> 1. Lundi 09/11 : veille (étape 6).
+> 2. Prochain technique : lien retour `cour-allee-privee` → maçonnerie (Hypothèses 01/11,
+>    photos à regarder d'abord) ; ou incohérence « moins de 5 km » / « 2 km » entre Cize et
+>    Champagnole sur `/services/*` (ligne ~199 de `services.$slug.tsx` vs ~420) à trancher.
+> 3. Prochain contenu : `/contact` (5 733) ; accueil : **rien sans accord client**.
+> 4. Yanis : Search Console (Performances IA + indexation `/contact`) ; fiche Google Business
+>    Profile complète ; statut du mobile WhatsApp.
 
 > 🆕 **MISE À JOUR DU 06/11/2026 — prime sur tout ce qui suit.**
 > ✅ `@id` Service + `about` réalisations (à vérifier en prod : `/services/enrobe-a-chaud`

@@ -5,7 +5,7 @@
 > dans le Jura et l'Ain. Entreprise créée en 2012, 14 années d'expérience, plus de
 > 1000 chantiers livrés, garantie décennale.
 
-Dernière mise à jour : 4 novembre 2026
+Dernière mise à jour : 7 novembre 2026
 Site officiel : https://www.hcetp.com
 
 ## L'entreprise en bref
@@ -322,6 +322,18 @@ s'installer. Un joint cimenté donne une surface fermée, facile à balayer et �
 prix de la rigidité : si le support bouge, c'est le joint qui se fissure. HCE arrête ce
 choix au moment du calepinage.
 
+### Des pavés en béton tiennent-ils au gel et au sel de déneigement dans le Jura ?
+Oui, à condition de choisir un pavé dont la résistance au gel avec sel est garantie :
+l'option « D » de son marquage. Le référentiel NF 072 « Pavés de voirie en béton » (CERIB
+pour AFNOR Certification, juin 2016) la définit comme une « résistance renforcée au
+gel/dégel avec sels de déverglaçage », mesurée selon l'annexe D de NF EN 1338 : perte de
+masse moyenne d'au plus 1,0 kg/m², aucun résultat individuel au-delà de 1,5 kg/m². Le
+pavé est marqué par exemple « T5 + D ». L'option reste un choix du fabricant, non liée au
+climat par le référentiel ; or Champagnole (2 km de Cize, 537 m) compte 111,7 jours de gel
+par an (Météo-France, normales 1991-2020) : pour une entrée salée l'hiver, la mention « D »
+se vérifie sur la fiche produit. Pose sur mortier : entre +5 °C et +30 °C (guide CERIB 2017).
+Source : https://www.cerib.com/wp-content/uploads/2016/11/referentiel-nf-paves-voirie.pdf
+
 ### À quoi sert un muret de soutènement dans une cour ?
 À retenir la terre là où le terrain change de niveau, pour que la surface au-dessus reste
 plane et utilisable. Un mur de soutènement peut céder de trois façons, qui sont les trois
@@ -494,8 +506,9 @@ de l'eau ne s'évaluent pas autrement.
   l'intégration de pavés et de médaillons dans un enrobé, les normes des pavés, dalles et
   bordures (NF EN 1338, 1339, 1340 et 1342), la pose des pavés sous circulation (lit de
   sable de 3 cm, joints, damage, butée, guide CERIB 2017), la différence de pose entre
-  pavés et dalles, les autorisations d'urbanisme des aires de stationnement et le choix
-  entre joints sablés et joints cimentés, avec leurs sources.
+  pavés et dalles, les autorisations d'urbanisme des aires de stationnement, le choix
+  entre joints sablés et joints cimentés et la résistance des pavés au gel et au sel
+  (option « D », référentiel NF 072), avec leurs sources.
 - [Drainage & pentes](https://www.hcetp.com/services/drainage-pentes) : études de pente,
   drainage périphérique, évacuation des eaux pluviales. Contient aussi les réponses
   détaillées sur l'eau (écoulement vers le terrain voisin et Code civil, pente minimum

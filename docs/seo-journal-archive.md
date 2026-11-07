@@ -3906,3 +3906,52 @@ France le 12/09, pour la même raison.
 >    cette entrée de journal est absente de `main` au prochain run, c'est que la
 >    branche n'a pas été fusionnée : la chercher là-bas avant de refaire le
 >    travail.**
+
+## Archivé le 07/11/2026 (bloc d'état du 07/10/2026)
+
+> 🟠 **07/10/2026 — LE BLOCAGE DE DÉPLOIEMENT TIENT DEPUIS 5 JOURS, LE CLIENT
+> N'A PAS AGI, ET CE RUN A REPRIS LE TRAVAIL DE CONTENU. À lire avant l'encadré
+> du 06/10 ci-dessous, qu'il confirme sans le contredire.**
+>
+> **Le blocage, mesuré en 3 secondes par la recette du 05/10 et plus par des
+> octets :** `GET /repos/:owner/:repo/commits/12f7431/status` → **`failure`**,
+> « Deployment has failed — run this Vercel CLI command: npx vercel inspect
+> `dpl_Bkx8DSZRpgzvTjXesTJonw1JbL6P` --logs ». **Le dernier déploiement date du
+> 06/10 à 08:03:46 UTC et il a échoué ; aucun déploiement n'a eu lieu depuis.**
+> La recette fonctionne : c'est désormais une mesure d'une requête, à faire en
+> premier à chaque run.
+>
+> **Le client n'a pas agi, et c'est le fait du jour.** `git log` sur
+> `origin/main` : **aucun commit d'un autre auteur depuis la bascule de domaine
+> du 30/09**. L'ACTION 0 d'`ACTIONS-SEO-CLIENT.md` (ouvrir le build en échec sur
+> le tableau de bord Vercel et lire l'erreur) **n'a pas été exécutée**. Elle
+> reste la seule action qui débloque, et elle n'est pas de notre côté.
+>
+> **Production cohérente avec ce diagnostic, revérifiée :**
+> `/services/enrobe-a-chaud` sert toujours **30 261 octets / 3 783 caractères**
+> (attendu 11 856), `/llms.txt` affiche toujours « 30 septembre 2026 » quand le
+> dépôt dit « 2 octobre 2026 ». Les 13 URLs répondent en 200 : **la production
+> n'est pas cassée, elle a 7 jours.**
+>
+> ✅ **Ce que ce run a fait, et c'est l'application de la consigne du 06/10 :**
+> le gel du contenu étant levé, **un vrai chantier a été mené et poussé** — le
+> maillage interne des six pages `/services/*`, qui passent de **1 lien interne
+> servi à 6 ou 7**. Détail sous « Chantiers faits » du 07/10. Plus l'ajout de
+> `pagesjaunes.fr/pros/52322496` aux `sameAs`, chantier posé le 04/10 et prêt.
+> **Tout est vérifié au banc d'essai local ; rien n'est vérifié en ligne, et ça
+> s'ajoute à la dette de vérification tenue sous « Chantiers en attente ».**
+>
+> ⚠️ **CONSIGNE POUR LE PROCHAIN RUN — courte, parce que l'essentiel ne change
+> pas.**
+> 1. **Relever l'état du dernier déploiement par l'API GitHub, en premier** (une
+>    requête). `success` → **purger la dette de vérification en ligne AVANT tout
+>    nouveau chantier** (liste sous « Chantiers en attente »). `failure` →
+>    continuer le travail de contenu, il arrivera en ligne plus tard.
+> 2. **Ne PAS retenter un correctif de déploiement dans le dépôt.** Les deux
+>    leviers sont épuisés et mesurés (06/10). Inchangé.
+> 3. **Ne pas relancer le diagnostic de déploiement** : il est complet depuis le
+>    05/10. Le seul geste utile est côté client.
+> 4. **Le chantier de contenu continue normalement.** Le prochain candidat est
+>    `/realisations/chantier-en-cours` (373 caractères servis, seule page du
+>    sitemap sans date et sans entrée `PAGE_UPDATED`) — ⚠️ c'est une galerie, lire
+>    la réserve sous « Chantiers en attente » avant de rédiger.

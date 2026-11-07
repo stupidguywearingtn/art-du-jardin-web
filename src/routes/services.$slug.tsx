@@ -244,7 +244,7 @@ const SERVICES: Record<string, ServiceData> = {
       "Pavage, dallage, bordures et médaillons dans l'enrobé, Jura et Ain : motif dessiné avec vous, pose au cordeau, joints sablés ou cimentés. Devis détaillé.",
     savoir: {
       heading: "Pavage, dallage et médaillons : les questions qu'on nous pose",
-      lead: "Le pavage, le dallage et les médaillons ne remplacent pas l'enrobé : ils s'y intègrent. Voici comment les deux techniques se posent sur un même chantier, ce que disent les normes des pavés, des dalles et des bordures, sur quoi l'on pose des pavés qui doivent porter des voitures, et à partir de quand une autorisation d'urbanisme entre en jeu, dans le Jura et l'Ain.",
+      lead: "Le pavage, le dallage et les médaillons ne remplacent pas l'enrobé : ils s'y intègrent. Voici comment les deux techniques se posent sur un même chantier, ce que disent les normes des pavés, des dalles et des bordures, sur quoi l'on pose des pavés qui doivent porter des voitures, comment choisir un pavé qui tienne au gel et au sel, et à partir de quand une autorisation d'urbanisme entre en jeu, dans le Jura et l'Ain.",
       updated: PAGE_UPDATED["/services/maconnerie-generale"],
       qa: [
         {
@@ -275,6 +275,10 @@ const SERVICES: Record<string, ServiceData> = {
           q: "Joints sablés ou joints cimentés : lequel choisir ?",
           a: "Cela se décide sur l'usage prévu de la surface, et c'est un vrai choix, pas un détail de finition. Un joint sablé reste perméable et un peu souple : il laisse passer l'eau, se recharge facilement et encaisse les micro-mouvements du support sans casser, mais il se creuse au nettoyeur haute pression et laisse la végétation s'installer. Un joint cimenté donne une surface fermée, facile à balayer et à laver, au prix de la rigidité : si le support bouge, c'est le joint qui se fissure. La décision se prend au moment du calepinage, en même temps que le dessin du motif.",
         },
+        {
+          q: "Des pavés en béton tiennent-ils au gel et au sel de déneigement dans le Jura ?",
+          a: "Oui, à condition de choisir un pavé dont la résistance au gel avec sel est garantie : c'est l'option repérée par la lettre « D » dans son marquage. Le référentiel de la marque NF « Pavés de voirie en béton » (NF 072, CERIB pour AFNOR Certification, révision de juin 2016) la définit comme une « résistance renforcée au gel/dégel avec sels de déverglaçage », mesurée selon l'annexe D de la norme NF EN 1338 : une perte de masse moyenne d'au plus 1,0 kg/m² à l'essai, sans aucun résultat individuel au-delà de 1,5 kg/m². Le pavé porte alors sa classe de trafic suivie de « + D », par exemple « T5 + D ». Cette option reste un choix du fabricant, pas une obligation : ni ce référentiel ni le guide de pose du CERIB ne la lient au climat. Or la station Météo-France de Champagnole, à 2 km de Cize et à 537 m d'altitude, compte 111,7 jours de gel par an (normales 1991-2020) : pour une entrée qu'on sale l'hiver, la mention « D » se vérifie sur la fiche du produit avant la commande. Et quand des pavés ou des dalles sont posés sur mortier, le guide du CERIB fixe une mise en œuvre entre +5 °C et +30 °C.",
+        },
       ],
       sources: [
         {
@@ -294,6 +298,15 @@ const SERVICES: Record<string, ServiceData> = {
           label:
             "service-public.gouv.fr — Permis d'aménager (aires de stationnement ouvertes au public)",
           url: "https://www.service-public.gouv.fr/particuliers/vosdroits/F17665",
+        },
+        {
+          label:
+            "CERIB / AFNOR Certification — Référentiel de certification NF 072 « Pavés de voirie en béton », révision 2, juin 2016 (option « + D », gel/dégel avec sels de déverglaçage)",
+          url: "https://www.cerib.com/wp-content/uploads/2016/11/referentiel-nf-paves-voirie.pdf",
+        },
+        {
+          label: "Météo-France — fiche climatologique de CHAMPAGNOLE (39), indicatif 39097003, altitude 537 m, normales 1991-2020, éditée le 6 juin 2026",
+          url: "https://object.files.data.gouv.fr/meteofrance/data/synchro_ftp/REF_STATION/FICHECLIM_39097003.pdf",
         },
       ],
     },

@@ -20,6 +20,8 @@ et à compléter en fin de run.
 > **Rien d'affirmé sur les produits posés par HCE.** Banc local : **9 583 car.**, FAQ 8/8,
 > lastmod + `llms.txt` 07/11. Build OK, `check:fige` OK, `verif-lastmod` : seul écart connu
 > `/`. Archive : bloc d'état du 07/10.
+> ✅ Vérifié en prod (`018f9b5`, `success`) : `maconnerie-generale` 9 583 car., FAQ 8/8,
+> `llms.txt` 07/11, IndexNow 16 URLs → 200.
 
 > ✅ **06/11/2026 — Déploiement OK** (`074ed2b` : statut GitHub `success`). Prod = dernier
 > commit (16/16 en 200, valeurs identiques au 04/11 ; pas de run le 05/11). Chantier

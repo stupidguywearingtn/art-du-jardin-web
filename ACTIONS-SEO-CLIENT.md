@@ -1,5 +1,11 @@
 # SEO — les 4 actions que seul le client peut faire
 
+> 🆕 **08/11/2026 — pour Naofal, une question oui/non : les nombres de chantiers de la
+> carte sont-ils exacts ?** La carte « Zone d'intervention » affiche « 120 chantiers
+> réalisés » à Cize, 85 à Lons-le-Saunier, 95 à Bourg-en-Bresse, 67 à Oyonnax, 42 à
+> Saint-Claude, 38 à Champagnole. Si ce sont vos vrais chiffres (même arrondis), on les garde ;
+> sinon on retire la ligne : un chiffre affiché doit pouvoir être justifié.
+
 > 🆕 **12/10/2026 — action agence (Yanis), 2 minutes : inscrire le site dans
 > Bing Webmaster Tools** (bing.com/webmasters → « Importer depuis Google Search
 > Console »). ChatGPT (recherche web) et Copilot s'appuient sur l'index de Bing ;

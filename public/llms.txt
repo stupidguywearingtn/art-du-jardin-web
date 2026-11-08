@@ -329,7 +329,7 @@ pour AFNOR Certification, juin 2016) la définit comme une « résistance renfor
 gel/dégel avec sels de déverglaçage », mesurée selon l'annexe D de NF EN 1338 : perte de
 masse moyenne d'au plus 1,0 kg/m², aucun résultat individuel au-delà de 1,5 kg/m². Le
 pavé est marqué par exemple « T5 + D ». L'option reste un choix du fabricant, non liée au
-climat par le référentiel ; or Champagnole (2 km de Cize, 537 m) compte 111,7 jours de gel
+climat par le référentiel ; or Champagnole (moins de 5 km de Cize, 537 m) compte 111,7 jours de gel
 par an (Météo-France, normales 1991-2020) : pour une entrée salée l'hiver, la mention « D »
 se vérifie sur la fiche produit. Pose sur mortier : entre +5 °C et +30 °C (guide CERIB 2017).
 Source : https://www.cerib.com/wp-content/uploads/2016/11/referentiel-nf-paves-voirie.pdf
@@ -389,7 +389,7 @@ Source : https://norminfo.afnor.org/norme/nf-en-1340/elements-pour-bordures-de-t
 
 ### Peut-on couler des bordures et des murets toute l'année dans le Jura ?
 Pas indifféremment : un béton frais redoute le gel tant qu'il n'a pas pris. À la station
-Météo-France de Champagnole, à 2 km de Cize et à 537 m d'altitude, les normales 1991-2020
+Météo-France de Champagnole, à moins de 5 km de Cize et à 537 m d'altitude, les normales 1991-2020
 relèvent 111,7 jours de gel par an (température minimale inférieure ou égale à 0 °C), dont
 21,8 en janvier, 20,9 en février et 20,4 en décembre, et 35,2 jours par an où elle descend
 à -5 °C ou en dessous. La température moyenne annuelle y est de 9,4 °C et le cumul annuel

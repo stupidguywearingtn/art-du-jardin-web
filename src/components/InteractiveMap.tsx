@@ -2,8 +2,9 @@ import { useEffect, useRef, useState } from "react";
 
 const CITIES = [
   // Cize (39300, Jura), le siège réel — à ne pas confondre avec Cize (01250,
-  // dans l'Ain) qui se trouve en 46.244/5.464, à ~55 km au sud.
-  { name: "Cize", lat: 46.726, lng: 5.914, hq: true, chantiers: 120, desc: "Notre siège social. Atelier, dépôt machines et planning des équipes." },
+  // dans l'Ain) qui se trouve en 46.244/5.464, à ~55 km au sud. Point = 40 avenue
+  // Etienne Lamy géocodé par la BAN (08/11/2026), identique au JSON-LD et à /contact.
+  { name: "Cize", lat: 46.7234, lng: 5.9186, hq: true, chantiers: 120, desc: "Notre siège social. Atelier, dépôt machines et planning des équipes." },
   { name: "Lons-le-Saunier", lat: 46.674, lng: 5.554, chantiers: 85, desc: "Chantiers résidentiels et copropriétés. Devis détaillé." },
   { name: "Saint-Claude", lat: 46.387, lng: 5.864, chantiers: 42, desc: "Préparation de terrain et enrobé en zone montagne." },
   { name: "Champagnole", lat: 46.747, lng: 5.911, chantiers: 38, desc: "Cours, allées et parkings d'entreprise." },

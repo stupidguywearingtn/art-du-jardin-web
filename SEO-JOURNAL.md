@@ -8,6 +8,21 @@ et à compléter en fin de run.
 
 ## État des lieux
 
+> ✅ **08/11/2026 — Déploiement OK** (`e2c963c` : statut GitHub `success`). Prod = dernier
+> commit (16/16 en 200 ; `maconnerie-generale` 9 583 : Q/R du 07/11 en ligne). Chantier
+> (**technique — cohérence factuelle**, après un jour contenu) : la distance station
+> Météo-France de Champagnole ↔ Cize est tranchée. Station 39097003 : 46°45'24"N / 5°53'09"E
+> (relu sur la fiche climatologique, data.gouv). Siège géocodé par la BAN (Géoplateforme,
+> `40 Avenue Etienne Lamy 39300 Cize`, score 0,95) : 46,7235 / 5,9188 → **4,5 km** ;
+> centroïde de Cize → 4,8 km. Le « 2 km » était faux depuis les deux points : remplacé par
+> « à moins de 5 km » (formule déjà servie sur `/zone-intervention` et `enrobe-a-chaud`) dans
+> 2 Q/R de `/services/*` (maçonnerie, bordures-murets) et 2 passages de `llms.txt`. Marqueur
+> « Cize · Siège » de la carte : centroïde → adresse du siège (46,7234 / 5,9186, = JSON-LD et
+> `/contact`). `lastmod` non touché (correction de 2 mots). Build OK, `check:fige` OK.
+> Archive : blocs d'état 07-08/10 + positions 05, 07, 08/10.
+> 🆕 Relevé : la carte affiche « 120 / 85 / 42 / 38 / 95 / 67 chantiers réalisés » par ville
+> (`InteractiveMap.tsx`) — **chiffres sans source connue**, non touchés (voir Hypothèses 08/11).
+
 > ✅ **07/11/2026 — Déploiement OK** (`5928665` : statut GitHub `success`). Prod = dernier
 > commit (16/16 en 200, mêmes valeurs qu'au 06/11). Chantier (**contenu**, après un jour
 > technique) : **`/services/maconnerie-generale`** (8 040, la plus maigre des services) +1 Q/R
@@ -375,99 +390,6 @@ et à compléter en fin de run.
 > Chantier du jour : **`/arnaque-goudronnage`** (15ᵉ URL). Pas de run les 09 et
 > 10/10.
 
-> ✅ **Addendum du 08/10, mesuré APRÈS le push du jour (commit `924ac78`, poussé
-> sur `main` à 07:43 UTC) — deux faits.**
-> 1. **Le push vers `main` est passé sans encombre**, comme le 07/10. Le refus
->    « Production Deploy » du 05/10 ne s'est pas reproduit deux runs de suite :
->    il peut être considéré comme un incident ponctuel, pas comme une règle de
->    l'environnement.
-> 2. **Le déploiement de ce commit a échoué, et il a été chronométré sur deux
->    minutes :** `failure` dès **t+20 s** et stable à t+40, 60, 80, 100 et 120 s
->    (`dpl_Hp5D5w2dzBD92sGRDnXYCwmbBybE`, statut posé à 07:43:29 UTC).
->    **Signature identique au 05/10 et au 07/10** — échec immédiat et
->    reproductible, cohérent avec un rejet en amont du build. Le build complet
->    sort en 17 s en local. **Seul le journal de build tranche, et il demande le
->    compte propriétaire.**
-> 3. `ACTIONS-SEO-CLIENT.md` porte en tête le bloc du 08/10 (les quatre
->    informations manquantes des mentions légales) et l'identifiant de
->    déploiement en échec du jour.
-
-
-> 🟠 **08/10/2026 — SEPTIÈME JOUR DE BLOCAGE DE DÉPLOIEMENT, INDEXATION
-> TOUJOURS NULLE, ET LE CHANTIER DU JOUR COMBLE UN TROU LÉGAL : LE SITE N'AVAIT
-> AUCUNE MENTION LÉGALE. À lire avant l'encadré du 07/10, qu'il confirme.**
->
-> **Le blocage, mesuré en une requête par la recette du 05/10 :**
-> `GET /repos/stupidguywearingtn/art-du-jardin-web/commits/df5fb24/status` →
-> **`state: failure`**, « Deployment has failed — run this Vercel CLI command:
-> npx vercel inspect `dpl_2SpXiojhkGTTjFrFiwuXSD6QaErX` --logs », statut posé le
-> **07/10 à 07:39:44 UTC**. ⚠️ **Note d'exactitude : l'identifiant de
-> déploiement n'est pas celui que le journal du 07/10 avait inscrit**
-> (`dpl_9yaN7EmfLcYhoV5w56joBYqwCpmV`). Les deux sont réels — le push du 07/10 a
-> déclenché plus d'un déploiement — mais **c'est le statut du dernier commit de
-> `main` qui fait foi, pas un identifiant recopié**. Prendre l'identifiant dans
-> la réponse de l'API le jour même, jamais dans le journal de la veille.
->
-> **Production cohérente avec ce diagnostic, revérifiée ce matin :**
-> `/services/enrobe-a-chaud` sert toujours **30 261 octets**, `/llms.txt`
-> affiche toujours « 30 septembre 2026 » quand le dépôt dit « 2 octobre » (et
-> maintenant « 8 octobre »). **La production a huit jours.** L'apex
-> `hcebtp.com` répond bien **308 → `https://www.hcetp.com/`** (un premier
-> `curl` a rendu un code 000 : c'était un aléa réseau, pas une panne — le
-> deuxième appel, verbeux, a montré le 308 complet. **Ne pas conclure sur une
-> seule mesure réseau.**)
->
-> ✅ **Le site est intégralement explorable, et c'est vérifié autrement qu'en
-> relisant le code** : `robots.txt` en `Allow: /`, sitemap valide, aucune balise
-> `robots` restrictive, canonical auto-référent — et surtout **les pages
-> répondent 200 à un `curl` portant l'User-Agent de Googlebot, sans `Set-Cookie`
-> ni `x-robots-tag`**. Il n'y a donc **ni blocage de pare-feu, ni protection de
-> déploiement Vercel** sur le chemin du crawler. Cette vérification manquait :
-> le journal concluait « site sain » depuis le 07/09 sur la seule lecture du
-> dépôt. **Elle est faite, elle est négative, et elle n'a pas à être refaite
-> avant un changement d'hébergement.**
->
-> ✅ **Chantier du jour, mené jusqu'au bout et validé au banc d'essai local :
-> création de `/mentions-legales`** (8 351 caractères servis). Détail sous
-> « Chantiers faits » du 08/10. C'est la 14ᵉ URL du sitemap.
->
-> ⚠️ **CONSIGNE POUR LE PROCHAIN RUN.**
-> 1. **Relever l'état du dernier déploiement par l'API GitHub, en premier.**
->    `success` → **purger la dette de vérification en ligne AVANT tout nouveau
->    chantier** (liste sous « Chantiers en attente », complétée du 08/10).
->    `failure` → continuer le travail de contenu.
-> 2. **Ne PAS retenter un correctif de déploiement dans le dépôt** (leviers
->    épuisés et mesurés le 06/10), **ni relancer le diagnostic** (complet depuis
->    le 05/10). Inchangé.
-> 3. **Ne pas mesurer les positions avec `curl` sur Bing ni sur DuckDuckGo** :
->    testé aujourd'hui, les deux canaux sont inutilisables. Voir « Techniques
->    apprises » du 08/10 — c'est l'économie d'une heure.
-> 4. **Prochain candidat de contenu : `/realisations/chantier-en-cours`**
->    (373 caractères servis, seule URL du sitemap sans date affichée). ⚠️ C'est
->    une galerie : lire la réserve sous « Chantiers en attente » avant de
->    rédiger. Le filon « page légale » est désormais épuisé — il n'y en avait
->    qu'une.
-
-
-> ✅ **Addendum du 07/10, mesuré APRÈS le push du jour (commit `23eb831`,
-> poussé sur `main` à 07:43 UTC) — deux faits à retenir.**
-> 1. **Le push vers `main` est passé sans encombre.** Le refus « Production
->    Deploy » qui avait frappé le run du 05/10 et coûté une journée de travail
->    invisible **ne s'est pas reproduit**. Le travail du jour est bien sur
->    `main`, pas sur une branche de session : vérifié par `git push` puis
->    `git log origin/main`.
-> 2. **Le déploiement de ce commit a échoué lui aussi, et il a été chronométré :**
->    `pending` à **t+20 s**, `failure` à **t+40 s**
->    (`dpl_9yaN7EmfLcYhoV5w56joBYqwCpmV`). **Signature identique à celle du
->    05/10** — l'échec est immédiat et reproductible, ce qui reste cohérent avec
->    un rejet en amont du build plutôt qu'avec une erreur de compilation (le
->    build complet prend ~18 s en local, mais l'échec Vercel ne laisse aucun
->    journal lisible d'ici). **Ne pas en tirer plus : seul le journal de build
->    tranche, et il demande le compte propriétaire.**
-> 3. `ACTIONS-SEO-CLIENT.md` a reçu une **relance datée du 07/10** en tête, avec
->    l'identifiant du déploiement en échec du jour et la liste de ce qui attend
->    en ligne.
-
 > 🔴 **DOMAINE — À LIRE AVANT TOUT (mis à jour le 01/10/2026).**
 > **Le site est servi sur `https://www.hcetp.com`** (sans le `b`), depuis la
 > bascule du 30/09/2026 (commit `f07b19f`). `hcebtp.com`, `www.hcebtp.com` et
@@ -638,6 +560,17 @@ un extrait de SERP ne prouve pas ce que la page contient.
 > `verif.com` ont été jugées périmées **sur la seule foi d'extraits de recherche**
 > (403 au runner, contenu jamais lu). Leur statut « périmée » n'est donc pas
 > établi. Noté en chantier en attente.
+
+### Positions mesurées — 08/11/2026
+
+| Contrôle | 08/11/2026 | vs 07/11 |
+|---|---|---|
+| Déploiement `main` (`e2c963c`) | **`success`** (Vercel) | = |
+| Prod vs code (`mesure-texte-servi`) | 16/16 en 200 ; maçonnerie 9 583 (Q/R du 07/11 en ligne) | +1 543 maçonnerie |
+| SERP | non relevée (canal `WebSearch` US, non représentatif) | — |
+
+Pas d'accès Search Console. **À relever par Yanis** : « Performances IA » + requêtes à
+impressions ; indexation de `/contact` et `/arnaque-goudronnage`.
 
 ### Positions mesurées — 07/11/2026
 
@@ -959,155 +892,11 @@ Seule vraie mesure à venir : **Search Console** (non accessible depuis le
 runner). À relever par Yanis : pages indexées, et impressions sur
 « goudronnage », « enrobé Jura », « arnaque goudronnage » dans 2-3 semaines.
 
-### Positions mesurées — 08/10/2026
-
-**Indexation : toujours nulle, sixième semaine. Mais la mesure du jour est
-surtout une mesure sur les OUTILS, et elle économisera du temps.**
-
-| Requête / contrôle | 08/10/2026 | Évolution vs 07/10 |
-|---|---|---|
-| `site:hcetp.com` (`WebSearch`) | **0 résultat du domaine** (9 pages d'acronymes sans rapport : ceetp.udel.edu, hptn.org, hpcet, hug.ch, cetweb.edu, cetl.hku.hk, cpet.tc.columbia.edu) | inchangé sur le fond — **opérateur toujours non honoré par ce canal** |
-| `"hcetp.com" HCE Cize enrobé` (`WebSearch`) | **0 page mentionnant le domaine, où que ce soit.** Les 9 résultats parlent d'« enrobé » au sens confiserie/œnologie (OQLF, douane suisse, guide Hachette) et d'un collier cervical « Cizeta » | **reconduit le relevé du 04/10 — et c'est la ligne qui compte** : zéro mention du domaine sur le web indexé, pas seulement zéro lien |
-| Crawlabilité réelle sous User-Agent Googlebot | **200 sur `/` et sur `/services/enrobe-a-chaud`**, aucun `Set-Cookie`, aucun `x-robots-tag`, `robots.txt` en `Allow: /` | 🆕 **nouveau contrôle, négatif : rien ne bloque le crawler** |
-| Apex `hcebtp.com` | **308 → `https://www.hcetp.com/`** (serveur `Vercel`) | inchangé |
-| Dernier déploiement (API GitHub, commit `df5fb24`) | **`failure`**, `dpl_2SpXiojhkGTTjFrFiwuXSD6QaErX`, posé le 07/10 à 07:39:44 UTC | inchangé — septième jour |
-
-⚠️ **RÉSERVE DE MÉTHODE, et elle est maintenant adossée à trois canaux testés,
-pas à un.** La réserve posée le 07/10 sur `WebSearch` tient. Les deux canaux
-essayés aujourd'hui pour la contourner **sont pires** :
-- **Bing en `curl`** rend des SERP sans aucun rapport avec la requête (« enrobé
-  à chaud Jura » → l'Apec de Toulouse ; « terrassement Jura » → un forum
-  Toyota ; `site:hcetp.com` → des pages de téléchargement de WhatsApp). Le
-  paramètre `&format=rss` est encore plus franchement faux. **Ce canal ne
-  mesure rien.**
-- **DuckDuckGo** (`html.duckduckgo.com`) répond **HTTP 202**, c'est-à-dire une
-  page de défi anti-robot, sans aucun résultat.
-
-**Conséquence pratique, à tenir :** la seule mesure d'indexation exploitable
-depuis ce runner reste **« le domaine apparaît / n'apparaît pas » via
-`WebSearch`**, plus le code IndexNow. **Ne pas redépenser de temps à chercher un
-canal SERP ; il n'y en a pas.** La vraie mesure de progrès viendra de la Search
-Console, donc du client.
-
-**Volume de texte servi — banc d'essai local (`vite dev`), pas production.** La
-production est inchangée au caractère près depuis le 30/09 (huitième relevé
-identique). Valeurs locales du jour, qui sont ce qui partira en ligne au
-déblocage : **13 543** (accueil, +17 car. : le lien « Mentions légales » du pied
-de page) / 12 633 / 13 491 / **8 351** (🆕 `/mentions-legales`) / 8 578 / 8 156 /
-7 670 / 7 634 / 7 413 / 6 356 / 5 832 / 5 706 / 5 154 / 373.
-
-### Positions mesurées — 07/10/2026
-
-**Indexation : toujours nulle, cinquième semaine. Quatre mesures, toutes
-reconduites.**
-
-| Requête | 07/10/2026 | Évolution vs 05/10 |
-|---|---|---|
-| `site:hcetp.com` | **0 résultat du domaine** (9 pages d'acronymes : HPTN, CEETP Delaware, HPCET Inde, TFETP Taïwan, hug.ch, cetweb.edu, ctep.cancer.gov) | inchangé sur le fond — **opérateur toujours non honoré par ce canal, ce résultat n'est pas une information**. La composition des 9 pages a entièrement changé, ce qui confirme qu'elle est du bruit |
-| phrase exacte du site `"Médaillons et inserts pavés intégrés à l'enrobé"` | **0 résultat du domaine** — et cette fois **9 brevets américains** (USPTO, Google Patents, CIPO) au lieu des 10 sites français d'enrobé relevés les 30/09 → 02/10 | ⚠️ **rupture de composition totale, et c'est un biais d'outil, pas un signal** : voir la réserve ci-dessous |
-| requête nommant le domaine et l'entité | **0 page du domaine** ; 9 résultats sur Cize (Wikipédia, INSEE, jura-tourism) sans rapport avec l'entreprise | inchangé sur le fond |
-| `enrobé à chaud Jura entreprise` (requête commerciale) | **HCE absent du domaine**, 9 résultats. 🆕 **Mais la fiche `118712.fr` de l'entreprise sort en 1ʳᵉ position** | ⚠️ **SFCTP, qui tenait 4 URLs sur 9 depuis le 02/10, est absent du relevé** ; PagesJaunes aussi. Composition méconnaissable — même réserve |
-| **code IndexNow** | **200** (fichier clé servi en 200, 13 URLs soumises) | inchangé depuis le 02/10 |
-
-⚠️ **RÉSERVE DE MÉTHODE, ET ELLE EST PLUS FORTE QUE LES RUNS PRÉCÉDENTS NE LE
-DISAIENT. Ne pas lire les changements de composition de ce tableau comme des
-mouvements de marché.** Deux relevés du jour le prouvent : la phrase exacte du
-site, qui ramenait **dix sites français d'enrobé** les 30/09, 01/10 et 02/10,
-ramène aujourd'hui **neuf brevets américains sur le pavage décoratif** ; et la
-requête commerciale ne contient plus ni SFCTP ni PagesJaunes, qui tenaient
-ensemble 6 places sur 9 il y a deux jours. **Aucun bouleversement de SERP de
-cette ampleur n'est crédible en 48 h sur un marché local français.** C'est
-l'orientation marché américain de `WebSearch`, déjà notée depuis le 05/10, qui
-domine le résultat. **Conséquence pratique à tenir : la seule ligne de ce
-tableau qui vaut comme mesure de progrès est « le domaine apparaît / n'apparaît
-pas », plus le code IndexNow. Les positions des concurrents et l'ordre des
-résultats ne sont pas exploitables par ce canal — ne plus construire de chantier
-sur « ce que fait SFCTP ».**
-
-🆕 **Une huitième fiche d'annuaire découverte, et elle ne porte pas de lien non
-plus.** `https://www.118712.fr/professionnels/WkBSXFVRFAc` — « H.C.E
-Aménagement de Cours en Enrobés », sort **1ʳᵉ sur la requête commerciale**. Lue
-le 07/10 : nom correct, activité correcte (« travaux publics, exploitation de
-carrières, travaux routiers, entreprises de terrassement », « aménagement de
-cours en enrobé »), adresse **« 40 av Etienne Lamy 39300 Cize »**, téléphone
-**masqué derrière un bouton « Afficher le n° »**, et **aucun lien vers un site**.
-⚠️ **Volontairement PAS ajoutée aux `sameAs`**, et la raison est le critère
-appliqué depuis le 13/09 : une fiche n'entre dans les `sameAs` que si **le
-téléphone et l'adresse y sont vérifiés**. Ici le téléphone n'est pas lisible et
-l'adresse ne porte pas le « Bis » tranché le 04/10. **Le critère tient, la fiche
-attend.** Elle porte le compte à **huit fiches d'annuaire qui parlent de
-l'entreprise sans jamais mener au site** — le diagnostic du 04/10 est donc
-renforcé, pas modifié.
-
-⚠️ **Note sur la fiche PagesJaunes, relue le 07/10 avant de l'ajouter aux
-`sameAs` : elle publie deux informations qui contredisent le contenu figé, et
-elles n'ont PAS été reprises.** (a) « SARL established **April 1, 2010** » alors
-que le contenu figé par le client dit **2012** ; (b) « **4.5 stars on Google (16
-reviews)** » alors que la section avis a été supprimée à la demande du client.
-**Rien de tout cela n'a été touché ni recopié** : le contenu figé fait foi, et on
-n'ajoute pas d'`aggregateRating` pour une note qu'on ne maîtrise pas et que le
-client a explicitement retirée du site. Noté ici pour qu'un prochain run ne
-« corrige » pas le site d'après cette fiche.
-
-**Volume de texte servi en production** (`scripts/mesure-texte-servi.mjs` sur
-`https://www.hcetp.com`) : **inchangé au caractère près depuis le 30/09**, soit
-le septième relevé identique (13 526 / 13 491 / 8 578 / 8 156 / 7 670 / 7 012 /
-6 821 / 6 356 / 5 198 / 5 080 / 4 482 / **3 783** / 373).
-`/services/enrobe-a-chaud` toujours à 3 783 au lieu de 11 856 : **cinquième jour
-hors ligne** pour le chantier du 02/10.
-
-**Graphe des liens internes servis — la mesure du chantier du jour**, relevée
-des deux côtés (production = avant, banc local = après) :
-
-| Page | Avant (prod) | Après (banc local) |
-|---|---|---|
-| `/services/preparation-terrain` | **1** | **6** |
-| `/services/enrobe-a-chaud` | **1** | **7** |
-| `/services/maconnerie-generale` | **1** | **6** |
-| `/services/drainage-pentes` | **1** | **6** |
-| `/services/bordures-murets` | **1** | **6** |
-| `/services/finitions-soignees` | **1** | **6** |
-
-### Positions mesurées — 05/10/2026
-
-**Indexation : toujours nulle. Quatre mesures, toutes reconduites à
-l'identique du 04/10.**
-
-| Requête | 05/10/2026 | Évolution vs 04/10 |
-|---|---|---|
-| `site:hcetp.com` | **0 résultat du domaine** (9 pages d'acronymes : Wikipédia HCET/HCT/HCPT, Hitkarini College, hrsa.gov, sites.bu.edu) | inchangé — opérateur toujours non honoré par ce canal, ce n'est pas une information |
-| `"hcetp.com" OR "hcebtp.com" HCE Cize` | **0 page mentionnant l'un ou l'autre domaine** | inchangé |
-| `HCE enrobé à chaud Cize Jura travaux publics hcetp` | **0 résultat du domaine**, mais **10 résultats sur l'entreprise** | inchangé sur le fond ; composition : PagesJaunes **×5** (4 pages départementales + la fiche `/pros/52322496`), Mappy, Kompass, Verif, societe.com, manageo. `nosartisansontdutalent.fr` ressort de la liste |
-| `enrobé à chaud Jura entreprise` (requête commerciale) | **HCE absent**, 9 résultats | inchangé. SFCTP tient toujours **4 URLs** sur 9 ; les 2 pages départementales PagesJaunes tiennent les 2 premières places ; entrent daniel-moquet, socorebat, un-max-de-services |
-| **code IndexNow** | **200** | inchangé (13 URLs, fichier clé servi en 200) |
-
-**Le diagnostic du 04/10 tient : zéro mention des deux domaines sur le web
-indexé, et sept fiches d'annuaire qui parlent de l'entreprise sans jamais mener
-au site.** Rien n'a bougé en 24 h, ce qui est normal : aucune action de
-découverte n'est possible depuis le dépôt, et les actions 1 à 4 attendent le
-client.
-
-⚠️ **Réserve de méthode, inchangée :** `WebSearch` est orienté marché américain
-et ne vaut pas une SERP google.fr. Le troisième relevé le rend malgré tout
-exploitable : l'index interrogé **connaît** l'entreprise sur dix pages
-françaises, donc l'absence du domaine n'est pas un biais de couverture.
-
-**Volume de texte servi en production** (`scripts/mesure-texte-servi.mjs` sur
-`https://www.hcetp.com`) : **les 13 URLs rendent exactement les mêmes valeurs
-qu'aux 30/09, 01/10, 02/10 et 04/10, au caractère près** (13 526 / 13 491 /
-8 578 / 8 156 / 7 670 / 7 012 / 6 821 / 6 356 / 5 198 / 5 080 / 4 482 / **3 783**
-/ 373). `/services/enrobe-a-chaud` à **3 783** au lieu des 11 856 attendus : le
-chantier du 02/10 n'est toujours pas en ligne, **quatrième jour**. `/llms.txt` en
-production affiche toujours « 30 septembre 2026 » quand le dépôt dit « 2 octobre
-2026 ».
-
-**Contrôle du dépôt (banc local, pas la production) :** `llms.txt` est **à
-jour et sans dérive** — les 12 routes de `src/lib/lastmod.ts` y sont toutes
-présentes, 0 occurrence de l'ancien domaine `hcebtp`. Rien à corriger. Sa date
-reste au 2 octobre : **volontairement pas touchée**, aucun contenu n'ayant changé
-aujourd'hui.
-
 ## Chantiers faits
+
+### 08/11/2026 — Distance station de Champagnole ↔ Cize : « 2 km » → « moins de 5 km »
+Mesure : siège (BAN) 4,5 km, centroïde 4,8 km de la station 39097003. 2 Q/R
+`services.$slug.tsx` + 2 passages `llms.txt`. Carte : marqueur siège sur l'adresse géocodée.
 
 ### 07/11/2026 — `/services/maconnerie-generale` : Q/R pavés, gel et sel (option « D »)
 8 040 → 9 583 car. (banc local), FAQ 7 → 8. Référentiel NF 072 (CERIB, 2016) + Météo-France
@@ -2067,6 +1856,15 @@ points d'entrée tiers).
 
 Par ordre de priorité. **Alterner les angles, ne pas refaire le même deux jours
 de suite.**
+
+> 🆕 **MISE À JOUR DU 08/11/2026 — prime sur tout ce qui suit.**
+> ✅ Distance station Champagnole tranchée (à vérifier en prod : plus aucun « 2 km de Cize »
+> servi ; `llms.txt` lignes 332 et 392 ; puis IndexNow).
+> 1. Lundi 09/11 : veille (étape 6).
+> 2. Prochain contenu : `/contact` (5 733) ; accueil : **rien sans accord client**.
+> 3. Technique en réserve : lien retour `cour-allee-privee` → maçonnerie (photos d'abord).
+> 4. Yanis/client : sourcer ou retirer les compteurs « X chantiers réalisés » de la carte ;
+>    Search Console ; fiche Google Business Profile ; statut du mobile WhatsApp.
 
 > 🆕 **MISE À JOUR DU 07/11/2026 — prime sur tout ce qui suit.**
 > ✅ `maconnerie-generale` : Q/R gel/sel (à vérifier en prod : ~9 583 car., FAQ 8/8, lastmod
@@ -3194,6 +2992,13 @@ de suite.**
 
 ## Hypothèses à vérifier
 
+### 08/11/2026 — Les compteurs « chantiers réalisés » de la carte ont-ils une source ?
+`src/components/InteractiveMap.tsx` affiche au visiteur, dans la bulle de chaque ville :
+Cize 120, Lons-le-Saunier 85, Saint-Claude 42, Champagnole 38, Bourg-en-Bresse 95,
+Oyonnax 67 « chantiers réalisés ». Aucune source dans le dépôt ni dans le journal ; valeurs
+probablement héritées du gabarit Lovable. **Non touché** (contenu existant, possible donnée
+client). Si Naofal ne les confirme pas : retirer la ligne « X chantiers » (garder ville + desc).
+
 ### 01/11/2026 — Le dossier « Cour et allée privée » montre-t-il vraiment des pavés ?
 `/services/maconnerie-generale` y renvoie (« pavés, dallages et médaillons… en photos »),
 mais le dossier ne liste pas la maçonnerie dans ses prestations (`RELATED_SERVICES`). Les
@@ -3359,7 +3164,8 @@ retiré du site.
 > tranché** : il sert de garde-fou sur du contenu figé client, le casser coûterait
 > plus que l'inconvénient actuel.
 
-- **Deux pages publient « la station Météo-France de Champagnole, à 2 km de
+- ✅ **Tranché le 08/11/2026** (siège BAN → 4,5 km ; « 2 km » remplacé par « moins de 5 km »).
+  **Deux pages publient « la station Météo-France de Champagnole, à 2 km de
   Cize », alors que la distance mesurée est de 4,8 km.** Relevé le 30/09/2026 :
   la station 39097003 est à 46°45'24"N / 5°53'09"E, le point central de Cize
   (INSEE 39153) à 46,7209 / 5,9212, soit **4,8 km** à vol d'oiseau. Le « 2 km »

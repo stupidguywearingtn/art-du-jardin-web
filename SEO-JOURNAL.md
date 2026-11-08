@@ -22,6 +22,8 @@ et à compléter en fin de run.
 > Archive : blocs d'état 07-08/10 + positions 05, 07, 08/10.
 > 🆕 Relevé : la carte affiche « 120 / 85 / 42 / 38 / 95 / 67 chantiers réalisés » par ville
 > (`InteractiveMap.tsx`) — **chiffres sans source connue**, non touchés (voir Hypothèses 08/11).
+> ✅ Vérifié en prod (`e1f7d80`, `success`) : 0 « 2 km de Cize » servi (maçonnerie,
+> bordures-murets, `llms.txt`), IndexNow 16 URLs → 200.
 
 > ✅ **07/11/2026 — Déploiement OK** (`5928665` : statut GitHub `success`). Prod = dernier
 > commit (16/16 en 200, mêmes valeurs qu'au 06/11). Chantier (**contenu**, après un jour

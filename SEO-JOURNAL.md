@@ -21,6 +21,8 @@ et à compléter en fin de run.
 > visite. **Aucun prix, aucun délai.** Banc local : **7 314 car.**, FAQ 5/5, lead « Quatre » →
 > « Cinq », lastmod + `llms.txt` 09/11. Build OK, `check:fige` OK, `verif-lastmod` : seul
 > écart connu `/`. Archive : « Chantiers faits » des 04-08/10.
+> ✅ Vérifié en prod (`9cc4500`, `success`) : `/contact` 7 314 car., FAQ 5/5, `llms.txt`
+> 09/11 (cartes.gouv.fr servi), IndexNow 16 URLs → 200.
 
 > ✅ **08/11/2026 — Déploiement OK** (`e2c963c` : statut GitHub `success`). Prod = dernier
 > commit (16/16 en 200 ; `maconnerie-generale` 9 583 : Q/R du 07/11 en ligne). Chantier

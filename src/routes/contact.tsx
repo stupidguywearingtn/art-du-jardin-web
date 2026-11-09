@@ -63,7 +63,7 @@ const COORDONNEES: { k: string; v: string; href?: string }[] = [
  */
 const SAVOIR = {
   heading: "Ce qu'on nous demande avant d'appeler",
-  lead: "Quatre questions reviennent avant le premier contact : comment joindre l'entreprise, où elle se trouve exactement, ce qu'il faut avoir sous la main pour une demande de devis, et comment s'assurer qu'on parle bien à HCE et pas à un démarcheur qui en emprunte le nom.",
+  lead: "Cinq questions reviennent avant le premier contact : comment joindre l'entreprise, où elle se trouve exactement, ce qu'il faut avoir sous la main pour une demande de devis, comment mesurer soi-même la surface à revêtir, et comment s'assurer qu'on parle bien à HCE et pas à un démarcheur qui en emprunte le nom.",
   updated: PAGE_UPDATED["/contact"],
   qa: [
     {
@@ -77,6 +77,10 @@ const SAVOIR = {
     {
       q: "Que faut-il préparer avant de demander un devis d'enrobé ?",
       a: "Cinq informations suffisent pour un premier échange utile : la commune du chantier et son code postal, le type de surface (cour, chemin, parking, voirie), ses dimensions approximatives — une longueur et une largeur à quelques mètres près suffisent, elles sont affinées sur place —, ce qu'il y a aujourd'hui au sol (gravier, terre, ancien enrobé fissuré, béton) et la façon dont un engin peut y accéder. Si vous connaissez un problème d'eau, une flaque qui stagne ou un ruissellement vers la maison, dites-le dès le départ : c'est ce qui décide des pentes et parfois d'un drainage. Deux choses, en revanche, ne se donnent pas par téléphone : un prix et une date de pose ferme. Un chantier d'enrobé se chiffre après une visite sur site, parce que la surface réelle, l'état du support et l'évacuation de l'eau ne s'évaluent pas autrement, et la période de pose dépend de la météo et de l'altitude du chantier.",
+    },
+    {
+      q: "Comment mesurer la surface de sa cour ou de son chemin avant de demander un devis ?",
+      a: "Pour une forme rectangulaire, la surface est la longueur multipliée par la largeur, en mètres : une cour de 12 m sur 8 m fait 96 m². Une forme irrégulière se découpe en rectangles et en triangles (base × hauteur ÷ 2) dont on additionne les surfaces, et un chemin se mesure comme une bande : sa longueur multipliée par sa largeur moyenne. Sans mètre ruban, le visualiseur cartographique public de l'IGN, cartes.gouv.fr — inauguré le 25 juin 2026 pour prendre la suite du Géoportail —, propose un outil « Mesurer une surface » : sur la photographie aérienne, on clique chaque angle de la zone, un double-clic la ferme, et la surface s'affiche pendant le tracé ; l'outil « Mesurer une distance » donne de la même façon la longueur d'un chemin. Deux limites à garder en tête : un arbre ou un avant-toit peut cacher une partie de la surface sur la photo, et la surface d'une parcelle au cadastre couvre tout le terrain, pas la seule zone à revêtir. Le formulaire de devis de l'accueil demande seulement une longueur et une largeur approximatives ; pour une surface en L ou en plusieurs morceaux, la case « Je ne connais pas les dimensions » permet de décrire le projet librement. Dans tous les cas, la surface est remesurée lors de la visite sur site, avant le devis détaillé.",
     },
     {
       q: "Comment être sûr de parler à la vraie entreprise HCE ?",
@@ -93,6 +97,15 @@ const SAVOIR = {
       label:
         "API Recherche d'entreprises (recherche-entreprises.api.gouv.fr) — géocodage INSEE de l'établissement 52168357300039, consulté le 8 septembre 2026",
       url: "https://recherche-entreprises.api.gouv.fr/search?q=521683573",
+    },
+    {
+      label:
+        "cartes.gouv.fr (IGN) — aide « Utiliser les outils de mesure » : Mesurer une distance, Mesurer une surface",
+      url: "https://cartes.gouv.fr/aide/fr/guides-utilisateur/visualiseur-cartographique/utiliser-les-outils-de-mesure/",
+    },
+    {
+      label: "IGN — « Après Géoportail, découvrez cartes.gouv.fr », 19 octobre 2026",
+      url: "https://www.ign.fr/actualites/apres-geoportail-decouvrez-cartesgouvfr",
     },
     {
       label:

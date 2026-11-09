@@ -8,6 +8,20 @@ et à compléter en fin de run.
 
 ## État des lieux
 
+> ✅ **09/11/2026 — Déploiement OK** (`25d76aa` : statut GitHub `success`). Prod = dernier
+> commit (16/16 en 200 ; maçonnerie 9 592, correction « moins de 5 km » du 08/11 en ligne).
+> Lundi : veille (voir « Techniques apprises »). Chantier (**contenu**, après un jour
+> technique) : **`/contact`** (5 733, la plus maigre hors accueil) +1 Q/R **« Comment mesurer
+> la surface de sa cour ou de son chemin avant de demander un devis ? »** (le formulaire
+> demande longueur × largeur ; rien sur le site n'aidait à les obtenir). Contenu : calcul
+> rectangle / découpage triangles / bande pour un chemin, outils « Mesurer une surface » et
+> « Mesurer une distance » de **cartes.gouv.fr** (IGN, inauguré le 25/06/2026, successeur du
+> Géoportail — vérifié sur ign.fr et l'aide cartes.gouv.fr), limites (arbres, cadastre = toute
+> la parcelle), case « Je ne connais pas les dimensions » du formulaire, surface remesurée à la
+> visite. **Aucun prix, aucun délai.** Banc local : **7 314 car.**, FAQ 5/5, lead « Quatre » →
+> « Cinq », lastmod + `llms.txt` 09/11. Build OK, `check:fige` OK, `verif-lastmod` : seul
+> écart connu `/`. Archive : « Chantiers faits » des 04-08/10.
+
 > ✅ **08/11/2026 — Déploiement OK** (`e2c963c` : statut GitHub `success`). Prod = dernier
 > commit (16/16 en 200 ; `maconnerie-generale` 9 583 : Q/R du 07/11 en ligne). Chantier
 > (**technique — cohérence factuelle**, après un jour contenu) : la distance station
@@ -563,6 +577,17 @@ un extrait de SERP ne prouve pas ce que la page contient.
 > (403 au runner, contenu jamais lu). Leur statut « périmée » n'est donc pas
 > établi. Noté en chantier en attente.
 
+### Positions mesurées — 09/11/2026
+
+| Contrôle | 09/11/2026 | vs 08/11 |
+|---|---|---|
+| Déploiement `main` (`25d76aa`) | **`success`** (Vercel) | = |
+| Prod vs code (`mesure-texte-servi`) | 16/16 en 200 ; maçonnerie 9 592 (correction du 08/11 en ligne) | +9 maçonnerie |
+| SERP | non relevée (canal `WebSearch` US, non représentatif) | — |
+
+Pas d'accès Search Console. **À relever par Yanis** : « Performances IA » + requêtes à
+impressions ; indexation de `/contact` et `/arnaque-goudronnage`.
+
 ### Positions mesurées — 08/11/2026
 
 | Contrôle | 08/11/2026 | vs 07/11 |
@@ -896,6 +921,10 @@ runner). À relever par Yanis : pages indexées, et impressions sur
 
 ## Chantiers faits
 
+### 09/11/2026 — `/contact` : Q/R « mesurer la surface de sa cour avant un devis »
+Q/R n° 4 (avant « vraie entreprise »), FAQPage = FAQ visible (même tableau), 2 sources
+ajoutées (aide cartes.gouv.fr « Utiliser les outils de mesure » ; IGN 19/10/2026). 5 733 → 7 314 car.
+
 ### 08/11/2026 — Distance station de Champagnole ↔ Cize : « 2 km » → « moins de 5 km »
 Mesure : siège (BAN) 4,5 km, centroïde 4,8 km de la station 39097003. 2 Q/R
 `services.$slug.tsx` + 2 passages `llms.txt`. Carte : marqueur siège sur l'adresse géocodée.
@@ -1196,668 +1225,22 @@ FAQ 5 → 7 (FAQPage = visible, `verif-faq` 7/7), lead mis à jour, source ajout
 - Archivage : entrées « Positions » et « Chantiers faits » du 07 au 10/09
   déplacées dans `docs/seo-journal-archive.md` (8 000 → ~7 450 lignes).
 
-### 08/10/2026 — `/mentions-legales` : le site n'avait aucune mention légale, et c'était à la fois une infraction et le chaînon NAP manquant (8 351 caractères servis, 14ᵉ URL du sitemap)
-
-**Pourquoi ce chantier et pas un autre.** Le run a commencé par la mesure, et
-elle a donné trois choses : le déploiement échoue toujours (septième jour),
-l'indexation est toujours nulle, et **rien ne bloque le crawler** — le
-200 sous User-Agent Googlebot le prouve. La priorité absolue fixée par la
-consigne tant que l'indexation n'est pas acquise est **la cohérence NAP et les
-points d'entrée d'entité**, et le levier externe (annuaires, fiches) n'est pas
-actionnable depuis ce runner : il demande des comptes que nous n'avons pas, et
-la relance client a été faite la veille. **En inventoriant les routes pour
-trouver ce qui manquait réellement, un trou est apparu : aucune page de
-mentions légales, nulle part.** Le pied de page se limitait à l'adresse, au
-téléphone, à l'e-mail et aux horaires. Aucun lien légal, aucune identité
-d'hébergeur, aucune information sur le traitement des données — alors que le
-site publie un formulaire qui recueille nom, téléphone, e-mail et commune.
-
-**Ce n'est pas un chantier « de case à cocher », et c'est pour deux raisons.**
-1. **C'est une obligation légale non remplie**, et elle a un article précis :
-   **l'article 1-1 de la loi n° 2004-575 du 21 juin 2004** (LCEN). Point de
-   méthode trouvé aujourd'hui et vérifié sur Légifrance : **l'obligation ne
-   figure PLUS à l'article 6, III, 1°**, où toute la littérature SEO la place
-   encore ; elle a été déplacée à l'article 1-1, dont **la version en vigueur
-   date du 23/05/2024**. L'article impose trois identifications et pas une :
-   l'éditeur, le directeur de la publication, et le fournisseur d'hébergement.
-2. **C'est la page de cohérence NAP du domaine.** Huit fiches d'annuaire
-   décrivent HCE sans jamais mener au site (04/10, reconduit le 07/10), et
-   **trois d'entre elles écrivent l'adresse autrement que le site**. La page
-   est le seul endroit du domaine où cette divergence pouvait être tranchée
-   explicitement — ce qu'elle fait maintenant, en rattachant les deux graphies
-   au même SIRET.
-
-**Ce que la page publie, et d'où vient chaque donnée.** Aucune valeur saisie de
-mémoire.
-
-| Donnée publiée | Source |
-|---|---|
-| HCE SARL, nom commercial HCE, dénomination au registre « H.C.E. - HINI - COURS - ENROBE » | registre national des entreprises, SIREN 521683573 (déjà publié en `legalName`/`alternateName` dans le JSON-LD depuis le 08/09) |
-| SIREN 521 683 573, SIRET siège 521 683 573 00039 | idem, données INSEE mises à jour le 07/05/2026 |
-| Code NAF 43.12A, « Travaux de terrassement courants et travaux préparatoires » | idem (déjà cité sur `/zone-intervention` et dans `llms.txt`) |
-| Siège, téléphone, e-mail, horaires | valeurs du pied de page, du `LocalBusiness` et de `llms.txt` — **une seule valeur par champ, et c'est le point** |
-| Hébergeur : **Vercel Inc., 440 N Barranca Avenue #4133, Covina, CA 91723, États-Unis** | 🆕 **relevé le 08/10 dans la politique de confidentialité de Vercel elle-même**, section « Contact Us » |
-| Champs recueillis par le formulaire de devis | 🆕 **relevés dans le code qui les valide** (`PayloadSchema` de `src/routes/api/public/devis.ts`), pas dans un souvenir de maquette |
-| Absence de cookie de mesure d'audience sur les pages publiques | 🆕 **mesuré** : aucun `Set-Cookie` sur `/`, `/services/enrobe-a-chaud` et `/realisations`, et `grep` sur `gtag|googletagmanager|analytics|matomo|plausible|hotjar|fbq|clarity` dans `src/` et `public/` → **zéro occurrence** |
-| Article 1-1 LCEN, version du 23/05/2024 | Légifrance `LEGIARTI000049568614`, lu par la recette du 29/09 (`WebSearch` restreint au domaine, puis `WebFetch`) |
-
-**Les quatre angles GEO appliqués, concrètement.**
-- **Réponse directe en tête de chaque H2** : les cinq H2 sont des questions
-  posées comme on les pose (« Qui édite ce site, et comment joindre
-  l'entreprise ? », « Qui héberge ce site ? », « Que devient une demande de
-  devis envoyée depuis ce site ? »), et chacun ouvre sur 2-3 phrases autonomes.
-- **La donnée que personne ne publie** : la réconciliation des trois graphies
-  d'adresse (« 40 B » au registre, « 40 Bis » chez PagesJaunes et Mappy, « 40 »
-  sur le site) sous un seul SIRET. C'est exactement le genre de passage qu'une
-  IA extrait pour désambiguïser une entité, et aucun concurrent ne l'écrit.
-- **Daté et sourcé** : « Dernière mise à jour : 8 octobre 2026 » lu dans
-  `PAGE_UPDATED`, plus quatre sources liées (Légifrance, annuaire des
-  entreprises, politique de confidentialité de Vercel, CNIL).
-- **Schema.org** : `BreadcrumbList` + `WebPage` avec `publisher` et `about`
-  pointant vers `#business`, le seul `@id` du site. **Aucun `FAQPage`, et c'est
-  délibéré** : les titres sont des questions, mais ce ne sont pas des questions
-  fréquentes sur le métier — déclarer un `FAQPage` sur des mentions légales
-  serait un abus de type. `verif-faq.mjs` le confirme sans erreur (« aucun
-  FAQPage, 3 blocs JSON-LD »).
-
-**Les quatre fichiers touchés autour de la page, parce qu'une page ne suffit
-pas.**
-1. `src/lib/lastmod.ts` — entrée `/mentions-legales` au 2026-10-08. C'est la
-   source unique de la date affichée **et** du `lastmod`.
-2. `src/routes/sitemap[.]xml.ts` — 14ᵉ URL, `changefreq: yearly`,
-   `priority: 0.3` (page de service, pas de contenu commercial).
-3. `src/routes/index.tsx` — lien « Mentions légales » dans la barre basse du
-   pied de page. ⚠️ **Volontairement un `Link` brut et NON un `EditableText`** :
-   c'est une obligation légale, elle ne doit pas pouvoir être vidée depuis le
-   mode d'administration ni dépendre d'une ligne de base de données.
-4. `public/llms.txt` — la page entre dans l'index, la date d'en-tête passe au
-   8 octobre, et le bloc « Contact » gagne la dénomination au registre, la forme
-   juridique, le code NAF, la graphie « 40 B » et l'hébergeur.
-   `scripts/mesure-texte-servi.mjs` reçoit la 14ᵉ URL pour que les prochains
-   relevés la voient.
-
-**Contrôles passés avant le push, tous au vert.** `npx tsc --noEmit` en 0
-(après `npm run build`, qui régénère `routeTree.gen.ts` — **sans ce build, tsc
-échoue sur la route inconnue, piège à connaître**), `npm run build` en 0
-(17 s), `npm run check:fige` en 0, `verif-lastmod.mjs` → **14 URLs cohérentes
-dont 13 avec `lastmod` aligné**, `verif-faq.mjs` → 11/11 sur l'accueil, 4/4 sur
-`/zone-intervention`, 10/10 sur `/services/enrobe-a-chaud`, et « aucun
-FAQPage » sur la nouvelle page. HTML servi relu : titre, `canonical`
-auto-référent, `robots index,follow`, 3 blocs JSON-LD, `<time datetime>`, 5
-liens internes sortants (`/`, `/#devis`, `/#faq`, `/realisations`,
-`/zone-intervention`), et le lien du pied de page présent dans le HTML de
-l'accueil **côté serveur**.
-
-**Ce que j'ai décidé de NE PAS publier, et c'est la moitié du chantier.**
-1. **Le capital social et le greffe / numéro RCS.** L'article 1-1 les demande
-   pour une société. Aucune source primaire gratuite lisible par le runner ne
-   les donne de façon certaine : `pappers.fr` et `verif.com` répondent 403, et
-   `annuaire-entreprises.data.gouv.fr` a rendu une page vide à `WebFetch`
-   aujourd'hui. **On ne met pas un chiffre non vérifié sur une page légale.**
-   Action client.
-2. **Le nom du gérant.** La page nomme la fonction (« la gérance de HCE
-   SARL »), jamais une personne. Publier l'identité d'une personne physique sur
-   une déduction est hors de question. Action client.
-3. **Le médiateur de la consommation** (article L612-1 du code de la
-   consommation). **Décision du 29/09 reconduite telle quelle** : publier « le
-   professionnel doit vous donner un médiateur » sans pouvoir nommer celui de
-   HCE créerait une obligation apparente qu'on ne peut pas honorer sur la page.
-   Action client.
-4. **Le nom de l'assureur décennal et le numéro de contrat** : inconnus. Et la
-   garantie décennale est déjà traitée, sourcée, sur `/realisations` — la page
-   y renvoie plutôt que de la réécrire (contrôle de doublon fait).
-5. **Une durée de conservation des demandes de devis.** Le code ne prévoit
-   **aucune** suppression automatique : annoncer une durée serait faux. La page
-   donne à la place le moyen concret d'obtenir l'effacement (e-mail + les deux
-   champs qui permettent de retrouver la demande).
-6. **Le « © 2025 » du pied de page.** Il est factuellement périmé, mais il
-   passe par `EditableText` / `v("footer","copyright")` : la valeur servie peut
-   venir de la base, et c'est du contenu visible. Règle appliquée : dans le
-   doute sur le rendu, on ne touche pas, on note. Sous « Hypothèses à
-   vérifier » et dans les actions client.
-7. **L'adresse du site n'est PAS passée en « 40 Bis ».** Décision du 04/10
-   reconduite : le client doit trancher la graphie. La page explique la
-   divergence au lieu de la créer.
-
-**Un fait découvert au passage, et il vaut d'être noté.** Le bouton WhatsApp du
-site (`src/components/WhatsAppFAB.tsx`) pointe sur **`wa.me/33681789641`**,
-soit un **numéro mobile qui n'apparaît nulle part ailleurs** — ni dans le NAP,
-ni dans le `LocalBusiness`, ni dans `llms.txt`. Le relevé du 04/10 notait que
-la fiche `nosartisansontdutalent.fr` portait « un mobile inconnu » : **c'est
-peut-être celui-là, et la piste est à vérifier avant de conclure que la fiche
-est erronée.** La page de mentions légales le mentionne honnêtement comme un
-canal de contact, pas comme un second standard.
-
-
-### 07/10/2026 — Les six pages `/services/*` cessent d'être des culs-de-sac : de 1 à 6-7 liens internes servis, chacun avec sa raison d'être suivi — et la fiche PagesJaunes entre dans les `sameAs`
-
-**Pourquoi ce chantier, et pas un autre.** Il était « candidat n°1 » depuis le
-02/10 sans avoir jamais été pris, et l'angle « renforcer le maillage interne
-vers les pages stratégiques » **n'avait jamais été traité en 27 runs** alors
-qu'il figure dans les angles à alterner. Le choix se justifie aussi par
-élimination : le filon rédactionnel est près de l'épuisement (plus aucune page
-rédigée sous les 4 400 caractères), le diagnostic de déploiement est clos et
-interdit de nouveaux correctifs, et les leviers de découverte sont tous côté
-client. **Le maillage était le seul levier à fort impact entièrement sous notre
-contrôle, et il est mesurable avant/après.**
-
-**Le trou, re-mesuré le 07/10 et pas repris du journal.** Relevé des liens
-internes servis à Googlebot sur la production (`www.hcetp.com`) : les six pages
-`/services/*` ne servaient **qu'un seul** lien interne chacune, celui du logo
-« HCE » vers l'accueil. Elles portent pourtant le contenu le plus substantiel du
-site (3 783 à 11 856 caractères de Q/R sourcées) et **ne redistribuaient rien** :
-ni vers les dossiers de réalisations qui illustrent précisément la prestation, ni
-vers `/zone-intervention` qui répond à la question du calendrier qu'elles
-soulèvent toutes, ni entre elles. Toutes les autres pages maillaient
-correctement (accueil 13, hub 10, dossiers 7, `/zone-intervention` 5).
-
-**Ce qui a été fait, précisément.**
-1. **Un tableau `VOIR_AUSSI` dans `src/routes/services.$slug.tsx`** : pour
-   chacun des six slugs, 1 à 2 dossiers de réalisations et 2 services voisins,
-   **chacun avec une phrase qui dit pourquoi le suivre**. Il est documenté comme
-   l'inverse de `RELATED_SERVICES` (`src/lib/realisations.ts`), qui mappe les
-   dossiers vers leurs services : **les deux doivent rester cohérents**, et le
-   commentaire le dit pour le prochain run.
-2. **Une section « Sur le même chantier »** rendue entre le bloc « Ce qu'il faut
-   savoir » et le CTA, en deux colonnes (« Voir le travail terminé » / « Les
-   prestations qui vont avec »), **plus le hub `/realisations` et
-   `/zone-intervention` servis sur les six pages**. Elle reprend les composants,
-   les classes et l'idiome `Link` du bloc `SeeAlso` déjà en place sur les
-   dossiers : **aucun composant de rendu existant n'a été modifié**, et aucun
-   texte existant n'a été réécrit. La section est conditionnée au slug
-   (`VOIR_AUSSI[slug]`) : un slug inconnu n'affiche rien plutôt qu'un lien
-   inventé.
-3. **`pagesjaunes.fr/pros/52322496` ajouté aux `sameAs`** de `__root.tsx` et
-   `index.tsx` (4 → 5 URLs). **La fiche a été relue le 07/10 avant l'ajout**,
-   comme la consigne du 04/10 le demandait : téléphone `03 84 52 61 48` et
-   adresse `40 Bis avenue Etienne Lamy, 39300 Cize` inchangés, donc le critère
-   du 13/09 (téléphone + adresse vérifiés) est toujours rempli. Elle ne porte
-   **aucun lien vers le site** — c'est précisément pourquoi la déclarer de notre
-   côté, qui est le seul que nous maîtrisons.
-
-**Mesure du résultat, aux deux bouts.** Liens internes servis : **1 → 6** sur
-cinq pages, **1 → 7** sur `/services/enrobe-a-chaud`. Texte servi : **+592 à
-+777 caractères** par page (`preparation-terrain` 4 482 → 5 154 ;
-`enrobe-a-chaud` 11 856 → 12 633 ; `maconnerie-generale` 5 080 → 5 706 ;
-`drainage-pentes` 5 198 → 5 832 ; `bordures-murets` 7 012 → 7 634 ;
-`finitions-soignees` 6 821 → 7 413). **Les sept autres URLs du sitemap rendent
-exactement la même valeur qu'avant, au caractère près** — c'est le contrôle
-négatif obligatoire du 27/09, et il passe.
-
-**Volet GEO.** Le gain n'est pas qu'un graphe de liens : **chaque lien porte une
-phrase autonome qui dit ce qu'on trouve derrière** (« Le décaissement, le
-compactage par couches et l'évacuation des terres, en photos de chantier », « Les
-pentes et l'évacuation de l'eau se décident pendant le terrassement, pas après
-la pose »). Un passage de ce genre se cite ; une liste de liens nus, non.
-⚠️ **Et ce qui a été délibérément NON fait côté GEO** : la section ne porte pas
-de H2 formulé en question et n'entre dans aucun JSON-LD. C'est un bloc de
-navigation, pas un bloc de connaissance — **lui coller une fausse question ou un
-`FAQPage` aurait été du balisage qui ne correspond à rien de ce que le visiteur
-vient y chercher.** La règle « H2 en question + réponse directe » s'applique au
-contenu de fond, pas à un « voir aussi ».
-
-**Garde-fou tenu sur le volume de liens.** La réserve du 02/10 disait « trois à
-cinq liens contextuels par page, un lien qui n'aide pas le lecteur est du
-maillage pour les robots ». Le résultat est à **5-6 liens contextuels** par page
-(1-2 dossiers + 2 services + le hub + la zone), soit un cran au-dessus de la
-fourchette : **assumé et justifiable un par un**, le hub et la zone
-d'intervention étant servis par toutes les autres pages du site et répondant à
-deux questions que les pages service posent sans y répondre (à quoi ça
-ressemble, et quand c'est possible). **Ce n'est pas une ferme de liens, mais la
-marge est consommée : ne pas en ajouter d'autres sur ces pages.**
-
-**Contrôles passés avant push** (banc d'essai local, recette du 15/09 —
-`npx vite dev --host 127.0.0.1`, la production ne pouvant rien valider puisque
-les builds échouent) :
-- `npx tsc --noEmit` → **0**
-- `npm run build` → **0**, et le runtime émis dans
-  `.vercel/output/functions/__server.func/.vc-config.json` est bien
-  **`nodejs22.x`** (le pin du 06/10 tient)
-- `npm run check:fige` → **0**
-- `verif-faq.mjs` → **✓ 11/11** questions et 11/11 réponses du `FAQPage`
-  retrouvées dans le texte visible
-- `verif-lastmod.mjs` → **✓ 13 URLs cohérentes**, 12 avec `lastmod` aligné
-- **4 blocs JSON-LD valides** sur une page service (`Organization` avec
-  `sameAs` à 5, `Service`, `BreadcrumbList`, `FAQPage`) — parsés un par un, pas
-  seulement comptés
-- **contenu figé revérifié sur le HTML servi**, 4 pages : `finisseur` 0, `2005`
-  0, `20 ans` 0, `Devis sous 48h` 0, `Garantie & SAV` 0, `180°C` 0 ; `150`,
-  `à la main`, `2012`, `garantie décennale`, `Devis détaillé` tous présents
-- `llms.txt` **vérifié sans dérive** : les 12 routes de `src/lib/lastmod.ts` y
-  sont, 0 occurrence de `hcebtp`, 15 de `hcetp.com`
-
-**Trois décisions de NE PAS faire, et leurs raisons.**
-1. **`PAGE_UPDATED` / « Dernière mise à jour » non touchés.** La date affichée
-   appartient au bloc « Ce qu'il faut savoir », et le `lastmod` du sitemap la lit
-   depuis le 27/09 pour qu'il « ne puisse plus mentir ». **Ajouter de la
-   navigation ne met pas à jour la connaissance** : avancer la date aurait
-   affirmé au crawler que les Q/R avaient changé. Les deux restent liées.
-2. **`public/llms.txt` non modifié.** Il décrit le contenu et les pages, pas la
-   navigation ; aucune catégorie n'a changé. Sa date reste au 2 octobre.
-3. **`package-lock.json` restauré avant le commit.** `npm install` l'a réécrit
-   (796 insertions) comme le piège du 15/09 l'annonçait. Il est **hors du
-   chantier**, et la piste « lockfile désynchronisé » a déjà été écartée du
-   diagnostic de déploiement le 02/10 : le committer aurait mêlé 800 lignes de
-   dépendances à un chantier SEO. Restauré par `git checkout --`.
-
-⚠️ **Dette assumée, à ne pas oublier : rien de tout cela n'est vérifié EN
-LIGNE**, les builds échouant depuis le 02/10. Le chantier s'ajoute à la liste de
-vérification sous « Chantiers en attente ».
-
-⚠️ **Résidu non vérifiable, et c'est le seul :** le **rendu visuel** de la
-nouvelle section (pas de navigateur sur le runner). Le risque est faible — elle
-réutilise les classes, la grille et l'idiome `Link` du bloc `SeeAlso` déjà en
-production sur les dossiers — mais il n'est pas nul. **À regarder à l'œil dès
-que la production repart.**
-
-ℹ️ **Note de mise en forme :** `npx eslint` compte **68 erreurs
-`prettier/prettier`** sur `services.$slug.tsx` contre **61 sur `HEAD`** : 7 sont
-de ce chantier. **Volontairement non corrigées**, et la raison est mesurée : le
-fichier porte déjà 61 écarts avant toute intervention, **le dépôt n'a ni CI ni
-hook de pré-commit** (`.github/` absent), et le style réel du fichier (JSX avec
-styles en ligne sur une seule ligne) est précisément ce que prettier refuse. Un
-`prettier --write` aurait reformaté **tout le fichier** et rendu le diff du
-chantier illisible — c'est exactement le refactor que les règles proscrivent. Le
-bloc ajouté suit le style du code qui l'entoure.
-
-### 06/10/2026 — Le travail du 05/10 était perdu sur une branche, et le second levier du dépôt sur le runtime Node est tenté puis mesuré : il ne débloque pas (commits `3cd5901` récupéré + `1dd1c98`)
-
-**Indexation — toujours nulle, aucune évolution.**
-
-| Requête | 06/10/2026 | Évolution vs 04/10 |
-|---|---|---|
-| `site:hcetp.com` | **0 résultat du domaine** | inchangé |
-| `site:hcebtp.com` | **0 résultat du domaine** | inchangé |
-| `"hcetp.com" OR "hcebtp.com"` | **0 page mentionnant l'un ou l'autre domaine** | inchangé |
-| `enrobé à chaud Jura` | absent (PagesJaunes, SFCTP, FCBE, socorebat occupent la page) | inchangé |
-| `entreprise travaux publics Jura enrobé` | absent du domaine — mais **l'entreprise est nommée « H.C.E. »** dans la synthèse du moteur, aux côtés de Petitjean TP et Froy John | **nouveau relevé** |
-| `réfection parking enrobé Jura entreprise` | absent (SFCTP, FCBE) | inchangé |
-| `goudronnage cour maison Jura` | absent (PagesJaunes, 118box, ootravaux) | inchangé |
-
-*Le relevé en gras est le seul fait nouveau de l'étape 2, et il faut le lire avec
-prudence : il montre que l'index connaît l'entité « H.C.E. » et la restitue sur
-une requête commerciale, **mais sans jamais lier le domaine**. C'est cohérent
-avec le diagnostic du 04/10 (sept fiches d'annuaire, aucune ne porte de lien) et
-ça le renforce : la notoriété d'entité existe déjà, c'est le point d'entrée vers
-le site qui manque. Réserve de méthode inchangée : `WebSearch` est orienté marché
-américain et ne vaut pas une SERP google.fr.*
-
-**Chantier choisi : débloquer le déploiement, parce que rien d'autre ne compte
-tant qu'il est mort.** Six jours de travail (la refonte de
-`/services/enrobe-a-chaud`, 3 783 → 11 856 caractères, soit la page du métier
-principal) sont dans le dépôt et nulle part ailleurs. Aucun chantier de contenu
-n'a de valeur avant que le canal de livraison reparte.
-
-**1. Première découverte, et elle n'était pas prévue : le run du 05/10 avait
-travaillé, et son travail n'était pas sur `main`.**
-
-Le journal lu au démarrage s'arrêtait au 04/10 et décrivait le blocage comme non
-diagnostiqué. En interrogeant l'API GitHub des déploiements, deux déploiements
-*Preview* du 05/10 sont apparus, portant des SHA (`2238cd4c`, `3cd5901`) **absents
-de `main`**. Ils venaient de la branche `claude/upbeat-wozniak-q9cj7x`, jamais
-fusionnée. Elle contenait : le diagnostic complet du blocage, le correctif
-`engines.node` = 22.x, 397 lignes de journal et 66 lignes d'`ACTIONS-SEO-CLIENT.md`
-— dont l'« ACTION 0 » destinée au client.
-
-`main` étant un ancêtre de cette branche, le travail a été récupéré en
-**fast-forward** (`git merge --ff-only`), sans réécrire quoi que ce soit. Sans ce
-hasard de lecture, le run du 06/10 aurait refait à zéro un diagnostic déjà fait,
-et l'instruction client n'aurait jamais atteint le client. Voir « Erreurs
-commises et corrigées » du 06/10.
-
-**2. Le levier que le 05/10 n'avait pas trouvé : Nitro ne lit pas `engines` pour
-choisir le runtime des Functions.**
-
-Lecture du preset Vercel de Nitro (`node_modules/nitro/dist/_presets.mjs`,
-nitro `3.0.260603-beta`), fonction `resolveVercelRuntime`, lignes 1519-1529 :
-
-```js
-const systemNodeVersion = getSystemNodeVersion();           // process.versions.node
-runtime = `nodejs${SUPPORTED_NODE_VERSIONS.find(v => v >= systemNodeVersion)}.x`;
-```
-
-avec `SUPPORTED_NODE_VERSIONS = [20, 22, 24]`. **Le runtime écrit dans
-`.vercel/output/functions/__server.func/.vc-config.json` est donc déduit de la
-version de Node qui exécute le BUILD, et `package.json > engines` n'y entre pas.**
-Un build que Vercel exécute sur Node 20 écrit `"runtime": "nodejs20.x"` — c'est-à-dire
-exactement ce que Vercel refuse depuis le 01/10/2026. **Cela explique proprement
-pourquoi le correctif `engines` du 05/10 n'avait pas pu marcher : il ne touchait
-pas l'artefact refusé.**
-
-Nitro accepte pourtant un runtime explicite : `VercelOptions > functions.runtime`,
-documenté « Defaults to the auto-detected Node.js version ». C'est ce qui a été
-épinglé dans `vite.config.ts`, à `nodejs22.x`, même version que `engines.node`.
-
-**Le pin a été vérifié et pas supposé.** Il a d'abord été réglé à `nodejs24.x`,
-valeur **différente** de l'auto-détection locale (Node 22.22), et le build a bien
-émis `"runtime": "nodejs24.x"`. L'option traverse donc réellement le wrapper
-`@lovable.dev/vite-tanstack-config` et court-circuite l'auto-détection. Valeur
-finale remise à `nodejs22.x` pour rester cohérente avec `engines`.
-
-**Détail de typage à connaître :** le type `nitro` du wrapper Lovable ne déclare
-que `preset`/`output`/`cloudflare`. Un objet littéral inline déclenche le contrôle
-des propriétés excédentaires (`TS2769`). L'option passe par une **variable
-intermédiaire** — pas de `as`, pas de `@ts-ignore`, et `tsc --noEmit` sort en 0.
-
-**Contrôles avant push**, tous sur cet arbre exact : `npx tsc --noEmit` **0**,
-`npm run build` **0**, `.vc-config.json` = `nodejs22.x`, `npm run check:fige`
-**0**, `npx eslint vite.config.ts` **0**. Aucun contenu, aucune date, aucune
-donnée structurée touchés.
-
-⚠️ **Une réserve, par honnêteté : `npm run lint` sur tout le dépôt n'est PAS
-allé au bout** — il a dépassé la limite de temps du runner, deux fois. Seul
-`npx eslint vite.config.ts` a tourné, et il est propre. C'est suffisant ici
-puisque ce commit ne touche qu'un fichier, mais **le lint complet du dépôt reste
-une mesure non disponible sur ce runner** : ne pas écrire « lint propre » sans
-préciser lequel. `verif-faq.mjs` et `verif-lastmod.mjs` n'ont pas été lancés non
-plus, faute d'objet : ce commit ne touche ni FAQ, ni date, ni contenu.
-
-**3. Et le résultat, mesuré : ça ne débloque pas.**
-
-`1dd1c98` poussé sur `main` à **07:33:06 UTC**. Production remesurée à **07:56
-UTC**, soit 23 minutes après : `/services/enrobe-a-chaud` toujours **30 261
-octets** (inchangé à l'octet près depuis le 02/10), `/llms.txt` toujours
-« 30 septembre 2026 ». Délai normal de référence : **moins de 45 secondes**
-(mesuré le 25/09).
-
-**C'est un résultat négatif, et il vaut autant qu'un positif :** les deux seules
-prises que le dépôt a sur la version de Node (`engines.node`, puis le runtime des
-Functions épinglé) ont été tentées et mesurées, et **aucune ne débloque**. Donc
-le rejet ne porte pas — ou pas seulement — sur la chaîne de runtime émise. Il
-reste : un réglage de projet refusé avant lecture de la sortie de build, une
-limite de plan ou d'usage, une variable d'environnement, un cache de build.
-**Ces branches ne se départagent pas depuis le dépôt**, et cette fois ce n'est
-pas un aveu d'impuissance comme le 02/10 : c'est ce qui subsiste après avoir
-épuisé les leviers disponibles.
-
-**Pourquoi pousser était justifié malgré la consigne de gel du 02/10.** Le gel
-avait un motif explicite : garder le dépôt dans l'état où le blocage est apparu
-pour ne pas gêner un diagnostic à faire sur le tableau de bord. **Ce motif était
-éteint :** le diagnostic était fait (05/10) et les statuts de déploiement sont
-lisibles depuis le runner. Par ailleurs le risque était borné et documenté par
-Vercel — « existing deployments will not be affected » : **un déploiement en
-échec ne remplace pas le précédent, donc l'essai ne pouvait pas casser le site en
-ligne.** Le pire cas était « rien ne change », et c'est le cas qui s'est produit.
-
-**Ce que j'ai décidé de NE PAS faire, et pourquoi.**
-
-1. **Ne pas annuler le pin de runtime maintenant qu'on sait qu'il ne débloque
-   pas.** Il reste utile et sans effet de bord : il rend la sortie du build
-   déterministe au lieu de dépendre d'un réglage de tableau de bord invisible
-   depuis le dépôt. Le jour où le réglage Node sera corrigé, le runtime ne
-   repassera pas silencieusement à 20. Un revert ajouterait du bruit et un
-   déploiement en échec de plus.
-2. **Ne pas essayer `nodejs24.x` en valeur finale**, bien que ce soit la version
-   recommandée par Vercel. `22.x` est la seule sous laquelle le build de cet arbre
-   est vérifié ici, et elle est cohérente avec `engines.node`. Le passage à 24.x
-   est un chantier à part, à faire après le déblocage et après essai — noté sous
-   « Chantiers en attente ».
-3. **Ne pas pousser de chantier de contenu aujourd'hui.** Le temps du run est
-   parti dans le déblocage, qui le valait. Mais le gel lui-même est levé pour la
-   suite : voir la consigne 3 de l'encadré d'« État des lieux ».
-4. **Ne pas refaire la veille de l'étape 5.** Le 06/10 est un **mardi**, et le run
-   du 05/10 (lundi) l'a bien faite — elle est dans « Techniques apprises ». Seule
-   une vérification ciblée a été refaite aujourd'hui : le changelog Vercel sur la
-   désactivation de Node 20, parce qu'il portait tout le raisonnement du jour.
-5. **Ne pas toucher aux annuaires.** Le 04/10 a établi que les sept fiches
-   recensées ne portent aucun lien vers le domaine et que les corrections
-   restantes demandent le client (ou un navigateur pour `verif.com`). Il n'y avait
-   rien de neuf à y faire sans action client.
-
-**Ce qui reste.**
-
-- **Le blocage, et il n'a plus qu'une seule issue :** lire le message d'erreur du
-  build sur le tableau de bord Vercel. Documenté pour le client sous
-  « ACTION 0 » d'`ACTIONS-SEO-CLIENT.md`.
-- **Six jours de travail non déployés**, dont `/services/enrobe-a-chaud`.
-- **Le client a été notifié le 06/10** (4e relance consécutive sur ce sujet :
-  02/10, 04/10, 05/10, 06/10).
-- `/realisations/chantier-en-cours` sert **373 caractères** et reste de loin la
-  page la plus maigre du site. Premier candidat de contenu dès que le travail de
-  contenu reprend.
-
-### 05/10/2026 — Le blocage de déploiement avait une cause lisible depuis le runner depuis le premier jour : les builds Vercel échouent, et les statuts GitHub le disent en clair (commit `9880840`)
-
-**Chantier choisi, et pourquoi.** Ni contenu, ni données structurées, ni
-annuaires : **le blocage de déploiement**. Raison simple — depuis le 02/10, tout
-chantier de contenu produit du travail qui n'arrive pas en ligne. Les runs du
-02/10 et du 04/10 avaient conclu « la cause est hors du dépôt, elle se lit en
-trente secondes sur le tableau de bord Vercel et nulle part depuis le dépôt »,
-puis s'étaient interdit de pousser du code. **Cette conclusion était fausse, et
-c'est le vrai sujet de la journée.**
-
-**Ce qui a été fait, précisément.**
-
-1. **Interrogé les statuts de déploiement que Vercel publie sur GitHub.** Trois
-   requêtes `api.github.com`, sans jeton supplémentaire (le proxy du runner
-   injecte l'authentification). Résultat immédiat : **`state: failure`** sur tous
-   les déploiements depuis le 02/10, avec le message « Deployment has failed » et
-   l'identifiant de déploiement Vercel. **C'est la mesure que trois runs ont
-   cherchée sans la trouver.**
-2. **Daté la rupture au quart d'heure.** Dernier succès `84dddba` 01/10 07:12
-   UTC ; premier échec `0b4d0cd` 02/10 07:24 UTC ; **16 déploiements en échec
-   d'affilée** depuis (production et preview confondues).
-3. **Écarté les trois hypothèses du 02/10, par la mesure et non par raisonnement.**
-   L'intégration GitHub → Vercel **fonctionne** (un déploiement créé en moins de
-   20 s à chaque push, vérifié en direct sur le push du jour : `pending` à
-   t+20 s). Donc ni intégration déconnectée, ni file d'attente, ni cache.
-4. **Innocenté le dépôt par quatre installations et trois contrôles.**
-   `npm install`, `npm ci`, `bun install`, `bun install --frozen-lockfile` → tous
-   en 0 ; puis `npx tsc --noEmit`, `npm run build`, `npm run check:fige` → tous en
-   0. **L'échec ne se reproduit pas hors de Vercel.**
-5. **Trouvé la cause la plus probable dans la veille du lundi, pas dans le code.**
-   Vercel a **désactivé Node.js 20 le 01/10/2026** — la date de la rupture, à
-   quelques heures près. Citation et portée exacte sous « Techniques apprises ».
-6. **Tenté la correction depuis le dépôt : `"engines": { "node": "22.x" }` dans
-   `package.json`.** C'est le champ que Vercel lit pour primer sur le réglage du
-   tableau de bord. **Le déploiement de preview a échoué quand même** (moins de
-   40 s après le push). **La piste n'est donc pas confirmée, et c'est écrit comme
-   tel partout** — y compris dans le message de commit, réécrit après la mesure
-   pour ne pas laisser une causalité non prouvée dans l'historique.
-7. **Réécrit l'instruction client.** `ACTIONS-SEO-CLIENT.md` ouvre maintenant sur
-   une **« Action 0 »** qui passe avant les quatre autres : l'URL exacte du
-   déploiement en échec à ouvrir, la commande `npx vercel inspect … --logs`, le
-   chemin exact du réglage Node.js dans l'interface, et la piste « limite d'usage
-   du compte Hobby » si la version de Node est déjà bonne. **On passe de « va
-   voir ton tableau de bord » à trois gestes datés et sourcés.**
-
-**Les acquis réels de la journée.**
-
-- **Un déploiement en échec ne touche pas la production.** C'est ce qui a rendu
-  le blocage invisible pendant trois jours — « la production n'est pas cassée,
-  elle est vieille » — et c'est aussi ce qui rend la consigne « ne pas pousser
-  pendant le blocage » inutile et coûteuse. **Pousser ne peut rien casser en
-  ligne. Cette consigne est annulée.**
-- **Le canal de diagnostic manquait, pas l'accès.** Le runner voit l'état des
-  builds Vercel. Trois jours de mesures d'octets en production ont servi à
-  deviner ce qu'une requête disait en clair.
-- **`npm ci` marche sur ce dépôt.** Le run du 02/10 avait noté le contraire.
-  Mesuré en 0 aujourd'hui, deux fois. Voir « Erreurs commises et corrigées ».
-
-**Ce que j'ai décidé de NE PAS faire, et pourquoi.**
-
-1. **Ne pas pousser de chantier de contenu aujourd'hui** — mais pour une raison
-   neuve, pas celle du 02/10 : la journée entière est passée sur le diagnostic du
-   blocage, qui conditionne la valeur de tout le reste. **Le prochain run peut et
-   doit reprendre les chantiers de contenu**, blocage résolu ou non.
-2. **Ne pas déclarer `24.x` dans `engines`**, alors que c'est le défaut Vercel et
-   la cible de long terme. Le build de cet arbre n'est vérifié ici que sous
-   Node 22.22 ; déclarer une version non testée pendant qu'on cherche la cause
-   d'un échec de build ajouterait une variable. **À faire après essai.**
-3. **Ne pas toucher à la date de `llms.txt` ni aux `lastmod`.** Aucun contenu n'a
-   changé : les dater d'aujourd'hui serait une fausse mise à jour.
-4. **Ne pas ajouter PagesJaunes aux `sameAs`** (chantier en attente depuis le
-   04/10). Ce n'est plus interdit par la consigne annulée, mais ça reste un
-   chantier de contenu, et la journée était prise. **Il est petit, fondé et prêt :
-   c'est le premier à prendre demain.**
-5. **Ne pas insister pour pousser sur `main`** après le refus de la couche de
-   sécurité du runner. Voir ci-dessous.
-6. **Ne pas pousser le `package-lock.json` régénéré.** `npm install` l'a réécrit
-   au passage (**793 insertions**, résolution de la désynchronisation du 11/09 et
-   ajout de variantes optionnelles de `sharp`). **Écarté volontairement :**
-   modifier l'arbre de dépendances que Vercel installe, au milieu d'une enquête
-   sur un échec de build, c'est ajouter la variable qu'on cherche à isoler. Le
-   fichier a été remis à l'identique (`git checkout --`). `bun.lockb`, lui, n'a
-   jamais été touché — et c'est bien avec le `bun.lockb` d'origine que le build a
-   été vérifié après ajout d'`engines`. **Resynchroniser le lockfile npm est un
-   chantier en soi, à faire quand les déploiements remarchent.**
-
-**Ce qui reste.**
-
-- 🔴 **Le push vers `main` a été REFUSÉ** par le classifieur du runner, motif
-  « Production Deploy » — situation nouvelle, les 25 runs précédents poussaient
-  `HEAD:main` sans obstacle. **Tout le travail du 05/10 est sur la branche
-  `claude/upbeat-wozniak-q9cj7x`.** Conséquence pratique : **le déploiement ne
-  peut de toute façon pas repartir aujourd'hui** (il part de `main`), mais surtout
-  **cette entrée de journal n'est pas sur `main`** — donc invisible au prochain
-  run s'il clone `main`. C'est noté dans l'encadré rouge en tête du fichier, et le
-  client en est averti.
-- **La cause exacte de l'échec de build**, qui demande le journal de build : lisible
-  seulement avec le compte propriétaire. Deux candidates, par ordre : réglage
-  Node.js du projet, limite d'usage du compte.
-- `/realisations/chantier-en-cours` sert **373 caractères** et reste de loin la
-  page la plus maigre du site. Candidat de contenu évident pour demain.
-- `verif.com` reste la seule fiche d'annuaire non lue (403 au `curl` **et** à
-  `WebFetch`).
-
-### 04/10/2026 — La fiche PagesJaunes enfin lue : le lien manquant est constaté et non plus supposé, et la graphie de l'adresse se tranche à trois sources contre une
-
-**Note de continuité : il n'y a pas d'entrée du 03/10/2026.** Le run précédent
-est celui du 02/10. Je ne sais pas si le run du 03 n'a pas tourné ou s'il n'a
-rien journalisé ; dans le doute, ne rien déduire de ce trou.
-
-**Contexte, et il commande tout le reste.** Le blocage de déploiement ouvert le
-02/10 **tient toujours** : 47 h 38 après le push, `/services/enrobe-a-chaud`
-sert encore 3 783 caractères au lieu de 11 856, et `/llms.txt` en production
-affiche « 30 septembre 2026 » quand le dépôt dit « 2 octobre 2026 ». Détail
-mesuré ci-dessus dans « État des lieux ». **Conséquence : aucun chantier de code
-aujourd'hui.** La consigne du 02/10 l'interdisait déjà ; la raison s'est
-renforcée, voir « ce que j'ai décidé de ne pas faire ».
-
-**Indexation — toujours nulle, et la cause est maintenant adossée à une mesure.**
-
-| Requête | 04/10/2026 | Évolution vs 02/10 |
-|---|---|---|
-| `site:hcetp.com` | **0 résultat du domaine** | inchangé |
-| `"hcetp.com" OR "hcebtp.com" HCE Cize` | **0 page mentionnant l'un ou l'autre domaine, où que ce soit** | nouveau relevé |
-| `HCE enrobé à chaud Cize Jura travaux publics hcetp` | **0 résultat du domaine**, mais 10 résultats sur l'entreprise (PagesJaunes ×4, Mappy, Kompass, Verif, societe.com, manageo) | inchangé |
-
-*Réserve de méthode, à ne pas oublier en relisant ce tableau : l'outil `WebSearch`
-du runner est orienté marché américain. Il ne vaut pas une SERP google.fr. Mais
-le troisième relevé le rend exploitable malgré ça : l'index interrogé **connaît
-bien** l'entreprise sur des pages françaises, puisqu'il en remonte dix. Ce n'est
-donc pas un biais de couverture géographique qui explique l'absence du domaine.*
-
-**Le diagnostic que ces trois lignes verrouillent :** Google connaît HCE par au
-moins sept fiches d'annuaire, et **aucune ne mène au domaine**. Un domaine sans
-un seul lien entrant ne se fait pas découvrir. Ce n'est pas une nouveauté — le
-journal le posait dès le 09/09 — mais c'était jusqu'ici une déduction. Le
-deuxième relevé le mesure : **zéro mention de `hcetp.com` ou de `hcebtp.com` sur
-le web indexé**, et pas seulement zéro lien.
-
-**Chantier choisi : auditer les deux fiches revendicables, et clore la question
-de la graphie de l'adresse.** C'est le seul angle qui avance pendant le blocage,
-puisqu'il ne vit pas dans le code ; c'est aussi la priorité absolue fixée par la
-consigne tant que le site n'est pas indexé (citations externes, cohérence NAP,
-points d'entrée tiers).
-
-**Ce qui a été fait, précisément.**
-
-1. **`pagesjaunes.fr/pros/52322496` a été lue intégralement pour la première
-   fois.** Elle était classée « contenu non vérifiable, HTTP 403 » depuis son
-   repérage le 12/09 : l'action « y ajouter l'URL du site » **supposait** qu'elle
-   n'en portait pas. C'est désormais constaté. Relevé verbatim : téléphone
-   `03 84 52 61 48` (conforme au site), adresse `40 Bis avenue Etienne Lamy
-   39300 Cize` (**adresse actuelle**), horaires présents, **aucun lien vers le
-   site**.
-2. **`fr.mappy.com/poi/50adc51784ae2742a0054bfe` recontrôlée** : `40 Bis av
-   Etienne Lamy, 39300 Cize`, toujours **aucun lien vers le site**. Inchangée
-   depuis le 13/09.
-3. **Le registre national réinterrogé** (`recherche-entreprises.api.gouv.fr`,
-   SIREN 521683573, le 04/10) : 3 établissements, **1 seul ouvert**, siège SIRET
-   `52168357300039`, `40 B AVENUE ETIENNE LAMY 39300 CIZE`, champs `numero_voie`
-   = `40` et `indice_repetition` = `B`, mise à jour INSEE du 07/05/2026.
-4. **Les deux autres fiches « non vérifiables » retentées par le même canal, dans
-   la foulée.** `pappers.fr` **a été lue** : « Site internet : Non disponible »
-   (le champ existe et il est vide), `40 B AVENUE ETIENNE LAMY 39300 CIZE`, SIRET
-   `521 683 573 00039` — donc l'établissement **ouvert**, pas l'ancien.
-   `verif.com` **refuse aussi `WebFetch`** (403) et reste non vérifiable.
-   **Bilan : trois fiches sur quatre sont maintenant lues ; la quatrième
-   demandera un navigateur.**
-5. **Cinquième fiche confirmée sans lien vers le site.** Avec PagesJaunes, Mappy,
-   Pappers, `nosartisansontdutalent.fr` et La Gazette France, **cinq fiches sont
-   désormais vérifiées comme ne portant aucun lien vers le domaine** (et 118000
-   et societe.com l'étaient depuis le 09/09). Le « chaînon manquant » posé le
-   09/09 n'est plus une hypothèse sur un échantillon : c'est le cas de toutes les
-   fiches lues à ce jour, sans exception.
-6. **`ACTIONS-SEO-CLIENT.md` complété** d'un bloc daté du 04/10 : la ligne de
-   tableau PagesJaunes passe de « non vérifiable » à vérifiée, Pappers aussi, et
-   la graphie de l'adresse est tranchée (voir ci-dessous).
-
-**Les deux acquis réels de la journée.**
-
-- **PagesJaunes rejoint Mappy comme fiche « propre ».** Elle est la deuxième — et
-  non plus Mappy seule — à porter *à la fois* le bon téléphone et l'adresse
-  actuelle. Ça compte pour l'ordre des actions client : **les deux fiches à
-  revendiquer en premier sont aussi les deux qui n'ont rien à corriger avant
-  d'être liées**, contrairement à `nosartisansontdutalent.fr` (adresse de
-  Champagnole, mobile inconnu), La Gazette France et verif.com, tous trois
-  référencés sur un établissement fermé.
-- **La graphie de l'adresse n'est plus un arbitrage à trois branches.** Registre
-  `40 B`, Mappy `40 Bis`, PagesJaunes `40 Bis` : **trois sources indépendantes
-  portent le complément, et deux l'écrivent en clair.** Le `B` du registre est
-  donc l'abréviation de « Bis ». La forme à employer dans les annuaires et pour
-  la validation postale de la fiche Google est `40 Bis avenue Etienne Lamy,
-  39300 Cize`. Le site, lui, écrit `40 avenue Etienne Lamy` et **est le seul à
-  omettre le complément**.
-
-**Ce que j'ai décidé de NE PAS faire, et pourquoi.**
-
-1. **Ne pas corriger l'adresse du site en « 40 Bis ».** Trois raisons, dont une
-   technique qui est la vraie. (a) C'est du contenu visible, et la consigne dit
-   de ne pas y toucher dans le doute. (b) Le client doit confirmer la forme de
-   son courrier ; il a été relancé là-dessus le 04/10. (c) **La raison
-   déterminante :** le pied de page ne lit pas une constante mais
-   `v("footer", "address", "40 avenue Etienne Lamy, 39300 Cize")`
-   (`src/routes/index.tsx:2142`) — une valeur éditable en base, dont le code ne
-   porte que le défaut. Si la base contient une valeur, **changer le défaut ne
-   changerait rien à l'affichage, mais changerait le JSON-LD** (qui écrit
-   l'adresse en dur dans `__root.tsx:142`, `index.tsx:197` et
-   `services.$slug.tsx:481`). Résultat : un `LocalBusiness` qui contredit le
-   pied de page rendu — exactement le mismatch que la consigne interdit. **Cette
-   correction, le jour où elle sera décidée, devra traiter les quatre points
-   d'un coup (défaut CMS + valeur en base + les trois JSON-LD + les deux
-   occurrences de `public/llms.txt`), et pas le seul défaut.** Noté sous
-   « Hypothèses à vérifier ».
-2. **Ne pas ajouter PagesJaunes aux `sameAs`** aujourd'hui, alors que la fiche
-   remplit maintenant le critère appliqué à Mappy le 13/09 (bon téléphone +
-   adresse actuelle). C'est une modification de code : elle ne se déploierait
-   pas, ne se vérifierait pas en ligne, et empilerait un commit sur un dépôt dont
-   l'état doit rester celui où le blocage est apparu. **C'est le premier chantier
-   à prendre dès que le déploiement repart** — il est petit, fondé et prêt, voir
-   « Chantiers en attente ».
-3. **Ne pas pousser de contenu**, pour la même raison qu'au 02/10.
-4. **Ne pas faire la veille de l'étape 5** : le 04/10/2026 est un **dimanche**, pas
-   un lundi. Prochaine veille le lundi 05/10.
-
-**Ce qui reste.**
-
-- **Le blocage de déploiement, et il n'est pas réparable d'ici.** Il se lit en
-  trente secondes sur le tableau de bord Vercel (build en échec / déploiement en
-  file / intégration GitHub déconnectée) et nulle part depuis le dépôt.
-- **`verif.com` reste la seule fiche non lue** : elle refuse `curl` **et**
-  `WebFetch` (403 aux deux, mesuré le 04/10). Elle demandera un navigateur. C'est
-  aussi celle qui est référencée sur l'établissement fermé (SIRET …0021, ancienne
-  adresse « 36 avenue Etienne Lamy ») : elle est donc à faire corriger par le
-  client, pas à lire par moi.
-- `/realisations/chantier-en-cours` sert **373 caractères** et reste de loin la
-  page la plus maigre du site. Candidat de contenu évident — mais il attend le
-  déploiement.
+> Entrées « Chantiers faits » des 04 à 08/10/2026 archivées le 09/11 dans `docs/seo-journal-archive.md`.
 
 ## Chantiers en attente
 
 Par ordre de priorité. **Alterner les angles, ne pas refaire le même deux jours
 de suite.**
+
+> 🆕 **MISE À JOUR DU 09/11/2026 — prime sur tout ce qui suit.**
+> ✅ `/contact` : Q/R mesure de surface (à vérifier en prod : ~7 314 car., FAQ 5/5, lastmod
+> 09/11, `llms.txt` 09/11, puis IndexNow).
+> 1. Prochain technique : lien retour `cour-allee-privee` → maçonnerie (photos d'abord) ; ou
+>    relecture titres/H2 vs requêtes (veille 09/11 : correspondance titre/H2 ↔ requête).
+> 2. Prochain contenu : `/zone-intervention` (8 784, lastmod 30/09 — la plus ancienne) ;
+>    accueil : **rien sans accord client**.
+> 3. Yanis/client : compteurs « X chantiers réalisés » de la carte (sourcer ou retirer) ;
+>    Search Console ; fiche Google Business Profile ; statut du mobile WhatsApp.
 
 > 🆕 **MISE À JOUR DU 08/11/2026 — prime sur tout ce qui suit.**
 > ✅ Distance station Champagnole tranchée (à vérifier en prod : plus aucun « 2 km de Cize »
@@ -3782,6 +3165,24 @@ récupérer sans rien réécrire. **Sans cette requête, le travail restait perd
 ---
 
 ## Techniques apprises
+
+### 09/11/2026 (lundi) — 📚 Correspondance titre/H2 ↔ requête et fraîcheur 30-90 j pèsent sur les citations ChatGPT ; 📚 Géoportail → cartes.gouv.fr
+- AirOps, « AI Search Statistics (October 2026) », publiée 29/10, màj 02/11/2026
+  (https://www.airops.com/blog/ai-search-statistics) — **corrélations, études US, pas de local** :
+  page n° 1 Google citée par ChatGPT 43,2 % (3,5× hors top 20, mars 2026) ; H2 proche de la
+  requête : 55,9 → 75,3 % de citation (avr. 2026) ; titre ≥ 50 % de recouvrement avec la requête :
+  20,1 % vs 9,3 % ; pages de 30-89 jours les plus citées (32,8 %) ; FAQPage 45,6 % ; ≥ 2 sources
+  sortantes / 500 mots : ×2,4. **Applicable** : on le fait déjà (H2 = question, sources, FAQ
+  visible). À exploiter : relire `<title>`/H2 contre les requêtes de la Search Console dès que
+  Yanis les fournit ; ne pas toucher `lastmod` sans contenu (la fraîcheur se gagne par du vrai
+  contenu, cycle naturel d'une page tous les 1-3 mois).
+- IGN, 19/10/2026 (https://www.ign.fr/actualites/apres-geoportail-decouvrez-cartesgouvfr) :
+  cartes.gouv.fr (inauguré le 25/06/2026) succède au Géoportail ; les anciens liens
+  `geoservices.ign.fr/…pdf` redirigent (302) vers cartes.gouv.fr. **Applicable** : citer
+  cartes.gouv.fr, plus le Géoportail, dans tout nouveau contenu.
+- Rien de neuf vérifiable sur claude-seo / geo-seo-claude (pas de changelog lisible depuis le
+  runner) ; test « AI Overviews à la place du pack local » (DAC, juin 2025) : ancien, pays non
+  précisé — ne change rien : la fiche Google Business Profile reste l'action n° 1 côté client.
 
 ### 02/11/2026 (lundi) — 📚 Gemini local : 60 % des citations vont aux sites d'entreprise, mais une mesure ponctuelle ne vaut rien
 - **Steady Demand, 20/08/2026** (repris par Optimixed / MarTech / Search Engine Land),

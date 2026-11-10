@@ -33,6 +33,16 @@ type ServiceData = {
      affiché n'est pas un nom de service (cas de finitions-soignees, dont le H1
      est une accroche laissée telle quelle — voir journal 21/09). */
   schemaName?: string;
+  /* Titres H2 des sections « Ce que nous faisons » et « Notre méthode »
+     (10/11/2026) : formulés comme la question posée à un moteur ou à une IA
+     (requête + zone), avec une réponse directe de 1-2 phrases en tête. Le
+     contenu ne fait que résumer `prestations` et `methode` : ne rien y
+     affirmer qui n'y figure pas. Remplacent « Nos prestations » et « Comment
+     HCE travaille », identiques sur les six pages. */
+  sections: {
+    prestations: { h: string; lead: string };
+    methode: { h: string; lead: string };
+  };
   /* Bloc « ce qu'il faut savoir » : questions posées telles qu'on les pose à
      voix haute, réponse autonome de 2-3 phrases en tête. Rendu visible en clair
      (jamais replié, jamais monté conditionnellement) ET repris tel quel dans le
@@ -55,6 +65,10 @@ type ServiceData = {
 const SERVICES: Record<string, ServiceData> = {
   "preparation-terrain": {
     seoTitle: "Terrassement et préparation de terrain — Jura & Ain | HCE",
+    sections: {
+      prestations: { h: "Quels travaux de terrassement HCE réalise-t-elle dans le Jura et l'Ain ?", lead: "Terrassement VRD, viabilisation de terrains, génie civil, drainage des sols, puits perdus, enrochement et aménagement de terrasses : HCE prépare le terrain depuis Cize, avant une pose d'enrobé ou pour un aménagement extérieur." },
+      methode: { h: "Comment HCE prépare-t-elle un terrain avant l'enrobé ?", lead: "En trois temps : lecture du terrain (pentes, sol, écoulements), décaissement à la mini-pelle et au chargeur dans les volumes prévus au devis, puis compactage par couches à la plaque vibrante et au rouleau, avec contrôle de portance." },
+    },
     n: "01",
     title: "Préparation de terrain",
     hero: "/assets/preparation-terrain-1.png",
@@ -136,6 +150,10 @@ const SERVICES: Record<string, ServiceData> = {
   },
   "enrobe-a-chaud": {
     seoTitle: "Enrobé à chaud, goudronnage de cour — Jura & Ain | HCE",
+    sections: {
+      prestations: { h: "Quels travaux d'enrobé à chaud et de goudronnage HCE réalise-t-elle ?", lead: "Le goudronnage de cours, d'allées et de parkings dans le Jura et l'Ain, en enrobé noir, rouge, saumon ou bordeaux, sous différentes granulations. L'enrobé est posé à la main à 150°C puis compacté ; les travaux sont couverts par la garantie décennale." },
+      methode: { h: "Comment se déroule la pose d'un enrobé à chaud ?", lead: "L'enrobé est livré à température et appliqué sans interruption, posé à la main en épaisseur régulière avec des pentes et des joints soignés, puis compacté en plusieurs passes au rouleau tandem." },
+    },
     n: "02",
     title: "Enrobé à chaud",
     hero: "/assets/enrobe-1.png",
@@ -225,6 +243,10 @@ const SERVICES: Record<string, ServiceData> = {
   },
   "maconnerie-generale": {
     seoTitle: "Pavage, dallage et médaillons dans l'enrobé — Jura | HCE",
+    sections: {
+      prestations: { h: "Quels travaux de pavage et de dallage HCE associe-t-elle à l'enrobé ?", lead: "Pavage, dallage, pose de bordures et médaillons ou inserts décoratifs sur mesure, intégrés à une cour en enrobé dans le Jura et l'Ain pour en personnaliser l'aspect." },
+      methode: { h: "Comment HCE pose-t-elle pavés, dalles et médaillons ?", lead: "Le motif, les matériaux et le calepinage sont choisis avec vous ; la pose se fait au cordeau et au niveau laser, puis les joints sont sablés ou cimentés selon l'usage prévu." },
+    },
     n: "03",
     title: "Maçonnerie générale",
     hero: "/assets/maconnerie-1.png",
@@ -313,6 +335,10 @@ const SERVICES: Record<string, ServiceData> = {
   },
   "drainage-pentes": {
     seoTitle: "Drainage et pentes d'une cour en enrobé — Jura & Ain | HCE",
+    sections: {
+      prestations: { h: "Quels travaux de drainage et de pentes avant un enrobé ?", lead: "Étude des pentes, drainage périphérique, évacuation des eaux pluviales et lecture du terrain : HCE traite l'eau avant chaque pose dans le Jura et l'Ain, parce qu'une cour qui dure est d'abord une cour qui évacue l'eau." },
+      methode: { h: "Comment HCE traite-t-elle l'eau avant de poser l'enrobé ?", lead: "Elle repère d'abord les points bas et les arrivées d'eau, pose des drains et des regards aux endroits stratégiques, puis règle une pente d'au moins 1,5 % vers les exutoires, vérifiée au laser." },
+    },
     n: "04",
     title: "Drainage & pentes",
     hero: "/assets/drainage-1.jpeg",
@@ -390,6 +416,10 @@ const SERVICES: Record<string, ServiceData> = {
   },
   "bordures-murets": {
     seoTitle: "Bordures béton et murets de soutènement — Jura & Ain | HCE",
+    sections: {
+      prestations: { h: "Quelles bordures et quels murets HCE réalise-t-elle dans le Jura et l'Ain ?", lead: "Des bordures béton coulées sur place, des bordures pavées, de petits murets de soutènement et les finitions périphériques qui encadrent une cour en enrobé." },
+      methode: { h: "Comment HCE réalise-t-elle une bordure béton coulée sur place ?", lead: "Coffrage en lignes droites ou courbes selon la cour (jamais en kit), coulage d'un béton dosé pour résister au gel, puis décoffrage propre aux arêtes nettes, prêt à recevoir l'enrobé." },
+    },
     n: "05",
     title: "Bordures & murets",
     hero: "/assets/bordures-1.png",
@@ -471,6 +501,10 @@ const SERVICES: Record<string, ServiceData> = {
   },
   "finitions-soignees": {
     seoTitle: "Finition soignée d'une cour en enrobé — Jura & Ain | HCE",
+    sections: {
+      prestations: { h: "Qu'est-ce qu'une finition soignée sur une cour en enrobé ?", lead: "Des bords et des angles nets sans bavure, des raccords et des jonctions intégrés, une surface plane et homogène sans flaque, et un chantier nettoyé en fin de travaux." },
+      methode: { h: "Comment HCE contrôle-t-elle la finition avant de quitter le chantier ?", lead: "Contrôle visuel et de planéité avant de partir, demande de validation à chaque étape avant de poursuivre, et chantier rendu propre, prêt à l'usage." },
+    },
     schemaName: "Finition soignée d'enrobé",
     n: "06",
     title: "Vous avez un projet d'aménagement de cour en enrobé",
@@ -915,7 +949,7 @@ function ServicePageBody() {
             {(url) => (
               <img
                 src={url}
-                alt={data.title}
+                alt={data.schemaName ?? data.title}
                 fetchPriority="high"
                 className="absolute inset-0 w-full h-full object-cover"
               />
@@ -935,7 +969,8 @@ function ServicePageBody() {
         {/* PRESTATIONS */}
         <section className="px-6 md:px-12 py-24 md:py-32 max-w-6xl mx-auto">
           <div className="label text-gold">— Ce que nous faisons</div>
-          <h2 className="font-display mt-6 text-foreground" style={{ fontSize: "clamp(32px, 5vw, 56px)", fontWeight: 400 }}>Nos prestations</h2>
+          <h2 className="font-display mt-6 text-foreground" style={{ fontSize: "clamp(32px, 5vw, 56px)", fontWeight: 400, lineHeight: 1.05 }}>{data.sections.prestations.h}</h2>
+          <p className="mt-6 text-muted max-w-3xl" style={{ fontSize: 17, lineHeight: 1.7 }}>{data.sections.prestations.lead}</p>
           <ul className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-4">
             {data.prestations.map((p) => (
               <li key={p} className="border-b border-gold/15 py-4 flex items-baseline gap-4">
@@ -953,7 +988,7 @@ function ServicePageBody() {
         >
           <div className="relative z-10 px-6 py-14 md:py-16 text-center max-w-3xl mx-auto">
             <p className="font-display italic text-foreground" style={{ fontSize: "clamp(20px, 2.6vw, 28px)", lineHeight: 1.3 }}>
-              Vous avez un projet de <span className="text-gold">{data.title.toLowerCase()}</span> ?
+              Vous avez un projet de <span className="text-gold">{(data.schemaName ?? data.title).toLowerCase()}</span> ?
             </p>
             <p className="mt-3 text-muted text-sm md:text-base">
               Devis détaillé · Visite gratuite · Garantie décennale
@@ -984,7 +1019,7 @@ function ServicePageBody() {
           >
             {data.gallery.map((g) => (
               <div key={g} className="aspect-[4/3] overflow-hidden">
-                <img src={optimizeImageUrl(g, 800)} alt={data.title} loading="lazy" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" />
+                <img src={optimizeImageUrl(g, 800)} alt={data.schemaName ?? data.title} loading="lazy" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" />
               </div>
             ))}
           </div>
@@ -993,7 +1028,8 @@ function ServicePageBody() {
         {/* METHODE */}
         <section className="px-6 md:px-12 py-24 md:py-32 max-w-6xl mx-auto">
           <div className="label text-gold">— Notre méthode</div>
-          <h2 className="font-display mt-6 text-foreground" style={{ fontSize: "clamp(32px, 5vw, 56px)", fontWeight: 400 }}>Comment HCE travaille</h2>
+          <h2 className="font-display mt-6 text-foreground" style={{ fontSize: "clamp(32px, 5vw, 56px)", fontWeight: 400, lineHeight: 1.05 }}>{data.sections.methode.h}</h2>
+          <p className="mt-6 text-muted max-w-3xl" style={{ fontSize: 17, lineHeight: 1.7 }}>{data.sections.methode.lead}</p>
           <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8">
             {data.methode.map((m, i) => (
               <article key={m.t} className="border-l-2 pl-6" style={{ borderColor: "var(--cuivre-500)" }}>
@@ -1160,7 +1196,7 @@ function ServicePageBody() {
         <section id="service-cta-bottom" className="relative px-6 md:px-12 py-32 text-center bg-surface">
           <div className="label text-gold">— Un projet ?</div>
           <h2 className="font-display mt-6 text-foreground max-w-3xl mx-auto" style={{ fontSize: "clamp(32px, 5vw, 64px)", fontWeight: 400, lineHeight: 1.05 }}>
-            Demander un devis pour <span className="italic text-gold">{data.title.toLowerCase()}</span>
+            Demander un devis pour <span className="italic text-gold">{(data.schemaName ?? data.title).toLowerCase()}</span>
           </h2>
           <div className="mt-12 flex flex-wrap gap-3 justify-center">
             <Link

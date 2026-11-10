@@ -4861,3 +4861,106 @@ points d'entrée tiers).
 - `/realisations/chantier-en-cours` sert **373 caractères** et reste de loin la
   page la plus maigre du site. Candidat de contenu évident — mais il attend le
   déploiement.
+
+<!-- section d'origine : Chantiers en attente (archivé le 10/11/2026) -->
+> 🆕 **MISE À JOUR DU 08/10/2026 — à lire avant celle du 07/10.**
+>
+> ✅ **Fait aujourd'hui, à ne pas refaire : `/mentions-legales`.** La page
+> existe, elle est liée depuis le pied de page, elle est dans le sitemap (14ᵉ
+> URL), dans `llms.txt` et dans `mesure-texte-servi.mjs`. **Le filon « page
+> légale manquante » est épuisé : il n'y en avait qu'une.**
+>
+> 🔴 **DETTE DE VÉRIFICATION EN LIGNE — mise à jour, et c'est toujours la
+> première chose à faire le jour du déblocage, avant tout nouveau chantier.**
+> Rien de ce qui a été poussé depuis le 02/10 n'a jamais été vu en production.
+> Valeurs attendues **mesurées au banc local le 08/10** :
+> 1. `node scripts/mesure-texte-servi.mjs https://www.hcetp.com` → **14 lignes**
+>    attendues : 13 543 / 5 154 / 12 633 / 5 706 / 5 832 / 7 634 / 7 413 /
+>    8 578 / 13 491 / 7 670 / 6 356 / 8 156 / 373 / **8 351**.
+>    ⚠️ L'accueil passe de 13 526 à **13 543** (+17 car.) : c'est le lien
+>    « Mentions légales ». Ne pas lire cet écart comme une anomalie.
+> 2. Graphe des liens internes : les six `/services/*` doivent servir **6 liens**
+>    (7 pour `enrobe-a-chaud`), contre 1 en production aujourd'hui. Recette du
+>    07/10 sous « Techniques apprises ».
+> 3. `verif-faq.mjs` et `verif-lastmod.mjs` en ligne → attendus **11/11** et
+>    **14 URLs cohérentes dont 13 avec lastmod**.
+> 4. `/llms.txt` doit afficher « **8 octobre 2026** » (et non plus 2 octobre).
+> 5. `sameAs` doit porter **5 URLs** dont PagesJaunes.
+> 6. `/mentions-legales` doit répondre **200** et le lien doit être visible dans
+>    le pied de page de l'accueil.
+> 7. **Regarder le rendu visuel** de la section « Sur le même chantier » sur une
+>    page service **et du tableau d'identité de `/mentions-legales`** : c'est le
+>    seul contrôle que le runner ne peut pas faire.
+>
+> **Reste à faire, par ordre, après la dette :**
+> 1. **`/realisations/chantier-en-cours` — 373 caractères servis**, seule URL du
+>    sitemap sans date affichée et sans entrée `PAGE_UPDATED`. Prochain candidat
+>    de contenu. ⚠️ **Réserve inchangée : c'est une page de GALERIE.** Vérifier
+>    qu'il y a de la matière honnête et **ne RIEN inventer sur un chantier
+>    précis** — ni lieu, ni surface, ni date, ni client.
+> 2. **Compléter `/mentions-legales` dès que le client répond** : capital
+>    social, greffe + numéro RCS, nom du responsable de la publication,
+>    médiateur de la consommation. Les quatre sont demandés dans
+>    `ACTIONS-SEO-CLIENT.md` (bloc du 08/10). Chantier de 15 minutes, à prendre
+>    dès que la réponse arrive — ne pas attendre un « jour de chantier » pour ça.
+> 3. **Vérifier si le mobile `06 81 78 96 41` du bouton WhatsApp est celui de la
+>    fiche `nosartisansontdutalent.fr`** (notée « mobile inconnu » le 04/10). Si
+>    c'est le cas, la fiche n'est pas erronée sur ce point et l'action client la
+>    concernant doit être réécrite.
+> 4. **Ne pas chercher de canal SERP alternatif** : Bing en `curl` et DuckDuckGo
+>    sont testés et inutilisables (08/10). Économie d'une heure.
+> 5. **Migration du runtime vers `nodejs24.x`** — après le déblocage seulement.
+>    Inchangé.
+> 6. **Ne PAS retenter un correctif de déploiement dans le dépôt.** Inchangé.
+
+> 🆕 **MISE À JOUR DU 07/10/2026 — à lire avant tout le reste de cette section.**
+>
+> ✅ **Deux chantiers de cette liste sont FAITS aujourd'hui** (détail sous
+> « Chantiers faits » du 07/10) : le **maillage interne des six `/services/*`**
+> (candidat n°1 depuis le 02/10 — 1 → 6-7 liens servis par page) et l'ajout de
+> **`pagesjaunes.fr/pros/52322496` aux `sameAs`** (posé le 04/10). Les encadrés
+> ci-dessous qui les annoncent sont donc périmés : ne pas les refaire.
+>
+> 🔴 **DETTE DE VÉRIFICATION EN LIGNE — elle a grossi, et c'est la première
+> chose à faire le jour du déblocage, avant tout nouveau chantier.** Rien de ce
+> qui a été poussé depuis le 02/10 n'a jamais été vu en production. Repasser
+> **dans cet ordre** :
+> 1. `node scripts/mesure-texte-servi.mjs https://www.hcetp.com` — attendu :
+>    **13 526 / 13 491 / 8 578 / 8 156 / 7 670 / 7 634 / 7 413 / 6 356 / 5 832 /
+>    5 706 / 5 154 / 12 633 / 373**. ⚠️ **Ces valeurs sont celles du banc local du
+>    07/10, pas celles de l'ancienne production** : les six pages service ont
+>    gagné 592 à 777 caractères et `enrobe-a-chaud` doit passer à **12 633** (et
+>    non 11 856, qui était la valeur d'avant le maillage).
+> 2. Graphe des liens internes : les six `/services/*` doivent servir **6 liens**
+>    (7 pour `enrobe-a-chaud`), plus 1. Script jetable, 15 lignes, voir la
+>    recette du 07/10 sous « Techniques apprises ».
+> 3. `verif-faq.mjs` et `verif-lastmod.mjs` en ligne → attendus **11/11** et
+>    **13 URLs cohérentes**.
+> 4. `/llms.txt` doit afficher « **2 octobre 2026** ».
+> 5. `sameAs` doit porter **5 URLs** dont PagesJaunes.
+> 6. **Regarder le rendu visuel de la section « Sur le même chantier »** sur une
+>    page service : c'est le seul contrôle que le runner n'a pas pu faire.
+>
+> **Reste à faire, par ordre, après la dette :**
+> 1. **`/realisations/chantier-en-cours` — 373 caractères servis**, de loin la
+>    page la plus maigre, **seule URL du sitemap sans date affichée et sans
+>    entrée `PAGE_UPDATED`**. C'est le prochain candidat de contenu. ⚠️ **Réserve
+>    sérieuse et inchangée : c'est une page de GALERIE.** Vérifier d'abord qu'il y
+>    a de la matière honnête (la mise en œuvre elle-même, l'enrobé répandu à la
+>    main à 150 °C, ce que montrent réellement les photos) et **ne RIEN inventer
+>    sur un chantier précis** — ni lieu, ni surface, ni date, ni client. Lui
+>    donner une entrée `PAGE_UPDATED` suffirait déjà à lui offrir un `lastmod`.
+> 2. **Migration du runtime vers `nodejs24.x`** — `engines.node` ET
+>    `nitro.vercel.functions.runtime` ensemble, pin vérifié par la recette du
+>    06/10. ⚠️ **Après le déblocage seulement** : on ne mêle pas une migration de
+>    runtime à un diagnostic de build en échec.
+> 3. **Ne PAS retenter un correctif de déploiement dans le dépôt** — les deux
+>    leviers sont épuisés et mesurés (06/10). Inchangé.
+> 4. ⚠️ **Ne plus construire de chantier sur « ce que fait le concurrent ».** Le
+>    relevé du 07/10 montre que `WebSearch` ne rend pas une SERP française
+>    stable : SFCTP tenait 4 URLs sur 9 le 05/10 et disparaît complètement le
+>    07/10. Les positions des concurrents relevées par ce canal ne sont pas
+>    exploitables. Choisir les chantiers pour leur valeur propre.
+> 5. **`118712.fr` : fiche repérée le 07/10, volontairement PAS dans les
+>    `sameAs`** (téléphone masqué, adresse sans le « Bis »). À reconsidérer
+>    seulement si la fiche devient vérifiable, ou si le client la revendique.

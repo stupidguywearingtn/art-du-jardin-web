@@ -21,6 +21,8 @@ et à compléter en fin de run.
 > client). Banc local : services +350 à +550 car. (ex. enrobé 13 463), 10 autres URLs
 > identiques à la prod, FAQ 6/6 pages OK, mobile 390 px sans débordement. `lastmod` non
 > touché (aucun fait nouveau). Build OK, `check:fige` OK. Archive : MAJ « en attente » 07-08/10.
+> ✅ Vérifié en prod (`a5c667f`, `success`) : enrobé 13 463 / finitions 11 394 car. (= banc),
+> H2 question servi, plus de « devis pour vous avez un projet », IndexNow 16 URLs → 200.
 
 > ✅ **09/11/2026 — Déploiement OK** (`25d76aa` : statut GitHub `success`). Prod = dernier
 > commit (16/16 en 200 ; maçonnerie 9 592, correction « moins de 5 km » du 08/11 en ligne).

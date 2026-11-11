@@ -8,6 +8,21 @@ et à compléter en fin de run.
 
 ## État des lieux
 
+> ✅ **11/11/2026 — Déploiement OK** (`b8cbaca` : statut GitHub `success`). Prod = dernier
+> commit (16/16 en 200 ; services = H2 du 10/11 en ligne, ex. enrobé 13 463). Chantier
+> (**contenu**, après un jour technique) : **`/zone-intervention`** (8 784, lastmod 30/09 — la
+> plus ancienne) +1 Q/R **« Dans le Jura, à qui demander l'autorisation de raccorder sa cour à
+> une route départementale ? »**. Angle local, complémentaire de la règle générale déjà sur
+> `cour-allee-privee` (L113-2, R*116-2) : Département du Jura, règlement de voirie
+> départementale du 28/05/2010 (lu dans 2 arrêtés jura.fr), exemple réel = arrêté du
+> 11/04/2024, accès riverain RD 39 Châtillon, délégation ARD Champagnole (pente ≤ 5 %,
+> « ne pas envoyer l'eau vers la chaussée », buse Ø 300 mm × 6 m + têtes de sécurité, travaux
+> ≤ 14 j, 5 ans précaire et révocable, redevance 3,92 €/an) — présenté comme un dossier, pas un
+> barème. **Rien d'affirmé sur les démarches faites par HCE.** + lien visible vers
+> `cour-allee-privee`, lead complété. Banc local : **11 143 car.**, FAQ 5/5, lastmod +
+> `llms.txt` 11/11. Build OK, `check:fige` OK, `verif-lastmod` : seul écart connu `/`.
+> Archive : positions du 11/10.
+
 > ✅ **10/11/2026 — Déploiement OK** (`d65ec0d` : statut GitHub `success`). Prod = dernier
 > commit (16/16 en 200 ; `/contact` 7 314 : Q/R du 09/11 en ligne). Chantier (**technique —
 > titres H2 vs requêtes**, après un jour contenu ; veille 09/11) : sur les 6 `/services/*`,
@@ -595,6 +610,17 @@ un extrait de SERP ne prouve pas ce que la page contient.
 > (403 au runner, contenu jamais lu). Leur statut « périmée » n'est donc pas
 > établi. Noté en chantier en attente.
 
+### Positions mesurées — 11/11/2026
+
+| Contrôle | 11/11/2026 | vs 10/11 |
+|---|---|---|
+| Déploiement `main` (`b8cbaca`) | **`success`** (Vercel) | = |
+| Prod vs code (`mesure-texte-servi`) | 16/16 en 200 ; services = banc du 10/11 (enrobé 13 463, finitions 11 394) | = |
+| SERP | non relevée (canal `WebSearch` US, non représentatif) | — |
+
+Pas d'accès Search Console. **À relever par Yanis** : « Performances IA » + requêtes à
+impressions ; indexation de `/contact`, `/arnaque-goudronnage` et `/zone-intervention`.
+
 ### Positions mesurées — 10/11/2026
 
 | Contrôle | 10/11/2026 | vs 09/11 |
@@ -935,20 +961,11 @@ Canal `WebSearch` = US, non représentatif. Pas d'accès Search Console depuis l
 runner (aucun outil GSC chargeable). **À relever par Yanis dans la GSC** :
 pages indexées / « Explorée, non indexée », et requêtes avec impressions.
 
-### Positions mesurées — 11/10/2026
-
-| Contrôle | 11/10/2026 | vs 08/10 |
-|---|---|---|
-| Déploiement `main` (`e3a860e`) | **`success`** | 🟢 débloqué (failure depuis le 01/10) |
-| « enrobé à chaud Jura entreprise cour » (`WebSearch`) | domaine **absent** ; la fiche `118712.fr` de HCE sort 1ʳᵉ | inchangé |
-| « goudronnage cour Jura » | domaine **absent** (résultats hors sujet : Wikipédia anglais, météo) | inchangé — canal US, peu fiable |
-| Texte servi en prod (`mesure-texte-servi.mjs`) | **= banc local du 08/10 sur les 14 URLs** | 🟢 la prod sert enfin le dernier commit |
-
-Seule vraie mesure à venir : **Search Console** (non accessible depuis le
-runner). À relever par Yanis : pages indexées, et impressions sur
-« goudronnage », « enrobé Jura », « arnaque goudronnage » dans 2-3 semaines.
-
 ## Chantiers faits
+
+### 11/11/2026 — `/zone-intervention` : Q/R permission de voirie sur route départementale du Jura
+Q/R n° 4 (avant « ma commune »), FAQPage = FAQ visible, 2 sources (arrêté jura.fr RD 39
+Châtillon 11/04/2024 ; Légifrance L113-2). Lien vers `cour-allee-privee`. 8 784 → 11 143 car.
 
 ### 10/11/2026 — `/services/*` : H2 génériques → questions ciblées + réponse directe ; phrases du gabarit réparées
 H2 prestations / méthode par service (ex. « Quels travaux d'enrobé à chaud et de goudronnage
@@ -1265,6 +1282,16 @@ FAQ 5 → 7 (FAQPage = visible, `verif-faq` 7/7), lead mis à jour, source ajout
 
 Par ordre de priorité. **Alterner les angles, ne pas refaire le même deux jours
 de suite.**
+
+> 🆕 **MISE À JOUR DU 11/11/2026 — prime sur tout ce qui suit.**
+> ✅ `/zone-intervention` : Q/R permission de voirie Jura (à vérifier en prod : ~11 143 car.,
+> FAQ 5/5, lastmod 11/11, `llms.txt` 11/11, puis IndexNow).
+> 1. Prochain technique : passe H2 sur `/realisations/*` (« — Autres réalisations », « — Les
+>    prestations mises en œuvre ») ; lien retour `cour-allee-privee` → maçonnerie.
+> 2. Prochain contenu : `/arnaque-goudronnage` (10 656, vérifier son lastmod) ou
+>    `bordures-murets` (9 983) ; accueil : **rien sans accord client**.
+> 3. Yanis/client : H1 de `finitions-soignees` ; compteurs « X chantiers réalisés » de la
+>    carte ; Search Console ; fiche Google Business Profile.
 
 > 🆕 **MISE À JOUR DU 10/11/2026 — prime sur tout ce qui suit.**
 > ✅ H2 questions sur les 6 `/services/*` (à vérifier en prod : `/services/enrobe-a-chaud`

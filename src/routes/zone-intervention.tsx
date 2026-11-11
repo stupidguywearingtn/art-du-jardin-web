@@ -84,7 +84,7 @@ const COMMUNES = [
  */
 const SAVOIR = {
   heading: "Ce qu'on nous demande sur la zone d'intervention",
-  lead: "Une zone d'intervention se résume d'habitude à une liste de villes, ce qui ne renseigne sur rien. Voici les chiffres réels, mesurés sur les référentiels publics de l'État : à quelle distance et à quelle altitude se trouvent les six communes repères de la zone, pourquoi l'altitude pèse plus lourd que le kilométrage sur un chantier d'enrobé, quels mois sont effectivement compromis et à quel endroit, et ce qu'il faut faire si votre commune n'est pas dans la liste.",
+  lead: "Une zone d'intervention se résume d'habitude à une liste de villes, ce qui ne renseigne sur rien. Voici les chiffres réels, mesurés sur les référentiels publics de l'État : à quelle distance et à quelle altitude se trouvent les six communes repères de la zone, pourquoi l'altitude pèse plus lourd que le kilométrage sur un chantier d'enrobé, quels mois sont effectivement compromis et à quel endroit, à qui demander l'autorisation quand la cour débouche sur une route départementale, et ce qu'il faut faire si votre commune n'est pas dans la liste.",
   updated: PAGE_UPDATED["/zone-intervention"],
   qa: [
     {
@@ -98,6 +98,10 @@ const SAVOIR = {
     {
       q: "Quels mois de l'année sont réellement compromis, et à quel endroit ?",
       a: "Décembre, janvier et février partout ; mars et novembre en altitude seulement — et c'est mars qui fait la bascule. Le détail mensuel des normales 1991-2020 le montre sans ambiguïté. À la station de Champagnole (537 m), le gel touche 21,8 jours en janvier, 20,9 en février et 20,4 en décembre, puis encore 17,9 jours en mars et 9,0 jours en avril, et il n'est pas tout à fait nul en mai (1,4 jour) : la saison franchement hivernale y dure cinq mois pleins. À la station de Lons-le-Saunier (298 m), les mêmes mois comptent 14,0, 11,3 et 13,1 jours de gel, et mars n'en compte plus que 5,6. Le mois qui reste hivernal à 537 mètres est donc déjà praticable 240 mètres plus bas — c'est là que se joue l'écart, pas au cœur de l'hiver où les deux sont bloqués. Deux chiffres empêchent toutefois de conclure que « plaine » veut dire « sans contrainte » : Lons-le-Saunier relève tout de même 10,3 jours par an où la température ne repasse pas au-dessus de 0 °C de toute la journée, et 1,5 jour par an à -10 °C ou moins. À Champagnole, ce dernier chiffre monte à 10,0 jours, et 35,2 jours par an descendent à -5 °C ou moins. La conséquence pratique est la même des deux côtés mais elle ne tombe pas au même moment : un projet décidé à l'automne se planifie souvent pour le printemps suivant, et ce décalage est plus long en altitude qu'en plaine. Ce n'est pas un délai commercial, c'est le climat local. La période se cale avec vous au moment du devis, qui est établi après une visite sur site.",
+    },
+    {
+      q: "Dans le Jura, à qui demander l'autorisation de raccorder sa cour à une route départementale ?",
+      a: "Au Département du Jura, gestionnaire des routes départementales, et non à la mairie : c'est lui qui délivre la permission de voirie lorsqu'une entrée de cour ou de chemin crée ou modifie un accès sur une RD. La règle générale — ce qui déborde sur la route se demande au gestionnaire de la voie — vient de l'article L113-2 du code de la voirie routière ; le Jura y ajoute un texte local, le règlement de voirie départementale approuvé le 28 mai 2010, visé par les arrêtés de permission de voirie que le Département publie. L'un d'eux montre ce que contient concrètement une telle autorisation : l'arrêté du 11 avril 2024 qui autorise la création d'un accès riverain sur la RD 39 à Châtillon, établi par délégation au chef de l'Agence routière départementale de Champagnole. Il fixe une pente d'accès de 5 % au plus, demande de « ne pas envoyer l'eau vers la chaussée » ni gêner l'écoulement, impose une canalisation de 300 mm de diamètre sur 6 mètres pour assurer la continuité du fossé, avec des têtes de sécurité aux deux extrémités, et limite la durée des travaux à 14 jours, le service gestionnaire étant prévenu au début du chantier. L'autorisation y est accordée pour cinq ans, à titre précaire et révocable, contre une redevance de 3,92 € par an pour l'occupation du domaine public. Ces prescriptions sont celles d'un dossier précis, pas un barème valable pour tous : chaque accès est instruit au cas par cas, selon la route et le fossé concernés. Sur une voie communale, l'interlocuteur est la mairie ; dans l'Ain, c'est le Département de l'Ain pour ses propres routes. Dans tous les cas, la demande se fait avant les travaux, et son délai d'instruction se prévoit dès la visite sur site, au moment où se cale la période du chantier.",
     },
     {
       q: "HCE intervient-elle dans ma commune si elle n'est pas dans cette liste ?",
@@ -124,6 +128,16 @@ const SAVOIR = {
       label:
         "Météo-France — fiche climatologique de LONS LE SAUNIER (39), indicatif 39362001, altitude 298 m, normales 1991-2020, éditée le 6 juin 2026",
       url: "https://object.files.data.gouv.fr/meteofrance/data/synchro_ftp/REF_STATION/FICHECLIM_39362001.pdf",
+    },
+    {
+      label:
+        "Département du Jura — arrêté de permission de voirie du 11 avril 2024, accès riverain sur la RD 39 à Châtillon (règlement de voirie départementale du 28 mai 2010)",
+      url: "https://www.jura.fr/wp-content/uploads/sites/23/2024/04/ARR_2024_0378_PV5_RD39_CHATILLON.pdf",
+    },
+    {
+      label:
+        "Article L113-2 du code de la voirie routière — permission de voirie et permis de stationnement (Légifrance)",
+      url: "https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000017924078",
     },
   ],
 };
@@ -360,7 +374,17 @@ function ZoneIntervention() {
             >
               arnaque au goudronnage
             </Link>{" "}
-            liste les signes à reconnaître et les vérifications à faire.
+            liste les signes à reconnaître et les vérifications à faire. Les règles générales à
+            connaître avant de raccorder une cour à la route (permission de voirie, busage du
+            fossé) sont détaillées sur la réalisation{" "}
+            <Link
+              to="/realisations/$slug"
+              params={{ slug: "cour-allee-privee" }}
+              className="underline decoration-gold/40 underline-offset-2 hover:text-gold"
+            >
+              Cour &amp; allée privée
+            </Link>
+            .
           </p>
         </section>
 

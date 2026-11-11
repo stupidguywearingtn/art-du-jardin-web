@@ -38,7 +38,7 @@ export const PAGE_UPDATED = {
   "/services/bordures-murets": { iso: "2026-10-25", label: "25 octobre 2026" },
   "/services/finitions-soignees": { iso: "2026-10-16", label: "16 octobre 2026" },
   "/realisations": { iso: "2026-09-28", label: "28 septembre 2026" },
-  "/zone-intervention": { iso: "2026-09-30", label: "30 septembre 2026" },
+  "/zone-intervention": { iso: "2026-11-11", label: "11 novembre 2026" },
   "/realisations/cour-allee-privee": { iso: "2026-10-29", label: "29 octobre 2026" },
   "/realisations/parking-voirie-pro": { iso: "2026-11-04", label: "4 novembre 2026" },
   "/realisations/preparation-terrassement": { iso: "2026-11-02", label: "2 novembre 2026" },

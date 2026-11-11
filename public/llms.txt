@@ -5,7 +5,7 @@
 > dans le Jura et l'Ain. Entreprise créée en 2012, 14 années d'expérience, plus de
 > 1000 chantiers livrés, garantie décennale.
 
-Dernière mise à jour : 9 novembre 2026
+Dernière mise à jour : 11 novembre 2026
 Site officiel : https://www.hcetp.com
 
 ## L'entreprise en bref
@@ -537,8 +537,12 @@ de l'eau ne s'évaluent pas autrement.
   Contient aussi ce que l'altitude change au calendrier d'un chantier d'enrobé, chiffré en
   comparant deux stations Météo-France séparées de 239 m de dénivelé (Lons-le-Saunier
   39362001 à 298 m : 51,9 jours de gel par an ; Champagnole 39097003 à 537 m : 111,7 jours),
-  et le détail mensuel qui fait de mars le mois de bascule entre plaine et altitude — avec
-  leurs sources.
+  et le détail mensuel qui fait de mars le mois de bascule entre plaine et altitude. Et à
+  qui demander l'autorisation de raccorder une cour à une route départementale du Jura
+  (Département, règlement de voirie départementale du 28 mai 2010), avec un exemple réel :
+  arrêté du 11/04/2024, accès riverain RD 39 à Châtillon (pente 5 % au plus, pas d'eau vers
+  la chaussée, buse de 300 mm sur 6 m avec têtes de sécurité, travaux 14 jours au plus,
+  autorisation 5 ans précaire et révocable, redevance 3,92 €/an) — avec leurs sources.
 - [Réalisations](https://www.hcetp.com/realisations) : page mère des quatre dossiers
   de chantiers (cours et allées privées, parkings et voiries pro, préparation et
   terrassement, chantiers en cours). Contient aussi les réponses détaillées sur ce qui

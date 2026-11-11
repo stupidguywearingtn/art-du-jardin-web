@@ -4964,3 +4964,18 @@ points d'entrée tiers).
 > 5. **`118712.fr` : fiche repérée le 07/10, volontairement PAS dans les
 >    `sameAs`** (téléphone masqué, adresse sans le « Bis »). À reconsidérer
 >    seulement si la fiche devient vérifiable, ou si le client la revendique.
+
+
+<!-- Archivé le 11/11/2026 depuis SEO-JOURNAL.md -->
+### Positions mesurées — 11/10/2026
+
+| Contrôle | 11/10/2026 | vs 08/10 |
+|---|---|---|
+| Déploiement `main` (`e3a860e`) | **`success`** | 🟢 débloqué (failure depuis le 01/10) |
+| « enrobé à chaud Jura entreprise cour » (`WebSearch`) | domaine **absent** ; la fiche `118712.fr` de HCE sort 1ʳᵉ | inchangé |
+| « goudronnage cour Jura » | domaine **absent** (résultats hors sujet : Wikipédia anglais, météo) | inchangé — canal US, peu fiable |
+| Texte servi en prod (`mesure-texte-servi.mjs`) | **= banc local du 08/10 sur les 14 URLs** | 🟢 la prod sert enfin le dernier commit |
+
+Seule vraie mesure à venir : **Search Console** (non accessible depuis le
+runner). À relever par Yanis : pages indexées, et impressions sur
+« goudronnage », « enrobé Jura », « arnaque goudronnage » dans 2-3 semaines.

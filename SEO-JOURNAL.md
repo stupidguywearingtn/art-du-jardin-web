@@ -22,6 +22,8 @@ et à compléter en fin de run.
 > `cour-allee-privee`, lead complété. Banc local : **11 143 car.**, FAQ 5/5, lastmod +
 > `llms.txt` 11/11. Build OK, `check:fige` OK, `verif-lastmod` : seul écart connu `/`.
 > Archive : positions du 11/10.
+> ✅ Vérifié en prod (`8ea9744`, `success`) : `/zone-intervention` 11 143 car. (= banc), FAQ
+> 5/5, `llms.txt` (Châtillon servi), IndexNow 16 URLs → 200.
 
 > ✅ **10/11/2026 — Déploiement OK** (`d65ec0d` : statut GitHub `success`). Prod = dernier
 > commit (16/16 en 200 ; `/contact` 7 314 : Q/R du 09/11 en ligne). Chantier (**technique —

@@ -35,6 +35,11 @@ export const RELATED_SERVICES: Record<string, { slug: string; label: string }[]>
   "cour-allee-privee": [
     { slug: "enrobe-a-chaud", label: "Enrobé à chaud" },
     { slug: "finitions-soignees", label: "Finitions soignées" },
+    // 12/11/2026 : photos du dossier relues (23 en prod) — bordures béton et
+    // bandes de pavés / dalles en rive d'enrobé visibles. Lien retour vers les
+    // deux services qui renvoyaient déjà ici « en photos ».
+    { slug: "maconnerie-generale", label: "Maçonnerie générale" },
+    { slug: "bordures-murets", label: "Bordures & murets" },
   ],
   "parking-voirie-pro": [
     { slug: "enrobe-a-chaud", label: "Enrobé à chaud" },

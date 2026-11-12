@@ -680,7 +680,7 @@ const VOIR_AUSSI: Record<
       {
         slug: "cour-allee-privee",
         label: "Cour et allée privée",
-        why: "Les pavés, dallages et médaillons intégrés à l'enrobé, en photos.",
+        why: "Des bandes de pavés et de dalles posées en rive d'enrobé, en photos.",
       },
     ],
     services: [

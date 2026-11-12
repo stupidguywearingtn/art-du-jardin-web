@@ -4979,3 +4979,26 @@ points d'entrée tiers).
 Seule vraie mesure à venir : **Search Console** (non accessible depuis le
 runner). À relever par Yanis : pages indexées, et impressions sur
 « goudronnage », « enrobé Jura », « arnaque goudronnage » dans 2-3 semaines.
+
+<!-- section d'origine : État des lieux (archivé le 12/11/2026) -->
+> ✅ **12/10/2026 — Déploiement OK** (`9e2e07e` : Vercel `success`). Prod =
+> dernier commit (15/15 URLs identiques au banc du 11/10, FAQ 11/11, lastmod
+> 15 cohérentes). Chantier du jour : **`/realisations/chantier-en-cours`
+> sort de la maigreur (373 → 5 596 car. en prod)** — la dernière page maigre du site.
+> Toutes les URLs du sitemap ont désormais un `lastmod`.
+
+<!-- section d'origine : Positions mesurées (archivé le 12/11/2026) -->
+### Positions mesurées — 12/10/2026
+
+| Contrôle | 12/10/2026 | vs 11/10 |
+|---|---|---|
+| Déploiement `main` (`9e2e07e`) | **`success`** | = |
+| Prod vs code (`mesure-texte-servi`) | 15/15 URLs = banc du 11/10 (`/arnaque-goudronnage` 10 646) | = |
+| « enrobé à chaud Jura entreprise cour » | domaine **absent** ; fiche `118712.fr` de HCE 1ʳᵉ | = |
+| « goudronnage cour Jura » | **absent** (Wikipédia anglais, météo) | = |
+| « enrobé Champagnole entreprise » | **absent** (bruit : Champagne-au-Mont-d'Or) | 🆕 relevé |
+| « réfection parking enrobé Jura Lons-le-Saunier » | **absent** (PDF Mijoux, annonces parking) | 🆕 relevé |
+
+Canal `WebSearch` = US, non représentatif. Pas d'accès Search Console depuis le
+runner (aucun outil GSC chargeable). **À relever par Yanis dans la GSC** :
+pages indexées / « Explorée, non indexée », et requêtes avec impressions.

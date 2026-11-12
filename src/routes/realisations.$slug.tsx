@@ -293,7 +293,8 @@ const REAL_SAVOIR: Record<
      précis (lieu, surface, date, client) — uniquement ce que vit un client le
      jour de la pose, avec des sources publiques. */
   "chantier-en-cours": {
-    heading: "Le jour de la pose d'enrobé : les questions qu'on se pose quand l'équipe est devant chez soi",
+    heading:
+      "Le jour de la pose d'enrobé : les questions qu'on se pose quand l'équipe est devant chez soi",
     lead: "Ce dossier est consacré à HCE au travail, pendant la pose. C'est le moment où un client découvre un chantier qu'il n'avait vu que sur un devis : une équipe qui ne s'arrête pas, une odeur de bitume, une cour qu'on ne peut pas utiliser tout de suite, puis, une fois la cour finie, une ligne visible entre deux bandes. Voici six questions qui reviennent ce jour-là, avec les sources publiques qui y répondent.",
     updated: PAGE_UPDATED["/realisations/chantier-en-cours"],
     qa: [
@@ -334,7 +335,8 @@ const REAL_SAVOIR: Record<
         url: "https://www.iarc.who.int/news-events/iarc-monographs-occupational-exposures-to-bitumens-and-their-emissions",
       },
       {
-        label: "Prévention des risques liés au bitume sur les chantiers de construction routière (INRS)",
+        label:
+          "Prévention des risques liés au bitume sur les chantiers de construction routière (INRS)",
         url: "https://www.inrs.fr/header/presse/cp-bitume.html",
       },
       {
@@ -343,7 +345,8 @@ const REAL_SAVOIR: Record<
         url: "https://www.transports.gouv.qc.ca/fr/entreprises-partenaires/entreprises-reseaux-routier/bulletin-technique-dglc/Documents/2002/02-12.pdf",
       },
       {
-        label: "Le collage des couches — colloque Bitume Québec « La mise en œuvre des enrobés », 26 novembre 2008",
+        label:
+          "Le collage des couches — colloque Bitume Québec « La mise en œuvre des enrobés », 26 novembre 2008",
         url: "https://archive.bitumequebec.ca/wp-content/uploads/2015/06/collagedescouches.pdf",
       },
       {
@@ -393,6 +396,11 @@ function CategoryHeader() {
   );
 }
 
+/** Petits nombres en lettres pour le texte courant (« quatre dossiers »). */
+function enLettres(n: number): string {
+  return ["zéro", "un", "deux", "trois", "quatre", "cinq", "six"][n] ?? String(n);
+}
+
 /**
  * Bloc « Voir aussi » : les autres dossiers et les services correspondants.
  * Rendu dans l'état de chargement **et** dans la page complète — servir aux
@@ -407,11 +415,23 @@ function SeeAlso({ slug }: { slug: string }) {
     { slug: "enrobe-a-chaud", label: "Enrobé à chaud" },
     { slug: "preparation-terrain", label: "Préparation de terrain" },
   ];
+  const label = fallbackCategoryBySlug(slug)?.title ?? titleCaseSlug(slug);
   return (
     <section className="relative w-full bg-background px-6 md:px-12 py-12 md:py-16 border-t border-gold/15">
       <div className="max-w-5xl mx-auto grid gap-10 md:grid-cols-2">
         <div>
-          <h2 className="label text-gold">— Autres réalisations</h2>
+          <div className="label text-gold">— Autres réalisations</div>
+          <h2
+            className="font-display mt-4 text-foreground"
+            style={{ fontSize: "clamp(20px, 2.4vw, 26px)", fontWeight: 400, lineHeight: 1.25 }}
+          >
+            Quels autres chantiers d'HCE peut-on voir en photos ?
+          </h2>
+          <p className="mt-3 text-muted" style={{ fontSize: 15, lineHeight: 1.7 }}>
+            Les photos d'HCE sont classées en {enLettres(REAL_CAT_SLUGS.length)} dossiers. Chacun
+            réunit ses photos de chantier et les questions à trancher avant les travaux, avec leurs
+            sources.
+          </p>
           <ul className="mt-4 space-y-2">
             <li>
               <Link
@@ -437,7 +457,20 @@ function SeeAlso({ slug }: { slug: string }) {
           </ul>
         </div>
         <div>
-          <h2 className="label text-gold">— Les prestations mises en œuvre</h2>
+          <div className="label text-gold">— Les prestations mises en œuvre</div>
+          <h2
+            className="font-display mt-4 text-foreground"
+            style={{ fontSize: "clamp(20px, 2.4vw, 26px)", fontWeight: 400, lineHeight: 1.25 }}
+          >
+            {`Quels services d'HCE ce dossier « ${label} » illustre-t-il ?`}
+          </h2>
+          <p className="mt-3 text-muted" style={{ fontSize: 15, lineHeight: 1.7 }}>
+            {services.length === 1
+              ? "La page ci-dessous détaille"
+              : `Les ${enLettres(services.length)} pages ci-dessous détaillent`}{" "}
+            la méthode d'HCE pour les prestations visibles sur ces photos, dans le Jura et l'Ain,
+            avec les questions qu'on lui pose.
+          </p>
           <ul className="mt-4 space-y-2">
             {services.map((s) => (
               <li key={s.slug}>

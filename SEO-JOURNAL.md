@@ -8,6 +8,24 @@ et à compléter en fin de run.
 
 ## État des lieux
 
+> ✅ **12/11/2026 — Déploiement OK** (`2b3c08e` : statut GitHub `success`). Prod = dernier
+> commit (16/16 en 200 ; `/zone-intervention` 11 143 = banc du 11/11). Chantier
+> (**technique — maillage + titres**, après un jour contenu) : (1) **Hypothèse du 01/11
+> tranchée** : les 23 photos servies sur `/realisations/cour-allee-privee` ont été relues
+> (planche-contact, rendu Playwright de la prod) → enrobé + bordures béton + bandes de pavés /
+> dalles en rive (4 photos), **aucun médaillon visible**. Donc `RELATED_SERVICES` du dossier
+> gagne `maconnerie-generale` et `bordures-murets` (lien retour + `about` JSON-LD 2 → 4), et
+> la raison du lien `maconnerie-generale` → dossier passe de « pavés, dallages et médaillons…
+> en photos » à « des bandes de pavés et de dalles posées en rive d'enrobé, en photos ».
+> (2) Bloc « Voir aussi » des 4 `/realisations/*` : les H2 « — Autres réalisations » / « — Les
+> prestations mises en œuvre » (identiques sur 4 pages) deviennent des sur-titres ; H2 =
+> questions (« Quels autres chantiers d'HCE peut-on voir en photos ? », « Quels services
+> d'HCE ce dossier « {titre} » illustre-t-il ? ») + 1 phrase de réponse qui décrit les liens
+> (rien de neuf affirmé). Banc local (`vite dev`) : cour 10 686, parking 11 659, prépa
+> 11 139, chantier 10 385, maçonnerie 10 021 ; mobile 390 px sans débordement (SSR sans JS).
+> `lastmod` / `llms.txt` non touchés (liens et titres seuls). Build OK, `check:fige` OK.
+> Archive : état + positions du 12/10.
+
 > ✅ **11/11/2026 — Déploiement OK** (`b8cbaca` : statut GitHub `success`). Prod = dernier
 > commit (16/16 en 200 ; services = H2 du 10/11 en ligne, ex. enrobé 13 463). Chantier
 > (**contenu**, après un jour technique) : **`/zone-intervention`** (8 784, lastmod 30/09 — la
@@ -423,12 +441,6 @@ et à compléter en fin de run.
 > ✅ Vérifié en prod (`175e08a`, `success` ~80 s) : 6/6 titres servis,
 > IndexNow 15 URLs → 200.
 
-> ✅ **12/10/2026 — Déploiement OK** (`9e2e07e` : Vercel `success`). Prod =
-> dernier commit (15/15 URLs identiques au banc du 11/10, FAQ 11/11, lastmod
-> 15 cohérentes). Chantier du jour : **`/realisations/chantier-en-cours`
-> sort de la maigreur (373 → 5 596 car. en prod)** — la dernière page maigre du site.
-> Toutes les URLs du sitemap ont désormais un `lastmod`.
-
 > ✅ **11/10/2026 — LA PRODUCTION SE DÉPLOIE À NOUVEAU. Le blocage du 01/10 est
 > levé.** Yanis a mergé `fix/tanstack-cve-deploy` (PR #1, commit `e3a860e`, le
 > 10/10 à 22:30) : statut Vercel **`success`** sur `main`. **La dette de
@@ -611,6 +623,17 @@ un extrait de SERP ne prouve pas ce que la page contient.
 > `verif.com` ont été jugées périmées **sur la seule foi d'extraits de recherche**
 > (403 au runner, contenu jamais lu). Leur statut « périmée » n'est donc pas
 > établi. Noté en chantier en attente.
+
+### Positions mesurées — 12/11/2026
+
+| Contrôle | 12/11/2026 | vs 11/11 |
+|---|---|---|
+| Déploiement `main` (`2b3c08e`) | **`success`** (Vercel) | = |
+| Prod vs code (`mesure-texte-servi`) | 16/16 en 200 ; zone 11 143 (Q/R du 11/11 en ligne) | = banc |
+| SERP | non relevée (canal `WebSearch` US, non représentatif) | — |
+
+Pas d'accès Search Console. **À relever par Yanis** : « Performances IA » + requêtes à
+impressions ; indexation de `/contact`, `/arnaque-goudronnage` et `/zone-intervention`.
 
 ### Positions mesurées — 11/11/2026
 
@@ -948,22 +971,12 @@ Pas d'accès Search Console depuis le runner. **À relever par Yanis** : pages
 indexées, et — dans 2-3 semaines — le CTR des six `/services/*` (nouveaux
 `<title>`), requêtes « goudronnage » / « terrassement ».
 
-### Positions mesurées — 12/10/2026
-
-| Contrôle | 12/10/2026 | vs 11/10 |
-|---|---|---|
-| Déploiement `main` (`9e2e07e`) | **`success`** | = |
-| Prod vs code (`mesure-texte-servi`) | 15/15 URLs = banc du 11/10 (`/arnaque-goudronnage` 10 646) | = |
-| « enrobé à chaud Jura entreprise cour » | domaine **absent** ; fiche `118712.fr` de HCE 1ʳᵉ | = |
-| « goudronnage cour Jura » | **absent** (Wikipédia anglais, météo) | = |
-| « enrobé Champagnole entreprise » | **absent** (bruit : Champagne-au-Mont-d'Or) | 🆕 relevé |
-| « réfection parking enrobé Jura Lons-le-Saunier » | **absent** (PDF Mijoux, annonces parking) | 🆕 relevé |
-
-Canal `WebSearch` = US, non représentatif. Pas d'accès Search Console depuis le
-runner (aucun outil GSC chargeable). **À relever par Yanis dans la GSC** :
-pages indexées / « Explorée, non indexée », et requêtes avec impressions.
-
 ## Chantiers faits
+
+### 12/11/2026 — `/realisations/*` : H2 « Voir aussi » en questions ; lien retour cour-allee-privee → maçonnerie et bordures
+`realisations.ts` (`RELATED_SERVICES`), `realisations.$slug.tsx` (`SeeAlso`, helper
+`enLettres`), `services.$slug.tsx` (raison du lien maçonnerie → dossier, sans « médaillons »).
+Le tableau des services de `/realisations` (index) affiche aussi les 2 nouveaux liens.
 
 ### 11/11/2026 — `/zone-intervention` : Q/R permission de voirie sur route départementale du Jura
 Q/R n° 4 (avant « ma commune »), FAQPage = FAQ visible, 2 sources (arrêté jura.fr RD 39
@@ -1284,6 +1297,18 @@ FAQ 5 → 7 (FAQPage = visible, `verif-faq` 7/7), lead mis à jour, source ajout
 
 Par ordre de priorité. **Alterner les angles, ne pas refaire le même deux jours
 de suite.**
+
+> 🆕 **MISE À JOUR DU 12/11/2026 — prime sur tout ce qui suit.**
+> ✅ H2 « Voir aussi » des `/realisations/*` + lien retour `cour-allee-privee` → maçonnerie /
+> bordures (à vérifier en prod : cour ~10 686 car., H2 « Quels autres chantiers d'HCE… »,
+> `about` 4 services ; puis IndexNow).
+> 1. Prochain contenu : `/arnaque-goudronnage` (10 656, vérifier son lastmod) ou
+>    `bordures-murets` (9 983) ; accueil : **rien sans accord client**.
+> 2. Prochain technique : texte servi de `/realisations/*` en SSR = « Chargement des
+>    photos… » (photos client seul) — voir si un `alt` / une légende peut sortir côté serveur
+>    sans toucher à Supabase ; sinon noter.
+> 3. Yanis/client : H1 de `finitions-soignees` ; compteurs « X chantiers réalisés » de la
+>    carte ; Search Console ; fiche Google Business Profile.
 
 > 🆕 **MISE À JOUR DU 11/11/2026 — prime sur tout ce qui suit.**
 > ✅ `/zone-intervention` : Q/R permission de voirie Jura (à vérifier en prod : ~11 143 car.,
@@ -2360,6 +2385,8 @@ client). Si Naofal ne les confirme pas : retirer la ligne « X chantiers » (gar
 `/services/maconnerie-generale` y renvoie (« pavés, dallages et médaillons… en photos »),
 mais le dossier ne liste pas la maçonnerie dans ses prestations (`RELATED_SERVICES`). Les
 photos sont en base : à regarder avant d'ajouter le lien retour, ou de corriger la phrase.
+✅ **Tranché le 12/11/2026** : 23 photos relues — pavés / dalles en rive d'enrobé sur 4 photos,
+bordures béton sur plusieurs, **aucun médaillon**. Lien retour ajouté, phrase corrigée.
 
 ### 22/10/2026 — La demande client du 22/10 vaut-elle pour les autres blocs juridiques du site ?
 Le client a fait retirer de l'accueil le bloc loi devis/acompte/délais et la Q/R « posé

@@ -25,6 +25,8 @@ et à compléter en fin de run.
 > 11 139, chantier 10 385, maçonnerie 10 021 ; mobile 390 px sans débordement (SSR sans JS).
 > `lastmod` / `llms.txt` non touchés (liens et titres seuls). Build OK, `check:fige` OK.
 > Archive : état + positions du 12/10.
+> ✅ Vérifié en prod (`b1bd28e`, `success`) : cour 10 696, parking 11 667, H2 question servi,
+> maçonnerie 10 021 (= banc), IndexNow 16 URLs → 200.
 
 > ✅ **11/11/2026 — Déploiement OK** (`b8cbaca` : statut GitHub `success`). Prod = dernier
 > commit (16/16 en 200 ; services = H2 du 10/11 en ligne, ex. enrobé 13 463). Chantier

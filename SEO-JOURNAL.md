@@ -19,6 +19,8 @@ et à compléter en fin de run.
 > **Pas de phrase sur la saison de pose** (Hypothèse du 22/10 non tranchée). Source ajoutée,
 > `datePublished` figé au 11/10 (il suivait le lastmod), lastmod + `llms.txt` 13/11. Banc
 > local : **11 880 car.**, FAQ 7/7. Build OK, `check:fige` OK. Archive : état + positions 13/10.
+> ✅ Vérifié en prod (`2ca3aed`, `success`) : 11 880 car. (= banc), FAQ 7/7, `llms.txt`
+> (alerte Jura servie), IndexNow 16 URLs → 200.
 
 > ✅ **12/11/2026 — Déploiement OK** (`2b3c08e` : statut GitHub `success`). Prod = dernier
 > commit (16/16 en 200 ; `/zone-intervention` 11 143 = banc du 11/11). Chantier

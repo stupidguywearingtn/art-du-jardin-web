@@ -16,10 +16,13 @@ import { PAGE_UPDATED } from "@/lib/lastmod";
  * d'alerte une preuve que le visiteur peut contrôler lui-même chez HCE.
  *
  * RÈGLES DE RÉDACTION TENUES ICI (à garder si la page est reprise) :
- * - **Aucune alerte locale inventée.** Aucune alerte de la gendarmerie du Jura
- *   ou de l'Ain n'a été retrouvée en source primaire le 11/10/2026 ; la page
- *   cite donc l'alerte de la gendarmerie de l'Indre (France Bleu Berry) comme
- *   exemple, et ne prétend pas que le procédé « sévit dans le Jura ».
+ * - **Aucune alerte locale inventée.** Le 11/10/2026, aucune alerte de la
+ *   gendarmerie du Jura ou de l'Ain n'avait été retrouvée. Le 13/11/2026, une
+ *   alerte de la gendarmerie du Jura a été lue (Plein Air, 23/03/2021 :
+ *   « Plusieurs faits ont été dénoncés dans le département ces derniers
+ *   jours ») : elle fait l'objet de la section « jura », DATÉE (2021), sans
+ *   rien affirmer de plus récent. Toujours rien trouvé pour l'Ain : ne pas
+ *   écrire que le procédé « sévit dans l'Ain ».
  * - **Aucune promesse au nom du client.** On décrit ce que la loi impose à
  *   toute entreprise et les éléments d'identité publics de HCE (SIRET, adresse,
  *   téléphone fixe, date de création). On n'écrit PAS « HCE ne fait jamais de
@@ -57,6 +60,16 @@ const SECTIONS: Section[] = [
     suite: [
       "La gendarmerie de l'Indre a décrit ce procédé dans une alerte relayée par France Bleu Berry : de faux ouvriers proposent, contre de l'argent, de goudronner une partie du chemin d'accès, à des tarifs attractifs, avec un produit de mauvaise qualité qui ne tient pas. Elle appelle « à la plus grande vigilance, notamment pour les personnes isolées et les plus fragiles ». Des alertes de même nature sont publiées régulièrement par les gendarmeries d'autres départements, au printemps et à l'automne, quand il fait assez doux pour poser.",
       "Le schéma de pression est le même que celui que la DGCCRF décrit pour les arnaques à la rénovation : un prix « préférentiel » conditionné à une décision immédiate, un paiement le jour même, et parfois une renonciation au délai de rétractation signée en échange de la remise. C'est la combinaison urgence + prix + paiement immédiat qui doit alerter, pas l'un des trois isolément.",
+    ],
+  },
+  {
+    id: "jura",
+    label: "Dans le Jura",
+    q: "Y a-t-il eu des arnaques au goudronnage dans le Jura ?",
+    r: "Oui. En mars 2021, la gendarmerie du Jura a appelé à la prudence après que plusieurs faits d'arnaque « aux bitumeurs » ont été dénoncés dans le département : des démarcheurs proposaient à des particuliers de refaire le goudron de leur cour à bas prix, sans devis ni contrat, avec un goudron de mauvaise qualité, un travail bâclé et un prix qui augmentait au fil du chantier. Elle conseillait de ne rien signer, de ne remettre aucune somme, de relever l'immatriculation du véhicule et d'appeler le 17.",
+    suite: [
+      "Cette alerte a été relayée par le média régional Plein Air le 23 mars 2021. La gendarmerie y rattachait le retour du procédé aux beaux jours : c'est le moment où une équipe de passage peut proposer un goudronnage « tout de suite » sans que l'offre paraisse déplacée.",
+      "Aucune alerte plus récente de la gendarmerie du Jura ou de l'Ain n'a été retrouvée en source publique à la date de mise à jour de cette page. Cela ne veut pas dire que le procédé a disparu : les alertes de même nature continuent d'être publiées ailleurs en France, et les signes à repérer restent les mêmes.",
     ],
   },
   {
@@ -127,6 +140,10 @@ const SOURCES = [
     url: "https://www.francebleu.fr/infos/faits-divers-justice/indre-l-arnaque-aux-bitumeurs-est-de-retour-la-gendarmerie-appelle-a-la-vigilance-1616057249",
   },
   {
+    label: "Plein Air — « Jura : La gendarmerie prévient » (23 mars 2021)",
+    url: "http://pleinair.net/actualites/item/90009-jura-la-gendarmerie-previent",
+  },
+  {
     label:
       "DGCCRF — Lutte contre les arnaques dans le secteur des travaux de rénovation (20 février 2024)",
     url: "https://www.economie.gouv.fr/dgccrf/lutte-contre-les-arnaques-dans-le-secteur-des-travaux-de-renovation-0",
@@ -186,7 +203,7 @@ export const Route = createFileRoute("/arnaque-goudronnage")({
           inLanguage: "fr-FR",
           url: URL_PAGE,
           mainEntityOfPage: URL_PAGE,
-          datePublished: PAGE_UPDATED["/arnaque-goudronnage"].iso,
+          datePublished: "2026-10-11",
           dateModified: PAGE_UPDATED["/arnaque-goudronnage"].iso,
           author: { "@id": "https://www.hcetp.com/#business" },
           publisher: { "@id": "https://www.hcetp.com/#business" },

@@ -43,7 +43,7 @@ export const PAGE_UPDATED = {
   "/realisations/parking-voirie-pro": { iso: "2026-11-04", label: "4 novembre 2026" },
   "/realisations/preparation-terrassement": { iso: "2026-11-02", label: "2 novembre 2026" },
   "/mentions-legales": { iso: "2026-10-22", label: "22 octobre 2026" },
-  "/arnaque-goudronnage": { iso: "2026-10-11", label: "11 octobre 2026" },
+  "/arnaque-goudronnage": { iso: "2026-11-13", label: "13 novembre 2026" },
   "/realisations/chantier-en-cours": { iso: "2026-10-31", label: "31 octobre 2026" },
   "/contact": { iso: "2026-11-09", label: "9 novembre 2026" },
 } satisfies Record<string, PageUpdate>;

@@ -5002,3 +5002,27 @@ runner). À relever par Yanis : pages indexées, et impressions sur
 Canal `WebSearch` = US, non représentatif. Pas d'accès Search Console depuis le
 runner (aucun outil GSC chargeable). **À relever par Yanis dans la GSC** :
 pages indexées / « Explorée, non indexée », et requêtes avec impressions.
+
+<!-- section d'origine : État des lieux (archivé le 13/11/2026) -->
+> ✅ **13/10/2026 — Déploiement OK** (`5de9cb1` : Vercel `success`). Prod =
+> dernier commit (15/15 URLs = banc du 12/10). Chantier du jour : **balises
+> `<title>` des six `/services/*`** — elles étaient génériques (« Enrobé à
+> chaud — HCE · Jura & Ain ») et celle de `finitions-soignees` portait une
+> accroche (« Vous avez un projet d'aménagement… »). Désormais champ
+> `seoTitle` dédié (requête + zone), H1 et contenu visibles inchangés.
+> ✅ Vérifié en prod (`175e08a`, `success` ~80 s) : 6/6 titres servis,
+> IndexNow 15 URLs → 200.
+
+<!-- section d'origine : Positions mesurées (archivé le 13/11/2026) -->
+### Positions mesurées — 13/10/2026
+
+| Contrôle | 13/10/2026 | vs 12/10 |
+|---|---|---|
+| Déploiement `main` (`5de9cb1`) | **`success`** | = |
+| Prod vs code (`mesure-texte-servi`) | 15/15 URLs = banc du 12/10 | = |
+| « enrobé à chaud Jura entreprise cour » | domaine **absent** ; fiche `118712.fr` de HCE 1ʳᵉ | = |
+| « terrassement Jura entreprise Champagnole » | **absent** (obat.fr, cylex, annonces) | 🆕 relevé |
+
+Pas d'accès Search Console depuis le runner. **À relever par Yanis** : pages
+indexées, et — dans 2-3 semaines — le CTR des six `/services/*` (nouveaux
+`<title>`), requêtes « goudronnage » / « terrassement ».

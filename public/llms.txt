@@ -5,7 +5,7 @@
 > dans le Jura et l'Ain. Entreprise créée en 2012, 14 années d'expérience, plus de
 > 1000 chantiers livrés, garantie décennale.
 
-Dernière mise à jour : 11 novembre 2026
+Dernière mise à jour : 13 novembre 2026
 Site officiel : https://www.hcetp.com
 
 ## L'entreprise en bref
@@ -628,7 +628,10 @@ de l'eau ne s'évaluent pas autrement.
   des chaussées ; chevauchement 25-50 mm, liant d'accrochage sur le joint) — avec leurs sources.
 - [Arnaque au goudronnage : les signes](https://www.hcetp.com/arnaque-goudronnage) :
   comment reconnaître l'offre de goudronnage faite sans rendez-vous « avec l'enrobé qui reste
-  d'un chantier voisin » (prix bas, paiement immédiat, pas de devis écrit), comment vérifier
+  d'un chantier voisin » (prix bas, paiement immédiat, pas de devis écrit), l'alerte de la
+  gendarmerie du Jura de mars 2021 (plusieurs faits dénoncés dans le département : goudron de
+  cour à bas prix, sans devis ni contrat, prix qui augmente en cours de chantier ; conseils :
+  ne rien signer, ne rien payer, relever l'immatriculation, appeler le 17), comment vérifier
   une entreprise en cinq minutes (SIRET sur annuaire-entreprises.data.gouv.fr, attestation
   d'assurance décennale obligatoirement jointe au devis selon l'article L243-2 du code des
   assurances, modèle applicable depuis le 1er juillet 2016), ce que dit la loi (aucun paiement

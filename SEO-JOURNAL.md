@@ -8,6 +8,18 @@ et à compléter en fin de run.
 
 ## État des lieux
 
+> ✅ **13/11/2026 — Déploiement OK** (`ee6d9ff` : statut GitHub `success`). Prod = dernier
+> commit (16/16 en 200, chiffres = banc du 12/11). Chantier (**contenu**, après un jour
+> technique) : **`/arnaque-goudronnage`** (10 656, lastmod 11/10) +1 Q/R **« Y a-t-il eu des
+> arnaques au goudronnage dans le Jura ? »** — alerte réelle de la **gendarmerie du Jura**
+> lue (Plein Air, 23/03/2021 : « Plusieurs faits ont été dénoncés dans le département ces
+> derniers jours » ; pas de devis/contrat, goudron de mauvaise qualité, prix qui évolue ;
+> conseils : 17, ne rien signer/payer, relever la plaque). Présentée **datée 2021**, + phrase
+> « aucune alerte plus récente Jura/Ain retrouvée ». Rien trouvé pour l'Ain (3 recherches).
+> **Pas de phrase sur la saison de pose** (Hypothèse du 22/10 non tranchée). Source ajoutée,
+> `datePublished` figé au 11/10 (il suivait le lastmod), lastmod + `llms.txt` 13/11. Banc
+> local : **11 880 car.**, FAQ 7/7. Build OK, `check:fige` OK. Archive : état + positions 13/10.
+
 > ✅ **12/11/2026 — Déploiement OK** (`2b3c08e` : statut GitHub `success`). Prod = dernier
 > commit (16/16 en 200 ; `/zone-intervention` 11 143 = banc du 11/11). Chantier
 > (**technique — maillage + titres**, après un jour contenu) : (1) **Hypothèse du 01/11
@@ -434,15 +446,6 @@ et à compléter en fin de run.
 > `HomeAndConstructionBusiness` en ligne, `garantie-sav` → 301, textes inchangés,
 > IndexNow 15 URLs → 200.
 
-> ✅ **13/10/2026 — Déploiement OK** (`5de9cb1` : Vercel `success`). Prod =
-> dernier commit (15/15 URLs = banc du 12/10). Chantier du jour : **balises
-> `<title>` des six `/services/*`** — elles étaient génériques (« Enrobé à
-> chaud — HCE · Jura & Ain ») et celle de `finitions-soignees` portait une
-> accroche (« Vous avez un projet d'aménagement… »). Désormais champ
-> `seoTitle` dédié (requête + zone), H1 et contenu visibles inchangés.
-> ✅ Vérifié en prod (`175e08a`, `success` ~80 s) : 6/6 titres servis,
-> IndexNow 15 URLs → 200.
-
 > ✅ **11/10/2026 — LA PRODUCTION SE DÉPLOIE À NOUVEAU. Le blocage du 01/10 est
 > levé.** Yanis a mergé `fix/tanstack-cve-deploy` (PR #1, commit `e3a860e`, le
 > 10/10 à 22:30) : statut Vercel **`success`** sur `main`. **La dette de
@@ -625,6 +628,17 @@ un extrait de SERP ne prouve pas ce que la page contient.
 > `verif.com` ont été jugées périmées **sur la seule foi d'extraits de recherche**
 > (403 au runner, contenu jamais lu). Leur statut « périmée » n'est donc pas
 > établi. Noté en chantier en attente.
+
+### Positions mesurées — 13/11/2026
+
+| Contrôle | 13/11/2026 | vs 12/11 |
+|---|---|---|
+| Déploiement `main` (`ee6d9ff`) | **`success`** (Vercel) | = |
+| Prod vs code (`mesure-texte-servi`) | 16/16 en 200 ; cour 10 696, parking 11 667 (= 12/11) | = |
+| SERP | non relevée (canal `WebSearch` US, non représentatif) | — |
+
+Pas d'accès Search Console. **À relever par Yanis** : « Performances IA » + requêtes à
+impressions ; indexation de `/arnaque-goudronnage` (et requête « arnaque goudronnage Jura »).
 
 ### Positions mesurées — 12/11/2026
 
@@ -960,20 +974,12 @@ indexées, requêtes à impressions (« goudronnage », « enrobé Jura », « p
 Pas d'accès Search Console depuis le runner. **À relever par Yanis** : pages
 indexées et requêtes à impressions (« enrobé », « goudronnage », « terrassement »).
 
-### Positions mesurées — 13/10/2026
-
-| Contrôle | 13/10/2026 | vs 12/10 |
-|---|---|---|
-| Déploiement `main` (`5de9cb1`) | **`success`** | = |
-| Prod vs code (`mesure-texte-servi`) | 15/15 URLs = banc du 12/10 | = |
-| « enrobé à chaud Jura entreprise cour » | domaine **absent** ; fiche `118712.fr` de HCE 1ʳᵉ | = |
-| « terrassement Jura entreprise Champagnole » | **absent** (obat.fr, cylex, annonces) | 🆕 relevé |
-
-Pas d'accès Search Console depuis le runner. **À relever par Yanis** : pages
-indexées, et — dans 2-3 semaines — le CTR des six `/services/*` (nouveaux
-`<title>`), requêtes « goudronnage » / « terrassement ».
-
 ## Chantiers faits
+
+### 13/11/2026 — `/arnaque-goudronnage` : Q/R alerte de la gendarmerie du Jura (2021)
+Section `jura` (2ᵉ, après « Le procédé »), FAQPage = FAQ visible (7/7), source Plein Air
+23/03/2021. Commentaire d'en-tête mis à jour (règle « aucune alerte locale inventée »).
+10 656 → 11 880 car.
 
 ### 12/11/2026 — `/realisations/*` : H2 « Voir aussi » en questions ; lien retour cour-allee-privee → maçonnerie et bordures
 `realisations.ts` (`RELATED_SERVICES`), `realisations.$slug.tsx` (`SeeAlso`, helper
@@ -1299,6 +1305,16 @@ FAQ 5 → 7 (FAQPage = visible, `verif-faq` 7/7), lead mis à jour, source ajout
 
 Par ordre de priorité. **Alterner les angles, ne pas refaire le même deux jours
 de suite.**
+
+> 🆕 **MISE À JOUR DU 13/11/2026 — prime sur tout ce qui suit.**
+> ✅ `/arnaque-goudronnage` : Q/R gendarmerie du Jura (à vérifier en prod : ~11 880 car.,
+> FAQ 7/7, « Plein Air » servi, lastmod 13/11, `llms.txt` 13/11 ; puis IndexNow).
+> 1. Prochain technique : texte SSR de `/realisations/*` (« Chargement des photos… ») —
+>    `alt` / légende côté serveur sans toucher à Supabase ; sinon noter.
+> 2. Prochain contenu : `bordures-murets` (9 983) ; accueil : **rien sans accord client**.
+> 3. Lundi 16/11 : veille (étape 6).
+> 4. Yanis/client : saison de pose (Hypothèse 22/10) ; H1 `finitions-soignees` ; compteurs
+>    de la carte ; Search Console ; fiche Google Business Profile.
 
 > 🆕 **MISE À JOUR DU 12/11/2026 — prime sur tout ce qui suit.**
 > ✅ H2 « Voir aussi » des `/realisations/*` + lien retour `cour-allee-privee` → maçonnerie /

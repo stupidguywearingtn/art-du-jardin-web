@@ -22,6 +22,8 @@ et à compléter en fin de run.
 > 10 397, bordures 10 288, finitions 11 718 ; mobile 390 px sans débordement. `lastmod` /
 > `llms.txt` non touchés (liens et titres seuls). Build OK, `check:fige` OK. Archive : état
 > + positions du 14/10. **Écarté** : SSR des photos de `/realisations/*` (voir « en attente »).
+> ✅ Vérifié en prod (`1744e95`, `success`) : enrobé 14 010, prépa 10 461 (3 liens dossiers),
+> chantier-en-cours 5 → 7 entrants, parking 6 → 7, IndexNow 16 URLs → 200.
 
 > ✅ **13/11/2026 — Déploiement OK** (`ee6d9ff` : statut GitHub `success`). Prod = dernier
 > commit (16/16 en 200, chiffres = banc du 12/11). Chantier (**contenu**, après un jour

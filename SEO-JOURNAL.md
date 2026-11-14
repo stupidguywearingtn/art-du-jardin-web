@@ -8,6 +8,21 @@ et à compléter en fin de run.
 
 ## État des lieux
 
+> ✅ **14/11/2026 — Déploiement OK** (`2cc278a` : statut GitHub `success`). Prod = dernier
+> commit (16/16 en 200 ; `/arnaque-goudronnage` 11 880 = banc du 13/11). Chantier
+> (**technique — maillage**, après un jour contenu) : audit des liens entrants servis (16
+> URLs) → `/realisations/chantier-en-cours` n'était lié par **aucune page service** (5
+> entrants : hub + 3 dossiers + accueil), alors que `RELATED_SERVICES` le rattache à
+> enrobé et préparation ; idem `parking-voirie-pro` ← préparation. `VOIR_AUSSI`
+> (`services.$slug.tsx`) remis en miroir : enrobé → chantier-en-cours ; préparation →
+> parking + chantier-en-cours (raisons tirées des Q/R existantes, rien de neuf affirmé). H2
+> « — Sur le même chantier » (identique sur 6 pages) → sur-titre + **H2 question propre à
+> chaque service** (« Où voir … en photos, et quels travaux … ? ») + 1 phrase de réponse qui
+> décrit les liens. Banc local SSR : prépa 10 464, enrobé 14 010, maçonnerie 10 327, drainage
+> 10 397, bordures 10 288, finitions 11 718 ; mobile 390 px sans débordement. `lastmod` /
+> `llms.txt` non touchés (liens et titres seuls). Build OK, `check:fige` OK. Archive : état
+> + positions du 14/10. **Écarté** : SSR des photos de `/realisations/*` (voir « en attente »).
+
 > ✅ **13/11/2026 — Déploiement OK** (`ee6d9ff` : statut GitHub `success`). Prod = dernier
 > commit (16/16 en 200, chiffres = banc du 12/11). Chantier (**contenu**, après un jour
 > technique) : **`/arnaque-goudronnage`** (10 656, lastmod 11/10) +1 Q/R **« Y a-t-il eu des
@@ -435,19 +450,6 @@ et à compléter en fin de run.
 > ✅ Vérifié en prod (`ebb0310`, `success` < 80 s) : 2 Q/R servies, « 15 octobre
 > 2026 » affiché, `llms.txt` à jour, IndexNow 15 URLs → 200.
 
-> ✅ **14/10/2026 — Déploiement OK** (`68466b3` : Vercel `success`). Prod =
-> dernier commit (15/15 URLs = valeurs du 13/10). Chantier du jour (technique) :
-> **aperçu de partage + entité locale**. L'`og:image` de tout le site (sauf
-> `/services/*`) était une **capture d'une ancienne preview Lovable** sur un
-> bucket tiers `r2.dev`, montrant un finisseur (contraire à « posé à la
-> main ») et un titre tronqué → remplacée par `/og-hce.jpg` (vraie photo
-> d'allée du dépôt, 1200×630, servie par le domaine). `LocalBusiness` →
-> `HomeAndConstructionBusiness` + `image` + `hasOfferCatalog` (6 services, sans
-> prix). `/services/garantie-sav` : 307 → **301**.
-> ✅ Vérifié en prod (`3e40ab4`, `success` < 100 s) : `og-hce.jpg` servi (200),
-> `HomeAndConstructionBusiness` en ligne, `garantie-sav` → 301, textes inchangés,
-> IndexNow 15 URLs → 200.
-
 > ✅ **11/10/2026 — LA PRODUCTION SE DÉPLOIE À NOUVEAU. Le blocage du 01/10 est
 > levé.** Yanis a mergé `fix/tanstack-cve-deploy` (PR #1, commit `e3a860e`, le
 > 10/10 à 22:30) : statut Vercel **`success`** sur `main`. **La dette de
@@ -630,6 +632,19 @@ un extrait de SERP ne prouve pas ce que la page contient.
 > `verif.com` ont été jugées périmées **sur la seule foi d'extraits de recherche**
 > (403 au runner, contenu jamais lu). Leur statut « périmée » n'est donc pas
 > établi. Noté en chantier en attente.
+
+### Positions mesurées — 14/11/2026
+
+| Contrôle | 14/11/2026 | vs 13/11 |
+|---|---|---|
+| Déploiement `main` (`2cc278a`) | **`success`** (Vercel) | = |
+| Prod vs code (`mesure-texte-servi`) | 16/16 en 200 ; arnaque 11 880 (Q/R du 13/11 en ligne) | = banc |
+| `verif-lastmod` / `verif-faq` (prod) | 15/16 (seul écart connu `/`) ; FAQ accueil 5/5 | = |
+| Liens entrants servis (min.) | chantier-en-cours 5, drainage 5, finitions 5, parking 6 | 🆕 relevé |
+| SERP | non relevée (canal `WebSearch` US, non représentatif) | — |
+
+Pas d'accès Search Console. **À relever par Yanis** : « Performances IA » + requêtes à
+impressions ; indexation de `/arnaque-goudronnage` et `/zone-intervention`.
 
 ### Positions mesurées — 13/11/2026
 
@@ -964,19 +979,11 @@ par Yanis** : pages indexées / « Explorée, non indexée », requêtes à impr
 Pas d'accès Search Console depuis le runner. **À relever par Yanis** : pages
 indexées, requêtes à impressions (« goudronnage », « enrobé Jura », « puits perdu »).
 
-### Positions mesurées — 14/10/2026
-
-| Contrôle | 14/10/2026 | vs 13/10 |
-|---|---|---|
-| Déploiement `main` (`68466b3`) | **`success`** | = |
-| Prod vs code (`mesure-texte-servi`) | 15/15 URLs = 13/10 | = |
-| Redirections | apex/http/`hcebtp.com` → 308 OK ; `/avant-apres` 301 OK ; `/services/garantie-sav` **307** (corrigé) ; `/x/` → 307 vers sans slash (canonique OK, laissé) | 🆕 |
-| SERP | non remesurée (canal `WebSearch` US non représentatif, voir 12-13/10) | — |
-
-Pas d'accès Search Console depuis le runner. **À relever par Yanis** : pages
-indexées et requêtes à impressions (« enrobé », « goudronnage », « terrassement »).
-
 ## Chantiers faits
+
+### 14/11/2026 — Maillage `/services/*` → dossiers : liens inverses manquants + H2 question
+`VOIR_AUSSI` gagne un champ `h` (H2 par service) ; enrobé → `chantier-en-cours` ; préparation
+→ `parking-voirie-pro` + `chantier-en-cours` ; helper `listeFr`. `services.$slug.tsx` seul.
 
 ### 13/11/2026 — `/arnaque-goudronnage` : Q/R alerte de la gendarmerie du Jura (2021)
 Section `jura` (2ᵉ, après « Le procédé »), FAQPage = FAQ visible (7/7), source Plein Air
@@ -1307,6 +1314,20 @@ FAQ 5 → 7 (FAQPage = visible, `verif-faq` 7/7), lead mis à jour, source ajout
 
 Par ordre de priorité. **Alterner les angles, ne pas refaire le même deux jours
 de suite.**
+
+> 🆕 **MISE À JOUR DU 14/11/2026 — prime sur tout ce qui suit.**
+> ✅ Maillage services → dossiers (à vérifier en prod : `/services/enrobe-a-chaud` ~14 010
+> car. et lien `/realisations/chantier-en-cours` ; `preparation-terrain` ~10 464 et 3 liens
+> `/realisations/*` ; H2 « Où voir … » ; puis IndexNow).
+> ⛔ **SSR des photos de `/realisations/*` écarté** : elles arrivent dans un `useEffect`
+> (hook `useGalleryByCategorySlug`, partagé avec l'admin) ; les sortir côté serveur demande
+> un `loader` qui lit Supabase — refonte du flux de données, hors périmètre (« ne touche pas à
+> Supabase »). Google rend le JS, l'impact restant = crawlers IA sans JS. À proposer à Yanis.
+> 1. Prochain contenu : `bordures-murets` (9 983 en prod) ; accueil : **rien sans accord client**.
+> 2. Lundi 16/11 : veille (étape 6).
+> 3. Technique en réserve : `drainage-pentes` / `finitions-soignees` (5 entrants chacun).
+> 4. Yanis/client : saison de pose (Hypothèse 22/10) ; H1 `finitions-soignees` ; compteurs
+>    de la carte ; Search Console ; fiche Google Business Profile.
 
 > 🆕 **MISE À JOUR DU 13/11/2026 — prime sur tout ce qui suit.**
 > ✅ `/arnaque-goudronnage` : Q/R gendarmerie du Jura (à vérifier en prod : ~11 880 car.,

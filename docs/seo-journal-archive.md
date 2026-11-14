@@ -5026,3 +5026,32 @@ pages indexées / « Explorée, non indexée », et requêtes avec impressions.
 Pas d'accès Search Console depuis le runner. **À relever par Yanis** : pages
 indexées, et — dans 2-3 semaines — le CTR des six `/services/*` (nouveaux
 `<title>`), requêtes « goudronnage » / « terrassement ».
+
+## Archivé le 14/11/2026
+
+<!-- section d'origine : État des lieux -->
+> ✅ **14/10/2026 — Déploiement OK** (`68466b3` : Vercel `success`). Prod =
+> dernier commit (15/15 URLs = valeurs du 13/10). Chantier du jour (technique) :
+> **aperçu de partage + entité locale**. L'`og:image` de tout le site (sauf
+> `/services/*`) était une **capture d'une ancienne preview Lovable** sur un
+> bucket tiers `r2.dev`, montrant un finisseur (contraire à « posé à la
+> main ») et un titre tronqué → remplacée par `/og-hce.jpg` (vraie photo
+> d'allée du dépôt, 1200×630, servie par le domaine). `LocalBusiness` →
+> `HomeAndConstructionBusiness` + `image` + `hasOfferCatalog` (6 services, sans
+> prix). `/services/garantie-sav` : 307 → **301**.
+> ✅ Vérifié en prod (`3e40ab4`, `success` < 100 s) : `og-hce.jpg` servi (200),
+> `HomeAndConstructionBusiness` en ligne, `garantie-sav` → 301, textes inchangés,
+> IndexNow 15 URLs → 200.
+
+<!-- section d'origine : Positions mesurées -->
+### Positions mesurées — 14/10/2026
+
+| Contrôle | 14/10/2026 | vs 13/10 |
+|---|---|---|
+| Déploiement `main` (`68466b3`) | **`success`** | = |
+| Prod vs code (`mesure-texte-servi`) | 15/15 URLs = 13/10 | = |
+| Redirections | apex/http/`hcebtp.com` → 308 OK ; `/avant-apres` 301 OK ; `/services/garantie-sav` **307** (corrigé) ; `/x/` → 307 vers sans slash (canonique OK, laissé) | 🆕 |
+| SERP | non remesurée (canal `WebSearch` US non représentatif, voir 12-13/10) | — |
+
+Pas d'accès Search Console depuis le runner. **À relever par Yanis** : pages
+indexées et requêtes à impressions (« enrobé », « goudronnage », « terrassement »).

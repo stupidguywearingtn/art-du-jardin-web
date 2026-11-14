@@ -616,19 +616,41 @@ const SERVICES: Record<string, ServiceData> = {
  * `dossiers` est l'inverse de `RELATED_SERVICES` (`src/lib/realisations.ts`),
  * qui mappe chaque dossier vers ses services : garder les deux cohérents.
  */
+/** « a », « a et b », « a, b et c ». */
+function listeFr(items: string[]): string {
+  if (items.length <= 1) return items.join("");
+  return `${items.slice(0, -1).join(", ")} et ${items[items.length - 1]}`;
+}
+
 const VOIR_AUSSI: Record<
   string,
   {
+    /** H2 du bloc (14/11/2026) : question propre à la page, à la place du
+     *  « — Sur le même chantier » identique sur les six services. */
+    h: string;
     dossiers: { slug: string; label: string; why: string }[];
     services: { slug: string; label: string; why: string }[];
   }
 > = {
   "preparation-terrain": {
+    h: "Où voir une préparation de terrain d'HCE en photos, et quels travaux la suivent ?",
     dossiers: [
       {
         slug: "preparation-terrassement",
         label: "Préparation et terrassement",
         why: "Le décaissement, le compactage par couches et l'évacuation des terres, en photos de chantier.",
+      },
+      // 14/11/2026 : liens inverses de RELATED_SERVICES (parking et chantier
+      // en cours listent la préparation de terrain, l'inverse manquait).
+      {
+        slug: "parking-voirie-pro",
+        label: "Parking et voirie pro",
+        why: "La même préparation à l'échelle d'un parking pro, et ce que la réglementation demande pour les eaux pluviales d'une grande surface.",
+      },
+      {
+        slug: "chantier-en-cours",
+        label: "Chantier en cours",
+        why: "Le jour de la pose qui suit la préparation : ce qu'on voit sur le chantier et ce qu'il faut prévoir chez soi.",
       },
     ],
     services: [
@@ -645,6 +667,7 @@ const VOIR_AUSSI: Record<
     ],
   },
   "enrobe-a-chaud": {
+    h: "Où voir des chantiers d'enrobé d'HCE en photos, et quels travaux accompagnent la pose ?",
     dossiers: [
       {
         slug: "cour-allee-privee",
@@ -655,6 +678,12 @@ const VOIR_AUSSI: Record<
         slug: "parking-voirie-pro",
         label: "Parking et voirie pro",
         why: "Les mêmes passes à plus grande échelle, sur de la réfection de parking professionnel.",
+      },
+      // 14/11/2026 : lien inverse de RELATED_SERVICES["chantier-en-cours"].
+      {
+        slug: "chantier-en-cours",
+        label: "Chantier en cours",
+        why: "La pose vue de l'intérieur : la couche d'accrochage, une équipe qui ne s'arrête pas, et le délai avant de rouler sur la cour neuve.",
       },
     ],
     services: [
@@ -676,6 +705,7 @@ const VOIR_AUSSI: Record<
     ],
   },
   "maconnerie-generale": {
+    h: "Où voir les pavés et dalles posés par HCE, et quels travaux les accompagnent ?",
     dossiers: [
       {
         slug: "cour-allee-privee",
@@ -697,6 +727,7 @@ const VOIR_AUSSI: Record<
     ],
   },
   "drainage-pentes": {
+    h: "Où voir le réglage des pentes sur un chantier d'HCE, et quels travaux vont avec ?",
     dossiers: [
       {
         slug: "preparation-terrassement",
@@ -718,6 +749,7 @@ const VOIR_AUSSI: Record<
     ],
   },
   "bordures-murets": {
+    h: "Où voir les bordures posées par HCE, et quels travaux les accompagnent ?",
     dossiers: [
       {
         slug: "cour-allee-privee",
@@ -739,6 +771,7 @@ const VOIR_AUSSI: Record<
     ],
   },
   "finitions-soignees": {
+    h: "Où voir des finitions d'enrobé d'HCE, et de quels travaux dépendent-elles ?",
     dossiers: [
       {
         slug: "cour-allee-privee",
@@ -1102,7 +1135,19 @@ function ServicePageBody() {
         {voirAussi && (
           <section className="px-6 md:px-12 py-16 md:py-20 border-t border-gold/15 bg-surface">
             <div className="max-w-5xl mx-auto">
-              <h2 className="label text-gold">— Sur le même chantier</h2>
+              <div className="label text-gold">— Sur le même chantier</div>
+              <h2
+                className="font-display mt-4 text-foreground"
+                style={{ fontSize: "clamp(20px, 2.4vw, 26px)", fontWeight: 400, lineHeight: 1.25 }}
+              >
+                {voirAussi.h}
+              </h2>
+              <p className="mt-3 text-muted max-w-3xl" style={{ fontSize: 15, lineHeight: 1.7 }}>
+                En photos : {listeFr(voirAussi.dossiers.map((d) => `«\u00a0${d.label}\u00a0»`))}
+                {voirAussi.dossiers.length > 1 ? ", parmi les quatre dossiers de réalisations" : ", l'un des quatre dossiers de réalisations"}.
+                Les prestations qui vont avec : {listeFr(voirAussi.services.map((s) => s.label.toLowerCase()))}.
+                Les communes desservies depuis Cize sont sur la page Zone d'intervention.
+              </p>
               <div className="mt-8 grid gap-10 md:grid-cols-2">
                 {voirAussi.dossiers.length > 0 && (
                   <div>

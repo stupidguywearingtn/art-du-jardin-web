@@ -435,7 +435,7 @@ const SERVICES: Record<string, ServiceData> = {
       "Bordures béton coulées sur place, bordures pavées et petits murets de soutènement dans le Jura et l'Ain : urbanisme, mur mitoyen, gel. Devis détaillé.",
     savoir: {
       heading: "Bordures et murets : les questions qu'on nous pose",
-      lead: "Une bordure tient la rive d'une cour, un muret retient la terre : ce sont deux ouvrages différents, avec chacun leurs règles. Voici pourquoi un muret doit être drainé, quand une autorisation d'urbanisme entre en jeu, à qui appartient le mur qui sépare deux terrains, ce qui distingue une bordure coulée sur place d'une bordure préfabriquée, et ce que l'hiver jurassien impose au béton.",
+      lead: "Une bordure tient la rive d'une cour, un muret retient la terre : ce sont deux ouvrages différents, avec chacun leurs règles. Voici pourquoi un muret doit être drainé, quand une autorisation d'urbanisme entre en jeu, à qui appartient le mur qui sépare deux terrains, ce qui distingue une bordure coulée sur place d'une bordure préfabriquée, quel béton choisir face au gel et au sel, et ce que l'hiver jurassien impose au chantier.",
       updated: PAGE_UPDATED["/services/bordures-murets"],
       qa: [
         {
@@ -457,6 +457,10 @@ const SERVICES: Record<string, ServiceData> = {
         {
           q: "Bordure coulée sur place ou bordure préfabriquée : qu'est-ce qui change ?",
           a: "La bordure préfabriquée est un produit industriel : des éléments de béton moulés en usine, de dimensions fixes, couverts par la norme NF EN 1340 qui vise les éléments de bordure et de caniveau préfabriqués en béton. La bordure coulée sur place est un ouvrage fabriqué sur le chantier, au coffrage, et elle sort donc du champ de cette norme produit : sa tenue dépend du coffrage, du béton mis en œuvre et du décoffrage, pas d'un marquage. Ce qui les sépare à l'usage, c'est la forme. Un élément préfabriqué suit une ligne droite ou un rayon standard, et une courbe se rattrape en ouvrant les joints ; une bordure coulée épouse la forme réelle de la cour, courbes comprises, sans interruption tous les mètres. HCE coffre puis coule sur place, ou pose des bordures pavées lorsque le dessin le demande. Le rôle structurel de la bordure — la butée qui empêche la rive de l'enrobé de s'effriter sous les roues — est le même dans les deux cas ; il est détaillé sur la page Maçonnerie générale.",
+        },
+        {
+          q: "Quel béton pour une bordure ou un muret exposé au gel et au sel dans le Jura ?",
+          a: "Un béton choisi pour sa classe d'exposition au gel, et pas seulement pour sa résistance. La norme béton NF EN 206/CN range les ouvrages exposés au gel et au dégel en quatre classes, de XF1 à XF4, et en France le choix ne se fait pas à l'intuition : il dépend de deux critères, rappelés par les recommandations « Bien prescrire les bétons » de l'AFGC (version du 1er février 2018). Le premier est le niveau de gel du lieu, faible ou modéré, ou sévère, défini canton par canton dans le fascicule de documentation FD P 18-326. Le second est la fréquence de salage : peu fréquent en dessous de 10 jours par an en moyenne sur dix ans, très fréquent à partir de 30 jours. La recommandation gel-dégel de l'AFGC (version du 14 février 2023) croise les deux : en gel faible ou modéré, XF1 en général, XF2 voire XF4 quand le salage est fréquent ou très fréquent sur un béton saturé d'eau ; en gel sévère, XF3 au minimum, et XF4 dès que le salage est fréquent sur un béton saturé d'eau. Une bordure de cour est exactement ce type d'ouvrage : au ras du sol, au contact de l'eau de ruissellement, et souvent touchée par le sel. Les recommandations de la FIB et du CERIB sur les classes d'exposition (mars 2021) considèrent d'ailleurs comme exposées aux projections de sels les parties situées à moins de 6 m d'une chaussée salée. Pour une bordure préfabriquée, ces exigences relèvent de sa norme produit, la NF EN 1340 ; pour une bordure coulée sur place ou un muret, c'est le béton commandé qui doit les porter. Dans le Jura, où la station de Champagnole compte 111,7 jours de gel par an, le niveau de gel se lit sur la carte pour la commune du chantier, et la classe du béton est une question légitime à poser au moment du devis détaillé.",
         },
         {
           q: "Peut-on couler des bordures et des murets toute l'année dans le Jura ?",
@@ -495,6 +499,18 @@ const SERVICES: Record<string, ServiceData> = {
           label:
             "Météo-France — Fiche climatologique de la station de Champagnole (39), indicatif 39097003, statistiques 1991-2020",
           url: "https://object.files.data.gouv.fr/meteofrance/data/synchro_ftp/REF_STATION/FICHECLIM_39097003.pdf",
+        },
+        {
+          label: "AFGC — Recommandations « Bien prescrire les bétons » : choix des classes d'exposition selon la norme NF EN 206/CN (version du 1er février 2018)",
+          url: "https://www.afgc.asso.fr/app/uploads/2016/10/2_1_RECO_Classe_exposition.pdf",
+        },
+        {
+          label: "AFGC — Recommandations « Bien prescrire les bétons » : prévention vis-à-vis du gel / dégel (version du 14 février 2023)",
+          url: "https://www.afgc.asso.fr/app/uploads/2023/02/3_3_RECO_Gel_Degel_20230214.pdf",
+        },
+        {
+          label: "FIB / CERIB — Les classes d'exposition : aide à la prescription, recommandations professionnelles (mars 2021)",
+          url: "https://www.fib.org/wp-content/uploads/2021/04/ClassedExpositionMars2021.pdf",
         },
       ],
     },

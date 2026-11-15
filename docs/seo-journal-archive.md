@@ -5055,3 +5055,30 @@ indexées, et — dans 2-3 semaines — le CTR des six `/services/*` (nouveaux
 
 Pas d'accès Search Console depuis le runner. **À relever par Yanis** : pages
 indexées et requêtes à impressions (« enrobé », « goudronnage », « terrassement »).
+
+---
+
+## Archivé le 15/11/2026 (entrées du 15/10/2026)
+
+> ✅ **15/10/2026 — Déploiement OK** (`295ca4f` : Vercel `success`). Prod =
+> dernier commit (15/15 URLs servies, valeurs du 14/10). Chantier du jour
+> (contenu) : **`/services/preparation-terrain`** — deux prestations listées mais
+> jamais expliquées reçoivent leur Q/R : **puits perdu** (eaux pluviales
+> seulement ; rejet d'eaux usées interdit, art. 13 de l'arrêté du 7/09/2009,
+> source préfecture du Doubs) et **enrochement** (vs muret). FAQ 5 → 7,
+> `PAGE_UPDATED` 15/10, `llms.txt` 15/10. Banc local OK, build OK, `check:fige` OK.
+> ✅ Vérifié en prod (`ebb0310`, `success` < 80 s) : 2 Q/R servies, « 15 octobre
+> 2026 » affiché, `llms.txt` à jour, IndexNow 15 URLs → 200.
+
+> ✅ **11/10/2026 — LA PRODUCTION SE DÉPLOIE À NOUVEAU. Le blocage du 01/10 est
+### Positions mesurées — 15/10/2026
+
+| Contrôle | 15/10/2026 | vs 14/10 |
+|---|---|---|
+| Déploiement `main` (`295ca4f`) | **`success`** | = |
+| Prod vs code (`mesure-texte-servi`) | 15/15 en 200 ; `preparation-terrain` 5 170 car. avant ce run | = |
+| SERP | non remesurée (canal `WebSearch` US non représentatif) | — |
+
+Pas d'accès Search Console depuis le runner. **À relever par Yanis** : pages
+indexées, requêtes à impressions (« goudronnage », « enrobé Jura », « puits perdu »).
+

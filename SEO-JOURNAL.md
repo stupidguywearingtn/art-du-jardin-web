@@ -8,6 +8,17 @@ et à compléter en fin de run.
 
 ## État des lieux
 
+> ✅ **15/11/2026 — Déploiement OK** (`ae8a9a9` : statut GitHub `success`). Prod = dernier
+> commit (16/16 en 200 ; enrobé 14 010, prépa 10 461 = vérif. du 14/11). Chantier
+> (**contenu**, après un jour technique) : **`/services/bordures-murets`** (10 288 en prod) +1
+> Q/R **« Quel béton pour une bordure ou un muret exposé au gel et au sel dans le Jura ? »** —
+> classes XF1-XF4 (NF EN 206/CN) choisies selon le niveau de gel (FD P 18-326, par canton) et
+> la fréquence de salage (< 10 j/an ; ≥ 30 j/an) — AFGC 01/02/2018 et 14/02/2023 ; zone de
+> 6 m d'une chaussée salée — FIB/CERIB 03/2021. **Zone de gel du Jura NON affirmée** (seules
+> sources trouvées = copies piratées du FD AFNOR) ; rien affirmé sur le béton qu'utilise HCE.
+> 3 sources, chapeau mis à jour, `PAGE_UPDATED` + `llms.txt` 15/11. Banc local : **12 521
+> car.**, FAQ 7/7. Build OK, `check:fige` OK. Archive : état + positions du 15/10.
+
 > ✅ **14/11/2026 — Déploiement OK** (`2cc278a` : statut GitHub `success`). Prod = dernier
 > commit (16/16 en 200 ; `/arnaque-goudronnage` 11 880 = banc du 13/11). Chantier
 > (**technique — maillage**, après un jour contenu) : audit des liens entrants servis (16
@@ -442,17 +453,6 @@ et à compléter en fin de run.
 > `finitions-soignees` 7 399 → 10 891 car., « 16 octobre 2026 » affiché, lastmod
 > 2026-10-16, `llms.txt` à jour, IndexNow 15 URLs → 200.
 
-> ✅ **15/10/2026 — Déploiement OK** (`295ca4f` : Vercel `success`). Prod =
-> dernier commit (15/15 URLs servies, valeurs du 14/10). Chantier du jour
-> (contenu) : **`/services/preparation-terrain`** — deux prestations listées mais
-> jamais expliquées reçoivent leur Q/R : **puits perdu** (eaux pluviales
-> seulement ; rejet d'eaux usées interdit, art. 13 de l'arrêté du 7/09/2009,
-> source préfecture du Doubs) et **enrochement** (vs muret). FAQ 5 → 7,
-> `PAGE_UPDATED` 15/10, `llms.txt` 15/10. Banc local OK, build OK, `check:fige` OK.
-> ✅ Vérifié en prod (`ebb0310`, `success` < 80 s) : 2 Q/R servies, « 15 octobre
-> 2026 » affiché, `llms.txt` à jour, IndexNow 15 URLs → 200.
-
-> ✅ **11/10/2026 — LA PRODUCTION SE DÉPLOIE À NOUVEAU. Le blocage du 01/10 est
 > levé.** Yanis a mergé `fix/tanstack-cve-deploy` (PR #1, commit `e3a860e`, le
 > 10/10 à 22:30) : statut Vercel **`success`** sur `main`. **La dette de
 > vérification en ligne est purgée, à ne pas refaire** : 14/14 URLs servent
@@ -634,6 +634,17 @@ un extrait de SERP ne prouve pas ce que la page contient.
 > `verif.com` ont été jugées périmées **sur la seule foi d'extraits de recherche**
 > (403 au runner, contenu jamais lu). Leur statut « périmée » n'est donc pas
 > établi. Noté en chantier en attente.
+
+### Positions mesurées — 15/11/2026
+
+| Contrôle | 15/11/2026 | vs 14/11 |
+|---|---|---|
+| Déploiement `main` (`ae8a9a9`) | **`success`** (Vercel) | = |
+| Prod vs code (`mesure-texte-servi`) | 16/16 en 200 ; maillage du 14/11 servi (enrobé 14 010) | = |
+| SERP | non relevée (canal `WebSearch` US, non représentatif) | — |
+
+Pas d'accès Search Console. **À relever par Yanis** : « Performances IA » + requêtes à
+impressions ; indexation de `/arnaque-goudronnage` et `/zone-intervention`.
 
 ### Positions mesurées — 14/11/2026
 
@@ -970,18 +981,11 @@ par Yanis** : pages indexées, requêtes à impressions (« caniveau », « eaux
 Canal `WebSearch` = US, non représentatif. Pas d'accès Search Console. **À relever
 par Yanis** : pages indexées / « Explorée, non indexée », requêtes à impressions.
 
-### Positions mesurées — 15/10/2026
-
-| Contrôle | 15/10/2026 | vs 14/10 |
-|---|---|---|
-| Déploiement `main` (`295ca4f`) | **`success`** | = |
-| Prod vs code (`mesure-texte-servi`) | 15/15 en 200 ; `preparation-terrain` 5 170 car. avant ce run | = |
-| SERP | non remesurée (canal `WebSearch` US non représentatif) | — |
-
-Pas d'accès Search Console depuis le runner. **À relever par Yanis** : pages
-indexées, requêtes à impressions (« goudronnage », « enrobé Jura », « puits perdu »).
-
 ## Chantiers faits
+
+### 15/11/2026 — `/services/bordures-murets` : Q/R classe d'exposition du béton au gel et au sel
+Q/R n° 6 (avant « toute l'année »), FAQPage = FAQ visible (7/7), 3 sources (AFGC ×2, FIB/CERIB).
+10 288 → 12 521 car. (banc local).
 
 ### 14/11/2026 — Maillage `/services/*` → dossiers : liens inverses manquants + H2 question
 `VOIR_AUSSI` gagne un champ `h` (H2 par service) ; enrobé → `chantier-en-cours` ; préparation
@@ -1316,6 +1320,14 @@ FAQ 5 → 7 (FAQPage = visible, `verif-faq` 7/7), lead mis à jour, source ajout
 
 Par ordre de priorité. **Alterner les angles, ne pas refaire le même deux jours
 de suite.**
+
+> 🆕 **MISE À JOUR DU 15/11/2026 — prime sur tout ce qui suit.**
+> ✅ Q/R béton XF sur `bordures-murets` (à vérifier en prod : ~12 521 car., FAQ 7/7, `llms.txt`
+> 15/11 ; puis IndexNow).
+> 1. Lundi 16/11 : veille (étape 6) — et technique en réserve : `drainage-pentes` /
+>    `finitions-soignees` (5 entrants chacun).
+> 2. Contenu suivant : `maconnerie-generale` (10 324) ou `drainage-pentes` (10 394).
+> 3. Piste écartée faute de source libre : zone de gel FD P 18-326 du Jura (norme AFNOR payante).
 
 > 🆕 **MISE À JOUR DU 14/11/2026 — prime sur tout ce qui suit.**
 > ✅ Maillage services → dossiers (à vérifier en prod : `/services/enrobe-a-chaud` ~14 010

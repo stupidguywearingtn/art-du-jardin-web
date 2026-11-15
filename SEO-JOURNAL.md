@@ -18,6 +18,8 @@ et à compléter en fin de run.
 > sources trouvées = copies piratées du FD AFNOR) ; rien affirmé sur le béton qu'utilise HCE.
 > 3 sources, chapeau mis à jour, `PAGE_UPDATED` + `llms.txt` 15/11. Banc local : **12 521
 > car.**, FAQ 7/7. Build OK, `check:fige` OK. Archive : état + positions du 15/10.
+> ✅ Vérifié en prod (`fbc29c3`, `success`) : 12 521 car. (= banc), FAQ 7/7, `llms.txt`
+> servi, IndexNow 16 URLs → 200.
 
 > ✅ **14/11/2026 — Déploiement OK** (`2cc278a` : statut GitHub `success`). Prod = dernier
 > commit (16/16 en 200 ; `/arnaque-goudronnage` 11 880 = banc du 13/11). Chantier

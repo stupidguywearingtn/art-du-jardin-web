@@ -327,6 +327,13 @@ function ArnaqueGoudronnage() {
                   <Link to="/services/$slug" params={{ slug: "preparation-terrain" }} className={LIEN}>
                     préparation de terrain
                   </Link>
+                  . Ce qui distingue à l'œil un enrobé bien posé — des bords francs, des raccords
+                  qu'on ne sent pas sous le pied, une surface qui ne retient pas l'eau — est
+                  détaillé sur la page{" "}
+                  {/* 16/11/2026 : lien ajouté, finitions-soignees n'avait que 5 pages entrantes. */}
+                  <Link to="/services/$slug" params={{ slug: "finitions-soignees" }} className={LIEN}>
+                    finitions soignées
+                  </Link>
                   .
                 </p>
               </>

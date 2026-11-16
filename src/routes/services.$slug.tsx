@@ -718,6 +718,14 @@ const VOIR_AUSSI: Record<
         label: "Maçonnerie générale",
         why: "Pavés, dallage ou médaillon posés au cordeau avant l'enrobé, qui vient ensuite occuper le reste de la cour.",
       },
+      // 16/11/2026 : drainage-pentes n'avait que 5 pages entrantes (dont
+      // aucune page enrobé) ; or ses Q/R « pente d'une cour en enrobé » et
+      // « flaques sur un enrobé » répondent à la question que pose la pose.
+      {
+        slug: "drainage-pentes",
+        label: "Drainage & pentes",
+        why: "La pente qui évacue l'eau d'une cour en enrobé, et la cause des flaques : cela se règle avant la pose, pas après.",
+      },
     ],
   },
   "maconnerie-generale": {
@@ -761,6 +769,14 @@ const VOIR_AUSSI: Record<
         slug: "bordures-murets",
         label: "Bordures & murets",
         why: "Les bordures qui canalisent l'eau en périphérie et les murets de soutènement.",
+      },
+      // 16/11/2026 : finitions-soignees n'avait que 5 pages entrantes ; sa
+      // Q/R « enrobé bien posé » range « une surface qui ne retient pas
+      // l'eau » parmi les trois points vérifiés à la réception.
+      {
+        slug: "finitions-soignees",
+        label: "Finitions soignées",
+        why: "Une surface qui ne retient pas l'eau après la pluie : l'un des trois points qui se vérifient à la réception du chantier.",
       },
     ],
   },

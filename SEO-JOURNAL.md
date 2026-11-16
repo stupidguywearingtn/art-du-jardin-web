@@ -8,6 +8,19 @@ et à compléter en fin de run.
 
 ## État des lieux
 
+> ✅ **16/11/2026 — Déploiement OK** (`d9dd85d` : statut GitHub `success`). Prod = dernier
+> commit (16/16 en 200 ; bordures 12 521 = vérif. du 15/11). Lundi : veille (voir
+> « Techniques apprises » : **core update de novembre en cours depuis le 10/11**). Chantier
+> (**technique — maillage**, après un jour contenu) : liens entrants servis recomptés (16 URLs) →
+> `drainage-pentes` 5 et `finitions-soignees` 5 (minimum du site). +3 liens contextuels, raison
+> tirée des Q/R existantes : enrobé → drainage (pente, flaques) ; drainage → finitions (« surface
+> qui ne retient pas l'eau », point de réception) ; `/arnaque-goudronnage` (section « signes »)
+> → finitions (3 critères d'un enrobé bien posé). **Écarté** : `RELATED_SERVICES` parking →
+> drainage — les 11 photos du dossier relues ne montrent ni caniveau ni grille, et le bloc dit
+> « prestations visibles sur ces photos ». Banc local : enrobé 14 157, drainage 10 554, arnaque
+> 12 075. `lastmod` / `llms.txt` non touchés (liens seuls). Build OK, `check:fige` OK.
+> Archive : état + positions du 16/10.
+
 > ✅ **15/11/2026 — Déploiement OK** (`ae8a9a9` : statut GitHub `success`). Prod = dernier
 > commit (16/16 en 200 ; enrobé 14 010, prépa 10 461 = vérif. du 14/11). Chantier
 > (**contenu**, après un jour technique) : **`/services/bordures-murets`** (10 288 en prod) +1
@@ -442,19 +455,6 @@ et à compléter en fin de run.
 > ✅ Vérifié en prod (`fbc84e5`, `success` < 90 s) : `drainage-pentes` 9 557 car.,
 > lastmod 2026-10-17, `llms.txt` à jour, IndexNow 15 URLs → 200.
 
-> ✅ **16/10/2026 — Déploiement OK** (`0c777ee` : Vercel `success`). Prod =
-> dernier commit (15/15 URLs en 200, `preparation-terrain` 7 138 car. = Q/R du
-> 15/10 en ligne). Chantier du jour (contenu, saisonnier) :
-> **`/services/finitions-soignees`** — 2 Q/R d'entretien avant l'hiver :
-> **sel de déneigement** (essai Cerema 2015 : enrobé ~91 % de résistance en eau
-> salée vs ~75 % en eau douce, limites de l'essai dites) et **taches de
-> gazole/huile** (solvants du bitume, bulletin MTQ 2004). FAQ 5 → 7,
-> `PAGE_UPDATED` 16/10, `llms.txt` 16/10 (+2 Q/R). Banc local OK, build OK,
-> `check:fige` OK. Accès robots IA vérifié pour la 1ʳᵉ fois : tout en 200.
-> ✅ Vérifié en prod (`627143e`, `success` < 60 s) : 2 Q/R servies,
-> `finitions-soignees` 7 399 → 10 891 car., « 16 octobre 2026 » affiché, lastmod
-> 2026-10-16, `llms.txt` à jour, IndexNow 15 URLs → 200.
-
 > levé.** Yanis a mergé `fix/tanstack-cve-deploy` (PR #1, commit `e3a860e`, le
 > 10/10 à 22:30) : statut Vercel **`success`** sur `main`. **La dette de
 > vérification en ligne est purgée, à ne pas refaire** : 14/14 URLs servent
@@ -636,6 +636,18 @@ un extrait de SERP ne prouve pas ce que la page contient.
 > `verif.com` ont été jugées périmées **sur la seule foi d'extraits de recherche**
 > (403 au runner, contenu jamais lu). Leur statut « périmée » n'est donc pas
 > établi. Noté en chantier en attente.
+
+### Positions mesurées — 16/11/2026
+
+| Contrôle | 16/11/2026 | vs 15/11 |
+|---|---|---|
+| Déploiement `main` (`d9dd85d`) | **`success`** (Vercel) | = |
+| Prod vs code (`mesure-texte-servi`) | 16/16 en 200 ; bordures 12 521 (= banc 15/11) | = |
+| Liens entrants servis (min., avant run) | drainage 5, finitions 5, bordures 6, parking/prépa/chantier 7 | = 14/11 |
+| SERP | non relevée (canal `WebSearch` US) ; **core update en cours 10/11 → ~24/11** : toute variation avant fin novembre = bruit | — |
+
+Pas d'accès Search Console. **À relever par Yanis** : « Performances IA » + requêtes à
+impressions ; comparer 7 jours avant le 10/11 et 7 jours après le ~24/11.
 
 ### Positions mesurées — 15/11/2026
 
@@ -970,20 +982,11 @@ essentiels » (LCP mobile) avant/après cette correction.
 Canal `WebSearch` = US, non représentatif. Pas d'accès Search Console. **À relever
 par Yanis** : pages indexées, requêtes à impressions (« caniveau », « eaux pluviales cour »).
 
-### Positions mesurées — 16/10/2026
-
-| Contrôle | 16/10/2026 | vs 15/10 |
-|---|---|---|
-| Déploiement `main` (`0c777ee`) | **`success`** | = |
-| Prod vs code (`mesure-texte-servi`) | 15/15 en 200 ; `preparation-terrain` 7 138 (Q/R 15/10 servies) | 🆕 |
-| Robots IA (`robots.txt` `Allow: /` ; GPTBot, OAI-SearchBot, ChatGPT-User, PerplexityBot, ClaudeBot, Google-Extended, Bingbot, CCBot → 200) | OK | 🆕 1ʳᵉ mesure |
-| « enrobé à chaud Jura entreprise cour » / « goudronnage cour Jura entreprise » | domaine **absent** ; fiche `118712.fr` de HCE 1ʳᵉ | = |
-| « enrobé Champagnole entreprise goudron » | **absent** (bruit Géorisques, Champagne-au-Mont-d'Or) | = |
-
-Canal `WebSearch` = US, non représentatif. Pas d'accès Search Console. **À relever
-par Yanis** : pages indexées / « Explorée, non indexée », requêtes à impressions.
-
 ## Chantiers faits
+
+### 16/11/2026 — Maillage : `drainage-pentes` 5 → 6, `finitions-soignees` 5 → 7 pages entrantes
+`VOIR_AUSSI` : enrobé +drainage (4 services), drainage +finitions (3) ; `/arnaque-goudronnage`
+section « signes » +lien finitions. Photos parking relues : pas de lien dossier → drainage.
 
 ### 15/11/2026 — `/services/bordures-murets` : Q/R classe d'exposition du béton au gel et au sel
 Q/R n° 6 (avant « toute l'année »), FAQPage = FAQ visible (7/7), 3 sources (AFGC ×2, FIB/CERIB).
@@ -1322,6 +1325,16 @@ FAQ 5 → 7 (FAQPage = visible, `verif-faq` 7/7), lead mis à jour, source ajout
 
 Par ordre de priorité. **Alterner les angles, ne pas refaire le même deux jours
 de suite.**
+
+> 🆕 **MISE À JOUR DU 16/11/2026 — prime sur tout ce qui suit.**
+> ✅ Maillage drainage / finitions (à vérifier en prod : enrobé ~14 157 car. + lien drainage ;
+> drainage ~10 554 + lien finitions ; arnaque ~12 075 + lien finitions ; puis IndexNow).
+> 1. Contenu suivant : `maconnerie-generale` (10 324) ou `drainage-pentes` (10 554).
+> 2. Ne pas juger de positions avant la fin du core update de novembre (~24/11).
+> 3. `/realisations/chantier-en-cours` : 0 photo rendue au navigateur le 16/11 (parking : 11) —
+>    voir Hypothèses.
+> 4. Yanis/client : saison de pose (Hypothèse 22/10) ; H1 `finitions-soignees` ; compteurs de
+>    la carte ; Search Console ; fiche Google Business Profile (+ Posts).
 
 > 🆕 **MISE À JOUR DU 15/11/2026 — prime sur tout ce qui suit.**
 > ✅ Q/R béton XF sur `bordures-murets` (à vérifier en prod : ~12 521 car., FAQ 7/7, `llms.txt`
@@ -2431,6 +2444,11 @@ de suite.**
 
 ## Hypothèses à vérifier
 
+### 16/11/2026 — `/realisations/chantier-en-cours` sert-il des photos ?
+Rendu Playwright de la prod (networkidle + 3 s) : **0 `<img>`** hors logo, contre 11 sur
+`parking-voirie-pro` avec le même script. Dossier vide en base, ou chargement plus tardif ?
+Non tranché, rien modifié ; Yanis peut regarder la page ou l'admin.
+
 ### 08/11/2026 — Les compteurs « chantiers réalisés » de la carte ont-ils une source ?
 `src/components/InteractiveMap.tsx` affiche au visiteur, dans la bulle de chaque ville :
 Cize 120, Lons-le-Saunier 85, Saint-Claude 42, Champagnole 38, Bourg-en-Bresse 95,
@@ -3221,6 +3239,27 @@ récupérer sans rien réécrire. **Sans cette requête, le travail restait perd
 ---
 
 ## Techniques apprises
+
+### 16/11/2026 (lundi) — 📚 Core update de novembre 2026 en cours (10/11 → ~24/11) ; 📚 Yext : un fait présent seulement sur son site pèse moins pour les IA
+- **Google, core update de novembre 2026** lancée le 10/11/2026 (~13 h 07 ET), déploiement
+  « jusqu'à 2 semaines », « regular update designed to better surface relevant, satisfying
+  content » (Search Engine Roundtable, 10/11/2026 :
+  https://www.seroundtable.com/google-november-2026-core-update-42504.html). **Applicable** :
+  aucune conclusion sur positions / Search Console avant ~24/11 ; comparer ensuite des
+  fenêtres de 7 jours avant/après ; ne rien changer « en réaction » pendant le déploiement.
+- **SER, rapport de novembre (02/11/2026)** : spam update de septembre terminée en octobre ;
+  Google Business Profile — Posts remontés dans le panneau local, bouton WhatsApp dans le
+  panneau local, nouveau « Google Business Home » ; Search Console — filtre pays multiple
+  (https://www.seroundtable.com/november-2026-google-webmaster-report-42431.html).
+  **Applicable (client)** : des Posts GBP (chantiers réels) deviennent plus visibles ; bouton
+  WhatsApp suspendu au statut du mobile (Hypothèse 08/10).
+- **iPullRank / Yext** (6,9 M citations, 1,6 M questions, ChatGPT/Gemini/Perplexity, pays non
+  précisé ; publié 16/12/2025, MAJ 26/10/2026 : https://ipullrank.com/local-ai-search-data) :
+  sites d'entreprise en tête des citations et en hausse ; avis/réseaux en baisse ; **un fait
+  présent seulement sur le site de l'entreprise inspire moins confiance** que s'il est répété
+  ailleurs. **Applicable** : confirme la priorité NAP + fiches tierces (PagesJaunes, GBP) côté
+  client ; sa recommandation « une page par ville » reste refusée ici sans contenu propre.
+- Skills claude-seo / geo-seo-claude : pas re-vérifié (canal inutile, cf. 19/10).
 
 ### 09/11/2026 (lundi) — 📚 Correspondance titre/H2 ↔ requête et fraîcheur 30-90 j pèsent sur les citations ChatGPT ; 📚 Géoportail → cartes.gouv.fr
 - AirOps, « AI Search Statistics (October 2026) », publiée 29/10, màj 02/11/2026

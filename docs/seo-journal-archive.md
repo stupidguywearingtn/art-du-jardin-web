@@ -5082,3 +5082,32 @@ indexées et requêtes à impressions (« enrobé », « goudronnage », « terr
 Pas d'accès Search Console depuis le runner. **À relever par Yanis** : pages
 indexées, requêtes à impressions (« goudronnage », « enrobé Jura », « puits perdu »).
 
+---
+
+## Archivé le 16/11/2026 (entrées du 16/10/2026)
+
+> ✅ **16/10/2026 — Déploiement OK** (`0c777ee` : Vercel `success`). Prod =
+> dernier commit (15/15 URLs en 200, `preparation-terrain` 7 138 car. = Q/R du
+> 15/10 en ligne). Chantier du jour (contenu, saisonnier) :
+> **`/services/finitions-soignees`** — 2 Q/R d'entretien avant l'hiver :
+> **sel de déneigement** (essai Cerema 2015 : enrobé ~91 % de résistance en eau
+> salée vs ~75 % en eau douce, limites de l'essai dites) et **taches de
+> gazole/huile** (solvants du bitume, bulletin MTQ 2004). FAQ 5 → 7,
+> `PAGE_UPDATED` 16/10, `llms.txt` 16/10 (+2 Q/R). Banc local OK, build OK,
+> `check:fige` OK. Accès robots IA vérifié pour la 1ʳᵉ fois : tout en 200.
+> ✅ Vérifié en prod (`627143e`, `success` < 60 s) : 2 Q/R servies,
+> `finitions-soignees` 7 399 → 10 891 car., « 16 octobre 2026 » affiché, lastmod
+> 2026-10-16, `llms.txt` à jour, IndexNow 15 URLs → 200.
+
+### Positions mesurées — 16/10/2026
+
+| Contrôle | 16/10/2026 | vs 15/10 |
+|---|---|---|
+| Déploiement `main` (`0c777ee`) | **`success`** | = |
+| Prod vs code (`mesure-texte-servi`) | 15/15 en 200 ; `preparation-terrain` 7 138 (Q/R 15/10 servies) | 🆕 |
+| Robots IA (`robots.txt` `Allow: /` ; GPTBot, OAI-SearchBot, ChatGPT-User, PerplexityBot, ClaudeBot, Google-Extended, Bingbot, CCBot → 200) | OK | 🆕 1ʳᵉ mesure |
+| « enrobé à chaud Jura entreprise cour » / « goudronnage cour Jura entreprise » | domaine **absent** ; fiche `118712.fr` de HCE 1ʳᵉ | = |
+| « enrobé Champagnole entreprise goudron » | **absent** (bruit Géorisques, Champagne-au-Mont-d'Or) | = |
+
+Canal `WebSearch` = US, non représentatif. Pas d'accès Search Console. **À relever
+par Yanis** : pages indexées / « Explorée, non indexée », requêtes à impressions.

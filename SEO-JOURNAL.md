@@ -20,6 +20,8 @@ et à compléter en fin de run.
 > « prestations visibles sur ces photos ». Banc local : enrobé 14 157, drainage 10 554, arnaque
 > 12 075. `lastmod` / `llms.txt` non touchés (liens seuls). Build OK, `check:fige` OK.
 > Archive : état + positions du 16/10.
+> ✅ Vérifié en prod (`e275948`, `success`) : enrobé 14 157, drainage 10 554, arnaque 12 075
+> (= banc) ; entrants servis drainage 6, finitions 7 ; IndexNow 16 URLs → 200.
 
 > ✅ **15/11/2026 — Déploiement OK** (`ae8a9a9` : statut GitHub `success`). Prod = dernier
 > commit (16/16 en 200 ; enrobé 14 010, prépa 10 461 = vérif. du 14/11). Chantier

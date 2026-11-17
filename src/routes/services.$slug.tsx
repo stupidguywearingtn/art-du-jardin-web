@@ -358,7 +358,7 @@ const SERVICES: Record<string, ServiceData> = {
       "Drainage et pentes avant enrobé dans le Jura et l'Ain : pente d'au moins 1,5 % vers les exutoires, drains, caniveaux, eaux pluviales. Devis détaillé.",
     savoir: {
       heading: "Drainage, pentes et eaux pluviales : les questions qu'on nous pose",
-      lead: "Poser un enrobé sur une cour, une allée ou un parking imperméabilise une surface qui absorbait jusque-là une partie de la pluie : cette eau doit désormais aller quelque part. Voici où elle part — chez soi, dans la rue ou dans un réseau —, ce que dit la réglementation, quel caniveau poser devant un garage, et pourquoi la pente se calcule avant la pose et non après, dans le Jura et l'Ain.",
+      lead: "Poser un enrobé sur une cour, une allée ou un parking imperméabilise une surface qui absorbait jusque-là une partie de la pluie : cette eau doit désormais aller quelque part. Voici où elle part — chez soi, dans la rue ou dans un réseau —, ce que dit la réglementation, quel caniveau poser devant un garage, ce que vaut un enrobé drainant sous les hivers du Jura, et pourquoi la pente se calcule avant la pose et non après, dans le Jura et l'Ain.",
       updated: PAGE_UPDATED["/services/drainage-pentes"],
       qa: [
         {
@@ -389,6 +389,10 @@ const SERVICES: Record<string, ServiceData> = {
           q: "Quel caniveau à grille poser devant un garage ou en bas d'une descente ?",
           a: "Un caniveau dont la classe de résistance correspond au véhicule le plus lourd qui roulera dessus, posé au point bas et raccordé à un exutoire. La classe est gravée sur la grille : la norme européenne NF EN 1433 classe les caniveaux de A 15 à F 900, et le nombre est la charge d'essai en kilonewtons. Le tableau d'usage du fabricant Hauraton donne les repères des quatre premières classes : A 15 pour les surfaces à usage piéton léger, B 125 pour les zones où circulent des voitures à faible vitesse, par exemple les parkings résidentiels, C 250 pour les petits parkings et les véhicules utilitaires légers, D 400 pour les voies publiques et les parkings ouverts à tous les véhicules. Le même fabricant cite les allées domestiques parmi les usages possibles de la classe A 15, mais dès qu'une voiture roule ou stationne sur la grille, c'est B 125 qu'il associe aux parkings résidentiels ; et il précise que la classe seule ne suffit pas à choisir : les efforts dynamiques, l'intensité du trafic et la position du caniveau, au bord d'un virage ou d'une zone de freinage, comptent aussi. Deux points que la classe ne règle jamais. Un caniveau sans exutoire ne fait que déplacer la flaque : il doit rejoindre un regard, un puits perdu ou un réseau autorisé. Et en bas d'une descente de garage, il recueille toute l'eau de la rampe : c'est l'endroit où un raccordement sous-dimensionné se voit le premier, devant la porte. Le caniveau se pose avant l'enrobé, et la surface finie doit arriver au niveau de la grille, jamais en dessous, sinon l'eau la contourne.",
         },
+        {
+          q: "Un enrobé drainant ou un revêtement perméable est-il une bonne idée pour une cour dans le Jura ?",
+          a: "C'est possible, mais c'est un choix qui se paie en hiver, et il se fait en connaissance de ses contraintes. Un enrobé drainant laisse l'eau traverser sa couche de surface au lieu de la faire ruisseler vers un exutoire. Pour les routes des zones à hivers rigoureux, l'IDRRIM le déconseille : dans sa note d'information n° 43 de décembre 2020, il écrit que le béton bitumineux drainant « est à éviter » en raison des difficultés à maintenir une viabilité hivernale suffisante, parce que sa température de surface est « généralement plus faible que celles des autres revêtements » — d'où plus de déverglaçage et de déneigement. La même note relève qu'une couche drainante ancienne « a tendance à accumuler et conserver l'eau », ce qui la rend très vulnérable aux cycles pluie, gel et dégel. La fiche du canton de Genève sur les revêtements perméables (juillet 2024) ajoute trois règles d'usage qui valent pour une cour : une surface plate ou à faible pente, moins de 2,5 % ; pas de dépôts de sable, de terre ou de feuilles, qui colmatent les pores ; et en hiver, un salage et un sablage « fortement déconseillés ». Or la station Météo-France de Champagnole, à moins de 5 km de Cize, compte 111,7 jours de gel par an (normales 1991-2020). Pour une entrée qu'on sale l'hiver, un enrobé dense posé avec une pente d'au moins 1,5 % vers un exutoire est donc le plus simple à vivre. Le revêtement perméable garde son intérêt là où le zonage pluvial impose de garder l'eau sur la parcelle, ou sur une partie d'un grand parking, à condition d'en accepter l'entretien : le choix se discute au devis détaillé.",
+        },
       ],
       sources: [
         {
@@ -410,6 +414,18 @@ const SERVICES: Record<string, ServiceData> = {
         {
           label: "Hauraton — Classes de charge des caniveaux selon la norme EN 1433 (A 15 à D 400, usages types)",
           url: "https://www.hauraton.com/en/load-classes-for-drainage/",
+        },
+        {
+          label: "IDRRIM — Note d'information n°43, « Choix et mise en œuvre des couches de surface dans les zones soumises à des conditions climatiques hivernales rigoureuses », décembre 2020 (béton bitumineux drainant)",
+          url: "https://www.idrrim.com/ressources/documents/3/8129-IDRRIM_NOTE_D_INFORMATION_N-43.pdf",
+        },
+        {
+          label: "République et canton de Genève, Département du territoire — Revêtement perméable (pente, colmatage, salage), 25 juillet 2024",
+          url: "https://www.ge.ch/node/36434",
+        },
+        {
+          label: "Météo-France — fiche climatologique de CHAMPAGNOLE (39), indicatif 39097003, altitude 537 m, normales 1991-2020, éditée le 6 juin 2026",
+          url: "https://object.files.data.gouv.fr/meteofrance/data/synchro_ftp/REF_STATION/FICHECLIM_39097003.pdf",
         },
       ],
     },

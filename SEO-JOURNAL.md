@@ -8,6 +8,19 @@ et à compléter en fin de run.
 
 ## État des lieux
 
+> ✅ **17/11/2026 — Déploiement OK** (`810d7c9` : statut GitHub `success`). Prod = dernier
+> commit (16/16 en 200 ; enrobé 14 157, drainage 10 554, arnaque 12 075 = vérif. du 16/11).
+> Chantier (**contenu**, après un jour technique) : **`/services/drainage-pentes`** (lastmod
+> 17/10, la plus ancienne des `/services/*`) +1 Q/R **« Un enrobé drainant ou un revêtement
+> perméable est-il une bonne idée pour une cour dans le Jura ? »** — IDRRIM note n° 43 (déc.
+> 2020, lue en PDF) : BBDr « est à éviter » en zone hivernale rigoureuse (surface plus froide,
+> effet réservoir gel/dégel) ; canton de Genève, fiche « Revêtement perméable » (25/07/2024) :
+> pente < 2,5 %, colmatage par les fines, salage/sablage « fortement déconseillés » ;
+> Champagnole 111,7 j de gel (source déjà citée). **Zone H du Jura NON affirmée** (carte image
+> seulement) ; rien affirmé sur ce que pose ou non HCE. Chapeau mis à jour, 3 sources,
+> `PAGE_UPDATED` + `llms.txt` 17/11. Banc local : **12 774 car.**, FAQPage 8 Q. Build OK,
+> `check:fige` OK. Archive : état + positions du 17/10.
+
 > ✅ **16/11/2026 — Déploiement OK** (`d9dd85d` : statut GitHub `success`). Prod = dernier
 > commit (16/16 en 200 ; bordures 12 521 = vérif. du 15/11). Lundi : veille (voir
 > « Techniques apprises » : **core update de novembre en cours depuis le 10/11**). Chantier
@@ -443,20 +456,6 @@ et à compléter en fin de run.
 > `/photos/*.png` dans le HTML de l'accueil ni de `maconnerie-generale`, textes
 > inchangés (accueil 13 579), IndexNow 15 URLs → 200.
 
-> ✅ **17/10/2026 — Déploiement OK** (`979e485` : Vercel `success`). Prod =
-> dernier commit (15/15 URLs en 200, `finitions-soignees` 10 891 car. = Q/R du
-> 16/10 en ligne). Chantier du jour (contenu, page la plus maigre après
-> maçonnerie) : **`/services/drainage-pentes`** — 2 Q/R : **où envoyer l'eau
-> d'une cour (rue / réseau / parcelle)** (C. civ. 641 et 681, réponse min.
-> Intérieur JO Sénat 2/06/2016 « ne constitue pas une obligation pour les
-> communes », art. L2224-10 CGCT → demander le zonage pluvial en mairie) et
-> **classe de caniveau à grille devant un garage** (NF EN 1433, A 15 → F 900 ;
-> repères d'usage Hauraton A15/B125/C250/D400). FAQ 5 → 7, 5 856 → 9 557 car.
-> (banc local), `PAGE_UPDATED` + lastmod 17/10, `llms.txt` 17/10 (+2 Q/R).
-> Build OK, `check:fige` OK.
-> ✅ Vérifié en prod (`fbc84e5`, `success` < 90 s) : `drainage-pentes` 9 557 car.,
-> lastmod 2026-10-17, `llms.txt` à jour, IndexNow 15 URLs → 200.
-
 > levé.** Yanis a mergé `fix/tanstack-cve-deploy` (PR #1, commit `e3a860e`, le
 > 10/10 à 22:30) : statut Vercel **`success`** sur `main`. **La dette de
 > vérification en ligne est purgée, à ne pas refaire** : 14/14 URLs servent
@@ -638,6 +637,17 @@ un extrait de SERP ne prouve pas ce que la page contient.
 > `verif.com` ont été jugées périmées **sur la seule foi d'extraits de recherche**
 > (403 au runner, contenu jamais lu). Leur statut « périmée » n'est donc pas
 > établi. Noté en chantier en attente.
+
+### Positions mesurées — 17/11/2026
+
+| Contrôle | 17/11/2026 | vs 16/11 |
+|---|---|---|
+| Déploiement `main` (`810d7c9`) | **`success`** (Vercel) | = |
+| Prod vs code (`mesure-texte-servi`) | 16/16 en 200 ; maillage du 16/11 servi | = banc |
+| SERP | non relevée (canal `WebSearch` US) ; core update en cours jusqu'à ~24/11 | — |
+
+Pas d'accès Search Console. **À relever par Yanis** après le ~24/11 : « Performances IA » +
+requêtes à impressions (dont « enrobé drainant », « caniveau »).
 
 ### Positions mesurées — 16/11/2026
 
@@ -971,20 +981,11 @@ indexées, requêtes à impressions.
 Pas d'accès Search Console. **À relever par Yanis** : rapport « Signaux Web
 essentiels » (LCP mobile) avant/après cette correction.
 
-### Positions mesurées — 17/10/2026
-
-| Contrôle | 17/10/2026 | vs 16/10 |
-|---|---|---|
-| Déploiement `main` (`979e485`) | **`success`** | = |
-| Prod vs code (`mesure-texte-servi`) | 15/15 en 200 ; `finitions-soignees` 10 891 (Q/R 16/10 servies) | = |
-| JSON-LD (7 pages contrôlées) | tous valides ; BreadcrumbList partout hors accueil ; FAQPage = FAQ visible | = |
-| « réfection parking enrobé Jura entreprise » | domaine **absent** ; fiche `118712.fr` de HCE présente | 🆕 relevé |
-| « enrobé Lons-le-Saunier entreprise cour goudron » | **absent** (INRS, Saint-Gobain, bruit) | 🆕 relevé |
-
-Canal `WebSearch` = US, non représentatif. Pas d'accès Search Console. **À relever
-par Yanis** : pages indexées, requêtes à impressions (« caniveau », « eaux pluviales cour »).
-
 ## Chantiers faits
+
+### 17/11/2026 — `/services/drainage-pentes` : Q/R enrobé drainant / revêtement perméable en hiver
+Q/R n° 8 (dernière), FAQPage = FAQ visible (8/8), +3 sources (IDRRIM n° 43, Genève, Météo-France).
+10 554 → 12 774 car. (banc local).
 
 ### 16/11/2026 — Maillage : `drainage-pentes` 5 → 6, `finitions-soignees` 5 → 7 pages entrantes
 `VOIR_AUSSI` : enrobé +drainage (4 services), drainage +finitions (3) ; `/arnaque-goudronnage`
@@ -1327,6 +1328,15 @@ FAQ 5 → 7 (FAQPage = visible, `verif-faq` 7/7), lead mis à jour, source ajout
 
 Par ordre de priorité. **Alterner les angles, ne pas refaire le même deux jours
 de suite.**
+
+> 🆕 **MISE À JOUR DU 17/11/2026 — prime sur tout ce qui suit.**
+> ✅ Q/R enrobé drainant sur `drainage-pentes` (à vérifier en prod : ~12 774 car., FAQ 8/8,
+> lastmod 2026-11-17, `llms.txt` 17/11 ; puis IndexNow).
+> 1. Technique demain (alternance) ; contenu suivant : `enrobe-a-chaud` (lastmod 02/10, la plus
+>    ancienne des services) ou `finitions-soignees` (16/10).
+> 2. Ne pas juger de positions avant la fin du core update (~24/11).
+> 3. Yanis/client : saison de pose (Hypothèse 22/10) ; compteurs de la carte ; Search Console ;
+>    fiche Google Business Profile (+ Posts) ; photos `chantier-en-cours`.
 
 > 🆕 **MISE À JOUR DU 16/11/2026 — prime sur tout ce qui suit.**
 > ✅ Maillage drainage / finitions (à vérifier en prod : enrobé ~14 157 car. + lien drainage ;

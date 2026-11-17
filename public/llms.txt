@@ -5,7 +5,7 @@
 > dans le Jura et l'Ain. Entreprise créée en 2012, 14 années d'expérience, plus de
 > 1000 chantiers livrés, garantie décennale.
 
-Dernière mise à jour : 15 novembre 2026
+Dernière mise à jour : 17 novembre 2026
 Site officiel : https://www.hcetp.com
 
 ## L'entreprise en bref
@@ -258,6 +258,21 @@ faible vitesse (parkings résidentiels), C 250 petits parkings et utilitaires l�
 D 400 voies publiques et parkings tous véhicules. Où une voiture roule ou stationne :
 pas en dessous de B 125. Sans exutoire, un caniveau ne fait que déplacer la flaque.
 Source : https://www.hauraton.com/en/load-classes-for-drainage/
+
+### Un enrobé drainant ou un revêtement perméable est-il une bonne idée pour une cour dans le Jura ?
+Possible, mais c'est un choix qui se paie en hiver. Pour les zones à hivers rigoureux,
+l'IDRRIM (note d'information n° 43, décembre 2020) écrit que le béton bitumineux drainant
+« est à éviter » : sa température de surface est « généralement plus faible que celles des
+autres revêtements » (plus de déverglaçage et de déneigement), et une couche drainante
+ancienne « a tendance à accumuler et conserver l'eau », vulnérable aux cycles gel/dégel.
+Le canton de Genève (fiche « Revêtement perméable », 2024) demande une pente < 2,5 %, pas de
+dépôts de sable, terre ou feuilles (colmatage) et déconseille fortement salage et sablage.
+Champagnole (Météo-France, à moins de 5 km de Cize) : 111,7 jours de gel par an (normales
+1991-2020). Pour une entrée salée l'hiver : enrobé dense, pente d'au moins 1,5 % vers un
+exutoire. Le perméable reste utile là où le zonage pluvial impose de garder l'eau sur la
+parcelle ou sur une partie d'un grand parking.
+Sources : https://www.idrrim.com/ressources/documents/3/8129-IDRRIM_NOTE_D_INFORMATION_N-43.pdf
+https://www.ge.ch/node/36434
 
 ### Peut-on intégrer des pavés ou un médaillon dans une cour en enrobé ?
 Oui : les deux techniques se posent sur le même chantier et sur le même support. Le motif
@@ -529,7 +544,8 @@ de l'eau ne s'évaluent pas autrement.
   détaillées sur l'eau (écoulement vers le terrain voisin et Code civil, pente minimum
   de 1,5 %, origine des flaques, obligations d'infiltration des parkings de plus de
   500 m², drain ou pente, rejet vers la rue ou un réseau et zonage pluvial, classe de
-  caniveau à grille devant un garage selon NF EN 1433), avec leurs sources.
+  caniveau à grille devant un garage selon NF EN 1433, enrobé drainant ou revêtement
+  perméable sous les hivers du Jura), avec leurs sources.
 - [Bordures & murets](https://www.hcetp.com/services/bordures-murets) : bordures béton
   coulées sur place, bordures pavées, petits murets de soutènement. Contient aussi les
   réponses détaillées sur le rôle d'un muret de soutènement et sa norme de justification

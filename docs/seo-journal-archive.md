@@ -5111,3 +5111,32 @@ indexées, requêtes à impressions (« goudronnage », « enrobé Jura », « p
 
 Canal `WebSearch` = US, non représentatif. Pas d'accès Search Console. **À relever
 par Yanis** : pages indexées / « Explorée, non indexée », requêtes à impressions.
+
+<!-- section d'origine : État des lieux (archivé le 17/11/2026) -->
+> ✅ **17/10/2026 — Déploiement OK** (`979e485` : Vercel `success`). Prod =
+> dernier commit (15/15 URLs en 200, `finitions-soignees` 10 891 car. = Q/R du
+> 16/10 en ligne). Chantier du jour (contenu, page la plus maigre après
+> maçonnerie) : **`/services/drainage-pentes`** — 2 Q/R : **où envoyer l'eau
+> d'une cour (rue / réseau / parcelle)** (C. civ. 641 et 681, réponse min.
+> Intérieur JO Sénat 2/06/2016 « ne constitue pas une obligation pour les
+> communes », art. L2224-10 CGCT → demander le zonage pluvial en mairie) et
+> **classe de caniveau à grille devant un garage** (NF EN 1433, A 15 → F 900 ;
+> repères d'usage Hauraton A15/B125/C250/D400). FAQ 5 → 7, 5 856 → 9 557 car.
+> (banc local), `PAGE_UPDATED` + lastmod 17/10, `llms.txt` 17/10 (+2 Q/R).
+> Build OK, `check:fige` OK.
+> ✅ Vérifié en prod (`fbc84e5`, `success` < 90 s) : `drainage-pentes` 9 557 car.,
+> lastmod 2026-10-17, `llms.txt` à jour, IndexNow 15 URLs → 200.
+
+<!-- section d'origine : Positions mesurées (archivé le 17/11/2026) -->
+### Positions mesurées — 17/10/2026
+
+| Contrôle | 17/10/2026 | vs 16/10 |
+|---|---|---|
+| Déploiement `main` (`979e485`) | **`success`** | = |
+| Prod vs code (`mesure-texte-servi`) | 15/15 en 200 ; `finitions-soignees` 10 891 (Q/R 16/10 servies) | = |
+| JSON-LD (7 pages contrôlées) | tous valides ; BreadcrumbList partout hors accueil ; FAQPage = FAQ visible | = |
+| « réfection parking enrobé Jura entreprise » | domaine **absent** ; fiche `118712.fr` de HCE présente | 🆕 relevé |
+| « enrobé Lons-le-Saunier entreprise cour goudron » | **absent** (INRS, Saint-Gobain, bruit) | 🆕 relevé |
+
+Canal `WebSearch` = US, non représentatif. Pas d'accès Search Console. **À relever
+par Yanis** : pages indexées, requêtes à impressions (« caniveau », « eaux pluviales cour »).

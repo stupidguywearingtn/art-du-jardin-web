@@ -20,6 +20,8 @@ et à compléter en fin de run.
 > seulement) ; rien affirmé sur ce que pose ou non HCE. Chapeau mis à jour, 3 sources,
 > `PAGE_UPDATED` + `llms.txt` 17/11. Banc local : **12 774 car.**, FAQPage 8 Q. Build OK,
 > `check:fige` OK. Archive : état + positions du 17/10.
+> ✅ Vérifié en prod (`4648acd`, `success`) : 12 774 car. (= banc), lastmod 2026-11-17,
+> `llms.txt` servi, IndexNow 16 URLs → 200.
 
 > ✅ **16/11/2026 — Déploiement OK** (`d9dd85d` : statut GitHub `success`). Prod = dernier
 > commit (16/16 en 200 ; bordures 12 521 = vérif. du 15/11). Lundi : veille (voir

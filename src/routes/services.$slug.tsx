@@ -541,7 +541,7 @@ const SERVICES: Record<string, ServiceData> = {
     schemaName: "Finition soignée d'enrobé",
     n: "06",
     title: "Vous avez un projet d'aménagement de cour en enrobé",
-    hero: "/assets/finitions-1.jpeg",
+    hero: "/assets/finitions-naoufal-2.jpg", // 19/11/2026 : photo Naoufal (l'ancienne était aussi dans la galerie remplacée)
     intro: "Bords nets, raccords maîtrisés, surface plane et homogène. Le souci du détail jusqu'à la dernière passe.",
     prestations: [
       "Bords et angles nets, sans bavure",

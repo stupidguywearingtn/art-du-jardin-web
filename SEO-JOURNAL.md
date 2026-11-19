@@ -8,6 +8,19 @@ et à compléter en fin de run.
 
 ## État des lieux
 
+> ✅ **19/11/2026 — Déploiement OK** (`c917649` : statut GitHub `success`). Prod = dernier
+> commit (16/16 en 200, valeurs = banc du 17/11 ; drainage 12 774). Pas de run le 18/11.
+> Chantier (**technique**, après un jour contenu) : 1ʳᵉ mesure de vitesse (Playwright,
+> Pixel 5, 4G lente 1,6 Mb/s + CPU ×4 ; Lighthouse refusé en run) — voir Positions 19/11 et
+> Hypothèses. Audit on-page 16 URLs + 22 liens internes : tout OK. **Corrigé** : `og:image`
+> des 6 `/services/*` = photo originale de **0,7 à 2,9 Mo** (WhatsApp ne montre pas de
+> vignette au-delà d'~300 Ko) → copies JPEG de la même photo, non recadrées, ≤ 1200 px,
+> **250-263 Ko**, dans `public/og/<slug>.jpg` + `og:image:type/width/height/alt` ; accueil et
+> autres pages : `og:image:width/height` 1200×630 ajoutés (`og-hce.jpg`, 324 Ko, laissé tel
+> quel : le recompresser sous 300 Ko dégradait la photo pour 20 Ko). Texte servi 16/16
+> identique au banc (`vite dev`). Pas de `lastmod` ni `llms.txt` (contenu inchangé). Build
+> OK, `check:fige` OK. Archive : état + positions des 18 et 19/10.
+
 > ✅ **17/11/2026 — Déploiement OK** (`810d7c9` : statut GitHub `success`). Prod = dernier
 > commit (16/16 en 200 ; enrobé 14 157, drainage 10 554, arnaque 12 075 = vérif. du 16/11).
 > Chantier (**contenu**, après un jour technique) : **`/services/drainage-pentes`** (lastmod
@@ -431,33 +444,6 @@ et à compléter en fin de run.
 > ✅ Vérifié en prod (`b3a57d3`, `success` < 4 min) : descriptions ≤ 159 servies,
 > textes 15/15 inchangés, IndexNow 15 URLs → 200.
 
-> ✅ **19/10/2026 — Déploiement OK** (`9b956ab` : Vercel `READY`). Prod = dernier
-> commit (15/15 en 200, valeurs du 18/10). Lundi : veille (Google met en avant les
-> liens dans les réponses IA ; rapports IA de la Search Console depuis le 03/06).
-> Chantier (contenu) : **`/services/maconnerie-generale`** +2 Q/R pose des pavés /
-> dalles (guide CERIB 2017), 5 726 → 8 013 car. au banc local, FAQ 7/7, lastmod +
-> `llms.txt` 19/10. Build OK, `check:fige` OK.
-> ✅ Vérifié en prod (`87313a3`, < 100 s) : `maconnerie-generale` 8 013 car., lastmod
-> 2026-10-19, `llms.txt` 19/10, IndexNow 15 URLs → 200.
-
-> ✅ **18/10/2026 — Déploiement OK** (`e99d634` : Vercel `READY`, lu via l'API
-> Vercel). Prod = dernier commit (15/15 URLs en 200, valeurs du 17/10 ; FAQ 11/11 ;
-> lastmod 15/15 alignés). Chantier du jour (**technique**, après 3 jours de Q/R) :
-> **poids des images**. Audit on-page des 15 URLs (title, canonical, og:url, H1
-> unique, alt : tout OK) ; en revanche l'accueil chargeait **~12 Mo d'images**
-> brutes depuis `/photos/` : 5 PNG de 2,5 à 3,3 Mo (`geste-enrobe-a-chaud`,
-> `matiere-bordure-nette`, `process-controle-finitions`, `1.png` bandeau
-> « Finitions soignées », `2.png` galerie maçonnerie) + un JPEG de 1 Mo. Copies
-> **.webp** créées à côté des originaux (originaux conservés), code pointé dessus :
-> 3,3 Mo → 355 Ko, 3,2 Mo → 359 Ko, 3,1 Mo → 260 Ko, 2,5 Mo → 154 Ko, 3,1 Mo →
-> 282 Ko, 1,06 Mo → 314 Ko (**~16,4 Mo → ~1,7 Mo**). Rendu contrôlé à l'œil.
-> Build OK, `check:fige` OK. Les valeurs servies par la base (`site_content_fields`,
-> admin) priment sur ces défauts : à l'accueil, aucune n'était surchargée (URLs
-> servies = défauts du code).
-> ✅ Vérifié en prod (`a341c1e`, < 120 s) : 6 `.webp` en 200, plus aucun
-> `/photos/*.png` dans le HTML de l'accueil ni de `maconnerie-generale`, textes
-> inchangés (accueil 13 579), IndexNow 15 URLs → 200.
-
 > levé.** Yanis a mergé `fix/tanstack-cve-deploy` (PR #1, commit `e3a860e`, le
 > 10/10 à 22:30) : statut Vercel **`success`** sur `main`. **La dette de
 > vérification en ligne est purgée, à ne pas refaire** : 14/14 URLs servent
@@ -639,6 +625,19 @@ un extrait de SERP ne prouve pas ce que la page contient.
 > `verif.com` ont été jugées périmées **sur la seule foi d'extraits de recherche**
 > (403 au runner, contenu jamais lu). Leur statut « périmée » n'est donc pas
 > établi. Noté en chantier en attente.
+
+### Positions mesurées — 19/11/2026
+
+| Contrôle | 19/11/2026 | vs 17/11 |
+|---|---|---|
+| Déploiement `main` (`c917649`) | **`success`** (Vercel) | = |
+| Prod vs code (`mesure-texte-servi`) | 16/16 en 200, = banc 17/11 | = |
+| On-page 16 URLs (title 46-74, desc ≤ 159, canonical = URL, 1 H1, 0 doublon) + 22 liens internes | OK, 0 lien cassé | = |
+| Vitesse mobile simulée (Playwright, 4G lente + CPU ×4, LCP) | accueil **≈ 4,3 s** (FCP ≈ 1,3 s, LCP = H1 « HCE » animé) ; enrobé 4,0 s (photo hero via wsrv.nl, 239 Ko) ; parking 0,9 s ; arnaque 0,8 s ; CLS ≤ 0,025 partout | 🆕 1ʳᵉ mesure |
+| SERP | non relevée (core update jusqu'à ~24/11) | — |
+
+Pas d'accès Search Console (PageSpeed API : quota du jour épuisé). **À relever par Yanis** :
+« Signaux Web essentiels » mobile (LCP de l'accueil) ; après le ~24/11 : « Performances IA ».
 
 ### Positions mesurées — 17/11/2026
 
@@ -955,35 +954,11 @@ par Yanis** : rapport « Performances IA » + requêtes à impressions.
 Canal `WebSearch` = US, non représentatif. Pas d'accès Search Console. **À relever
 par Yanis** : rapport « Performances IA » + requêtes à impressions.
 
-### Positions mesurées — 19/10/2026
-
-| Contrôle | 19/10/2026 | vs 18/10 |
-|---|---|---|
-| Déploiement `main` (`9b956ab`) | **`READY`** (API Vercel) | = |
-| Prod vs code (`mesure-texte-servi`) | 15/15 en 200, valeurs identiques au 18/10 | = |
-| « enrobé à chaud Jura entreprise cour » | domaine **absent** ; fiche `118712.fr` de HCE 1ʳᵉ | = |
-| « terrassement Jura entreprise » | **absent** (obat.fr, cylex, offres d'emploi) | 🆕 relevé |
-
-Canal `WebSearch` = US, non représentatif. Pas d'accès Search Console. **À relever
-par Yanis** : rapport « Performances IA » (nouveau, cf. Techniques 19/10), pages
-indexées, requêtes à impressions.
-
-### Positions mesurées — 18/10/2026
-
-| Contrôle | 18/10/2026 | vs 17/10 |
-|---|---|---|
-| Déploiement `main` (`e99d634`) | **`READY`** (API Vercel) | = |
-| Prod vs code (`mesure-texte-servi`) | 15/15 en 200 ; `drainage-pentes` 9 557 (Q/R 17/10 servies) | = |
-| `verif-faq` / `verif-lastmod` en ligne | 11/11 ; 15/15 alignés | = |
-| On-page 15 URLs (title 47-78 car., canonical = og:url = URL, 1 H1, 0 img sans alt, 404 réel) | OK | 🆕 1ʳᵉ mesure groupée |
-| Meta descriptions > 160 car. | 12/15 (troncature d'extrait seulement, pas un facteur de classement) | 🆕 noté, non traité |
-| Poids images accueil | ~12 Mo → corrigé ce run (voir État des lieux) | 🆕 |
-| SERP | non remesurée (dimanche, canal `WebSearch` US non représentatif) | — |
-
-Pas d'accès Search Console. **À relever par Yanis** : rapport « Signaux Web
-essentiels » (LCP mobile) avant/après cette correction.
-
 ## Chantiers faits
+
+### 19/11/2026 — Aperçus de partage : `og:image` des `/services/*` 0,7-2,9 Mo → ~255 Ko
+`public/og/<slug>.jpg` (6 copies JPEG non recadrées) + `og:image:type/width/height/alt` ;
+`og:image:width/height` 1200×630 sur le défaut (`__root.tsx`). Si un hero change : régénérer.
 
 ### 17/11/2026 — `/services/drainage-pentes` : Q/R enrobé drainant / revêtement perméable en hiver
 Q/R n° 8 (dernière), FAQPage = FAQ visible (8/8), +3 sources (IDRRIM n° 43, Genève, Météo-France).
@@ -1330,6 +1305,16 @@ FAQ 5 → 7 (FAQPage = visible, `verif-faq` 7/7), lead mis à jour, source ajout
 
 Par ordre de priorité. **Alterner les angles, ne pas refaire le même deux jours
 de suite.**
+
+> 🆕 **MISE À JOUR DU 19/11/2026 — prime sur tout ce qui suit.**
+> ✅ Aperçus de partage `/services/*` (à vérifier en prod : `og:image` =
+> `/og/<slug>.jpg` en 200, ~255 Ko ; puis IndexNow). Test réel conseillé : coller un lien
+> service dans WhatsApp.
+> 1. Contenu demain : `enrobe-a-chaud` (lastmod 02/10, la plus ancienne) ou `finitions-soignees`.
+> 2. Vitesse accueil : voir Hypothèses 19/11 (animation du H1, à valider par Yanis).
+> 3. Ne pas juger de positions avant la fin du core update (~24/11).
+> 4. Yanis/client : saison de pose (Hypothèse 22/10) ; compteurs de la carte ; Search Console ;
+>    fiche Google Business Profile ; photos `chantier-en-cours`.
 
 > 🆕 **MISE À JOUR DU 17/11/2026 — prime sur tout ce qui suit.**
 > ✅ Q/R enrobé drainant sur `drainage-pentes` (à vérifier en prod : ~12 774 car., FAQ 8/8,
@@ -2457,6 +2442,14 @@ de suite.**
 ---
 
 ## Hypothèses à vérifier
+
+### 19/11/2026 — Le LCP mobile de l'accueil est retardé par l'animation du H1
+Mesure Playwright (4G lente, CPU ×4, 2 essais) : LCP ≈ 4,3-4,7 s, élément = H1 « HCE »
+(`fadeUp 0.7s ease 0.5s both` : invisible pendant 1,2 s après rendu) ; bloquer les 2 vidéos
+(`hero.mp4` 2 Mo + `transformation.mp4` 1,5 Mo, toutes deux `preload="auto"`) ne gagne
+que ~0,4 s. Bundle JS principal 1 Mo (non compressé). Piste : H1 visible sans délai
+(animation réservée aux lignes GSAP). **Non touché** (rendu du hero = choix de design) →
+Yanis : valider, et regarder le LCP réel dans « Signaux Web essentiels ».
 
 ### 16/11/2026 — `/realisations/chantier-en-cours` sert-il des photos ?
 Rendu Playwright de la prod (networkidle + 3 s) : **0 `<img>`** hors logo, contre 11 sur

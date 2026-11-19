@@ -5140,3 +5140,61 @@ par Yanis** : pages indexées / « Explorée, non indexée », requêtes à impr
 
 Canal `WebSearch` = US, non représentatif. Pas d'accès Search Console. **À relever
 par Yanis** : pages indexées, requêtes à impressions (« caniveau », « eaux pluviales cour »).
+
+
+## Archivé le 19/11/2026 — état des lieux et positions des 18 et 19/10/2026
+
+> ✅ **19/10/2026 — Déploiement OK** (`9b956ab` : Vercel `READY`). Prod = dernier
+> commit (15/15 en 200, valeurs du 18/10). Lundi : veille (Google met en avant les
+> liens dans les réponses IA ; rapports IA de la Search Console depuis le 03/06).
+> Chantier (contenu) : **`/services/maconnerie-generale`** +2 Q/R pose des pavés /
+> dalles (guide CERIB 2017), 5 726 → 8 013 car. au banc local, FAQ 7/7, lastmod +
+> `llms.txt` 19/10. Build OK, `check:fige` OK.
+> ✅ Vérifié en prod (`87313a3`, < 100 s) : `maconnerie-generale` 8 013 car., lastmod
+> 2026-10-19, `llms.txt` 19/10, IndexNow 15 URLs → 200.
+
+> ✅ **18/10/2026 — Déploiement OK** (`e99d634` : Vercel `READY`, lu via l'API
+> Vercel). Prod = dernier commit (15/15 URLs en 200, valeurs du 17/10 ; FAQ 11/11 ;
+> lastmod 15/15 alignés). Chantier du jour (**technique**, après 3 jours de Q/R) :
+> **poids des images**. Audit on-page des 15 URLs (title, canonical, og:url, H1
+> unique, alt : tout OK) ; en revanche l'accueil chargeait **~12 Mo d'images**
+> brutes depuis `/photos/` : 5 PNG de 2,5 à 3,3 Mo (`geste-enrobe-a-chaud`,
+> `matiere-bordure-nette`, `process-controle-finitions`, `1.png` bandeau
+> « Finitions soignées », `2.png` galerie maçonnerie) + un JPEG de 1 Mo. Copies
+> **.webp** créées à côté des originaux (originaux conservés), code pointé dessus :
+> 3,3 Mo → 355 Ko, 3,2 Mo → 359 Ko, 3,1 Mo → 260 Ko, 2,5 Mo → 154 Ko, 3,1 Mo →
+> 282 Ko, 1,06 Mo → 314 Ko (**~16,4 Mo → ~1,7 Mo**). Rendu contrôlé à l'œil.
+> Build OK, `check:fige` OK. Les valeurs servies par la base (`site_content_fields`,
+> admin) priment sur ces défauts : à l'accueil, aucune n'était surchargée (URLs
+> servies = défauts du code).
+> ✅ Vérifié en prod (`a341c1e`, < 120 s) : 6 `.webp` en 200, plus aucun
+> `/photos/*.png` dans le HTML de l'accueil ni de `maconnerie-generale`, textes
+> inchangés (accueil 13 579), IndexNow 15 URLs → 200.
+
+### Positions mesurées — 19/10/2026
+
+| Contrôle | 19/10/2026 | vs 18/10 |
+|---|---|---|
+| Déploiement `main` (`9b956ab`) | **`READY`** (API Vercel) | = |
+| Prod vs code (`mesure-texte-servi`) | 15/15 en 200, valeurs identiques au 18/10 | = |
+| « enrobé à chaud Jura entreprise cour » | domaine **absent** ; fiche `118712.fr` de HCE 1ʳᵉ | = |
+| « terrassement Jura entreprise » | **absent** (obat.fr, cylex, offres d'emploi) | 🆕 relevé |
+
+Canal `WebSearch` = US, non représentatif. Pas d'accès Search Console. **À relever
+par Yanis** : rapport « Performances IA » (nouveau, cf. Techniques 19/10), pages
+indexées, requêtes à impressions.
+
+### Positions mesurées — 18/10/2026
+
+| Contrôle | 18/10/2026 | vs 17/10 |
+|---|---|---|
+| Déploiement `main` (`e99d634`) | **`READY`** (API Vercel) | = |
+| Prod vs code (`mesure-texte-servi`) | 15/15 en 200 ; `drainage-pentes` 9 557 (Q/R 17/10 servies) | = |
+| `verif-faq` / `verif-lastmod` en ligne | 11/11 ; 15/15 alignés | = |
+| On-page 15 URLs (title 47-78 car., canonical = og:url = URL, 1 H1, 0 img sans alt, 404 réel) | OK | 🆕 1ʳᵉ mesure groupée |
+| Meta descriptions > 160 car. | 12/15 (troncature d'extrait seulement, pas un facteur de classement) | 🆕 noté, non traité |
+| Poids images accueil | ~12 Mo → corrigé ce run (voir État des lieux) | 🆕 |
+| SERP | non remesurée (dimanche, canal `WebSearch` US non représentatif) | — |
+
+Pas d'accès Search Console. **À relever par Yanis** : rapport « Signaux Web
+essentiels » (LCP mobile) avant/après cette correction.

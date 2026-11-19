@@ -847,6 +847,16 @@ const VOIR_AUSSI: Record<
   },
 };
 
+/* Dimensions des copies d'aperçu public/og/<slug>.jpg (voir `head`). */
+const OG_IMAGES: Record<string, [number, number]> = {
+  "preparation-terrain": [1200, 900],
+  "enrobe-a-chaud": [1200, 715],
+  "maconnerie-generale": [900, 1200],
+  "drainage-pentes": [1200, 634],
+  "bordures-murets": [1200, 792],
+  "finitions-soignees": [1200, 900],
+};
+
 export const Route = createFileRoute("/services/$slug")({
   loader: ({ params }) => {
     const data = SERVICES[params.slug];
@@ -860,7 +870,23 @@ export const Route = createFileRoute("/services/$slug")({
           { name: "description", content: loaderData.seoDescription ?? loaderData.intro },
           { property: "og:title", content: loaderData.seoTitle },
           { property: "og:description", content: loaderData.seoDescription ?? loaderData.intro },
-          { property: "og:image", content: `https://www.hcetp.com${loaderData.hero}` },
+          /* Aperçu de partage (19/11/2026) : l'og:image pointait vers
+             l'original de la photo (`loaderData.hero`, 0,7 à 2,9 Mo) ;
+             WhatsApp n'affiche pas de vignette au-delà d'environ 300 Ko. Copie
+             JPEG ≤ 1200 px et < 280 Ko de la MÊME photo, non recadrée, dans
+             public/og/ (régénérer si le hero d'un service change). */
+          ...(OG_IMAGES[params.slug]
+            ? [
+                {
+                  property: "og:image",
+                  content: `https://www.hcetp.com/og/${params.slug}.jpg`,
+                },
+                { property: "og:image:type", content: "image/jpeg" },
+                { property: "og:image:width", content: String(OG_IMAGES[params.slug][0]) },
+                { property: "og:image:height", content: String(OG_IMAGES[params.slug][1]) },
+                { property: "og:image:alt", content: loaderData.schemaName ?? loaderData.title },
+              ]
+            : [{ property: "og:image", content: `https://www.hcetp.com${loaderData.hero}` }]),
           { property: "og:url", content: `https://www.hcetp.com/services/${params.slug}` },
         ]
       : [{ title: "Service — HCE" }],

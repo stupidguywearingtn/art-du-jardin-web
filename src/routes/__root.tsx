@@ -62,6 +62,11 @@ export const Route = createRootRoute({
          de chaque page. */
       { name: "twitter:card", content: "summary_large_image" },
       { property: "og:image", content: "https://www.hcetp.com/og-hce.jpg" },
+      /* Dimensions réelles de og-hce.jpg (19/11/2026) : Facebook/LinkedIn
+         affichent la grande vignette dès le premier partage sans attendre
+         de télécharger l'image. Les /services/* les surchargent. */
+      { property: "og:image:width", content: "1200" },
+      { property: "og:image:height", content: "630" },
     ],
     links: [
       { rel: "icon", href: "/favicon.ico", sizes: "any" },

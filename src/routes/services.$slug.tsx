@@ -446,7 +446,8 @@ const SERVICES: Record<string, ServiceData> = {
       { t: "Coulage sur place", d: "Béton dosé pour résister au gel et à la décennie." },
       { t: "Décoffrage propre", d: "Finition lisse, arêtes nettes, prêt à recevoir l'enrobé." },
     ],
-    gallery: ["/assets/bordures-1.png", "/assets/bordures-2.png", "/assets/bordures-3.png"],
+    // 19/11/2026 : photo du milieu remplacée par celle de Naoufal (17/11).
+    gallery: ["/assets/bordures-1.png", "/assets/bordures-naoufal-2.jpg", "/assets/bordures-3.png"],
     seoDescription:
       "Bordures béton coulées sur place, bordures pavées et petits murets de soutènement dans le Jura et l'Ain : urbanisme, mur mitoyen, gel. Devis détaillé.",
     savoir: {
@@ -553,10 +554,11 @@ const SERVICES: Record<string, ServiceData> = {
       { t: "Demande de validation", d: "Chaque étape est validée avec vous avant de poursuivre." },
       { t: "Livraison propre", d: "Chantier rendu propre, prêt à l'usage." },
     ],
+    // 19/11/2026 : 3 photos de chantier envoyées par Naoufal (17/11).
     gallery: [
-      "/assets/finitions-1.jpeg",
-      "/assets/finitions-3.jpeg",
-      "/assets/finitions-4.jpeg",
+      "/assets/finitions-naoufal-1.jpg",
+      "/assets/finitions-naoufal-2.jpg",
+      "/assets/finitions-naoufal-3.jpg",
     ],
     seoDescription:
       "Finitions d'enrobé dans le Jura et l'Ain : bords nets, raccords entre bandes, surface sans flaque, gravats évacués. Devis détaillé après visite sur site.",

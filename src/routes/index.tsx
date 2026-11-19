@@ -1264,7 +1264,7 @@ function Hero() {
 }
 
 /* ============ PHILOSOPHY (carousel auto avec logo) ============ */
-const HCE_LOGO = "/assets/hce-logo-engins-v2.png";
+const HCE_LOGO = "/assets/hce-accueil-canva.jpg"; // 19/11/2026 : visuel Canva fourni par Naoufal
 
 function Philosophy() {
   return (

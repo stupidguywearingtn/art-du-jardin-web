@@ -14,7 +14,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { Pencil, Trash2, Plus, Loader2, ImagePlus } from "lucide-react";
 import { optimizeImageUrl } from "@/lib/optimizeImage";
-import { cropCover } from "@/lib/cropImage";
+import { resizeKeepRatio } from "@/lib/cropImage";
 import { PAGE_UPDATED, type PageUpdate } from "@/lib/lastmod";
 
 /** Nombre d'emplacements toujours proposés à l'admin par dossier (extensible). */
@@ -739,9 +739,10 @@ function RealisationsPage() {
 
   const uploadFile = async (file: File): Promise<string | null> => {
     try {
-      // Recadrage 4:5 forcé (canvas, côté client) : ratio identique pour
-      // toutes les photos quel que soit le fichier envoyé depuis l'admin.
-      const processed = await cropCover(file).catch(() => file);
+      // 19/11/2026 (demande client) : plus de recadrage 4:5 forcé — la photo
+      // garde son cadrage (plans larges compris), seule sa taille est réduite.
+      // La vignette de la grille reste 4:5, la visionneuse montre la photo entière.
+      const processed = await resizeKeepRatio(file).catch(() => file);
       const path = `gallery/${Date.now()}-${Math.random().toString(36).slice(2, 8)}.jpg`;
       const { error } = await supabase.storage
         .from("site-images")

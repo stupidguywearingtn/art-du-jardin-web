@@ -20,6 +20,8 @@ et à compléter en fin de run.
 > quel : le recompresser sous 300 Ko dégradait la photo pour 20 Ko). Texte servi 16/16
 > identique au banc (`vite dev`). Pas de `lastmod` ni `llms.txt` (contenu inchangé). Build
 > OK, `check:fige` OK. Archive : état + positions des 18 et 19/10.
+> ✅ Vérifié en prod (`0491dc1`, `success`) : `og:image` = `/og/<slug>.jpg` sur les 6 services,
+> 6 fichiers en 200 (257-270 Ko), texte 16/16 inchangé, IndexNow 16 URLs → 200.
 
 > ✅ **17/11/2026 — Déploiement OK** (`810d7c9` : statut GitHub `success`). Prod = dernier
 > commit (16/16 en 200 ; enrobé 14 157, drainage 10 554, arnaque 12 075 = vérif. du 16/11).

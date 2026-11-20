@@ -24,6 +24,8 @@ et à compléter en fin de run.
 > code (pas d'override admin). Lead mis à jour, `PAGE_UPDATED` + `llms.txt` 20/11. Banc
 > local : **13 429 car.**, FAQPage 8 Q. Build OK, `check:fige` OK. Archive : état + positions
 > du 20/10.
+> ✅ Vérifié en prod (`f6ec32e`, `success`) : 13 429 car. (= banc), Q/R servie, `og:image`
+> 266 465 o en 200, `og:image:alt` propre, lastmod 2026-11-20, `llms.txt` 20/11, IndexNow 16 URLs → 200.
 
 > ✅ **19/11/2026 — Déploiement OK** (`c917649` : statut GitHub `success`). Prod = dernier
 > commit (16/16 en 200, valeurs = banc du 17/11 ; drainage 12 774). Pas de run le 18/11.

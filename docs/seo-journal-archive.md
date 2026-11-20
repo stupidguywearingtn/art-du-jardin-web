@@ -5198,3 +5198,28 @@ indexées, requêtes à impressions.
 
 Pas d'accès Search Console. **À relever par Yanis** : rapport « Signaux Web
 essentiels » (LCP mobile) avant/après cette correction.
+
+## Archivé le 20/11/2026 — état des lieux et positions du 20/10/2026
+
+> ✅ **20/10/2026 — Déploiement OK** (`2d8f086` : Vercel `success`). Prod = dernier
+> commit (15/15 en 200, valeurs du 19/10). Chantier (**technique**) : **meta
+> descriptions** — 10 pages dépassaient 160 car. (173 à 248) → toutes ≤ 159 au banc
+> local (`vite dev`), `og:description` suit (même constante). Texte visible
+> inchangé (15/15 identiques), FAQ 11/11, build OK, `check:fige` OK. Pas de
+> `lastmod` ni « mise à jour » touchés (contenu inchangé). `llms.txt` : rien à
+> modifier (ne cite pas ces descriptions).
+> ✅ Vérifié en prod (`b3a57d3`, `success` < 4 min) : descriptions ≤ 159 servies,
+> textes 15/15 inchangés, IndexNow 15 URLs → 200.
+
+### Positions mesurées — 20/10/2026
+
+| Contrôle | 20/10/2026 | vs 19/10 |
+|---|---|---|
+| Déploiement `main` (`2d8f086`) | **`success`** | = |
+| Prod vs code (`mesure-texte-servi`) | 15/15 en 200, valeurs identiques au 19/10 | = |
+| Meta descriptions > 160 car. (prod, avant push) | 10/15 (accueil 138 OK) — corrigé ce run | 🆕 recompté (12 annoncé le 18/10 : comptage HTML encodé) |
+| « goudronnage cour Jura entreprise » | domaine **absent** ; fiche `118712.fr` de HCE 1ʳᵉ | = |
+| « enrobé Ain entreprise cour » | **absent** (marchés publics, annuaires hors zone) | 🆕 relevé |
+
+Canal `WebSearch` = US, non représentatif. Pas d'accès Search Console. **À relever
+par Yanis** : rapport « Performances IA » + requêtes à impressions.

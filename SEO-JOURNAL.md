@@ -8,6 +8,23 @@ et à compléter en fin de run.
 
 ## État des lieux
 
+> ✅ **20/11/2026 — Déploiement OK** (`6c17d8a` : statut GitHub `success`). Prod = dernier
+> commit (16/16 en 200 ; finitions 11 715, reste = banc 17-19/11). Le 19/11 après-midi, une
+> autre session a remplacé des photos (hero + galerie `finitions-soignees`, 1 photo
+> `bordures-murets`, visuel Canva de l'accueil) → l'`og:image` de `finitions-soignees`
+> montrait encore l'**ancienne** photo. Chantier (**contenu**, après un jour technique) :
+> **`/services/finitions-soignees`** (lastmod 16/10) : (1) +1 Q/R **« De l'herbe pousse au
+> bord de ma cour en enrobé : ai-je encore le droit d'utiliser un désherbant ? »** — loi
+> Labbé, particuliers depuis le 01/01/2019 (dépliant interministériel « Mon jardin sans
+> pesticides », DREAL Normandie ; citation exacte), collectivités 01/01/2017, biocontrôle /
+> faible risque / bio autorisés ; aucun chiffre ni produit inventé ; (2) `og:image`
+> régénérée depuis le nouveau hero (1200×900, 266 Ko) ; (3) **textes alternatifs propres**
+> aux 3 photos de la galerie + hero (au lieu de « Finition soignée d'enrobé » ×4), décrits
+> d'après les photos ; `og:image:alt` suit ; hero alt seulement si l'image servie = hero du
+> code (pas d'override admin). Lead mis à jour, `PAGE_UPDATED` + `llms.txt` 20/11. Banc
+> local : **13 429 car.**, FAQPage 8 Q. Build OK, `check:fige` OK. Archive : état + positions
+> du 20/10.
+
 > ✅ **19/11/2026 — Déploiement OK** (`c917649` : statut GitHub `success`). Prod = dernier
 > commit (16/16 en 200, valeurs = banc du 17/11 ; drainage 12 774). Pas de run le 18/11.
 > Chantier (**technique**, après un jour contenu) : 1ʳᵉ mesure de vitesse (Playwright,
@@ -436,16 +453,6 @@ et à compléter en fin de run.
 > ✅ Vérifié en prod (`ec730c6`, `success`) : `parking-voirie-pro` 8 265 car., lastmod
 > 2026-10-21, `llms.txt` 21/10, IndexNow 15 URLs → 200.
 
-> ✅ **20/10/2026 — Déploiement OK** (`2d8f086` : Vercel `success`). Prod = dernier
-> commit (15/15 en 200, valeurs du 19/10). Chantier (**technique**) : **meta
-> descriptions** — 10 pages dépassaient 160 car. (173 à 248) → toutes ≤ 159 au banc
-> local (`vite dev`), `og:description` suit (même constante). Texte visible
-> inchangé (15/15 identiques), FAQ 11/11, build OK, `check:fige` OK. Pas de
-> `lastmod` ni « mise à jour » touchés (contenu inchangé). `llms.txt` : rien à
-> modifier (ne cite pas ces descriptions).
-> ✅ Vérifié en prod (`b3a57d3`, `success` < 4 min) : descriptions ≤ 159 servies,
-> textes 15/15 inchangés, IndexNow 15 URLs → 200.
-
 > levé.** Yanis a mergé `fix/tanstack-cve-deploy` (PR #1, commit `e3a860e`, le
 > 10/10 à 22:30) : statut Vercel **`success`** sur `main`. **La dette de
 > vérification en ligne est purgée, à ne pas refaire** : 14/14 URLs servent
@@ -627,6 +634,18 @@ un extrait de SERP ne prouve pas ce que la page contient.
 > `verif.com` ont été jugées périmées **sur la seule foi d'extraits de recherche**
 > (403 au runner, contenu jamais lu). Leur statut « périmée » n'est donc pas
 > établi. Noté en chantier en attente.
+
+### Positions mesurées — 20/11/2026
+
+| Contrôle | 20/11/2026 | vs 19/11 |
+|---|---|---|
+| Déploiement `main` (`6c17d8a`, commits photos du 19/11 après-midi) | **`success`** (Vercel) | = |
+| Prod vs code (`mesure-texte-servi`) | 16/16 en 200 ; finitions 11 715 (−3, photos) | = |
+| `og:image` finitions = hero servi ? | **non** (ancienne photo) → corrigé ce run | 🆕 |
+| SERP | non relevée (core update jusqu'à ~24/11) | — |
+
+Pas d'accès Search Console. **À relever par Yanis** après le ~24/11 : « Performances IA » +
+requêtes à impressions (comparer 7 j avant le 10/11 et 7 j après le 24/11).
 
 ### Positions mesurées — 19/11/2026
 
@@ -943,20 +962,11 @@ impressions, et surveiller l'accueil après la baisse de contenu.
 Canal `WebSearch` = US, non représentatif. Pas d'accès Search Console. **À relever
 par Yanis** : rapport « Performances IA » + requêtes à impressions.
 
-### Positions mesurées — 20/10/2026
-
-| Contrôle | 20/10/2026 | vs 19/10 |
-|---|---|---|
-| Déploiement `main` (`2d8f086`) | **`success`** | = |
-| Prod vs code (`mesure-texte-servi`) | 15/15 en 200, valeurs identiques au 19/10 | = |
-| Meta descriptions > 160 car. (prod, avant push) | 10/15 (accueil 138 OK) — corrigé ce run | 🆕 recompté (12 annoncé le 18/10 : comptage HTML encodé) |
-| « goudronnage cour Jura entreprise » | domaine **absent** ; fiche `118712.fr` de HCE 1ʳᵉ | = |
-| « enrobé Ain entreprise cour » | **absent** (marchés publics, annuaires hors zone) | 🆕 relevé |
-
-Canal `WebSearch` = US, non représentatif. Pas d'accès Search Console. **À relever
-par Yanis** : rapport « Performances IA » + requêtes à impressions.
-
 ## Chantiers faits
+
+### 20/11/2026 — `/services/finitions-soignees` : Q/R désherbant (loi Labbé), alt des photos, `og:image`
+Q/R n° 8 (FAQPage 8/8), +1 source (dépliant ministères). `galleryAlt` / `heroAlt` (nouveaux champs
+optionnels de `ServiceData`, réutilisables sur les autres services). 11 715 → 13 429 car.
 
 ### 19/11/2026 — Aperçus de partage : `og:image` des `/services/*` 0,7-2,9 Mo → ~255 Ko
 `public/og/<slug>.jpg` (6 copies JPEG non recadrées) + `og:image:type/width/height/alt` ;
@@ -1307,6 +1317,16 @@ FAQ 5 → 7 (FAQPage = visible, `verif-faq` 7/7), lead mis à jour, source ajout
 
 Par ordre de priorité. **Alterner les angles, ne pas refaire le même deux jours
 de suite.**
+
+> 🆕 **MISE À JOUR DU 20/11/2026 — prime sur tout ce qui suit.**
+> ✅ `finitions-soignees` (à vérifier en prod : ~13 429 car., FAQ 8/8, lastmod 2026-11-20,
+> `llms.txt` 20/11, `og:image` = nouvelle photo ~266 Ko, alt propres ; puis IndexNow).
+> 1. Technique demain : `bordures-murets` a une nouvelle photo de galerie (`bordures-naoufal-2.jpg`)
+>    → lui donner des `galleryAlt` (même mécanisme) ; vérifier l'alt du visuel Canva de l'accueil.
+> 2. Contenu suivant : `enrobe-a-chaud` (lastmod 02/10, la plus ancienne).
+> 3. Si un hero de service change encore : régénérer `public/og/<slug>.jpg` (+ `OG_IMAGES`).
+> 4. Yanis/client : saison de pose ; compteurs de la carte ; Search Console ; fiche Google
+>    Business Profile ; photos `chantier-en-cours`.
 
 > 🆕 **MISE À JOUR DU 19/11/2026 — prime sur tout ce qui suit.**
 > ✅ Aperçus de partage `/services/*` (à vérifier en prod : `og:image` =

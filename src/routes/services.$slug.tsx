@@ -20,6 +20,10 @@ type ServiceData = {
   prestations: string[];
   methode: { t: string; d: string }[];
   gallery: string[];
+  /** Textes alternatifs propres à chaque photo de `gallery` (même ordre) ; sinon schemaName. */
+  galleryAlt?: string[];
+  /** Texte alternatif de `hero`, appliqué seulement si l'image servie est bien `hero`. */
+  heroAlt?: string;
   /* Description utilisée dans <title>/meta uniquement, quand la phrase d'intro
      affichée dans le héros ne contient pas le vocabulaire réellement tapé par
      les internautes. Aucun effet sur le rendu. */
@@ -560,11 +564,18 @@ const SERVICES: Record<string, ServiceData> = {
       "/assets/finitions-naoufal-2.jpg",
       "/assets/finitions-naoufal-3.jpg",
     ],
+    // 20/11/2026 : textes alternatifs décrivant ce que montre chaque photo (au lieu du même libellé ×3).
+    galleryAlt: [
+      "Chemin en enrobé neuf bordé de pavés gris, entre deux bandes de gravier, rejoignant une voirie en enrobé",
+      "Cour en enrobé neuf au pied d'une maison, rive tenue par une rangée de pavés gris, mur de soutènement au fond",
+      "Cour en enrobé neuf entre un abri de jardin en bois et un mur blanc, rive bordée de pavés côté terre",
+    ],
+    heroAlt: "Cour en enrobé neuf au pied d'une maison, rive tenue par une rangée de pavés gris, mur de soutènement au fond",
     seoDescription:
       "Finitions d'enrobé dans le Jura et l'Ain : bords nets, raccords entre bandes, surface sans flaque, gravats évacués. Devis détaillé après visite sur site.",
     savoir: {
       heading: "Finitions et fin de chantier : les questions qu'on nous pose",
-      lead: "La finition est la partie du chantier que le client voit vraiment : les bords, les raccords entre bandes, la planéité, et l'état dans lequel le chantier est rendu. Voici à quoi se reconnaît un enrobé bien posé, pourquoi une ligne apparaît parfois entre deux bandes, où partent les gravats d'une cour refaite, ce qu'un devis doit obligatoirement dire à ce sujet — et, une fois la cour livrée, ce qui l'abîme vraiment : le sel de déneigement, ou les taches de gazole et d'huile.",
+      lead: "La finition est la partie du chantier que le client voit vraiment : les bords, les raccords entre bandes, la planéité, et l'état dans lequel le chantier est rendu. Voici à quoi se reconnaît un enrobé bien posé, pourquoi une ligne apparaît parfois entre deux bandes, où partent les gravats d'une cour refaite, ce qu'un devis doit obligatoirement dire à ce sujet — et, une fois la cour livrée, ce qui l'abîme vraiment : le sel de déneigement, les taches de gazole et d'huile — et ce qu'on a encore le droit de faire contre l'herbe qui pousse en bordure.",
       updated: PAGE_UPDATED["/services/finitions-soignees"],
       qa: [
         {
@@ -595,6 +606,10 @@ const SERVICES: Record<string, ServiceData> = {
           q: "Une tache de gazole ou d'huile sur l'enrobé, est-ce grave ?",
           a: "Oui, si elle se répète au même endroit : le gazole, le fioul, les huiles moteur et les fluides hydrauliques dissolvent le bitume qui tient les gravillons de l'enrobé. Une goutte isolée laisse une tache ; une fuite qui revient sous un véhicule garé toujours à la même place, sous une machine ou près d'une cuve ramollit la surface, qui finit par se désagréger. Le ministère des Transports du Québec l'a documenté dans un bulletin technique de décembre 2004 consacré à la contamination des enrobés : « Ces hydrocarbures sont de puissants solvants pour le bitume », et « une faible quantité d'hydrocarbures légers suffit donc pour diminuer grandement la capacité de l'enrobé à résister aux déformations ». Ce bulletin vise d'abord le moment de la pose, où l'enrobé encore très chaud est le plus vulnérable, et sa consigne est nette : un enrobé contaminé pendant les travaux « doit être remplacé immédiatement ». Sur une cour en service, l'effet est plus lent, mais le mécanisme est le même. Trois réflexes : absorber tout de suite avec un absorbant sec (sable, sciure ou absorbant de garage) puis balayer ; ne pas étaler la tache au jet d'eau ; et ne jamais la « nettoyer » au gazole ou au solvant, ce qui reviendrait à ajouter un solvant du bitume sur le bitume. Une zone déjà ramollie ne se rattrape pas en surface : elle se découpe et se reprend localement.",
         },
+        {
+          q: "De l'herbe pousse au bord de ma cour en enrobé : ai-je encore le droit d'utiliser un désherbant ?",
+          a: "Pas un désherbant chimique de synthèse : depuis le 1er janvier 2019, avec l'entrée en vigueur de la loi Labbé pour les particuliers, « vous ne pouvez plus acheter, utiliser et stocker des pesticides chimiques pour jardiner ou désherber », rappelle le dépliant « Mon jardin sans pesticides » des ministères de la Transition écologique, de la Santé et de l'Agriculture. Les collectivités y sont soumises depuis le 1er janvier 2017. Restent autorisés, selon ce même document, les produits « de biocontrôle, à faible risque ou utilisables en agriculture biologique ». Et un vieux bidon de désherbant ne se vide pas dans le caniveau de la cour : il se rapporte en déchetterie ou en point de collecte. Pour une cour en enrobé, l'herbe ne traverse pas une surface bien compactée : elle s'installe là où il reste de la terre et de l'eau — le long d'une rive restée ouverte sur le terrain, dans les joints d'une bordure de pavés, ou dans une fissure. C'est pour cela que la finition compte : une rive tenue par une bordure et une jonction bien fermée entre l'enrobé et ses abords laissent peu de prise aux graines. Sur une cour déjà en place, l'arrachage à la main ou au couteau à désherber, dès que les pousses apparaissent, reste la méthode la plus simple ; si une même fissure se végétalise d'une année sur l'autre, c'est qu'elle laisse passer l'eau, et c'est elle qu'il faut faire examiner.",
+        },
       ],
       sources: [
         {
@@ -620,6 +635,11 @@ const SERVICES: Record<string, ServiceData> = {
           label:
             "Ministère des Transports du Québec — Info DGLC vol. 9 n° 12, « Contamination des enrobés par des hydrocarbures légers pendant les travaux routiers », décembre 2004",
           url: "https://www.transports.gouv.qc.ca/fr/entreprises-partenaires/entreprises-reseaux-routier/bulletin-technique-dglc/Documents/2004/04-12.pdf",
+        },
+        {
+          label:
+            "« Mon jardin sans pesticides » — dépliant des ministères (Transition écologique, Santé, Agriculture) pour les particuliers, loi Labbé (DREAL Normandie)",
+          url: "https://www.normandie.developpement-durable.gouv.fr/IMG/pdf/flyer_auto_impression-a5.pdf",
         },
         {
           label: "Météo-France — fiche climatologique de CHAMPAGNOLE (39), indicatif 39097003, normales 1991-2020",
@@ -886,7 +906,7 @@ export const Route = createFileRoute("/services/$slug")({
                 { property: "og:image:type", content: "image/jpeg" },
                 { property: "og:image:width", content: String(OG_IMAGES[params.slug][0]) },
                 { property: "og:image:height", content: String(OG_IMAGES[params.slug][1]) },
-                { property: "og:image:alt", content: loaderData.schemaName ?? loaderData.title },
+                { property: "og:image:alt", content: loaderData.heroAlt ?? loaderData.schemaName ?? loaderData.title },
               ]
             : [{ property: "og:image", content: `https://www.hcetp.com${loaderData.hero}` }]),
           { property: "og:url", content: `https://www.hcetp.com/services/${params.slug}` },
@@ -1058,7 +1078,7 @@ function ServicePageBody() {
             {(url) => (
               <img
                 src={url}
-                alt={data.schemaName ?? data.title}
+                alt={(heroImg === data.hero && data.heroAlt) || data.schemaName || data.title}
                 fetchPriority="high"
                 className="absolute inset-0 w-full h-full object-cover"
               />
@@ -1126,9 +1146,9 @@ function ServicePageBody() {
                   : "md:grid-cols-3"
             }`}
           >
-            {data.gallery.map((g) => (
+            {data.gallery.map((g, i) => (
               <div key={g} className="aspect-[4/3] overflow-hidden">
-                <img src={optimizeImageUrl(g, 800)} alt={data.schemaName ?? data.title} loading="lazy" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" />
+                <img src={optimizeImageUrl(g, 800)} alt={data.galleryAlt?.[i] ?? data.schemaName ?? data.title} loading="lazy" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" />
               </div>
             ))}
           </div>

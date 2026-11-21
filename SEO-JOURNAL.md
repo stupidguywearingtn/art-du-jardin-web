@@ -17,6 +17,7 @@ et à compléter en fin de run.
 > lieu supposé). Alt du visuel Canva de l'accueil (« HCE — Aménagement de cours en enrobé ») =
 > texte de l'image → laissé (accueil : rien sans accord client). Texte servi inchangé (6/6 =
 > prod), pas de `lastmod` / `llms.txt`. Build OK, `check:fige` OK. Archive : état + positions du 21/10.
+> ✅ Vérifié en prod (`2a2f8d9`, `success`) : 3 alt distincts sur chacun des 5 services, 16/16 en 200, IndexNow 16 URLs → 200.
 
 > ✅ **20/11/2026 — Déploiement OK** (`6c17d8a` : statut GitHub `success`). Prod = dernier
 > commit (16/16 en 200 ; finitions 11 715, reste = banc 17-19/11). Le 19/11 après-midi, une

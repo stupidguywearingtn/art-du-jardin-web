@@ -5223,3 +5223,27 @@ essentiels » (LCP mobile) avant/après cette correction.
 
 Canal `WebSearch` = US, non représentatif. Pas d'accès Search Console. **À relever
 par Yanis** : rapport « Performances IA » + requêtes à impressions.
+
+## Archivé le 21/11/2026 — état des lieux et positions du 21/10/2026
+
+> ✅ **21/10/2026 — Déploiement OK** (`0f8cdeb` : statut GitHub `success`). Prod =
+> dernier commit (15/15 en 200, valeurs du 20/10). Chantier (**contenu**) :
+> **`/realisations/parking-voirie-pro`** +1 Q/R **bornes de recharge / fourreaux avant
+> l'enrobé** (CCH L113-12 à L113-14, R113-6 ; fiche service-public F38491 vérifiée le
+> 12/06/2026). Le sujet « perméabilité 500 m² » était déjà traité sur `drainage-pentes`
+> → pas dupliqué. Banc local : 6 356 → **8 265 car.**, FAQ 6/6, lastmod + `llms.txt`
+> 21/10 (+1 Q/R autonome). Build OK, `check:fige` OK. Archive : entrées du 20/09 → 
+> `docs/seo-journal-archive.md`.
+> ✅ Vérifié en prod (`ec730c6`, `success`) : `parking-voirie-pro` 8 265 car., lastmod
+> 2026-10-21, `llms.txt` 21/10, IndexNow 15 URLs → 200.
+
+### Positions mesurées — 21/10/2026
+
+| Contrôle | 21/10/2026 | vs 20/10 |
+|---|---|---|
+| Déploiement `main` (`0f8cdeb`) | **`success`** | = |
+| Prod vs code (`mesure-texte-servi`) | 15/15 en 200, valeurs du 20/10 | = |
+| « réfection parking enrobé Jura entreprise » | domaine **absent** (marchés publics, DIR Est) ; fiche `118712.fr` de HCE présente | 🆕 relevé |
+
+Canal `WebSearch` = US, non représentatif. Pas d'accès Search Console. **À relever
+par Yanis** : rapport « Performances IA » + requêtes à impressions.

@@ -88,6 +88,13 @@ const SERVICES: Record<string, ServiceData> = {
       "/assets/preparation-terrain-2.png",
       "/assets/preparation-terrain-3.png",
     ],
+    // 21/11/2026 : textes alternatifs décrivant ce que montre chaque photo (relues une à une).
+    galleryAlt: [
+      "Plateforme en grave compactée devant une maison à flanc de coteau, encadrée d'une rangée de pavés gris clair",
+      "Allée recouverte de gravillons concassés, tenue par des bordures béton le long d'une pelouse et d'un massif",
+      "Démolition d'un ancien dallage en pierres plates, mini-pelle et camion benne au fond, grille de caniveau au premier plan",
+    ],
+    heroAlt: "Plateforme en grave compactée devant une maison à flanc de coteau, encadrée d'une rangée de pavés gris clair",
     seoDescription:
       "Terrassement, VRD et viabilisation dans le Jura et l'Ain : décaissement contrôlé, drainage et compactage par couches avant toute pose d'enrobé. Devis détaillé.",
     savoir: {
@@ -173,6 +180,13 @@ const SERVICES: Record<string, ServiceData> = {
       "/assets/enrobe-2.png",
       "/assets/enrobe-3.png",
     ],
+    // 21/11/2026 : textes alternatifs décrivant ce que montre chaque photo (relues une à une).
+    galleryAlt: [
+      "Rouleau compacteur orange sur une cour en enrobé fraîchement étalée, au pied d'une maison, devant un seuil en dalles claires",
+      "Enrobé neuf, plus sombre, prolongeant en courbe une voirie existante le long d'une pelouse",
+      "Enrobé qui fume encore juste après l'étalage, sur une grande surface au bord d'un terrain en grave",
+    ],
+    heroAlt: "Rouleau compacteur orange sur une cour en enrobé fraîchement étalée, au pied d'une maison, devant un seuil en dalles claires",
     seoDescription:
       "Goudronnage de cour, d'allée ou de parking (Jura, Ain) : enrobé à chaud posé à la main à 150°C, compacté au rouleau. Devis détaillé, garantie décennale.",
     savoir: {
@@ -266,6 +280,13 @@ const SERVICES: Record<string, ServiceData> = {
       "/photos/2.webp",
       "/assets/maconnerie-3.png",
     ],
+    // 21/11/2026 : textes alternatifs décrivant ce que montre chaque photo (relues une à une).
+    galleryAlt: [
+      "Rangée de pavés gris clair posée au cordeau entre une pelouse et un fond de forme en concassé, devant une maison en bois",
+      "Quart de cercle de pavés gris clair posés en éventail dans une cour en enrobé neuf, devant une porte de garage",
+      "Fond de forme en concassé encadré de deux rangées de pavés gris le long d'un mur, seuil protégé par une bande orange",
+    ],
+    heroAlt: "Rangée de pavés gris clair posée au cordeau entre une pelouse et un fond de forme en concassé, devant une maison en bois",
     seoDescription:
       "Pavage, dallage, bordures et médaillons dans l'enrobé, Jura et Ain : motif dessiné avec vous, pose au cordeau, joints sablés ou cimentés. Devis détaillé.",
     savoir: {
@@ -358,6 +379,13 @@ const SERVICES: Record<string, ServiceData> = {
       "/assets/drainage-3.jpeg",
       "/assets/drainage-4.jpeg",
     ],
+    // 21/11/2026 : textes alternatifs décrivant ce que montre chaque photo (relues une à une).
+    galleryAlt: [
+      "Allée en enrobé neuf en pente contournant un talus en enrochement, camion en haut de la pente",
+      "Enrobé neuf mouillé : l'eau ruisselle en traînées vers le bas de la pente, à côté d'un îlot de pelouse",
+      "Cour en enrobé neuf aux rives nettes, entre une plate-bande fleurie et un sol en grave",
+    ],
+    heroAlt: "Allée en enrobé neuf en pente contournant un talus en enrochement, camion en haut de la pente",
     seoDescription:
       "Drainage et pentes avant enrobé dans le Jura et l'Ain : pente d'au moins 1,5 % vers les exutoires, drains, caniveaux, eaux pluviales. Devis détaillé.",
     savoir: {
@@ -452,6 +480,13 @@ const SERVICES: Record<string, ServiceData> = {
     ],
     // 19/11/2026 : photo du milieu remplacée par celle de Naoufal (17/11).
     gallery: ["/assets/bordures-1.png", "/assets/bordures-naoufal-2.jpg", "/assets/bordures-3.png"],
+    // 21/11/2026 : textes alternatifs décrivant ce que montre chaque photo (relues une à une).
+    galleryAlt: [
+      "Bordure béton en courbe tenant la rive d'une cour en enrobé neuf, côté talus en pierres concassées",
+      "Bande de gravillons le long d'une façade en bardage bois, encadrée de bordures béton dans la pelouse",
+      "Rive rectiligne d'une cour en enrobé neuf tenue par des bordures béton, côté terre",
+    ],
+    heroAlt: "Bordure béton en courbe tenant la rive d'une cour en enrobé neuf, côté talus en pierres concassées",
     seoDescription:
       "Bordures béton coulées sur place, bordures pavées et petits murets de soutènement dans le Jura et l'Ain : urbanisme, mur mitoyen, gel. Devis détaillé.",
     savoir: {

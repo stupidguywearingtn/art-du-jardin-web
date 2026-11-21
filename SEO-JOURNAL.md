@@ -8,6 +8,16 @@ et à compléter en fin de run.
 
 ## État des lieux
 
+> ✅ **21/11/2026 — Déploiement OK** (`30fb1f9` : statut GitHub `success`). Prod = dernier
+> commit (16/16 en 200 ; 6 `/services/*` = banc du 20/11, finitions 13 429). Chantier
+> (**technique**, après un jour contenu) : **textes alternatifs** des 5 autres `/services/*`
+> (prépa, enrobé, maçonnerie, drainage, bordures) — la galerie servait le même libellé ×3
+> (`schemaName`) ; 15 photos relues une à une → `galleryAlt` + `heroAlt` (= photo 1, donc
+> `og:image:alt` suit). Description de ce qu'on voit, rien d'inventé (pas de matériau ni de
+> lieu supposé). Alt du visuel Canva de l'accueil (« HCE — Aménagement de cours en enrobé ») =
+> texte de l'image → laissé (accueil : rien sans accord client). Texte servi inchangé (6/6 =
+> prod), pas de `lastmod` / `llms.txt`. Build OK, `check:fige` OK. Archive : état + positions du 21/10.
+
 > ✅ **20/11/2026 — Déploiement OK** (`6c17d8a` : statut GitHub `success`). Prod = dernier
 > commit (16/16 en 200 ; finitions 11 715, reste = banc 17-19/11). Le 19/11 après-midi, une
 > autre session a remplacé des photos (hero + galerie `finitions-soignees`, 1 photo
@@ -444,17 +454,6 @@ et à compléter en fin de run.
 > ✅ Vérifié en prod (`ecb7fe7`, `success`) : `lastmod` `/` et `/mentions-legales`
 > 2026-10-22, plus de renvoi « arrhes » sur `/mentions-legales`, `llms.txt` 22/10, IndexNow 15 URLs → 200.
 
-> ✅ **21/10/2026 — Déploiement OK** (`0f8cdeb` : statut GitHub `success`). Prod =
-> dernier commit (15/15 en 200, valeurs du 20/10). Chantier (**contenu**) :
-> **`/realisations/parking-voirie-pro`** +1 Q/R **bornes de recharge / fourreaux avant
-> l'enrobé** (CCH L113-12 à L113-14, R113-6 ; fiche service-public F38491 vérifiée le
-> 12/06/2026). Le sujet « perméabilité 500 m² » était déjà traité sur `drainage-pentes`
-> → pas dupliqué. Banc local : 6 356 → **8 265 car.**, FAQ 6/6, lastmod + `llms.txt`
-> 21/10 (+1 Q/R autonome). Build OK, `check:fige` OK. Archive : entrées du 20/09 → 
-> `docs/seo-journal-archive.md`.
-> ✅ Vérifié en prod (`ec730c6`, `success`) : `parking-voirie-pro` 8 265 car., lastmod
-> 2026-10-21, `llms.txt` 21/10, IndexNow 15 URLs → 200.
-
 > levé.** Yanis a mergé `fix/tanstack-cve-deploy` (PR #1, commit `e3a860e`, le
 > 10/10 à 22:30) : statut Vercel **`success`** sur `main`. **La dette de
 > vérification en ligne est purgée, à ne pas refaire** : 14/14 URLs servent
@@ -636,6 +635,18 @@ un extrait de SERP ne prouve pas ce que la page contient.
 > `verif.com` ont été jugées périmées **sur la seule foi d'extraits de recherche**
 > (403 au runner, contenu jamais lu). Leur statut « périmée » n'est donc pas
 > établi. Noté en chantier en attente.
+
+### Positions mesurées — 21/11/2026
+
+| Contrôle | 21/11/2026 | vs 20/11 |
+|---|---|---|
+| Déploiement `main` (`30fb1f9`) | **`success`** (Vercel) | = |
+| Prod vs code (`mesure-texte-servi`) | 16/16 en 200 ; 6 services = banc | = |
+| Alt distincts sur les galeries `/services/*` | 6/6 au banc (1/6 en prod avant ce run) | 🆕 |
+| SERP | non relevée (core update jusqu'à ~24/11) | — |
+
+Pas d'accès Search Console. **À relever par Yanis** après le ~24/11 : « Performances IA » +
+requêtes à impressions (7 j avant le 10/11 vs 7 j après le 24/11).
 
 ### Positions mesurées — 20/11/2026
 
@@ -953,18 +964,11 @@ Pas d'accès Search Console. **À relever par Yanis** : « Performances IA » + 
 Pas d'accès Search Console. **À relever par Yanis** : « Performances IA » + requêtes à
 impressions, et surveiller l'accueil après la baisse de contenu.
 
-### Positions mesurées — 21/10/2026
-
-| Contrôle | 21/10/2026 | vs 20/10 |
-|---|---|---|
-| Déploiement `main` (`0f8cdeb`) | **`success`** | = |
-| Prod vs code (`mesure-texte-servi`) | 15/15 en 200, valeurs du 20/10 | = |
-| « réfection parking enrobé Jura entreprise » | domaine **absent** (marchés publics, DIR Est) ; fiche `118712.fr` de HCE présente | 🆕 relevé |
-
-Canal `WebSearch` = US, non représentatif. Pas d'accès Search Console. **À relever
-par Yanis** : rapport « Performances IA » + requêtes à impressions.
-
 ## Chantiers faits
+
+### 21/11/2026 — Textes alternatifs des galeries `/services/*` (5 services restants)
+`galleryAlt` + `heroAlt` sur prépa, enrobé, maçonnerie, drainage, bordures (15 photos relues).
+Les 6 services ont désormais des alt propres ; si une photo change, réécrire son alt.
 
 ### 20/11/2026 — `/services/finitions-soignees` : Q/R désherbant (loi Labbé), alt des photos, `og:image`
 Q/R n° 8 (FAQPage 8/8), +1 source (dépliant ministères). `galleryAlt` / `heroAlt` (nouveaux champs
@@ -1319,6 +1323,14 @@ FAQ 5 → 7 (FAQPage = visible, `verif-faq` 7/7), lead mis à jour, source ajout
 
 Par ordre de priorité. **Alterner les angles, ne pas refaire le même deux jours
 de suite.**
+
+> 🆕 **MISE À JOUR DU 21/11/2026 — prime sur tout ce qui suit.**
+> ✅ Alt des galeries des 5 services (à vérifier en prod : `alt` distincts ×3 + `og:image:alt`
+> sur chaque `/services/*` ; puis IndexNow).
+> 1. Contenu demain : `enrobe-a-chaud` (lastmod 02/10, la plus ancienne des services).
+> 2. Lundi 23/11 : veille (étape 6) ; à partir du ~24/11 (fin du core update) : relever les positions.
+> 3. Yanis/client : saison de pose ; compteurs de la carte ; Search Console ; fiche Google
+>    Business Profile ; photos `chantier-en-cours` ; LCP accueil (animation du H1).
 
 > 🆕 **MISE À JOUR DU 20/11/2026 — prime sur tout ce qui suit.**
 > ✅ `finitions-soignees` (à vérifier en prod : ~13 429 car., FAQ 8/8, lastmod 2026-11-20,

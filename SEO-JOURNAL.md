@@ -22,6 +22,7 @@ et à compléter en fin de run.
 > FAQPage 11/11. Build OK (après `npm install` : `bun install` installe react-start 1.169.7
 > et casse le build « index.html », voir Techniques), `check:fige` OK. Archive : état +
 > positions du 22/10.
+> ✅ Vérifié en prod (`72a48cf`, `success`) : 16 062 car. (= banc), FAQ 11/11, `llms.txt` 22/11, IndexNow 16 URLs → 200.
 
 > ✅ **21/11/2026 — Déploiement OK** (`30fb1f9` : statut GitHub `success`). Prod = dernier
 > commit (16/16 en 200 ; 6 `/services/*` = banc du 20/11, finitions 13 429). Chantier

@@ -191,7 +191,7 @@ const SERVICES: Record<string, ServiceData> = {
       "Goudronnage de cour, d'allée ou de parking (Jura, Ain) : enrobé à chaud posé à la main à 150°C, compacté au rouleau. Devis détaillé, garantie décennale.",
     savoir: {
       heading: "Goudronnage, épaisseurs et tenue dans le temps : les questions qu'on nous pose",
-      lead: "« Faire goudronner sa cour » et « poser un enrobé à chaud » désignent aujourd'hui le même chantier. Voici ce que recouvre réellement le mot, ce que disent les normes, et à quelle saison le chantier est possible dans le Jura et l'Ain. Puis, chiffres et sources à l'appui, ce qui se décide au devis et qu'on ne voit plus une fois la surface finie : quelle épaisseur se pose réellement, ce que veut dire 0/10 ou 0/14 sur un devis, dans quels cas un enrobé neuf peut être posé sur l'ancien, pourquoi un revêtement se dégrade après un hiver, et ce que l'altitude change au choix du bitume.",
+      lead: "« Faire goudronner sa cour » et « poser un enrobé à chaud » désignent aujourd'hui le même chantier. Voici ce que recouvre réellement le mot, ce que disent les normes, et à quelle saison le chantier est possible dans le Jura et l'Ain, et ce que change un enrobé rouge, saumon ou bordeaux. Puis, chiffres et sources à l'appui, ce qui se décide au devis et qu'on ne voit plus une fois la surface finie : quelle épaisseur se pose réellement, ce que veut dire 0/10 ou 0/14 sur un devis, dans quels cas un enrobé neuf peut être posé sur l'ancien, pourquoi un revêtement se dégrade après un hiver, et ce que l'altitude change au choix du bitume.",
       updated: PAGE_UPDATED["/services/enrobe-a-chaud"],
       qa: [
         {
@@ -213,6 +213,10 @@ const SERVICES: Record<string, ServiceData> = {
         {
           q: "Quelle différence entre enrobé à chaud et enrobé à froid ?",
           a: "L'enrobé à froid se livre prêt à l'emploi et se compacte sans chauffe : c'est une solution de réparation ponctuelle, pour reboucher un nid-de-poule ou une tranchée. L'enrobé à chaud, lui, est fabriqué en centrale, livré chaud et posé à 150°C : c'est celui qui donne une surface homogène sur une cour, une allée ou un parking entier. HCE travaille l'enrobé à chaud, en noir, rouge, saumon ou bordeaux et sous différentes granulations.",
+        },
+        {
+          q: "Comment obtient-on un enrobé rouge, saumon ou bordeaux, et se salit-il plus qu'un noir ?",
+          a: "La couleur vient d'un liant clair, souvent complété d'un pigment : sur le noir d'un bitume classique, un granulat coloré ne se verrait pas. TotalEnergies l'explique dans sa fiche sur les enrobés colorés : « pour obtenir un enrobé de couleur, il est nécessaire d'utiliser un liant clair afin de ne pas masquer le granulat coloré choisi » ; pour un enrobé rouge, « l'opération consiste alors à ajouter de l'oxyde de fer au liant clair pour lui donner sa teinte ». Ce liant clair est un liant de synthèse : la fiche produit d'une gamme d'enrobés colorés de Colas (juillet 2025) parle d'un « liant translucide de synthèse », et indique que les performances techniques de ces revêtements « sont équivalentes à celles des revêtements de même famille au liant bitumineux classique ». La différence qui se voit au quotidien est ailleurs : selon TotalEnergies, « les enrobés colorés sont plus salissants que leurs homologues noirs », exposés là où les voitures circulent aux taches d'huile, de carburant et aux traces de pneus — c'est pourquoi les revêtements foncés restent préférés sous le trafic. La même fiche rappelle qu'une fabrication en couleur demande une centrale nettoyée de toute trace noire et que « des quantités de fabrication minimum sont souvent exigées ». En pratique, une teinte se choisit donc selon l'endroit : un chemin piéton ou les abords d'une maison ne s'usent pas comme une place où l'on gare et manœuvre. HCE pose l'enrobé noir, rouge, saumon ou bordeaux ; la teinte et son emplacement se décident avec vous lors de la visite, avant le devis détaillé.",
         },
         {
           q: "Quelle épaisseur d'enrobé faut-il pour une cour ou une allée ?",
@@ -239,6 +243,14 @@ const SERVICES: Record<string, ServiceData> = {
         {
           label: "TotalEnergies — Bitume, asphalte et goudron : quelles différences ?",
           url: "https://services.totalenergies.fr/professionnels/conseils/bitumes/quelles-differences-entre-bitume-asphalte-goudron",
+        },
+        {
+          label: "TotalEnergies — Enrobés colorés : quelle composition et quelles propriétés ?",
+          url: "https://services.totalenergies.fr/professionnels/conseils/bitumes/enrobes-colores-composition-et-proprietes",
+        },
+        {
+          label: "Colas — fiche produit Colclair, revêtements clairs ou colorés à liant translucide de synthèse, juillet 2025",
+          url: "https://www.colas.fr/sites/g/files/tkmtob376/files/2026-04/Fiche%20produit%20Colclair.pdf",
         },
         {
           label: "IDRRIM / CFTR-info n°17 — La normalisation européenne des enrobés (NF EN 13108)",

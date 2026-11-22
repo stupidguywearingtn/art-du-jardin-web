@@ -5,7 +5,7 @@
 > dans le Jura et l'Ain. Entreprise créée en 2012, 14 années d'expérience, plus de
 > 1000 chantiers livrés, garantie décennale.
 
-Dernière mise à jour : 20 novembre 2026
+Dernière mise à jour : 22 novembre 2026
 Site officiel : https://www.hcetp.com
 
 ## L'entreprise en bref
@@ -453,6 +453,17 @@ En cas de changement d'emprise ou de doute, HCE conseille avant le chantier.
 ### Quelles couleurs d'enrobé sont possibles ?
 HCE pose de l'enrobé noir, rouge, saumon et bordeaux, sous différentes granulations.
 
+### Comment obtient-on un enrobé rouge, saumon ou bordeaux, et se salit-il plus qu'un noir ?
+La couleur vient d'un liant clair (liant de synthèse), souvent complété d'un pigment :
+pour un enrobé rouge, on ajoute de l'oxyde de fer au liant clair (TotalEnergies). Les
+performances techniques sont équivalentes à celles des revêtements de même famille au
+bitume classique (fiche Colas, juillet 2025), mais « les enrobés colorés sont plus
+salissants que leurs homologues noirs » (huile, carburant, traces de pneus) : le noir
+reste préféré là où l'on gare et manœuvre. La teinte et son emplacement se décident à la
+visite, avant le devis détaillé.
+Sources : https://services.totalenergies.fr/professionnels/conseils/bitumes/enrobes-colores-composition-et-proprietes
+https://www.colas.fr/sites/g/files/tkmtob376/files/2026-04/Fiche%20produit%20Colclair.pdf
+
 ### HCE travaille-t-il pour les professionnels ?
 Oui : parkings d'entreprise, voiries de copropriété, plateformes industrielles, en plus
 des cours privées et allées de particuliers.
@@ -524,7 +535,7 @@ de l'eau ne s'évaluent pas autrement.
   de richesse, conditions dans lesquelles un enrobé neuf peut être posé sur l'ancien,
   origine des dégradations hivernales et entretien des fissures, choix du grade de bitume
   selon l'altitude (note d'information IDRRIM n° 43 de décembre 2020, fiche technique BBSG
-  du département de la Meuse) — avec leurs sources.
+  du département de la Meuse), composition et salissure des enrobés colorés — avec leurs sources.
 - [Préparation de terrain](https://www.hcetp.com/services/preparation-terrain) :
   terrassement, VRD, viabilisation, drainage, enrochement. Contient aussi les réponses
   détaillées sur le terrassement (déclarations DT-DICT et leurs délais, devenir des

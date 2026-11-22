@@ -8,6 +8,21 @@ et à compléter en fin de run.
 
 ## État des lieux
 
+> ✅ **22/11/2026 — Déploiement OK** (`1c766cb` : statut GitHub `success`). Prod = dernier
+> commit (16/16 en 200 ; enrobé 14 157 = banc précédent). Chantier (**contenu**, après un jour
+> technique) : **`/services/enrobe-a-chaud`** (lastmod 02/10, la plus ancienne) +1 Q/R
+> **« Comment obtient-on un enrobé rouge, saumon ou bordeaux, et se salit-il plus qu'un
+> noir ? »** — liant clair de synthèse + oxyde de fer pour le rouge, centrale nettoyée,
+> quantités minimales (TotalEnergies, fiche « Enrobés colorés ») ; performances équivalentes
+> au bitume classique (fiche Colas Colclair, juillet 2025) ; plus salissant sous le trafic
+> (huile, carburant, pneus). **Écarté** : la température de fabrication citée par
+> TotalEnergies (160 °C, valeur interdite par CONTENU-FIGE, et contradictoire dans la page
+> même) ; **rien affirmé sur le liant qu'utilise HCE** pour ses couleurs (non connu). Chapeau
+> mis à jour, +2 sources, `PAGE_UPDATED` + `llms.txt` 22/11. Banc local : **16 062 car.**,
+> FAQPage 11/11. Build OK (après `npm install` : `bun install` installe react-start 1.169.7
+> et casse le build « index.html », voir Techniques), `check:fige` OK. Archive : état +
+> positions du 22/10.
+
 > ✅ **21/11/2026 — Déploiement OK** (`30fb1f9` : statut GitHub `success`). Prod = dernier
 > commit (16/16 en 200 ; 6 `/services/*` = banc du 20/11, finitions 13 429). Chantier
 > (**technique**, après un jour contenu) : **textes alternatifs** des 5 autres `/services/*`
@@ -441,20 +456,6 @@ et à compléter en fin de run.
 > ✅ Vérifié en prod (`079dfdf`, `success`) : `chantier-en-cours` 7 445 car., FAQ 5/5,
 > `llms.txt` 23/10, IndexNow 15 URLs → 200.
 
-> ✅ **22/10/2026 — Déploiement OK** (`87af34d` : Vercel `success`). Prod = dernier
-> commit : la suppression demandée par le client (section juridique de l'accueil + Q/R
-> « posé toute l'année ») est **en ligne** (0 occurrence en prod, FAQPage 5/5 = FAQ
-> visible). Effet : **accueil 13 579 → 5 529 car.**, page la plus maigre du site.
-> Chantier (**technique — cohérence après suppression**) : `/mentions-legales`
-> renvoyait vers « les conditions d'un devis, les arrhes et l'acompte, et le délai
-> d'exécution […] sur l'accueil » via `#faq` — texte devenu faux **et** ancre morte
-> (aucun `id="faq"`) → phrase retirée. `lastmod` `/` 29/09 → 22/10 (contenu changé,
-> plus de date visible sur l'accueil), `/mentions-legales` → 22/10, `llms.txt` daté
-> 22/10 (modifié le 22/10 sans changer sa date). Ancres internes restantes : `#devis`,
-> `#galerie` → existent. Build OK, `check:fige` OK. Archive : entrées du 21/09.
-> ✅ Vérifié en prod (`ecb7fe7`, `success`) : `lastmod` `/` et `/mentions-legales`
-> 2026-10-22, plus de renvoi « arrhes » sur `/mentions-legales`, `llms.txt` 22/10, IndexNow 15 URLs → 200.
-
 > levé.** Yanis a mergé `fix/tanstack-cve-deploy` (PR #1, commit `e3a860e`, le
 > 10/10 à 22:30) : statut Vercel **`success`** sur `main`. **La dette de
 > vérification en ligne est purgée, à ne pas refaire** : 14/14 URLs servent
@@ -636,6 +637,17 @@ un extrait de SERP ne prouve pas ce que la page contient.
 > `verif.com` ont été jugées périmées **sur la seule foi d'extraits de recherche**
 > (403 au runner, contenu jamais lu). Leur statut « périmée » n'est donc pas
 > établi. Noté en chantier en attente.
+
+### Positions mesurées — 22/11/2026
+
+| Contrôle | 22/11/2026 | vs 21/11 |
+|---|---|---|
+| Déploiement `main` (`1c766cb`) | **`success`** (Vercel) | = |
+| Prod vs code (`mesure-texte-servi`) | 16/16 en 200 ; enrobé 14 157 | = |
+| SERP | non relevée (core update jusqu'à ~24/11) | — |
+
+Pas d'accès Search Console. **À relever par Yanis** après le ~24/11 : « Performances IA » +
+requêtes à impressions (dont « enrobé rouge », « enrobé couleur »).
 
 ### Positions mesurées — 21/11/2026
 
@@ -953,19 +965,11 @@ demander l'indexation de `/contact` (Inspection d'URL).
 
 Pas d'accès Search Console. **À relever par Yanis** : « Performances IA » + requêtes à impressions.
 
-### Positions mesurées — 22/10/2026
-
-| Contrôle | 22/10/2026 | vs 21/10 |
-|---|---|---|
-| Déploiement `main` (`87af34d`) | **`success`** | = |
-| Prod vs code (`mesure-texte-servi`) | 15/15 en 200 ; accueil **5 529** (13 579 la veille) | 🔻 suppression client |
-| FAQPage accueil vs FAQ visible (`verif-faq`) | 5/5 | 🆕 (6 → 5) |
-| SERP | non relevée (canal `WebSearch` US, non représentatif) | — |
-
-Pas d'accès Search Console. **À relever par Yanis** : « Performances IA » + requêtes à
-impressions, et surveiller l'accueil après la baisse de contenu.
-
 ## Chantiers faits
+
+### 22/11/2026 — `/services/enrobe-a-chaud` : Q/R enrobés colorés (liant clair, salissure)
+Q/R n° 6 (après « chaud ou froid »), FAQPage = FAQ visible (11/11), +2 sources (TotalEnergies,
+Colas). 14 157 → 16 062 car. (banc local).
 
 ### 21/11/2026 — Textes alternatifs des galeries `/services/*` (5 services restants)
 `galleryAlt` + `heroAlt` sur prépa, enrobé, maçonnerie, drainage, bordures (15 photos relues).
@@ -1324,6 +1328,15 @@ FAQ 5 → 7 (FAQPage = visible, `verif-faq` 7/7), lead mis à jour, source ajout
 
 Par ordre de priorité. **Alterner les angles, ne pas refaire le même deux jours
 de suite.**
+
+> 🆕 **MISE À JOUR DU 22/11/2026 — prime sur tout ce qui suit.**
+> ✅ Q/R enrobés colorés sur `enrobe-a-chaud` (à vérifier en prod : ~16 062 car., FAQ 11/11,
+> lastmod 2026-11-22, `llms.txt` 22/11 ; puis IndexNow).
+> 1. Lundi 23/11 : veille (étape 6) + technique ; à partir du ~24/11 : relever les positions.
+> 2. Contenu suivant : `preparation-terrain` (lastmod 27/10) ou `/realisations` (28/09).
+> 3. Yanis/client : quel liant / quelle centrale pour les enrobés colorés d'HCE (permettrait
+>    d'affirmer un fait propre) ; saison de pose ; Search Console ; fiche Google Business Profile.
+
 
 > 🆕 **MISE À JOUR DU 21/11/2026 — prime sur tout ce qui suit.**
 > ✅ Alt des galeries des 5 services (à vérifier en prod : `alt` distincts ×3 + `og:image:alt`
@@ -3283,6 +3296,13 @@ récupérer sans rien réécrire. **Sans cette requête, le travail restait perd
 ---
 
 ## Techniques apprises
+
+### 22/11/2026 — ⚙️ Installer les dépendances avec `npm install`, plus avec `bun install`
+`package.json` demande désormais `@tanstack/react-router ^1.170.42`, que `bun.lockb` ne
+connaît pas : `bun install` réécrit le lockfile et tire `@tanstack/react-start` 1.169.7, avec
+lequel `npm run build` échoue (« Could not resolve entry module "index.html" »). `npm install`
+(684 paquets, suit `package-lock.json`, react-start 1.168.61) ne modifie aucun fichier suivi et
+le build passe. `vite dev` : ajouter `--host 127.0.0.1` (IPv6 refusé, `EAFNOSUPPORT`).
 
 ### 16/11/2026 (lundi) — 📚 Core update de novembre 2026 en cours (10/11 → ~24/11) ; 📚 Yext : un fait présent seulement sur son site pèse moins pour les IA
 - **Google, core update de novembre 2026** lancée le 10/11/2026 (~13 h 07 ET), déploiement

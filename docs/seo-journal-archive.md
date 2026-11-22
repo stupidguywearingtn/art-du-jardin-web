@@ -5247,3 +5247,31 @@ par Yanis** : rapport « Performances IA » + requêtes à impressions.
 
 Canal `WebSearch` = US, non représentatif. Pas d'accès Search Console. **À relever
 par Yanis** : rapport « Performances IA » + requêtes à impressions.
+
+## Archivé le 22/11/2026 — état des lieux et positions du 22/10/2026
+
+> ✅ **22/10/2026 — Déploiement OK** (`87af34d` : Vercel `success`). Prod = dernier
+> commit : la suppression demandée par le client (section juridique de l'accueil + Q/R
+> « posé toute l'année ») est **en ligne** (0 occurrence en prod, FAQPage 5/5 = FAQ
+> visible). Effet : **accueil 13 579 → 5 529 car.**, page la plus maigre du site.
+> Chantier (**technique — cohérence après suppression**) : `/mentions-legales`
+> renvoyait vers « les conditions d'un devis, les arrhes et l'acompte, et le délai
+> d'exécution […] sur l'accueil » via `#faq` — texte devenu faux **et** ancre morte
+> (aucun `id="faq"`) → phrase retirée. `lastmod` `/` 29/09 → 22/10 (contenu changé,
+> plus de date visible sur l'accueil), `/mentions-legales` → 22/10, `llms.txt` daté
+> 22/10 (modifié le 22/10 sans changer sa date). Ancres internes restantes : `#devis`,
+> `#galerie` → existent. Build OK, `check:fige` OK. Archive : entrées du 21/09.
+> ✅ Vérifié en prod (`ecb7fe7`, `success`) : `lastmod` `/` et `/mentions-legales`
+> 2026-10-22, plus de renvoi « arrhes » sur `/mentions-legales`, `llms.txt` 22/10, IndexNow 15 URLs → 200.
+
+### Positions mesurées — 22/10/2026
+
+| Contrôle | 22/10/2026 | vs 21/10 |
+|---|---|---|
+| Déploiement `main` (`87af34d`) | **`success`** | = |
+| Prod vs code (`mesure-texte-servi`) | 15/15 en 200 ; accueil **5 529** (13 579 la veille) | 🔻 suppression client |
+| FAQPage accueil vs FAQ visible (`verif-faq`) | 5/5 | 🆕 (6 → 5) |
+| SERP | non relevée (canal `WebSearch` US, non représentatif) | — |
+
+Pas d'accès Search Console. **À relever par Yanis** : « Performances IA » + requêtes à
+impressions, et surveiller l'accueil après la baisse de contenu.

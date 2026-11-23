@@ -8,6 +8,20 @@ et à compléter en fin de run.
 
 ## État des lieux
 
+> ✅ **23/11/2026 (lundi) — Déploiement OK** (`a3790ae` : statut GitHub `success`). Prod =
+> dernier commit (16/16 en 200, = banc du 22/11 ; enrobé 16 062). Veille (voir Techniques).
+> Chantier (**technique**, après un jour contenu) : audit des réponses HTTP (variantes d'URL,
+> slugs inventés) + JSON-LD 16 URLs (FAQPage = FAQ visible 15/15 pages, NAP identique partout,
+> `sameAs` 4/5 en 200, PagesJaunes 403 aux robots). **Trouvé : `/realisations/<n'importe quoi>`
+> répondait HTTP 200**, title « Inexistant — Réalisations HCE », `index,follow`, canonical vers
+> lui-même = soft 404 indexable (régression du garde-fou du 14/09, qui ne retirait que le
+> balisage). **Corrigé** : `loader` → `notFound()` si le slug n'est pas un des 4 dossiers
+> (`REAL_CAT_SLUGS` ; la base sert exactement ces 4, vérifié au rendu de l'accueil et du hub),
+> page 404 en français + `noindex` ; page 404 globale traduite (« Page not found » → « Page
+> introuvable »). Banc local : slug inventé → **404**, 4 dossiers = prod (10 696 / 11 667 /
+> 11 147 / 10 393), FAQ OK. Pas de `lastmod` / `llms.txt` (contenu inchangé). Build OK,
+> `check:fige` OK. Archive : état + positions du 23/10.
+
 > ✅ **22/11/2026 — Déploiement OK** (`1c766cb` : statut GitHub `success`). Prod = dernier
 > commit (16/16 en 200 ; enrobé 14 157 = banc précédent). Chantier (**contenu**, après un jour
 > technique) : **`/services/enrobe-a-chaud`** (lastmod 02/10, la plus ancienne) +1 Q/R
@@ -444,19 +458,6 @@ et à compléter en fin de run.
 > ✅ Vérifié en prod (`85cec14`, `success`) : `/contact` 200, 5 694 car., FAQ 4/4, sitemap
 > 16 URLs, `llms.txt` à jour, IndexNow 16 URLs → 200.
 
-> ✅ **23/10/2026 — Déploiement OK** (`5c3e56c` : statut GitHub `success`). Prod =
-> dernier commit (15/15 en 200, valeurs du 22/10). Chantier (**contenu**, après un jour
-> technique) : **`/realisations/chantier-en-cours`** (5 596, la plus maigre hors accueil)
-> +1 Q/R **« Quel est ce liquide noir répandu au sol juste avant l'enrobé ? »** (couche
-> d'accrochage : bulletin MTQ vol. 7 n° 12, déc. 2002 — « coller ensemble deux couches
-> d'enrobé », ~0,25 kg/m² de bitume résiduel, surface propre et sèche ; Bitume Québec
-> 26/11/2008 « Le collage des couches »). Rien d'affirmé sur la pratique propre d'HCE
-> (« dépend du support, à préciser au devis détaillé »). Banc local : 5 596 → **7 445
-> car.**, FAQ 5/5, lead « quatre » → « cinq », lastmod + `llms.txt` 23/10. Build OK,
-> `check:fige` OK. Archive : entrées du 22/09.
-> ✅ Vérifié en prod (`079dfdf`, `success`) : `chantier-en-cours` 7 445 car., FAQ 5/5,
-> `llms.txt` 23/10, IndexNow 15 URLs → 200.
-
 > levé.** Yanis a mergé `fix/tanstack-cve-deploy` (PR #1, commit `e3a860e`, le
 > 10/10 à 22:30) : statut Vercel **`success`** sur `main`. **La dette de
 > vérification en ligne est purgée, à ne pas refaire** : 14/14 URLs servent
@@ -597,7 +598,8 @@ SIREN 521683573 · SIRET siège 52168357300039
 > demandes de devis**. Voir « Hypothèses à vérifier ».
 
 Attention : **il existe deux communes nommées Cize**, Cize 01250 dans l'Ain et
-Cize 39300 dans le Jura. HCE est dans le Jura, coordonnées 46.726 / 5.914.
+Cize 39300 dans le Jura. HCE est dans le Jura : établissement 46.7234 / 5.9186 (géocodage
+INSEE du SIRET, publié dans le JSON-LD et sur `/contact`) ; 46.726 / 5.914 = centre de la commune.
 
 > Note sur l'hébergement — **tranchée par le code le 07/10/2026, la question est
 > close.** Les consignes de maintenance disent « Lovable Cloud, pas Vercel » ;
@@ -638,6 +640,20 @@ un extrait de SERP ne prouve pas ce que la page contient.
 > `verif.com` ont été jugées périmées **sur la seule foi d'extraits de recherche**
 > (403 au runner, contenu jamais lu). Leur statut « périmée » n'est donc pas
 > établi. Noté en chantier en attente.
+
+### Positions mesurées — 23/11/2026
+
+| Contrôle | 23/11/2026 | vs 22/11 |
+|---|---|---|
+| Déploiement `main` (`a3790ae`) | **`success`** (Vercel) | = |
+| Prod vs code (`mesure-texte-servi`) | 16/16 en 200 ; enrobé 16 062 (= banc) | = |
+| `verif-faq` 15 pages / `verif-lastmod` | 15/15 OK / 15/16 (écart connu `/`) | = |
+| Slug `/realisations/*` inventé | **200 indexable** → 404 au banc | 🆕 |
+| Slash final (`/services/x/`) | 307 → URL sans slash (temporaire ; voir Hypothèses) | 🆕 |
+| SERP | non relevée (core update : fin attendue ~24/11, non confirmée le 23/11) | — |
+
+Pas d'accès Search Console. **À relever par Yanis** à partir du ~25/11 : « Performances IA » +
+requêtes à impressions (7 j avant le 10/11 vs 7 j après la fin du core update).
 
 ### Positions mesurées — 22/11/2026
 
@@ -956,17 +972,11 @@ impressions ; indexation de `/contact` demandée ?
 Pas d'accès Search Console. **À relever par Yanis** : « Performances IA » + requêtes à impressions ;
 demander l'indexation de `/contact` (Inspection d'URL).
 
-### Positions mesurées — 23/10/2026
-
-| Contrôle | 23/10/2026 | vs 22/10 |
-|---|---|---|
-| Déploiement `main` (`5c3e56c`) | **`success`** | = |
-| Prod vs code (`mesure-texte-servi`) | 15/15 en 200, valeurs identiques au 22/10 | = |
-| SERP | non relevée (canal `WebSearch` US, non représentatif) | — |
-
-Pas d'accès Search Console. **À relever par Yanis** : « Performances IA » + requêtes à impressions.
-
 ## Chantiers faits
+
+### 23/11/2026 — `/realisations/<slug inconnu>` : soft 404 → vrai 404
+`loader` + `notFound()` (même mécanisme que `/services/$slug`), `head` → `noindex`, 404 en
+français ; 404 globale traduite. Si un 5ᵉ dossier est créé en base : l'ajouter à `REAL_CAT_SLUGS`.
 
 ### 22/11/2026 — `/services/enrobe-a-chaud` : Q/R enrobés colorés (liant clair, salissure)
 Q/R n° 6 (après « chaud ou froid »), FAQPage = FAQ visible (11/11), +2 sources (TotalEnergies,
@@ -1329,6 +1339,15 @@ FAQ 5 → 7 (FAQPage = visible, `verif-faq` 7/7), lead mis à jour, source ajout
 
 Par ordre de priorité. **Alterner les angles, ne pas refaire le même deux jours
 de suite.**
+
+> 🆕 **MISE À JOUR DU 23/11/2026 — prime sur tout ce qui suit.**
+> ✅ 404 des slugs `/realisations/*` inventés (à vérifier en prod : `/realisations/inexistant`
+> → 404 + `noindex` ; 4 dossiers inchangés en 200 ; puis IndexNow).
+> 1. Contenu demain : `preparation-terrain` (lastmod 27/10) ou `/realisations` (28/09).
+> 2. À partir du ~25/11 (si Google confirme la fin du core update) : relever les positions.
+> 3. Technique en réserve : slash final en 307 (Hypothèse 23/11).
+> 4. Yanis/client : Search Console ; fiche Google Business Profile ; liant des enrobés colorés ;
+>    saison de pose ; compteurs de la carte.
 
 > 🆕 **MISE À JOUR DU 22/11/2026 — prime sur tout ce qui suit.**
 > ✅ Q/R enrobés colorés sur `enrobe-a-chaud` (à vérifier en prod : ~16 062 car., FAQ 11/11,
@@ -2494,6 +2513,12 @@ de suite.**
 
 ## Hypothèses à vérifier
 
+### 23/11/2026 — Le slash final redirige en 307 (temporaire), pas en 308
+`/services/enrobe-a-chaud/` → 307 → `/services/enrobe-a-chaud` (même chose sur les autres
+routes). Google suit les 307, mais un 308 consolide plus vite. Vient du routeur ou de Vercel
+(`trailingSlash`) : non touché (configuration de déploiement, `vercel.json` absent). Aucun lien
+interne ne porte de slash final → impact faible. Yanis : à régler côté Vercel si simple.
+
 ### 19/11/2026 — Le LCP mobile de l'accueil est retardé par l'animation du H1
 Mesure Playwright (4G lente, CPU ×4, 2 essais) : LCP ≈ 4,3-4,7 s, élément = H1 « HCE »
 (`fadeUp 0.7s ease 0.5s both` : invisible pendant 1,2 s après rendu) ; bloquer les 2 vidéos
@@ -3297,6 +3322,21 @@ récupérer sans rien réécrire. **Sans cette requête, le travail restait perd
 ---
 
 ## Techniques apprises
+
+### 23/11/2026 (lundi) — 📚 Core update de novembre : fin non annoncée au 23/11 ; 📚 Test d'un pack local IA sans boutons d'action
+- **Core update de novembre 2026** : démarrée le 10/11 à 10 h 06 (heure du Pacifique), toutes
+  langues, « may take up to 2 weeks » (PPC Land, 10/11/2026 :
+  https://ppc.land/googles-core-update-shifts-rankings-for-up-to-2-weeks-before-black-friday/).
+  Aucune source lue ne confirme la fin au 23/11. **Applicable** : attendre l'annonce sur le
+  Search Status Dashboard avant toute lecture de positions (fenêtre 7 j après la fin).
+- **Google teste un pack local dans les AI Overviews sans boutons d'action, avis ni photos**
+  (Search Engine Roundtable, 10/11/2026, mis à jour 18/11 : retour de l'ancienne version chez
+  Joy Hawkins ; https://www.seroundtable.com/google-ai-overview-local-pack-action-buttons-42483.html).
+  **Applicable** : si le test se généralise, le clic vers la fiche passe par le nom et la
+  description → le nom exact et la catégorie principale de la fiche Google Business Profile
+  comptent encore plus (action client, inchangée : créer/compléter la fiche).
+- Méthode (technique du jour) : **tester toute route à paramètre avec un slug inventé** — code
+  HTTP, `robots`, canonical — pas seulement l'absence de balisage.
 
 ### 22/11/2026 — ⚙️ Installer les dépendances avec `npm install`, plus avec `bun install`
 `package.json` demande désormais `@tanstack/react-router ^1.170.42`, que `bun.lockb` ne

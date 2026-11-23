@@ -5275,3 +5275,30 @@ par Yanis** : rapport « Performances IA » + requêtes à impressions.
 
 Pas d'accès Search Console. **À relever par Yanis** : « Performances IA » + requêtes à
 impressions, et surveiller l'accueil après la baisse de contenu.
+
+<!-- section d'origine : État des lieux -->
+> ✅ **23/10/2026 — Déploiement OK** (`5c3e56c` : statut GitHub `success`). Prod =
+> dernier commit (15/15 en 200, valeurs du 22/10). Chantier (**contenu**, après un jour
+> technique) : **`/realisations/chantier-en-cours`** (5 596, la plus maigre hors accueil)
+> +1 Q/R **« Quel est ce liquide noir répandu au sol juste avant l'enrobé ? »** (couche
+> d'accrochage : bulletin MTQ vol. 7 n° 12, déc. 2002 — « coller ensemble deux couches
+> d'enrobé », ~0,25 kg/m² de bitume résiduel, surface propre et sèche ; Bitume Québec
+> 26/11/2008 « Le collage des couches »). Rien d'affirmé sur la pratique propre d'HCE
+> (« dépend du support, à préciser au devis détaillé »). Banc local : 5 596 → **7 445
+> car.**, FAQ 5/5, lead « quatre » → « cinq », lastmod + `llms.txt` 23/10. Build OK,
+> `check:fige` OK. Archive : entrées du 22/09.
+> ✅ Vérifié en prod (`079dfdf`, `success`) : `chantier-en-cours` 7 445 car., FAQ 5/5,
+> `llms.txt` 23/10, IndexNow 15 URLs → 200.
+
+
+<!-- section d'origine : Positions mesurées -->
+### Positions mesurées — 23/10/2026
+
+| Contrôle | 23/10/2026 | vs 22/10 |
+|---|---|---|
+| Déploiement `main` (`5c3e56c`) | **`success`** | = |
+| Prod vs code (`mesure-texte-servi`) | 15/15 en 200, valeurs identiques au 22/10 | = |
+| SERP | non relevée (canal `WebSearch` US, non représentatif) | — |
+
+Pas d'accès Search Console. **À relever par Yanis** : « Performances IA » + requêtes à impressions.
+

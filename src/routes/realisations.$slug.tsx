@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { SmoothScroll } from "@/components/SmoothScroll";
@@ -591,9 +591,43 @@ function CategorySavoir({ slug }: { slug: string }) {
   );
 }
 
+/* Slug connu = un des 4 dossiers publiés (sitemap, accueil, hub). */
+function isKnownSlug(slug: string): boolean {
+  return (REAL_CAT_SLUGS as readonly string[]).includes(slug);
+}
+
 export const Route = createFileRoute("/realisations/$slug")({
+  /* Vrai 404 pour un slug inconnu (23/11/2026). Jusque-là,
+     `/realisations/n-importe-quoi` répondait HTTP 200 avec un title
+     « N Importe Quoi — Réalisations HCE », `robots: index,follow` et un
+     canonical vers lui-même : un soft 404 indexable, et un espace de crawl
+     infini. Les catégories servies par la base sont les 4 de
+     `REAL_CAT_SLUGS` (vérifié au rendu de l'accueil et du hub) ; aucune
+     interface ne permet d'en créer une autre. Même mécanisme que
+     `/services/$slug`. */
+  loader: ({ params }) => {
+    if (!isKnownSlug(params.slug)) throw notFound();
+    return null;
+  },
+  notFoundComponent: () => (
+    <div className="min-h-screen flex items-center justify-center bg-background text-foreground px-6">
+      <div className="text-center">
+        <h1 className="font-display text-6xl text-gold">404</h1>
+        <p className="mt-4 text-muted">Réalisation introuvable.</p>
+        <Link
+          to="/realisations"
+          className="mt-8 inline-block label text-gold border-b border-gold/40 pb-1"
+        >
+          ← Toutes les réalisations
+        </Link>
+      </div>
+    </div>
+  ),
   component: RealisationsRoute,
   head: ({ params }) => {
+    if (!isKnownSlug(params.slug)) {
+      return { meta: [{ title: "Page introuvable — HCE" }, { name: "robots", content: "noindex" }] };
+    }
     const cat = fallbackCategoryBySlug(params.slug);
     const meta = REAL_META[params.slug] ?? {
       title: `${titleCaseSlug(params.slug)} — Réalisations HCE`,

@@ -21,6 +21,7 @@ et à compléter en fin de run.
 > introuvable »). Banc local : slug inventé → **404**, 4 dossiers = prod (10 696 / 11 667 /
 > 11 147 / 10 393), FAQ OK. Pas de `lastmod` / `llms.txt` (contenu inchangé). Build OK,
 > `check:fige` OK. Archive : état + positions du 23/10.
+> ✅ Vérifié en prod (`9c98f22`, `success`) : `/realisations/inexistant` → **404** + `noindex` ; 16/16 en 200, valeurs = banc. IndexNow non relancé (aucune URL indexable modifiée).
 
 > ✅ **22/11/2026 — Déploiement OK** (`1c766cb` : statut GitHub `success`). Prod = dernier
 > commit (16/16 en 200 ; enrobé 14 157 = banc précédent). Chantier (**contenu**, après un jour
@@ -1341,8 +1342,7 @@ Par ordre de priorité. **Alterner les angles, ne pas refaire le même deux jour
 de suite.**
 
 > 🆕 **MISE À JOUR DU 23/11/2026 — prime sur tout ce qui suit.**
-> ✅ 404 des slugs `/realisations/*` inventés (à vérifier en prod : `/realisations/inexistant`
-> → 404 + `noindex` ; 4 dossiers inchangés en 200 ; puis IndexNow).
+> ✅ 404 des slugs `/realisations/*` inventés — vérifié en prod le 23/11.
 > 1. Contenu demain : `preparation-terrain` (lastmod 27/10) ou `/realisations` (28/09).
 > 2. À partir du ~25/11 (si Google confirme la fin du core update) : relever les positions.
 > 3. Technique en réserve : slash final en 307 (Hypothèse 23/11).

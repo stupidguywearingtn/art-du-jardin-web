@@ -5302,3 +5302,35 @@ impressions, et surveiller l'accueil après la baisse de contenu.
 
 Pas d'accès Search Console. **À relever par Yanis** : « Performances IA » + requêtes à impressions.
 
+## Archivé le 24/11/2026 — état des lieux et positions du 24/10/2026
+
+<!-- section d'origine : État des lieux -->
+> ✅ **24/10/2026 — Déploiement OK** (`fa4ce52` : statut GitHub `success`). Prod =
+> dernier commit (15/15 en 200, valeurs du 23/10). Chantier (**technique / local**) :
+> nouvelle page **`/contact`** (16ᵉ URL du sitemap) — NAP complet en clair (identique au
+> bloc canonique), GPS INSEE 46.7234 / 5.9186 + lien carte OSM, `ContactPage`
+> (`mainEntity` → `#business`, pas de NAP redéclaré), `BreadcrumbList`, FAQPage 4/4 =
+> FAQ visible : joindre HCE, trouver la bonne Cize (Cize 01106 à 68,1 km, calculé),
+> préparer une demande de devis (champs réels du formulaire, ni prix ni date ferme),
+> vérifier qu'on parle à HCE (rappel du fixe, SIREN sur annuaire-entreprises). Mobile
+> WhatsApp **non repris** (hypothèse ouverte). Aucune alerte « Jura » inventée. Lien
+> « Contact » ajouté au pied de page de l'accueil ; sitemap, `lastmod` 24/10,
+> `llms.txt`, scripts IndexNow / mesure mis à jour. Banc local : `/contact` **5 694
+> car.**, 4 JSON-LD, pas de défilement horizontal à 390 px (rendu SSR contrôlé à l'œil).
+> Build OK, `check:fige` OK. `verif-lastmod` : seul écart = `/` sans date visible
+> (connu depuis le 22/10, suppression client). Archive : entrées du 23/09.
+> ✅ Vérifié en prod (`85cec14`, `success`) : `/contact` 200, 5 694 car., FAQ 4/4, sitemap
+> 16 URLs, `llms.txt` à jour, IndexNow 16 URLs → 200.
+
+
+<!-- section d'origine : Positions mesurées -->
+### Positions mesurées — 24/10/2026
+
+| Contrôle | 24/10/2026 | vs 23/10 |
+|---|---|---|
+| Déploiement `main` (`fa4ce52`) | **`success`** | = |
+| Prod vs code (`mesure-texte-servi`) | 15/15 en 200, valeurs identiques au 23/10 (`chantier-en-cours` 7 445) | = |
+| SERP | non relevée (canal `WebSearch` US, non représentatif) | — |
+
+Pas d'accès Search Console. **À relever par Yanis** : « Performances IA » + requêtes à impressions ;
+demander l'indexation de `/contact` (Inspection d'URL).

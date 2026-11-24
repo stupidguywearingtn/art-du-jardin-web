@@ -8,6 +8,22 @@ et à compléter en fin de run.
 
 ## État des lieux
 
+> ✅ **24/11/2026 — Déploiement OK** (`f20e675` : statut GitHub `success`). Prod = dernier
+> commit (16/16 en 200, valeurs = banc du 23/11 ; FAQ accueil 5/5). Chantier (**contenu**,
+> après un jour technique) : **`/services/preparation-terrain`** (lastmod 27/10) +1 Q/R
+> **« Faut-il une étude de sol (loi Elan) avant de terrasser pour une cour ou une allée ? »**
+> — obligation depuis le 01/10/2020 en zones d'exposition moyenne/forte aux argiles, vente de
+> terrain non bâti constructible + contrats de construction/maîtrise d'œuvre ≤ 2 logements
+> (art. L. 132-4 s. CCH, ex-art. 68 loi Elan), exclusions (travaux sans effet sur fondations,
+> eaux, échanges thermiques ; extensions détachées < 20 m²) — source INC (vérifié 05/01/2023)
+> + carte Géorisques. Cour/allée/parking : pas l'objet de l'obligation ; rien affirmé sur
+> l'exposition du Jura ni sur une pratique d'HCE. **Écarté** : Q/R essai à la plaque / classes
+> PF (aucune source primaire lisible : norme AFNOR payante, Techniques de l'ingénieur payant ;
+> guides « Construire en terrain argileux » des préfectures en erreur au fetch). Lead +
+> « sol argileux », +2 sources, `PAGE_UPDATED` + `llms.txt` 24/11. Banc local (`vite dev`) :
+> 10 461 → **12 176 car.**, FAQPage 9/9, sitemap lastmod 2026-11-24. Build OK, `check:fige` OK.
+> Archive : état + positions du 24/10.
+
 > ✅ **23/11/2026 (lundi) — Déploiement OK** (`a3790ae` : statut GitHub `success`). Prod =
 > dernier commit (16/16 en 200, = banc du 22/11 ; enrobé 16 062). Veille (voir Techniques).
 > Chantier (**technique**, après un jour contenu) : audit des réponses HTTP (variantes d'URL,
@@ -442,23 +458,6 @@ et à compléter en fin de run.
 > ✅ Vérifié en prod (`0064f38`, `success`) : `bordures-murets` 9 506 car., FAQ 6/6,
 > lastmod sitemap 2026-10-25, `llms.txt` à jour, IndexNow 16 URLs → 200.
 
-> ✅ **24/10/2026 — Déploiement OK** (`fa4ce52` : statut GitHub `success`). Prod =
-> dernier commit (15/15 en 200, valeurs du 23/10). Chantier (**technique / local**) :
-> nouvelle page **`/contact`** (16ᵉ URL du sitemap) — NAP complet en clair (identique au
-> bloc canonique), GPS INSEE 46.7234 / 5.9186 + lien carte OSM, `ContactPage`
-> (`mainEntity` → `#business`, pas de NAP redéclaré), `BreadcrumbList`, FAQPage 4/4 =
-> FAQ visible : joindre HCE, trouver la bonne Cize (Cize 01106 à 68,1 km, calculé),
-> préparer une demande de devis (champs réels du formulaire, ni prix ni date ferme),
-> vérifier qu'on parle à HCE (rappel du fixe, SIREN sur annuaire-entreprises). Mobile
-> WhatsApp **non repris** (hypothèse ouverte). Aucune alerte « Jura » inventée. Lien
-> « Contact » ajouté au pied de page de l'accueil ; sitemap, `lastmod` 24/10,
-> `llms.txt`, scripts IndexNow / mesure mis à jour. Banc local : `/contact` **5 694
-> car.**, 4 JSON-LD, pas de défilement horizontal à 390 px (rendu SSR contrôlé à l'œil).
-> Build OK, `check:fige` OK. `verif-lastmod` : seul écart = `/` sans date visible
-> (connu depuis le 22/10, suppression client). Archive : entrées du 23/09.
-> ✅ Vérifié en prod (`85cec14`, `success`) : `/contact` 200, 5 694 car., FAQ 4/4, sitemap
-> 16 URLs, `llms.txt` à jour, IndexNow 16 URLs → 200.
-
 > levé.** Yanis a mergé `fix/tanstack-cve-deploy` (PR #1, commit `e3a860e`, le
 > 10/10 à 22:30) : statut Vercel **`success`** sur `main`. **La dette de
 > vérification en ligne est purgée, à ne pas refaire** : 14/14 URLs servent
@@ -641,6 +640,17 @@ un extrait de SERP ne prouve pas ce que la page contient.
 > `verif.com` ont été jugées périmées **sur la seule foi d'extraits de recherche**
 > (403 au runner, contenu jamais lu). Leur statut « périmée » n'est donc pas
 > établi. Noté en chantier en attente.
+
+### Positions mesurées — 24/11/2026
+
+| Contrôle | 24/11/2026 | vs 23/11 |
+|---|---|---|
+| Déploiement `main` (`f20e675`) | **`success`** (Vercel) | = |
+| Prod vs code (`mesure-texte-servi`) | 16/16 en 200 ; prépa 10 461 → 12 176 au banc | = |
+| SERP | non relevée (fin du core update de novembre non confirmée au 24/11) | — |
+
+Pas d'accès Search Console. **À relever par Yanis** dès la fin annoncée du core update :
+« Performances IA » + requêtes à impressions (dont « terrassement Jura »).
 
 ### Positions mesurées — 23/11/2026
 
@@ -962,18 +972,11 @@ impressions ; indexation de `/contact`.
 Pas d'accès Search Console. **À relever par Yanis** : « Performances IA » + requêtes à
 impressions ; indexation de `/contact` demandée ?
 
-### Positions mesurées — 24/10/2026
-
-| Contrôle | 24/10/2026 | vs 23/10 |
-|---|---|---|
-| Déploiement `main` (`fa4ce52`) | **`success`** | = |
-| Prod vs code (`mesure-texte-servi`) | 15/15 en 200, valeurs identiques au 23/10 (`chantier-en-cours` 7 445) | = |
-| SERP | non relevée (canal `WebSearch` US, non représentatif) | — |
-
-Pas d'accès Search Console. **À relever par Yanis** : « Performances IA » + requêtes à impressions ;
-demander l'indexation de `/contact` (Inspection d'URL).
-
 ## Chantiers faits
+
+### 24/11/2026 — `/services/preparation-terrain` : Q/R étude de sol loi Elan (argiles)
+Q/R n° 6 (avant « gel »), FAQPage = FAQ visible (9/9), +2 sources (INC, Géorisques).
+10 461 → 12 176 car. (banc local).
 
 ### 23/11/2026 — `/realisations/<slug inconnu>` : soft 404 → vrai 404
 `loader` + `notFound()` (même mécanisme que `/services/$slug`), `head` → `noindex`, 404 en
@@ -1340,6 +1343,16 @@ FAQ 5 → 7 (FAQPage = visible, `verif-faq` 7/7), lead mis à jour, source ajout
 
 Par ordre de priorité. **Alterner les angles, ne pas refaire le même deux jours
 de suite.**
+
+> 🆕 **MISE À JOUR DU 24/11/2026 — prime sur tout ce qui suit.**
+> ✅ Q/R loi Elan sur `preparation-terrain` (à vérifier en prod : ~12 176 car., FAQ 9/9,
+> lastmod 2026-11-24, `llms.txt` 24/11 ; puis IndexNow).
+> 1. Technique demain : slash final en 307 (Hypothèse 23/11), ou relevé des positions si
+>    Google a confirmé la fin du core update.
+> 2. Contenu suivant : `/realisations` (lastmod 28/09, la plus ancienne).
+> 3. Piste écartée faute de source libre : essai à la plaque / classes de plateforme PF.
+> 4. Yanis/client : Search Console ; fiche Google Business Profile ; liant des enrobés colorés ;
+>    saison de pose ; compteurs de la carte.
 
 > 🆕 **MISE À JOUR DU 23/11/2026 — prime sur tout ce qui suit.**
 > ✅ 404 des slugs `/realisations/*` inventés — vérifié en prod le 23/11.

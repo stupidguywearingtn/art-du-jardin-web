@@ -99,7 +99,7 @@ const SERVICES: Record<string, ServiceData> = {
       "Terrassement, VRD et viabilisation dans le Jura et l'Ain : décaissement contrôlé, drainage et compactage par couches avant toute pose d'enrobé. Devis détaillé.",
     savoir: {
       heading: "Terrassement : les questions qu'on nous pose avant d'ouvrir le sol",
-      lead: "Avant de goudronner une cour ou de viabiliser un terrain, il y a le terrassement : des déclarations obligatoires, des délais réglementaires, des terres à évacuer, un sol à compacter et, dans le Jura, un gel qui se prépare dès le terrassement. Voici ce que cela implique concrètement dans le Jura et l'Ain.",
+      lead: "Avant de goudronner une cour ou de viabiliser un terrain, il y a le terrassement : des déclarations obligatoires, des délais réglementaires, parfois la question d'un sol argileux, des terres à évacuer, un sol à compacter et, dans le Jura, un gel qui se prépare dès le terrassement. Voici ce que cela implique concrètement dans le Jura et l'Ain.",
       updated: PAGE_UPDATED["/services/preparation-terrain"],
       qa: [
         {
@@ -121,6 +121,10 @@ const SERVICES: Record<string, ServiceData> = {
         {
           q: "Pourquoi faut-il compacter le sol par couches avant de poser un enrobé ?",
           a: "Parce qu'un enrobé ne rattrape jamais un support qui bouge. Une terre remise en place d'un seul tenant conserve des vides : sous le poids des véhicules, elle se tasse de façon irrégulière, et la surface finit par se fissurer ou par retenir des flaques. Le compactage se fait donc par couches successives, à la plaque vibrante puis au rouleau, avec contrôle de la portance — c'est ce support-là qui porte les véhicules, l'enrobé posé à la main à 150°C n'étant que la couche de finition.",
+        },
+        {
+          q: "Faut-il une étude de sol (loi Elan) avant de terrasser pour une cour ou une allée ?",
+          a: "Pas au titre de la loi Elan, qui vise autre chose : la construction de logements sur un sol argileux. Depuis le 1er octobre 2020, dans les zones où l'exposition au retrait-gonflement des argiles est identifiée comme moyenne ou forte, une étude géotechnique préalable doit être annexée à la vente d'un terrain non bâti constructible, et une étude est exigée pour tout contrat de construction ou de maîtrise d'œuvre d'un bâtiment d'habitation d'au plus deux logements (articles L. 132-4 et suivants du code de la construction et de l'habitation, issus de l'article 68 de la loi Elan). Les travaux qui ne touchent ni aux fondations ou à la structure d'un bâtiment, ni à l'écoulement des eaux, ni aux échanges thermiques entre le sol et le bâtiment sont exclus, de même que les extensions détachées de moins de 20 m² comme un garage ou une véranda. Une cour, une allée ou un parking ne sont donc pas, en eux-mêmes, l'objet de cette obligation. Le sol argileux reste en revanche une donnée du chantier : il gonfle quand il s'humidifie et se rétracte en séchant, et une cour qui renvoie l'eau de pluie vers le pied d'une maison peut aggraver ces mouvements près des fondations. L'exposition d'une parcelle se vérifie sur la carte nationale publiée par Géorisques ; c'est l'une des choses que la lecture du terrain et le plan des pentes prennent en compte avant le devis détaillé.",
         },
         {
           q: "Le gel peut-il soulever ou casser une cour en enrobé dans le Jura ?",
@@ -147,6 +151,14 @@ const SERVICES: Record<string, ServiceData> = {
         {
           label: "Préfecture du Doubs — Arrêté du 7 septembre 2009 (assainissement non collectif), version consolidée, article 13",
           url: "https://www.doubs.gouv.fr/index.php/contenu/telechargement/22817/152536/file/Arr_t__du_7_septembre_2009_version_consolidee_au_20150427.pdf",
+        },
+        {
+          label: "Institut national de la consommation — La réalisation d'études géotechniques sur des sols argileux (loi Elan, vérifié le 5 janvier 2023)",
+          url: "https://www.inc-conso.fr/content/la-realisation-detudes-geotechniques-sur-des-sols-argileux",
+        },
+        {
+          label: "Géorisques — Exposition au retrait-gonflement des argiles (carte nationale)",
+          url: "https://www.georisques.gouv.fr/dossiers/exposition-au-retrait-gonflement-des-argiles",
         },
         {
           label: "D. Bonnard et E. Recordon — « Les fondations des chaussées. Les problèmes de la portance et de la résistance au gel » (1958), réédité par la Société suisse de géotechnique",

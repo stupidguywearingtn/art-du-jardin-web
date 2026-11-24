@@ -5,7 +5,7 @@
 > dans le Jura et l'Ain. Entreprise créée en 2012, 14 années d'expérience, plus de
 > 1000 chantiers livrés, garantie décennale.
 
-Dernière mise à jour : 22 novembre 2026
+Dernière mise à jour : 24 novembre 2026
 Site officiel : https://www.hcetp.com
 
 ## L'entreprise en bref
@@ -156,6 +156,18 @@ seul tenant garde des vides et se tasse de façon irrégulière sous le poids de
 Le compactage se fait par couches successives, à la plaque vibrante puis au rouleau, avec
 contrôle de la portance : c'est ce support qui porte les véhicules, l'enrobé posé à la
 main à 150 °C étant la couche de finition.
+
+### Faut-il une étude de sol (loi Elan) avant de terrasser pour une cour ou une allée ?
+Pas au titre de la loi Elan. Depuis le 1er octobre 2020, dans les zones d'exposition
+moyenne ou forte au retrait-gonflement des argiles, l'étude géotechnique vise la vente
+d'un terrain non bâti constructible et les contrats de construction ou de maîtrise
+d'œuvre d'un bâtiment d'habitation d'au plus deux logements (art. L. 132-4 et suivants du
+code de la construction et de l'habitation). Une cour, une allée ou un parking n'en sont
+pas l'objet. Le sol argileux reste une donnée du chantier : une cour qui renvoie l'eau
+vers le pied d'une maison peut aggraver ses mouvements. Exposition d'une parcelle : carte
+Géorisques.
+Sources : https://www.inc-conso.fr/content/la-realisation-detudes-geotechniques-sur-des-sols-argileux ;
+https://www.georisques.gouv.fr/dossiers/exposition-au-retrait-gonflement-des-argiles
 
 ### Le gel peut-il soulever ou casser une cour en enrobé dans le Jura ?
 Oui, si le sol sous la cour est gélif et reçoit de l'eau : c'est le sol qui gonfle (lentilles
@@ -539,7 +551,7 @@ de l'eau ne s'évaluent pas autrement.
 - [Préparation de terrain](https://www.hcetp.com/services/preparation-terrain) :
   terrassement, VRD, viabilisation, drainage, enrochement. Contient aussi les réponses
   détaillées sur le terrassement (déclarations DT-DICT et leurs délais, devenir des
-  terres excavées et registre Trackdéchets, compactage par couches, gel et dégel du sol sous une cour), sur le puits perdu
+  terres excavées et registre Trackdéchets, compactage par couches, étude de sol loi Elan et argiles, gel et dégel du sol sous une cour), sur le puits perdu
   (eaux pluviales seulement : rejet d'eaux usées interdit, article 13 de l'arrêté du
   7 septembre 2009) et sur l'enrochement comparé au muret de soutènement, avec leurs sources.
 - [Maçonnerie générale](https://www.hcetp.com/services/maconnerie-generale) : pavage,

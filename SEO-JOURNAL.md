@@ -23,6 +23,7 @@ et à compléter en fin de run.
 > « sol argileux », +2 sources, `PAGE_UPDATED` + `llms.txt` 24/11. Banc local (`vite dev`) :
 > 10 461 → **12 176 car.**, FAQPage 9/9, sitemap lastmod 2026-11-24. Build OK, `check:fige` OK.
 > Archive : état + positions du 24/10.
+> ✅ Vérifié en prod (`a3e3a8e`, `success`) : prépa 12 176 car. (= banc), FAQ 9/9, `llms.txt` 24/11, IndexNow 16 URLs → 200.
 
 > ✅ **23/11/2026 (lundi) — Déploiement OK** (`a3790ae` : statut GitHub `success`). Prod =
 > dernier commit (16/16 en 200, = banc du 22/11 ; enrobé 16 062). Veille (voir Techniques).

@@ -5334,3 +5334,33 @@ Pas d'accès Search Console. **À relever par Yanis** : « Performances IA » + 
 
 Pas d'accès Search Console. **À relever par Yanis** : « Performances IA » + requêtes à impressions ;
 demander l'indexation de `/contact` (Inspection d'URL).
+
+## Archivé le 25/11/2026 — état des lieux et positions du 25/10/2026
+
+> ✅ **25/10/2026 — Déploiement OK** (`f53cb90` : statut GitHub `success`). Prod =
+> dernier commit (16/16 en 200, valeurs du 24/10). Chantier (**contenu**, après un jour
+> technique) : **`/services/bordures-murets`** (7 658, inchangée depuis le 17/09) +1 Q/R
+> **« Faut-il un drainage derrière un muret de soutènement ? »** (0 occurrence de
+> « barbacane » / « massif drainant » sur le site avant). Sources : AQC, plaquette « Murs
+> de soutènement — bonnes pratiques » (nov. 2022, murs < 3 m : massif drainant sans
+> fines, géotextile, drain ≥ 100 mm au-dessus de la fondation, pente 3-10 mm/m, exutoire
+> EP, regards ; barbacane seule insuffisante, accord du voisin en aval) et « risques
+> réels » (fév. 2011 : drainage absent/inefficace, barbacanes bouchées). Aucun chiffre de
+> sinistralité (les plaquettes n'en donnent pas). Rien d'affirmé sur la pratique propre
+> d'HCE (« se règle au devis détaillé »). Banc local (`vite dev`) : 7 658 → **9 506
+> car.**, FAQ 6/6, lead mis à jour, lastmod + `llms.txt` 25/10. Build OK, `check:fige` OK.
+> Archive : entrées du 25/09.
+> ✅ Vérifié en prod (`0064f38`, `success`) : `bordures-murets` 9 506 car., FAQ 6/6,
+> lastmod sitemap 2026-10-25, `llms.txt` à jour, IndexNow 16 URLs → 200.
+
+### Positions mesurées — 25/10/2026
+
+| Contrôle | 25/10/2026 | vs 24/10 |
+|---|---|---|
+| Déploiement `main` (`f53cb90`) | **`success`** | = |
+| Prod vs code (`mesure-texte-servi`) | 16/16 en 200, valeurs identiques au 24/10 (`/contact` 5 694) | = |
+| SERP | non relevée (canal `WebSearch` US, non représentatif) | — |
+
+Pas d'accès Search Console. **À relever par Yanis** : « Performances IA » + requêtes à
+impressions ; indexation de `/contact` demandée ?
+

@@ -28,9 +28,30 @@ import { defineConfig } from "@lovable.dev/vite-tanstack-config";
 // declencherait le controle des proprietes excedentaires de TypeScript ; via une
 // variable, l'option passe sans `as` ni `@ts-ignore`. Verifie : le build emet
 // bien le runtime epingle (teste avec une valeur differente de l'auto-detection).
+//
+// `vercel.config.routes` (fusionne par Nitro, via defu, dans
+// .vercel/output/config.json, AVANT ses propres routes et avant
+// `handle: filesystem`) : une URL avec slash final (`/services/x/`) part en
+// 308 permanent vers l'URL sans slash. Sans cette regle, c'est TanStack Router
+// qui canonicalise, avec son 307 temporaire code en dur (router-core
+// load-server.js, `redirect({ href })`), moins net pour Google. Le motif
+// n'accepte que [A-Za-z0-9/_.-] et un premier caractere alphanumerique : pas
+// de `//` ni de `\` en tete de Location (pas de redirection ouverte). La racine
+// `/` n'est pas concernee (au moins un caractere avant le slash final).
 const nitroConfig = {
   preset: "vercel",
-  vercel: { functions: { runtime: "nodejs22.x" } },
+  vercel: {
+    functions: { runtime: "nodejs22.x" },
+    config: {
+      routes: [
+        {
+          src: "^/([A-Za-z0-9][A-Za-z0-9/_.-]*)/$",
+          status: 308,
+          headers: { Location: "/$1" },
+        },
+      ],
+    },
+  },
 };
 
 export default defineConfig({

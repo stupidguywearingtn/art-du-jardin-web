@@ -8,6 +8,19 @@ et à compléter en fin de run.
 
 ## État des lieux
 
+> ✅ **25/11/2026 — Déploiement OK** (`9dac06f` : statut GitHub `success`). Prod = dernier
+> commit (16/16 en 200, valeurs = banc du 24/11 ; prépa 12 176). Chantier (**technique**, après
+> un jour contenu) : **slash final en 307 → 308** (Hypothèse 23/11). Cause trouvée : c'est
+> TanStack Router qui canonicalise `/x/` → `/x` avec un `redirect({ href })` à 307 codé en dur
+> (`router-core/load-server.js`), pas Vercel. **Corrigé sans toucher aux dépendances** :
+> `vite.config.ts` → `nitro.vercel.config.routes` = 1 règle `^/([A-Za-z0-9][A-Za-z0-9/_.-]*)/$`
+> → 308 `Location: /$1`, placée par Nitro en tête de `.vercel/output/config.json` (diff du
+> build avant/après : seule cette route s'ajoute). Motif testé : `/` non touché, `//evil.com/`,
+> `/\evil.com/`, `/%2F…/` non redirigés (pas de redirection ouverte). + Écran d'erreur générique
+> (`router.tsx`) traduit (« Something went wrong » → « Une erreur est survenue »). Pas de
+> `lastmod` / `llms.txt` (contenu inchangé). Build OK, `check:fige` OK. Archive : état + positions du 25/10.
+> ⏳ À vérifier en prod : `curl -sI https://www.hcetp.com/services/enrobe-a-chaud/` → **308**.
+
 > ✅ **24/11/2026 — Déploiement OK** (`f20e675` : statut GitHub `success`). Prod = dernier
 > commit (16/16 en 200, valeurs = banc du 23/11 ; FAQ accueil 5/5). Chantier (**contenu**,
 > après un jour technique) : **`/services/preparation-terrain`** (lastmod 27/10) +1 Q/R
@@ -443,22 +456,6 @@ et à compléter en fin de run.
 > ✅ Vérifié en prod (`adcf0ba`, `success`) : `href="/contact"` servi sur `/services/enrobe-a-chaud`
 > et `/zone-intervention`, IndexNow 16 URLs → 200.
 
-> ✅ **25/10/2026 — Déploiement OK** (`f53cb90` : statut GitHub `success`). Prod =
-> dernier commit (16/16 en 200, valeurs du 24/10). Chantier (**contenu**, après un jour
-> technique) : **`/services/bordures-murets`** (7 658, inchangée depuis le 17/09) +1 Q/R
-> **« Faut-il un drainage derrière un muret de soutènement ? »** (0 occurrence de
-> « barbacane » / « massif drainant » sur le site avant). Sources : AQC, plaquette « Murs
-> de soutènement — bonnes pratiques » (nov. 2022, murs < 3 m : massif drainant sans
-> fines, géotextile, drain ≥ 100 mm au-dessus de la fondation, pente 3-10 mm/m, exutoire
-> EP, regards ; barbacane seule insuffisante, accord du voisin en aval) et « risques
-> réels » (fév. 2011 : drainage absent/inefficace, barbacanes bouchées). Aucun chiffre de
-> sinistralité (les plaquettes n'en donnent pas). Rien d'affirmé sur la pratique propre
-> d'HCE (« se règle au devis détaillé »). Banc local (`vite dev`) : 7 658 → **9 506
-> car.**, FAQ 6/6, lead mis à jour, lastmod + `llms.txt` 25/10. Build OK, `check:fige` OK.
-> Archive : entrées du 25/09.
-> ✅ Vérifié en prod (`0064f38`, `success`) : `bordures-murets` 9 506 car., FAQ 6/6,
-> lastmod sitemap 2026-10-25, `llms.txt` à jour, IndexNow 16 URLs → 200.
-
 > levé.** Yanis a mergé `fix/tanstack-cve-deploy` (PR #1, commit `e3a860e`, le
 > 10/10 à 22:30) : statut Vercel **`success`** sur `main`. **La dette de
 > vérification en ligne est purgée, à ne pas refaire** : 14/14 URLs servent
@@ -641,6 +638,18 @@ un extrait de SERP ne prouve pas ce que la page contient.
 > `verif.com` ont été jugées périmées **sur la seule foi d'extraits de recherche**
 > (403 au runner, contenu jamais lu). Leur statut « périmée » n'est donc pas
 > établi. Noté en chantier en attente.
+
+### Positions mesurées — 25/11/2026
+
+| Contrôle | 25/11/2026 | vs 24/11 |
+|---|---|---|
+| Déploiement `main` (`9dac06f`) | **`success`** (Vercel) | = |
+| Prod vs code (`mesure-texte-servi`) | 16/16 en 200 ; prépa 12 176 (= banc 24/11) | = |
+| Slash final (`/services/x/`) | 307 en prod → 308 au build (route Vercel) | 🆕 |
+| SERP | non relevée (fin du core update de novembre non annoncée au 25/11) | — |
+
+Pas d'accès Search Console. **À relever par Yanis** dès l'annonce de fin du core update :
+« Performances IA » + requêtes à impressions.
 
 ### Positions mesurées — 24/11/2026
 
@@ -962,18 +971,12 @@ impressions ; indexation de `/contact`.
 Pas d'accès Search Console. **À relever par Yanis** : « Performances IA » + requêtes à
 impressions ; indexation de `/contact`.
 
-### Positions mesurées — 25/10/2026
-
-| Contrôle | 25/10/2026 | vs 24/10 |
-|---|---|---|
-| Déploiement `main` (`f53cb90`) | **`success`** | = |
-| Prod vs code (`mesure-texte-servi`) | 16/16 en 200, valeurs identiques au 24/10 (`/contact` 5 694) | = |
-| SERP | non relevée (canal `WebSearch` US, non représentatif) | — |
-
-Pas d'accès Search Console. **À relever par Yanis** : « Performances IA » + requêtes à
-impressions ; indexation de `/contact` demandée ?
-
 ## Chantiers faits
+
+### 25/11/2026 — Slash final : 307 (TanStack) → 308 (route Vercel)
+`vite.config.ts` › `nitro.vercel.config.routes` (1 règle, avant `handle: filesystem`). Si
+Nitro change sa fusion `defu`, revérifier `.vercel/output/config.json` après build.
+Écran d'erreur générique traduit en français (`router.tsx`).
 
 ### 24/11/2026 — `/services/preparation-terrain` : Q/R étude de sol loi Elan (argiles)
 Q/R n° 6 (avant « gel »), FAQPage = FAQ visible (9/9), +2 sources (INC, Géorisques).
@@ -1344,6 +1347,14 @@ FAQ 5 → 7 (FAQPage = visible, `verif-faq` 7/7), lead mis à jour, source ajout
 
 Par ordre de priorité. **Alterner les angles, ne pas refaire le même deux jours
 de suite.**
+
+> 🆕 **MISE À JOUR DU 25/11/2026 — prime sur tout ce qui suit.**
+> ✅ Slash final 308 (à vérifier en prod : `/services/enrobe-a-chaud/` → 308 → sans slash ;
+> `/` toujours 200). Pas d'IndexNow (aucune URL indexable modifiée).
+> 1. Contenu demain : `/realisations` (lastmod 28/09, la plus ancienne).
+> 2. Relevé des positions dès que Google annonce la fin du core update de novembre.
+> 3. Yanis/client : Search Console ; fiche Google Business Profile ; liant des enrobés colorés ;
+>    saison de pose ; compteurs de la carte.
 
 > 🆕 **MISE À JOUR DU 24/11/2026 — prime sur tout ce qui suit.**
 > ✅ Q/R loi Elan sur `preparation-terrain` (à vérifier en prod : ~12 176 car., FAQ 9/9,
@@ -2528,6 +2539,7 @@ de suite.**
 ## Hypothèses à vérifier
 
 ### 23/11/2026 — Le slash final redirige en 307 (temporaire), pas en 308
+✅ **Corrigé le 25/11/2026** (route Vercel 308 dans `vite.config.ts`, voir Chantiers faits) — à vérifier en prod.
 `/services/enrobe-a-chaud/` → 307 → `/services/enrobe-a-chaud` (même chose sur les autres
 routes). Google suit les 307, mais un 308 consolide plus vite. Vient du routeur ou de Vercel
 (`trailingSlash`) : non touché (configuration de déploiement, `vercel.json` absent). Aucun lien

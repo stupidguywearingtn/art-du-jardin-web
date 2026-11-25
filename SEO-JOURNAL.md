@@ -19,7 +19,7 @@ et à compléter en fin de run.
 > `/\evil.com/`, `/%2F…/` non redirigés (pas de redirection ouverte). + Écran d'erreur générique
 > (`router.tsx`) traduit (« Something went wrong » → « Une erreur est survenue »). Pas de
 > `lastmod` / `llms.txt` (contenu inchangé). Build OK, `check:fige` OK. Archive : état + positions du 25/10.
-> ⏳ À vérifier en prod : `curl -sI https://www.hcetp.com/services/enrobe-a-chaud/` → **308**.
+> ✅ Vérifié en prod (`d1b7144`, `success`) : `/services/enrobe-a-chaud/`, `/realisations/` → **308** sans slash ; query conservée (`/contact/?a=1` → `/contact?a=1`) ; `/` 200 ; `//evil.com/` → 308 relatif `/evil.com/` (normalisation Vercel, sûr) ; 16/16 en 200.
 
 > ✅ **24/11/2026 — Déploiement OK** (`f20e675` : statut GitHub `success`). Prod = dernier
 > commit (16/16 en 200, valeurs = banc du 23/11 ; FAQ accueil 5/5). Chantier (**contenu**,
@@ -1349,8 +1349,7 @@ Par ordre de priorité. **Alterner les angles, ne pas refaire le même deux jour
 de suite.**
 
 > 🆕 **MISE À JOUR DU 25/11/2026 — prime sur tout ce qui suit.**
-> ✅ Slash final 308 (à vérifier en prod : `/services/enrobe-a-chaud/` → 308 → sans slash ;
-> `/` toujours 200). Pas d'IndexNow (aucune URL indexable modifiée).
+> ✅ Slash final 308 — vérifié en prod le 25/11. Pas d'IndexNow (aucune URL indexable modifiée).
 > 1. Contenu demain : `/realisations` (lastmod 28/09, la plus ancienne).
 > 2. Relevé des positions dès que Google annonce la fin du core update de novembre.
 > 3. Yanis/client : Search Console ; fiche Google Business Profile ; liant des enrobés colorés ;
@@ -2539,7 +2538,7 @@ de suite.**
 ## Hypothèses à vérifier
 
 ### 23/11/2026 — Le slash final redirige en 307 (temporaire), pas en 308
-✅ **Corrigé le 25/11/2026** (route Vercel 308 dans `vite.config.ts`, voir Chantiers faits) — à vérifier en prod.
+✅ **Corrigé le 25/11/2026** (route Vercel 308 dans `vite.config.ts`) — vérifié en prod.
 `/services/enrobe-a-chaud/` → 307 → `/services/enrobe-a-chaud` (même chose sur les autres
 routes). Google suit les 307, mais un 308 consolide plus vite. Vient du routeur ou de Vercel
 (`trailingSlash`) : non touché (configuration de déploiement, `vercel.json` absent). Aucun lien

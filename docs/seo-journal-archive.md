@@ -5364,3 +5364,30 @@ demander l'indexation de `/contact` (Inspection d'URL).
 Pas d'accès Search Console. **À relever par Yanis** : « Performances IA » + requêtes à
 impressions ; indexation de `/contact` demandée ?
 
+<!-- section d'origine : État des lieux -->
+> ✅ **26/10/2026 (lundi) — Déploiement OK** (`e0b4e35` : statut GitHub `success`). Prod =
+> dernier commit (16/16 en 200, valeurs du 25/10). Chantier (**technique — maillage**,
+> après un jour contenu) : `/contact` n'était lié que depuis le pied de page de l'accueil
+> (0 lien entrant servi sur les 15 autres URLs). Ajout d'une ligne « Contact · Mentions
+> légales » dans les pieds de page simplifiés : 6 `/services/*`, `/zone-intervention`,
+> `/realisations` ; « Contact » ajouté sur `/mentions-legales` et `/arnaque-goudronnage` ;
+> « Mentions légales » ajouté sur `/contact`. Banc local (`vite dev --host 127.0.0.1`) :
+> `/contact` lié depuis **11 pages** (+ accueil) ; +27 car. par page touchée, rien d'autre
+> ne bouge. `lastmod` / « Dernière mise à jour » **non modifiés** (pied de page seulement,
+> pas de contenu). Les 4 `/realisations/*` n'ont pas de pied de page → pas touchées.
+> Build OK (`npm ci` puis `npm run build`), `check:fige` OK. Veille du lundi faite
+> (Techniques apprises). Archive : rien à archiver (pas de run le 26/09).
+> ✅ Vérifié en prod (`adcf0ba`, `success`) : `href="/contact"` servi sur `/services/enrobe-a-chaud`
+> et `/zone-intervention`, IndexNow 16 URLs → 200.
+
+<!-- section d'origine : Positions mesurées -->
+### Positions mesurées — 26/10/2026
+
+| Contrôle | 26/10/2026 | vs 25/10 |
+|---|---|---|
+| Déploiement `main` (`e0b4e35`) | **`success`** | = |
+| Prod vs code (`mesure-texte-servi`) | 16/16 en 200, valeurs identiques au 25/10 (`bordures-murets` 9 506) | = |
+| SERP | non relevée (canal `WebSearch` US, non représentatif) | — |
+
+Pas d'accès Search Console. **À relever par Yanis** : « Performances IA » + requêtes à
+impressions ; indexation de `/contact`.

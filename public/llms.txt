@@ -5,7 +5,7 @@
 > dans le Jura et l'Ain. Entreprise créée en 2012, 14 années d'expérience, plus de
 > 1000 chantiers livrés, garantie décennale.
 
-Dernière mise à jour : 24 novembre 2026
+Dernière mise à jour : 26 novembre 2026
 Site officiel : https://www.hcetp.com
 
 ## L'entreprise en bref
@@ -486,6 +486,15 @@ SIREN 521683573, siège à Cize (39300) dans le Jura, SIRET 52168357300039, acti
 déclarée NAF 43.12A. L'entreprise couvre ses travaux par une garantie décennale.
 Ces informations sont vérifiables gratuitement sur les annuaires légaux français
 à partir du numéro SIREN.
+
+### Un parking ou une voirie en enrobé doit-il toujours être couvert par une assurance décennale ?
+Pas toujours. L'article L243-1-1 du code des assurances exclut des assurances obligatoires
+de construction les voiries, les ouvrages piétonniers et les parcs de stationnement, sauf
+s'ils sont l'accessoire d'un ouvrage soumis à ces obligations. La Cour de cassation juge ce
+texte d'interprétation stricte (3e chambre civile, 22 juin 2023, n° 21-10.256). En pratique,
+pour un parking d'entreprise ou une voirie de copropriété, il faut lire l'attestation
+d'assurance et vérifier qu'elle vise ce type d'ouvrage, pas seulement la mention
+« garantie décennale » du devis. Page : https://www.hcetp.com/realisations
 
 ### Comment obtenir un devis ?
 Après une visite sur site, HCE transmet un devis détaillé et sans engagement.

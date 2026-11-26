@@ -51,13 +51,17 @@ const DOSSIERS: Record<string, string> = {
  * section visible ET du JSON-LD `FAQPage` : les deux ne peuvent pas diverger.
  */
 const SAVOIR = {
-  heading: "Ce qu'on nous demande avant de signer",
-  lead: "Regarder des photos de chantiers ne dit pas ce qui se passe autour : ce qu'on signe à la fin, qui reprend un défaut apparu après coup, à quel taux de TVA les travaux sont facturés, et ce que la loi prévoit sur le paiement. Voici, sources à l'appui, ce que couvre la garantie décennale sur une cour ou un parking, à partir de quand elle court, comment se passe la réception des travaux, ce que change la garantie de parfait achèvement d'un an, quel document l'entreprise doit remettre avant d'ouvrir le chantier, quand le taux réduit de TVA à 10 % s'applique à une allée, ce que le code civil impose au client sur la garantie de paiement, et d'où HCE intervient.",
+  heading: "Que vérifier avant de signer pour une cour ou un parking en enrobé ?",
+  lead: "Regarder des photos de chantiers ne dit pas ce qui se passe autour : ce qu'on signe à la fin, qui reprend un défaut apparu après coup, à quel taux de TVA les travaux sont facturés, et ce que la loi prévoit sur le paiement. Voici, sources à l'appui, ce que couvre la garantie décennale sur une cour ou un parking, pourquoi un parking ou une voirie n'est pas toujours soumis à l'assurance décennale obligatoire, à partir de quand la décennale court, comment se passe la réception des travaux, ce que change la garantie de parfait achèvement d'un an, quel document l'entreprise doit remettre avant d'ouvrir le chantier, quand le taux réduit de TVA à 10 % s'applique à une allée, ce que le code civil impose au client sur la garantie de paiement, et d'où HCE intervient.",
   updated: PAGE_UPDATED["/realisations"],
   qa: [
     {
       q: "Une cour ou un parking en enrobé est-il couvert par la garantie décennale ?",
       a: "Oui. La garantie décennale ne concerne pas que les bâtiments : la fiche officielle service-public.gouv.fr sur la garantie décennale des constructeurs, vérifiée le 10 avril 2026, cite parmi les ouvrages couverts la voirie — c'est-à-dire le chemin d'accès — et les ouvrages de viabilité, réseaux et assainissement. Une cour, une allée ou un parking réalisés par un professionnel entrent donc dans son champ. Ce qu'elle couvre, ce ne sont pas les défauts d'aspect : ce sont les désordres qui menacent la solidité de l'ouvrage ou le rendent impropre à son usage, y compris quand ils proviennent d'un vice du sol. La garantie repose sur l'article 1792 du Code civil, et l'assurance correspondante doit être souscrite par l'entreprise avant le démarrage des travaux. HCE intervient sous garantie décennale.",
+    },
+    {
+      q: "Un parking ou une voirie en enrobé doit-il toujours être couvert par une assurance décennale ?",
+      a: "Pas toujours. L'article L243-1-1 du code des assurances exclut des assurances obligatoires de construction « les voiries, les ouvrages piétonniers, les parcs de stationnement », ainsi que les réseaux divers et les canalisations, « sauf si l'ouvrage ou l'élément d'équipement est accessoire à un ouvrage soumis à ces obligations d'assurance ». Autrement dit, un parking ou une voirie réalisé pour lui-même peut échapper à l'obligation de s'assurer, alors que la même surface reste dans l'obligation lorsqu'elle est l'accessoire d'un ouvrage qui y est soumis. Le texte ne porte que sur l'obligation d'assurance : il ne dit rien de la responsabilité du constructeur elle-même. La Cour de cassation juge que cet article « est d'interprétation stricte », parce qu'il déroge à des obligations d'ordre public : un ouvrage qui ne figure pas dans sa liste reste soumis à l'assurance obligatoire, même s'il est l'accessoire d'un ouvrage exclu (troisième chambre civile, 22 juin 2023, pourvoi n° 21-10.256, arrêt publié au Bulletin, rendu sur la rédaction du texte issue de l'ordonnance du 8 juin 2005). Le même article précise en outre que ces obligations ne s'appliquent pas aux ouvrages existants avant l'ouverture du chantier, sauf à ceux qui sont totalement incorporés dans l'ouvrage neuf et en deviennent techniquement indivisibles. Conséquence pratique, surtout pour un parking d'entreprise ou une voirie de copropriété : la mention « garantie décennale » sur un devis ne suffit pas, il faut lire l'attestation d'assurance et vérifier qu'elle vise bien ce type d'ouvrage et cette activité. Ce sont des points de droit général, à faire confirmer pour un cas précis par l'assureur ou un juriste.",
     },
     {
       q: "À partir de quand court la garantie décennale d'un chantier ?",
@@ -85,7 +89,7 @@ const SAVOIR = {
     },
     {
       q: "Où HCE réalise-t-elle ces chantiers ?",
-      a: "Dans le Jura (39) et l'Ain (01), depuis son siège de Cize. L'entreprise est enregistrée au registre national des entreprises sous le SIREN 521683573, SIRET du siège 52168357300039, au 40 avenue Etienne Lamy, 39300 Cize, avec le code d'activité NAF 43.12A — travaux de terrassement courants et travaux préparatoires — relevé le 20 septembre 2026. Un point d'attention pour qui cherche l'entreprise ou vérifie une adresse : il existe deux communes nommées Cize en France, l'une dans l'Ain (01250) et l'autre dans le Jura (39300). HCE est celle du Jura, à deux kilomètres de Champagnole.",
+      a: "Dans le Jura (39) et l'Ain (01), depuis son siège de Cize. L'entreprise est enregistrée au registre national des entreprises sous le SIREN 521683573, SIRET du siège 52168357300039, au 40 avenue Etienne Lamy, 39300 Cize, avec le code d'activité NAF 43.12A — travaux de terrassement courants et travaux préparatoires — relevé le 20 septembre 2026. Un point d'attention pour qui cherche l'entreprise ou vérifie une adresse : il existe deux communes nommées Cize en France, l'une dans l'Ain (01250) et l'autre dans le Jura (39300). HCE est celle du Jura, à 3,2 kilomètres à vol d'oiseau du centre de Champagnole.",
     },
   ],
   sources: [
@@ -93,6 +97,16 @@ const SAVOIR = {
       label:
         "service-public.gouv.fr — Garantie décennale des constructeurs (article 1792 du Code civil, article L243-3 du Code des assurances), fiche vérifiée le 10 avril 2026",
       url: "https://www.service-public.gouv.fr/particuliers/vosdroits/F2034",
+    },
+    {
+      label:
+        "Légifrance — article L243-1-1 du code des assurances (ouvrages exclus des assurances obligatoires de construction), version en vigueur depuis le 30 juillet 2008",
+      url: "https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000019265462",
+    },
+    {
+      label:
+        "Cour de cassation, 3e chambre civile, 22 juin 2023, n° 21-10.256 (FS-B), texte de l'arrêt reproduit par Dalloz Actualité",
+      url: "https://www.dalloz-actualite.fr/document/civ-3e-22-juin-2023-fs-b-n-21-10256",
     },
     {
       label:

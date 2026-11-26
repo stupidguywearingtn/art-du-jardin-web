@@ -8,6 +8,23 @@ et à compléter en fin de run.
 
 ## État des lieux
 
+> ✅ **26/11/2026 — Déploiement OK** (`c29c7db` : statut GitHub `success`). Prod = dernier
+> commit (16/16 en 200, valeurs = 25/11). Chantier (**contenu**, après un jour technique) :
+> **`/realisations`** (lastmod 28/09, la plus ancienne) +1 Q/R **« Un parking ou une voirie en
+> enrobé doit-il toujours être couvert par une assurance décennale ? »** — art. L243-1-1 C. ass. :
+> voiries, ouvrages piétonniers, parcs de stationnement exclus des assurances obligatoires sauf
+> accessoire d'un ouvrage assujetti ; ouvrages existants avant le chantier exclus sauf
+> incorporés ; Cass. 3e civ. 22/06/2023 n° 21-10.256 (FS-B) : texte « d'interprétation stricte »
+> (arrêt rendu sur la rédaction 2005, signalé). Texte FR lu via loidici.biz + traduction
+> french-business-law (Légifrance refusé au fetch) ; **rien affirmé sur le cas précis d'une cour
+> de maison** (aucune source) ni sur l'attestation d'HCE. H2 FAQ « Ce qu'on nous demande avant de
+> signer » → **« Que vérifier avant de signer pour une cour ou un parking en enrobé ? »** ; lead
+> mis à jour ; +2 sources. **Corrigé** : Q/R « Où HCE réalise-t-elle ces chantiers ? » disait
+> « à deux kilomètres de Champagnole » → « 3,2 km à vol d'oiseau du centre » (= `/contact`,
+> `zone-intervention`, `llms.txt`). `PAGE_UPDATED` + `llms.txt` 26/11 (+1 Q/R). Banc local :
+> 13 558 → **15 788 car.**, FAQPage 9/9, sitemap lastmod 2026-11-26. Build OK, `check:fige` OK.
+> Archive : état + positions du 26/10.
+
 > ✅ **25/11/2026 — Déploiement OK** (`9dac06f` : statut GitHub `success`). Prod = dernier
 > commit (16/16 en 200, valeurs = banc du 24/11 ; prépa 12 176). Chantier (**technique**, après
 > un jour contenu) : **slash final en 307 → 308** (Hypothèse 23/11). Cause trouvée : c'est
@@ -441,21 +458,6 @@ et à compléter en fin de run.
 > ✅ Vérifié en prod (`a1c3c96`, `success`) : `preparation-terrain` 9 121 car., FAQ 8/8,
 > lastmod sitemap 2026-10-27, `llms.txt` à jour, IndexNow 16 URLs → 200.
 
-> ✅ **26/10/2026 (lundi) — Déploiement OK** (`e0b4e35` : statut GitHub `success`). Prod =
-> dernier commit (16/16 en 200, valeurs du 25/10). Chantier (**technique — maillage**,
-> après un jour contenu) : `/contact` n'était lié que depuis le pied de page de l'accueil
-> (0 lien entrant servi sur les 15 autres URLs). Ajout d'une ligne « Contact · Mentions
-> légales » dans les pieds de page simplifiés : 6 `/services/*`, `/zone-intervention`,
-> `/realisations` ; « Contact » ajouté sur `/mentions-legales` et `/arnaque-goudronnage` ;
-> « Mentions légales » ajouté sur `/contact`. Banc local (`vite dev --host 127.0.0.1`) :
-> `/contact` lié depuis **11 pages** (+ accueil) ; +27 car. par page touchée, rien d'autre
-> ne bouge. `lastmod` / « Dernière mise à jour » **non modifiés** (pied de page seulement,
-> pas de contenu). Les 4 `/realisations/*` n'ont pas de pied de page → pas touchées.
-> Build OK (`npm ci` puis `npm run build`), `check:fige` OK. Veille du lundi faite
-> (Techniques apprises). Archive : rien à archiver (pas de run le 26/09).
-> ✅ Vérifié en prod (`adcf0ba`, `success`) : `href="/contact"` servi sur `/services/enrobe-a-chaud`
-> et `/zone-intervention`, IndexNow 16 URLs → 200.
-
 > levé.** Yanis a mergé `fix/tanstack-cve-deploy` (PR #1, commit `e3a860e`, le
 > 10/10 à 22:30) : statut Vercel **`success`** sur `main`. **La dette de
 > vérification en ligne est purgée, à ne pas refaire** : 14/14 URLs servent
@@ -638,6 +640,17 @@ un extrait de SERP ne prouve pas ce que la page contient.
 > `verif.com` ont été jugées périmées **sur la seule foi d'extraits de recherche**
 > (403 au runner, contenu jamais lu). Leur statut « périmée » n'est donc pas
 > établi. Noté en chantier en attente.
+
+### Positions mesurées — 26/11/2026
+
+| Contrôle | 26/11/2026 | vs 25/11 |
+|---|---|---|
+| Déploiement `main` (`c29c7db`) | **`success`** (Vercel) | = |
+| Prod vs code (`mesure-texte-servi`) | 16/16 en 200 ; `/realisations` 13 558 → 15 788 au banc | = |
+| SERP | non relevée (pas d'accès Search Console ; canal SERP non fiable, cf. leçon) | — |
+
+Pas d'accès Search Console. **À relever par Yanis** : « Performances » 28 j, requêtes à
+impressions (enrobé / goudronnage / terrassement Jura) + « Performances IA ».
 
 ### Positions mesurées — 25/11/2026
 
@@ -960,18 +973,12 @@ impressions ; indexation de `/contact`.
 Pas d'accès Search Console. **À relever par Yanis** : « Performances IA » + requêtes à
 impressions ; indexation de `/contact`.
 
-### Positions mesurées — 26/10/2026
-
-| Contrôle | 26/10/2026 | vs 25/10 |
-|---|---|---|
-| Déploiement `main` (`e0b4e35`) | **`success`** | = |
-| Prod vs code (`mesure-texte-servi`) | 16/16 en 200, valeurs identiques au 25/10 (`bordures-murets` 9 506) | = |
-| SERP | non relevée (canal `WebSearch` US, non représentatif) | — |
-
-Pas d'accès Search Console. **À relever par Yanis** : « Performances IA » + requêtes à
-impressions ; indexation de `/contact`.
-
 ## Chantiers faits
+
+### 26/11/2026 — `/realisations` : Q/R assurance décennale et voiries/parkings (L243-1-1)
+Q/R n° 2 (après « couverte par la décennale »), FAQPage = FAQ visible (9/9), H2 FAQ en question,
++2 sources (Légifrance L243-1-1, Cass. 21-10.256). Distance Champagnole alignée (3,2 km).
+13 558 → 15 788 car. (banc local).
 
 ### 25/11/2026 — Slash final : 307 (TanStack) → 308 (route Vercel)
 `vite.config.ts` › `nitro.vercel.config.routes` (1 règle, avant `handle: filesystem`). Si
@@ -1347,6 +1354,15 @@ FAQ 5 → 7 (FAQPage = visible, `verif-faq` 7/7), lead mis à jour, source ajout
 
 Par ordre de priorité. **Alterner les angles, ne pas refaire le même deux jours
 de suite.**
+
+> 🆕 **MISE À JOUR DU 26/11/2026 — prime sur tout ce qui suit.**
+> ✅ Q/R L243-1-1 sur `/realisations` (à vérifier en prod : ~15 788 car., FAQ 9/9, lastmod
+> 2026-11-26, `llms.txt` 26/11, « 3,2 kilomètres » ; puis IndexNow).
+> 1. Technique demain (alternance) : relire le JSON-LD `HomeAndConstructionBusiness` contre la
+>    checklist `seo-local` / `seo-schema`, ou chantier-en-cours sans photos (Hypothèse 16/11).
+> 2. Contenu suivant : la plus ancienne = `/services/maconnerie-generale` (07/11).
+> 3. « 1000+ chantiers » (accueil + `llms.txt`) : contenu existant, non touché ; source à confirmer par Naofal un jour.
+> 4. Yanis/client : Search Console ; fiche Google Business Profile ; compteurs de la carte.
 
 > 🆕 **MISE À JOUR DU 25/11/2026 — prime sur tout ce qui suit.**
 > ✅ Slash final 308 — vérifié en prod le 25/11. Pas d'IndexNow (aucune URL indexable modifiée).

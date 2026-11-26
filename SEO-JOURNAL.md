@@ -24,6 +24,7 @@ et à compléter en fin de run.
 > `zone-intervention`, `llms.txt`). `PAGE_UPDATED` + `llms.txt` 26/11 (+1 Q/R). Banc local :
 > 13 558 → **15 788 car.**, FAQPage 9/9, sitemap lastmod 2026-11-26. Build OK, `check:fige` OK.
 > Archive : état + positions du 26/10.
+> ✅ Vérifié en prod (`185ad14`, `success`) : `/realisations` 15 788 car. (= banc), FAQ 9/9, lastmod 2026-11-26, `llms.txt` 26/11, IndexNow 16 URLs envoyées.
 
 > ✅ **25/11/2026 — Déploiement OK** (`9dac06f` : statut GitHub `success`). Prod = dernier
 > commit (16/16 en 200, valeurs = banc du 24/11 ; prépa 12 176). Chantier (**technique**, après

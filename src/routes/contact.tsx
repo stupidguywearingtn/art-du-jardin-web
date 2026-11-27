@@ -37,7 +37,7 @@ const TITRE = "Contact HCE — enrobé et travaux publics à Cize (Jura) · 03 8
 const DESCRIPTION =
   "Coordonnées officielles de HCE : 40 avenue Etienne Lamy, 39300 Cize (Jura), 03 84 52 61 48, horaires, accès et préparation d'une demande de devis.";
 
-const GPS = { lat: 46.7234, lon: 5.9186 };
+const GPS = { lat: 46.723401, lon: 5.918576 };
 const LIEN_CARTE = `https://www.openstreetmap.org/?mlat=${GPS.lat}&mlon=${GPS.lon}#map=16/${GPS.lat}/${GPS.lon}`;
 
 const COORDONNEES: { k: string; v: string; href?: string }[] = [
@@ -48,7 +48,7 @@ const COORDONNEES: { k: string; v: string; href?: string }[] = [
   { k: "Horaires", v: "Lundi au vendredi 8h-18h · samedi 8h-12h" },
   { k: "Zone d'intervention", v: "Jura (39) et Ain (01)" },
   { k: "SIREN / SIRET du siège", v: "521 683 573 / 521 683 573 00039" },
-  { k: "Coordonnées GPS", v: "46.7234, 5.9186", href: LIEN_CARTE },
+  { k: "Coordonnées GPS", v: "46.723401, 5.918576", href: LIEN_CARTE },
 ];
 
 /**
@@ -72,7 +72,7 @@ const SAVOIR = {
     },
     {
       q: "Où se trouve HCE, et comment ne pas se tromper de Cize ?",
-      a: "Au 40 avenue Etienne Lamy, 39300 Cize, dans le Jura — à 3,2 kilomètres à vol d'oiseau du centre de Champagnole. Les coordonnées GPS de l'établissement sont 46.7234 de latitude et 5.9186 de longitude : c'est le géocodage officiel de l'INSEE pour le SIRET 52168357300039, plus précis que le centre de la commune. Deux pièges classiques. Le premier : il existe une autre commune nommée Cize, dans l'Ain (code postal 01250, code INSEE 01106), à environ 68 kilomètres à vol d'oiseau ; un GPS à qui l'on donne seulement « Cize » peut proposer l'une ou l'autre, d'où l'intérêt de saisir le code postal 39300 ou les coordonnées. Le second : l'adresse s'écrit « 40 B avenue Etienne Lamy » au registre national des entreprises et « 40 Bis » dans plusieurs annuaires — il s'agit de la même adresse et du même établissement.",
+      a: "Au 40 avenue Etienne Lamy, 39300 Cize, dans le Jura — à 3,2 kilomètres à vol d'oiseau du centre de Champagnole. Les coordonnées GPS de l'établissement sont 46.723401 de latitude et 5.918576 de longitude : c'est le géocodage officiel de l'INSEE pour le SIRET 52168357300039, plus précis que le centre de la commune. Deux pièges classiques. Le premier : il existe une autre commune nommée Cize, dans l'Ain (code postal 01250, code INSEE 01106), à environ 68 kilomètres à vol d'oiseau ; un GPS à qui l'on donne seulement « Cize » peut proposer l'une ou l'autre, d'où l'intérêt de saisir le code postal 39300 ou les coordonnées. Le second : l'adresse s'écrit « 40 B avenue Etienne Lamy » au registre national des entreprises et « 40 Bis » dans plusieurs annuaires — il s'agit de la même adresse et du même établissement.",
     },
     {
       q: "Que faut-il préparer avant de demander un devis d'enrobé ?",

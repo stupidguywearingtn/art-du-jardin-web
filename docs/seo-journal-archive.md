@@ -5391,3 +5391,35 @@ impressions ; indexation de `/contact` demandée ?
 
 Pas d'accès Search Console. **À relever par Yanis** : « Performances IA » + requêtes à
 impressions ; indexation de `/contact`.
+
+## Archivé le 27/11/2026
+
+### État des lieux — 27/10/2026
+
+> ✅ **27/10/2026 — Déploiement OK** (`192d0dd` : statut GitHub `success`). Prod =
+> dernier commit (16/16 en 200 ; +27 car. du maillage du 26/10 visibles, ex.
+> `enrobe-a-chaud` 12 809). Chantier (**contenu**, après un jour technique) :
+> **`/services/preparation-terrain`** (7 165, la plus maigre des services) +1 Q/R
+> **« Le gel peut-il soulever ou casser une cour en enrobé dans le Jura ? »** (0 occurrence
+> de « gélif » / « dégel » sur le site avant). Sources : Bonnard & Recordon 1958 (Soc.
+> suisse de géotechnique : gélif dès 3 % < 0,02 mm, sables limoneux les plus sensibles,
+> 3 conditions, 80-140 cm de gel dans le Jura et les Préalpes **suisses** — présenté comme
+> ordre de grandeur, côté suisse), Wikipédia « Barrière de dégel » (R411-20/R411-21,
+> faiblesse maximale au dégel). Aucune barrière de dégel « Jura 39 » affirmée (pas de source
+> départementale trouvée). Rien sur la pratique d'HCE au-delà du devis détaillé. Banc local :
+> 7 165 → **9 121 car.**, FAQ 8/8, lead mis à jour, lastmod + `llms.txt` 27/10. Build OK,
+> `check:fige` OK, `verif-lastmod` : seul écart connu `/` (depuis 22/10). Archive : entrées
+> du 27/09.
+> ✅ Vérifié en prod (`a1c3c96`, `success`) : `preparation-terrain` 9 121 car., FAQ 8/8,
+> lastmod sitemap 2026-10-27, `llms.txt` à jour, IndexNow 16 URLs → 200.
+
+### Positions mesurées — 27/10/2026
+
+| Contrôle | 27/10/2026 | vs 26/10 |
+|---|---|---|
+| Déploiement `main` (`192d0dd`) | **`success`** | = |
+| Prod vs code (`mesure-texte-servi`) | 16/16 en 200, +27 car. sur les pages au pied de page enrichi (attendu) | = |
+| SERP | non relevée (canal `WebSearch` US, non représentatif) | — |
+
+Pas d'accès Search Console. **À relever par Yanis** : « Performances IA » + requêtes à
+impressions ; indexation de `/contact`.

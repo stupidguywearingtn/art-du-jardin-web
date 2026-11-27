@@ -142,11 +142,13 @@ export const Route = createFileRoute("/")({
           // Cize (39300, Jura) — surtout pas Cize (01250, Ain), autre commune.
           // Géocodage officiel de l'établissement (SIRET 52168357300039) par
           // l'INSEE, et non le centre de la commune : ~300 m plus précis.
-          // Source : recherche-entreprises.api.gouv.fr, consulté le 08/09/2026.
+          // Source : recherche-entreprises.api.gouv.fr, consulté le 08/09/2026
+          // (46.7234009 / 5.9185757). 6 décimales depuis le 27/11/2026 : Google
+          // exige « au moins 5 décimales » pour geo (doc LocalBusiness).
           geo: {
             "@type": "GeoCoordinates",
-            latitude: 46.7234,
-            longitude: 5.9186,
+            latitude: 46.723401,
+            longitude: 5.918576,
           },
           openingHoursSpecification: [
             {

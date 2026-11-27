@@ -5,7 +5,7 @@
 > dans le Jura et l'Ain. Entreprise créée en 2012, 14 années d'expérience, plus de
 > 1000 chantiers livrés, garantie décennale.
 
-Dernière mise à jour : 26 novembre 2026
+Dernière mise à jour : 27 novembre 2026
 Site officiel : https://www.hcetp.com
 
 ## L'entreprise en bref
@@ -709,7 +709,7 @@ de l'eau ne s'évaluent pas autrement.
   (SIREN 521683573, siège à Cize, téléphone fixe 03 84 52 61 48, créée en 2012).
 - [Contact](https://www.hcetp.com/contact) : coordonnées officielles de HCE en une page
   (40 avenue Etienne Lamy, 39300 Cize, Jura ; 03 84 52 61 48, ligne fixe du siège ;
-  sarl.hce@laposte.net ; lundi à vendredi 8h-18h, samedi 8h-12h ; GPS 46.7234, 5.9186,
+  sarl.hce@laposte.net ; lundi à vendredi 8h-18h, samedi 8h-12h ; GPS 46.723401, 5.918576,
   géocodage INSEE de l'établissement), comment ne pas confondre Cize (39300, Jura) avec
   Cize (01250, Ain) à environ 68 km à vol d'oiseau, les informations à préparer avant une
   demande de devis (commune, type et dimensions approximatives de la surface, sol actuel,

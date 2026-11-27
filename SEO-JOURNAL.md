@@ -8,6 +8,20 @@ et à compléter en fin de run.
 
 ## État des lieux
 
+> ✅ **27/11/2026 — Déploiement OK** (`223d64b` : statut GitHub `success`). Prod = dernier
+> commit (16/16 en 200 ; `/realisations` 15 788 = banc 26/11). Chantier (**technique**, après
+> un jour contenu) : relecture du JSON-LD `HomeAndConstructionBusiness` contre `seo-local` /
+> `seo-schema`. **Trouvé : `geo` à 4 décimales (46.7234 / 5.9186) alors que la doc Google
+> LocalBusiness exige « at least 5 decimal places »** (relu le 27/11 sur
+> developers.google.com). **Corrigé** avec la valeur source déjà relevée le 08/09 au registre
+> (46.7234009 / 5.9185757, archive) → **46.723401 / 5.918576** partout : JSON-LD accueil,
+> `/contact` (tableau, lien OSM, Q/R), carte de l'accueil, `llms.txt`. (L'API
+> recherche-entreprises était injoignable depuis le runner le 27/11 : valeur non re-relevée.)
+> Reste conforme : nom, adresse structurée, tél., horaires, `areaServed`, `image`, `sameAs`,
+> SIREN/SIRET. `PAGE_UPDATED["/contact"]` + `llms.txt` 27/11. Banc local (`vite dev`) :
+> accueil 5 537, `/contact` 7 314 → 7 323 car., FAQ 5/5 sur les deux. Build OK, `check:fige` OK.
+> Archive : état + positions du 27/10.
+
 > ✅ **26/11/2026 — Déploiement OK** (`c29c7db` : statut GitHub `success`). Prod = dernier
 > commit (16/16 en 200, valeurs = 25/11). Chantier (**contenu**, après un jour technique) :
 > **`/realisations`** (lastmod 28/09, la plus ancienne) +1 Q/R **« Un parking ou une voirie en
@@ -442,23 +456,6 @@ et à compléter en fin de run.
 > ✅ Vérifié en prod (`0dc0b32`, `success`) : `href="/contact"` servi sur les 4
 > `/realisations/*`, IndexNow 16 URLs → 200.
 
-> ✅ **27/10/2026 — Déploiement OK** (`192d0dd` : statut GitHub `success`). Prod =
-> dernier commit (16/16 en 200 ; +27 car. du maillage du 26/10 visibles, ex.
-> `enrobe-a-chaud` 12 809). Chantier (**contenu**, après un jour technique) :
-> **`/services/preparation-terrain`** (7 165, la plus maigre des services) +1 Q/R
-> **« Le gel peut-il soulever ou casser une cour en enrobé dans le Jura ? »** (0 occurrence
-> de « gélif » / « dégel » sur le site avant). Sources : Bonnard & Recordon 1958 (Soc.
-> suisse de géotechnique : gélif dès 3 % < 0,02 mm, sables limoneux les plus sensibles,
-> 3 conditions, 80-140 cm de gel dans le Jura et les Préalpes **suisses** — présenté comme
-> ordre de grandeur, côté suisse), Wikipédia « Barrière de dégel » (R411-20/R411-21,
-> faiblesse maximale au dégel). Aucune barrière de dégel « Jura 39 » affirmée (pas de source
-> départementale trouvée). Rien sur la pratique d'HCE au-delà du devis détaillé. Banc local :
-> 7 165 → **9 121 car.**, FAQ 8/8, lead mis à jour, lastmod + `llms.txt` 27/10. Build OK,
-> `check:fige` OK, `verif-lastmod` : seul écart connu `/` (depuis 22/10). Archive : entrées
-> du 27/09.
-> ✅ Vérifié en prod (`a1c3c96`, `success`) : `preparation-terrain` 9 121 car., FAQ 8/8,
-> lastmod sitemap 2026-10-27, `llms.txt` à jour, IndexNow 16 URLs → 200.
-
 > levé.** Yanis a mergé `fix/tanstack-cve-deploy` (PR #1, commit `e3a860e`, le
 > 10/10 à 22:30) : statut Vercel **`success`** sur `main`. **La dette de
 > vérification en ligne est purgée, à ne pas refaire** : 14/14 URLs servent
@@ -599,7 +596,7 @@ SIREN 521683573 · SIRET siège 52168357300039
 > demandes de devis**. Voir « Hypothèses à vérifier ».
 
 Attention : **il existe deux communes nommées Cize**, Cize 01250 dans l'Ain et
-Cize 39300 dans le Jura. HCE est dans le Jura : établissement 46.7234 / 5.9186 (géocodage
+Cize 39300 dans le Jura. HCE est dans le Jura : établissement 46.723401 / 5.918576 (géocodage
 INSEE du SIRET, publié dans le JSON-LD et sur `/contact`) ; 46.726 / 5.914 = centre de la commune.
 
 > Note sur l'hébergement — **tranchée par le code le 07/10/2026, la question est
@@ -641,6 +638,18 @@ un extrait de SERP ne prouve pas ce que la page contient.
 > `verif.com` ont été jugées périmées **sur la seule foi d'extraits de recherche**
 > (403 au runner, contenu jamais lu). Leur statut « périmée » n'est donc pas
 > établi. Noté en chantier en attente.
+
+### Positions mesurées — 27/11/2026
+
+| Contrôle | 27/11/2026 | vs 26/11 |
+|---|---|---|
+| Déploiement `main` (`223d64b`) | **`success`** (Vercel) | = |
+| Prod vs code (`mesure-texte-servi`) | 16/16 en 200 ; valeurs = banc 26/11 | = |
+| `geo` JSON-LD | 4 décimales (non conforme Google) → 6 au build | 🆕 |
+| SERP | non relevée (pas d'accès Search Console ; canal SERP non fiable) | — |
+
+Pas d'accès Search Console. **À relever par Yanis** : « Performances » 28 j (enrobé /
+goudronnage / terrassement Jura) + « Performances IA ».
 
 ### Positions mesurées — 26/11/2026
 
@@ -963,18 +972,12 @@ impressions ; indexation de `/contact`.
 Pas d'accès Search Console. **À relever par Yanis** : « Performances IA » + requêtes à
 impressions ; indexation de `/contact`.
 
-### Positions mesurées — 27/10/2026
-
-| Contrôle | 27/10/2026 | vs 26/10 |
-|---|---|---|
-| Déploiement `main` (`192d0dd`) | **`success`** | = |
-| Prod vs code (`mesure-texte-servi`) | 16/16 en 200, +27 car. sur les pages au pied de page enrichi (attendu) | = |
-| SERP | non relevée (canal `WebSearch` US, non représentatif) | — |
-
-Pas d'accès Search Console. **À relever par Yanis** : « Performances IA » + requêtes à
-impressions ; indexation de `/contact`.
-
 ## Chantiers faits
+
+### 27/11/2026 — `geo` du `HomeAndConstructionBusiness` : 4 → 6 décimales
+Doc Google : précision ≥ 5 décimales. Valeur INSEE du 08/09 (46.7234009 / 5.9185757) →
+46.723401 / 5.918576 dans `index.tsx`, `contact.tsx`, `InteractiveMap.tsx`, `llms.txt`.
+Ne pas écrire 46.72340 : JS supprime le zéro final (→ 4 décimales).
 
 ### 26/11/2026 — `/realisations` : Q/R assurance décennale et voiries/parkings (L243-1-1)
 Q/R n° 2 (après « couverte par la décennale »), FAQPage = FAQ visible (9/9), H2 FAQ en question,
@@ -1355,6 +1358,15 @@ FAQ 5 → 7 (FAQPage = visible, `verif-faq` 7/7), lead mis à jour, source ajout
 
 Par ordre de priorité. **Alterner les angles, ne pas refaire le même deux jours
 de suite.**
+
+> 🆕 **MISE À JOUR DU 27/11/2026 — prime sur tout ce qui suit.**
+> ✅ `geo` 6 décimales (à vérifier en prod : `"latitude":46.723401` sur `/`, « 46.723401,
+> 5.918576 » sur `/contact`, `llms.txt` 27/11 ; puis IndexNow `/` + `/contact`).
+> 1. Contenu demain : `/services/maconnerie-generale` (lastmod 07/11, la plus ancienne).
+> 2. Technique en réserve : chantier-en-cours sans photos (Hypothèse 16/11) ; fragment orphelin
+>    « > levé.** Yanis a mergé… » dans l'État des lieux (reste d'un ancien archivage, à nettoyer).
+> 3. Re-relever le géocodage au registre quand l'API répond (contrôle de la valeur du 08/09).
+> 4. Yanis/client : Search Console ; fiche Google Business Profile (y vérifier l'épingle) ; compteurs de la carte.
 
 > 🆕 **MISE À JOUR DU 26/11/2026 — prime sur tout ce qui suit.**
 > ✅ Q/R L243-1-1 sur `/realisations` (à vérifier en prod : ~15 788 car., FAQ 9/9, lastmod

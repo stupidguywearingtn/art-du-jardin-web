@@ -21,6 +21,7 @@ et à compléter en fin de run.
 > SIREN/SIRET. `PAGE_UPDATED["/contact"]` + `llms.txt` 27/11. Banc local (`vite dev`) :
 > accueil 5 537, `/contact` 7 314 → 7 323 car., FAQ 5/5 sur les deux. Build OK, `check:fige` OK.
 > Archive : état + positions du 27/10.
+> ✅ Vérifié en prod (`24c44a2`, `success`) : `"latitude":46.723401` sur `/`, « 46.723401, 5.918576 » sur `/contact`, lastmod `/contact` 2026-11-27, `llms.txt` 27/11, 16/16 en 200, IndexNow 16 URLs → 200.
 
 > ✅ **26/11/2026 — Déploiement OK** (`c29c7db` : statut GitHub `success`). Prod = dernier
 > commit (16/16 en 200, valeurs = 25/11). Chantier (**contenu**, après un jour technique) :

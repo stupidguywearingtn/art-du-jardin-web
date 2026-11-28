@@ -23,6 +23,7 @@ et à compléter en fin de run.
 > existant. Lead mis à jour, `PAGE_UPDATED` + `llms.txt` 28/11 (+2 Q/R, index). Banc local
 > (`vite dev`) : 10 324 → **13 012 car.**, FAQPage 10/10, sitemap lastmod 2026-11-28. Build OK,
 > `check:fige` OK. Archive : état + positions du 28/10 + fragment orphelin « levé.** Yanis a mergé… ».
+> ✅ Vérifié en prod (`5291643`, `success`) : `maconnerie-generale` 13 012 car. (= banc), FAQ 10/10, lastmod 2026-11-28, `llms.txt` 28/11, IndexNow 16 URLs → 200.
 
 > ✅ **27/11/2026 — Déploiement OK** (`223d64b` : statut GitHub `success`). Prod = dernier
 > commit (16/16 en 200 ; `/realisations` 15 788 = banc 26/11). Chantier (**technique**, après

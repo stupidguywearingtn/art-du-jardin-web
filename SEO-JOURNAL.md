@@ -8,6 +8,22 @@ et à compléter en fin de run.
 
 ## État des lieux
 
+> ✅ **28/11/2026 — Déploiement OK** (`7de33af` : statut GitHub `success`). Prod = dernier
+> commit (16/16 en 200, valeurs = banc 27/11 ; `"latitude":46.723401` servi). Chantier
+> (**contenu**, après un jour technique) : **`/services/maconnerie-generale`** (lastmod 07/11,
+> la plus ancienne) +2 Q/R tirées du guide de pose CERIB / FIB 2017 (PDF relu le 28/11, déjà en
+> sources) : **« Dans quel sens poser les pavés d'une entrée où passent des voitures ? »**
+> (joints discontinus dans le sens de circulation, chevrons si très fort trafic, coupes ≥ ½ pavé,
+> alignement tous les 5 m, panachage des teintes) et **« Comment vérifier qu'un pavage est bien
+> posé à la fin du chantier ? »** (règle de 3 m ≤ 10 mm, désaffleurement ≤ 2 mm / 3 mm chanfrein,
+> nivellement ± 10 mm sur 95 % des points, jamais > 20 mm ; regarnissage des joints ; dalles sur
+> mortier : 10 j avant circulation si > 10 °C). **Précision ajoutée** à la Q/R joints : sur lit de
+> sable, le guide **proscrit** mortier et coulis dans les joints ; le joint cimenté va avec une pose
+> sur mortier, exceptionnelle pour des pavés. Rien affirmé sur une pratique d'HCE hors contenu
+> existant. Lead mis à jour, `PAGE_UPDATED` + `llms.txt` 28/11 (+2 Q/R, index). Banc local
+> (`vite dev`) : 10 324 → **13 012 car.**, FAQPage 10/10, sitemap lastmod 2026-11-28. Build OK,
+> `check:fige` OK. Archive : état + positions du 28/10 + fragment orphelin « levé.** Yanis a mergé… ».
+
 > ✅ **27/11/2026 — Déploiement OK** (`223d64b` : statut GitHub `success`). Prod = dernier
 > commit (16/16 en 200 ; `/realisations` 15 788 = banc 26/11). Chantier (**technique**, après
 > un jour contenu) : relecture du JSON-LD `HomeAndConstructionBusiness` contre `seo-local` /
@@ -443,31 +459,6 @@ et à compléter en fin de run.
 > ✅ Vérifié en prod (`338be6b`, `success`) : `cour-allee-privee` 10 081 car., FAQ 6/6,
 > lastmod sitemap 2026-10-29, `llms.txt` à jour, IndexNow 16 URLs → 200.
 
-> ✅ **28/10/2026 — Déploiement OK** (`4acdaf3` : statut GitHub `success`). Prod =
-> dernier commit (16/16 en 200, valeurs du 27/10 : `preparation-terrain` 9 121). Chantier
-> (**technique — maillage**, après un jour contenu) : les 4 `/realisations/*` n'avaient
-> aucun lien vers `/contact` ni `/mentions-legales`. ⚠️ Piège évité : le CTA bas de ces
-> pages n'est rendu **qu'après chargement client** (état serveur = état de chargement) —
-> un premier ajout là n'apparaissait pas dans le HTML servi (0 lien au banc local). Ligne
-> « HCE · Cize, Jura · 03 84 52 61 48 · Contact · Mentions légales » placée dans `SeeAlso`
-> (rendu dans les deux états). Banc local : 4/4 pages servent `href="/contact"` et
-> `href="/mentions-legales"`, +63 car. par page, rendu sans JS vérifié à 390 px (pas de
-> défilement horizontal). `lastmod` non modifié (maillage, pas de contenu). Build OK,
-> `check:fige` OK. Archive : entrées du 28/09.
-> ✅ Vérifié en prod (`0dc0b32`, `success`) : `href="/contact"` servi sur les 4
-> `/realisations/*`, IndexNow 16 URLs → 200.
-
-> levé.** Yanis a mergé `fix/tanstack-cve-deploy` (PR #1, commit `e3a860e`, le
-> 10/10 à 22:30) : statut Vercel **`success`** sur `main`. **La dette de
-> vérification en ligne est purgée, à ne pas refaire** : 14/14 URLs servent
-> exactement les valeurs attendues du banc local du 08/10 (13 543 / 5 154 /
-> 12 633 / … / 373 / 8 351), FAQ 11/11, lastmod 14 URLs cohérentes, `llms.txt`
-> « 8 octobre 2026 », `sameAs` à 5 URLs dont PagesJaunes, `/mentions-legales`
-> en 200 et liée en pied de page, six `/services/*` à 6 liens de contenu (7 pour
-> `enrobe-a-chaud`). Les encadrés « blocage » ci-dessous sont **historiques**.
-> Chantier du jour : **`/arnaque-goudronnage`** (15ᵉ URL). Pas de run les 09 et
-> 10/10.
-
 > 🔴 **DOMAINE — À LIRE AVANT TOUT (mis à jour le 01/10/2026).**
 > **Le site est servi sur `https://www.hcetp.com`** (sans le `b`), depuis la
 > bascule du 30/09/2026 (commit `f07b19f`). `hcebtp.com`, `www.hcebtp.com` et
@@ -639,6 +630,18 @@ un extrait de SERP ne prouve pas ce que la page contient.
 > `verif.com` ont été jugées périmées **sur la seule foi d'extraits de recherche**
 > (403 au runner, contenu jamais lu). Leur statut « périmée » n'est donc pas
 > établi. Noté en chantier en attente.
+
+### Positions mesurées — 28/11/2026
+
+| Contrôle | 28/11/2026 | vs 27/11 |
+|---|---|---|
+| Déploiement `main` (`7de33af`) | **`success`** (Vercel) | = |
+| Prod vs code (`mesure-texte-servi`) | 16/16 en 200 ; valeurs = banc 27/11 | = |
+| `/services/maconnerie-generale` | 10 324 → 13 012 au banc | 🆕 |
+| SERP | non relevée (pas d'accès Search Console ; canal SERP non fiable) | — |
+
+Pas d'accès Search Console. **À relever par Yanis** : « Performances » 28 j (enrobé /
+goudronnage / terrassement Jura) + « Performances IA ».
 
 ### Positions mesurées — 27/11/2026
 
@@ -962,18 +965,10 @@ impressions ; indexation de `/contact` et `/arnaque-goudronnage`.
 Pas d'accès Search Console. **À relever par Yanis** : « Performances IA » + requêtes à
 impressions ; indexation de `/contact`.
 
-### Positions mesurées — 28/10/2026
-
-| Contrôle | 28/10/2026 | vs 27/10 |
-|---|---|---|
-| Déploiement `main` (`4acdaf3`) | **`success`** | = |
-| Prod vs code (`mesure-texte-servi`) | 16/16 en 200, valeurs identiques au 27/10 | = |
-| SERP | non relevée (canal `WebSearch` US, non représentatif) | — |
-
-Pas d'accès Search Console. **À relever par Yanis** : « Performances IA » + requêtes à
-impressions ; indexation de `/contact`.
-
 ## Chantiers faits
+
+### 28/11/2026 — `/services/maconnerie-generale` : Q/R sens de pose des pavés + contrôles de réception
++2 Q/R (guide CERIB / FIB 2017), précision « pas de mortier dans les joints sur lit de sable ». 10 324 → 13 012 car., FAQ 10/10.
 
 ### 27/11/2026 — `geo` du `HomeAndConstructionBusiness` : 4 → 6 décimales
 Doc Google : précision ≥ 5 décimales. Valeur INSEE du 08/09 (46.7234009 / 5.9185757) →
@@ -1359,6 +1354,14 @@ FAQ 5 → 7 (FAQPage = visible, `verif-faq` 7/7), lead mis à jour, source ajout
 
 Par ordre de priorité. **Alterner les angles, ne pas refaire le même deux jours
 de suite.**
+
+> 🆕 **MISE À JOUR DU 28/11/2026 — prime sur tout ce qui suit.**
+> ✅ 2 Q/R sur `maconnerie-generale` (à vérifier en prod : ~13 012 car., FAQ 10/10, lastmod
+> 2026-11-28, `llms.txt` 28/11 ; puis IndexNow). ✅ Fragment orphelin archivé.
+> 1. Technique demain : chantier-en-cours sans photos (Hypothèse 16/11).
+> 2. Contenu suivant : la plus ancienne = `/realisations/preparation-terrassement` (lastmod 02/11), puis `parking-voirie-pro` (04/11).
+> 3. Lundi 30/11 : veille (étape 6).
+> 4. Yanis/client : Search Console ; fiche Google Business Profile ; compteurs de la carte.
 
 > 🆕 **MISE À JOUR DU 27/11/2026 — prime sur tout ce qui suit.**
 > ✅ `geo` 6 décimales (à vérifier en prod : `"latitude":46.723401` sur `/`, « 46.723401,

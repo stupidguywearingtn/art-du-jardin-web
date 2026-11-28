@@ -5423,3 +5423,47 @@ impressions ; indexation de `/contact`.
 
 Pas d'accès Search Console. **À relever par Yanis** : « Performances IA » + requêtes à
 impressions ; indexation de `/contact`.
+
+<!-- section d'origine : État des lieux (archivé le 28/11/2026) -->
+### État des lieux — 28/10/2026
+
+> ✅ **28/10/2026 — Déploiement OK** (`4acdaf3` : statut GitHub `success`). Prod =
+> dernier commit (16/16 en 200, valeurs du 27/10 : `preparation-terrain` 9 121). Chantier
+> (**technique — maillage**, après un jour contenu) : les 4 `/realisations/*` n'avaient
+> aucun lien vers `/contact` ni `/mentions-legales`. ⚠️ Piège évité : le CTA bas de ces
+> pages n'est rendu **qu'après chargement client** (état serveur = état de chargement) —
+> un premier ajout là n'apparaissait pas dans le HTML servi (0 lien au banc local). Ligne
+> « HCE · Cize, Jura · 03 84 52 61 48 · Contact · Mentions légales » placée dans `SeeAlso`
+> (rendu dans les deux états). Banc local : 4/4 pages servent `href="/contact"` et
+> `href="/mentions-legales"`, +63 car. par page, rendu sans JS vérifié à 390 px (pas de
+> défilement horizontal). `lastmod` non modifié (maillage, pas de contenu). Build OK,
+> `check:fige` OK. Archive : entrées du 28/09.
+> ✅ Vérifié en prod (`0dc0b32`, `success`) : `href="/contact"` servi sur les 4
+> `/realisations/*`, IndexNow 16 URLs → 200.
+
+
+<!-- fragment orphelin de l'État des lieux (reste d'un ancien archivage, ~10/10/2026), archivé le 28/11/2026 -->
+> levé.** Yanis a mergé `fix/tanstack-cve-deploy` (PR #1, commit `e3a860e`, le
+> 10/10 à 22:30) : statut Vercel **`success`** sur `main`. **La dette de
+> vérification en ligne est purgée, à ne pas refaire** : 14/14 URLs servent
+> exactement les valeurs attendues du banc local du 08/10 (13 543 / 5 154 /
+> 12 633 / … / 373 / 8 351), FAQ 11/11, lastmod 14 URLs cohérentes, `llms.txt`
+> « 8 octobre 2026 », `sameAs` à 5 URLs dont PagesJaunes, `/mentions-legales`
+> en 200 et liée en pied de page, six `/services/*` à 6 liens de contenu (7 pour
+> `enrobe-a-chaud`). Les encadrés « blocage » ci-dessous sont **historiques**.
+> Chantier du jour : **`/arnaque-goudronnage`** (15ᵉ URL). Pas de run les 09 et
+> 10/10.
+
+
+<!-- section d'origine : Positions mesurées -->
+### Positions mesurées — 28/10/2026
+
+| Contrôle | 28/10/2026 | vs 27/10 |
+|---|---|---|
+| Déploiement `main` (`4acdaf3`) | **`success`** | = |
+| Prod vs code (`mesure-texte-servi`) | 16/16 en 200, valeurs identiques au 27/10 | = |
+| SERP | non relevée (canal `WebSearch` US, non représentatif) | — |
+
+Pas d'accès Search Console. **À relever par Yanis** : « Performances IA » + requêtes à
+impressions ; indexation de `/contact`.
+

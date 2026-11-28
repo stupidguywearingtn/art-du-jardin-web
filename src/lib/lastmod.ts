@@ -33,7 +33,7 @@ export const PAGE_UPDATED = {
   "/": { iso: "2026-10-22", label: "22 octobre 2026" },
   "/services/preparation-terrain": { iso: "2026-11-24", label: "24 novembre 2026" },
   "/services/enrobe-a-chaud": { iso: "2026-11-22", label: "22 novembre 2026" },
-  "/services/maconnerie-generale": { iso: "2026-11-07", label: "7 novembre 2026" },
+  "/services/maconnerie-generale": { iso: "2026-11-28", label: "28 novembre 2026" },
   "/services/drainage-pentes": { iso: "2026-11-17", label: "17 novembre 2026" },
   "/services/bordures-murets": { iso: "2026-11-15", label: "15 novembre 2026" },
   "/services/finitions-soignees": { iso: "2026-11-20", label: "20 novembre 2026" },
